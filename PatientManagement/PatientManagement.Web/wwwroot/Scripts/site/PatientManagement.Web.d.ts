@@ -834,80 +834,21 @@ declare namespace PatientManagement.PatientManagement {
         static formKey: string;
     }
     interface VisitsForm {
-        PatientId: Serenity.IntegerEditor;
-        VisitInfoId: Serenity.IntegerEditor;
-        VisitTypeId: Serenity.IntegerEditor;
-        Date: Serenity.DateEditor;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-}
-declare namespace PatientManagement.PatientManagement {
-    class VisitsInfoForm extends Serenity.PrefixedContext {
-        static formKey: string;
-    }
-    interface VisitsInfoForm {
-        VisitId: Serenity.IntegerEditor;
-        Remarks: Serenity.StringEditor;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    interface VisitsInfoRow {
-        VisitInfoId?: number;
-        VisitId?: number;
-        Remarks?: string;
-        InsertUserId?: number;
-        InsertDate?: string;
-        VisitPatientId?: number;
-        VisitVisitInfoId?: number;
-        VisitVisitTypeId?: number;
-        VisitDate?: string;
-        VisitInsertUserId?: number;
-        VisitInsertDate?: string;
-    }
-    namespace VisitsInfoRow {
-        const idProperty = "VisitInfoId";
-        const nameProperty = "Remarks";
-        const localTextPrefix = "PatientManagement.VisitsInfo";
-        namespace Fields {
-            const VisitInfoId: string;
-            const VisitId: string;
-            const Remarks: string;
-            const InsertUserId: string;
-            const InsertDate: string;
-            const VisitPatientId: string;
-            const VisitVisitInfoId: string;
-            const VisitVisitTypeId: string;
-            const VisitDate: string;
-            const VisitInsertUserId: string;
-            const VisitInsertDate: string;
-        }
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    namespace VisitsInfoService {
-        const baseUrl = "PatientManagement/VisitsInfo";
-        function Create(request: Serenity.SaveRequest<VisitsInfoRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        function Update(request: Serenity.SaveRequest<VisitsInfoRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<VisitsInfoRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<VisitsInfoRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        namespace Methods {
-            const Create: string;
-            const Update: string;
-            const Delete: string;
-            const Retrieve: string;
-            const List: string;
-        }
+        PatientId: Serenity.LookupEditor;
+        VisitTypeId: Serenity.LookupEditor;
+        StartDate: Serenity.DateTimeEditor;
+        EndDate: Serenity.DateTimeEditor;
+        Description: Serenity.TextAreaEditor;
     }
 }
 declare namespace PatientManagement.PatientManagement {
     interface VisitsRow {
         VisitId?: number;
         PatientId?: number;
-        VisitInfoId?: number;
         VisitTypeId?: number;
-        Date?: string;
+        Description?: string;
+        StartDate?: string;
+        EndDate?: string;
         InsertUserId?: number;
         InsertDate?: string;
         PatientName?: string;
@@ -917,11 +858,7 @@ declare namespace PatientManagement.PatientManagement {
         PatientAddress?: string;
         PatientHeight?: number;
         PatientWeight?: number;
-        PatientInsertUserId?: number;
-        PatientInsertDate?: string;
         VisitTypeName?: string;
-        VisitTypeInsertUserId?: number;
-        VisitTypeInsertDate?: string;
     }
     namespace VisitsRow {
         const idProperty = "VisitId";
@@ -929,9 +866,10 @@ declare namespace PatientManagement.PatientManagement {
         namespace Fields {
             const VisitId: string;
             const PatientId: string;
-            const VisitInfoId: string;
             const VisitTypeId: string;
-            const Date: string;
+            const Description: string;
+            const StartDate: string;
+            const EndDate: string;
             const InsertUserId: string;
             const InsertDate: string;
             const PatientName: string;
@@ -941,11 +879,7 @@ declare namespace PatientManagement.PatientManagement {
             const PatientAddress: string;
             const PatientHeight: string;
             const PatientWeight: string;
-            const PatientInsertUserId: string;
-            const PatientInsertDate: string;
             const VisitTypeName: string;
-            const VisitTypeInsertUserId: string;
-            const VisitTypeInsertDate: string;
         }
     }
 }
@@ -987,6 +921,8 @@ declare namespace PatientManagement.PatientManagement {
         const idProperty = "VisitTypeId";
         const nameProperty = "Name";
         const localTextPrefix = "PatientManagement.VisitTypes";
+        const lookupKey = "PatientManagement.VisitTypes";
+        function getLookup(): Q.Lookup<VisitTypesRow>;
         namespace Fields {
             const VisitTypeId: string;
             const Name: string;
@@ -1548,32 +1484,13 @@ declare namespace PatientManagement.PatientManagement {
         protected getLocalTextPrefix(): string;
         protected getService(): string;
         protected form: VisitsForm;
+        constructor();
     }
 }
 declare namespace PatientManagement.PatientManagement {
     class VisitsGrid extends Serenity.EntityGrid<VisitsRow, any> {
         protected getColumnsKey(): string;
         protected getDialogType(): typeof VisitsDialog;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getService(): string;
-        constructor(container: JQuery);
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class VisitsInfoDialog extends Serenity.EntityDialog<VisitsInfoRow, any> {
-        protected getFormKey(): string;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getNameProperty(): string;
-        protected getService(): string;
-        protected form: VisitsInfoForm;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class VisitsInfoGrid extends Serenity.EntityGrid<VisitsInfoRow, any> {
-        protected getColumnsKey(): string;
-        protected getDialogType(): typeof VisitsInfoDialog;
         protected getIdProperty(): string;
         protected getLocalTextPrefix(): string;
         protected getService(): string;

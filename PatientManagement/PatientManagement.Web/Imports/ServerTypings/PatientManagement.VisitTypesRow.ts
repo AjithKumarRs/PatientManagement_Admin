@@ -10,6 +10,11 @@
         export const idProperty = 'VisitTypeId';
         export const nameProperty = 'Name';
         export const localTextPrefix = 'PatientManagement.VisitTypes';
+        export const lookupKey = 'PatientManagement.VisitTypes';
+
+        export function getLookup(): Q.Lookup<VisitTypesRow> {
+            return Q.getLookup<VisitTypesRow>('PatientManagement.VisitTypes');
+        }
 
         export namespace Fields {
             export declare const VisitTypeId: string;

@@ -14,9 +14,13 @@ namespace PatientManagement.PatientManagement.Forms
     public class VisitsForm
     {
         public Int32 PatientId { get; set; }
-        public Int32 VisitInfoId { get; set; }
         public Int32 VisitTypeId { get; set; }
-        public DateTime Date { get; set; }
+        [DefaultValue("now")]
+        public DateTime StartDate { get; set; }
+        [DefaultValue("now")]
+        public DateTime EndDate { get; set; }
+
+        public String Description { get; set; }
 
         // TODO Add when you figure out how to add permissions here
         //public Int32 InsertUserId { get; set; }

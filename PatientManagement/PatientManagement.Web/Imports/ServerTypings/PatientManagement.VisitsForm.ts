@@ -5,11 +5,12 @@
     }
 
     export interface VisitsForm {
-        PatientId: Serenity.IntegerEditor;
-        VisitInfoId: Serenity.IntegerEditor;
-        VisitTypeId: Serenity.IntegerEditor;
-        Date: Serenity.DateEditor;
+        PatientId: Serenity.LookupEditor;
+        VisitTypeId: Serenity.LookupEditor;
+        StartDate: Serenity.DateTimeEditor;
+        EndDate: Serenity.DateTimeEditor;
+        Description: Serenity.TextAreaEditor;
     }
 
-    [['PatientId', () => Serenity.IntegerEditor], ['VisitInfoId', () => Serenity.IntegerEditor], ['VisitTypeId', () => Serenity.IntegerEditor], ['Date', () => Serenity.DateEditor]].forEach(x => Object.defineProperty(VisitsForm.prototype, <string>x[0], { get: function () { return this.w(x[0], (x[1] as any)()); }, enumerable: true, configurable: true }));
+    [['PatientId', () => Serenity.LookupEditor], ['VisitTypeId', () => Serenity.LookupEditor], ['StartDate', () => Serenity.DateTimeEditor], ['EndDate', () => Serenity.DateTimeEditor], ['Description', () => Serenity.TextAreaEditor]].forEach(x => Object.defineProperty(VisitsForm.prototype, <string>x[0], { get: function () { return this.w(x[0], (x[1] as any)()); }, enumerable: true, configurable: true }));
 }

@@ -11,5 +11,18 @@ namespace PatientManagement.PatientManagement {
 
         protected form = new VisitsForm(this.idPrefix);
 
+        constructor() {
+            super();
+            
+            this.form.EndDate.addValidationRule(this.uniqueName, e => {
+                if (this.form.EndDate.valueAsDate != null &&
+                    this.form.StartDate.valueAsDate != null &&
+                    this.form.StartDate.valueAsDate > this.form.EndDate.valueAsDate) {
+                    return "End Date can't be earlier than Start Date";
+                }
+
+                return null;
+            });
+        }
     }
 }

@@ -118,11 +118,6 @@ namespace MVC
                 public const string VisitsIndex = "~/Modules/PatientManagement/Visits/VisitsIndex.cshtml";
             }
 
-            public static class VisitsInfo
-            {
-                public const string VisitsInfoIndex = "~/Modules/PatientManagement/VisitsInfo/VisitsInfoIndex.cshtml";
-            }
-
             public static class VisitTypes
             {
                 public const string VisitTypesIndex = "~/Modules/PatientManagement/VisitTypes/VisitTypesIndex.cshtml";

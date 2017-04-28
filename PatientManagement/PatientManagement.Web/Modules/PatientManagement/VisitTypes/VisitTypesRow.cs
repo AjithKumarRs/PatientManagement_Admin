@@ -12,6 +12,7 @@ namespace PatientManagement.PatientManagement.Entities
     [ConnectionKey("PatientManagement"), TableName("[dbo].[VisitTypes]"), DisplayName("Visit Types"), InstanceName("Visit Types"), TwoLevelCached]
     [ReadPermission("PatientManagement:VisitTypes:Read")]
     [ModifyPermission("PatientManagement:VisitTypes:Modify")]
+    [LookupScript("PatientManagement.VisitTypes")]
     public sealed class VisitTypesRow : Row, IIdRow, INameRow, IInsertLogRow
     {
         [DisplayName("Visit Type Id"), Identity]

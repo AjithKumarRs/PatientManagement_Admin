@@ -9,13 +9,13 @@ namespace PatientManagement.PatientManagement.Entities
     using System.ComponentModel;
     using System.IO;
 
-    [ConnectionKey("PatientManagement"), TableName("[dbo].[LifeStyles]"), DisplayName("Life Styles"), InstanceName("Life Styles"), TwoLevelCached]
+    [ConnectionKey("PatientManagement"), TableName("[dbo].[LifeStyles]"), DisplayName("Life Styles"), InstanceName("Life Style"), TwoLevelCached]
     [ReadPermission("PatientManagement:LifeStyles:Read")]
     [ModifyPermission("PatientManagement:LifeStyles:Modify")]
     [LookupScript("PatientManagement.LifeStyles")]
     public sealed class LifeStylesRow : Row, IIdRow, INameRow, IInsertLogRow
     {
-        [DisplayName("Patient"), PrimaryKey, ForeignKey("[dbo].[Patients]", "PatientId"), LeftJoin("jPatient"), TextualField("PatientName")]
+        [DisplayName("Patient"), PrimaryKey, ForeignKey("[dbo].[Patients]", "PatientId"), LeftJoin("jPatient"), TextualField("PatientName"), Required(true)]
         [LookupEditor(typeof(PatientsRow), InplaceAdd = true)]
 
         public Int32? PatientId

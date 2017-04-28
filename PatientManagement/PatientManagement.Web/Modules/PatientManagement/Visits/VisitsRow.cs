@@ -9,7 +9,7 @@ namespace PatientManagement.PatientManagement.Entities
     using System.ComponentModel;
     using System.IO;
 
-    [ConnectionKey("PatientManagement"), TableName("[dbo].[Visits]"), DisplayName("Visits"), InstanceName("Visits"), TwoLevelCached]
+    [ConnectionKey("PatientManagement"), TableName("[dbo].[Visits]"), DisplayName("Visits"), InstanceName("Visit"), TwoLevelCached]
     [ReadPermission("PatientManagement:Visits:Read")]
     [ModifyPermission("PatientManagement:Visits:Modify")]
     public sealed class VisitsRow : Row, IIdRow, IInsertLogRow
@@ -17,140 +17,130 @@ namespace PatientManagement.PatientManagement.Entities
         [DisplayName("Visit Id"), Identity]
         public Int32? VisitId
         {
-            get { return Fields.VisitId[this]; }
-            set { Fields.VisitId[this] = value; }
+            get => Fields.VisitId[this];
+            set => Fields.VisitId[this] = value;
         }
-
+        [Category("Properties")]
         [DisplayName("Patient"), NotNull, ForeignKey("[dbo].[Patients]", "PatientId"), LeftJoin("jPatient"), TextualField("PatientName")]
+        [LookupEditor(typeof(PatientsRow), InplaceAdd = true)]
         public Int32? PatientId
         {
-            get { return Fields.PatientId[this]; }
-            set { Fields.PatientId[this] = value; }
+            get => Fields.PatientId[this];
+            set => Fields.PatientId[this] = value;
         }
-
-        [DisplayName("Visit Info Id")]
-        public Int32? VisitInfoId
-        {
-            get { return Fields.VisitInfoId[this]; }
-            set { Fields.VisitInfoId[this] = value; }
-        }
+        
 
         [DisplayName("Visit Type"), NotNull, ForeignKey("[dbo].[VisitTypes]", "VisitTypeId"), LeftJoin("jVisitType"), TextualField("VisitTypeName")]
+        [LookupEditor(typeof(VisitTypesRow), InplaceAdd = true)]
         public Int32? VisitTypeId
         {
-            get { return Fields.VisitTypeId[this]; }
-            set { Fields.VisitTypeId[this] = value; }
+            get => Fields.VisitTypeId[this];
+            set => Fields.VisitTypeId[this] = value;
         }
 
-        [DisplayName("Date"), NotNull]
-        public DateTime? Date
+        [DisplayName("Start Date"), NotNull]
+        [DateTimeKind(DateTimeKind.Utc), DateTimeEditor]
+        public DateTime? StartDate
         {
-            get { return Fields.Date[this]; }
-            set { Fields.Date[this] = value; }
+            get => Fields.StartDate[this];
+            set => Fields.StartDate[this] = value;
+        }
+
+        [DisplayName("End Date"), NotNull]
+        [DateTimeKind(DateTimeKind.Utc), DateTimeEditor]
+        public DateTime? EndDate
+        {
+            get => Fields.EndDate[this];
+            set => Fields.EndDate[this] = value;
         }
 
         [DisplayName("Insert User Id"), NotNull]
         public Int32? InsertUserId
         {
-            get { return Fields.InsertUserId[this]; }
-            set { Fields.InsertUserId[this] = value; }
+            get => Fields.InsertUserId[this];
+            set => Fields.InsertUserId[this] = value;
         }
 
         [DisplayName("Insert Date"), NotNull]
         public DateTime? InsertDate
         {
-            get { return Fields.InsertDate[this]; }
-            set { Fields.InsertDate[this] = value; }
+            get => Fields.InsertDate[this];
+            set => Fields.InsertDate[this] = value;
         }
 
-        [DisplayName("Patient Name"), Expression("jPatient.[Name]")]
+        [Category("Extra Info")]
+        [DisplayName("Description"), Width(400)]
+        [TextAreaEditor(Rows = 8)]
+        public String Description
+        {
+            get => Fields.Description[this];
+            set => Fields.Description[this] = value;
+        }
+
+        #region PatientFields
+
+        [DisplayName("Patient Name"), Expression("jPatient.[Name]"), Width(150)]
         public String PatientName
         {
-            get { return Fields.PatientName[this]; }
-            set { Fields.PatientName[this] = value; }
+            get => Fields.PatientName[this];
+            set => Fields.PatientName[this] = value;
         }
 
         [DisplayName("Patient Personal Number"), Expression("jPatient.[PersonalNumber]")]
         public Int32? PatientPersonalNumber
         {
-            get { return Fields.PatientPersonalNumber[this]; }
-            set { Fields.PatientPersonalNumber[this] = value; }
+            get => Fields.PatientPersonalNumber[this];
+            set => Fields.PatientPersonalNumber[this] = value;
         }
 
         [DisplayName("Patient Phone Number"), Expression("jPatient.[PhoneNumber]")]
         public Int32? PatientPhoneNumber
         {
-            get { return Fields.PatientPhoneNumber[this]; }
-            set { Fields.PatientPhoneNumber[this] = value; }
+            get => Fields.PatientPhoneNumber[this];
+            set => Fields.PatientPhoneNumber[this] = value;
         }
 
         [DisplayName("Patient First Registration Date"), Expression("jPatient.[FirstRegistrationDate]")]
         public DateTime? PatientFirstRegistrationDate
         {
-            get { return Fields.PatientFirstRegistrationDate[this]; }
-            set { Fields.PatientFirstRegistrationDate[this] = value; }
+            get => Fields.PatientFirstRegistrationDate[this];
+            set => Fields.PatientFirstRegistrationDate[this] = value;
         }
 
         [DisplayName("Patient Address"), Expression("jPatient.[Address]")]
         public String PatientAddress
         {
-            get { return Fields.PatientAddress[this]; }
-            set { Fields.PatientAddress[this] = value; }
+            get => Fields.PatientAddress[this];
+            set => Fields.PatientAddress[this] = value;
         }
 
         [DisplayName("Patient Height"), Expression("jPatient.[Height]")]
         public Int32? PatientHeight
         {
-            get { return Fields.PatientHeight[this]; }
-            set { Fields.PatientHeight[this] = value; }
+            get => Fields.PatientHeight[this];
+            set => Fields.PatientHeight[this] = value;
         }
 
         [DisplayName("Patient Weight"), Expression("jPatient.[Weight]")]
         public Int32? PatientWeight
         {
-            get { return Fields.PatientWeight[this]; }
-            set { Fields.PatientWeight[this] = value; }
+            get => Fields.PatientWeight[this];
+            set => Fields.PatientWeight[this] = value;
         }
 
-        [DisplayName("Patient Insert User Id"), Expression("jPatient.[InsertUserId]")]
-        public Int32? PatientInsertUserId
-        {
-            get { return Fields.PatientInsertUserId[this]; }
-            set { Fields.PatientInsertUserId[this] = value; }
-        }
 
-        [DisplayName("Patient Insert Date"), Expression("jPatient.[InsertDate]")]
-        public DateTime? PatientInsertDate
-        {
-            get { return Fields.PatientInsertDate[this]; }
-            set { Fields.PatientInsertDate[this] = value; }
-        }
 
-        [DisplayName("Visit Type Name"), Expression("jVisitType.[Name]")]
+        #endregion
+
+
+        [DisplayName("Visit Type Name"), Expression("jVisitType.[Name]"), Width(150)]
         public String VisitTypeName
         {
-            get { return Fields.VisitTypeName[this]; }
-            set { Fields.VisitTypeName[this] = value; }
+            get => Fields.VisitTypeName[this];
+            set => Fields.VisitTypeName[this] = value;
         }
-
-        [DisplayName("Visit Type Insert User Id"), Expression("jVisitType.[InsertUserId]")]
-        public Int32? VisitTypeInsertUserId
-        {
-            get { return Fields.VisitTypeInsertUserId[this]; }
-            set { Fields.VisitTypeInsertUserId[this] = value; }
-        }
-
-        [DisplayName("Visit Type Insert Date"), Expression("jVisitType.[InsertDate]")]
-        public DateTime? VisitTypeInsertDate
-        {
-            get { return Fields.VisitTypeInsertDate[this]; }
-            set { Fields.VisitTypeInsertDate[this] = value; }
-        }
-
-        IIdField IIdRow.IdField
-        {
-            get { return Fields.VisitId; }
-        }
+        
+        IIdField IIdRow.IdField => Fields.VisitId;
 
         public static readonly RowFields Fields = new RowFields().Init();
 
@@ -163,9 +153,10 @@ namespace PatientManagement.PatientManagement.Entities
         {
             public Int32Field VisitId;
             public Int32Field PatientId;
-            public Int32Field VisitInfoId;
             public Int32Field VisitTypeId;
-            public DateTimeField Date;
+            public StringField Description;
+            public DateTimeField StartDate;
+            public DateTimeField EndDate;
             public Int32Field InsertUserId;
             public DateTimeField InsertDate;
 
@@ -176,12 +167,8 @@ namespace PatientManagement.PatientManagement.Entities
             public StringField PatientAddress;
             public Int32Field PatientHeight;
             public Int32Field PatientWeight;
-            public Int32Field PatientInsertUserId;
-            public DateTimeField PatientInsertDate;
 
             public StringField VisitTypeName;
-            public Int32Field VisitTypeInsertUserId;
-            public DateTimeField VisitTypeInsertDate;
 
             public RowFields()
                 : base()

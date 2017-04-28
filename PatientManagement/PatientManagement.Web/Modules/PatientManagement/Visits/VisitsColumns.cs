@@ -15,10 +15,12 @@ namespace PatientManagement.PatientManagement.Columns
     {
         [EditLink, DisplayName("Db.Shared.RecordId"), AlignRight]
         public Int32 VisitId { get; set; }
-        public Int32 PatientId { get; set; }
-        public Int32 VisitInfoId { get; set; }
-        public Int32 VisitTypeId { get; set; }
-        public DateTime Date { get; set; }
+        public Int32 PatientName { get; set; }
+        public Int32 VisitTypeName { get; set; }
+
+        public String Description { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
 
         // TODO Add when you figure out how to add permissions here
         //public Int32 InsertUserId { get; set; }
