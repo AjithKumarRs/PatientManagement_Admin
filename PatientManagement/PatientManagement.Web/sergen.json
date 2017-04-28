@@ -1,0 +1,11 @@
+﻿{
+  "RootNamespace": "PatientManagement",
+  "ServerTypings": {
+    "Assemblies": [
+      "bin/Debug/netcoreapp1.1/PatientManagement.Web.dll"
+    ]
+  },
+  "Connections": [],
+  "BaseRowClasses": [],
+  "RemoveForeignFields": []
+}
