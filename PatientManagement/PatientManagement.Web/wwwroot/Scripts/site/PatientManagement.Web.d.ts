@@ -568,12 +568,11 @@ declare namespace PatientManagement.PatientManagement {
         static formKey: string;
     }
     interface LifeStylesForm {
+        PatientId: Serenity.LookupEditor;
         Job: Serenity.StringEditor;
         Movement: Serenity.StringEditor;
         Training: Serenity.StringEditor;
         BadHabits: Serenity.StringEditor;
-        InsertUserId: Serenity.IntegerEditor;
-        InsertDate: Serenity.DateEditor;
     }
 }
 declare namespace PatientManagement.PatientManagement {
@@ -599,6 +598,8 @@ declare namespace PatientManagement.PatientManagement {
         const idProperty = "PatientId";
         const nameProperty = "Job";
         const localTextPrefix = "PatientManagement.LifeStyles";
+        const lookupKey = "PatientManagement.LifeStyles";
+        function getLookup(): Q.Lookup<LifeStylesRow>;
         namespace Fields {
             const PatientId: string;
             const Job: string;
@@ -700,8 +701,6 @@ declare namespace PatientManagement.PatientManagement {
         DailyMeals: Serenity.StringEditor;
         Diseases: Serenity.StringEditor;
         MedicinesIntake: Serenity.StringEditor;
-        InsertUserId: Serenity.IntegerEditor;
-        InsertDate: Serenity.DateEditor;
     }
 }
 declare namespace PatientManagement.PatientManagement {
@@ -776,8 +775,6 @@ declare namespace PatientManagement.PatientManagement {
         Address: Serenity.StringEditor;
         Height: Serenity.IntegerEditor;
         Weight: Serenity.IntegerEditor;
-        InsertUserId: Serenity.IntegerEditor;
-        InsertDate: Serenity.DateEditor;
     }
 }
 declare namespace PatientManagement.PatientManagement {
@@ -797,6 +794,8 @@ declare namespace PatientManagement.PatientManagement {
         const idProperty = "PatientId";
         const nameProperty = "Name";
         const localTextPrefix = "PatientManagement.Patients";
+        const lookupKey = "PatientManagement.Patients";
+        function getLookup(): Q.Lookup<PatientsRow>;
         namespace Fields {
             const PatientId: string;
             const Name: string;
@@ -839,8 +838,6 @@ declare namespace PatientManagement.PatientManagement {
         VisitInfoId: Serenity.IntegerEditor;
         VisitTypeId: Serenity.IntegerEditor;
         Date: Serenity.DateEditor;
-        InsertUserId: Serenity.IntegerEditor;
-        InsertDate: Serenity.DateEditor;
     }
 }
 declare namespace PatientManagement.PatientManagement {
@@ -852,8 +849,6 @@ declare namespace PatientManagement.PatientManagement {
     interface VisitsInfoForm {
         VisitId: Serenity.IntegerEditor;
         Remarks: Serenity.StringEditor;
-        InsertUserId: Serenity.IntegerEditor;
-        InsertDate: Serenity.DateEditor;
     }
 }
 declare namespace PatientManagement.PatientManagement {
@@ -979,8 +974,6 @@ declare namespace PatientManagement.PatientManagement {
     }
     interface VisitTypesForm {
         Name: Serenity.StringEditor;
-        InsertUserId: Serenity.IntegerEditor;
-        InsertDate: Serenity.DateEditor;
     }
 }
 declare namespace PatientManagement.PatientManagement {

@@ -12,9 +12,12 @@ namespace PatientManagement.PatientManagement.Entities
     [ConnectionKey("PatientManagement"), TableName("[dbo].[LifeStyles]"), DisplayName("Life Styles"), InstanceName("Life Styles"), TwoLevelCached]
     [ReadPermission("PatientManagement:LifeStyles:Read")]
     [ModifyPermission("PatientManagement:LifeStyles:Modify")]
-    public sealed class LifeStylesRow : Row, IIdRow, INameRow
+    [LookupScript("PatientManagement.LifeStyles")]
+    public sealed class LifeStylesRow : Row, IIdRow, INameRow, IInsertLogRow
     {
         [DisplayName("Patient"), PrimaryKey, ForeignKey("[dbo].[Patients]", "PatientId"), LeftJoin("jPatient"), TextualField("PatientName")]
+        [LookupEditor(typeof(PatientsRow), InplaceAdd = true)]
+
         public Int32? PatientId
         {
             get { return Fields.PatientId[this]; }
@@ -47,20 +50,6 @@ namespace PatientManagement.PatientManagement.Entities
         {
             get { return Fields.BadHabits[this]; }
             set { Fields.BadHabits[this] = value; }
-        }
-
-        [DisplayName("Insert User Id"), NotNull]
-        public Int32? InsertUserId
-        {
-            get { return Fields.InsertUserId[this]; }
-            set { Fields.InsertUserId[this] = value; }
-        }
-
-        [DisplayName("Insert Date"), NotNull]
-        public DateTime? InsertDate
-        {
-            get { return Fields.InsertDate[this]; }
-            set { Fields.InsertDate[this] = value; }
         }
 
         [DisplayName("Patient Name"), Expression("jPatient.[Name]")]
@@ -126,6 +115,23 @@ namespace PatientManagement.PatientManagement.Entities
             set { Fields.PatientInsertDate[this] = value; }
         }
 
+
+        [DisplayName("Insert User Id"), NotNull, Insertable(false), Updatable(false)]
+        public Int32? InsertUserId
+        {
+            get { return Fields.InsertUserId[this]; }
+            set { Fields.InsertUserId[this] = value; }
+        }
+
+        [DisplayName("Insert Date"), NotNull, Insertable(false), Updatable(false)]
+
+        public DateTime? InsertDate
+        {
+            get { return Fields.InsertDate[this]; }
+            set { Fields.InsertDate[this] = value; }
+        }
+
+
         IIdField IIdRow.IdField
         {
             get { return Fields.PatientId; }
@@ -169,5 +175,9 @@ namespace PatientManagement.PatientManagement.Entities
                 LocalTextPrefix = "PatientManagement.LifeStyles";
             }
         }
+
+        public IIdField InsertUserIdField => Fields.InsertUserId;
+
+        public DateTimeField InsertDateField => Fields.InsertDate;
     }
 }

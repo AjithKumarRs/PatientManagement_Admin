@@ -22,6 +22,11 @@
         export const idProperty = 'PatientId';
         export const nameProperty = 'Job';
         export const localTextPrefix = 'PatientManagement.LifeStyles';
+        export const lookupKey = 'PatientManagement.LifeStyles';
+
+        export function getLookup(): Q.Lookup<LifeStylesRow> {
+            return Q.getLookup<LifeStylesRow>('PatientManagement.LifeStyles');
+        }
 
         export namespace Fields {
             export declare const PatientId: string;

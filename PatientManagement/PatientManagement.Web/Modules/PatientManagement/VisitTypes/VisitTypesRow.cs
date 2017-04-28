@@ -12,7 +12,7 @@ namespace PatientManagement.PatientManagement.Entities
     [ConnectionKey("PatientManagement"), TableName("[dbo].[VisitTypes]"), DisplayName("Visit Types"), InstanceName("Visit Types"), TwoLevelCached]
     [ReadPermission("PatientManagement:VisitTypes:Read")]
     [ModifyPermission("PatientManagement:VisitTypes:Modify")]
-    public sealed class VisitTypesRow : Row, IIdRow, INameRow
+    public sealed class VisitTypesRow : Row, IIdRow, INameRow, IInsertLogRow
     {
         [DisplayName("Visit Type Id"), Identity]
         public Int32? VisitTypeId
@@ -72,5 +72,9 @@ namespace PatientManagement.PatientManagement.Entities
                 LocalTextPrefix = "PatientManagement.VisitTypes";
             }
         }
+
+        public IIdField InsertUserIdField => Fields.InsertUserId;
+
+        public DateTimeField InsertDateField => Fields.InsertDate;
     }
 }

@@ -5,13 +5,12 @@
     }
 
     export interface LifeStylesForm {
+        PatientId: Serenity.LookupEditor;
         Job: Serenity.StringEditor;
         Movement: Serenity.StringEditor;
         Training: Serenity.StringEditor;
         BadHabits: Serenity.StringEditor;
-        InsertUserId: Serenity.IntegerEditor;
-        InsertDate: Serenity.DateEditor;
     }
 
-    [['Job', () => Serenity.StringEditor], ['Movement', () => Serenity.StringEditor], ['Training', () => Serenity.StringEditor], ['BadHabits', () => Serenity.StringEditor], ['InsertUserId', () => Serenity.IntegerEditor], ['InsertDate', () => Serenity.DateEditor]].forEach(x => Object.defineProperty(LifeStylesForm.prototype, <string>x[0], { get: function () { return this.w(x[0], (x[1] as any)()); }, enumerable: true, configurable: true }));
+    [['PatientId', () => Serenity.LookupEditor], ['Job', () => Serenity.StringEditor], ['Movement', () => Serenity.StringEditor], ['Training', () => Serenity.StringEditor], ['BadHabits', () => Serenity.StringEditor]].forEach(x => Object.defineProperty(LifeStylesForm.prototype, <string>x[0], { get: function () { return this.w(x[0], (x[1] as any)()); }, enumerable: true, configurable: true }));
 }

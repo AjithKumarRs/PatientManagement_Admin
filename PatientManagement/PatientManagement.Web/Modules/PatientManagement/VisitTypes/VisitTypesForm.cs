@@ -14,7 +14,5 @@ namespace PatientManagement.PatientManagement.Forms
     public class VisitTypesForm
     {
         public String Name { get; set; }
-        public Int32 InsertUserId { get; set; }
-        public DateTime InsertDate { get; set; }
     }
 }

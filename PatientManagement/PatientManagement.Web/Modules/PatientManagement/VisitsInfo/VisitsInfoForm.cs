@@ -15,7 +15,5 @@ namespace PatientManagement.PatientManagement.Forms
     {
         public Int32 VisitId { get; set; }
         public String Remarks { get; set; }
-        public Int32 InsertUserId { get; set; }
-        public DateTime InsertDate { get; set; }
     }
 }

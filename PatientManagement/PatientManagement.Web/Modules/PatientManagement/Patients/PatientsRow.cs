@@ -9,17 +9,20 @@ namespace PatientManagement.PatientManagement.Entities
     using System.ComponentModel;
     using System.IO;
 
-    [ConnectionKey("PatientManagement"), TableName("[dbo].[Patients]"), DisplayName("Patients"), InstanceName("Patients"), TwoLevelCached]
+    [ConnectionKey("PatientManagement"), TableName("[dbo].[Patients]"), DisplayName("Patient"), InstanceName("Patients"), TwoLevelCached]
     [ReadPermission("PatientManagement:Patients:Read")]
     [ModifyPermission("PatientManagement:Patients:Modify")]
-    public sealed class PatientsRow : Row, IIdRow, INameRow
+    [LookupScript("PatientManagement.Patients")]
+    public sealed class PatientsRow : Row, IIdRow, INameRow, IInsertLogRow
     {
+
         [DisplayName("Patient Id"), Identity]
         public Int32? PatientId
         {
             get { return Fields.PatientId[this]; }
             set { Fields.PatientId[this] = value; }
         }
+        [Category("Required Fields")]
 
         [DisplayName("Name"), Size(500), NotNull, QuickSearch]
         public String Name
@@ -42,6 +45,7 @@ namespace PatientManagement.PatientManagement.Entities
             set { Fields.PhoneNumber[this] = value; }
         }
 
+        [Category("Additional Information")]
         [DisplayName("First Registration Date"), Size(200)]
         public DateTime? FirstRegistrationDate
         {
@@ -120,5 +124,10 @@ namespace PatientManagement.PatientManagement.Entities
                 LocalTextPrefix = "PatientManagement.Patients";
             }
         }
+
+
+        public IIdField InsertUserIdField => Fields.InsertUserId;
+
+        public DateTimeField InsertDateField => Fields.InsertDate;
     }
 }

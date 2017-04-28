@@ -12,7 +12,7 @@ namespace PatientManagement.PatientManagement.Entities
     [ConnectionKey("PatientManagement"), TableName("[dbo].[PatientHealth]"), DisplayName("Patient Health"), InstanceName("Patient Health"), TwoLevelCached]
     [ReadPermission("PatientManagement:PatientHealth:Read")]
     [ModifyPermission("PatientManagement:PatientHealth:Modify")]
-    public sealed class PatientHealthRow : Row, IIdRow, INameRow
+    public sealed class PatientHealthRow : Row, IIdRow, INameRow , IInsertLogRow
     {
         [DisplayName("Patient"), PrimaryKey, ForeignKey("[dbo].[Patients]", "PatientId"), LeftJoin("jPatient"), TextualField("PatientName")]
         public Int32? PatientId
@@ -53,7 +53,7 @@ namespace PatientManagement.PatientManagement.Entities
         public DateTime? InsertDate
         {
             get { return Fields.InsertDate[this]; }
-            set { Fields.InsertDate[this] = value; }
+            set { Fields.InsertDate[this] = DateTime.Now; }
         }
 
         [DisplayName("Patient Name"), Expression("jPatient.[Name]")]
@@ -161,5 +161,9 @@ namespace PatientManagement.PatientManagement.Entities
                 LocalTextPrefix = "PatientManagement.PatientHealth";
             }
         }
+
+        public IIdField InsertUserIdField => Fields.InsertUserId;
+
+        public DateTimeField InsertDateField => Fields.InsertDate;
     }
 }

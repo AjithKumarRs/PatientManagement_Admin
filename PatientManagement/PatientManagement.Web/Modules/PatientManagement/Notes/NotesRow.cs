@@ -12,7 +12,7 @@ namespace PatientManagement.PatientManagement.Entities
     [ConnectionKey("PatientManagement"), TableName("[dbo].[Notes]"), DisplayName("Notes"), InstanceName("Notes"), TwoLevelCached]
     [ReadPermission("PatientManagement:Notes:Read")]
     [ModifyPermission("PatientManagement:Notes:Modify")]
-    public sealed class NotesRow : Row, IIdRow, INameRow
+    public sealed class NotesRow : Row, IIdRow, INameRow, IInsertLogRow
     {
         [DisplayName("Note Id"), Column("NoteID"), Identity]
         public Int64? NoteId
@@ -88,5 +88,9 @@ namespace PatientManagement.PatientManagement.Entities
                 LocalTextPrefix = "PatientManagement.Notes";
             }
         }
+
+        public IIdField InsertUserIdField => Fields.InsertUserId;
+
+        public DateTimeField InsertDateField => Fields.InsertDate;
     }
 }

@@ -12,9 +12,7 @@
         Address: Serenity.StringEditor;
         Height: Serenity.IntegerEditor;
         Weight: Serenity.IntegerEditor;
-        InsertUserId: Serenity.IntegerEditor;
-        InsertDate: Serenity.DateEditor;
     }
 
-    [['Name', () => Serenity.StringEditor], ['PersonalNumber', () => Serenity.IntegerEditor], ['PhoneNumber', () => Serenity.IntegerEditor], ['FirstRegistrationDate', () => Serenity.DateEditor], ['Address', () => Serenity.StringEditor], ['Height', () => Serenity.IntegerEditor], ['Weight', () => Serenity.IntegerEditor], ['InsertUserId', () => Serenity.IntegerEditor], ['InsertDate', () => Serenity.DateEditor]].forEach(x => Object.defineProperty(PatientsForm.prototype, <string>x[0], { get: function () { return this.w(x[0], (x[1] as any)()); }, enumerable: true, configurable: true }));
+    [['Name', () => Serenity.StringEditor], ['PersonalNumber', () => Serenity.IntegerEditor], ['PhoneNumber', () => Serenity.IntegerEditor], ['FirstRegistrationDate', () => Serenity.DateEditor], ['Address', () => Serenity.StringEditor], ['Height', () => Serenity.IntegerEditor], ['Weight', () => Serenity.IntegerEditor]].forEach(x => Object.defineProperty(PatientsForm.prototype, <string>x[0], { get: function () { return this.w(x[0], (x[1] as any)()); }, enumerable: true, configurable: true }));
 }
