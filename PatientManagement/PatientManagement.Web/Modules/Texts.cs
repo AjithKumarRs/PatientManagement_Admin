@@ -100,8 +100,7 @@ namespace PatientManagement
             public static class Dashboard
             {
                 public static LocalText ContentDescription =
-                    "a sample with random data (from free <em><a href = \"https://almsaeedstudio.com/\" target= \"_blank\">" +
-                    "AdminLTE theme</a></em>)";
+                    "all saved meetings for period.";
             }
 
             public static class BasicProgressDialog

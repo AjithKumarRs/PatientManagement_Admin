@@ -1,3 +1,5 @@
 {
-  "Navigation.SiteTitle": "Kokon"
+  "Navigation.Dashboard": "Dashboard",
+  "Navigation.SiteTitle": "Kokon",
+  "Site.Dashboard.ContentDescription": "all saved hours for period"
 }

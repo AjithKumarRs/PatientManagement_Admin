@@ -1,8 +1,4 @@
-﻿
-
-[assembly:Serenity.Navigation.NavigationLink(int.MaxValue, "PatientManagement/LifeStyles", typeof(PatientManagement.PatientManagement.Pages.LifeStylesController))]
-
-namespace PatientManagement.PatientManagement.Pages
+﻿namespace PatientManagement.PatientManagement.Pages
 {
     using Serenity;
     using Serenity.Web;
