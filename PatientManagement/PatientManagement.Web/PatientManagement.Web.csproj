@@ -9,6 +9,12 @@
     <PackageTargetFallback>$(PackageTargetFallback);dotnet5.6;portable-net45+win8</PackageTargetFallback>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Modules\Common\Dashboard\**" />
+    <Content Remove="Modules\Common\Dashboard\**" />
+    <EmbeddedResource Remove="Modules\Common\Dashboard\**" />
+    <None Remove="Modules\Common\Dashboard\**" />
+  </ItemGroup>
+  <ItemGroup>
     <None Update="wwwroot\**\*">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>

@@ -1,8 +1,9 @@
 ﻿
+using PatientManagement.Administration.Entities;
+
 namespace PatientManagement.Administration.Repositories
 {
     using Newtonsoft.Json.Linq;
-    using PatientManagement.Administration.Entities;
     using Serenity;
     using Serenity.Abstractions;
     using Serenity.ComponentModel;

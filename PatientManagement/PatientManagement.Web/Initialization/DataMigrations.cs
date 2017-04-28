@@ -180,14 +180,14 @@
             bool isOracle = serverType.StartsWith("Oracle", StringComparison.OrdinalIgnoreCase);
             bool isFirebird = serverType.StartsWith("Firebird", StringComparison.OrdinalIgnoreCase);
 
-            // safety check to ensure that we are not modifying an arbitrary database.
-            // remove these lines if you want PatientManagement migrations to run on your DB.
-            if (!isOracle && cs.ConnectionString.IndexOf(typeof(DataMigrations).Namespace +
-                    @"_" + databaseKey + "_v1", StringComparison.OrdinalIgnoreCase) < 0)
-            {
-                SkippedMigrations = true;
-                return;
-            }
+            //// safety check to ensure that we are not modifying an arbitrary database.
+            //// remove these lines if you want PatientManagement migrations to run on your DB.
+            //if (!isOracle && cs.ConnectionString.IndexOf(typeof(DataMigrations).Namespace +
+            //        @"_" + databaseKey + "_v1", StringComparison.OrdinalIgnoreCase) < 0)
+            //{
+            //    SkippedMigrations = true;
+            //    return;
+            //}
 
             string databaseType = isOracle ? "OracleManaged" : serverType;
 

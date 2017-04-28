@@ -1,7 +1,8 @@
 ﻿
+using PatientManagement.Administration.Entities;
+
 namespace PatientManagement.Navigation
 {
-    using PatientManagement.Administration.Entities;
     using Serenity;
     using Serenity.Navigation;
     using System;

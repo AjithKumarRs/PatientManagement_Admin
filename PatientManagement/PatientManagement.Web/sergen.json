@@ -1,11 +1,65 @@
-﻿{
+{
   "RootNamespace": "PatientManagement",
   "ServerTypings": {
     "Assemblies": [
       "bin/Debug/netcoreapp1.1/PatientManagement.Web.dll"
     ]
   },
-  "Connections": [],
+  "Connections": [
+    {
+      "Key": "PatientManagement",
+      "Tables": [
+        {
+          "Tablename": "dbo.LifeStyles",
+          "Identifier": "LifeStyles",
+          "Module": "PatientManagement",
+          "PermissionKey": "Administration:PatientManagement"
+        },
+        {
+          "Tablename": "dbo.Notes",
+          "Identifier": "Notes",
+          "Module": "PatientManagement",
+          "PermissionKey": "PatientManagement:Notes"
+        },
+        {
+          "Tablename": "dbo.PatientHealth",
+          "Identifier": "PatientHealth",
+          "Module": "PatientManagement",
+          "PermissionKey": "Administration:General"
+        },
+        {
+          "Tablename": "dbo.Patients",
+          "Identifier": "Patients",
+          "Module": "PatientManagement",
+          "PermissionKey": "Administration:PatientManagement"
+        },
+        {
+          "Tablename": "dbo.sysdiagrams",
+          "Identifier": "Sysdiagrams",
+          "Module": "PatientManagement",
+          "PermissionKey": "Administration:PatientManagement"
+        },
+        {
+          "Tablename": "dbo.Visits",
+          "Identifier": "Visits",
+          "Module": "PatientManagement",
+          "PermissionKey": "Administration:PatientManagement"
+        },
+        {
+          "Tablename": "dbo.VisitsInfo",
+          "Identifier": "VisitsInfo",
+          "Module": "PatientManagement",
+          "PermissionKey": "Administration:PatientManagement"
+        },
+        {
+          "Tablename": "dbo.VisitTypes",
+          "Identifier": "VisitTypes",
+          "Module": "PatientManagement",
+          "PermissionKey": "Administration:PatientManagement"
+        }
+      ]
+    }
+  ],
   "BaseRowClasses": [],
   "RemoveForeignFields": []
 }

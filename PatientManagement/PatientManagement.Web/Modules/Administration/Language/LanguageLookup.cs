@@ -1,7 +1,8 @@
 ﻿
+using PatientManagement.Administration.Entities;
+
 namespace PatientManagement.Administration
 {
-    using PatientManagement.Administration.Entities;
     using Serenity.ComponentModel;
     using Serenity.Data;
     using Serenity.Web;

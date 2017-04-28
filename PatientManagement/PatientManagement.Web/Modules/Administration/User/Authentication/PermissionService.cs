@@ -1,6 +1,7 @@
-﻿namespace PatientManagement.Administration
+﻿using PatientManagement.Administration.Entities;
+
+namespace PatientManagement.Administration
 {
-    using PatientManagement.Administration.Entities;
     using Serenity;
     using Serenity.Abstractions;
     using Serenity.Data;
