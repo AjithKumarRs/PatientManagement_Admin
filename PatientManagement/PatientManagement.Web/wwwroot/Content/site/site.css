@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Core: General Layout Style
  * -------------------------
  */
@@ -8566,6 +8566,7 @@ section.content > .s-DataGrid {
 }
 .s-PatientManagement-PatientsDialog > .size {
   width: 650px;
+  height: 500px;
 }
 .s-PatientManagement-PatientsDialog .caption {
   width: 150px;
@@ -8646,5 +8647,12 @@ section.content > .s-DataGrid {
   width: 650px;
 }
 .s-PatientManagement-NotesDialog .caption {
+  width: 150px;
+}
+.s-PatientManagement-PatientVisitsDialog > .size {
+  width: 550px;
+  height: 520px;
+}
+.s-PatientManagement-PatientVisitsDialog .caption {
   width: 150px;
 }
