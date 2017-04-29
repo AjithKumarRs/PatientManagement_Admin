@@ -39,7 +39,23 @@ namespace PatientManagement.PatientManagement.Repositories
         }
 
         private class MySaveHandler : SaveRequestHandler<MyRow> { }
-        private class MyDeleteHandler : DeleteRequestHandler<MyRow> { }
+
+        private class MyDeleteHandler : DeleteRequestHandler<MyRow>
+        {
+         
+            protected override void ExecuteDelete()
+            {
+                try
+                {
+                    base.ExecuteDelete();
+                }
+                catch (Exception e)
+                {
+                    SqlExceptionHelper.HandleDeleteForeignKeyException(e);
+                    throw;
+                }
+            }
+        }
         private class MyRetrieveHandler : RetrieveRequestHandler<MyRow> { }
         private class MyListHandler : ListRequestHandler<MyRow> { }
     }

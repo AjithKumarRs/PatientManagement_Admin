@@ -9,47 +9,54 @@ namespace PatientManagement.PatientManagement.Entities
     using System.ComponentModel;
     using System.IO;
 
-    [ConnectionKey("PatientManagement"), TableName("[dbo].[Notes]"), DisplayName("Notes"), InstanceName("Notes"), TwoLevelCached]
+    [ConnectionKey("PatientManagement"), TableName("[dbo].[Notes]"), DisplayName("Notes"), InstanceName("Note"), TwoLevelCached]
     [ReadPermission("PatientManagement:Notes:Read")]
     [ModifyPermission("PatientManagement:Notes:Modify")]
     public sealed class NotesRow : Row, IIdRow, INameRow, IInsertLogRow
     {
-        [DisplayName("Note Id"), Column("NoteID"), Identity]
+        [DisplayName("Note Id"), Identity, Column("NoteID")]
         public Int64? NoteId
         {
             get { return Fields.NoteId[this]; }
             set { Fields.NoteId[this] = value; }
         }
 
-        [DisplayName("Entity Type"), Size(100), NotNull, QuickSearch]
+        [DisplayName("Entity Type"), Size(100), NotNull, Updatable(false)]
         public String EntityType
         {
             get { return Fields.EntityType[this]; }
             set { Fields.EntityType[this] = value; }
         }
 
-        [DisplayName("Entity Id"), NotNull]
+        [DisplayName("Entity Id"), Column("EntityID"), Size(100), NotNull, Updatable(false)]
         public Int64? EntityId
         {
             get { return Fields.EntityId[this]; }
             set { Fields.EntityId[this] = value; }
         }
 
-        [DisplayName("Text"), Size(-1), NotNull]
+        [DisplayName("Text"), NotNull, QuickSearch]
         public String Text
         {
             get { return Fields.Text[this]; }
             set { Fields.Text[this] = value; }
         }
 
-        [DisplayName("Insert User Id"), NotNull]
+        [DisplayName("Insert User Id"), NotNull, Insertable(false), Updatable(false)]
         public Int32? InsertUserId
         {
             get { return Fields.InsertUserId[this]; }
             set { Fields.InsertUserId[this] = value; }
         }
 
-        [DisplayName("Insert Date"), NotNull]
+        [DisplayName("Insert User"), NotMapped]
+        public String InsertUserDisplayName
+        {
+            get { return Fields.InsertUserDisplayName[this]; }
+            set { Fields.InsertUserDisplayName[this] = value; }
+        }
+
+        [DisplayName("Insert Date"), NotNull, Insertable(false), Updatable(false)]
         public DateTime? InsertDate
         {
             get { return Fields.InsertDate[this]; }
@@ -65,6 +72,23 @@ namespace PatientManagement.PatientManagement.Entities
         {
             get { return Fields.EntityType; }
         }
+
+        public IIdField InsertUserIdField
+        {
+            get
+            {
+                return Fields.InsertUserId;
+            }
+        }
+
+        public DateTimeField InsertDateField
+        {
+            get
+            {
+                return Fields.InsertDate;
+            }
+        }
+
 
         public static readonly RowFields Fields = new RowFields().Init();
 
@@ -82,15 +106,13 @@ namespace PatientManagement.PatientManagement.Entities
             public Int32Field InsertUserId;
             public DateTimeField InsertDate;
 
+            public StringField InsertUserDisplayName;
             public RowFields()
                 : base()
             {
                 LocalTextPrefix = "PatientManagement.Notes";
             }
         }
-
-        public IIdField InsertUserIdField => Fields.InsertUserId;
-
-        public DateTimeField InsertDateField => Fields.InsertDate;
+        
     }
 }

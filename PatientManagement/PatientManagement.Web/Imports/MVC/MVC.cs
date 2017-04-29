@@ -98,11 +98,6 @@ namespace MVC
                 public const string LifeStylesIndex = "~/Modules/PatientManagement/LifeStyles/LifeStylesIndex.cshtml";
             }
 
-            public static class Notes
-            {
-                public const string NotesIndex = "~/Modules/PatientManagement/Notes/NotesIndex.cshtml";
-            }
-
             public static class PatientHealth
             {
                 public const string PatientHealthIndex = "~/Modules/PatientManagement/PatientHealth/PatientHealthIndex.cshtml";

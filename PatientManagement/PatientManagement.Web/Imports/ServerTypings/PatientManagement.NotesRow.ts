@@ -6,6 +6,7 @@
         Text?: string;
         InsertUserId?: number;
         InsertDate?: string;
+        InsertUserDisplayName?: string;
     }
 
     export namespace NotesRow {
@@ -20,8 +21,9 @@
             export declare const Text: string;
             export declare const InsertUserId: string;
             export declare const InsertDate: string;
+            export declare const InsertUserDisplayName: string;
         }
 
-        ['NoteId', 'EntityType', 'EntityId', 'Text', 'InsertUserId', 'InsertDate'].forEach(x => (<any>Fields)[x] = x);
+        ['NoteId', 'EntityType', 'EntityId', 'Text', 'InsertUserId', 'InsertDate', 'InsertUserDisplayName'].forEach(x => (<any>Fields)[x] = x);
     }
 }

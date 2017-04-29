@@ -10,6 +10,7 @@
         Weight?: number;
         InsertUserId?: number;
         InsertDate?: string;
+        NoteList?: NotesRow[];
     }
 
     export namespace PatientsRow {
@@ -33,8 +34,9 @@
             export declare const Weight: string;
             export declare const InsertUserId: string;
             export declare const InsertDate: string;
+            export declare const NoteList: string;
         }
 
-        ['PatientId', 'Name', 'PersonalNumber', 'PhoneNumber', 'FirstRegistrationDate', 'Address', 'Height', 'Weight', 'InsertUserId', 'InsertDate'].forEach(x => (<any>Fields)[x] = x);
+        ['PatientId', 'Name', 'PersonalNumber', 'PhoneNumber', 'FirstRegistrationDate', 'Address', 'Height', 'Weight', 'InsertUserId', 'InsertDate', 'NoteList'].forEach(x => (<any>Fields)[x] = x);
     }
 }

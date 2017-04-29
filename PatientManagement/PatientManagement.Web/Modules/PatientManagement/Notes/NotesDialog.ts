@@ -2,15 +2,51 @@
 namespace PatientManagement.PatientManagement {
 
     @Serenity.Decorators.registerClass()
-    @Serenity.Decorators.responsive()
-    export class NotesDialog extends Serenity.EntityDialog<NotesRow, any> {
-        protected getFormKey() { return NotesForm.formKey; }
-        protected getIdProperty() { return NotesRow.idProperty; }
-        protected getLocalTextPrefix() { return NotesRow.localTextPrefix; }
-        protected getNameProperty() { return NotesRow.nameProperty; }
-        protected getService() { return NotesService.baseUrl; }
+    export class NotesDialog extends Serenity.TemplatedDialog<any> {
+        private textEditor: Serenity.HtmlContentEditor;
 
-        protected form = new NotesForm(this.idPrefix);
+        constructor() {
+            super();
 
+            this.textEditor = new Serenity.HtmlNoteContentEditor(this.byId('Text'));
+        }
+
+        protected getTemplate() {
+            return (
+                "<form id='~_Form' class='s-Form'>" +
+                    "<textarea id='~_Text' class='required'></textarea>" +
+                    "</form>");
+        }
+
+        protected getDialogOptions() {
+            var opt = super.getDialogOptions();
+
+            opt.buttons = [{
+                    text: Q.text('Dialogs.OkButton'),
+                    click: () => {
+                        if (!this.validateForm()) {
+                            return;
+                        }
+
+                        this.okClick && this.okClick();
+                    }
+                }, {
+                    text: Q.text('Dialogs.CancelButton'),
+                    click: () => this.dialogClose()
+                }
+            ];
+
+            return opt;
+        }
+
+        get text(): string {
+            return this.textEditor.value;
+        }
+
+        set text(value: string) {
+            this.textEditor.value = value;
+        }
+
+        public okClick: () => void;
     }
 }

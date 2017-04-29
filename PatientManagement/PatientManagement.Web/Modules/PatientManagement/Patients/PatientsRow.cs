@@ -1,4 +1,6 @@
 ﻿
+using System.Collections.Generic;
+
 namespace PatientManagement.PatientManagement.Entities
 {
     using Serenity;
@@ -9,10 +11,11 @@ namespace PatientManagement.PatientManagement.Entities
     using System.ComponentModel;
     using System.IO;
 
-    [ConnectionKey("PatientManagement"), TableName("[dbo].[Patients]"), DisplayName("Patient"), InstanceName("Patients"), TwoLevelCached]
+    [ConnectionKey("PatientManagement"), TableName("[dbo].[Patients]"), DisplayName("Patients"), InstanceName("Patient"), TwoLevelCached]
     [ReadPermission("PatientManagement:Patients:Read")]
     [ModifyPermission("PatientManagement:Patients:Modify")]
     [LookupScript("PatientManagement.Patients")]
+    [LeftJoin("cd", "PatientHealth", "cd.[ID] = t0.[ID]", RowType = typeof(PatientHealthRow), TitlePrefix = "")]
     public sealed class PatientsRow : Row, IIdRow, INameRow, IInsertLogRow
     {
 
@@ -47,6 +50,8 @@ namespace PatientManagement.PatientManagement.Entities
 
         [Category("Additional Information")]
         [DisplayName("First Registration Date"), Size(200)]
+        [DateTimeKind(DateTimeKind.Utc), DateTimeEditor]
+
         public DateTime? FirstRegistrationDate
         {
             get { return Fields.FirstRegistrationDate[this]; }
@@ -88,6 +93,13 @@ namespace PatientManagement.PatientManagement.Entities
             set { Fields.InsertDate[this] = value; }
         }
 
+        [NotesEditor, NotMapped]
+        public List<NotesRow> NoteList
+        {
+            get { return Fields.NoteList[this]; }
+            set { Fields.NoteList[this] = value; }
+        }
+
         IIdField IIdRow.IdField
         {
             get { return Fields.PatientId; }
@@ -118,6 +130,7 @@ namespace PatientManagement.PatientManagement.Entities
             public Int32Field InsertUserId;
             public DateTimeField InsertDate;
 
+            public RowListField<NotesRow> NoteList;
             public RowFields()
                 : base()
             {

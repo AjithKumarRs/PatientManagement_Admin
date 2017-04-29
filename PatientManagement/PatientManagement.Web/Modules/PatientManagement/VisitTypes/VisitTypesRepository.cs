@@ -39,7 +39,8 @@ namespace PatientManagement.PatientManagement.Repositories
         }
 
         private class MySaveHandler : SaveRequestHandler<MyRow> { }
-        private class MyDeleteHandler : DeleteRequestHandler<MyRow> { }
+
+        private class MyDeleteHandler : DeleteRequestHandler<MyRow>{ }
         private class MyRetrieveHandler : RetrieveRequestHandler<MyRow> { }
         private class MyListHandler : ListRequestHandler<MyRow> { }
     }

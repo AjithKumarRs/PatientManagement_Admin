@@ -638,20 +638,6 @@ declare namespace PatientManagement.PatientManagement {
     }
 }
 declare namespace PatientManagement.PatientManagement {
-}
-declare namespace PatientManagement.PatientManagement {
-    class NotesForm extends Serenity.PrefixedContext {
-        static formKey: string;
-    }
-    interface NotesForm {
-        EntityType: Serenity.StringEditor;
-        EntityId: Serenity.StringEditor;
-        Text: Serenity.StringEditor;
-        InsertUserId: Serenity.IntegerEditor;
-        InsertDate: Serenity.DateEditor;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
     interface NotesRow {
         NoteId?: number;
         EntityType?: string;
@@ -659,6 +645,7 @@ declare namespace PatientManagement.PatientManagement {
         Text?: string;
         InsertUserId?: number;
         InsertDate?: string;
+        InsertUserDisplayName?: string;
     }
     namespace NotesRow {
         const idProperty = "NoteId";
@@ -671,23 +658,7 @@ declare namespace PatientManagement.PatientManagement {
             const Text: string;
             const InsertUserId: string;
             const InsertDate: string;
-        }
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    namespace NotesService {
-        const baseUrl = "PatientManagement/Notes";
-        function Create(request: Serenity.SaveRequest<NotesRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        function Update(request: Serenity.SaveRequest<NotesRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<NotesRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<NotesRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        namespace Methods {
-            const Create: string;
-            const Update: string;
-            const Delete: string;
-            const Retrieve: string;
-            const List: string;
+            const InsertUserDisplayName: string;
         }
     }
 }
@@ -771,10 +742,11 @@ declare namespace PatientManagement.PatientManagement {
         Name: Serenity.StringEditor;
         PersonalNumber: Serenity.IntegerEditor;
         PhoneNumber: Serenity.IntegerEditor;
-        FirstRegistrationDate: Serenity.DateEditor;
+        FirstRegistrationDate: Serenity.DateTimeEditor;
         Address: Serenity.StringEditor;
         Height: Serenity.IntegerEditor;
         Weight: Serenity.IntegerEditor;
+        NoteList: NotesEditor;
     }
 }
 declare namespace PatientManagement.PatientManagement {
@@ -789,6 +761,7 @@ declare namespace PatientManagement.PatientManagement {
         Weight?: number;
         InsertUserId?: number;
         InsertDate?: string;
+        NoteList?: NotesRow[];
     }
     namespace PatientsRow {
         const idProperty = "PatientId";
@@ -807,6 +780,7 @@ declare namespace PatientManagement.PatientManagement {
             const Weight: string;
             const InsertUserId: string;
             const InsertDate: string;
+            const NoteList: string;
         }
     }
 }
@@ -1418,23 +1392,31 @@ declare namespace PatientManagement.PatientManagement {
     }
 }
 declare namespace PatientManagement.PatientManagement {
-    class NotesDialog extends Serenity.EntityDialog<NotesRow, any> {
-        protected getFormKey(): string;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getNameProperty(): string;
-        protected getService(): string;
-        protected form: NotesForm;
+    class NotesDialog extends Serenity.TemplatedDialog<any> {
+        private textEditor;
+        constructor();
+        protected getTemplate(): string;
+        protected getDialogOptions(): JQueryUI.DialogOptions;
+        text: string;
+        okClick: () => void;
     }
 }
 declare namespace PatientManagement.PatientManagement {
-    class NotesGrid extends Serenity.EntityGrid<NotesRow, any> {
-        protected getColumnsKey(): string;
-        protected getDialogType(): typeof NotesDialog;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getService(): string;
-        constructor(container: JQuery);
+    class NotesEditor extends Serenity.TemplatedWidget<any> implements Serenity.IGetEditValue, Serenity.ISetEditValue {
+        private isDirty;
+        private items;
+        constructor(div: JQuery);
+        protected getTemplate(): string;
+        protected updateContent(): void;
+        protected addClick(): void;
+        protected editClick(e: any): void;
+        deleteClick(e: any): void;
+        value: NotesRow[];
+        getEditValue(prop: Serenity.PropertyItem, target: any): void;
+        setEditValue(source: any, prop: Serenity.PropertyItem): void;
+        get_isDirty(): boolean;
+        set_isDirty(value: any): void;
+        onChange: () => void;
     }
 }
 declare namespace PatientManagement.PatientManagement {
@@ -1465,6 +1447,10 @@ declare namespace PatientManagement.PatientManagement {
         protected getNameProperty(): string;
         protected getService(): string;
         protected form: PatientsForm;
+        private loadedState;
+        constructor();
+        getSaveState(): string;
+        loadResponse(data: any): void;
     }
 }
 declare namespace PatientManagement.PatientManagement {
