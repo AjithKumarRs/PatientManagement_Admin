@@ -15,7 +15,10 @@ namespace PatientManagement.PatientManagement.Columns
     {
         [EditLink, DisplayName("Db.Shared.RecordId"), AlignRight]
         public Int32 PatientId { get; set; }
+
         [EditLink]
+        public String PatientName { get; set; }
+
         public String DailyMeals { get; set; }
         public String Diseases { get; set; }
         public String MedicinesIntake { get; set; }

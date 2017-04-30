@@ -45,9 +45,7 @@ namespace PatientManagement.PatientManagement {
             Serenity.TabsExtensions.setDisabled(this.tabs, 'PatientHealth', this.isNewOrDeleted());
             Serenity.TabsExtensions.setDisabled(this.tabs, 'Notes', this.isNewOrDeleted());
             Serenity.TabsExtensions.setDisabled(this.tabs, 'LifeStyle', this.isNewOrDeleted());
-
-
-
+            
             this.visitsGrid.patientId = entity.PatientId;
         }
 

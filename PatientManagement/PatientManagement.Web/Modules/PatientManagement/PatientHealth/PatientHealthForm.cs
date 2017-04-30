@@ -13,6 +13,7 @@ namespace PatientManagement.PatientManagement.Forms
     [BasedOnRow(typeof(Entities.PatientHealthRow))]
     public class PatientHealthForm
     {
+        public Int32? PatientId { get; set; }
         public String DailyMeals { get; set; }
         public String Diseases { get; set; }
         public String MedicinesIntake { get; set; }

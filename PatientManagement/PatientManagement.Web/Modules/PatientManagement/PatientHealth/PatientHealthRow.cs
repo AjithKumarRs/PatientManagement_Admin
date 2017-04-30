@@ -12,9 +12,12 @@ namespace PatientManagement.PatientManagement.Entities
     [ConnectionKey("PatientManagement"), TableName("[dbo].[PatientHealth]"), DisplayName("Patient Health"), InstanceName("Patient Health"), TwoLevelCached]
     [ReadPermission("PatientManagement:PatientHealth:Read")]
     [ModifyPermission("PatientManagement:PatientHealth:Modify")]
+    [LookupScript("PatientManagement.PatientHealth")]
+
     public sealed class PatientHealthRow : Row, IIdRow, INameRow , IInsertLogRow
     {
         [DisplayName("Patient"), PrimaryKey, ForeignKey("[dbo].[Patients]", "PatientId"), LeftJoin("jPatient"), TextualField("PatientName")]
+        [LookupEditor(typeof(PatientsRow), InplaceAdd = true)]
         public Int32? PatientId
         {
             get { return Fields.PatientId[this]; }
@@ -22,6 +25,7 @@ namespace PatientManagement.PatientManagement.Entities
         }
 
         [DisplayName("Daily Meals"), Size(200), QuickSearch]
+        [TextAreaEditor(Rows = 8)]
         public String DailyMeals
         {
             get { return Fields.DailyMeals[this]; }
@@ -29,6 +33,7 @@ namespace PatientManagement.PatientManagement.Entities
         }
 
         [DisplayName("Diseases"), Size(500)]
+        [TextAreaEditor(Rows = 8)]
         public String Diseases
         {
             get { return Fields.Diseases[this]; }
@@ -36,6 +41,7 @@ namespace PatientManagement.PatientManagement.Entities
         }
 
         [DisplayName("Medicines Intake"), Size(500)]
+        [TextAreaEditor(Rows = 8)]
         public String MedicinesIntake
         {
             get { return Fields.MedicinesIntake[this]; }

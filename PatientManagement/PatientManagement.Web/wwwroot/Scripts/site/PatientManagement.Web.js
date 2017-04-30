@@ -500,7 +500,7 @@ var PatientManagement;
         }(Serenity.PrefixedContext));
         PatientHealthForm.formKey = 'PatientManagement.PatientHealth';
         PatientManagement.PatientHealthForm = PatientHealthForm;
-        [['DailyMeals', function () { return Serenity.StringEditor; }], ['Diseases', function () { return Serenity.StringEditor; }], ['MedicinesIntake', function () { return Serenity.StringEditor; }]].forEach(function (x) { return Object.defineProperty(PatientHealthForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
+        [['PatientId', function () { return Serenity.LookupEditor; }], ['DailyMeals', function () { return Serenity.TextAreaEditor; }], ['Diseases', function () { return Serenity.TextAreaEditor; }], ['MedicinesIntake', function () { return Serenity.TextAreaEditor; }]].forEach(function (x) { return Object.defineProperty(PatientHealthForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
     })(PatientManagement = PatientManagement_5.PatientManagement || (PatientManagement_5.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
@@ -512,6 +512,11 @@ var PatientManagement;
             PatientHealthRow.idProperty = 'PatientId';
             PatientHealthRow.nameProperty = 'DailyMeals';
             PatientHealthRow.localTextPrefix = 'PatientManagement.PatientHealth';
+            PatientHealthRow.lookupKey = 'PatientManagement.PatientHealth';
+            function getLookup() {
+                return Q.getLookup('PatientManagement.PatientHealth');
+            }
+            PatientHealthRow.getLookup = getLookup;
             var Fields;
             (function (Fields) {
             })(Fields = PatientHealthRow.Fields || (PatientHealthRow.Fields = {}));

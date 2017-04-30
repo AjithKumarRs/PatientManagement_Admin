@@ -80,7 +80,7 @@ namespace PatientManagement.PatientManagement.Entities
         }
 
         #region PatientFields
-        [DisplayName("Patient Name"), Expression("jPatient.[Name]"), Width(150), QuickFilter, EditLink]
+        [DisplayName("Patient Name"), Expression("jPatient.[Name]"), Width(150), EditLink]
         public String PatientName
         {
             get => Fields.PatientName[this];

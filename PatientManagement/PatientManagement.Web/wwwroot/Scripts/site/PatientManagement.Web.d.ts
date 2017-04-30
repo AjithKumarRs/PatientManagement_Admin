@@ -669,9 +669,10 @@ declare namespace PatientManagement.PatientManagement {
         static formKey: string;
     }
     interface PatientHealthForm {
-        DailyMeals: Serenity.StringEditor;
-        Diseases: Serenity.StringEditor;
-        MedicinesIntake: Serenity.StringEditor;
+        PatientId: Serenity.LookupEditor;
+        DailyMeals: Serenity.TextAreaEditor;
+        Diseases: Serenity.TextAreaEditor;
+        MedicinesIntake: Serenity.TextAreaEditor;
     }
 }
 declare namespace PatientManagement.PatientManagement {
@@ -696,6 +697,8 @@ declare namespace PatientManagement.PatientManagement {
         const idProperty = "PatientId";
         const nameProperty = "DailyMeals";
         const localTextPrefix = "PatientManagement.PatientHealth";
+        const lookupKey = "PatientManagement.PatientHealth";
+        function getLookup(): Q.Lookup<PatientHealthRow>;
         namespace Fields {
             const PatientId: string;
             const DailyMeals: string;

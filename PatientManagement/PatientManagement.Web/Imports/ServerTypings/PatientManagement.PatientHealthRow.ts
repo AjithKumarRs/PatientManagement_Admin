@@ -21,6 +21,11 @@
         export const idProperty = 'PatientId';
         export const nameProperty = 'DailyMeals';
         export const localTextPrefix = 'PatientManagement.PatientHealth';
+        export const lookupKey = 'PatientManagement.PatientHealth';
+
+        export function getLookup(): Q.Lookup<PatientHealthRow> {
+            return Q.getLookup<PatientHealthRow>('PatientManagement.PatientHealth');
+        }
 
         export namespace Fields {
             export declare const PatientId: string;

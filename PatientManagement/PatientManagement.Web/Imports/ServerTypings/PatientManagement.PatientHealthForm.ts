@@ -5,10 +5,11 @@
     }
 
     export interface PatientHealthForm {
-        DailyMeals: Serenity.StringEditor;
-        Diseases: Serenity.StringEditor;
-        MedicinesIntake: Serenity.StringEditor;
+        PatientId: Serenity.LookupEditor;
+        DailyMeals: Serenity.TextAreaEditor;
+        Diseases: Serenity.TextAreaEditor;
+        MedicinesIntake: Serenity.TextAreaEditor;
     }
 
-    [['DailyMeals', () => Serenity.StringEditor], ['Diseases', () => Serenity.StringEditor], ['MedicinesIntake', () => Serenity.StringEditor]].forEach(x => Object.defineProperty(PatientHealthForm.prototype, <string>x[0], { get: function () { return this.w(x[0], (x[1] as any)()); }, enumerable: true, configurable: true }));
+    [['PatientId', () => Serenity.LookupEditor], ['DailyMeals', () => Serenity.TextAreaEditor], ['Diseases', () => Serenity.TextAreaEditor], ['MedicinesIntake', () => Serenity.TextAreaEditor]].forEach(x => Object.defineProperty(PatientHealthForm.prototype, <string>x[0], { get: function () { return this.w(x[0], (x[1] as any)()); }, enumerable: true, configurable: true }));
 }
