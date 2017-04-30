@@ -1,6 +1,7 @@
 ﻿
 namespace PatientManagement.PatientManagement {
 
+    @Serenity.Decorators.maximizable()
     @Serenity.Decorators.registerClass()
     @Serenity.Decorators.responsive()
     export class PatientsDialog extends Serenity.EntityDialog<PatientsRow, any> {
@@ -21,6 +22,9 @@ namespace PatientManagement.PatientManagement {
 
         private lifeStyleForm: LifeStylesForm;
         private lifeStyleGrid: Serenity.PropertyGrid;
+
+        private patientsFileUploadsGrid: Serenity.PropertyGrid;
+        private patientsFileUploadsForm: PatientsFileUploadsForm;
 
 
         constructor() {
@@ -48,11 +52,22 @@ namespace PatientManagement.PatientManagement {
 
             this.lifeStyleForm = new LifeStylesForm((this.lifeStyleGrid as any).idPrefix);
 
+            //Initialize new instance of LifeStyle grid and form
+            this.patientsFileUploadsGrid = new Serenity.PropertyGrid(this.byId("FileUploadsPropertyGrid"),
+                {
+                    items: Q.getForm(PatientsFileUploadsForm.formKey).filter(x => x.name != "PatientId"),
+                    useCategories: true
+                });
+
+            this.patientsFileUploadsForm = new PatientsFileUploadsForm((this.patientsFileUploadsGrid as any).idPrefix);
+
 
 
             this.patientValidator = this.byId("PatientHealthForm").validate(Q.validateOptions({}));
 
             this.patientValidator = this.byId("LifeStyleForm").validate(Q.validateOptions({}));
+
+            this.patientValidator = this.byId("FileUploadsForm").validate(Q.validateOptions({}));
 
             this.byId('NoteList').closest('.field').hide().end().appendTo(this.byId('TabNotes'));
             DialogUtils.pendingChangesConfirmation(this.element, () => this.getSaveState() != this.loadedState);
@@ -122,6 +137,7 @@ namespace PatientManagement.PatientManagement {
             Serenity.TabsExtensions.setDisabled(this.tabs, 'PatientHealth', this.isNewOrDeleted());
             Serenity.TabsExtensions.setDisabled(this.tabs, 'Notes', this.isNewOrDeleted());
             Serenity.TabsExtensions.setDisabled(this.tabs, 'LifeStyle', this.isNewOrDeleted());
+            Serenity.TabsExtensions.setDisabled(this.tabs, 'FileUploads', this.isNewOrDeleted());
 
             if (this.isNewOrDeleted()) {
                 // no patient is selected, just load an empty entity

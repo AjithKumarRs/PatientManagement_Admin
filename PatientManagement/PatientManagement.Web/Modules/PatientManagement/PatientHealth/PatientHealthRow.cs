@@ -16,6 +16,8 @@ namespace PatientManagement.PatientManagement.Entities
 
     public sealed class PatientHealthRow : Row, IIdRow, INameRow , IInsertLogRow
     {
+        [Category("General")]
+
         [DisplayName("Patient"), PrimaryKey, ForeignKey("[dbo].[Patients]", "PatientId"), LeftJoin("jPatient"), TextualField("PatientName")]
         [LookupEditor(typeof(PatientsRow), InplaceAdd = true)]
         public Int32? PatientId

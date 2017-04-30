@@ -1,4 +1,6 @@
 {
+  "Db.PatientManagement.PatientsFileUploads.EntityPlural": "Documents",
+  "Db.PatientManagement.PatientsFileUploads.EntitySingular": "Document",
   "Navigation.Dashboard": "Dashboard",
   "Navigation.SiteTitle": "Kokon",
   "Site.Dashboard.ContentDescription": "all saved hours for period"

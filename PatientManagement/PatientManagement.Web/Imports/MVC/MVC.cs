@@ -108,6 +108,11 @@ namespace MVC
                 public const string PatientsIndex = "~/Modules/PatientManagement/Patients/PatientsIndex.cshtml";
             }
 
+            public static class PatientsFileUploads
+            {
+                public const string PatientsFileUploadsIndex = "~/Modules/PatientManagement/PatientsFileUploads/PatientsFileUploadsIndex.cshtml";
+            }
+
             public static class Visits
             {
                 public const string VisitsIndex = "~/Modules/PatientManagement/Visits/VisitsIndex.cshtml";

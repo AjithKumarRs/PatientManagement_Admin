@@ -8,6 +8,8 @@ using Patients = PatientManagement.PatientManagement.Pages;
 [assembly: NavigationLink(501, "Patient Management/Life Style", typeof(Patients.LifeStylesController))]
 [assembly: NavigationLink(502, "Patient Management/Patient Health", typeof(Patients.PatientHealthController))]
 
-[assembly: NavigationMenu(503, "Visits Management", icon: "fa-calendar")]
-[assembly: NavigationLink(504, "Visits Management/Visits", typeof(Patients.VisitsController))]
-[assembly: NavigationLink(505, "Visits Management/Visit Types", typeof(Patients.VisitTypesController))]
+[assembly: NavigationLink(503, "Patient Management/File Uploads", typeof(Patients.PatientsFileUploadsController))]
+
+[assembly: NavigationMenu(504, "Visits Management", icon: "fa-calendar")]
+[assembly: NavigationLink(505, "Visits Management/Visits", typeof(Patients.VisitsController))]
+[assembly: NavigationLink(506, "Visits Management/Visit Types", typeof(Patients.VisitTypesController))]

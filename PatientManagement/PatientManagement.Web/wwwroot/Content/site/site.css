@@ -8659,3 +8659,9 @@ section.content > .s-DataGrid {
 .dashboard-visitsgrid .s-PatientManagement-VisitsGrid {
   height: 820px;
 }
+.s-PatientManagement-PatientsFileUploadsDialog > .size {
+  width: 650px;
+}
+.s-PatientManagement-PatientsFileUploadsDialog .caption {
+  width: 150px;
+}

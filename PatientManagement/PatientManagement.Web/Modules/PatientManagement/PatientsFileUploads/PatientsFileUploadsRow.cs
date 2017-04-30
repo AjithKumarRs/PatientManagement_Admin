@@ -9,53 +9,56 @@ namespace PatientManagement.PatientManagement.Entities
     using System.ComponentModel;
     using System.IO;
 
-    [ConnectionKey("PatientManagement"), TableName("[dbo].[LifeStyles]"), DisplayName("Life Styles"), InstanceName("Life Style"), TwoLevelCached]
-    [ReadPermission("PatientManagement:LifeStyles:Read")]
-    [ModifyPermission("PatientManagement:LifeStyles:Modify")]
-    [LookupScript("PatientManagement.LifeStyles")]
-    public sealed class LifeStylesRow : Row, IIdRow, INameRow, IInsertLogRow
+    [ConnectionKey("PatientManagement"), TableName("[dbo].[PatientsFileUploads]"), DisplayName("Patients File Uploads"), InstanceName("Patients File Uploads"), TwoLevelCached]
+    [ReadPermission("PatientManagement:PatientsFileUploads:Read")]
+    [ModifyPermission("PatientManagement:PatientsFileUploads:Modify")]
+    [LookupScript("PatientManagement.PatientsFileUploads")]
+    [LeftJoin("p", "Patients", "p.[PatientId] = t0.[PatientId]", RowType = typeof(PatientsRow), TitlePrefix = "")]
+    public sealed class PatientsFileUploadsRow : Row, IIdRow, INameRow, IInsertLogRow
     {
+        [DisplayName("Patient File Upload Id"), Identity]
+        public Int32? PatientFileUploadId
+        {
+            get { return Fields.PatientFileUploadId[this]; }
+            set { Fields.PatientFileUploadId[this] = value; }
+        }
         [Category("General")]
-
-        [DisplayName("Patient"), PrimaryKey, ForeignKey("[dbo].[Patients]", "PatientId"), LeftJoin("jPatient"), TextualField("PatientName"), Required(true)]
+        [DisplayName("Patient"), NotNull, ForeignKey("[dbo].[Patients]", "PatientId"), LeftJoin("jPatient"), TextualField("PatientName")]
         [LookupEditor(typeof(PatientsRow), InplaceAdd = true)]
-
         public Int32? PatientId
         {
             get { return Fields.PatientId[this]; }
             set { Fields.PatientId[this] = value; }
         }
 
-        [DisplayName("Job"), Size(500), QuickSearch]
-        [TextAreaEditor(Rows = 6)]
-        public String Job
+        [Category("Attachments")]
+        [DisplayName("File Path"), NotNull, MultipleFileUploadEditor]
+        public String FilePath
         {
-            get { return Fields.Job[this]; }
-            set { Fields.Job[this] = value; }
+            get { return Fields.FilePath[this]; }
+            set { Fields.FilePath[this] = value; }
         }
 
-        [DisplayName("Movement"), Size(500)]
-        [TextAreaEditor(Rows = 6)]
-        public String Movement
+        [DisplayName("Description"), Size(100), NotNull]
+        [TextAreaEditor(Rows = 3)]
+        public String Description
         {
-            get { return Fields.Movement[this]; }
-            set { Fields.Movement[this] = value; }
+            get { return Fields.Description[this]; }
+            set { Fields.Description[this] = value; }
         }
 
-        [DisplayName("Training"), Size(500)]
-        [TextAreaEditor(Rows = 6)]
-        public String Training
+        [DisplayName("Insert User Id"), NotNull]
+        public Int32? InsertUserId
         {
-            get { return Fields.Training[this]; }
-            set { Fields.Training[this] = value; }
+            get { return Fields.InsertUserId[this]; }
+            set { Fields.InsertUserId[this] = value; }
         }
 
-        [DisplayName("Bad Habits"), Size(500)]
-        [TextAreaEditor(Rows = 6)]
-        public String BadHabits
+        [DisplayName("Insert Date"), NotNull, SortOrder(1)]
+        public DateTime? InsertDate
         {
-            get { return Fields.BadHabits[this]; }
-            set { Fields.BadHabits[this] = value; }
+            get { return Fields.InsertDate[this]; }
+            set { Fields.InsertDate[this] = value; }
         }
 
         [DisplayName("Patient Name"), Expression("jPatient.[Name]")]
@@ -121,47 +124,29 @@ namespace PatientManagement.PatientManagement.Entities
             set { Fields.PatientInsertDate[this] = value; }
         }
 
-
-        [DisplayName("Insert User Id"), NotNull, Insertable(false), Updatable(false)]
-        public Int32? InsertUserId
-        {
-            get { return Fields.InsertUserId[this]; }
-            set { Fields.InsertUserId[this] = value; }
-        }
-
-        [DisplayName("Insert Date"), NotNull, Insertable(false), Updatable(false)]
-
-        public DateTime? InsertDate
-        {
-            get { return Fields.InsertDate[this]; }
-            set { Fields.InsertDate[this] = value; }
-        }
-
-
         IIdField IIdRow.IdField
         {
-            get { return Fields.PatientId; }
+            get { return Fields.PatientFileUploadId; }
         }
 
         StringField INameRow.NameField
         {
-            get { return Fields.Job; }
+            get { return Fields.FilePath; }
         }
 
         public static readonly RowFields Fields = new RowFields().Init();
 
-        public LifeStylesRow()
+        public PatientsFileUploadsRow()
             : base(Fields)
         {
         }
 
         public class RowFields : RowFieldsBase
         {
+            public Int32Field PatientFileUploadId;
             public Int32Field PatientId;
-            public StringField Job;
-            public StringField Movement;
-            public StringField Training;
-            public StringField BadHabits;
+            public StringField FilePath;
+            public StringField Description;
             public Int32Field InsertUserId;
             public DateTimeField InsertDate;
 
@@ -178,7 +163,7 @@ namespace PatientManagement.PatientManagement.Entities
             public RowFields()
                 : base()
             {
-                LocalTextPrefix = "PatientManagement.LifeStyles";
+                LocalTextPrefix = "PatientManagement.PatientsFileUploads";
             }
         }
 
