@@ -1456,9 +1456,10 @@ declare namespace PatientManagement.PatientManagement {
         private patientHealthGrid;
         private patientValidator;
         private selfChange;
+        private lifeStyleForm;
+        private lifeStyleGrid;
         constructor();
         getSaveState(): string;
-        protected savePatientHealth(callback: (response: Serenity.SaveResponse) => void, onSuccess?: (response: Serenity.SaveResponse) => void): boolean;
         loadResponse(data: any): void;
         loadEntity(entity: PatientsRow): void;
         onSaveSuccess(response: any): void;

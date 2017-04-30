@@ -19,13 +19,18 @@ namespace PatientManagement.PatientManagement {
         private patientValidator: JQueryValidation.Validator;
         private selfChange = 0;
 
+        private lifeStyleForm: LifeStylesForm;
+        private lifeStyleGrid: Serenity.PropertyGrid;
+
 
         constructor() {
             super();
 
+            //Initialize new instance of visits grid
             this.visitsGrid = new PatientVisitsGrid(this.byId("VisitsGrid"));
             this.visitsGrid.element.flexHeightOnly(1);
 
+            //Initialize new instance of patient health grid and form
             this.patientHealthGrid = new Serenity.PropertyGrid(this.byId("PatientHealthPropertyGrid"),
                 {
                     items: Q.getForm(PatientHealthForm.formKey).filter(x => x.name != "PatientId"),
@@ -34,7 +39,20 @@ namespace PatientManagement.PatientManagement {
 
             this.patientHealthForm = new PatientHealthForm((this.patientHealthGrid as any).idPrefix);
 
+            //Initialize new instance of LifeStyle grid and form
+            this.lifeStyleGrid = new Serenity.PropertyGrid(this.byId("LifeStylePropertyGrid"),
+                {
+                    items: Q.getForm(LifeStylesForm.formKey).filter(x => x.name != "PatientId"),
+                    useCategories: true
+                });
+
+            this.lifeStyleForm = new LifeStylesForm((this.lifeStyleGrid as any).idPrefix);
+
+
+
             this.patientValidator = this.byId("PatientHealthForm").validate(Q.validateOptions({}));
+
+            this.patientValidator = this.byId("LifeStyleForm").validate(Q.validateOptions({}));
 
             this.byId('NoteList').closest('.field').hide().end().appendTo(this.byId('TabNotes'));
             DialogUtils.pendingChangesConfirmation(this.element, () => this.getSaveState() != this.loadedState);
@@ -48,50 +66,50 @@ namespace PatientManagement.PatientManagement {
                 return null;
             }
         }
-        protected savePatientHealth(callback: (response: Serenity.SaveResponse) => void, onSuccess?: (response: Serenity.SaveResponse) => void): boolean {
-            var id = this.patientHealthForm.PatientId;
-            if (!id) {
-                onSuccess(null);
-            }
-            else {
-                // Get current tab
-                var currTab = Serenity.TabsExtensions.activeTabKey(this.tabs);
+        //protected savePatientHealth(callback: (response: Serenity.SaveResponse) => void, onSuccess?: (response: Serenity.SaveResponse) => void): boolean {
+        //    var id = this.patientHealthForm.PatientId;
+        //    if (!id) {
+        //        onSuccess(null);
+        //    }
+        //    else {
+        //        // Get current tab
+        //        var currTab = Serenity.TabsExtensions.activeTabKey(this.tabs);
 
-                // Select the correct tab and validate to see the error message in tab
-                Serenity.TabsExtensions.selectTab(this.tabs, "PatientHealth");
-                if (!this.patientValidator.form()) {
-                    return false;
-                }
+        //        // Select the correct tab and validate to see the error message in tab
+        //        Serenity.TabsExtensions.selectTab(this.tabs, "PatientHealth");
+        //        if (!this.patientValidator.form()) {
+        //            return false;
+        //        }
 
-                // Re-select initial tab
-                Serenity.TabsExtensions.selectTab(this.tabs, currTab);
+        //        // Re-select initial tab
+        //        Serenity.TabsExtensions.selectTab(this.tabs, currTab);
 
-                // prepare an empty entity to serialize customer details into
-                var c = <PatientHealthRow>{};
-                this.patientHealthGrid.save(c);
+        //        // prepare an empty entity to serialize customer details into
+        //        var c = <PatientHealthRow>{};
+        //        this.patientHealthGrid.save(c);
 
-                PatientHealthService.Update({
-                    EntityId: id,
-                    Entity: c
-                }, response => {
-                    // reload customer list just in case
-                    Q.reloadLookup(PatientHealthRow.lookupKey);
+        //        PatientHealthService.Update({
+        //            EntityId: id,
+        //            Entity: c
+        //        }, response => {
+        //            // reload customer list just in case
+        //            Q.reloadLookup(PatientHealthRow.lookupKey);
 
-                    // set flag that we are triggering customer select change event
-                    // otherwise active tab will change to first one
-                    this.selfChange++;
-                    try {
-                    }
-                    finally {
-                        this.selfChange--;
-                    }
+        //            // set flag that we are triggering customer select change event
+        //            // otherwise active tab will change to first one
+        //            this.selfChange++;
+        //            try {
+        //            }
+        //            finally {
+        //                this.selfChange--;
+        //            }
 
-                    onSuccess(response);
-                });
-            }
+        //            onSuccess(response);
+        //        });
+        //    }
 
-            return true;
-        }
+        //    return true;
+        //}
         loadResponse(data) {
             super.loadResponse(data);
             this.loadedState = this.getSaveState();
@@ -106,13 +124,11 @@ namespace PatientManagement.PatientManagement {
             Serenity.TabsExtensions.setDisabled(this.tabs, 'LifeStyle', this.isNewOrDeleted());
 
             if (this.isNewOrDeleted()) {
-                // no customer is selected, just load an empty entity
+                // no patient is selected, just load an empty entity
                 this.patientHealthGrid.load({});
                 return;
             }
-            console.log(entity.PatientId);
 
-            // load selected customer into customer form by calling CustomerService
             PatientHealthService.Retrieve({
                 EntityId: entity.PatientId
             }, response => {
@@ -127,5 +143,7 @@ namespace PatientManagement.PatientManagement {
 
             Q.reloadLookup('PatientManagement.Patients');
         }
+
+
     }
 }

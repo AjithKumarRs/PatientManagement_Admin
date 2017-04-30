@@ -25,7 +25,7 @@ namespace PatientManagement.PatientManagement.Entities
         }
 
         [DisplayName("Job"), Size(500), QuickSearch]
-        [TextAreaEditor(Rows = 8)]
+        [TextAreaEditor(Rows = 6)]
         public String Job
         {
             get { return Fields.Job[this]; }
@@ -33,7 +33,7 @@ namespace PatientManagement.PatientManagement.Entities
         }
 
         [DisplayName("Movement"), Size(500)]
-        [TextAreaEditor(Rows = 8)]
+        [TextAreaEditor(Rows = 6)]
         public String Movement
         {
             get { return Fields.Movement[this]; }
@@ -41,7 +41,7 @@ namespace PatientManagement.PatientManagement.Entities
         }
 
         [DisplayName("Training"), Size(500)]
-        [TextAreaEditor(Rows = 8)]
+        [TextAreaEditor(Rows = 6)]
         public String Training
         {
             get { return Fields.Training[this]; }
@@ -49,7 +49,7 @@ namespace PatientManagement.PatientManagement.Entities
         }
 
         [DisplayName("Bad Habits"), Size(500)]
-        [TextAreaEditor(Rows = 8)]
+        [TextAreaEditor(Rows = 6)]
         public String BadHabits
         {
             get { return Fields.BadHabits[this]; }

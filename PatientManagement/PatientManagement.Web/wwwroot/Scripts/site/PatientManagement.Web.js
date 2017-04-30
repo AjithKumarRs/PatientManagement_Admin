@@ -3270,14 +3270,23 @@ var PatientManagement;
                 var _this = _super.call(this) || this;
                 _this.form = new PatientManagement.PatientsForm(_this.idPrefix);
                 _this.selfChange = 0;
+                //Initialize new instance of visits grid
                 _this.visitsGrid = new PatientManagement.PatientVisitsGrid(_this.byId("VisitsGrid"));
                 _this.visitsGrid.element.flexHeightOnly(1);
+                //Initialize new instance of patient health grid and form
                 _this.patientHealthGrid = new Serenity.PropertyGrid(_this.byId("PatientHealthPropertyGrid"), {
                     items: Q.getForm(PatientManagement.PatientHealthForm.formKey).filter(function (x) { return x.name != "PatientId"; }),
                     useCategories: true
                 });
                 _this.patientHealthForm = new PatientManagement.PatientHealthForm(_this.patientHealthGrid.idPrefix);
+                //Initialize new instance of LifeStyle grid and form
+                _this.lifeStyleGrid = new Serenity.PropertyGrid(_this.byId("LifeStylePropertyGrid"), {
+                    items: Q.getForm(PatientManagement.LifeStylesForm.formKey).filter(function (x) { return x.name != "PatientId"; }),
+                    useCategories: true
+                });
+                _this.lifeStyleForm = new PatientManagement.LifeStylesForm(_this.lifeStyleGrid.idPrefix);
                 _this.patientValidator = _this.byId("PatientHealthForm").validate(Q.validateOptions({}));
+                _this.patientValidator = _this.byId("LifeStyleForm").validate(Q.validateOptions({}));
                 _this.byId('NoteList').closest('.field').hide().end().appendTo(_this.byId('TabNotes'));
                 PatientManagement_23.DialogUtils.pendingChangesConfirmation(_this.element, function () { return _this.getSaveState() != _this.loadedState; });
                 return _this;
@@ -3295,44 +3304,43 @@ var PatientManagement;
                     return null;
                 }
             };
-            PatientsDialog.prototype.savePatientHealth = function (callback, onSuccess) {
-                var _this = this;
-                var id = this.patientHealthForm.PatientId;
-                if (!id) {
-                    onSuccess(null);
-                }
-                else {
-                    // Get current tab
-                    var currTab = Serenity.TabsExtensions.activeTabKey(this.tabs);
-                    // Select the correct tab and validate to see the error message in tab
-                    Serenity.TabsExtensions.selectTab(this.tabs, "PatientHealth");
-                    if (!this.patientValidator.form()) {
-                        return false;
-                    }
-                    // Re-select initial tab
-                    Serenity.TabsExtensions.selectTab(this.tabs, currTab);
-                    // prepare an empty entity to serialize customer details into
-                    var c = {};
-                    this.patientHealthGrid.save(c);
-                    PatientManagement.PatientHealthService.Update({
-                        EntityId: id,
-                        Entity: c
-                    }, function (response) {
-                        // reload customer list just in case
-                        Q.reloadLookup(PatientManagement.PatientHealthRow.lookupKey);
-                        // set flag that we are triggering customer select change event
-                        // otherwise active tab will change to first one
-                        _this.selfChange++;
-                        try {
-                        }
-                        finally {
-                            _this.selfChange--;
-                        }
-                        onSuccess(response);
-                    });
-                }
-                return true;
-            };
+            //protected savePatientHealth(callback: (response: Serenity.SaveResponse) => void, onSuccess?: (response: Serenity.SaveResponse) => void): boolean {
+            //    var id = this.patientHealthForm.PatientId;
+            //    if (!id) {
+            //        onSuccess(null);
+            //    }
+            //    else {
+            //        // Get current tab
+            //        var currTab = Serenity.TabsExtensions.activeTabKey(this.tabs);
+            //        // Select the correct tab and validate to see the error message in tab
+            //        Serenity.TabsExtensions.selectTab(this.tabs, "PatientHealth");
+            //        if (!this.patientValidator.form()) {
+            //            return false;
+            //        }
+            //        // Re-select initial tab
+            //        Serenity.TabsExtensions.selectTab(this.tabs, currTab);
+            //        // prepare an empty entity to serialize customer details into
+            //        var c = <PatientHealthRow>{};
+            //        this.patientHealthGrid.save(c);
+            //        PatientHealthService.Update({
+            //            EntityId: id,
+            //            Entity: c
+            //        }, response => {
+            //            // reload customer list just in case
+            //            Q.reloadLookup(PatientHealthRow.lookupKey);
+            //            // set flag that we are triggering customer select change event
+            //            // otherwise active tab will change to first one
+            //            this.selfChange++;
+            //            try {
+            //            }
+            //            finally {
+            //                this.selfChange--;
+            //            }
+            //            onSuccess(response);
+            //        });
+            //    }
+            //    return true;
+            //}
             PatientsDialog.prototype.loadResponse = function (data) {
                 _super.prototype.loadResponse.call(this, data);
                 this.loadedState = this.getSaveState();
@@ -3345,12 +3353,10 @@ var PatientManagement;
                 Serenity.TabsExtensions.setDisabled(this.tabs, 'Notes', this.isNewOrDeleted());
                 Serenity.TabsExtensions.setDisabled(this.tabs, 'LifeStyle', this.isNewOrDeleted());
                 if (this.isNewOrDeleted()) {
-                    // no customer is selected, just load an empty entity
+                    // no patient is selected, just load an empty entity
                     this.patientHealthGrid.load({});
                     return;
                 }
-                console.log(entity.PatientId);
-                // load selected customer into customer form by calling CustomerService
                 PatientManagement.PatientHealthService.Retrieve({
                     EntityId: entity.PatientId
                 }, function (response) {
