@@ -430,7 +430,7 @@ var PatientManagement;
         }(Serenity.PrefixedContext));
         LifeStylesForm.formKey = 'PatientManagement.LifeStyles';
         PatientManagement.LifeStylesForm = LifeStylesForm;
-        [['PatientId', function () { return Serenity.LookupEditor; }], ['Job', function () { return Serenity.StringEditor; }], ['Movement', function () { return Serenity.StringEditor; }], ['Training', function () { return Serenity.StringEditor; }], ['BadHabits', function () { return Serenity.StringEditor; }]].forEach(function (x) { return Object.defineProperty(LifeStylesForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
+        [['PatientId', function () { return Serenity.LookupEditor; }], ['Job', function () { return Serenity.TextAreaEditor; }], ['Movement', function () { return Serenity.TextAreaEditor; }], ['Training', function () { return Serenity.TextAreaEditor; }], ['BadHabits', function () { return Serenity.TextAreaEditor; }]].forEach(function (x) { return Object.defineProperty(LifeStylesForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
     })(PatientManagement = PatientManagement_1.PatientManagement || (PatientManagement_1.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
@@ -3269,8 +3269,15 @@ var PatientManagement;
             function PatientsDialog() {
                 var _this = _super.call(this) || this;
                 _this.form = new PatientManagement.PatientsForm(_this.idPrefix);
+                _this.selfChange = 0;
                 _this.visitsGrid = new PatientManagement.PatientVisitsGrid(_this.byId("VisitsGrid"));
                 _this.visitsGrid.element.flexHeightOnly(1);
+                _this.patientHealthGrid = new Serenity.PropertyGrid(_this.byId("PatientHealthPropertyGrid"), {
+                    items: Q.getForm(PatientManagement.PatientHealthForm.formKey).filter(function (x) { return x.name != "PatientId"; }),
+                    useCategories: true
+                });
+                _this.patientHealthForm = new PatientManagement.PatientHealthForm(_this.patientHealthGrid.idPrefix);
+                _this.patientValidator = _this.byId("PatientHealthForm").validate(Q.validateOptions({}));
                 _this.byId('NoteList').closest('.field').hide().end().appendTo(_this.byId('TabNotes'));
                 PatientManagement_23.DialogUtils.pendingChangesConfirmation(_this.element, function () { return _this.getSaveState() != _this.loadedState; });
                 return _this;
@@ -3288,16 +3295,67 @@ var PatientManagement;
                     return null;
                 }
             };
+            PatientsDialog.prototype.savePatientHealth = function (callback, onSuccess) {
+                var _this = this;
+                var id = this.patientHealthForm.PatientId;
+                if (!id) {
+                    onSuccess(null);
+                }
+                else {
+                    // Get current tab
+                    var currTab = Serenity.TabsExtensions.activeTabKey(this.tabs);
+                    // Select the correct tab and validate to see the error message in tab
+                    Serenity.TabsExtensions.selectTab(this.tabs, "PatientHealth");
+                    if (!this.patientValidator.form()) {
+                        return false;
+                    }
+                    // Re-select initial tab
+                    Serenity.TabsExtensions.selectTab(this.tabs, currTab);
+                    // prepare an empty entity to serialize customer details into
+                    var c = {};
+                    this.patientHealthGrid.save(c);
+                    PatientManagement.PatientHealthService.Update({
+                        EntityId: id,
+                        Entity: c
+                    }, function (response) {
+                        // reload customer list just in case
+                        Q.reloadLookup(PatientManagement.PatientHealthRow.lookupKey);
+                        // set flag that we are triggering customer select change event
+                        // otherwise active tab will change to first one
+                        _this.selfChange++;
+                        try {
+                        }
+                        finally {
+                            _this.selfChange--;
+                        }
+                        onSuccess(response);
+                    });
+                }
+                return true;
+            };
             PatientsDialog.prototype.loadResponse = function (data) {
                 _super.prototype.loadResponse.call(this, data);
                 this.loadedState = this.getSaveState();
             };
             PatientsDialog.prototype.loadEntity = function (entity) {
+                var _this = this;
                 _super.prototype.loadEntity.call(this, entity);
                 Serenity.TabsExtensions.setDisabled(this.tabs, 'Visits', this.isNewOrDeleted());
                 Serenity.TabsExtensions.setDisabled(this.tabs, 'PatientHealth', this.isNewOrDeleted());
                 Serenity.TabsExtensions.setDisabled(this.tabs, 'Notes', this.isNewOrDeleted());
                 Serenity.TabsExtensions.setDisabled(this.tabs, 'LifeStyle', this.isNewOrDeleted());
+                if (this.isNewOrDeleted()) {
+                    // no customer is selected, just load an empty entity
+                    this.patientHealthGrid.load({});
+                    return;
+                }
+                console.log(entity.PatientId);
+                // load selected customer into customer form by calling CustomerService
+                PatientManagement.PatientHealthService.Retrieve({
+                    EntityId: entity.PatientId
+                }, function (response) {
+                    _this.patientHealthGrid.load(response.Entity);
+                });
                 this.visitsGrid.patientId = entity.PatientId;
             };
             PatientsDialog.prototype.onSaveSuccess = function (response) {

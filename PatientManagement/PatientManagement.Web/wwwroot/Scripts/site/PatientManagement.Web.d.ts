@@ -569,10 +569,10 @@ declare namespace PatientManagement.PatientManagement {
     }
     interface LifeStylesForm {
         PatientId: Serenity.LookupEditor;
-        Job: Serenity.StringEditor;
-        Movement: Serenity.StringEditor;
-        Training: Serenity.StringEditor;
-        BadHabits: Serenity.StringEditor;
+        Job: Serenity.TextAreaEditor;
+        Movement: Serenity.TextAreaEditor;
+        Training: Serenity.TextAreaEditor;
+        BadHabits: Serenity.TextAreaEditor;
     }
 }
 declare namespace PatientManagement.PatientManagement {
@@ -1452,8 +1452,13 @@ declare namespace PatientManagement.PatientManagement {
         protected form: PatientsForm;
         private visitsGrid;
         private loadedState;
+        private patientHealthForm;
+        private patientHealthGrid;
+        private patientValidator;
+        private selfChange;
         constructor();
         getSaveState(): string;
+        protected savePatientHealth(callback: (response: Serenity.SaveResponse) => void, onSuccess?: (response: Serenity.SaveResponse) => void): boolean;
         loadResponse(data: any): void;
         loadEntity(entity: PatientsRow): void;
         onSaveSuccess(response: any): void;

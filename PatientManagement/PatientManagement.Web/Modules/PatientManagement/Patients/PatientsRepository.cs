@@ -1,5 +1,8 @@
 ﻿
 
+using System.Linq;
+using PatientManagement.PatientManagement.Entities;
+
 namespace PatientManagement.PatientManagement.Repositories
 {
     using Serenity;
@@ -38,8 +41,57 @@ namespace PatientManagement.PatientManagement.Repositories
             return new MyListHandler().Process(connection, request);
         }
 
-        private class MySaveHandler : SaveRequestHandler<MyRow> { }
-        private class MyDeleteHandler : DeleteRequestHandler<MyRow> { }
+        private class MySaveHandler : SaveRequestHandler<MyRow>
+        {
+            protected override void AfterSave()
+            {
+
+                base.AfterSave();
+
+                if (!this.Connection.ExistsById<PatientHealthRow>(Row.PatientId))
+                {
+                    var ent = new PatientHealthRow
+                    {
+                        PatientId = Row.PatientId,
+                        InsertUserId = Authorization.UserId.TryParseID32(),
+                        InsertDate = DateTime.Now
+                    };
+                    this.Connection.Insert(ent);
+                }
+                if (!this.Connection.ExistsById<LifeStylesRow>(Row.PatientId))
+                {
+                    var ent2 = new LifeStylesRow
+                    {
+                        PatientId = Row.PatientId,
+                        InsertUserId = Authorization.UserId.TryParseID32(),
+                        InsertDate = DateTime.Now
+                    };
+                    this.Connection.Insert(ent2);
+                }
+            }
+        }
+
+        private class MyDeleteHandler : DeleteRequestHandler<MyRow>
+        {
+            protected override void OnBeforeDelete()
+            {
+                base.OnBeforeDelete();
+
+                using (var connection = SqlConnections.NewFor<PatientHealthRow>())
+                using (var uow = new UnitOfWork(connection))
+                {
+                    uow.Connection.DeleteById<LifeStylesRow>(Row.PatientId);
+                    uow.Connection.DeleteById<PatientHealthRow>(Row.PatientId);
+                    var ls = connection.List<VisitsRow>().Where(p => p.PatientId == Row.PatientId);
+                    foreach (var item in ls)
+                    {
+
+                        uow.Connection.DeleteById<VisitsRow>(item.VisitId);
+                    }
+                    uow.Commit();
+                }
+            }
+        }
         private class MyRetrieveHandler : RetrieveRequestHandler<MyRow> { }
         private class MyListHandler : ListRequestHandler<MyRow> { }
     }
