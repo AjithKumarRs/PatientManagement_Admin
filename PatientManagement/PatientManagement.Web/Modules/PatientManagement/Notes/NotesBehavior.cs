@@ -5,11 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using PatientManagement.Administration.Entities;
-using PatientManagement.Northwind;
 using PatientManagement.PatientManagement.Entities;
 using PatientManagement.PatientManagement.Repositories;
 
-namespace PatientManagement.Web.Modules.PatientManagement.Notes
+namespace PatientManagement.PatientManagement
 {
     public class NotesBehavior : BaseSaveDeleteBehavior, IImplicitBehavior, IRetrieveBehavior, IFieldBehavior
     {

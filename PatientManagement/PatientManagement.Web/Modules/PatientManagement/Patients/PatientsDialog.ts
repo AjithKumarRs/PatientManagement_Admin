@@ -37,6 +37,7 @@ namespace PatientManagement.PatientManagement {
             super.loadResponse(data);
             this.loadedState = this.getSaveState();
         }
+
         loadEntity(entity: PatientsRow) {
             super.loadEntity(entity);
 

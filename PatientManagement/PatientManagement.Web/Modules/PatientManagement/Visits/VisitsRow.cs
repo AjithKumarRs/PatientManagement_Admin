@@ -71,7 +71,7 @@ namespace PatientManagement.PatientManagement.Entities
         }
 
         [Category("Extra Info")]
-        [DisplayName("Description"), Width(300)]
+        [DisplayName("Description"), Width(200)]
         [TextAreaEditor(Rows = 8)]
         public String Description
         {
@@ -80,7 +80,7 @@ namespace PatientManagement.PatientManagement.Entities
         }
 
         #region PatientFields
-        [DisplayName("Patient Name"), Expression("jPatient.[Name]"), Width(150), QuickFilter]
+        [DisplayName("Patient Name"), Expression("jPatient.[Name]"), Width(150), QuickFilter, EditLink]
         public String PatientName
         {
             get => Fields.PatientName[this];
@@ -134,7 +134,7 @@ namespace PatientManagement.PatientManagement.Entities
         #endregion
 
 
-        [DisplayName("Visit Type Name"), Expression("jVisitType.[Name]"), Width(150)]
+        [DisplayName("Visit Type Name"), Expression("jVisitType.[Name]"), Width(150), QuickFilter]
         public String VisitTypeName
         {
             get => Fields.VisitTypeName[this];
