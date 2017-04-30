@@ -12,9 +12,11 @@ namespace PatientManagement.PatientManagement.Entities
     [ConnectionKey("PatientManagement"), TableName("[dbo].[Visits]"), DisplayName("Visits"), InstanceName("Visit"), TwoLevelCached]
     [ReadPermission("PatientManagement:Visits:Read")]
     [ModifyPermission("PatientManagement:Visits:Modify")]
+    [LeftJoin("p", "Patients", "p.[PatientId] = t0.[PatientId]", RowType = typeof(PatientsRow), TitlePrefix = "")]
+
     public sealed class VisitsRow : Row, IIdRow, IInsertLogRow
     {
-        [DisplayName("Visit Id"), Identity]
+        [DisplayName("Visit Id"), Identity, QuickSearch]
         public Int32? VisitId
         {
             get => Fields.VisitId[this];
@@ -38,7 +40,7 @@ namespace PatientManagement.PatientManagement.Entities
             set => Fields.VisitTypeId[this] = value;
         }
 
-        [DisplayName("Start Date"), NotNull]
+        [DisplayName("Start Date"), NotNull, QuickSearch, QuickFilter, SortOrder(1, true)]
         [DateTimeKind(DateTimeKind.Utc), DateTimeEditor]
         public DateTime? StartDate
         {
@@ -46,7 +48,7 @@ namespace PatientManagement.PatientManagement.Entities
             set => Fields.StartDate[this] = value;
         }
 
-        [DisplayName("End Date"), NotNull]
+        [DisplayName("End Date"), NotNull, QuickSearch]
         [DateTimeKind(DateTimeKind.Utc), DateTimeEditor]
         public DateTime? EndDate
         {
@@ -69,7 +71,7 @@ namespace PatientManagement.PatientManagement.Entities
         }
 
         [Category("Extra Info")]
-        [DisplayName("Description"), Width(400)]
+        [DisplayName("Description"), Width(300)]
         [TextAreaEditor(Rows = 8)]
         public String Description
         {
@@ -78,8 +80,7 @@ namespace PatientManagement.PatientManagement.Entities
         }
 
         #region PatientFields
-
-        [DisplayName("Patient Name"), Expression("jPatient.[Name]"), Width(150)]
+        [DisplayName("Patient Name"), Expression("jPatient.[Name]"), Width(150), QuickFilter]
         public String PatientName
         {
             get => Fields.PatientName[this];

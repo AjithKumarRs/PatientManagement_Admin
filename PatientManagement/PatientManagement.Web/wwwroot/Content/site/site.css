@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Core: General Layout Style
  * -------------------------
  */
@@ -8655,4 +8655,7 @@ section.content > .s-DataGrid {
 }
 .s-PatientManagement-PatientVisitsDialog .caption {
   width: 150px;
+}
+.dashboard-visitsgrid .s-PatientManagement-VisitsGrid {
+  height: 820px;
 }

@@ -25,19 +25,27 @@ namespace PatientManagement.PatientManagement.Pages
                     var v = VisitsRow.Fields;
                     using (var connection = SqlConnections.NewFor<VisitsRow>())
                     {
-                        var entity = connection.List<VisitsRow>();
-                        foreach (var visit in entity)
+                        try
                         {
-                            model.EventsList.Add(new Event
+                            var entity = connection.List<VisitsRow>();
+                            foreach (var visit in entity)
                             {
-                                Title = "",
-                                start = visit.StartDate??DateTime.MinValue,
-                                end = visit.EndDate??DateTime.MinValue,
-                                AllDay = false,
-                                BackGroundColor = "#FF0000",
-                                BorderColor = "#00FF00"
-                            });
+                                model.EventsList.Add(new Event
+                                {
+                                    title = connection.ById<PatientsRow>(visit.PatientId).Name,
+                                    start = visit.StartDate ?? DateTime.MinValue,
+                                    end = visit.EndDate ?? DateTime.MinValue,
+                                    allDay = false,
+                                    backGroundColor = "#FF0000",
+                                    borderColor = "#00FF00"
+                                });
+                            }
                         }
+                        catch (Exception e)
+                        {
+                            throw;
+                        }
+                       
                     
                         return model;
                     }

@@ -15,7 +15,7 @@ namespace PatientManagement.PatientManagement.Entities
     [ReadPermission("PatientManagement:Patients:Read")]
     [ModifyPermission("PatientManagement:Patients:Modify")]
     [LookupScript("PatientManagement.Patients")]
-    [LeftJoin("cd", "PatientHealth", "cd.[ID] = t0.[ID]", RowType = typeof(PatientHealthRow), TitlePrefix = "")]
+    [LeftJoin("cd", "PatientHealth", "cd.[PatientId] = t0.[PatientId]", RowType = typeof(PatientHealthRow), TitlePrefix = "")]
     public sealed class PatientsRow : Row, IIdRow, INameRow, IInsertLogRow
     {
 

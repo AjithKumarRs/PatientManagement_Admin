@@ -16,13 +16,13 @@ namespace PatientManagement.Dashboard
 
     public class Event
     {
-        public string Title { get; set; }
+        public string title { get; set; }
 
-        public string BackGroundColor { get; set; }
+        public string backGroundColor { get; set; }
 
-        public string BorderColor { get; set; }
+        public string borderColor { get; set; }
 
-        public bool AllDay { get; set; }
+        public bool allDay { get; set; }
 
         public DateTime start { get; set; }
 
