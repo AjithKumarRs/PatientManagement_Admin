@@ -21,7 +21,8 @@ namespace PatientManagement.PatientManagement {
         }
 
         protected addButtonClick() {
-            this.editItem({ patientId: this.patientId });
+            console.log(this.patientId);
+            this.editItem({ PatientId: this.patientId });
         }
 
         protected getInitialTitle() {

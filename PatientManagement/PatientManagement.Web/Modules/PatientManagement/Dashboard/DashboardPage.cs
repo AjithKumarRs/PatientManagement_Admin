@@ -1,7 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using System.Linq;
-using System.Threading.Tasks;
+using PatientManagement.PatientManagement.Entities;
+using PatientManagement.Dashboard;
+using PatientManagement.PatientManagement.Repositories;
 
 namespace PatientManagement.PatientManagement.Pages
 {
@@ -17,7 +18,32 @@ namespace PatientManagement.PatientManagement.Pages
         [PageAuthorize, HttpGet, Route("~/")]
         public ActionResult Index()
         {
-            return View(MVC.Views.PatientManagement.Dashboard.DashboardIndex);
+            var cachedModel = TwoLevelCache.GetLocalStoreOnly("DashboardPageModel", TimeSpan.FromSeconds(30),
+                VisitsRow.Fields.GenerationKey, () =>
+                {
+                    var model = new DashboardPageModel();
+                    var v = VisitsRow.Fields;
+                    using (var connection = SqlConnections.NewFor<VisitsRow>())
+                    {
+                        var entity = connection.List<VisitsRow>();
+                        foreach (var visit in entity)
+                        {
+                            model.EventsList.Add(new Event
+                            {
+                                Title = "",
+                                start = visit.StartDate??DateTime.MinValue,
+                                end = visit.EndDate??DateTime.MinValue,
+                                AllDay = false,
+                                BackGroundColor = "#FF0000",
+                                BorderColor = "#00FF00"
+                            });
+                        }
+                    
+                        return model;
+                    }
+                }
+            );
+            return View(MVC.Views.PatientManagement.Dashboard.DashboardIndex, cachedModel);
         }
     }
 }

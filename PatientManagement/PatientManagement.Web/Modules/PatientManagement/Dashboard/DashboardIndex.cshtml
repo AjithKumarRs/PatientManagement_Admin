@@ -1,4 +1,6 @@
-﻿
+﻿@using PatientManagement.PatientManagement
+
+@model PatientManagement.Dashboard.DashboardPageModel
 @{
     ViewData["Title"] = "Dashboard";
     ViewData["PageId"] = "Dashboard";
@@ -87,6 +89,10 @@
 <script>
     $(function () {
 
+        var visitsModel = @Html.Raw(Json.Serialize(Model));
+
+
+        console.log(visitsModel);
         /* initialize the external events
          -----------------------------------------------------------------*/
         function ini_events(ele) {
@@ -216,7 +222,7 @@
             //Save color
             currColor = $(this).css("color");
             //Add color effect to button
-            $('#add-new-event').css({"background-color": currColor, "border-color": currColor});
+            $('#add-new-event').css({ "background-color": currColor, "border-color": currColor });
         });
         $("#add-new-event").click(function (e) {
             e.preventDefault();
@@ -228,7 +234,7 @@
 
             //Create events
             var event = $("<div />");
-            event.css({"background-color": currColor, "border-color": currColor, "color": "#fff"}).addClass("external-event");
+            event.css({ "background-color": currColor, "border-color": currColor, "color": "#fff" }).addClass("external-event");
             event.html(val);
             $('#external-events').prepend(event);
 
