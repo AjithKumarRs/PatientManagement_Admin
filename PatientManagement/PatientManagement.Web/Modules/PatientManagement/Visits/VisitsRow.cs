@@ -13,6 +13,7 @@ namespace PatientManagement.PatientManagement.Entities
     [ReadPermission("PatientManagement:Visits:Read")]
     [ModifyPermission("PatientManagement:Visits:Modify")]
     [LeftJoin("p", "Patients", "p.[PatientId] = t0.[PatientId]", RowType = typeof(PatientsRow), TitlePrefix = "")]
+    [LookupScript("PatientManagement.Visits")]
 
     public sealed class VisitsRow : Row, IIdRow, IInsertLogRow
     {

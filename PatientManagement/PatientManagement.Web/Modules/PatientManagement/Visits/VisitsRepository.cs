@@ -15,6 +15,13 @@ namespace PatientManagement.PatientManagement.Repositories
 
         public SaveResponse Create(IUnitOfWork uow, SaveRequest<MyRow> request)
         {
+            if (request.Entity.EndDate != null &&
+                request.Entity.StartDate != null &&
+                request.Entity.StartDate > request.Entity.EndDate ||
+                request.Entity.StartDate == request.Entity.EndDate)
+            {
+                request.Entity.EndDate = request.Entity.StartDate?.AddMinutes(15);
+            }
             return new MySaveHandler().Process(uow, request, SaveRequestType.Create);
         }
 

@@ -34,8 +34,8 @@ namespace PatientManagement.PatientManagement.Pages
                                 {
                                     id = visit.VisitId??0,
                                     title = connection.ById<PatientsRow>(visit.PatientId).Name,
-                                    start = visit.StartDate?.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ"),
-                                    end = visit.EndDate?.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ"),
+                                    start = (visit.StartDate??DateTime.Now).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz") ,
+                                    end = (visit.EndDate ?? DateTime.Now).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
                                     allDay = false,
                                     backGroundColor = "#FF0000",
                                     borderColor = "#00FF00"

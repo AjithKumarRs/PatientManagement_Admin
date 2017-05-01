@@ -1,28 +1,49 @@
 ﻿/// <reference path="../Visits/VisitsDialog.ts" />
-
+declare var FullCalendar: any;
 
 namespace PatientManagement.PatientManagement {
 
     @Serenity.Decorators.registerClass()
     export class CalendarVisitsDialog extends VisitsDialog {
+        protected updateTitle(): void {
+            super.updateTitle();
+            if (this.isEditMode()) {
 
-
-        protected getEntityTitle(): string {
-
-            if (!this.isEditMode()) {
-                // we shouldn't hit here, but anyway for demo...
-                return "How did you manage to open this dialog in new record mode?";
-            }
-            else {
 
                 Serenity.EditorUtils.setReadOnly(this.form.PatientId, true);
             }
         }
+        
+        public updateVisit = (visitId, start, end): string => {
+            console.log(visitId);
+            var p = <PatientManagement.VisitsRow>{};
 
+            VisitsService.Retrieve(<any>{
+                EntityId: visitId
+            }, resp => {
+                var text = Q.format(Q.text("Site.Dashboard.SuccessChangedVisitDates"), resp.Entity.PatientName, resp.Entity.StartDate, resp.Entity.EndDate);
+                Q.notifyInfo(text + resp.Entity.PatientName + " Моля натиснете бутона <span class='fa fa-refresh'></span> за да видите промените в таблицата.");
+
+                p = resp.Entity;
+            });
+
+            p.StartDate = start;
+            p.EndDate = end;
+            console.log(p);
+
+            VisitsService.Update({
+                Entity: p,
+                EntityId: visitId
+            }, response => {
+                Q.reloadLookup(PatientManagement.VisitsRow.lookupKey);
+                
+                
+            })
+            return "yppppye";
+        }
         protected onSaveSuccess(response: Serenity.SaveResponse): void {
             // check that this is an insert
             if (this.isNew) {
-                Q.notifySuccess("Just inserted a category with ID: " + response.EntityId);
 
                 // you could also open a new dialog
                 // new Northwind.CategoryDialog().loadByIdAndOpenDialog(response.EntityId);
@@ -31,9 +52,12 @@ namespace PatientManagement.PatientManagement {
                 VisitsService.Retrieve(<any>{
                     EntityId: response.EntityId
                 }, resp => {
-                    Q.notifyInfo("Looks like the category you added has name: " + resp.Entity.PatientName);
+                  //  Q.notifySuccess("Looks like the category you added has name: " + resp.Entity.PatientName);
+             
+                    
                 });
             }
         }
+
     }
 }

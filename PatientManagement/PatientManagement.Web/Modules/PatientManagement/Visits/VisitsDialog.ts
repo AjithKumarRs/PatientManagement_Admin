@@ -17,10 +17,11 @@ namespace PatientManagement.PatientManagement {
             this.form.EndDate.addValidationRule(this.uniqueName, e => {
                 if (this.form.EndDate.valueAsDate != null &&
                     this.form.StartDate.valueAsDate != null &&
-                    this.form.StartDate.valueAsDate > this.form.EndDate.valueAsDate) {
-                    return "End Date can't be earlier than Start Date";
+                    this.form.StartDate.valueAsDate > this.form.EndDate.valueAsDate ||
+                    this.form.StartDate == this.form.EndDate) {
+                    return Q.text("Site.Dashboard.ErrorEndDateBiggerThanStartDate");
                 }
-
+                
                 return null;
             });
         }

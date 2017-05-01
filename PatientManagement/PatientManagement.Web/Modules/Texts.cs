@@ -99,10 +99,9 @@ namespace PatientManagement
         {
             public static class Dashboard
             {
-                public static LocalText CallendarMonth = "month";
-                public static LocalText CallendarWeek = "week";
-                public static LocalText CallendarDay = "day";
-                public static LocalText CallendarToday = "today";
+                public static LocalText SuccessChangedVisitDates = "You successfully change visit with patient name: {0} , Start date: {1} , End date: {2} ";
+                public static LocalText ErrorEndDateBiggerThanStartDate = "End Date can't be earlier than Start Date";
+                public static LocalText ErrorEndDateEqualStartDate = "End Date can't be equal to Start Date";
 
 
 

@@ -841,6 +841,8 @@ declare namespace PatientManagement.PatientManagement {
     namespace VisitsRow {
         const idProperty = "VisitId";
         const localTextPrefix = "PatientManagement.Visits";
+        const lookupKey = "PatientManagement.Visits";
+        function getLookup(): Q.Lookup<VisitsRow>;
         namespace Fields {
             const VisitId: string;
             const PatientId: string;
@@ -1654,9 +1656,11 @@ declare namespace PatientManagement.PatientManagement {
         protected getInitialTitle(): any;
     }
 }
+declare var FullCalendar: any;
 declare namespace PatientManagement.PatientManagement {
     class CalendarVisitsDialog extends VisitsDialog {
-        protected getEntityTitle(): string;
+        protected updateTitle(): void;
+        updateVisit: (visitId: any, start: any, end: any) => string;
         protected onSaveSuccess(response: Serenity.SaveResponse): void;
     }
 }

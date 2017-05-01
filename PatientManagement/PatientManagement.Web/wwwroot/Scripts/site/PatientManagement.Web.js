@@ -619,6 +619,11 @@ var PatientManagement;
         (function (VisitsRow) {
             VisitsRow.idProperty = 'VisitId';
             VisitsRow.localTextPrefix = 'PatientManagement.Visits';
+            VisitsRow.lookupKey = 'PatientManagement.Visits';
+            function getLookup() {
+                return Q.getLookup('PatientManagement.Visits');
+            }
+            VisitsRow.getLookup = getLookup;
             var Fields;
             (function (Fields) {
             })(Fields = VisitsRow.Fields || (VisitsRow.Fields = {}));
@@ -3438,8 +3443,9 @@ var PatientManagement;
                 _this.form.EndDate.addValidationRule(_this.uniqueName, function (e) {
                     if (_this.form.EndDate.valueAsDate != null &&
                         _this.form.StartDate.valueAsDate != null &&
-                        _this.form.StartDate.valueAsDate > _this.form.EndDate.valueAsDate) {
-                        return "End Date can't be earlier than Start Date";
+                        _this.form.StartDate.valueAsDate > _this.form.EndDate.valueAsDate ||
+                        _this.form.StartDate == _this.form.EndDate) {
+                        return Q.text("Site.Dashboard.ErrorEndDateBiggerThanStartDate");
                     }
                     return null;
                 });
@@ -3804,28 +3810,46 @@ var PatientManagement;
         var CalendarVisitsDialog = (function (_super) {
             __extends(CalendarVisitsDialog, _super);
             function CalendarVisitsDialog() {
-                return _super !== null && _super.apply(this, arguments) || this;
+                var _this = _super !== null && _super.apply(this, arguments) || this;
+                _this.updateVisit = function (visitId, start, end) {
+                    console.log(visitId);
+                    var p = {};
+                    PatientManagement.VisitsService.Retrieve({
+                        EntityId: visitId
+                    }, function (resp) {
+                        var text = Q.format(Q.text("Site.Dashboard.SuccessChangedVisitDates"), resp.Entity.PatientName, resp.Entity.StartDate, resp.Entity.EndDate);
+                        Q.notifyInfo(text + resp.Entity.PatientName + " Моля натиснете бутона <span class='fa fa-refresh'></span> за да видите промените в таблицата.");
+                        p = resp.Entity;
+                    });
+                    p.StartDate = start;
+                    p.EndDate = end;
+                    console.log(p);
+                    PatientManagement.VisitsService.Update({
+                        Entity: p,
+                        EntityId: visitId
+                    }, function (response) {
+                        Q.reloadLookup(PatientManagement.VisitsRow.lookupKey);
+                    });
+                    return "yppppye";
+                };
+                return _this;
             }
-            CalendarVisitsDialog.prototype.getEntityTitle = function () {
-                if (!this.isEditMode()) {
-                    // we shouldn't hit here, but anyway for demo...
-                    return "How did you manage to open this dialog in new record mode?";
-                }
-                else {
+            CalendarVisitsDialog.prototype.updateTitle = function () {
+                _super.prototype.updateTitle.call(this);
+                if (this.isEditMode()) {
                     Serenity.EditorUtils.setReadOnly(this.form.PatientId, true);
                 }
             };
             CalendarVisitsDialog.prototype.onSaveSuccess = function (response) {
                 // check that this is an insert
                 if (this.isNew) {
-                    Q.notifySuccess("Just inserted a category with ID: " + response.EntityId);
                     // you could also open a new dialog
                     // new Northwind.CategoryDialog().loadByIdAndOpenDialog(response.EntityId);
                     // but let's better load inserted record using Retrieve service
                     PatientManagement.VisitsService.Retrieve({
                         EntityId: response.EntityId
                     }, function (resp) {
-                        Q.notifyInfo("Looks like the category you added has name: " + resp.Entity.PatientName);
+                        //  Q.notifySuccess("Looks like the category you added has name: " + resp.Entity.PatientName);
                     });
                 }
             };

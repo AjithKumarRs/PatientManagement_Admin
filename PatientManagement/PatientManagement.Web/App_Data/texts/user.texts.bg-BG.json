@@ -34,5 +34,6 @@
   "Navigation.Dashboard": "Табло",
   "Navigation.SiteTitle": "Kokon",
   "Navigation.Visits Management/Visit Types": "Типове визити",
-  "Site.Dashboard.ContentDescription": "всички записани часове"
+  "Site.Dashboard.ContentDescription": "всички записани часове",
+  "Site.Dashboard.SuccessChangedVisitDates": "Успешно променихте визита за пациент:"
 }
