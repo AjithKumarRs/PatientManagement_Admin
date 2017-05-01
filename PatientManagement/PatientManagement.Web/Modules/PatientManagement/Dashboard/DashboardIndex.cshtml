@@ -151,6 +151,7 @@
         }
         ini_events($('#external-events div.external-event'));
 
+
         /* initialize the calendar
          -----------------------------------------------------------------*/
         //Date for the calendar events (dummy data)
@@ -170,10 +171,22 @@
                 week: 'week',
                 day: 'day'
             },
-            //Random default events
             events: visitsModel,
             editable: true,
             droppable: true, // this allows things to be dropped onto the calendar !!!
+            eventDrop: function(event,dayDelta,minuteDelta,allDay,revertFunc) {
+
+                alert(
+                    event.title + " was moved " +
+                    dayDelta + " days and " +
+                    minuteDelta + " minutes."
+                );
+                
+                if (!confirm("Are you sure about this change?")) {
+                    revertFunc();
+                }
+
+            },
             drop: function (date, allDay) { // this function is called when something is dropped
 
                 // retrieve the dropped element's stored Event Object
@@ -188,6 +201,7 @@
                 copiedEventObject.backgroundColor = $(this).css("background-color");
                 copiedEventObject.borderColor = $(this).css("border-color");
 
+                console.log(copiedEventObject);
                 // render the event on the calendar
                 // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
                 $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
@@ -199,6 +213,7 @@
                 }
 
             }
+
         });
 
         /* ADDING EVENTS */

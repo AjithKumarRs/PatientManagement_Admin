@@ -2902,8 +2902,7 @@ var PatientManagement;
                             { src: Q.resolveUrl('~/Content/site/slides/slide1.jpg'), transition: 'fade' },
                             { src: Q.resolveUrl('~/Content/site/slides/slide2.jpg'), transition: 'fade' },
                             { src: Q.resolveUrl('~/Content/site/slides/slide3.jpg'), transition: 'zoomOut' },
-                            { src: Q.resolveUrl('~/Content/site/slides/slide4.jpg'), transition: 'blur' },
-                            { src: Q.resolveUrl('~/Content/site/slides/slide5.jpg'), transition: 'swirlLeft' }
+                            { src: Q.resolveUrl('~/Content/site/slides/slide4.jpg'), transition: 'blur' }
                         ]
                     });
                 });

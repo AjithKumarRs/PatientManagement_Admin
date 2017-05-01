@@ -1,7 +1,7 @@
 @import "site.mixins.less";
 
 /*Default styles for login/register pages*/
-.page-content {    
+.page-content {
     .s-LoginPanel {
         padding: 30px 20px;
         width: 550px;
@@ -10,13 +10,16 @@
         border-radius: 12px;
         font-weight: 700;
 
-        .caption { width: 180px; }
+        .caption {
+            width: 180px;
+        }
 
         .logo {
             margin: 0 auto 20px auto;
-            width: 128px;
+            width: 330px;
             height: 128px;
-            background: transparent url(images/serenity-logo-w-128.png) no-repeat center center;
+            background: transparent url(../../Content/images/logo-frond-page.png) no-repeat center center;
+            background-size: contain;
         }
 
         h3 {
@@ -118,7 +121,11 @@
     .s-ChangePasswordPanel {
         width: 550px;
         .form-styles(150px, 350px);
-        .buttons { text-align: right; padding: 8px 48px; }
+
+        .buttons {
+            text-align: right;
+            padding: 8px 48px;
+        }
     }
 
     .s-ForgotPasswordPanel {
@@ -128,8 +135,16 @@
         width: 650px;
         margin: 60px auto auto auto;
         .form-styles(150px, 350px);
-        .buttons { text-align: right; padding: 8px 62px; }
-        p { padding: 8px; margin: 24px 0; }
+
+        .buttons {
+            text-align: right;
+            padding: 8px 62px;
+        }
+
+        p {
+            padding: 8px;
+            margin: 24px 0;
+        }
     }
 
     .s-ResetPasswordPanel {
@@ -139,7 +154,11 @@
         width: 650px;
         margin: 60px auto auto auto;
         .form-styles(150px, 350px);
-        .buttons { text-align: right; padding: 8px 62px; }
+
+        .buttons {
+            text-align: right;
+            padding: 8px 62px;
+        }
     }
 
     .s-SignUpPanel {
@@ -149,8 +168,16 @@
         width: 650px;
         margin: 60px auto auto auto;
         .form-styles(150px, 350px);
-        .buttons { text-align: right; padding: 8px 62px; }
-        p { padding: 8px; margin: 24px 0; }
+
+        .buttons {
+            text-align: right;
+            padding: 8px 62px;
+        }
+
+        p {
+            padding: 8px;
+            margin: 24px 0;
+        }
     }
 }
 

@@ -1,4 +1,6 @@
 {
+  "Db.Administration.User.Password": "Парола",
+  "Db.Administration.User.Username": "Потребител",
   "Db.PatientManagement.LifeStyles.BadHabits": "Лоши навици",
   "Db.PatientManagement.LifeStyles.Job": "Професия",
   "Db.PatientManagement.LifeStyles.Movement": "Движения",
@@ -25,7 +27,12 @@
   "Db.PatientManagement.Visits.VisitTypeName": "Име на тип визита",
   "Db.PatientManagement.VisitTypes.EntityPlural": "Типове на визита",
   "Db.PatientManagement.VisitTypes.EntitySingular": "Тип на визита",
+  "Forms.Membership.Login.FormTitle": "Система за управление на пациенти",
+  "Forms.Membership.Login.SignInButton": "Вход",
+  "Forms.Membership.SignUp.Email": "Имейл",
+  "Forms.Membership.SignUp.Password": "Парола",
   "Navigation.Dashboard": "Табло",
   "Navigation.SiteTitle": "Kokon",
-  "Navigation.Visits Management/Visit Types": "Типове визити"
+  "Navigation.Visits Management/Visit Types": "Типове визити",
+  "Site.Dashboard.ContentDescription": "всички записани часове"
 }

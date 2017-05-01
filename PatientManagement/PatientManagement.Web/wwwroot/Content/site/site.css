@@ -7795,9 +7795,10 @@ section.content > .s-DataGrid {
 }
 .page-content .s-LoginPanel .logo {
   margin: 0 auto 20px auto;
-  width: 128px;
+  width: 330px;
   height: 128px;
-  background: transparent url(images/serenity-logo-w-128.png) no-repeat center center;
+  background: transparent url(../../Content/images/logo-frond-page.png) no-repeat center center;
+  background-size: contain;
 }
 .page-content .s-LoginPanel h3 {
   font-size: 18px;
