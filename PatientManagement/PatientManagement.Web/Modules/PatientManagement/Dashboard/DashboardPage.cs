@@ -32,9 +32,10 @@ namespace PatientManagement.PatientManagement.Pages
                             {
                                 model.EventsList.Add(new Event
                                 {
+                                    id = visit.VisitId??0,
                                     title = connection.ById<PatientsRow>(visit.PatientId).Name,
-                                    start = visit.StartDate ?? DateTime.MinValue,
-                                    end = visit.EndDate ?? DateTime.MinValue,
+                                    start = visit.StartDate?.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ"),
+                                    end = visit.EndDate?.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ"),
                                     allDay = false,
                                     backGroundColor = "#FF0000",
                                     borderColor = "#00FF00"

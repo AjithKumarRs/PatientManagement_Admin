@@ -16,6 +16,8 @@ namespace PatientManagement.Dashboard
 
     public class Event
     {
+        public Int32 id { get; set; }
+
         public string title { get; set; }
 
         public string backGroundColor { get; set; }
@@ -24,9 +26,9 @@ namespace PatientManagement.Dashboard
 
         public bool allDay { get; set; }
 
-        public DateTime start { get; set; }
+        public string start { get; set; }
 
-        public DateTime end { get; set; }
+        public string end { get; set; }
 
     }
 }

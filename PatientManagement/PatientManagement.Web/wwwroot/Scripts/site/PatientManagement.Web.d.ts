@@ -738,78 +738,6 @@ declare namespace PatientManagement.PatientManagement {
 declare namespace PatientManagement.PatientManagement {
 }
 declare namespace PatientManagement.PatientManagement {
-}
-declare namespace PatientManagement.PatientManagement {
-    class PatientsFileUploadsForm extends Serenity.PrefixedContext {
-        static formKey: string;
-    }
-    interface PatientsFileUploadsForm {
-        PatientId: Serenity.LookupEditor;
-        Description: Serenity.TextAreaEditor;
-        FilePath: Serenity.MultipleImageUploadEditor;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    interface PatientsFileUploadsRow {
-        PatientFileUploadId?: number;
-        PatientId?: number;
-        FilePath?: string;
-        Description?: string;
-        InsertUserId?: number;
-        InsertDate?: string;
-        PatientName?: string;
-        PatientPersonalNumber?: number;
-        PatientPhoneNumber?: number;
-        PatientFirstRegistrationDate?: string;
-        PatientAddress?: string;
-        PatientHeight?: number;
-        PatientWeight?: number;
-        PatientInsertUserId?: number;
-        PatientInsertDate?: string;
-    }
-    namespace PatientsFileUploadsRow {
-        const idProperty = "PatientFileUploadId";
-        const nameProperty = "FilePath";
-        const localTextPrefix = "PatientManagement.PatientsFileUploads";
-        const lookupKey = "PatientManagement.PatientsFileUploads";
-        function getLookup(): Q.Lookup<PatientsFileUploadsRow>;
-        namespace Fields {
-            const PatientFileUploadId: string;
-            const PatientId: string;
-            const FilePath: string;
-            const Description: string;
-            const InsertUserId: string;
-            const InsertDate: string;
-            const PatientName: string;
-            const PatientPersonalNumber: string;
-            const PatientPhoneNumber: string;
-            const PatientFirstRegistrationDate: string;
-            const PatientAddress: string;
-            const PatientHeight: string;
-            const PatientWeight: string;
-            const PatientInsertUserId: string;
-            const PatientInsertDate: string;
-        }
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    namespace PatientsFileUploadsService {
-        const baseUrl = "PatientManagement/PatientsFileUploads";
-        function Create(request: Serenity.SaveRequest<PatientsFileUploadsRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        function Update(request: Serenity.SaveRequest<PatientsFileUploadsRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<PatientsFileUploadsRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<PatientsFileUploadsRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        namespace Methods {
-            const Create: string;
-            const Update: string;
-            const Delete: string;
-            const Retrieve: string;
-            const List: string;
-        }
-    }
-}
-declare namespace PatientManagement.PatientManagement {
     class PatientsForm extends Serenity.PrefixedContext {
         static formKey: string;
     }
@@ -1516,45 +1444,6 @@ declare namespace PatientManagement.PatientManagement {
     }
 }
 declare namespace PatientManagement.PatientManagement {
-    class PatientsFileUploadsDialog extends Serenity.EntityDialog<PatientsFileUploadsRow, any> {
-        protected getFormKey(): string;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getNameProperty(): string;
-        protected getService(): string;
-        protected form: PatientsFileUploadsForm;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class FIleUploadsForPatientDialog extends PatientsFileUploadsDialog {
-        constructor();
-        updateInterface(): void;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class PatientsFileUploadsGrid extends Serenity.EntityGrid<PatientsFileUploadsRow, any> {
-        protected getColumnsKey(): string;
-        protected getDialogType(): typeof PatientsFileUploadsDialog;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getService(): string;
-        constructor(container: JQuery);
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class FIleUploadsForPatientGrid extends PatientsFileUploadsGrid {
-        protected getDialogType(): typeof FIleUploadsForPatientDialog;
-        constructor(container: JQuery);
-        protected getColumns(): Slick.Column[];
-        protected initEntityDialog(itemType: any, dialog: any): void;
-        protected addButtonClick(): void;
-        protected getInitialTitle(): any;
-        protected getGridCanLoad(): boolean;
-        private _patientId;
-        patientId: number;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
     class PatientsDialog extends Serenity.EntityDialog<PatientsRow, any> {
         protected getFormKey(): string;
         protected getIdProperty(): string;
@@ -1645,5 +1534,129 @@ declare namespace PatientManagement.PatientManagement {
         protected getLocalTextPrefix(): string;
         protected getService(): string;
         constructor(container: JQuery);
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    interface PatientsFileUploadsRow {
+        PatientFileUploadId?: number;
+        PatientId?: number;
+        FilePath?: string;
+        Description?: string;
+        InsertUserId?: number;
+        InsertDate?: string;
+        PatientName?: string;
+        PatientPersonalNumber?: number;
+        PatientPhoneNumber?: number;
+        PatientFirstRegistrationDate?: string;
+        PatientAddress?: string;
+        PatientHeight?: number;
+        PatientWeight?: number;
+        PatientInsertUserId?: number;
+        PatientInsertDate?: string;
+    }
+    namespace PatientsFileUploadsRow {
+        const idProperty = "PatientFileUploadId";
+        const nameProperty = "FilePath";
+        const localTextPrefix = "PatientManagement.PatientsFileUploads";
+        const lookupKey = "PatientManagement.PatientsFileUploads";
+        function getLookup(): Q.Lookup<PatientsFileUploadsRow>;
+        namespace Fields {
+            const PatientFileUploadId: string;
+            const PatientId: string;
+            const FilePath: string;
+            const Description: string;
+            const InsertUserId: string;
+            const InsertDate: string;
+            const PatientName: string;
+            const PatientPersonalNumber: string;
+            const PatientPhoneNumber: string;
+            const PatientFirstRegistrationDate: string;
+            const PatientAddress: string;
+            const PatientHeight: string;
+            const PatientWeight: string;
+            const PatientInsertUserId: string;
+            const PatientInsertDate: string;
+        }
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    namespace PatientsFileUploadsService {
+        const baseUrl = "PatientManagement/PatientsFileUploads";
+        function Create(request: Serenity.SaveRequest<PatientsFileUploadsRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Update(request: Serenity.SaveRequest<PatientsFileUploadsRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<PatientsFileUploadsRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<PatientsFileUploadsRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        namespace Methods {
+            const Create: string;
+            const Update: string;
+            const Delete: string;
+            const Retrieve: string;
+            const List: string;
+        }
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class PatientsFileUploadsDialog extends Serenity.EntityDialog<PatientsFileUploadsRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getService(): string;
+        protected form: PatientsFileUploadsForm;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+}
+declare namespace PatientManagement.PatientManagement {
+    class PatientsFileUploadsForm extends Serenity.PrefixedContext {
+        static formKey: string;
+    }
+    interface PatientsFileUploadsForm {
+        PatientId: Serenity.LookupEditor;
+        Description: Serenity.TextAreaEditor;
+        FilePath: Serenity.MultipleImageUploadEditor;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class PatientsFileUploadsGrid extends Serenity.EntityGrid<PatientsFileUploadsRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof PatientsFileUploadsDialog;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        constructor(container: JQuery);
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class FIleUploadsForPatientGrid extends PatientsFileUploadsGrid {
+        protected getDialogType(): typeof FIleUploadsForPatientDialog;
+        constructor(container: JQuery);
+        protected getColumns(): Slick.Column[];
+        protected initEntityDialog(itemType: any, dialog: any): void;
+        protected addButtonClick(): void;
+        protected getInitialTitle(): any;
+        protected getGridCanLoad(): boolean;
+        private _patientId;
+        patientId: number;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class FIleUploadsForPatientDialog extends PatientsFileUploadsDialog {
+        constructor();
+        updateInterface(): void;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class CalendarVisitsGrid extends VisitsGrid {
+        protected getDialogType(): typeof CalendarVisitsDialog;
+        constructor(container: JQuery);
+        protected getInitialTitle(): any;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class CalendarVisitsDialog extends VisitsDialog {
+        protected getEntityTitle(): string;
+        protected onSaveSuccess(response: Serenity.SaveResponse): void;
     }
 }

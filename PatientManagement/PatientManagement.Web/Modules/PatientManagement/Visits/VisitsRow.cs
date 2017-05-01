@@ -39,17 +39,17 @@ namespace PatientManagement.PatientManagement.Entities
             get => Fields.VisitTypeId[this];
             set => Fields.VisitTypeId[this] = value;
         }
-
-        [DisplayName("Start Date"), NotNull, QuickSearch, QuickFilter, SortOrder(1, true)]
-        [DateTimeKind(DateTimeKind.Utc), DateTimeEditor]
+        [DisplayFormat("dd/MM/yyyy HH:mm")]
+        [DisplayName("Start Date"), NotNull, QuickSearch, QuickFilter, SortOrder(1, true), Width(150)]
+        [DateTimeKind(DateTimeKind.Unspecified), DateTimeEditor]
         public DateTime? StartDate
         {
             get => Fields.StartDate[this];
             set => Fields.StartDate[this] = value;
         }
-
-        [DisplayName("End Date"), NotNull, QuickSearch]
-        [DateTimeKind(DateTimeKind.Utc), DateTimeEditor]
+        [DisplayFormat("dd/MM/yyyy HH:mm")]
+        [DisplayName("End Date"), NotNull, QuickSearch, Width(150)]
+        [DateTimeKind(DateTimeKind.Unspecified), DateTimeEditor]
         public DateTime? EndDate
         {
             get => Fields.EndDate[this];
@@ -71,7 +71,7 @@ namespace PatientManagement.PatientManagement.Entities
         }
 
         [Category("Extra Info")]
-        [DisplayName("Description"), Width(200)]
+        [DisplayName("Description"), Width(150)]
         [TextAreaEditor(Rows = 8)]
         public String Description
         {
