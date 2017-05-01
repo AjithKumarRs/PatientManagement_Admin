@@ -13,6 +13,10 @@ namespace PatientManagement.PatientManagement.Forms
     [BasedOnRow(typeof(Entities.PatientsRow))]
     public class PatientsForm
     {
+        [Hidden]
+        public Int32? PatientId { get; set; }
+
+      
         public String Name { get; set; }
         public Int32 PersonalNumber { get; set; }
         public Int32 PhoneNumber { get; set; }

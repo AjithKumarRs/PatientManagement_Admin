@@ -814,6 +814,7 @@ declare namespace PatientManagement.PatientManagement {
         static formKey: string;
     }
     interface PatientsForm {
+        PatientId: Serenity.IntegerEditor;
         Name: Serenity.StringEditor;
         PersonalNumber: Serenity.IntegerEditor;
         PhoneNumber: Serenity.IntegerEditor;
@@ -1515,6 +1516,45 @@ declare namespace PatientManagement.PatientManagement {
     }
 }
 declare namespace PatientManagement.PatientManagement {
+    class PatientsFileUploadsDialog extends Serenity.EntityDialog<PatientsFileUploadsRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getService(): string;
+        protected form: PatientsFileUploadsForm;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class FIleUploadsForPatientDialog extends PatientsFileUploadsDialog {
+        constructor();
+        updateInterface(): void;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class PatientsFileUploadsGrid extends Serenity.EntityGrid<PatientsFileUploadsRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof PatientsFileUploadsDialog;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        constructor(container: JQuery);
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class FIleUploadsForPatientGrid extends PatientsFileUploadsGrid {
+        protected getDialogType(): typeof FIleUploadsForPatientDialog;
+        constructor(container: JQuery);
+        protected getColumns(): Slick.Column[];
+        protected initEntityDialog(itemType: any, dialog: any): void;
+        protected addButtonClick(): void;
+        protected getInitialTitle(): any;
+        protected getGridCanLoad(): boolean;
+        private _patientId;
+        patientId: number;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
     class PatientsDialog extends Serenity.EntityDialog<PatientsRow, any> {
         protected getFormKey(): string;
         protected getIdProperty(): string;
@@ -1531,7 +1571,6 @@ declare namespace PatientManagement.PatientManagement {
         private lifeStyleForm;
         private lifeStyleGrid;
         private patientsFileUploadsGrid;
-        private patientsFileUploadsForm;
         constructor();
         getSaveState(): string;
         loadResponse(data: any): void;
@@ -1586,26 +1625,6 @@ declare namespace PatientManagement.PatientManagement {
         protected getGridCanLoad(): boolean;
         private _patientId;
         patientId: number;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class PatientsFileUploadsDialog extends Serenity.EntityDialog<PatientsFileUploadsRow, any> {
-        protected getFormKey(): string;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getNameProperty(): string;
-        protected getService(): string;
-        protected form: PatientsFileUploadsForm;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class PatientsFileUploadsGrid extends Serenity.EntityGrid<PatientsFileUploadsRow, any> {
-        protected getColumnsKey(): string;
-        protected getDialogType(): typeof PatientsFileUploadsDialog;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getService(): string;
-        constructor(container: JQuery);
     }
 }
 declare namespace PatientManagement.PatientManagement {

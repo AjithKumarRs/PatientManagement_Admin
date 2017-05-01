@@ -18,14 +18,14 @@ namespace PatientManagement.PatientManagement.Entities
     [LeftJoin("cd", "PatientHealth", "cd.[PatientId] = t0.[PatientId]", RowType = typeof(PatientHealthRow), TitlePrefix = "")]
     public sealed class PatientsRow : Row, IIdRow, INameRow, IInsertLogRow
     {
-
+        [Category("Required Fields")]
         [DisplayName("Patient Id"), Identity]
         public Int32? PatientId
         {
             get { return Fields.PatientId[this]; }
             set { Fields.PatientId[this] = value; }
         }
-        [Category("Required Fields")]
+     
 
         [DisplayName("Name"), Size(500), NotNull, QuickSearch]
         public String Name

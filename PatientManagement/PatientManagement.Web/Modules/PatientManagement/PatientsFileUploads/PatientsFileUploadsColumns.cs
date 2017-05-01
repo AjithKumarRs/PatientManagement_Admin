@@ -15,7 +15,9 @@ namespace PatientManagement.PatientManagement.Columns
     {
         [EditLink, DisplayName("Db.Shared.RecordId"), AlignRight]
         public Int32 PatientFileUploadId { get; set; }
-        public Int32 PatientId { get; set; }
+
+        [EditLink]
+        public Int32 PatientName { get; set; }
         public String Description { get; set; }
 
         //public Int32 InsertUserId { get; set; }

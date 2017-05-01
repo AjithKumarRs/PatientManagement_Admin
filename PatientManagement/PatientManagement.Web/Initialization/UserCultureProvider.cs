@@ -11,6 +11,8 @@ namespace PatientManagement.AppServices
     {
         private static Dictionary<string, string> TwoLetterToFourLetter = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
         {
+            { "bg", "bg-BG" },
+
             { "en", "en-US" },
             { "zh", "zh-CN" },
             { "vi", "vi-VN" }
@@ -33,11 +35,13 @@ namespace PatientManagement.AppServices
                 }
             }
 
-            return Task.FromResult(new ProviderCultureResult(culture ?? "en-US", culture ?? "en-US"));
+            return Task.FromResult(new ProviderCultureResult(culture ?? "bg-BG", culture ?? "bg-BG"));
         }
 
         public static readonly List<CultureInfo> SupportedCultures = new List<CultureInfo>
         {
+            new CultureInfo("bg-BG"),
+
             new CultureInfo("de-DE"),
             new CultureInfo("en-US"),
             new CultureInfo("en-UK"),

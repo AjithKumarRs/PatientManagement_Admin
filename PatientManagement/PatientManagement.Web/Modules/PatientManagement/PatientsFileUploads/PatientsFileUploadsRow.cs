@@ -22,6 +22,7 @@ namespace PatientManagement.PatientManagement.Entities
             get { return Fields.PatientFileUploadId[this]; }
             set { Fields.PatientFileUploadId[this] = value; }
         }
+
         [Category("General")]
         [DisplayName("Patient"), NotNull, ForeignKey("[dbo].[Patients]", "PatientId"), LeftJoin("jPatient"), TextualField("PatientName")]
         [LookupEditor(typeof(PatientsRow), InplaceAdd = true)]
@@ -39,7 +40,7 @@ namespace PatientManagement.PatientManagement.Entities
             set { Fields.FilePath[this] = value; }
         }
 
-        [DisplayName("Description"), Size(100), NotNull]
+        [DisplayName("Description"), Size(300), NotNull]
         [TextAreaEditor(Rows = 3)]
         public String Description
         {

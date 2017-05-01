@@ -23,8 +23,7 @@ namespace PatientManagement.PatientManagement {
         private lifeStyleForm: LifeStylesForm;
         private lifeStyleGrid: Serenity.PropertyGrid;
 
-        private patientsFileUploadsGrid: Serenity.PropertyGrid;
-        private patientsFileUploadsForm: PatientsFileUploadsForm;
+        private patientsFileUploadsGrid: FIleUploadsForPatientGrid;
 
 
         constructor() {
@@ -53,26 +52,86 @@ namespace PatientManagement.PatientManagement {
             this.lifeStyleForm = new LifeStylesForm((this.lifeStyleGrid as any).idPrefix);
 
             //Initialize new instance of LifeStyle grid and form
-            this.patientsFileUploadsGrid = new Serenity.PropertyGrid(this.byId("FileUploadsPropertyGrid"),
-                {
-                    items: Q.getForm(PatientsFileUploadsForm.formKey).filter(x => x.name != "PatientId"),
-                    useCategories: true
-                });
-
-            this.patientsFileUploadsForm = new PatientsFileUploadsForm((this.patientsFileUploadsGrid as any).idPrefix);
-
-
+            this.patientsFileUploadsGrid = new FIleUploadsForPatientGrid(this.byId("FileUploadsPropertyGrid"));
+            this.patientsFileUploadsGrid.element.flexHeightOnly(1);
 
             this.patientValidator = this.byId("PatientHealthForm").validate(Q.validateOptions({}));
 
             this.patientValidator = this.byId("LifeStyleForm").validate(Q.validateOptions({}));
-
-            this.patientValidator = this.byId("FileUploadsForm").validate(Q.validateOptions({}));
-
+            
             this.byId('NoteList').closest('.field').hide().end().appendTo(this.byId('TabNotes'));
             DialogUtils.pendingChangesConfirmation(this.element, () => this.getSaveState() != this.loadedState);
+
+            //Add button for saving patient health form
+            // ReSharper disable once WrongExpressionStatement
+            new Serenity.Toolbar(this.byId("PatientHealthToolbar"),
+                {
+                    buttons: [
+                        {
+                            cssClass: "apply-changes-button",
+                            title: Q.text("Controls.EntityDialog.UpdateButton"),
+                            onClick: () => {
+                                var id = this.form.PatientId.value;
+
+                                if (!id)
+                                    return;
+
+                                if (!this.patientValidator.form())
+                                    return;
+
+                                var p = <PatientManagement.PatientHealthRow>{};
+                                this.patientHealthGrid.save(p);
+
+                                PatientManagement.PatientHealthService.Update({
+                                    EntityId: id,
+                                    Entity: p
+                                }, response => {
+                                    // reload customer list just in case
+                                    Q.reloadLookup(PatientManagement.PatientsRow.lookupKey);
+
+                                    Q.notifySuccess(Q.text("Controls.EntityDialog.SaveSuccessMessage"));
+
+                                });
+                            }
+                        }]
+                });
+
+            //Add button for saving patient life style form
+            // ReSharper disable once WrongExpressionStatement
+            new Serenity.Toolbar(this.byId("LifeStyleToolbar"),
+                {
+                    buttons: [
+                        {
+                            cssClass: "apply-changes-button",
+                            title: Q.text("Controls.EntityDialog.UpdateButton"),
+                            onClick: () => {
+                                var id = this.form.PatientId.value;
+
+                                if (!id)
+                                    return;
+
+                                if (!this.patientValidator.form())
+                                    return;
+
+                                var p = <PatientManagement.LifeStylesRow>{};
+                                this.lifeStyleGrid.save(p);
+
+                                PatientManagement.LifeStylesService.Update({
+                                    EntityId: id,
+                                    Entity: p
+                                }, response => {
+                                    // reload customer list just in case
+                                    Q.reloadLookup(PatientManagement.PatientsRow.lookupKey);
+
+                                    Q.notifySuccess(Q.text("Controls.EntityDialog.SaveSuccessMessage"));
+                                });
+                            }
+                        }]
+                });
         }
 
+
+        
         getSaveState() {
             try {
                 return $.toJSON(this.getSaveEntity());
@@ -81,50 +140,9 @@ namespace PatientManagement.PatientManagement {
                 return null;
             }
         }
-        //protected savePatientHealth(callback: (response: Serenity.SaveResponse) => void, onSuccess?: (response: Serenity.SaveResponse) => void): boolean {
-        //    var id = this.patientHealthForm.PatientId;
-        //    if (!id) {
-        //        onSuccess(null);
-        //    }
-        //    else {
-        //        // Get current tab
-        //        var currTab = Serenity.TabsExtensions.activeTabKey(this.tabs);
+        
 
-        //        // Select the correct tab and validate to see the error message in tab
-        //        Serenity.TabsExtensions.selectTab(this.tabs, "PatientHealth");
-        //        if (!this.patientValidator.form()) {
-        //            return false;
-        //        }
 
-        //        // Re-select initial tab
-        //        Serenity.TabsExtensions.selectTab(this.tabs, currTab);
-
-        //        // prepare an empty entity to serialize customer details into
-        //        var c = <PatientHealthRow>{};
-        //        this.patientHealthGrid.save(c);
-
-        //        PatientHealthService.Update({
-        //            EntityId: id,
-        //            Entity: c
-        //        }, response => {
-        //            // reload customer list just in case
-        //            Q.reloadLookup(PatientHealthRow.lookupKey);
-
-        //            // set flag that we are triggering customer select change event
-        //            // otherwise active tab will change to first one
-        //            this.selfChange++;
-        //            try {
-        //            }
-        //            finally {
-        //                this.selfChange--;
-        //            }
-
-        //            onSuccess(response);
-        //        });
-        //    }
-
-        //    return true;
-        //}
         loadResponse(data) {
             super.loadResponse(data);
             this.loadedState = this.getSaveState();
@@ -151,7 +169,16 @@ namespace PatientManagement.PatientManagement {
                 this.patientHealthGrid.load(response.Entity);
             });
 
+            LifeStylesService.Retrieve({
+                EntityId: entity.PatientId
+            },
+            response => {
+                this.lifeStyleGrid.load(response.Entity);
+            });
+
             this.visitsGrid.patientId = entity.PatientId;
+
+            this.patientsFileUploadsGrid.patientId = entity.PatientId;
         }
 
         onSaveSuccess(response) {
