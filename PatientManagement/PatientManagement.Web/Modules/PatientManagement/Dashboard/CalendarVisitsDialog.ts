@@ -1,4 +1,7 @@
 ﻿/// <reference path="../Visits/VisitsDialog.ts" />
+/// <reference types="jqueryui" />
+/// <reference types="fullcalendar" />
+
 declare var FullCalendar: any;
 
 namespace PatientManagement.PatientManagement {
@@ -29,15 +32,12 @@ namespace PatientManagement.PatientManagement {
 
             p.StartDate = start;
             p.EndDate = end;
-            console.log(p);
 
             VisitsService.Update({
                 Entity: p,
                 EntityId: visitId
             }, response => {
                 Q.reloadLookup(PatientManagement.VisitsRow.lookupKey);
-                
-                
             })
             return "yppppye";
         }
@@ -54,7 +54,9 @@ namespace PatientManagement.PatientManagement {
                 }, resp => {
                   //  Q.notifySuccess("Looks like the category you added has name: " + resp.Entity.PatientName);
              
-                    
+                    var event = { id: resp.Entity.PatientId, title: resp.Entity.PatientName, start: resp.Entity.StartDate, end: resp.Entity.EndDate };
+                 
+                    $("#calendar").fullCalendar('renderEvent', event, true);
                 });
             }
         }
