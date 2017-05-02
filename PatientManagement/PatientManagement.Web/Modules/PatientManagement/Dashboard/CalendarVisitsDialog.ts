@@ -40,6 +40,8 @@ namespace PatientManagement.PatientManagement {
                 },
                 response => {
                     Q.reloadLookup(PatientManagement.VisitsRow.lookupKey);
+
+                    $('#VisitsGridDiv .refresh-button').click();
                 });
         }
         protected onSaveSuccess(response: Serenity.SaveResponse): void {

@@ -15,6 +15,16 @@
     <None Remove="Modules\Common\Dashboard\**" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Modules\PatientManagement\Patients\PatientManagement.PatientsDialog.Template.html" />
+    <None Remove="Views\Templates\EntityDialog.Template.html" />
+    <None Remove="Views\Templates\PropertyDialog.Template.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Modules\PatientManagement\Patients\PatientManagement.PatientsDialog.Template.html" />
+    <Content Include="Views\Templates\EntityDialog.Template.html" />
+    <EmbeddedResource Include="Views\Templates\PropertyDialog.Template.html" />
+  </ItemGroup>
+  <ItemGroup>
     <None Update="wwwroot\**\*">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>

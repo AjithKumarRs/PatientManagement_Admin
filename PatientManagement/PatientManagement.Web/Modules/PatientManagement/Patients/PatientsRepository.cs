@@ -80,13 +80,22 @@ namespace PatientManagement.PatientManagement.Repositories
                 using (var connection = SqlConnections.NewFor<PatientHealthRow>())
                 using (var uow = new UnitOfWork(connection))
                 {
-                    uow.Connection.DeleteById<LifeStylesRow>(Row.PatientId);
-                    uow.Connection.DeleteById<PatientHealthRow>(Row.PatientId);
+                    if(connection.ExistsById<LifeStylesRow>(Row.PatientId))
+                        uow.Connection.DeleteById<LifeStylesRow>(Row.PatientId);
+
+                    if (connection.ExistsById<PatientHealthRow>(Row.PatientId))
+                        uow.Connection.DeleteById<PatientHealthRow>(Row.PatientId);
+
                     var ls = connection.List<VisitsRow>().Where(p => p.PatientId == Row.PatientId);
                     foreach (var item in ls)
                     {
 
                         uow.Connection.DeleteById<VisitsRow>(item.VisitId);
+                    }
+                    var fU = connection.List<PatientsFileUploadsRow>().Where(p => p.PatientId == Row.PatientId);
+                    foreach (var item in fU)
+                    {
+                        uow.Connection.DeleteById<PatientsFileUploadsRow>(item.PatientFileUploadId);
                     }
                     uow.Commit();
                 }

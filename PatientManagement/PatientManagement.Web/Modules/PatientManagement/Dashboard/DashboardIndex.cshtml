@@ -1,6 +1,5 @@
 ﻿@using PatientManagement.PatientManagement
 
-@model PatientManagement.Dashboard.DashboardPageModel
 @{
     ViewData["Title"] = "Dashboard";
     ViewData["PageId"] = "Dashboard";
@@ -51,9 +50,15 @@
 </div><!-- /.row -->
 
 <script>
-    $(function () {
+    function FormatAlertMessage(title, startDate, endDate) {
+        var str = Q.text("Site.Dashboard.AlertOnCalendarChange") + "\n " +
+            Q.text("Site.Dashboard.CalendarPatient")+ " " +  title + "\n" +
+            Q.text("Site.Dashboard.CalendarStartDate") + " " + startDate.format("DD.MM.YYYY HH:mm:ss") + "\n" +
+            Q.text("Site.Dashboard.CalendarEndDate") + " " + endDate.format("DD.MM.YYYY HH:mm:ss");
+        return str;
+    } 
 
-        var visitsModel = @Html.Raw(Json.Serialize(Model.EventsList));
+    $(function () {
         
         /* initialize the calendar   -----------------------------------------------------------------*/
         $('#calendar').fullCalendar({
@@ -64,9 +69,8 @@
             },
             eventClick: function (event) {
                 
-                new PatientManagement.PatientManagement.PatientsDialog().loadByIdAndOpenDialog(event.patientId);
+                new PatientManagement.PatientManagement.CalendarPatientDialog().loadByIdAndOpenDialog(event.patientId);
                 if (event.url) {
-                    window.open(event.url);
                     return false;
                 }
             }, 
@@ -74,38 +78,23 @@
             //events: visitsModel,
             editable: true,
             droppable: true, // this allows things to be dropped onto the calendar !!!
-            eventDrop: function(event,dayDelta,minuteDelta,allDay,revertFunc) {
-                var str = "Сигурни ли сте, че искате да направите тази промяна?\n Пациент: " +
-                    event.title +
-                    "\n Начална дата: " +
-                    event.start.format("YYYY-MM-DD HH:mm:ss") +
-                    "\n Крайна дата: " +
-                    event.end.format("YYYY-MM-DD HH:mm:ss");
-
-                 if (!confirm(str)) {
+            eventDrop: function (event, dayDelta, minuteDelta, allDay, revertFunc) {
+                
+                if (!confirm(FormatAlertMessage(event.title, event.start, event.end))) {
                     revertFunc();
-                 }
+                }
 
                 // Call Function to update the visit
-                 var dialog = new PatientManagement.PatientManagement.CalendarVisitsDialog();
-                 dialog.updateVisit(event.id, event.start.format("YYYY-MM-DD HH:mm:ss"), event.end.format("YYYY-MM-DD HH:mm:ss"));
+                var dialog = new PatientManagement.PatientManagement.CalendarVisitsDialog();
+                dialog.updateVisit(event.id, event.start.format("YYYY-MM-DD HH:mm:ss"), event.end.format("YYYY-MM-DD HH:mm:ss"));
 
-                $('#VisitsGridDiv .refresh-button').click();
             },
             eventResize: function(event,dayDelta,minuteDelta,revertFunc) {
-                var str = "Сигурни ли сте, че искате да направите тази промяна?\n Пациент: " +
-                    event.title +
-                    "\n Начална дата: " +
-                    event.start.format("YYYY-MM-DD HH:mm:ss") +
-                    "\n Крайна дата: " +
-                    event.end.format("YYYY-MM-DD HH:mm:ss");
-                
-                if (!confirm(str)) {
-                    revertFunc();
-                } 
 
+                if (!confirm(FormatAlertMessage(event.title, event.start, event.end))) {
+                    revertFunc();
+                }
                 var dialog = new PatientManagement.PatientManagement.CalendarVisitsDialog();
-                $('#VisitsGridDiv .refresh-button').click();
 
                 dialog.updateVisit(event.id, event.start.format("YYYY-MM-DD HH:mm:ss"), event.end.format("YYYY-MM-DD HH:mm:ss"));
                 

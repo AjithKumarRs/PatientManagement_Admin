@@ -1450,6 +1450,35 @@ declare namespace PatientManagement.Membership {
     }
 }
 declare namespace PatientManagement.PatientManagement {
+    class PatientsDialog extends Serenity.EntityDialog<PatientsRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getService(): string;
+        protected form: PatientsForm;
+        private visitsGrid;
+        private loadedState;
+        private patientHealthForm;
+        private patientHealthGrid;
+        private patientValidator;
+        private selfChange;
+        private lifeStyleForm;
+        private lifeStyleGrid;
+        private patientsFileUploadsGrid;
+        constructor();
+        getSaveState(): string;
+        loadResponse(data: any): void;
+        loadEntity(entity: PatientsRow): void;
+        onSaveSuccess(response: any): void;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class CalendarPatientDialog extends PatientsDialog {
+        loadEntity(entity: PatientsRow): void;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
     class VisitsDialog extends Serenity.EntityDialog<VisitsRow, any> {
         protected getFormKey(): string;
         protected getIdProperty(): string;
@@ -1590,30 +1619,6 @@ declare namespace PatientManagement.PatientManagement {
         protected getGridCanLoad(): boolean;
         private _patientId;
         patientId: number;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class PatientsDialog extends Serenity.EntityDialog<PatientsRow, any> {
-        protected getFormKey(): string;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getNameProperty(): string;
-        protected getService(): string;
-        protected form: PatientsForm;
-        private visitsGrid;
-        private loadedState;
-        private patientHealthForm;
-        private patientHealthGrid;
-        private patientValidator;
-        private selfChange;
-        private lifeStyleForm;
-        private lifeStyleGrid;
-        private patientsFileUploadsGrid;
-        constructor();
-        getSaveState(): string;
-        loadResponse(data: any): void;
-        loadEntity(entity: PatientsRow): void;
-        onSaveSuccess(response: any): void;
     }
 }
 declare namespace PatientManagement.PatientManagement {

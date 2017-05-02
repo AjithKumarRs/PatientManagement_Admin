@@ -16,6 +16,8 @@
     "App_Data/",
     "Views/",
     "node_modules/",
+    "obj",
+    "bin",
     "wwwroot/"
   ]
 }

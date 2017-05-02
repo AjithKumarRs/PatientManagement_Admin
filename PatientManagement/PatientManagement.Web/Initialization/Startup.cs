@@ -86,13 +86,19 @@ namespace PatientManagement
 
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-
             var reqLocOpt = new RequestLocalizationOptions();
-            reqLocOpt.SupportedUICultures = UserCultureProvider.SupportedCultures;
-            reqLocOpt.SupportedCultures = UserCultureProvider.SupportedCultures;
-            reqLocOpt.RequestCultureProviders.Clear();
-            reqLocOpt.RequestCultureProviders.Add(new UserCultureProvider());
-            app.UseRequestLocalization(reqLocOpt);
+            try
+            {
+                reqLocOpt.SupportedUICultures = UserCultureProvider.SupportedCultures;
+                reqLocOpt.SupportedCultures = UserCultureProvider.SupportedCultures;
+                reqLocOpt.RequestCultureProviders.Clear();
+                reqLocOpt.RequestCultureProviders.Add(new UserCultureProvider());
+                app.UseRequestLocalization(reqLocOpt);
+            }
+            catch (Exception e)
+            {
+                // Find Solution
+            }
 
             if (env.IsDevelopment())
             {
