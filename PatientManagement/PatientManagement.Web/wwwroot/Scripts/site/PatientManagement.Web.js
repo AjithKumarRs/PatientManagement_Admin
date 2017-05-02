@@ -3085,13 +3085,12 @@ var PatientManagement;
             function CalendarVisitsDialog() {
                 var _this = _super !== null && _super.apply(this, arguments) || this;
                 _this.updateVisit = function (visitId, start, end) {
-                    console.log(visitId);
                     var p = {};
                     PatientManagement.VisitsService.Retrieve({
                         EntityId: visitId
                     }, function (resp) {
                         var text = Q.format(Q.text("Site.Dashboard.SuccessChangedVisitDates"), resp.Entity.PatientName, resp.Entity.StartDate, resp.Entity.EndDate);
-                        Q.notifyInfo(text + resp.Entity.PatientName + " Моля натиснете бутона <span class='fa fa-refresh'></span> за да видите промените в таблицата.");
+                        Q.notifyInfo(text + resp.Entity.PatientName);
                         p = resp.Entity;
                     });
                     p.StartDate = start;
@@ -3102,7 +3101,6 @@ var PatientManagement;
                     }, function (response) {
                         Q.reloadLookup(PatientManagement.VisitsRow.lookupKey);
                     });
-                    return "yppppye";
                 };
                 return _this;
             }
@@ -3113,19 +3111,15 @@ var PatientManagement;
                 }
             };
             CalendarVisitsDialog.prototype.onSaveSuccess = function (response) {
-                // check that this is an insert
-                if (this.isNew) {
-                    // you could also open a new dialog
-                    // new Northwind.CategoryDialog().loadByIdAndOpenDialog(response.EntityId);
-                    // but let's better load inserted record using Retrieve service
-                    PatientManagement.VisitsService.Retrieve({
-                        EntityId: response.EntityId
-                    }, function (resp) {
-                        //  Q.notifySuccess("Looks like the category you added has name: " + resp.Entity.PatientName);
-                        var event = { id: resp.Entity.PatientId, title: resp.Entity.PatientName, start: resp.Entity.StartDate, end: resp.Entity.EndDate };
-                        $("#calendar").fullCalendar('renderEvent', event, true);
-                    });
-                }
+                PatientManagement.VisitsService.Retrieve({
+                    EntityId: response.EntityId
+                }, function (resp) {
+                    $("#calendar").fullCalendar('refetchEvents');
+                });
+            };
+            CalendarVisitsDialog.prototype.onDeleteSuccess = function (response) {
+                console.log(response);
+                $("#calendar").fullCalendar('refetchEvents');
             };
             return CalendarVisitsDialog;
         }(PatientManagement.VisitsDialog));

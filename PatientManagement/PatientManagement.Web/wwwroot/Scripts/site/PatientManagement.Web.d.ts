@@ -1463,8 +1463,9 @@ declare var FullCalendar: any;
 declare namespace PatientManagement.PatientManagement {
     class CalendarVisitsDialog extends VisitsDialog {
         protected updateTitle(): void;
-        updateVisit: (visitId: any, start: any, end: any) => string;
+        updateVisit: (visitId: any, start: any, end: any) => void;
         protected onSaveSuccess(response: Serenity.SaveResponse): void;
+        protected onDeleteSuccess(response: Serenity.DeleteResponse): void;
     }
 }
 declare namespace PatientManagement.PatientManagement {

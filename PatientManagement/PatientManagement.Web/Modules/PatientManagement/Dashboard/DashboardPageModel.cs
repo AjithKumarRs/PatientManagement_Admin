@@ -18,6 +18,7 @@ namespace PatientManagement.Dashboard
     {
         public Int32 id { get; set; }
 
+        public Int32 patientId { get; set; }
         public string title { get; set; }
 
         public string backGroundColor { get; set; }

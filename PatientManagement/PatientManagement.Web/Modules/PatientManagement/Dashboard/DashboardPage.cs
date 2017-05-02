@@ -22,37 +22,63 @@ namespace PatientManagement.PatientManagement.Pages
                 VisitsRow.Fields.GenerationKey, () =>
                 {
                     var model = new DashboardPageModel();
-                    var v = VisitsRow.Fields;
                     using (var connection = SqlConnections.NewFor<VisitsRow>())
                     {
-                        try
+                        var entity = connection.List<VisitsRow>();
+                        foreach (var visit in entity)
                         {
-                            var entity = connection.List<VisitsRow>();
-                            foreach (var visit in entity)
+                            model.EventsList.Add(new Event
                             {
-                                model.EventsList.Add(new Event
-                                {
-                                    id = visit.VisitId??0,
-                                    title = connection.ById<PatientsRow>(visit.PatientId).Name,
-                                    start = (visit.StartDate??DateTime.Now).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz") ,
-                                    end = (visit.EndDate ?? DateTime.Now).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
-                                    allDay = false,
-                                    backGroundColor = "#FF0000",
-                                    borderColor = "#00FF00"
-                                });
-                            }
+                                id = visit.VisitId ?? 0,
+                                patientId = visit.PatientId ?? 0,
+                                title = connection.ById<PatientsRow>(visit.PatientId).Name,
+                                start = (visit.StartDate ?? DateTime.Now).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
+                                end = (visit.EndDate ?? DateTime.Now).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
+                                allDay = false,
+                                backGroundColor = "#FF0000",
+                                borderColor = "#00FF00"
+                            });
                         }
-                        catch (Exception e)
-                        {
-                            throw;
-                        }
-                       
-                    
+
                         return model;
                     }
                 }
             );
             return View(MVC.Views.PatientManagement.Dashboard.DashboardIndex, cachedModel);
         }
+
+
+        [PageAuthorize]
+        public JsonResult GetVisitsTasks()
+        {
+            var cachedModel = TwoLevelCache.GetLocalStoreOnly("DashboardPageModel", TimeSpan.FromSeconds(30),
+                VisitsRow.Fields.GenerationKey, () =>
+                {
+                    var model = new DashboardPageModel();
+                    using (var connection = SqlConnections.NewFor<VisitsRow>())
+                    {
+                        var entity = connection.List<VisitsRow>();
+                        foreach (var visit in entity)
+                        {
+                            model.EventsList.Add(new Event
+                            {
+                                id = visit.VisitId ?? 0,
+                                patientId = visit.PatientId ?? 0,
+                                title = connection.ById<PatientsRow>(visit.PatientId).Name,
+                                start = (visit.StartDate ?? DateTime.Now).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
+                                end = (visit.EndDate ?? DateTime.Now).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
+                                allDay = false,
+                                backGroundColor = "#FF0000",
+                                borderColor = "#00FF00"
+                            });
+                        }
+
+                        return model;
+                    }
+                }
+            );
+            return Json(cachedModel.EventsList);
+        }
     }
+
 }

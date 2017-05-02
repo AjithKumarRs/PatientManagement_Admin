@@ -22,7 +22,6 @@
   <ItemGroup>
     <PackageReference Include="EPPlus.Core" Version="1.1.0" />
     <PackageReference Include="FastMember" Version="1.1.0" />
-    <PackageReference Include="fullCalendar.TypeScript.DefinitelyTyped" Version="0.7.3" />
     <PackageReference Include="MailKit" Version="1.10.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="1.1.1" />
