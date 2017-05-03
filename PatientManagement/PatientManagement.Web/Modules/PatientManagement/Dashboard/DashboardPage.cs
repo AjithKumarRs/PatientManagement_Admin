@@ -42,8 +42,8 @@ namespace PatientManagement.PatientManagement.Pages
                                 start = (visit.StartDate ?? DateTime.Now).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
                                 end = (visit.EndDate ?? DateTime.Now).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
                                 allDay = false,
-                                backGroundColor = "#FF0000",
-                                borderColor = "#00FF00"
+                                backgroundColor = connection.ById<VisitTypesRow>(visit.VisitTypeId).BackgroundColor,
+                                borderColor = connection.ById<VisitTypesRow>(visit.VisitTypeId).BorderColor
                             });
                         }
 

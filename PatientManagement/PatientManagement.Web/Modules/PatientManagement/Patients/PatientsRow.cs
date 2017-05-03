@@ -35,14 +35,14 @@ namespace PatientManagement.PatientManagement.Entities
         }
 
         [DisplayName("Personal Number"), Size(300), NotNull]
-        public Int32? PersonalNumber
+        public Int64? PersonalNumber
         {
             get { return Fields.PersonalNumber[this]; }
             set { Fields.PersonalNumber[this] = value; }
         }
 
         [DisplayName("Phone Number"), Size(300), NotNull]
-        public Int32? PhoneNumber
+        public Int64? PhoneNumber
         {
             get { return Fields.PhoneNumber[this]; }
             set { Fields.PhoneNumber[this] = value; }
@@ -121,8 +121,8 @@ namespace PatientManagement.PatientManagement.Entities
         {
             public Int32Field PatientId;
             public StringField Name;
-            public Int32Field PersonalNumber;
-            public Int32Field PhoneNumber;
+            public Int64Field PersonalNumber;
+            public Int64Field PhoneNumber;
             public DateTimeField FirstRegistrationDate;
             public StringField Address;
             public Int32Field Height;

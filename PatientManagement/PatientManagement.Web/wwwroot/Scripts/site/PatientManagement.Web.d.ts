@@ -585,14 +585,6 @@ declare namespace PatientManagement.PatientManagement {
         InsertUserId?: number;
         InsertDate?: string;
         PatientName?: string;
-        PatientPersonalNumber?: number;
-        PatientPhoneNumber?: number;
-        PatientFirstRegistrationDate?: string;
-        PatientAddress?: string;
-        PatientHeight?: number;
-        PatientWeight?: number;
-        PatientInsertUserId?: number;
-        PatientInsertDate?: string;
     }
     namespace LifeStylesRow {
         const idProperty = "PatientId";
@@ -609,14 +601,6 @@ declare namespace PatientManagement.PatientManagement {
             const InsertUserId: string;
             const InsertDate: string;
             const PatientName: string;
-            const PatientPersonalNumber: string;
-            const PatientPhoneNumber: string;
-            const PatientFirstRegistrationDate: string;
-            const PatientAddress: string;
-            const PatientHeight: string;
-            const PatientWeight: string;
-            const PatientInsertUserId: string;
-            const PatientInsertDate: string;
         }
     }
 }
@@ -684,14 +668,6 @@ declare namespace PatientManagement.PatientManagement {
         InsertUserId?: number;
         InsertDate?: string;
         PatientName?: string;
-        PatientPersonalNumber?: number;
-        PatientPhoneNumber?: number;
-        PatientFirstRegistrationDate?: string;
-        PatientAddress?: string;
-        PatientHeight?: number;
-        PatientWeight?: number;
-        PatientInsertUserId?: number;
-        PatientInsertDate?: string;
     }
     namespace PatientHealthRow {
         const idProperty = "PatientId";
@@ -707,14 +683,6 @@ declare namespace PatientManagement.PatientManagement {
             const InsertUserId: string;
             const InsertDate: string;
             const PatientName: string;
-            const PatientPersonalNumber: string;
-            const PatientPhoneNumber: string;
-            const PatientFirstRegistrationDate: string;
-            const PatientAddress: string;
-            const PatientHeight: string;
-            const PatientWeight: string;
-            const PatientInsertUserId: string;
-            const PatientInsertDate: string;
         }
     }
 }
@@ -758,14 +726,6 @@ declare namespace PatientManagement.PatientManagement {
         InsertUserId?: number;
         InsertDate?: string;
         PatientName?: string;
-        PatientPersonalNumber?: number;
-        PatientPhoneNumber?: number;
-        PatientFirstRegistrationDate?: string;
-        PatientAddress?: string;
-        PatientHeight?: number;
-        PatientWeight?: number;
-        PatientInsertUserId?: number;
-        PatientInsertDate?: string;
     }
     namespace PatientsFileUploadsRow {
         const idProperty = "PatientFileUploadId";
@@ -781,14 +741,6 @@ declare namespace PatientManagement.PatientManagement {
             const InsertUserId: string;
             const InsertDate: string;
             const PatientName: string;
-            const PatientPersonalNumber: string;
-            const PatientPhoneNumber: string;
-            const PatientFirstRegistrationDate: string;
-            const PatientAddress: string;
-            const PatientHeight: string;
-            const PatientWeight: string;
-            const PatientInsertUserId: string;
-            const PatientInsertDate: string;
         }
     }
 }
@@ -816,8 +768,8 @@ declare namespace PatientManagement.PatientManagement {
     interface PatientsForm {
         PatientId: Serenity.IntegerEditor;
         Name: Serenity.StringEditor;
-        PersonalNumber: Serenity.IntegerEditor;
-        PhoneNumber: Serenity.IntegerEditor;
+        PersonalNumber: Serenity.StringEditor;
+        PhoneNumber: Serenity.StringEditor;
         FirstRegistrationDate: Serenity.DateTimeEditor;
         Address: Serenity.StringEditor;
         Height: Serenity.IntegerEditor;
@@ -902,12 +854,6 @@ declare namespace PatientManagement.PatientManagement {
         InsertUserId?: number;
         InsertDate?: string;
         PatientName?: string;
-        PatientPersonalNumber?: number;
-        PatientPhoneNumber?: number;
-        PatientFirstRegistrationDate?: string;
-        PatientAddress?: string;
-        PatientHeight?: number;
-        PatientWeight?: number;
         VisitTypeName?: string;
     }
     namespace VisitsRow {
@@ -925,12 +871,6 @@ declare namespace PatientManagement.PatientManagement {
             const InsertUserId: string;
             const InsertDate: string;
             const PatientName: string;
-            const PatientPersonalNumber: string;
-            const PatientPhoneNumber: string;
-            const PatientFirstRegistrationDate: string;
-            const PatientAddress: string;
-            const PatientHeight: string;
-            const PatientWeight: string;
             const VisitTypeName: string;
         }
     }
@@ -960,12 +900,16 @@ declare namespace PatientManagement.PatientManagement {
     }
     interface VisitTypesForm {
         Name: Serenity.StringEditor;
+        BorderColor: Serenity.StringEditor;
+        BackgroundColor: Serenity.StringEditor;
     }
 }
 declare namespace PatientManagement.PatientManagement {
     interface VisitTypesRow {
         VisitTypeId?: number;
         Name?: string;
+        BorderColor?: string;
+        BackgroundColor?: string;
         InsertUserId?: number;
         InsertDate?: string;
     }
@@ -978,6 +922,8 @@ declare namespace PatientManagement.PatientManagement {
         namespace Fields {
             const VisitTypeId: string;
             const Name: string;
+            const BorderColor: string;
+            const BackgroundColor: string;
             const InsertUserId: string;
             const InsertDate: string;
         }
@@ -1466,6 +1412,8 @@ declare namespace PatientManagement.PatientManagement {
         private lifeStyleForm;
         private lifeStyleGrid;
         private patientsFileUploadsGrid;
+        private checkEgn;
+        protected isValidDate: (y: any, m: any, d: any) => boolean;
         constructor();
         getSaveState(): string;
         loadResponse(data: any): void;

@@ -17,7 +17,8 @@ namespace PatientManagement.Administration.Endpoints
     using MyRow = Entities.UserRow;
 
     [Route("Services/Administration/User/[action]")]
-    [ConnectionKey(typeof(MyRow)), ServiceAuthorize(typeof(MyRow))]
+    //[ConnectionKey(typeof(MyRow)), ServiceAuthorize(typeof(MyRow))]
+    [ConnectionKey(typeof(MyRow))]
     public class UserController : ServiceEndpoint
     {
         [HttpPost, AuthorizeCreate(typeof(MyRow))]

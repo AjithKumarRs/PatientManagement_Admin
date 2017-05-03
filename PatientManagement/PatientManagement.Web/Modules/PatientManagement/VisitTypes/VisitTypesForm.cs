@@ -14,5 +14,9 @@ namespace PatientManagement.PatientManagement.Forms
     public class VisitTypesForm
     {
         public String Name { get; set; }
+
+        public String BorderColor { get; set; }
+
+        public String BackgroundColor { get; set; }
     }
 }

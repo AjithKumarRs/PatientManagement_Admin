@@ -1,6 +1,8 @@
 {
   "Db.PatientManagement.PatientsFileUploads.EntityPlural": "Documents",
   "Db.PatientManagement.PatientsFileUploads.EntitySingular": "Document",
+  "Db.PatientManagement.Visits.BackgroundColor": "Цвят на фона",
+  "Db.PatientManagement.Visits.BorderColor": "Цвят на рамката",
   "Db.PatientManagement.Visits.Description": "Описание",
   "Db.PatientManagement.Visits.EndDate": "Крайна дата",
   "Db.PatientManagement.Visits.EntityPlural": "Визити",
@@ -16,6 +18,8 @@
   "Db.PatientManagement.Visits.StartDate": "Начална дата",
   "Db.PatientManagement.Visits.VisitTypeId": "Тип визита",
   "Db.PatientManagement.Visits.VisitTypeName": "Има на тип визита",
+  "Db.PatientManagement.VisitTypes.BackgroundColor": "Цвят на фона",
+  "Db.PatientManagement.VisitTypes.BorderColor": "Цвят на рамката",
   "Navigation.Dashboard": "Dashboard",
   "Navigation.SiteTitle": "Kokon",
   "Navigation.Visits": "Визити",

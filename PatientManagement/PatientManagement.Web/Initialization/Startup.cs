@@ -15,6 +15,7 @@ using Serenity.Services;
 using Serenity.Web.Middleware;
 using System;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.IO;
 
 namespace PatientManagement
@@ -86,6 +87,8 @@ namespace PatientManagement
 
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("bg-BG");
+            CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("bg-BG");
             var reqLocOpt = new RequestLocalizationOptions();
             try
             {

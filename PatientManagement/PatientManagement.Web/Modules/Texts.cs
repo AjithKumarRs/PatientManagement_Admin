@@ -184,6 +184,7 @@ namespace PatientManagement
             public static class ValidationError
             {
                 public static LocalText Title = "ERROR";
+                public static LocalText ValidateEgnNotCorrect = "Entered personal number is not correct!";
             }
         }
 

@@ -67,6 +67,7 @@
                 center: 'title',
                 right: 'month,agendaWeek,agendaDay, listWeek'
             },
+            defaultView: 'agendaWeek',
             eventClick: function (event) {
                 
                 new PatientManagement.PatientManagement.CalendarPatientDialog().loadByIdAndOpenDialog(event.patientId);

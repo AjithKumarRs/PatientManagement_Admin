@@ -29,6 +29,20 @@ namespace PatientManagement.PatientManagement.Entities
             set { Fields.Name[this] = value; }
         }
 
+        [DisplayName("Border Color"), Size(50), NotNull, QuickSearch]
+        public String BorderColor
+        {
+            get { return Fields.BorderColor[this]; }
+            set { Fields.BorderColor[this] = value; }
+        }
+
+        [DisplayName("Background Color"), Size(50), NotNull, QuickSearch]
+        public String BackgroundColor
+        {
+            get { return Fields.BackgroundColor[this]; }
+            set { Fields.BackgroundColor[this] = value; }
+        }
+
         [DisplayName("Insert User Id"), NotNull]
         public Int32? InsertUserId
         {
@@ -64,6 +78,9 @@ namespace PatientManagement.PatientManagement.Entities
         {
             public Int32Field VisitTypeId;
             public StringField Name;
+            public StringField BorderColor;
+            public StringField BackgroundColor;
+
             public Int32Field InsertUserId;
             public DateTimeField InsertDate;
 

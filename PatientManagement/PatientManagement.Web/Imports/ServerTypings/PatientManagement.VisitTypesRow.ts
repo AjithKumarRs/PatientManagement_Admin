@@ -2,6 +2,8 @@
     export interface VisitTypesRow {
         VisitTypeId?: number;
         Name?: string;
+        BorderColor?: string;
+        BackgroundColor?: string;
         InsertUserId?: number;
         InsertDate?: string;
     }
@@ -19,10 +21,12 @@
         export namespace Fields {
             export declare const VisitTypeId: string;
             export declare const Name: string;
+            export declare const BorderColor: string;
+            export declare const BackgroundColor: string;
             export declare const InsertUserId: string;
             export declare const InsertDate: string;
         }
 
-        ['VisitTypeId', 'Name', 'InsertUserId', 'InsertDate'].forEach(x => (<any>Fields)[x] = x);
+        ['VisitTypeId', 'Name', 'BorderColor', 'BackgroundColor', 'InsertUserId', 'InsertDate'].forEach(x => (<any>Fields)[x] = x);
     }
 }
