@@ -90,7 +90,7 @@
             },
             allDaySlot: false,
             editable: true,
-            droppable: true,
+            droppable: false,
             eventDrop: function (event, dayDelta, minuteDelta, allDay, revertFunc) {
                 
                 if (!confirm(FormatAlertMessage(event.title, event.start, event.end))) {
