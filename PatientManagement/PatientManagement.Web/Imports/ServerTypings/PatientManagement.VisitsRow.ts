@@ -12,6 +12,8 @@
         PhoneNumber?: string;
         PatientName?: string;
         VisitTypeName?: string;
+        VisitTypeBackgroundColor?: string;
+        VisitTypeBorderColor?: string;
     }
 
     export namespace VisitsRow {
@@ -36,8 +38,10 @@
             export declare const PhoneNumber: string;
             export declare const PatientName: string;
             export declare const VisitTypeName: string;
+            export declare const VisitTypeBackgroundColor: string;
+            export declare const VisitTypeBorderColor: string;
         }
 
-        ['VisitId', 'PatientId', 'VisitTypeId', 'Description', 'StartDate', 'EndDate', 'InsertUserId', 'InsertDate', 'PatientGender', 'PhoneNumber', 'PatientName', 'VisitTypeName'].forEach(x => (<any>Fields)[x] = x);
+        ['VisitId', 'PatientId', 'VisitTypeId', 'Description', 'StartDate', 'EndDate', 'InsertUserId', 'InsertDate', 'PatientGender', 'PhoneNumber', 'PatientName', 'VisitTypeName', 'VisitTypeBackgroundColor', 'VisitTypeBorderColor'].forEach(x => (<any>Fields)[x] = x);
     }
 }

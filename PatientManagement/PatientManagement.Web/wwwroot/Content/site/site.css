@@ -8511,6 +8511,12 @@ section.content > .s-DataGrid {
   padding: 2px 0px 2px 20px;
   background: url(../serenity/images/pda.png) no-repeat center left;
 }
+.visit-type-icon {
+  padding: 0 0 0 15px;
+  margin-right: 5px;
+  border-radius: 6px;
+  border: 1px solid;
+}
 .s-NotesEditor {
   border: 1px solid #ccc;
   border-radius: 4px;

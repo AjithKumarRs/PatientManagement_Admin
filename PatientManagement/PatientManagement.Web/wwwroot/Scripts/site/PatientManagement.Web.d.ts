@@ -866,6 +866,8 @@ declare namespace PatientManagement.PatientManagement {
         PhoneNumber?: string;
         PatientName?: string;
         VisitTypeName?: string;
+        VisitTypeBackgroundColor?: string;
+        VisitTypeBorderColor?: string;
     }
     namespace VisitsRow {
         const idProperty = "VisitId";
@@ -885,6 +887,8 @@ declare namespace PatientManagement.PatientManagement {
             const PhoneNumber: string;
             const PatientName: string;
             const VisitTypeName: string;
+            const VisitTypeBackgroundColor: string;
+            const VisitTypeBorderColor: string;
         }
     }
 }
@@ -1619,6 +1623,14 @@ declare namespace PatientManagement.PatientManagement {
         protected getGridCanLoad(): boolean;
         private _patientId;
         patientId: number;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class VisitsTypesFormatter implements Slick.Formatter {
+        format(ctx: Slick.FormatterContext): string;
+        backgroundProperty: string;
+        borderProperty: string;
+        initializeColumn(column: Slick.Column): void;
     }
 }
 declare namespace PatientManagement.PatientManagement {

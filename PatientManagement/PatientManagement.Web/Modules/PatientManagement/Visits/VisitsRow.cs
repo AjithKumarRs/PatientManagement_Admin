@@ -40,6 +40,22 @@ namespace PatientManagement.PatientManagement.Entities
             get => Fields.VisitTypeId[this];
             set => Fields.VisitTypeId[this] = value;
         }
+
+
+        [Expression("jVisitType.[BackgroundColor]")]
+        public String VisitTypeBackgroundColor
+        {
+            get { return Fields.VisitTypeBackgroundColor[this]; }
+            set { Fields.VisitTypeBackgroundColor[this] = value; }
+        }
+
+        [Expression("jVisitType.[BorderColor]")]
+        public String VisitTypeBorderColor
+        {
+            get { return Fields.VisitTypeBorderColor[this]; }
+            set { Fields.VisitTypeBorderColor[this] = value; }
+        }
+
         [DisplayFormat("dd/MM/yyyy HH:mm")]
         [DisplayName("Start Date"), NotNull, QuickSearch, QuickFilter, SortOrder(1, true), Width(150)]
         [DateTimeKind(DateTimeKind.Unspecified), DateTimeEditor]
@@ -136,6 +152,8 @@ namespace PatientManagement.PatientManagement.Entities
             public StringField PatientName;
 
             public StringField VisitTypeName;
+            public StringField VisitTypeBackgroundColor;
+            public StringField VisitTypeBorderColor;
             public RowFields()
                 : base()
             {

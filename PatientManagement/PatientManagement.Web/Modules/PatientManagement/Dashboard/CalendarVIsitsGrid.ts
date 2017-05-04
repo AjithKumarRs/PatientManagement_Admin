@@ -11,5 +11,7 @@ namespace PatientManagement.PatientManagement {
         protected getInitialTitle() {
             return null;
         }
+        
+
     }
 }

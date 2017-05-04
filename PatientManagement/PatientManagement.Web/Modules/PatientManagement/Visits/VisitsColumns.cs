@@ -22,6 +22,7 @@ namespace PatientManagement.PatientManagement.Columns
         [EditLink, Width(130), PatientsPhoneFormatter]
         public string PhoneNumber { get; set; }
 
+        [VisitsTypesFormatter(BackgroundProperty = "VisitTypeBackgroundColor", BorderProperty = "VisitTypeBorderColor")]
         public Int32 VisitTypeName { get; set; }
 
         public String Description { get; set; }

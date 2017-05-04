@@ -693,7 +693,7 @@ var PatientManagement;
             var Fields;
             (function (Fields) {
             })(Fields = VisitsRow.Fields || (VisitsRow.Fields = {}));
-            ['VisitId', 'PatientId', 'VisitTypeId', 'Description', 'StartDate', 'EndDate', 'InsertUserId', 'InsertDate', 'PatientGender', 'PhoneNumber', 'PatientName', 'VisitTypeName'].forEach(function (x) { return Fields[x] = x; });
+            ['VisitId', 'PatientId', 'VisitTypeId', 'Description', 'StartDate', 'EndDate', 'InsertUserId', 'InsertDate', 'PatientGender', 'PhoneNumber', 'PatientName', 'VisitTypeName', 'VisitTypeBackgroundColor', 'VisitTypeBorderColor'].forEach(function (x) { return Fields[x] = x; });
         })(VisitsRow = PatientManagement.VisitsRow || (PatientManagement.VisitsRow = {}));
     })(PatientManagement = PatientManagement_16.PatientManagement || (PatientManagement_16.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
@@ -3938,6 +3938,44 @@ var PatientManagement;
 (function (PatientManagement_41) {
     var PatientManagement;
     (function (PatientManagement) {
+        var VisitsTypesFormatter = (function () {
+            function VisitsTypesFormatter() {
+            }
+            VisitsTypesFormatter.prototype.format = function (ctx) {
+                if (!this.backgroundProperty || !this.borderProperty) {
+                    return text;
+                }
+                var backgroundColor = ctx.item[this.backgroundProperty];
+                var borderColor = ctx.item[this.borderProperty];
+                var text = Q.htmlEncode(ctx.value);
+                //return "<span style='background-color: " + color +";'>" + text + '</span>';
+                return "<span class='visit-type-icon' style='background-color: " + backgroundColor + "; border-color: " + borderColor + ";' >" + '</span>' + text;
+            };
+            VisitsTypesFormatter.prototype.initializeColumn = function (column) {
+                column.referencedFields = column.referencedFields || [];
+                if (this.backgroundProperty)
+                    column.referencedFields.push(this.backgroundProperty);
+                if (this.borderProperty)
+                    column.referencedFields.push(this.borderProperty);
+            };
+            return VisitsTypesFormatter;
+        }());
+        __decorate([
+            Serenity.Decorators.option()
+        ], VisitsTypesFormatter.prototype, "backgroundProperty", void 0);
+        __decorate([
+            Serenity.Decorators.option()
+        ], VisitsTypesFormatter.prototype, "borderProperty", void 0);
+        VisitsTypesFormatter = __decorate([
+            Serenity.Decorators.registerFormatter([Serenity.ISlickFormatter, Serenity.IInitializeColumn])
+        ], VisitsTypesFormatter);
+        PatientManagement.VisitsTypesFormatter = VisitsTypesFormatter;
+    })(PatientManagement = PatientManagement_41.PatientManagement || (PatientManagement_41.PatientManagement = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement_42) {
+    var PatientManagement;
+    (function (PatientManagement) {
         var VisitTypesDialog = (function (_super) {
             __extends(VisitTypesDialog, _super);
             function VisitTypesDialog() {
@@ -3957,10 +3995,10 @@ var PatientManagement;
             Serenity.Decorators.responsive()
         ], VisitTypesDialog);
         PatientManagement.VisitTypesDialog = VisitTypesDialog;
-    })(PatientManagement = PatientManagement_41.PatientManagement || (PatientManagement_41.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_42.PatientManagement || (PatientManagement_42.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
-(function (PatientManagement_42) {
+(function (PatientManagement_43) {
     var PatientManagement;
     (function (PatientManagement) {
         var VisitTypesGrid = (function (_super) {
@@ -3979,6 +4017,6 @@ var PatientManagement;
             Serenity.Decorators.registerClass()
         ], VisitTypesGrid);
         PatientManagement.VisitTypesGrid = VisitTypesGrid;
-    })(PatientManagement = PatientManagement_42.PatientManagement || (PatientManagement_42.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_43.PatientManagement || (PatientManagement_43.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 //# sourceMappingURL=PatientManagement.Web.js.map
