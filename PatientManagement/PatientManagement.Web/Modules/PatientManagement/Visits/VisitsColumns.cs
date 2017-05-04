@@ -13,9 +13,15 @@ namespace PatientManagement.PatientManagement.Columns
     [BasedOnRow(typeof(Entities.VisitsRow))]
     public class VisitsColumns
     {
-        [EditLink, DisplayName("Db.Shared.RecordId"), AlignRight]
+        [EditLink, DisplayName("Db.Shared.RecordId")]
         public Int32 VisitId { get; set; }
+
+        [PatientsFormatter(GenderProperty = "PatientGender")]
         public Int32 PatientName { get; set; }
+
+        [EditLink, Width(130), PatientsPhoneFormatter]
+        public string PhoneNumber { get; set; }
+
         public Int32 VisitTypeName { get; set; }
 
         public String Description { get; set; }

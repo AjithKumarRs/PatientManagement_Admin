@@ -56,6 +56,7 @@ namespace PatientManagement
             services.AddSingleton<IAuthorizationService, Administration.AuthorizationService>();
             services.AddSingleton<IUserRetrieveService, Administration.UserRetrieveService>();
             services.AddSingleton<IPermissionService, Administration.PermissionService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

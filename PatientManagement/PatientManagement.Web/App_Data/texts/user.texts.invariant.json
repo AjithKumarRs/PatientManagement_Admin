@@ -1,4 +1,5 @@
 {
+  "Db.PatientManagement.Patients.Gender": "Gender",
   "Db.PatientManagement.PatientsFileUploads.EntityPlural": "Documents",
   "Db.PatientManagement.PatientsFileUploads.EntitySingular": "Document",
   "Db.PatientManagement.Visits.BackgroundColor": "Цвят на фона",

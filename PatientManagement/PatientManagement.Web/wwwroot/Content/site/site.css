@@ -8507,6 +8507,10 @@ section.content > .s-DataGrid {
   padding: 2px 20px 2px 0px;
   background: url(../serenity/images/balance.png) no-repeat center right;
 }
+.phone-symbol {
+  padding: 2px 0px 2px 20px;
+  background: url(../serenity/images/pda.png) no-repeat center left;
+}
 .s-NotesEditor {
   border: 1px solid #ccc;
   border-radius: 4px;

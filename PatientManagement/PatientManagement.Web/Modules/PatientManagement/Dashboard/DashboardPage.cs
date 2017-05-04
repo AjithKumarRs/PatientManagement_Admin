@@ -1,4 +1,6 @@
 ﻿
+using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using PatientManagement.PatientManagement.Entities;
 using PatientManagement.Dashboard;
@@ -23,35 +25,35 @@ namespace PatientManagement.PatientManagement.Pages
 
 
         [PageAuthorize]
-        public JsonResult GetVisitsTasks()
+        public JsonResult GetVisitsTasks(string start, string end)
         {
-            var cachedModel = TwoLevelCache.GetLocalStoreOnly("DashboardPageModel", TimeSpan.FromSeconds(30),
-                VisitsRow.Fields.GenerationKey, () =>
-                {
-                    var model = new DashboardPageModel();
-                    using (var connection = SqlConnections.NewFor<VisitsRow>())
-                    {
-                        var entity = connection.List<VisitsRow>();
-                        foreach (var visit in entity)
-                        {
-                            model.EventsList.Add(new Event
-                            {
-                                id = visit.VisitId ?? 0,
-                                patientId = visit.PatientId ?? 0,
-                                title = connection.ById<PatientsRow>(visit.PatientId).Name,
-                                start = (visit.StartDate ?? DateTime.Now).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
-                                end = (visit.EndDate ?? DateTime.Now).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
-                                allDay = false,
-                                backgroundColor = connection.ById<VisitTypesRow>(visit.VisitTypeId).BackgroundColor,
-                                borderColor = connection.ById<VisitTypesRow>(visit.VisitTypeId).BorderColor
-                            });
-                        }
+            var connection = SqlConnections.NewFor<VisitsRow>();
+            var startDate = DateTime.ParseExact(start, "yyyy-MM-dd", new CultureInfo("en-US"),
+                DateTimeStyles.None);
 
-                        return model;
-                    }
-                }
-            );
-            return Json(cachedModel.EventsList);
+            var endDate = DateTime.ParseExact(end, "yyyy-MM-dd", new CultureInfo("en-US"),
+                DateTimeStyles.None);
+
+            var model = new DashboardPageModel();
+            List<VisitsRow> entity = connection.List<VisitsRow>()
+                .Where(e => e.StartDate >= startDate && e.EndDate <= endDate)
+                .ToList();
+
+            foreach (var visit in entity)
+            {
+                model.EventsList.Add(new Event
+                {
+                    id = visit.VisitId ?? 0,
+                    patientId = visit.PatientId ?? 0,
+                    title = connection.ById<PatientsRow>(visit.PatientId).Name,
+                    start = (visit.StartDate ?? DateTime.Now).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
+                    end = (visit.EndDate ?? DateTime.Now).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
+                    allDay = false,
+                    backgroundColor = connection.ById<VisitTypesRow>(visit.VisitTypeId).BackgroundColor,
+                    borderColor = connection.ById<VisitTypesRow>(visit.VisitTypeId).BorderColor
+                });
+            }
+            return Json(model.EventsList);
         }
     }
 

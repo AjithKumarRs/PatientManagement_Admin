@@ -15,10 +15,13 @@ namespace PatientManagement.PatientManagement.Columns
     {
         [EditLink, DisplayName("Db.Shared.RecordId"), AlignRight]
         public Int32 PatientId { get; set; }
-        [EditLink]
+
+        [EditLink, PatientsFormatter(GenderProperty = "Gender"),    Width(250)]
         public String Name { get; set; }
 
+        [Width(150)]
         public Int64 PersonalNumber { get; set; }
+        [Width(150), PatientsPhoneFormatter]
         public Int64 PhoneNumber { get; set; }
         public DateTime FirstRegistrationDate { get; set; }
         public String Address { get; set; }

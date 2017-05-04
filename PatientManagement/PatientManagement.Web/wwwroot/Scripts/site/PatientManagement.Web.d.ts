@@ -562,6 +562,12 @@ declare namespace PatientManagement.Membership {
     }
 }
 declare namespace PatientManagement.PatientManagement {
+    enum Gender {
+        Male = 1,
+        Female = 2,
+    }
+}
+declare namespace PatientManagement.PatientManagement {
 }
 declare namespace PatientManagement.PatientManagement {
     class LifeStylesForm extends Serenity.PrefixedContext {
@@ -768,6 +774,7 @@ declare namespace PatientManagement.PatientManagement {
     interface PatientsForm {
         PatientId: Serenity.IntegerEditor;
         Name: Serenity.StringEditor;
+        Gender: Serenity.EnumEditor;
         PersonalNumber: Serenity.StringEditor;
         PhoneNumber: Serenity.StringEditor;
         FirstRegistrationDate: Serenity.DateTimeEditor;
@@ -782,7 +789,8 @@ declare namespace PatientManagement.PatientManagement {
         PatientId?: number;
         Name?: string;
         PersonalNumber?: number;
-        PhoneNumber?: number;
+        PhoneNumber?: string;
+        Gender?: Gender;
         FirstRegistrationDate?: string;
         Address?: string;
         Height?: number;
@@ -802,6 +810,7 @@ declare namespace PatientManagement.PatientManagement {
             const Name: string;
             const PersonalNumber: string;
             const PhoneNumber: string;
+            const Gender: string;
             const FirstRegistrationDate: string;
             const Address: string;
             const Height: string;
@@ -853,6 +862,8 @@ declare namespace PatientManagement.PatientManagement {
         EndDate?: string;
         InsertUserId?: number;
         InsertDate?: string;
+        PatientGender?: Gender;
+        PhoneNumber?: string;
         PatientName?: string;
         VisitTypeName?: string;
     }
@@ -870,6 +881,8 @@ declare namespace PatientManagement.PatientManagement {
             const EndDate: string;
             const InsertUserId: string;
             const InsertDate: string;
+            const PatientGender: string;
+            const PhoneNumber: string;
             const PatientName: string;
             const VisitTypeName: string;
         }
@@ -1567,6 +1580,16 @@ declare namespace PatientManagement.PatientManagement {
         protected getGridCanLoad(): boolean;
         private _patientId;
         patientId: number;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class PatientsFormatter implements Slick.Formatter {
+        format(ctx: Slick.FormatterContext): string;
+        genderProperty: string;
+        initializeColumn(column: Slick.Column): void;
+    }
+    class PatientsPhoneFormatter implements Slick.Formatter {
+        format(ctx: Slick.FormatterContext): string;
     }
 }
 declare namespace PatientManagement.PatientManagement {

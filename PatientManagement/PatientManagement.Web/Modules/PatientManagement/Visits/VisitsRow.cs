@@ -87,9 +87,19 @@ namespace PatientManagement.PatientManagement.Entities
             get => Fields.PatientName[this];
             set => Fields.PatientName[this] = value;
         }
-        
 
-
+        [DisplayName("Phone Number"), Expression("jPatient.[PhoneNumber]"), QuickSearch]
+        public string PhoneNumber
+        {
+            get { return Fields.PhoneNumber[this]; }
+            set { Fields.PhoneNumber[this] = value; }
+        }
+        [Expression("jPatient.[Gender]")]
+        public Gender? PatientGender
+        {
+            get { return (Gender?)Fields.PatientGender[this]; }
+            set { Fields.PatientGender[this] = (Int32?)value; }
+        }
         #endregion
 
 
@@ -120,6 +130,9 @@ namespace PatientManagement.PatientManagement.Entities
             public Int32Field InsertUserId;
             public DateTimeField InsertDate;
 
+            public Int32Field PatientGender;
+
+            public StringField PhoneNumber;
             public StringField PatientName;
 
             public StringField VisitTypeName;
