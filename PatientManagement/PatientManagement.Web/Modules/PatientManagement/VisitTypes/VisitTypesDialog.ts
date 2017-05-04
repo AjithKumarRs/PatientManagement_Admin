@@ -1,4 +1,6 @@
-﻿
+﻿/// <reference types="jqueryui" />
+/// <returns type="jquery.colorpicker"></returns>
+
 namespace PatientManagement.PatientManagement {
 
     @Serenity.Decorators.registerClass()
@@ -12,5 +14,16 @@ namespace PatientManagement.PatientManagement {
 
         protected form = new VisitTypesForm(this.idPrefix);
 
+        loadEntity(entity: VisitTypesRow) {
+            super.loadEntity(entity);
+            console.log("entity loadded");
+
+            $(".BorderColor input").colorpicker();
+            $(".BackgroundColor input").colorpicker();
+
+            Serenity.EditorUtils.setReadOnly(this.form.BorderColor, true);
+            Serenity.EditorUtils.setReadOnly(this.form.BackgroundColor, true);
+
+        }
     }
 }

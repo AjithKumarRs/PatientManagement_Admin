@@ -1641,6 +1641,7 @@ declare namespace PatientManagement.PatientManagement {
         protected getNameProperty(): string;
         protected getService(): string;
         protected form: VisitTypesForm;
+        loadEntity(entity: VisitTypesRow): void;
     }
 }
 declare namespace PatientManagement.PatientManagement {

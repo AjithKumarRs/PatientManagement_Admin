@@ -3972,6 +3972,8 @@ var PatientManagement;
         PatientManagement.VisitsTypesFormatter = VisitsTypesFormatter;
     })(PatientManagement = PatientManagement_41.PatientManagement || (PatientManagement_41.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
+/// <reference types="jqueryui" />
+/// <returns type="jquery.colorpicker"></returns>
 var PatientManagement;
 (function (PatientManagement_42) {
     var PatientManagement;
@@ -3988,6 +3990,14 @@ var PatientManagement;
             VisitTypesDialog.prototype.getLocalTextPrefix = function () { return PatientManagement.VisitTypesRow.localTextPrefix; };
             VisitTypesDialog.prototype.getNameProperty = function () { return PatientManagement.VisitTypesRow.nameProperty; };
             VisitTypesDialog.prototype.getService = function () { return PatientManagement.VisitTypesService.baseUrl; };
+            VisitTypesDialog.prototype.loadEntity = function (entity) {
+                _super.prototype.loadEntity.call(this, entity);
+                console.log("entity loadded");
+                $(".BorderColor input").colorpicker();
+                $(".BackgroundColor input").colorpicker();
+                Serenity.EditorUtils.setReadOnly(this.form.BorderColor, true);
+                Serenity.EditorUtils.setReadOnly(this.form.BackgroundColor, true);
+            };
             return VisitTypesDialog;
         }(Serenity.EntityDialog));
         VisitTypesDialog = __decorate([
