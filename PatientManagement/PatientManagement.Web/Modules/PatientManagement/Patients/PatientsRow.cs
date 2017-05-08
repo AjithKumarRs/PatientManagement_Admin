@@ -34,7 +34,7 @@ namespace PatientManagement.PatientManagement.Entities
             set { Fields.Name[this] = value; }
         }
 
-        [DisplayName("Personal Number"), Size(300), NotNull, QuickSearch]
+        [DisplayName("Personal Number"), Size(300), QuickSearch]
         public Int64? PersonalNumber
         {
             get { return Fields.PersonalNumber[this]; }

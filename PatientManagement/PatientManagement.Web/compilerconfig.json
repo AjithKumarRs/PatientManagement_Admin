@@ -2,5 +2,9 @@
   {
     "outputFile": "wwwroot/Content/site/site.css",
     "inputFile": "wwwroot/Content/site/site.less"
+  },
+  {
+    "outputFile": "wwwroot/Scripts/jquery.colorbox.es5.js",
+    "inputFile": "wwwroot/Scripts/jquery.colorbox.js"
   }
 ]
