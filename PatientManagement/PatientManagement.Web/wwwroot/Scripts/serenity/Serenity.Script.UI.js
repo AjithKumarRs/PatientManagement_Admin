@@ -4147,8 +4147,18 @@
 		filename = ss.replaceAllString(ss.coalesce(filename, ''), '\\', '/');
 		return Q.resolveUrl('~/upload/') + filename;
 	};
-	$Serenity_UploadHelper.colorBox = function(link, options) {
-		link.colorbox({ current: Q.text('Controls.ImageUpload.ColorboxCurrent'), previous: Q.text('Controls.ImageUpload.ColorboxPrior'), next: Q.text('Controls.ImageUpload.ColorboxNext'), close: Q.text('Controls.ImageUpload.ColorboxClose') });
+    $Serenity_UploadHelper.colorBox = function (link, options) {
+        console.log($(link).attr('href'));
+        link.colorbox({
+            current: Q.text('Controls.ImageUpload.ColorboxCurrent'),
+            previous: Q.text('Controls.ImageUpload.ColorboxPrior'),
+            next: Q.text('Controls.ImageUpload.ColorboxNext'),
+            close: Q.text('Controls.ImageUpload.ColorboxClose'),
+            title: function() {
+                var url = $(this).attr('href');
+                return '<a href="' + url + '" target="_blank">Open In New Window</a>';
+            } 
+        });
 	};
 	$Serenity_UploadHelper.populateFileSymbols = function(container, items, displayOriginalName, urlPrefix) {
 		items = items || [];

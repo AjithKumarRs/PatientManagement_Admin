@@ -22,15 +22,15 @@
 		speed: 300,
 		fadeOut: 300,
 		width: false,
-		initialWidth: "600",
+		initialWidth: "90%",
 		innerWidth: false,
-		maxWidth: 800,
+		maxWidth: "90%",
 		height: false,
-		initialHeight: "450",
+		initialHeight: "45%",
 		innerHeight: false,
-		maxHeight: 640,
+		maxHeight: "90%",
 		scalePhotos: true,
-		scrolling: true,
+		scrolling: false,
 		href: false,
 		title: false,
 		rel: false,
@@ -48,7 +48,7 @@
 		data: undefined,
 		closeButton: true,
 		fastIframe: true,
-		open: false,
+		open: true,
 		reposition: true,
 		loop: true,
 		slideshow: false,
@@ -73,7 +73,7 @@
 
 		// accessbility
 		returnFocus: true,
-		trapFocus: true,
+		trapFocus: false,
 
 		// callbacks
 		onOpen: false,

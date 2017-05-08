@@ -6,5 +6,9 @@
   {
     "outputFile": "wwwroot/Scripts/jquery.colorbox.es5.js",
     "inputFile": "wwwroot/Scripts/jquery.colorbox.js"
+  },
+  {
+    "outputFile": "wwwroot/Scripts/serenity/Serenity.Script.UI.es5.js",
+    "inputFile": "wwwroot/Scripts/serenity/Serenity.Script.UI.js"
   }
 ]

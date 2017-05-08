@@ -1,0 +1,14 @@
+[
+  {
+    "outputFileName": "wwwroot/Scripts/jquery.colorbox.min.js",
+    "inputFiles": [
+      "wwwroot/Scripts/jquery.colorbox.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/Scripts/serenity/Serenity.Script.UI.min.js",
+    "inputFiles": [
+      "wwwroot/Scripts/serenity/Serenity.Script.UI.js"
+    ]
+  }
+]
