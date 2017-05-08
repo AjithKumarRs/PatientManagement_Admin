@@ -23,4 +23,3 @@
         ['UserPreferenceId', 'UserId', 'PreferenceType', 'Name', 'Value'].forEach(x => (<any>Fields)[x] = x);
     }
 }
-

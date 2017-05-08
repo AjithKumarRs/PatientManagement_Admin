@@ -11,7 +11,7 @@ namespace PatientManagement.Administration.Entities
     [ReadPermission(PermissionKeys.Security)]
     [ModifyPermission(PermissionKeys.Security)]
     [LookupScript("Administration.Role")]
-    public sealed class RoleRow : Row, IIdRow, INameRow
+    public sealed class RoleRow : Row, IIdRow, INameRow, IMultiTenantRow
     {
         [DisplayName("Role Id"), Identity, ForeignKey("Roles", "RoleId"), LeftJoin("jRole")]
         public Int32? RoleId
@@ -27,6 +27,12 @@ namespace PatientManagement.Administration.Entities
             set { Fields.RoleName[this] = value; }
         }
 
+        [Insertable(false), Updatable(false)]
+        public Int32? TenantId
+        {
+            get { return Fields.TenantId[this]; }
+            set { Fields.TenantId[this] = value; }
+        }
 
         IIdField IIdRow.IdField
         {
@@ -50,11 +56,17 @@ namespace PatientManagement.Administration.Entities
             public Int32Field RoleId;
             public StringField RoleName;
 
+            public Int32Field TenantId;
             public RowFields()
                 : base("Roles")
             {
                 LocalTextPrefix = "Administration.Role";
             }
+        }
+
+        public Int32Field TenantIdField
+        {
+            get { return Fields.TenantId; }
         }
     }
 }

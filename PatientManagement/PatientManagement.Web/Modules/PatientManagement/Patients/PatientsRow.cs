@@ -1,5 +1,6 @@
 ﻿
 using System.Collections.Generic;
+using PatientManagement.PatientManagement.Scripts;
 
 namespace PatientManagement.PatientManagement.Entities
 {
@@ -16,7 +17,7 @@ namespace PatientManagement.PatientManagement.Entities
     [ModifyPermission("PatientManagement:Patients:Modify")]
     [LookupScript("PatientManagement.Patients")]
     [LeftJoin("cd", "PatientHealth", "cd.[PatientId] = t0.[PatientId]", RowType = typeof(PatientHealthRow), TitlePrefix = "")]
-    public sealed class PatientsRow : Row, IIdRow, INameRow, IInsertLogRow
+    public sealed class PatientsRow : Row, IIdRow, INameRow, IInsertLogRow, IMultiTenantRow
     {
         [Category("Required Fields")]
         [DisplayName("Patient Id"), Identity]
@@ -140,6 +141,8 @@ namespace PatientManagement.PatientManagement.Entities
             public DateTimeField InsertDate;
 
             public RowListField<NotesRow> NoteList;
+
+            public readonly Int32Field TenantId;
             public RowFields()
                 : base()
             {
@@ -151,5 +154,18 @@ namespace PatientManagement.PatientManagement.Entities
         public IIdField InsertUserIdField => Fields.InsertUserId;
 
         public DateTimeField InsertDateField => Fields.InsertDate;
+
+        [Insertable(false), Updatable(false)]
+        public Int32? TenantId
+        {
+            get { return Fields.TenantId[this]; }
+            set { Fields.TenantId[this] = value; }
+        }
+
+        public Int32Field TenantIdField
+        {
+            get { return Fields.TenantId; }
+        }
+
     }
 }

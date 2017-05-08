@@ -6,6 +6,7 @@
         BackgroundColor?: string;
         InsertUserId?: number;
         InsertDate?: string;
+        TenantId?: number;
     }
 
     export namespace VisitTypesRow {
@@ -25,8 +26,9 @@
             export declare const BackgroundColor: string;
             export declare const InsertUserId: string;
             export declare const InsertDate: string;
+            export declare const TenantId: string;
         }
 
-        ['VisitTypeId', 'Name', 'BorderColor', 'BackgroundColor', 'InsertUserId', 'InsertDate'].forEach(x => (<any>Fields)[x] = x);
+        ['VisitTypeId', 'Name', 'BorderColor', 'BackgroundColor', 'InsertUserId', 'InsertDate', 'TenantId'].forEach(x => (<any>Fields)[x] = x);
     }
 }

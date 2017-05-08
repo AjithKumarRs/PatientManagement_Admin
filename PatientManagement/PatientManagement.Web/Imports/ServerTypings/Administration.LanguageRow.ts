@@ -24,4 +24,3 @@
         ['Id', 'LanguageId', 'LanguageName'].forEach(x => (<any>Fields)[x] = x);
     }
 }
-

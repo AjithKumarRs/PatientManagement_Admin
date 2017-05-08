@@ -6,4 +6,3 @@
         Permissions?: { [key: string]: boolean };
     }
 }
-

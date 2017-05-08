@@ -7,6 +7,7 @@
         InsertUserId?: number;
         InsertDate?: string;
         PatientName?: string;
+        TenantId?: number;
     }
 
     export namespace PatientHealthRow {
@@ -27,8 +28,9 @@
             export declare const InsertUserId: string;
             export declare const InsertDate: string;
             export declare const PatientName: string;
+            export declare const TenantId: string;
         }
 
-        ['PatientId', 'DailyMeals', 'Diseases', 'MedicinesIntake', 'InsertUserId', 'InsertDate', 'PatientName'].forEach(x => (<any>Fields)[x] = x);
+        ['PatientId', 'DailyMeals', 'Diseases', 'MedicinesIntake', 'InsertUserId', 'InsertDate', 'PatientName', 'TenantId'].forEach(x => (<any>Fields)[x] = x);
     }
 }

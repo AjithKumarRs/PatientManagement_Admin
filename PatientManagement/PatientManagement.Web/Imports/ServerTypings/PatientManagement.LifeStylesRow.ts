@@ -8,6 +8,7 @@
         InsertUserId?: number;
         InsertDate?: string;
         PatientName?: string;
+        TenantId?: number;
     }
 
     export namespace LifeStylesRow {
@@ -29,8 +30,9 @@
             export declare const InsertUserId: string;
             export declare const InsertDate: string;
             export declare const PatientName: string;
+            export declare const TenantId: string;
         }
 
-        ['PatientId', 'Job', 'Movement', 'Training', 'BadHabits', 'InsertUserId', 'InsertDate', 'PatientName'].forEach(x => (<any>Fields)[x] = x);
+        ['PatientId', 'Job', 'Movement', 'Training', 'BadHabits', 'InsertUserId', 'InsertDate', 'PatientName', 'TenantId'].forEach(x => (<any>Fields)[x] = x);
     }
 }

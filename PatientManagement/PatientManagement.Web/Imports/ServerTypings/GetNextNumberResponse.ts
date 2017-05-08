@@ -4,4 +4,3 @@
         Serial?: string;
     }
 }
-

@@ -110,6 +110,7 @@ declare namespace PatientManagement.Administration {
     interface RoleRow {
         RoleId?: number;
         RoleName?: string;
+        TenantId?: number;
     }
     namespace RoleRow {
         const idProperty = "RoleId";
@@ -120,6 +121,7 @@ declare namespace PatientManagement.Administration {
         namespace Fields {
             const RoleId: string;
             const RoleName: string;
+            const TenantId: string;
         }
     }
 }
@@ -186,6 +188,50 @@ declare namespace PatientManagement.Administration {
     }
 }
 declare namespace PatientManagement.Administration {
+}
+declare namespace PatientManagement.Administration {
+    class TenantForm extends Serenity.PrefixedContext {
+        static formKey: string;
+    }
+    interface TenantForm {
+        TenantName: Serenity.StringEditor;
+    }
+}
+declare namespace PatientManagement.Administration {
+    interface TenantRow {
+        TenantId?: number;
+        TenantName?: string;
+    }
+    namespace TenantRow {
+        const idProperty = "TenantId";
+        const nameProperty = "TenantName";
+        const localTextPrefix = "Administration.Tenant";
+        const lookupKey = "Administration.Tenant";
+        function getLookup(): Q.Lookup<TenantRow>;
+        namespace Fields {
+            const TenantId: string;
+            const TenantName: string;
+        }
+    }
+}
+declare namespace PatientManagement.Administration {
+    namespace TenantService {
+        const baseUrl = "Administration/Tenant";
+        function Create(request: Serenity.SaveRequest<TenantRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Update(request: Serenity.SaveRequest<TenantRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<TenantRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<TenantRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        namespace Methods {
+            const Create: string;
+            const Update: string;
+            const Delete: string;
+            const Retrieve: string;
+            const List: string;
+        }
+    }
+}
+declare namespace PatientManagement.Administration {
     interface TranslationItem {
         Key?: string;
         SourceText?: string;
@@ -232,6 +278,7 @@ declare namespace PatientManagement.Administration {
         Password: Serenity.PasswordEditor;
         PasswordConfirm: Serenity.PasswordEditor;
         Source: Serenity.StringEditor;
+        TenantId: Serenity.LookupEditor;
     }
 }
 declare namespace PatientManagement.Administration {
@@ -347,6 +394,8 @@ declare namespace PatientManagement.Administration {
         IsActive?: number;
         Password?: string;
         PasswordConfirm?: string;
+        TenantId?: number;
+        TenantName?: string;
         InsertUserId?: number;
         InsertDate?: string;
         UpdateUserId?: number;
@@ -372,6 +421,8 @@ declare namespace PatientManagement.Administration {
             const IsActive: string;
             const Password: string;
             const PasswordConfirm: string;
+            const TenantId: string;
+            const TenantName: string;
             const InsertUserId: string;
             const InsertDate: string;
             const UpdateUserId: string;
@@ -591,6 +642,7 @@ declare namespace PatientManagement.PatientManagement {
         InsertUserId?: number;
         InsertDate?: string;
         PatientName?: string;
+        TenantId?: number;
     }
     namespace LifeStylesRow {
         const idProperty = "PatientId";
@@ -607,6 +659,7 @@ declare namespace PatientManagement.PatientManagement {
             const InsertUserId: string;
             const InsertDate: string;
             const PatientName: string;
+            const TenantId: string;
         }
     }
 }
@@ -674,6 +727,7 @@ declare namespace PatientManagement.PatientManagement {
         InsertUserId?: number;
         InsertDate?: string;
         PatientName?: string;
+        TenantId?: number;
     }
     namespace PatientHealthRow {
         const idProperty = "PatientId";
@@ -689,6 +743,7 @@ declare namespace PatientManagement.PatientManagement {
             const InsertUserId: string;
             const InsertDate: string;
             const PatientName: string;
+            const TenantId: string;
         }
     }
 }
@@ -732,6 +787,7 @@ declare namespace PatientManagement.PatientManagement {
         InsertUserId?: number;
         InsertDate?: string;
         PatientName?: string;
+        TenantId?: number;
     }
     namespace PatientsFileUploadsRow {
         const idProperty = "PatientFileUploadId";
@@ -747,6 +803,7 @@ declare namespace PatientManagement.PatientManagement {
             const InsertUserId: string;
             const InsertDate: string;
             const PatientName: string;
+            const TenantId: string;
         }
     }
 }
@@ -798,6 +855,7 @@ declare namespace PatientManagement.PatientManagement {
         InsertUserId?: number;
         InsertDate?: string;
         NoteList?: NotesRow[];
+        TenantId?: number;
     }
     namespace PatientsRow {
         const idProperty = "PatientId";
@@ -818,6 +876,7 @@ declare namespace PatientManagement.PatientManagement {
             const InsertUserId: string;
             const InsertDate: string;
             const NoteList: string;
+            const TenantId: string;
         }
     }
 }
@@ -868,6 +927,7 @@ declare namespace PatientManagement.PatientManagement {
         VisitTypeName?: string;
         VisitTypeBackgroundColor?: string;
         VisitTypeBorderColor?: string;
+        TenantId?: number;
     }
     namespace VisitsRow {
         const idProperty = "VisitId";
@@ -889,6 +949,7 @@ declare namespace PatientManagement.PatientManagement {
             const VisitTypeName: string;
             const VisitTypeBackgroundColor: string;
             const VisitTypeBorderColor: string;
+            const TenantId: string;
         }
     }
 }
@@ -929,6 +990,7 @@ declare namespace PatientManagement.PatientManagement {
         BackgroundColor?: string;
         InsertUserId?: number;
         InsertDate?: string;
+        TenantId?: number;
     }
     namespace VisitTypesRow {
         const idProperty = "VisitTypeId";
@@ -943,6 +1005,7 @@ declare namespace PatientManagement.PatientManagement {
             const BackgroundColor: string;
             const InsertUserId: string;
             const InsertDate: string;
+            const TenantId: string;
         }
     }
 }
@@ -1036,6 +1099,26 @@ declare namespace PatientManagement.Administration {
     }
 }
 declare namespace PatientManagement.Administration {
+    class TenantDialog extends Serenity.EntityDialog<TenantRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getService(): string;
+        protected form: TenantForm;
+    }
+}
+declare namespace PatientManagement.Administration {
+    class TenantGrid extends Serenity.EntityGrid<TenantRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof TenantDialog;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        constructor(container: JQuery);
+    }
+}
+declare namespace PatientManagement.Administration {
     class TranslationGrid extends Serenity.EntityGrid<TranslationItem, any> {
         protected getIdProperty(): string;
         protected getLocalTextPrefix(): string;
@@ -1071,6 +1154,7 @@ declare namespace PatientManagement.Administration {
         protected getService(): string;
         protected form: UserForm;
         constructor();
+        protected getPropertyItems(): Serenity.PropertyItem[];
         protected getToolbarButtons(): Serenity.ToolButton[];
         protected updateInterface(): void;
         protected afterLoadEntity(): void;

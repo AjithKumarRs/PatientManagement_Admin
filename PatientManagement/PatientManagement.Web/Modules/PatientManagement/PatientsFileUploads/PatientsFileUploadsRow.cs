@@ -14,7 +14,7 @@ namespace PatientManagement.PatientManagement.Entities
     [ModifyPermission("PatientManagement:PatientsFileUploads:Modify")]
     [LookupScript("PatientManagement.PatientsFileUploads")]
     [LeftJoin("p", "Patients", "p.[PatientId] = t0.[PatientId]", RowType = typeof(PatientsRow), TitlePrefix = "")]
-    public sealed class PatientsFileUploadsRow : Row, IIdRow, INameRow, IInsertLogRow
+    public sealed class PatientsFileUploadsRow : Row, IIdRow, INameRow, IInsertLogRow, IMultiTenantRow
     {
         [DisplayName("Patient File Upload Id"), Identity]
         public Int32? PatientFileUploadId
@@ -96,6 +96,7 @@ namespace PatientManagement.PatientManagement.Entities
 
             public StringField PatientName;
 
+            public readonly Int32Field TenantId;
             public RowFields()
                 : base()
             {
@@ -106,5 +107,17 @@ namespace PatientManagement.PatientManagement.Entities
         public IIdField InsertUserIdField => Fields.InsertUserId;
 
         public DateTimeField InsertDateField => Fields.InsertDate;
+
+        [Insertable(false), Updatable(false)]
+        public Int32? TenantId
+        {
+            get { return Fields.TenantId[this]; }
+            set { Fields.TenantId[this] = value; }
+        }
+
+        public Int32Field TenantIdField
+        {
+            get { return Fields.TenantId; }
+        }
     }
 }

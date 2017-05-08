@@ -15,7 +15,7 @@ namespace PatientManagement.PatientManagement.Entities
     [LeftJoin("p", "Patients", "p.[PatientId] = t0.[PatientId]", RowType = typeof(PatientsRow), TitlePrefix = "")]
     [LookupScript("PatientManagement.Visits")]
 
-    public sealed class VisitsRow : Row, IIdRow, IInsertLogRow
+    public sealed class VisitsRow : Row, IIdRow, IInsertLogRow, IMultiTenantRow
     {
         [DisplayName("Visit Id"), Identity, QuickSearch]
         public Int32? VisitId
@@ -154,6 +154,8 @@ namespace PatientManagement.PatientManagement.Entities
             public StringField VisitTypeName;
             public StringField VisitTypeBackgroundColor;
             public StringField VisitTypeBorderColor;
+
+            public readonly Int32Field TenantId;
             public RowFields()
                 : base()
             {
@@ -164,5 +166,17 @@ namespace PatientManagement.PatientManagement.Entities
         public IIdField InsertUserIdField => Fields.InsertUserId;
 
         public DateTimeField InsertDateField => Fields.InsertDate;
+
+        [Insertable(false), Updatable(false)]
+        public Int32? TenantId
+        {
+            get { return Fields.TenantId[this]; }
+            set { Fields.TenantId[this] = value; }
+        }
+
+        public Int32Field TenantIdField
+        {
+            get { return Fields.TenantId; }
+        }
     }
 }

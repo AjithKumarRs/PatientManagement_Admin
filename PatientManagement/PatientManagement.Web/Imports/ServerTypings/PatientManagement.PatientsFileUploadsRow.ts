@@ -7,6 +7,7 @@
         InsertUserId?: number;
         InsertDate?: string;
         PatientName?: string;
+        TenantId?: number;
     }
 
     export namespace PatientsFileUploadsRow {
@@ -27,8 +28,9 @@
             export declare const InsertUserId: string;
             export declare const InsertDate: string;
             export declare const PatientName: string;
+            export declare const TenantId: string;
         }
 
-        ['PatientFileUploadId', 'PatientId', 'FilePath', 'Description', 'InsertUserId', 'InsertDate', 'PatientName'].forEach(x => (<any>Fields)[x] = x);
+        ['PatientFileUploadId', 'PatientId', 'FilePath', 'Description', 'InsertUserId', 'InsertDate', 'PatientName', 'TenantId'].forEach(x => (<any>Fields)[x] = x);
     }
 }

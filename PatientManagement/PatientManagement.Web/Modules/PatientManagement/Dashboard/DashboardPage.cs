@@ -27,6 +27,8 @@ namespace PatientManagement.PatientManagement.Pages
         [PageAuthorize]
         public JsonResult GetVisitsTasks(string start, string end)
         {
+            var user = (UserDefinition)Authorization.UserDefinition;
+
             var connection = SqlConnections.NewFor<VisitsRow>();
             var startDate = DateTime.ParseExact(start, "yyyy-MM-dd", new CultureInfo("en-US"),
                 DateTimeStyles.None);
@@ -36,7 +38,7 @@ namespace PatientManagement.PatientManagement.Pages
 
             var model = new DashboardPageModel();
             List<VisitsRow> entity = connection.List<VisitsRow>()
-                .Where(e => e.StartDate >= startDate && e.EndDate <= endDate)
+                .Where(e => e.StartDate >= startDate && e.EndDate <= endDate && e.TenantId == user.TenantId)
                 .ToList();
 
             foreach (var visit in entity)

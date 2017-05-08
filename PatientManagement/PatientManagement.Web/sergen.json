@@ -7,6 +7,17 @@
   },
   "Connections": [
     {
+      "Key": "Default",
+      "Tables": [
+        {
+          "Tablename": "dbo.Tenants",
+          "Identifier": "Tenant",
+          "Module": "Administration",
+          "PermissionKey": "Administration:General"
+        }
+      ]
+    },
+    {
       "Key": "PatientManagement",
       "Tables": [
         {

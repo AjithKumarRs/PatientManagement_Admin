@@ -25,4 +25,3 @@
         ['UserPermissionId', 'UserId', 'PermissionKey', 'Granted', 'Username', 'User'].forEach(x => (<any>Fields)[x] = x);
     }
 }
-

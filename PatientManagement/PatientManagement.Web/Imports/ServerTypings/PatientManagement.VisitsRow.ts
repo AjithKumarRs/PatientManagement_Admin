@@ -14,6 +14,7 @@
         VisitTypeName?: string;
         VisitTypeBackgroundColor?: string;
         VisitTypeBorderColor?: string;
+        TenantId?: number;
     }
 
     export namespace VisitsRow {
@@ -40,8 +41,9 @@
             export declare const VisitTypeName: string;
             export declare const VisitTypeBackgroundColor: string;
             export declare const VisitTypeBorderColor: string;
+            export declare const TenantId: string;
         }
 
-        ['VisitId', 'PatientId', 'VisitTypeId', 'Description', 'StartDate', 'EndDate', 'InsertUserId', 'InsertDate', 'PatientGender', 'PhoneNumber', 'PatientName', 'VisitTypeName', 'VisitTypeBackgroundColor', 'VisitTypeBorderColor'].forEach(x => (<any>Fields)[x] = x);
+        ['VisitId', 'PatientId', 'VisitTypeId', 'Description', 'StartDate', 'EndDate', 'InsertUserId', 'InsertDate', 'PatientGender', 'PhoneNumber', 'PatientName', 'VisitTypeName', 'VisitTypeBackgroundColor', 'VisitTypeBorderColor', 'TenantId'].forEach(x => (<any>Fields)[x] = x);
     }
 }

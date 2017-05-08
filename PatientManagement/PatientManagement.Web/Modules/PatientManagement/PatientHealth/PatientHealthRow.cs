@@ -14,7 +14,7 @@ namespace PatientManagement.PatientManagement.Entities
     [ModifyPermission("PatientManagement:PatientHealth:Modify")]
     [LookupScript("PatientManagement.PatientHealth")]
 
-    public sealed class PatientHealthRow : Row, IIdRow, INameRow , IInsertLogRow
+    public sealed class PatientHealthRow : Row, IIdRow, INameRow , IInsertLogRow, IMultiTenantRow
     {
         [Category("General")]
 
@@ -99,6 +99,8 @@ namespace PatientManagement.PatientManagement.Entities
 
             public StringField PatientName;
 
+            public readonly Int32Field TenantId;
+
             public RowFields()
                 : base()
             {
@@ -109,5 +111,18 @@ namespace PatientManagement.PatientManagement.Entities
         public IIdField InsertUserIdField => Fields.InsertUserId;
 
         public DateTimeField InsertDateField => Fields.InsertDate;
+
+        [Insertable(false), Updatable(false)]
+        public Int32? TenantId
+        {
+            get { return Fields.TenantId[this]; }
+            set { Fields.TenantId[this] = value; }
+        }
+
+        public Int32Field TenantIdField
+        {
+            get { return Fields.TenantId; }
+        }
+
     }
 }

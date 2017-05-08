@@ -25,6 +25,13 @@
             });
         }
 
+        protected getPropertyItems() {
+            var items = super.getPropertyItems();
+            if (!Q.Authorization.hasPermission("Administration:Tenants"))
+                items = items.filter(x => x.name != UserRow.Fields.TenantId);
+            return items;
+        }
+
         protected getToolbarButtons()
         {
             let buttons = super.getToolbarButtons();

@@ -22,6 +22,11 @@ namespace MVC
                 public const string SergenIndex = "~/Modules/Administration/Sergen/SergenIndex.cshtml";
             }
 
+            public static class Tenant
+            {
+                public const string TenantIndex = "~/Modules/Administration/Tenant/TenantIndex.cshtml";
+            }
+
             public static class Translation
             {
                 public const string TranslationIndex = "~/Modules/Administration/Translation/TranslationIndex.cshtml";

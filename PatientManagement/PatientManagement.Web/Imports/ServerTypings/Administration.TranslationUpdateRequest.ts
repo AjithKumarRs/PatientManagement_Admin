@@ -4,4 +4,3 @@
         Translations?: { [key: string]: string };
     }
 }
-

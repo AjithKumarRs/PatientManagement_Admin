@@ -13,7 +13,7 @@ namespace PatientManagement.PatientManagement.Entities
     [ReadPermission("PatientManagement:VisitTypes:Read")]
     [ModifyPermission("PatientManagement:VisitTypes:Modify")]
     [LookupScript("PatientManagement.VisitTypes")]
-    public sealed class VisitTypesRow : Row, IIdRow, INameRow, IInsertLogRow
+    public sealed class VisitTypesRow : Row, IIdRow, INameRow, IInsertLogRow, IMultiTenantRow
     {
         [DisplayName("Visit Type Id"), Identity]
         public Int32? VisitTypeId
@@ -84,6 +84,8 @@ namespace PatientManagement.PatientManagement.Entities
             public Int32Field InsertUserId;
             public DateTimeField InsertDate;
 
+            public readonly Int32Field TenantId;
+
             public RowFields()
                 : base()
             {
@@ -94,5 +96,17 @@ namespace PatientManagement.PatientManagement.Entities
         public IIdField InsertUserIdField => Fields.InsertUserId;
 
         public DateTimeField InsertDateField => Fields.InsertDate;
+
+        [Insertable(false), Updatable(false)]
+        public Int32? TenantId
+        {
+            get { return Fields.TenantId[this]; }
+            set { Fields.TenantId[this] = value; }
+        }
+
+        public Int32Field TenantIdField
+        {
+            get { return Fields.TenantId; }
+        }
     }
 }

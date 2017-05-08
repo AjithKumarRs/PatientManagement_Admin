@@ -21,4 +21,3 @@
         ['RolePermissionId', 'RoleId', 'PermissionKey', 'RoleRoleName'].forEach(x => (<any>Fields)[x] = x);
     }
 }
-

@@ -4,4 +4,3 @@
         Length?: number;
     }
 }
-

@@ -6,4 +6,3 @@
         Permissions?: string[];
     }
 }
-
