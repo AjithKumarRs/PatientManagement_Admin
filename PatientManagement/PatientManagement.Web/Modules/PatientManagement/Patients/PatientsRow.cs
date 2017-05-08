@@ -15,7 +15,8 @@ namespace PatientManagement.PatientManagement.Entities
     [ConnectionKey("PatientManagement"), TableName("[dbo].[Patients]"), DisplayName("Patients"), InstanceName("Patient"), TwoLevelCached]
     [ReadPermission("PatientManagement:Patients:Read")]
     [ModifyPermission("PatientManagement:Patients:Modify")]
-    [LookupScript("PatientManagement.Patients")]
+    [LookupScript("PatientManagement.Patients",
+        LookupType = typeof(MultiTenantRowLookupScript<>))]
     [LeftJoin("cd", "PatientHealth", "cd.[PatientId] = t0.[PatientId]", RowType = typeof(PatientHealthRow), TitlePrefix = "")]
     public sealed class PatientsRow : Row, IIdRow, INameRow, IInsertLogRow, IMultiTenantRow
     {

@@ -1,4 +1,5 @@
-﻿
+﻿using PatientManagement.PatientManagement.Scripts;
+
 namespace PatientManagement.PatientManagement.Entities
 {
     using Serenity;
@@ -12,7 +13,8 @@ namespace PatientManagement.PatientManagement.Entities
     [ConnectionKey("PatientManagement"), TableName("[dbo].[LifeStyles]"), DisplayName("Life Styles"), InstanceName("Life Style"), TwoLevelCached]
     [ReadPermission("PatientManagement:LifeStyles:Read")]
     [ModifyPermission("PatientManagement:LifeStyles:Modify")]
-    [LookupScript("PatientManagement.LifeStyles")]
+    [LookupScript("PatientManagement.LifeStyles",
+        LookupType = typeof(MultiTenantRowLookupScript<>))]
     public sealed class LifeStylesRow : Row, IIdRow, INameRow, IInsertLogRow, IMultiTenantRow
     {
         [Category("General")]

@@ -1,4 +1,6 @@
 ﻿
+using PatientManagement.PatientManagement.Scripts;
+
 namespace PatientManagement.PatientManagement.Entities
 {
     using Serenity;
@@ -12,7 +14,8 @@ namespace PatientManagement.PatientManagement.Entities
     [ConnectionKey("PatientManagement"), TableName("[dbo].[PatientsFileUploads]"), DisplayName("Patients File Uploads"), InstanceName("Patients File Uploads"), TwoLevelCached]
     [ReadPermission("PatientManagement:PatientsFileUploads:Read")]
     [ModifyPermission("PatientManagement:PatientsFileUploads:Modify")]
-    [LookupScript("PatientManagement.PatientsFileUploads")]
+    [LookupScript("PatientManagement.PatientsFileUploads",
+        LookupType = typeof(MultiTenantRowLookupScript<>))]
     [LeftJoin("p", "Patients", "p.[PatientId] = t0.[PatientId]", RowType = typeof(PatientsRow), TitlePrefix = "")]
     public sealed class PatientsFileUploadsRow : Row, IIdRow, INameRow, IInsertLogRow, IMultiTenantRow
     {

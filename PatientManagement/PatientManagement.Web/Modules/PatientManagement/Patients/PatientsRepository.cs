@@ -54,7 +54,8 @@ namespace PatientManagement.PatientManagement.Repositories
                     {
                         PatientId = Row.PatientId,
                         InsertUserId = Authorization.UserId.TryParseID32(),
-                        InsertDate = DateTime.Now
+                        InsertDate = DateTime.Now,
+                        TenantId = ((UserDefinition)Authorization.UserDefinition).TenantId
                     };
                     this.Connection.Insert(ent);
                 }
@@ -64,7 +65,8 @@ namespace PatientManagement.PatientManagement.Repositories
                     {
                         PatientId = Row.PatientId,
                         InsertUserId = Authorization.UserId.TryParseID32(),
-                        InsertDate = DateTime.Now
+                        InsertDate = DateTime.Now,
+                        TenantId = ((UserDefinition)Authorization.UserDefinition).TenantId
                     };
                     this.Connection.Insert(ent2);
                 }

@@ -1,4 +1,6 @@
 ﻿
+using PatientManagement.PatientManagement.Scripts;
+
 namespace PatientManagement.PatientManagement.Entities
 {
     using Serenity;
@@ -13,7 +15,8 @@ namespace PatientManagement.PatientManagement.Entities
     [ReadPermission("PatientManagement:Visits:Read")]
     [ModifyPermission("PatientManagement:Visits:Modify")]
     [LeftJoin("p", "Patients", "p.[PatientId] = t0.[PatientId]", RowType = typeof(PatientsRow), TitlePrefix = "")]
-    [LookupScript("PatientManagement.Visits")]
+    [LookupScript("PatientManagement.Visits",
+        LookupType = typeof(MultiTenantRowLookupScript<>))]
 
     public sealed class VisitsRow : Row, IIdRow, IInsertLogRow, IMultiTenantRow
     {

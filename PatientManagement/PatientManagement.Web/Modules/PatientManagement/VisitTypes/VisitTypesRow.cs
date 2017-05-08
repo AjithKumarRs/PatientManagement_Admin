@@ -1,4 +1,6 @@
 ﻿
+using PatientManagement.PatientManagement.Scripts;
+
 namespace PatientManagement.PatientManagement.Entities
 {
     using Serenity;
@@ -12,7 +14,8 @@ namespace PatientManagement.PatientManagement.Entities
     [ConnectionKey("PatientManagement"), TableName("[dbo].[VisitTypes]"), DisplayName("Visit Types"), InstanceName("Visit Types"), TwoLevelCached]
     [ReadPermission("PatientManagement:VisitTypes:Read")]
     [ModifyPermission("PatientManagement:VisitTypes:Modify")]
-    [LookupScript("PatientManagement.VisitTypes")]
+    [LookupScript("PatientManagement.VisitTypes",
+        LookupType = typeof(MultiTenantRowLookupScript<>))]
     public sealed class VisitTypesRow : Row, IIdRow, INameRow, IInsertLogRow, IMultiTenantRow
     {
         [DisplayName("Visit Type Id"), Identity]

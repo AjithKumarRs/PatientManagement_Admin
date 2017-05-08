@@ -13,7 +13,7 @@ namespace PatientManagement.PatientManagement.Scripts
     {
         public MultiTenantRowLookupScript()
         {
-            Expiration = TimeSpan.FromDays(-1);
+            Expiration = TimeSpan.FromTicks(1);
         }
 
         protected override void PrepareQuery(SqlQuery query)
