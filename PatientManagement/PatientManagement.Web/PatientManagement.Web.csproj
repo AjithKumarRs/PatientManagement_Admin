@@ -22,6 +22,8 @@
   <ItemGroup>
     <Content Include="Modules\PatientManagement\Patients\PatientManagement.PatientsDialog.Template.html" />
     <Content Include="Views\Templates\EntityDialog.Template.html" />
+    <Content Include="wwwroot\Content\site\site.theme.css" />
+    <Content Include="wwwroot\Content\site\site.theme.min.css" />
     <Content Include="wwwroot\Scripts\serenity\Serenity.Script.UI.es5.js" />
     <EmbeddedResource Include="Views\Templates\PropertyDialog.Template.html" />
   </ItemGroup>
