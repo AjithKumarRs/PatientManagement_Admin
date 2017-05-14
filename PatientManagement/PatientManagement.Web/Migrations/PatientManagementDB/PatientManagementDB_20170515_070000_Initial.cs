@@ -40,7 +40,7 @@ namespace PatientManagement.Migrations.PatientManagementDB
                 .WithColumn("PhoneNumber").AsString(50).NotNullable()
                 .WithColumn("Gender").AsInt32().Nullable()
                 .WithColumn("FirstRegistrationDate").AsDateTime().Nullable()
-                .WithColumn("Address").AsString(200).Nullable()
+                .WithColumn("Address").AsString(Int32.MaxValue).Nullable()
                 .WithColumn("Height").AsInt32().Nullable()
                 .WithColumn("Weight").AsInt32().Nullable()
                 .WithColumn("InsertUserId").AsInt32().NotNullable()
@@ -53,9 +53,9 @@ namespace PatientManagement.Migrations.PatientManagementDB
             Create.Table("PatientHealth")
                 .WithColumn("PatientId").AsInt32().Identity().PrimaryKey().NotNullable()
                 .ForeignKey("FK_PatientHealth_Patients1", "Patients", "PatientId")
-                .WithColumn("DailyMeals").AsString(200).Nullable()
-                .WithColumn("Diseases").AsString(500).Nullable()
-                .WithColumn("MedicinesIntake").AsString(500).Nullable()
+                .WithColumn("DailyMeals").AsString(Int32.MaxValue).Nullable()
+                .WithColumn("Diseases").AsString(Int32.MaxValue).Nullable()
+                .WithColumn("MedicinesIntake").AsString(Int32.MaxValue).Nullable()
                 .WithColumn("InsertUserId").AsInt32().NotNullable()
                 .WithColumn("InserDate").AsDateTime().NotNullable();
 
@@ -68,7 +68,7 @@ namespace PatientManagement.Migrations.PatientManagementDB
                 .WithColumn("PatientId").AsInt32().NotNullable()
                 .ForeignKey("FK_PatientsFileUploads_Patients1", "Patients", "PatientId")
                 .WithColumn("FilePath").AsString(Int32.MaxValue).NotNullable()
-                .WithColumn("Description").AsString(500).NotNullable()
+                .WithColumn("Description").AsString(Int32.MaxValue).NotNullable()
                 .WithColumn("InsertUserId").AsInt32().NotNullable()
                 .WithColumn("InserDate").AsDateTime().NotNullable();
 
@@ -79,10 +79,10 @@ namespace PatientManagement.Migrations.PatientManagementDB
             Create.Table("LifeStyles")
                 .WithColumn("PatientId").AsInt32().Identity().PrimaryKey().NotNullable()
                 .ForeignKey("FK_LifeStyles_Patients1", "Patients", "PatientId")
-                .WithColumn("Job").AsString(500).Nullable()
-                .WithColumn("Movement").AsString(500).Nullable()
-                .WithColumn("Training").AsString(500).Nullable()
-                .WithColumn("BadHabits").AsString(500).Nullable()
+                .WithColumn("Job").AsString(Int32.MaxValue).Nullable()
+                .WithColumn("Movement").AsString(Int32.MaxValue).Nullable()
+                .WithColumn("Training").AsString(Int32.MaxValue).Nullable()
+                .WithColumn("BadHabits").AsString(Int32.MaxValue).Nullable()
                 .WithColumn("InsertUserId").AsInt32().NotNullable()
                 .WithColumn("InserDate").AsDateTime().NotNullable();
 
@@ -109,7 +109,7 @@ namespace PatientManagement.Migrations.PatientManagementDB
                 .ForeignKey("FK_Visits_Patients", "Patients", "PatientId")
                 .WithColumn("VisitInfoId").AsInt32().NotNullable()
                 .ForeignKey("FK_Visits_VisitTypes", "VisitTypes", "VisitTypeId")
-                .WithColumn("Description").AsString(500).Nullable()
+                .WithColumn("Description").AsString(Int32.MaxValue).Nullable()
                 .WithColumn("StartDate").AsDateTime().NotNullable()
                 .WithColumn("EndDate").AsDateTime().NotNullable()
                 .WithColumn("InsertUserId").AsInt32().NotNullable()

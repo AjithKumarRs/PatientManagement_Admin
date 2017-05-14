@@ -33,6 +33,7 @@ namespace PatientManagement.PatientManagement.Repositories
 
         public RetrieveResponse<MyRow> Retrieve(IDbConnection connection, RetrieveRequest request)
         {
+            
             return new MyRetrieveHandler().Process(connection, request);
         }
 
@@ -70,6 +71,17 @@ namespace PatientManagement.PatientManagement.Repositories
                     };
                     this.Connection.Insert(ent2);
                 }
+
+                if (!this.Connection.ExistsById<ActivityRow>(Row.PatientId))
+                {
+                    var ent2 = new ActivityRow
+                    {
+                        PatientId = Row.PatientId,
+                        InsertUserId = Authorization.UserId.TryParseID32(),
+                        InsertDate = DateTime.Now
+                    };
+                    this.Connection.Insert(ent2);
+                }
             }
         }
 
@@ -88,6 +100,9 @@ namespace PatientManagement.PatientManagement.Repositories
                     if (connection.ExistsById<PatientHealthRow>(Row.PatientId))
                         uow.Connection.DeleteById<PatientHealthRow>(Row.PatientId);
 
+                    if (connection.ExistsById<ActivityRow>(Row.PatientId))
+                        uow.Connection.DeleteById<ActivityRow>(Row.PatientId);
+
                     var ls = connection.List<VisitsRow>().Where(p => p.PatientId == Row.PatientId);
                     foreach (var item in ls)
                     {
@@ -103,7 +118,25 @@ namespace PatientManagement.PatientManagement.Repositories
                 }
             }
         }
-        private class MyRetrieveHandler : RetrieveRequestHandler<MyRow> { }
+
+        private class MyRetrieveHandler : RetrieveRequestHandler<MyRow>
+        {
+            protected override void OnAfterExecuteQuery()
+            {
+                base.OnAfterExecuteQuery();
+
+                if (!this.Connection.ExistsById<ActivityRow>(Row.PatientId))
+                {
+                    var ent2 = new ActivityRow
+                    {
+                        PatientId = Row.PatientId,
+                        InsertUserId = Authorization.UserId.TryParseID32(),
+                        InsertDate = DateTime.Now
+                    };
+                    this.Connection.Insert(ent2);
+                }
+            }
+        }
         private class MyListHandler : ListRequestHandler<MyRow> { }
     }
 }

@@ -2,11 +2,13 @@
     <ul>
         <li><a href="#~_TabInfo"><span>{{text:"Db.PatientManagement.Patients.EntitySingular"}}</span></a></li>
         <li><a href="#~_TabPatientHealth"><span>{{text:"Db.PatientManagement.PatientHealth.EntitySingular"}}</span></a></li>
-        <li><a href="#~_TabVisits"><span>{{text:"Db.PatientManagement.Visits.EntityPlural"}}</span></a></li>
         <li><a href="#~_TabLifeStyle"><span>{{text:"Db.PatientManagement.LifeStyles.EntitySingular"}}</span></a></li>
+
+        <li><a href="#~_TabActivity"><span>{{text:"Db.PatientManagement.Activity.EntitySingular"}}</span></a></li>
+        <li><a href="#~_TabNotes"><span>{{text:"Db.PatientManagement.Notes.EntityPlural"}}</span></a></li>
+        <li><a href="#~_TabVisits"><span>{{text:"Db.PatientManagement.Visits.EntityPlural"}}</span></a></li>
         <li><a href="#~_TabFileUploads"><span>{{text:"Db.PatientManagement.PatientsFileUploads.EntityPlural"}}</span></a></li>
 
-        <li><a href="#~_TabNotes"><span>{{text:"Db.PatientManagement.Notes.EntityPlural"}}</span></a></li>
     </ul>
     <div id="~_TabInfo" class="tab-pane s-TabInfo">
         <div id="~_Toolbar" class="s-DialogToolbar">
@@ -46,6 +48,21 @@
             </form>
         </div>
     </div>
+    
+    <div id="~_TabActivity" class="tab-pane s-TabActivity">
+
+        <div id="~_ActivityToolbar" class="s-ActivityToolbar s-DialogToolbar s-Toolbar clearfix">
+        </div>
+        <div class="s-Form">
+            <form id="~_ActivityForm" action="">
+                <div class="fieldset">
+                    <div id="~_ActivityPropertyGrid"></div>
+                    <div class="clear"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <div id="~_TabVisits" class="tab-pane s-TabOrders">
         <div id="~_VisitsGrid">
         </div>

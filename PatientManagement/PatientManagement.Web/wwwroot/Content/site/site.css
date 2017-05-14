@@ -8592,7 +8592,7 @@ section.content > .s-DataGrid {
 }
 .s-PatientManagement-PatientsDialog > .size {
   width: 650px;
-  height: 500px;
+  min-height: 550px;
 }
 .s-PatientManagement-PatientsDialog .caption {
   width: 150px;
@@ -8701,5 +8701,17 @@ section.content > .s-DataGrid {
   width: 650px;
 }
 .s-Administration-TenantDialog .caption {
+  width: 150px;
+}
+.s-PatientManagement-ActivityDialog > .size {
+  width: 650px;
+}
+.s-PatientManagement-ActivityDialog .caption {
+  width: 150px;
+}
+.s-PatientManagement-ActivityDialog > .size {
+  width: 650px;
+}
+.s-PatientManagement-ActivityDialog .caption {
   width: 150px;
 }

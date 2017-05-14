@@ -20,6 +20,12 @@ namespace PatientManagement.PatientManagement.Forms
         public String Training { get; set; }
         public String BadHabits { get; set; }
 
+        public String RemarksForFoodTake { get; set; }
+        public String Regime { get; set; }
+        public String DailyMeals { get; set; }
+        public String FavoriteFood { get; set; }
+        public String NotEating { get; set; }
+
         // TODO Add when you figure out how to add permissions here
         //public Int32 InsertUserId { get; set; }
         //public DateTime InsertDate { get; set; }

@@ -28,7 +28,7 @@ namespace PatientManagement.PatientManagement.Entities
             set { Fields.PatientId[this] = value; }
         }
 
-        [DisplayName("Daily Meals"), Size(200), QuickSearch]
+        [DisplayName("Daily Meals"), Size(2000), QuickSearch]
         [TextAreaEditor(Rows = 8)]
         public String DailyMeals
         {
@@ -36,7 +36,7 @@ namespace PatientManagement.PatientManagement.Entities
             set { Fields.DailyMeals[this] = value; }
         }
 
-        [DisplayName("Diseases"), Size(500)]
+        [DisplayName("Diseases"), Size(2000)]
         [TextAreaEditor(Rows = 8)]
         public String Diseases
         {
@@ -44,7 +44,7 @@ namespace PatientManagement.PatientManagement.Entities
             set { Fields.Diseases[this] = value; }
         }
 
-        [DisplayName("Medicines Intake"), Size(500)]
+        [DisplayName("Medicines Intake"), Size(2000)]
         [TextAreaEditor(Rows = 8)]
         public String MedicinesIntake
         {

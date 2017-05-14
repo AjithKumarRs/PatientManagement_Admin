@@ -93,6 +93,11 @@ namespace MVC
 
         public static class PatientManagement
         {
+            public static class Activity
+            {
+                public const string ActivityIndex = "~/Modules/PatientManagement/Activity/ActivityIndex.cshtml";
+            }
+
             public static class Dashboard
             {
                 public const string DashboardIndex = "~/Modules/PatientManagement/Dashboard/DashboardIndex.cshtml";

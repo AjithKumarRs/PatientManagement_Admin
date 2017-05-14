@@ -29,6 +29,6 @@
     "tsc": "tsc -p ./tsconfig.json",
     "less": "lessc ./wwwroot/Content/site/site.less ./wwwroot/content/site/site.css"
   },
-  "author": "",
+  "author": "Svetlin Krastanov",
   "license": "ISC"
 }
