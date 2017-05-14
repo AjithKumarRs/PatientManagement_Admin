@@ -1333,8 +1333,8 @@ declare namespace PatientManagement.PatientManagement {
         static formKey: string;
     }
     interface ActivityForm {
-        MovementAndTraining: Serenity.StringEditor;
-        Profession: Serenity.StringEditor;
+        MovementAndTraining: Serenity.TextAreaEditor;
+        Profession: Serenity.TextAreaEditor;
     }
 }
 declare namespace PatientManagement.PatientManagement {
@@ -1342,15 +1342,21 @@ declare namespace PatientManagement.PatientManagement {
         PatientId?: number;
         MovementAndTraining?: string;
         Profession?: string;
+        InsertUserId?: number;
+        InsertDate?: string;
     }
     namespace ActivityRow {
         const idProperty = "PatientId";
         const nameProperty = "MovementAndTraining";
         const localTextPrefix = "PatientManagement.Activity";
+        const lookupKey = "PatientManagement.LifeStyles";
+        function getLookup(): Q.Lookup<ActivityRow>;
         namespace Fields {
             const PatientId: string;
             const MovementAndTraining: string;
             const Profession: string;
+            const InsertUserId: string;
+            const InsertDate: string;
         }
     }
 }
@@ -1385,18 +1391,22 @@ declare namespace PatientManagement.PatientManagement {
     }
     interface LifeStylesForm {
         PatientId: Serenity.LookupEditor;
-        Job: Serenity.TextAreaEditor;
-        Movement: Serenity.TextAreaEditor;
-        Training: Serenity.TextAreaEditor;
         BadHabits: Serenity.TextAreaEditor;
+        RemarksForFoodTake: Serenity.TextAreaEditor;
+        Regime: Serenity.TextAreaEditor;
+        DailyMeals: Serenity.TextAreaEditor;
+        FavoriteFood: Serenity.TextAreaEditor;
+        NotEating: Serenity.TextAreaEditor;
     }
 }
 declare namespace PatientManagement.PatientManagement {
     interface LifeStylesRow {
         PatientId?: number;
-        Job?: string;
-        Movement?: string;
-        Training?: string;
+        RemarksForFoodTake?: string;
+        Regime?: string;
+        DailyMeals?: string;
+        FavoriteFood?: string;
+        NotEating?: string;
         BadHabits?: string;
         InsertUserId?: number;
         InsertDate?: string;
@@ -1405,15 +1415,17 @@ declare namespace PatientManagement.PatientManagement {
     }
     namespace LifeStylesRow {
         const idProperty = "PatientId";
-        const nameProperty = "Job";
+        const nameProperty = "Regime";
         const localTextPrefix = "PatientManagement.LifeStyles";
         const lookupKey = "PatientManagement.LifeStyles";
         function getLookup(): Q.Lookup<LifeStylesRow>;
         namespace Fields {
             const PatientId: string;
-            const Job: string;
-            const Movement: string;
-            const Training: string;
+            const RemarksForFoodTake: string;
+            const Regime: string;
+            const DailyMeals: string;
+            const FavoriteFood: string;
+            const NotEating: string;
             const BadHabits: string;
             const InsertUserId: string;
             const InsertDate: string;
@@ -1472,7 +1484,6 @@ declare namespace PatientManagement.PatientManagement {
     }
     interface PatientHealthForm {
         PatientId: Serenity.LookupEditor;
-        DailyMeals: Serenity.TextAreaEditor;
         Diseases: Serenity.TextAreaEditor;
         MedicinesIntake: Serenity.TextAreaEditor;
     }
@@ -1480,7 +1491,6 @@ declare namespace PatientManagement.PatientManagement {
 declare namespace PatientManagement.PatientManagement {
     interface PatientHealthRow {
         PatientId?: number;
-        DailyMeals?: string;
         Diseases?: string;
         MedicinesIntake?: string;
         InsertUserId?: number;
@@ -1490,13 +1500,12 @@ declare namespace PatientManagement.PatientManagement {
     }
     namespace PatientHealthRow {
         const idProperty = "PatientId";
-        const nameProperty = "DailyMeals";
+        const nameProperty = "Diseases";
         const localTextPrefix = "PatientManagement.PatientHealth";
         const lookupKey = "PatientManagement.PatientHealth";
         function getLookup(): Q.Lookup<PatientHealthRow>;
         namespace Fields {
             const PatientId: string;
-            const DailyMeals: string;
             const Diseases: string;
             const MedicinesIntake: string;
             const InsertUserId: string;
@@ -1597,6 +1606,7 @@ declare namespace PatientManagement.PatientManagement {
         Address: Serenity.StringEditor;
         Height: Serenity.IntegerEditor;
         Weight: Serenity.IntegerEditor;
+        WantedWeight: Serenity.StringEditor;
         NoteList: NotesEditor;
     }
 }
@@ -1611,6 +1621,7 @@ declare namespace PatientManagement.PatientManagement {
         Address?: string;
         Height?: number;
         Weight?: number;
+        WantedWeight?: string;
         InsertUserId?: number;
         InsertDate?: string;
         NoteList?: NotesRow[];
@@ -1632,6 +1643,7 @@ declare namespace PatientManagement.PatientManagement {
             const Address: string;
             const Height: string;
             const Weight: string;
+            const WantedWeight: string;
             const InsertUserId: string;
             const InsertDate: string;
             const NoteList: string;

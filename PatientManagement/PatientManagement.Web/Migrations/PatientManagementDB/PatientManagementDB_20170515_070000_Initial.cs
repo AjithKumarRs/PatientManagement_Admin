@@ -53,7 +53,6 @@ namespace PatientManagement.Migrations.PatientManagementDB
             Create.Table("PatientHealth")
                 .WithColumn("PatientId").AsInt32().Identity().PrimaryKey().NotNullable()
                 .ForeignKey("FK_PatientHealth_Patients1", "Patients", "PatientId")
-                .WithColumn("DailyMeals").AsString(Int32.MaxValue).Nullable()
                 .WithColumn("Diseases").AsString(Int32.MaxValue).Nullable()
                 .WithColumn("MedicinesIntake").AsString(Int32.MaxValue).Nullable()
                 .WithColumn("InsertUserId").AsInt32().NotNullable()
@@ -79,9 +78,6 @@ namespace PatientManagement.Migrations.PatientManagementDB
             Create.Table("LifeStyles")
                 .WithColumn("PatientId").AsInt32().Identity().PrimaryKey().NotNullable()
                 .ForeignKey("FK_LifeStyles_Patients1", "Patients", "PatientId")
-                .WithColumn("Job").AsString(Int32.MaxValue).Nullable()
-                .WithColumn("Movement").AsString(Int32.MaxValue).Nullable()
-                .WithColumn("Training").AsString(Int32.MaxValue).Nullable()
                 .WithColumn("BadHabits").AsString(Int32.MaxValue).Nullable()
                 .WithColumn("InsertUserId").AsInt32().NotNullable()
                 .WithColumn("InserDate").AsDateTime().NotNullable();

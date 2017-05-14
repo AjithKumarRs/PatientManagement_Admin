@@ -5,9 +5,9 @@
     }
 
     export interface ActivityForm {
-        MovementAndTraining: Serenity.StringEditor;
-        Profession: Serenity.StringEditor;
+        MovementAndTraining: Serenity.TextAreaEditor;
+        Profession: Serenity.TextAreaEditor;
     }
 
-    [['MovementAndTraining', () => Serenity.StringEditor], ['Profession', () => Serenity.StringEditor]].forEach(x => Object.defineProperty(ActivityForm.prototype, <string>x[0], { get: function () { return this.w(x[0], (x[1] as any)()); }, enumerable: true, configurable: true }));
+    [['MovementAndTraining', () => Serenity.TextAreaEditor], ['Profession', () => Serenity.TextAreaEditor]].forEach(x => Object.defineProperty(ActivityForm.prototype, <string>x[0], { get: function () { return this.w(x[0], (x[1] as any)()); }, enumerable: true, configurable: true }));
 }

@@ -9,6 +9,7 @@
         Address?: string;
         Height?: number;
         Weight?: number;
+        WantedWeight?: string;
         InsertUserId?: number;
         InsertDate?: string;
         NoteList?: NotesRow[];
@@ -35,12 +36,13 @@
             export declare const Address: string;
             export declare const Height: string;
             export declare const Weight: string;
+            export declare const WantedWeight: string;
             export declare const InsertUserId: string;
             export declare const InsertDate: string;
             export declare const NoteList: string;
             export declare const TenantId: string;
         }
 
-        ['PatientId', 'Name', 'PersonalNumber', 'PhoneNumber', 'Gender', 'FirstRegistrationDate', 'Address', 'Height', 'Weight', 'InsertUserId', 'InsertDate', 'NoteList', 'TenantId'].forEach(x => (<any>Fields)[x] = x);
+        ['PatientId', 'Name', 'PersonalNumber', 'PhoneNumber', 'Gender', 'FirstRegistrationDate', 'Address', 'Height', 'Weight', 'WantedWeight', 'InsertUserId', 'InsertDate', 'NoteList', 'TenantId'].forEach(x => (<any>Fields)[x] = x);
     }
 }

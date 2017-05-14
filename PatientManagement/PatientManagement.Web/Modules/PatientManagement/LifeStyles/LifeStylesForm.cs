@@ -14,10 +14,7 @@ namespace PatientManagement.PatientManagement.Forms
     public class LifeStylesForm
     {
         public Int32? PatientId { get; set; }
-
-        public String Job { get; set; }
-        public String Movement { get; set; }
-        public String Training { get; set; }
+        
         public String BadHabits { get; set; }
 
         public String RemarksForFoodTake { get; set; }

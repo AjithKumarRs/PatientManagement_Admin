@@ -28,30 +28,7 @@ namespace PatientManagement.PatientManagement.Entities
             set { Fields.PatientId[this] = value; }
         }
 
-        [DisplayName("Job"), Size(500), QuickSearch]
-        [TextAreaEditor(Rows = 6)]
-        public String Job
-        {
-            get { return Fields.Job[this]; }
-            set { Fields.Job[this] = value; }
-        }
-
-        [DisplayName("Movement"), Size(500)]
-        [TextAreaEditor(Rows = 6)]
-        public String Movement
-        {
-            get { return Fields.Movement[this]; }
-            set { Fields.Movement[this] = value; }
-        }
-
-        [DisplayName("Training"), Size(500)]
-        [TextAreaEditor(Rows = 6)]
-        public String Training
-        {
-            get { return Fields.Training[this]; }
-            set { Fields.Training[this] = value; }
-        }
-
+        
         [DisplayName("Bad Habits"), Size(500)]
         [TextAreaEditor(Rows = 6)]
         public String BadHabits
@@ -130,7 +107,7 @@ namespace PatientManagement.PatientManagement.Entities
 
         StringField INameRow.NameField
         {
-            get { return Fields.Job; }
+            get { return Fields.Regime; }
         }
 
         public static readonly RowFields Fields = new RowFields().Init();
@@ -143,9 +120,6 @@ namespace PatientManagement.PatientManagement.Entities
         public class RowFields : RowFieldsBase
         {
             public Int32Field PatientId;
-            public StringField Job;
-            public StringField Movement;
-            public StringField Training;
 
             public StringField RemarksForFoodTake;
             public StringField Regime;

@@ -59,10 +59,15 @@
   </PropertyGroup>
   <Target Name="PrecompileScript" BeforeTargets="BeforeBuild">
     <Exec Command="npm install" />
+    <Exec Command="dotnet sergen mvc" ContinueOnError="true" />
+    <Exec Command="dotnet sergen clienttypes" ContinueOnError="true" />
+
   </Target>
   <Target Name="PostcompileScript" AfterTargets="Build">
     <Exec Command="node_modules/.bin/lessc ./wwwroot/Content/site/site.less ./wwwroot/content/site/site.css" ContinueOnError="true" />
     <Exec Command="node_modules/.bin/tsc -p ./tsconfig.json" ContinueOnError="true" />
+    <Exec Command="dotnet sergen servertypings" ContinueOnError="true" />
+
   </Target>
   <ItemGroup>
     <DotNetCliToolReference Include="Serenity.CodeGenerator" Version="2.9.22" />

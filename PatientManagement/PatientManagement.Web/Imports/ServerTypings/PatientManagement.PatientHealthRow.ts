@@ -1,7 +1,6 @@
 ﻿namespace PatientManagement.PatientManagement {
     export interface PatientHealthRow {
         PatientId?: number;
-        DailyMeals?: string;
         Diseases?: string;
         MedicinesIntake?: string;
         InsertUserId?: number;
@@ -12,7 +11,7 @@
 
     export namespace PatientHealthRow {
         export const idProperty = 'PatientId';
-        export const nameProperty = 'DailyMeals';
+        export const nameProperty = 'Diseases';
         export const localTextPrefix = 'PatientManagement.PatientHealth';
         export const lookupKey = 'PatientManagement.PatientHealth';
 
@@ -22,7 +21,6 @@
 
         export namespace Fields {
             export declare const PatientId: string;
-            export declare const DailyMeals: string;
             export declare const Diseases: string;
             export declare const MedicinesIntake: string;
             export declare const InsertUserId: string;
@@ -31,6 +29,6 @@
             export declare const TenantId: string;
         }
 
-        ['PatientId', 'DailyMeals', 'Diseases', 'MedicinesIntake', 'InsertUserId', 'InsertDate', 'PatientName', 'TenantId'].forEach(x => (<any>Fields)[x] = x);
+        ['PatientId', 'Diseases', 'MedicinesIntake', 'InsertUserId', 'InsertDate', 'PatientName', 'TenantId'].forEach(x => (<any>Fields)[x] = x);
     }
 }

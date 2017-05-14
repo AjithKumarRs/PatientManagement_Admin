@@ -3873,7 +3873,7 @@ var PatientManagement;
         }(Serenity.PrefixedContext));
         ActivityForm.formKey = 'PatientManagement.Activity';
         PatientManagement.ActivityForm = ActivityForm;
-        [['MovementAndTraining', function () { return Serenity.StringEditor; }], ['Profession', function () { return Serenity.StringEditor; }]].forEach(function (x) { return Object.defineProperty(ActivityForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
+        [['MovementAndTraining', function () { return Serenity.TextAreaEditor; }], ['Profession', function () { return Serenity.TextAreaEditor; }]].forEach(function (x) { return Object.defineProperty(ActivityForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
     })(PatientManagement = PatientManagement_25.PatientManagement || (PatientManagement_25.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
@@ -3885,10 +3885,15 @@ var PatientManagement;
             ActivityRow.idProperty = 'PatientId';
             ActivityRow.nameProperty = 'MovementAndTraining';
             ActivityRow.localTextPrefix = 'PatientManagement.Activity';
+            ActivityRow.lookupKey = 'PatientManagement.LifeStyles';
+            function getLookup() {
+                return Q.getLookup('PatientManagement.LifeStyles');
+            }
+            ActivityRow.getLookup = getLookup;
             var Fields;
             (function (Fields) {
             })(Fields = ActivityRow.Fields || (ActivityRow.Fields = {}));
-            ['PatientId', 'MovementAndTraining', 'Profession'].forEach(function (x) { return Fields[x] = x; });
+            ['PatientId', 'MovementAndTraining', 'Profession', 'InsertUserId', 'InsertDate'].forEach(function (x) { return Fields[x] = x; });
         })(ActivityRow = PatientManagement.ActivityRow || (PatientManagement.ActivityRow = {}));
     })(PatientManagement = PatientManagement_26.PatientManagement || (PatientManagement_26.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
@@ -3934,7 +3939,7 @@ var PatientManagement;
         }(Serenity.PrefixedContext));
         LifeStylesForm.formKey = 'PatientManagement.LifeStyles';
         PatientManagement.LifeStylesForm = LifeStylesForm;
-        [['PatientId', function () { return Serenity.LookupEditor; }], ['Job', function () { return Serenity.TextAreaEditor; }], ['Movement', function () { return Serenity.TextAreaEditor; }], ['Training', function () { return Serenity.TextAreaEditor; }], ['BadHabits', function () { return Serenity.TextAreaEditor; }]].forEach(function (x) { return Object.defineProperty(LifeStylesForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
+        [['PatientId', function () { return Serenity.LookupEditor; }], ['BadHabits', function () { return Serenity.TextAreaEditor; }], ['RemarksForFoodTake', function () { return Serenity.TextAreaEditor; }], ['Regime', function () { return Serenity.TextAreaEditor; }], ['DailyMeals', function () { return Serenity.TextAreaEditor; }], ['FavoriteFood', function () { return Serenity.TextAreaEditor; }], ['NotEating', function () { return Serenity.TextAreaEditor; }]].forEach(function (x) { return Object.defineProperty(LifeStylesForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
     })(PatientManagement = PatientManagement_29.PatientManagement || (PatientManagement_29.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
@@ -3944,7 +3949,7 @@ var PatientManagement;
         var LifeStylesRow;
         (function (LifeStylesRow) {
             LifeStylesRow.idProperty = 'PatientId';
-            LifeStylesRow.nameProperty = 'Job';
+            LifeStylesRow.nameProperty = 'Regime';
             LifeStylesRow.localTextPrefix = 'PatientManagement.LifeStyles';
             LifeStylesRow.lookupKey = 'PatientManagement.LifeStyles';
             function getLookup() {
@@ -3954,7 +3959,7 @@ var PatientManagement;
             var Fields;
             (function (Fields) {
             })(Fields = LifeStylesRow.Fields || (LifeStylesRow.Fields = {}));
-            ['PatientId', 'Job', 'Movement', 'Training', 'BadHabits', 'InsertUserId', 'InsertDate', 'PatientName', 'TenantId'].forEach(function (x) { return Fields[x] = x; });
+            ['PatientId', 'RemarksForFoodTake', 'Regime', 'DailyMeals', 'FavoriteFood', 'NotEating', 'BadHabits', 'InsertUserId', 'InsertDate', 'PatientName', 'TenantId'].forEach(function (x) { return Fields[x] = x; });
         })(LifeStylesRow = PatientManagement.LifeStylesRow || (PatientManagement.LifeStylesRow = {}));
     })(PatientManagement = PatientManagement_30.PatientManagement || (PatientManagement_30.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
@@ -4004,7 +4009,7 @@ var PatientManagement;
         }(Serenity.PrefixedContext));
         PatientHealthForm.formKey = 'PatientManagement.PatientHealth';
         PatientManagement.PatientHealthForm = PatientHealthForm;
-        [['PatientId', function () { return Serenity.LookupEditor; }], ['DailyMeals', function () { return Serenity.TextAreaEditor; }], ['Diseases', function () { return Serenity.TextAreaEditor; }], ['MedicinesIntake', function () { return Serenity.TextAreaEditor; }]].forEach(function (x) { return Object.defineProperty(PatientHealthForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
+        [['PatientId', function () { return Serenity.LookupEditor; }], ['Diseases', function () { return Serenity.TextAreaEditor; }], ['MedicinesIntake', function () { return Serenity.TextAreaEditor; }]].forEach(function (x) { return Object.defineProperty(PatientHealthForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
     })(PatientManagement = PatientManagement_33.PatientManagement || (PatientManagement_33.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
@@ -4014,7 +4019,7 @@ var PatientManagement;
         var PatientHealthRow;
         (function (PatientHealthRow) {
             PatientHealthRow.idProperty = 'PatientId';
-            PatientHealthRow.nameProperty = 'DailyMeals';
+            PatientHealthRow.nameProperty = 'Diseases';
             PatientHealthRow.localTextPrefix = 'PatientManagement.PatientHealth';
             PatientHealthRow.lookupKey = 'PatientManagement.PatientHealth';
             function getLookup() {
@@ -4024,7 +4029,7 @@ var PatientManagement;
             var Fields;
             (function (Fields) {
             })(Fields = PatientHealthRow.Fields || (PatientHealthRow.Fields = {}));
-            ['PatientId', 'DailyMeals', 'Diseases', 'MedicinesIntake', 'InsertUserId', 'InsertDate', 'PatientName', 'TenantId'].forEach(function (x) { return Fields[x] = x; });
+            ['PatientId', 'Diseases', 'MedicinesIntake', 'InsertUserId', 'InsertDate', 'PatientName', 'TenantId'].forEach(function (x) { return Fields[x] = x; });
         })(PatientHealthRow = PatientManagement.PatientHealthRow || (PatientManagement.PatientHealthRow = {}));
     })(PatientManagement = PatientManagement_34.PatientManagement || (PatientManagement_34.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
@@ -4112,7 +4117,7 @@ var PatientManagement;
         }(Serenity.PrefixedContext));
         PatientsForm.formKey = 'PatientManagement.Patients';
         PatientManagement.PatientsForm = PatientsForm;
-        [['PatientId', function () { return Serenity.IntegerEditor; }], ['Name', function () { return Serenity.StringEditor; }], ['Gender', function () { return Serenity.EnumEditor; }], ['PersonalNumber', function () { return Serenity.StringEditor; }], ['PhoneNumber', function () { return Serenity.StringEditor; }], ['FirstRegistrationDate', function () { return Serenity.DateTimeEditor; }], ['Address', function () { return Serenity.StringEditor; }], ['Height', function () { return Serenity.IntegerEditor; }], ['Weight', function () { return Serenity.IntegerEditor; }], ['NoteList', function () { return PatientManagement.NotesEditor; }]].forEach(function (x) { return Object.defineProperty(PatientsForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
+        [['PatientId', function () { return Serenity.IntegerEditor; }], ['Name', function () { return Serenity.StringEditor; }], ['Gender', function () { return Serenity.EnumEditor; }], ['PersonalNumber', function () { return Serenity.StringEditor; }], ['PhoneNumber', function () { return Serenity.StringEditor; }], ['FirstRegistrationDate', function () { return Serenity.DateTimeEditor; }], ['Address', function () { return Serenity.StringEditor; }], ['Height', function () { return Serenity.IntegerEditor; }], ['Weight', function () { return Serenity.IntegerEditor; }], ['WantedWeight', function () { return Serenity.StringEditor; }], ['NoteList', function () { return PatientManagement.NotesEditor; }]].forEach(function (x) { return Object.defineProperty(PatientsForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
     })(PatientManagement = PatientManagement_39.PatientManagement || (PatientManagement_39.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
@@ -4132,7 +4137,7 @@ var PatientManagement;
             var Fields;
             (function (Fields) {
             })(Fields = PatientsRow.Fields || (PatientsRow.Fields = {}));
-            ['PatientId', 'Name', 'PersonalNumber', 'PhoneNumber', 'Gender', 'FirstRegistrationDate', 'Address', 'Height', 'Weight', 'InsertUserId', 'InsertDate', 'NoteList', 'TenantId'].forEach(function (x) { return Fields[x] = x; });
+            ['PatientId', 'Name', 'PersonalNumber', 'PhoneNumber', 'Gender', 'FirstRegistrationDate', 'Address', 'Height', 'Weight', 'WantedWeight', 'InsertUserId', 'InsertDate', 'NoteList', 'TenantId'].forEach(function (x) { return Fields[x] = x; });
         })(PatientsRow = PatientManagement.PatientsRow || (PatientManagement.PatientsRow = {}));
     })(PatientManagement = PatientManagement_40.PatientManagement || (PatientManagement_40.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
