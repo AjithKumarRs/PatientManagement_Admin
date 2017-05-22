@@ -27,16 +27,9 @@ namespace PatientManagement.PatientManagement.Entities
             get { return Fields.PatientId[this]; }
             set { Fields.PatientId[this] = value; }
         }
+        
 
-        [DisplayName("Daily Meals"), Size(200), QuickSearch]
-        [TextAreaEditor(Rows = 8)]
-        public String DailyMeals
-        {
-            get { return Fields.DailyMeals[this]; }
-            set { Fields.DailyMeals[this] = value; }
-        }
-
-        [DisplayName("Diseases"), Size(500)]
+        [DisplayName("Diseases"), Size(2000)]
         [TextAreaEditor(Rows = 8)]
         public String Diseases
         {
@@ -44,7 +37,7 @@ namespace PatientManagement.PatientManagement.Entities
             set { Fields.Diseases[this] = value; }
         }
 
-        [DisplayName("Medicines Intake"), Size(500)]
+        [DisplayName("Medicines Intake"), Size(2000)]
         [TextAreaEditor(Rows = 8)]
         public String MedicinesIntake
         {
@@ -80,7 +73,7 @@ namespace PatientManagement.PatientManagement.Entities
 
         StringField INameRow.NameField
         {
-            get { return Fields.DailyMeals; }
+            get { return Fields.Diseases; }
         }
 
         public static readonly RowFields Fields = new RowFields().Init();
@@ -93,7 +86,6 @@ namespace PatientManagement.PatientManagement.Entities
         public class RowFields : RowFieldsBase
         {
             public Int32Field PatientId;
-            public StringField DailyMeals;
             public StringField Diseases;
             public StringField MedicinesIntake;
             public Int32Field InsertUserId;

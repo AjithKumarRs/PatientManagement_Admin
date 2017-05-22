@@ -28,36 +28,52 @@ namespace PatientManagement.PatientManagement.Entities
             set { Fields.PatientId[this] = value; }
         }
 
-        [DisplayName("Job"), Size(500), QuickSearch]
-        [TextAreaEditor(Rows = 6)]
-        public String Job
-        {
-            get { return Fields.Job[this]; }
-            set { Fields.Job[this] = value; }
-        }
-
-        [DisplayName("Movement"), Size(500)]
-        [TextAreaEditor(Rows = 6)]
-        public String Movement
-        {
-            get { return Fields.Movement[this]; }
-            set { Fields.Movement[this] = value; }
-        }
-
-        [DisplayName("Training"), Size(500)]
-        [TextAreaEditor(Rows = 6)]
-        public String Training
-        {
-            get { return Fields.Training[this]; }
-            set { Fields.Training[this] = value; }
-        }
-
+        
         [DisplayName("Bad Habits"), Size(500)]
         [TextAreaEditor(Rows = 6)]
         public String BadHabits
         {
             get { return Fields.BadHabits[this]; }
             set { Fields.BadHabits[this] = value; }
+        }
+
+        [DisplayName("Remarks For Food Take"), Size(500)]
+        [TextAreaEditor(Rows = 6)]
+        public String RemarksForFoodTake
+        {
+            get { return Fields.RemarksForFoodTake[this]; }
+            set { Fields.RemarksForFoodTake[this] = value; }
+        }
+
+        [DisplayName("Regime"), Size(500)]
+        [TextAreaEditor(Rows = 6)]
+        public String Regime
+        {
+            get { return Fields.Regime[this]; }
+            set { Fields.Regime[this] = value; }
+        }
+
+        [DisplayName("Daily Meals"), Size(500)]
+        [TextAreaEditor(Rows = 6)]
+        public String DailyMeals
+        {
+            get { return Fields.DailyMeals[this]; }
+            set { Fields.DailyMeals[this] = value; }
+        }
+
+        [DisplayName("Favorite Food"), Size(500)]
+        [TextAreaEditor(Rows = 6)]
+        public String FavoriteFood
+        {
+            get { return Fields.FavoriteFood[this]; }
+            set { Fields.FavoriteFood[this] = value; }
+        }
+        [DisplayName("Not Eating"), Size(500)]
+        [TextAreaEditor(Rows = 6)]
+        public String NotEating
+        {
+            get { return Fields.NotEating[this]; }
+            set { Fields.NotEating[this] = value; }
         }
 
         [DisplayName("Patient Name"), Expression("jPatient.[Name]")]
@@ -91,7 +107,7 @@ namespace PatientManagement.PatientManagement.Entities
 
         StringField INameRow.NameField
         {
-            get { return Fields.Job; }
+            get { return Fields.Regime; }
         }
 
         public static readonly RowFields Fields = new RowFields().Init();
@@ -104,9 +120,13 @@ namespace PatientManagement.PatientManagement.Entities
         public class RowFields : RowFieldsBase
         {
             public Int32Field PatientId;
-            public StringField Job;
-            public StringField Movement;
-            public StringField Training;
+
+            public StringField RemarksForFoodTake;
+            public StringField Regime;
+            public StringField DailyMeals;
+            public StringField FavoriteFood;
+            public StringField NotEating;
+
             public StringField BadHabits;
             public Int32Field InsertUserId;
             public DateTimeField InsertDate;

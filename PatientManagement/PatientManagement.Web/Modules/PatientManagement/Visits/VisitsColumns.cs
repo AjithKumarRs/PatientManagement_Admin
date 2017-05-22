@@ -13,7 +13,7 @@ namespace PatientManagement.PatientManagement.Columns
     [BasedOnRow(typeof(Entities.VisitsRow))]
     public class VisitsColumns
     {
-        [EditLink, DisplayName("Db.Shared.RecordId")]
+        [EditLink, DisplayName("Db.Shared.RecordId"), Hidden]
         public Int32 VisitId { get; set; }
 
         [PatientsFormatter(GenderProperty = "PatientGender")]

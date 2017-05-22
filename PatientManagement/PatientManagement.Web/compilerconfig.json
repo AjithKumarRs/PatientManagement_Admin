@@ -10,5 +10,9 @@
   {
     "outputFile": "wwwroot/Scripts/serenity/Serenity.Script.UI.es5.js",
     "inputFile": "wwwroot/Scripts/serenity/Serenity.Script.UI.js"
+  },
+  {
+    "outputFile": "wwwroot/Content/site/site.theme.css",
+    "inputFile": "wwwroot/Content/site/site.theme.less"
   }
 ]

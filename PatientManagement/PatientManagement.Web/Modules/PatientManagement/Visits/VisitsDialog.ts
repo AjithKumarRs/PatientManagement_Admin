@@ -1,4 +1,5 @@
-﻿
+﻿/// <reference types="jquery" />
+
 namespace PatientManagement.PatientManagement {
 
     @Serenity.Decorators.registerClass()
@@ -23,6 +24,11 @@ namespace PatientManagement.PatientManagement {
                 }
                 
                 return null;
+            });
+
+            this.form.StartDate.change(function (elem) {
+                var dateStart = this.form.StartDate.value;
+                this.form.EndDate.value = dateStart;
             });
         }
     }

@@ -47,7 +47,7 @@ namespace PatientManagement.PatientManagement.Pages
                 {
                     id = visit.VisitId ?? 0,
                     patientId = visit.PatientId ?? 0,
-                    title = connection.ById<PatientsRow>(visit.PatientId).Name,
+                    title = connection.ById<PatientsRow>(visit.PatientId).Name + "\n" + visit.Description,
                     start = (visit.StartDate ?? DateTime.Now).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
                     end = (visit.EndDate ?? DateTime.Now).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
                     allDay = false,

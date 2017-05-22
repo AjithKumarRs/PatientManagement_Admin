@@ -43,7 +43,7 @@ namespace PatientManagement.PatientManagement.Entities
             set { Fields.FilePath[this] = value; }
         }
 
-        [DisplayName("Description"), Size(300), NotNull]
+        [DisplayName("Description"), Size(2000), NotNull]
         [TextAreaEditor(Rows = 3)]
         public String Description
         {

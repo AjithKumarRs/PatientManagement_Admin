@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using System.Reflection
+@using Microsoft.AspNetCore.Html
+@using PatientManagement
+@using Serenity
+<!DOCTYPE html>
 @{
     Func<string, HtmlString> json = x => new HtmlString(Serenity.JSON.Stringify(x));
     var hideNav = (string)Context.Request.Query["hideNav"] == "1";
@@ -113,12 +117,23 @@ else
                 @RenderBody()
             </section>
         </div>
-
+             
+        @{
+            var runtimeVersion = typeof(Startup)
+                .GetTypeInfo()
+                .Assembly
+                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                .InformationalVersion;
+        }
         <footer class="main-footer">
             <div class="pull-right hidden-xs">
                 @Texts.Site.Layout.FooterInfo
+                -
+                Version: @runtimeVersion
+           
             </div>
             <strong>@Texts.Site.Layout.FooterCopyright</strong> @Texts.Site.Layout.FooterRights
+
         </footer>
 
         <aside class="control-sidebar control-sidebar-dark">

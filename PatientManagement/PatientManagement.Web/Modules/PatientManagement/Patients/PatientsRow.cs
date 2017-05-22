@@ -74,6 +74,13 @@ namespace PatientManagement.PatientManagement.Entities
             set { Fields.Address[this] = value; }
         }
 
+        [DisplayName("Wanted Weight"), Size(100)]
+        public String WantedWeight
+        {
+            get { return Fields.WantedWeight[this]; }
+            set { Fields.WantedWeight[this] = value; }
+        }
+
         [DisplayName("Height")]
         public Int32? Height
         {
@@ -138,6 +145,9 @@ namespace PatientManagement.PatientManagement.Entities
             public StringField Address;
             public Int32Field Height;
             public Int32Field Weight;
+
+            public StringField WantedWeight;
+
             public Int32Field InsertUserId;
             public DateTimeField InsertDate;
 

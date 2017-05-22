@@ -21,6 +21,12 @@
       "Key": "PatientManagement",
       "Tables": [
         {
+          "Tablename": "dbo.Activity",
+          "Identifier": "Activity",
+          "Module": "PatientManagement",
+          "PermissionKey": "PatientManagement:Activity"
+        },
+        {
           "Tablename": "dbo.LifeStyles",
           "Identifier": "LifeStyles",
           "Module": "PatientManagement",

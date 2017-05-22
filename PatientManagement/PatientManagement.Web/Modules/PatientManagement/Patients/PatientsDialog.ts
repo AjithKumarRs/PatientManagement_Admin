@@ -23,6 +23,9 @@ namespace PatientManagement.PatientManagement {
         private lifeStyleForm: LifeStylesForm;
         private lifeStyleGrid: Serenity.PropertyGrid;
 
+        private patientActivityForm: ActivityForm;
+        private patientActivityGrid: Serenity.PropertyGrid;
+
         private patientsFileUploadsGrid: FIleUploadsForPatientGrid;
 
         private checkEgn = (egn) => {
@@ -103,12 +106,25 @@ namespace PatientManagement.PatientManagement {
             this.lifeStyleForm = new LifeStylesForm((this.lifeStyleGrid as any).idPrefix);
 
             //Initialize new instance of LifeStyle grid and form
+            this.patientActivityGrid = new Serenity.PropertyGrid(this.byId("ActivityPropertyGrid"),
+                {
+                    items: Q.getForm(ActivityForm.formKey).filter(x => x.name != "PatientId"),
+                    useCategories: true
+                });
+
+            this.patientActivityForm = new ActivityForm((this.patientActivityGrid as any).idPrefix);
+
+
+            //Initialize new instance of FileUploads grid and form
             this.patientsFileUploadsGrid = new FIleUploadsForPatientGrid(this.byId("FileUploadsPropertyGrid"));
             this.patientsFileUploadsGrid.element.flexHeightOnly(1);
 
             this.patientValidator = this.byId("PatientHealthForm").validate(Q.validateOptions({}));
 
             this.patientValidator = this.byId("LifeStyleForm").validate(Q.validateOptions({}));
+
+            this.patientValidator = this.byId("ActivityForm").validate(Q.validateOptions({}));
+
             
             this.byId('NoteList').closest('.field').hide().end().appendTo(this.byId('TabNotes'));
             DialogUtils.pendingChangesConfirmation(this.element, () => this.getSaveState() != this.loadedState);
@@ -179,6 +195,39 @@ namespace PatientManagement.PatientManagement {
                             }
                         }]
                 });
+
+            //Add button for saving patient activity a form
+            // ReSharper disable once WrongExpressionStatement
+            new Serenity.Toolbar(this.byId("ActivityToolbar"),
+                {
+                    buttons: [
+                        {
+                            cssClass: "apply-changes-button",
+                            title: Q.text("Controls.EntityDialog.UpdateButton"),
+                            onClick: () => {
+                                var id = this.form.PatientId.value;
+
+                                if (!id)
+                                    return;
+
+                                if (!this.patientValidator.form())
+                                    return;
+
+                                var p = <PatientManagement.ActivityRow>{};
+                                this.patientActivityGrid.save(p);
+
+                                PatientManagement.ActivityService.Update({
+                                    EntityId: id,
+                                    Entity: p
+                                }, response => {
+                                    // reload customer list just in case
+                                    Q.reloadLookup(PatientManagement.PatientsRow.lookupKey);
+
+                                    Q.notifySuccess(Q.text("Controls.EntityDialog.SaveSuccessMessage"));
+                                });
+                            }
+                        }]
+                });
         }
 
 
@@ -206,6 +255,7 @@ namespace PatientManagement.PatientManagement {
             Serenity.TabsExtensions.setDisabled(this.tabs, 'PatientHealth', this.isNewOrDeleted());
             Serenity.TabsExtensions.setDisabled(this.tabs, 'Notes', this.isNewOrDeleted());
             Serenity.TabsExtensions.setDisabled(this.tabs, 'LifeStyle', this.isNewOrDeleted());
+            Serenity.TabsExtensions.setDisabled(this.tabs, 'Activity', this.isNewOrDeleted());
             Serenity.TabsExtensions.setDisabled(this.tabs, 'FileUploads', this.isNewOrDeleted());
 
             if (this.isNewOrDeleted()) {
@@ -226,6 +276,15 @@ namespace PatientManagement.PatientManagement {
             response => {
                 this.lifeStyleGrid.load(response.Entity);
             });
+
+
+            ActivityService.Retrieve({
+                    EntityId: entity.PatientId
+                },
+                response => {
+                    this.patientActivityGrid.load(response.Entity);
+                });
+
 
             this.visitsGrid.patientId = entity.PatientId;
 
