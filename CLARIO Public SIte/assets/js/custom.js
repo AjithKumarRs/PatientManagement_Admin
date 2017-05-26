@@ -4,7 +4,7 @@ $(document).ready(function () {
     /* ---------------------------------------------
     Pre loader
     --------------------------------------------- */
-    $(window).on('load', function() {
+    $(document).ready(function ()  {
         // will first fade out the loading animation
         $(".preloader").fadeOut();
         //then background color will fade out slowly
