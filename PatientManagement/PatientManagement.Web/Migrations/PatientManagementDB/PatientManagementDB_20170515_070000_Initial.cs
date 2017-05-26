@@ -44,7 +44,7 @@ namespace PatientManagement.Migrations.PatientManagementDB
                 .WithColumn("Height").AsInt32().Nullable()
                 .WithColumn("Weight").AsInt32().Nullable()
                 .WithColumn("InsertUserId").AsInt32().NotNullable()
-                .WithColumn("InserDate").AsDateTime().NotNullable();
+                .WithColumn("InsertDate").AsDateTime().NotNullable();
 
             #endregion
 
@@ -56,7 +56,7 @@ namespace PatientManagement.Migrations.PatientManagementDB
                 .WithColumn("Diseases").AsString(Int32.MaxValue).Nullable()
                 .WithColumn("MedicinesIntake").AsString(Int32.MaxValue).Nullable()
                 .WithColumn("InsertUserId").AsInt32().NotNullable()
-                .WithColumn("InserDate").AsDateTime().NotNullable();
+                .WithColumn("InsertDate").AsDateTime().NotNullable();
 
             #endregion
 
@@ -69,7 +69,7 @@ namespace PatientManagement.Migrations.PatientManagementDB
                 .WithColumn("FilePath").AsString(Int32.MaxValue).NotNullable()
                 .WithColumn("Description").AsString(Int32.MaxValue).NotNullable()
                 .WithColumn("InsertUserId").AsInt32().NotNullable()
-                .WithColumn("InserDate").AsDateTime().NotNullable();
+                .WithColumn("InsertDate").AsDateTime().NotNullable();
 
             #endregion
 
@@ -80,7 +80,7 @@ namespace PatientManagement.Migrations.PatientManagementDB
                 .ForeignKey("FK_LifeStyles_Patients1", "Patients", "PatientId")
                 .WithColumn("BadHabits").AsString(Int32.MaxValue).Nullable()
                 .WithColumn("InsertUserId").AsInt32().NotNullable()
-                .WithColumn("InserDate").AsDateTime().NotNullable();
+                .WithColumn("InsertDate").AsDateTime().NotNullable();
 
             #endregion
 
@@ -92,7 +92,7 @@ namespace PatientManagement.Migrations.PatientManagementDB
                 .WithColumn("BorderColor").AsString(50).Nullable()
                 .WithColumn("BackgroundColor").AsString(50).Nullable()
                 .WithColumn("InsertUserId").AsInt32().NotNullable()
-                .WithColumn("InserDate").AsDateTime().NotNullable();
+                .WithColumn("InsertDate").AsDateTime().NotNullable();
 
             #endregion
 
@@ -109,7 +109,7 @@ namespace PatientManagement.Migrations.PatientManagementDB
                 .WithColumn("StartDate").AsDateTime().NotNullable()
                 .WithColumn("EndDate").AsDateTime().NotNullable()
                 .WithColumn("InsertUserId").AsInt32().NotNullable()
-                .WithColumn("InserDate").AsDateTime().NotNullable();
+                .WithColumn("InsertDate").AsDateTime().NotNullable();
 
             #endregion
 
