@@ -31,7 +31,7 @@ namespace PatientManagement.Migrations.PatientManagementDB
                 .WithColumn("MovementAndTraining").AsString(2000).Nullable()
                 .WithColumn("Profession").AsString(200).Nullable()
                 .WithColumn("InsertUserId").AsInt32().NotNullable()
-                .WithColumn("InserDate").AsDateTime().NotNullable();
+                .WithColumn("InsertDate").AsDateTime().NotNullable();
 
 
         }
