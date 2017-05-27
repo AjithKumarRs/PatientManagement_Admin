@@ -29,6 +29,51 @@
 <meta name="twitter:description" content="Admin panel with web API for multi-language support and integration in all kind of clients (android, ios, web sites...)" />
 <meta name="twitter:image" content="@(baseUrl)Images/Socials/banner/right-logo.png" />
 
+<link rel="apple-touch-icon" sizes="57x57" href="~/Images/Socials/icons/apple-touch-icon-57x57.png">
+
+<link rel="apple-touch-icon" sizes="60x60" href="~/Images/Socials/icons/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="~/Images/Socials/icons/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="~/Images/Socials/icons/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="~/Images/Socials/icons/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="~/Images/Socials/icons/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="~/Images/Socials/icons/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="~/Images/Socials/icons/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="~/Images/Socials/icons/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="~/Images/Socials/icons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="~/Images/Socials/icons/favicon-192x192.png" sizes="192x192">
+<link rel="icon" type="image/png" href="~/Images/Socials/icons/favicon-16x16.png" sizes="16x16">
+<meta name="apple-mobile-web-app-title" content="Multi API Administrator">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+<link rel="apple-touch-startup-image" href="~/Images/Socials/icons/apple-touch-startup-image-1536x2008.png" media="(device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)">
+<link rel="apple-touch-startup-image" href="~/Images/Socials/icons/apple-touch-startup-image-1496x2048.png" media="(device-width: 768px) and (device-height: 1024px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 2)">
+<link rel="apple-touch-startup-image" href="~/Images/Socials/icons/apple-touch-startup-image-768x1004.png" media="(device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 1)">
+
+<link rel="apple-touch-startup-image" href="~/Images/Socials/icons/apple-touch-startup-image-748x1024.png" media="(device-width: 768px) and (device-height: 1024px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 1)">
+
+<link rel="apple-touch-startup-image" href="~/Images/Socials/icons/apple-touch-startup-image-640x1096.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)">
+
+<link rel="apple-touch-startup-image" href="~/Images/Socials/icons/apple-touch-startup-image-640x920.png" media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)">
+
+<link rel="apple-touch-startup-image" href="~/Images/Socials/icons/apple-touch-startup-image-320x460.png" media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 1)">
+
+
+<link rel="manifest" href="@Url.RouteUrl("manifest")">
+
+<meta name="theme-color" content="#D33724">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+
+<meta name="msapplication-config" content="@Url.RouteUrl(HomeControllerRoute.GetBrowserConfigXml).TrimEnd('/')"> 
+
+
+<meta name="description" content="Admin panel with web API for multi-language support and integration in all kind of clients (android, ios, web sites...) ">
+
+
+
+
     
     <!-- External CSS -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -614,13 +659,13 @@
                     <div class="col-md-6 col-md-offset-3 text-center">
                         <div class="section-heading">
                             <h2 class="section-title">Запознай се нашият екип</h2>
-                            <p class="section-subtitle">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy</p>
+                            <p class="section-subtitle">Само идеята не е достатъчна. Нужен е екип, който работи в синхрон и такава симбиоза, че превръща невъзможното в реалност.</p>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="team-members">
-                        <div class="col-md-4 col-sm-6">
+                        <div class="col-md-6 col-sm-6">
                             <div class="team-member text-center wow animated fadeInUp" data-wow-duration="1.5s">
                                 <div class="member-mock"><img src="assets/img/client-team/member-1.jpg" alt="..."></div>
                                 <h4 class="member-name">Светлин Кръстанов</h4>
@@ -633,7 +678,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 col-sm-6">
+                        <div class="col-md-6 col-sm-6">
                             <div class="team-member text-center wow animated fadeInUp" data-wow-delay="0.5s" data-wow-duration="1.5s">
                                 <div class="member-mock"><img src="assets/img/client-team/member-2.jpg" alt="..."></div>
                                 <h4 class="member-name">Петя Петкова</h4>
@@ -646,19 +691,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 col-sm-6">
-                            <div class="team-member text-center wow animated fadeInUp" data-wow-delay="1s" data-wow-duration="1.5s">
-                                <div class="member-mock"><img src="assets/img/client-team/member-3.jpg" alt="..."></div>
-                                <h4 class="member-name">Devid Muller</h4>
-                                <span class="member-work">Graphic Designer</span>
-                                <p>Lorem ipsum dolor sit amet, eteturadip isicing elitempor incidi dunt ut labore solidet doloredof.</p>
-                                <div class="member-connections">
-                                    <a href="#"><i class="fa fa-facebook"></i></a>
-                                    <a href="#"><i class="fa fa-google-plus"></i></a>
-                                    <a href="#"><i class="fa fa-pinterest"></i></a>
-                                </div>
-                            </div>
-                        </div>
+                        
                         
                     </div>
                 </div>
