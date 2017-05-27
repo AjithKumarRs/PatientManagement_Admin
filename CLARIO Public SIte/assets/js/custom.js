@@ -1,6 +1,14 @@
 $(document).ready(function () {
     'use strict';
-    
+      /* ---------------------------------------------
+    Autohide mobile menu on click
+    --------------------------------------------- */
+    $(".navbar-nav li").mousedown(function (){
+        var windowWidth = $(window).width();
+        if(windowWidth < 770){
+            $(".navbar-toggle").click();
+        }
+    });
     /* ---------------------------------------------
     Pre loader
     --------------------------------------------- */
@@ -11,6 +19,9 @@ $(document).ready(function () {
         $("#faceoff").delay(200).fadeOut("slow");
     });
     
+  
+
+
     /* ---------------------------------------------
     Wow
     --------------------------------------------- */
