@@ -103,7 +103,7 @@ namespace PatientManagement.Migrations.PatientManagementDB
                 .WithColumn("VisitId").AsInt32().Identity().PrimaryKey().NotNullable()
                 .WithColumn("PatientId").AsInt32().NotNullable()
                 .ForeignKey("FK_Visits_Patients", "Patients", "PatientId")
-                .WithColumn("VisitInfoId").AsInt32().NotNullable()
+                .WithColumn("VisitTypeId").AsInt32().NotNullable()
                 .ForeignKey("FK_Visits_VisitTypes", "VisitTypes", "VisitTypeId")
                 .WithColumn("Description").AsString(Int32.MaxValue).Nullable()
                 .WithColumn("StartDate").AsDateTime().NotNullable()
