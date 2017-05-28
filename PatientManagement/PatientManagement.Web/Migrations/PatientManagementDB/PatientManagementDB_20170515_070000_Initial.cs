@@ -51,7 +51,7 @@ namespace PatientManagement.Migrations.PatientManagementDB
             #region PatientHealth Table
 
             Create.Table("PatientHealth")
-                .WithColumn("PatientId").AsInt32().Identity().PrimaryKey().NotNullable()
+                .WithColumn("PatientId").AsInt32().PrimaryKey().NotNullable()
                 .ForeignKey("FK_PatientHealth_Patients1", "Patients", "PatientId")
                 .WithColumn("Diseases").AsString(Int32.MaxValue).Nullable()
                 .WithColumn("MedicinesIntake").AsString(Int32.MaxValue).Nullable()
@@ -63,7 +63,7 @@ namespace PatientManagement.Migrations.PatientManagementDB
             #region PatientsFileUploads Table
 
             Create.Table("PatientsFileUploads")
-                .WithColumn("PatientFileUploadId").AsInt32().Identity().PrimaryKey().NotNullable()
+                .WithColumn("PatientFileUploadId").AsInt32().PrimaryKey().NotNullable()
                 .WithColumn("PatientId").AsInt32().NotNullable()
                 .ForeignKey("FK_PatientsFileUploads_Patients1", "Patients", "PatientId")
                 .WithColumn("FilePath").AsString(Int32.MaxValue).NotNullable()
@@ -76,7 +76,7 @@ namespace PatientManagement.Migrations.PatientManagementDB
             #region LifeStyles Table
 
             Create.Table("LifeStyles")
-                .WithColumn("PatientId").AsInt32().Identity().PrimaryKey().NotNullable()
+                .WithColumn("PatientId").AsInt32().PrimaryKey().NotNullable()
                 .ForeignKey("FK_LifeStyles_Patients1", "Patients", "PatientId")
                 .WithColumn("BadHabits").AsString(Int32.MaxValue).Nullable()
                 .WithColumn("InsertUserId").AsInt32().NotNullable()
@@ -103,7 +103,7 @@ namespace PatientManagement.Migrations.PatientManagementDB
                 .WithColumn("VisitId").AsInt32().Identity().PrimaryKey().NotNullable()
                 .WithColumn("PatientId").AsInt32().NotNullable()
                 .ForeignKey("FK_Visits_Patients", "Patients", "PatientId")
-                .WithColumn("VisitInfoId").AsInt32().NotNullable()
+                .WithColumn("VisitTypeId").AsInt32().NotNullable()
                 .ForeignKey("FK_Visits_VisitTypes", "VisitTypes", "VisitTypeId")
                 .WithColumn("Description").AsString(Int32.MaxValue).Nullable()
                 .WithColumn("StartDate").AsDateTime().NotNullable()
