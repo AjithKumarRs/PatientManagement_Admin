@@ -18,7 +18,7 @@
     "@types/toastr": "^2.1.33",
     "@types/fullcalendar": "^2.7.4",
     "@types/jquery.colorpicker": "^1.4.3",
-
+    "signalr": "^2.2.1",
     "less": "^2.7.2",
     "vue": "^2.1.10"
   },

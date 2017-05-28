@@ -46,7 +46,7 @@ namespace PatientManagement
             {
                 options.SerializerSettings.ContractResolver = new DefaultContractResolver();
             });
-
+            
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddConfig(Configuration);
             services.AddCaching();
@@ -57,6 +57,7 @@ namespace PatientManagement
             services.AddSingleton<IUserRetrieveService, Administration.UserRetrieveService>();
             services.AddSingleton<IPermissionService, Administration.PermissionService>();
 
+            services.AddSignalR(options => options.Hubs.EnableDetailedErrors = true);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -128,6 +129,7 @@ namespace PatientManagement
             app.UseMvc(routes =>
             {
             });
+            app.UseSignalR();
 
             DataMigrations.Initialize();
         }

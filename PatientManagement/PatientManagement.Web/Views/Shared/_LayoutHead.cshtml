@@ -50,4 +50,20 @@
 <script src="~/DynJS.axd/@DynamicScriptManager.GetScriptInclude("TemplateBundle")"></script>
 <script src="~/DynJS.axd/@DynamicScriptManager.GetScriptInclude("RegisteredScripts")"></script>
 
+<script src="~/Scripts/jquery.signalR.min.js"></script>
+<script src="~/signalr/hubs"></script>
+<script>
+    $(function () {
+        var hub = $.connection.notificationHub;
+
+        $.connection.hub.start();
+
+        hub.client.globalNotification = function (notification) {
+            var to = {};
+            to.timeOut = 60000;
+            to.closeButton = true;
+            Q.notifySuccess(notification, '', to);
+        };
+    });
+</script>
 <meta name="mobile-web-app-capable" content="yes">
