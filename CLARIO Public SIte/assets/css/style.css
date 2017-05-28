@@ -1503,6 +1503,7 @@ footer{
 .logo-footer{
     display: inline-block;
     opacity: 0.22;
+    width: 230px;
 }
 .logo-footer:hover{
     opacity: 1;
