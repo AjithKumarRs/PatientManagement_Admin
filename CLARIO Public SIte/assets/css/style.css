@@ -546,6 +546,7 @@ Header
 }
 .logo{
     display: inline-block;
+    width:250px;
 }
 .top-header h1, .flex_text {
     margin-top: 40px;
