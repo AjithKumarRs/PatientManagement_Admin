@@ -41,11 +41,6 @@ namespace MVC
 
         public static class Common
         {
-            public static class Dashboard
-            {
-                public const string DashboardIndex = "~/Modules/Common/Dashboard/DashboardIndex.cshtml";
-            }
-
             public static class Reporting
             {
                 public const string ReportPage = "~/Modules/Common/Reporting/ReportPage.cshtml";

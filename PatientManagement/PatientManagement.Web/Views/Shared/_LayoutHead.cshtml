@@ -56,14 +56,18 @@
     $(function () {
         var hub = $.connection.notificationHub;
 
-        $.connection.hub.start();
-
         hub.client.globalNotification = function (notification) {
             var to = {};
-            to.timeOut = 60000;
+            to.timeOut = 6000;
             to.closeButton = true;
-            Q.notifySuccess(notification, '', to);
+            Q.notifyInfo(notification, '', to);
+
+            //TODO Refresh calendar only if date start and date end are in changes
+            $('#VisitsGridDiv .refresh-button').click();
+            $("#calendar").fullCalendar('refetchEvents');
         };
+        $.connection.hub.start();
+
     });
 </script>
 <meta name="mobile-web-app-capable" content="yes">

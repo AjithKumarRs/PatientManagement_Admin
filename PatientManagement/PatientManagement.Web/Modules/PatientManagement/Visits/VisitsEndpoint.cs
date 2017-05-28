@@ -1,4 +1,8 @@
 ﻿
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.AspNetCore.SignalR.Infrastructure;
+using PatientManagement.Web.Hubs;
+
 namespace PatientManagement.PatientManagement.Endpoints
 {
     using Serenity;
@@ -13,6 +17,13 @@ namespace PatientManagement.PatientManagement.Endpoints
     [ConnectionKey(typeof(MyRow)), ServiceAuthorize(typeof(MyRow))]
     public class VisitsController : ServiceEndpoint
     {
+        private  IHubContext _notificationHub;
+
+        public VisitsController()
+        {
+            _notificationHub = Dependency.Resolver.Resolve<IConnectionManager>().GetHubContext<NotificationHub>();
+        }
+
         [HttpPost, AuthorizeCreate(typeof(MyRow))]
         public SaveResponse Create(IUnitOfWork uow, SaveRequest<MyRow> request)
         {
@@ -22,6 +33,9 @@ namespace PatientManagement.PatientManagement.Endpoints
         [HttpPost, AuthorizeUpdate(typeof(MyRow))]
         public SaveResponse Update(IUnitOfWork uow, SaveRequest<MyRow> request)
         {
+            var user = (UserDefinition) Authorization.UserDefinition;
+            _notificationHub.Clients.Group(user.TenantId.ToString()).globalNotification("Петя Петкова току що промени визита: \n Пациент: ВАльо Вальов \n Начална дата: .");
+
             return new MyRepository().Update(uow, request);
         }
  
