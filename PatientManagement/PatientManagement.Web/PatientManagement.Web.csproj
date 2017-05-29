@@ -27,7 +27,7 @@
     <Content Include="wwwroot\Scripts\serenity\Serenity.Script.UI.es5.js" />
     <EmbeddedResource Include="Views\Templates\PropertyDialog.Template.html" />
   </ItemGroup>
-  <ItemGroup>
+  <ItemGroup> 
     <None Update="wwwroot\**\*">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>
