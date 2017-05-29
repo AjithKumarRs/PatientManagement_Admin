@@ -156,6 +156,22 @@ else
             </div>
         </aside>
         <div class="control-sidebar-bg"></div>
+        
+        
+        <nav class="container-floated" > 
+    
+            @*<a class="floated-button"  tooltip="Нов администратор"><i class="fa fa-users small-icon"></i></a>*@
+    
+            <a class="floated-button" tooltip="Нова визита" onclick="new PatientManagement.PatientManagement.CalendarVisitsDialog().loadNewAndOpenDialog();"><i class="fa fa-calendar small-icon"></i></a>
+    
+            <a class="floated-button" tooltip="Нов пациент" onclick="new PatientManagement.PatientManagement.PatientsDialog().loadNewAndOpenDialog();"><i class="fa fa-user small-icon"></i></a>
+
+            <a class="floated-button" tooltip="Добави" href="#"><i class="fa fa-plus plus"></i></a>
+
+        </nav>
+  
+
+
     </div>
 
     <script type="text/javascript">
