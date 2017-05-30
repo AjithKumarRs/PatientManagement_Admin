@@ -1,5 +1,10 @@
 ﻿
 
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.AspNetCore.SignalR.Infrastructure;
+using PatientManagement.PatientManagement.Entities;
+using PatientManagement.Web.Hubs;
+
 namespace PatientManagement.PatientManagement.Repositories
 {
     using Serenity;
@@ -45,7 +50,30 @@ namespace PatientManagement.PatientManagement.Repositories
             return new MyListHandler().Process(connection, request);
         }
 
-        private class MySaveHandler : SaveRequestHandler<MyRow> { }
+        private class MySaveHandler : SaveRequestHandler<MyRow>
+        {
+            protected override void AfterSave()
+            {
+                base.AfterSave();
+
+                var notificationHub = Dependency.Resolver.Resolve<IConnectionManager>().GetHubContext<NotificationHub>();
+                var user = (UserDefinition)Authorization.UserDefinition;
+                var patientName = Connection.First<PatientsRow>(new Criteria(PatientsRow.Fields.PatientId) == Row.PatientId.ToString()).Name;
+
+                if (IsUpdate)
+                {
+
+                    var notification = string.Format(Texts.Site.Notifications.VisitChangedNotification, user.DisplayName, patientName);
+                    notificationHub.Clients.Group(user.TenantId.ToString()).visitChangedNotification(notification, Row.StartDate, Row.EndDate);
+                }
+                else
+                {
+                    var notification = string.Format(Texts.Site.Notifications.VisitAddedNotification, user.DisplayName, Row.PatientName);
+                    notificationHub.Clients.AllExcept().Group(user.TenantId.ToString()).visitChangedNotification(notification, Row.StartDate, Row.EndDate);
+                }
+                
+            }
+        }
 
         private class MyDeleteHandler : DeleteRequestHandler<MyRow>
         {
@@ -61,6 +89,21 @@ namespace PatientManagement.PatientManagement.Repositories
                     SqlExceptionHelper.HandleDeleteForeignKeyException(e);
                     throw;
                 }
+            }
+
+            protected override void OnAfterDelete()
+            {
+
+                base.OnAfterDelete();
+
+                var notificationHub = Dependency.Resolver.Resolve<IConnectionManager>().GetHubContext<NotificationHub>();
+                var user = (UserDefinition)Authorization.UserDefinition;
+                var patientName = Connection.First<PatientsRow>(new Criteria(PatientsRow.Fields.PatientId) == Row.PatientId.ToString()).Name;
+
+                var notification = string.Format(Texts.Site.Notifications.VisitAddedNotification, user.DisplayName, patientName);
+                notificationHub.Clients.Group(user.TenantId.ToString()).visitChangedNotification(notification, Row.StartDate, Row.EndDate);
+
+
             }
         }
         private class MyRetrieveHandler : RetrieveRequestHandler<MyRow> { }

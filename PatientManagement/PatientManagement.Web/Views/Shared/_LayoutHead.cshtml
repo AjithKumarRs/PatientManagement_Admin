@@ -43,6 +43,7 @@
 @Html.Script("~/Scripts/adminlte/app.js")
 @Html.Script("~/Scripts/site/PatientManagement.Web.js")
 @Html.Script("~/Scripts/colorpicker/bootstrap-colorpicker.min.js")
+@Html.Script("~/Scripts/jquery.signalR.min.js")
 
 <script src="~/DynJS.axd/@HtmlScriptExtensions.GetLocalTextInclude(this.Html, "Site")"></script>
 <script src="~/DynJS.axd/@DynamicScriptManager.GetScriptInclude("ColumnsBundle")"></script>
@@ -50,21 +51,24 @@
 <script src="~/DynJS.axd/@DynamicScriptManager.GetScriptInclude("TemplateBundle")"></script>
 <script src="~/DynJS.axd/@DynamicScriptManager.GetScriptInclude("RegisteredScripts")"></script>
 
-<script src="~/Scripts/jquery.signalR.min.js"></script>
 <script src="~/signalr/hubs"></script>
 <script>
     $(function () {
         var hub = $.connection.notificationHub;
 
-        hub.client.globalNotification = function (notification) {
+        hub.client.visitChangedNotification = function (notification, start, end) {
             var to = {};
             to.timeOut = 6000;
             to.closeButton = true;
             Q.notifyInfo(notification, '', to);
+            
+            RefreshFullCalendar(start, end);
 
-            //TODO Refresh calendar only if date start and date end are in changes
-            $('#VisitsGridDiv .refresh-button').click();
-            $("#calendar").fullCalendar('refetchEvents');
+            // Keep this?
+            if ($('#VisitsGridDiv').length){
+                $('#VisitsGridDiv .refresh-button').click();
+            }
+
         };
         $.connection.hub.start();
 

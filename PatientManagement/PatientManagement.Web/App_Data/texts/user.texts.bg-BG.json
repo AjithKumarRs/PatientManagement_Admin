@@ -115,5 +115,11 @@
   "Site.Dashboard.ContentDescription": "всички записани часове",
   "Site.Dashboard.ErrorEndDateBiggerThanStartDate": "Крайната дата не може да е по - рано от началната дата",
   "Site.Dashboard.ErrorEndDateEqualStartDate": "Крайната дата не може да е равна на началната дата",
-  "Site.Dashboard.SuccessChangedVisitDates": "Успешно променихте визита за пациент:"
+  "Site.Dashboard.SuccessChangedVisitDates": "Успешно променихте визита за пациент:",
+  "Site.Layout.AddFloatedButton": "Добави",
+  "Site.Layout.NewPatientFloatedButton": "Нов Пациент",
+  "Site.Layout.NewVisitFloatedButton": "Нова Визита",
+  "Site.Notifications.VisitAddedNotification": "{0} добави визита за пациент {1}",
+  "Site.Notifications.VisitChangedNotification": "{0} промени визита за пациент {1}",
+  "Site.Notifications.VisitDeletedNotification": "{0} изтри визита за пациент {1}"
 }

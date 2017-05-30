@@ -25,7 +25,7 @@
     @RenderSection("Head", false)
     <title>@(ViewData["Title"]) - PatientManagement</title>
 </head>
-<body id="s-@(ViewData["PageId"])Page" class="@(ViewData["BodyClass"]) fixed sidebar-mini hold-transition sidebar-collapse skin-@theme@(hideNav ? " no-navigation" : " has-layout-event")@(rtl ? " rtl" : "")">
+<body id="s-@(ViewData["PageId"])Page" class="@(ViewData["BodyClass"]) fixed sidebar-mini hold-transition skin-@theme@(hideNav ? " no-navigation" : " has-layout-event")@(rtl ? " rtl" : "")">
 
 @if (hideNav)
 {
@@ -55,6 +55,37 @@ else
 
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
+                        <li class="dropdown messages-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-envelope-o"></i>
+                                <span class="label label-success">4</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="header">Tem 4 Mensagens</li>
+                                <li>
+                                    <!-- inner menu: contains the actual data -->
+                                    <ul class="menu">
+                                        <li>
+                                            <!-- start message -->
+                                            <a href="#">
+                                                <div class="pull-left">
+                                                    <img src="/Content/adminlte/img/avatar5.png" class="img-circle" alt="User Image">
+                                                </div>
+                                                <h4>
+                                                    Bial Group
+                                                    <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                                                </h4>
+                                                <p>Oportunidade de realização de Estudo ?</p>
+                                            </a>
+                                        </li><!-- end message -->
+                                    </ul>
+                                </li>
+                                <li class="footer"><a href="#">Ver todas as Mensagens</a></li>
+                            </ul>
+                        </li>
+                        
+                        
+                        
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="@userImage" class="user-image" alt="User Image">
@@ -92,6 +123,22 @@ else
 
         <aside class="main-sidebar">
             <section class="sidebar">
+                <!-- Sidebar user panel -->
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src="@userImage" class="img-circle" alt="User Image">
+                    </div>
+                    <div class="pull-left info">
+                        <p>
+                            @(user != null ? user.DisplayName : "")
+                          
+                        </p>
+                        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                 
+                        <div class="clearfix"></div>
+                    </div>
+                    
+                </div>
                 <form action="#" method="get" class="sidebar-form">
                     <div class="input-group">
                         <input type="text" id="SidebarSearch" name="q" class="form-control" autocomplete="off">
@@ -162,11 +209,11 @@ else
     
             @*<a class="floated-button"  tooltip="Нов администратор"><i class="fa fa-users small-icon"></i></a>*@
     
-            <a class="floated-button" tooltip="Нова визита" onclick="new PatientManagement.PatientManagement.CalendarVisitsDialog().loadNewAndOpenDialog();"><i class="fa fa-calendar small-icon"></i></a>
+            <a class="floated-button" tooltip="@Texts.Site.Layout.NewVisitFloatedButton" onclick="new PatientManagement.PatientManagement.CalendarVisitsDialog().loadNewAndOpenDialog();"><i class="fa fa-calendar small-icon"></i></a>
     
-            <a class="floated-button" tooltip="Нов пациент" onclick="new PatientManagement.PatientManagement.PatientsDialog().loadNewAndOpenDialog();"><i class="fa fa-user small-icon"></i></a>
+            <a class="floated-button" tooltip="@Texts.Site.Layout.NewPatientFloatedButton" onclick="new PatientManagement.PatientManagement.PatientsDialog().loadNewAndOpenDialog();"><i class="fa fa-user small-icon"></i></a>
 
-            <a class="floated-button" tooltip="Добави" href="#"><i class="fa fa-plus plus"></i></a>
+            <a class="floated-button" tooltip="@Texts.Site.Layout.AddFloatedButton" href="#"><i class="fa fa-plus plus"></i></a>
 
         </nav>
   

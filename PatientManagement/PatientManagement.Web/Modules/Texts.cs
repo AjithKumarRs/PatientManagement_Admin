@@ -97,6 +97,15 @@ namespace PatientManagement
 
         public static class Site
         {
+            public static class Notifications
+            {
+                public static LocalText VisitChangedNotification = "{0} just change a visit for patient {1}";
+                public static LocalText VisitAddedNotification = "{0} just add a visit for patient {1}";
+                public static LocalText VisitDeletedNotification = "{0} just delete a visit for patient {1}";
+
+
+            }
+
             public static class Dashboard
             {
                 public static LocalText SuccessChangedVisitDates = "You successfully change visit with patient name: ";
@@ -161,6 +170,10 @@ namespace PatientManagement
 
             public static class Layout
             {
+                public static LocalText NewVisitFloatedButton = "New Visit";
+                public static LocalText NewPatientFloatedButton = "New Patient";
+                public static LocalText AddFloatedButton = "Add";
+
                 public static LocalText FooterCopyright = "Copyright (c) 2017.";
                 public static LocalText FooterInfo = "S2KDesign Platform";
                 public static LocalText FooterRights = "All rights reserved.";
