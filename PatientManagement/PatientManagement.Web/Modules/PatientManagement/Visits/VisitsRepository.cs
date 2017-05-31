@@ -1,9 +1,11 @@
 ﻿
 
-using Microsoft.AspNetCore.SignalR;
+using System.Linq;
 using Microsoft.AspNetCore.SignalR.Infrastructure;
+using PatientManagement.Administration.Entities;
 using PatientManagement.PatientManagement.Entities;
 using PatientManagement.Web.Hubs;
+using PatientManagement.Web.Modules.Common.Helpers;
 
 namespace PatientManagement.PatientManagement.Repositories
 {
@@ -55,21 +57,22 @@ namespace PatientManagement.PatientManagement.Repositories
             protected override void AfterSave()
             {
                 base.AfterSave();
-
-                var notificationHub = Dependency.Resolver.Resolve<IConnectionManager>().GetHubContext<NotificationHub>();
-                var user = (UserDefinition)Authorization.UserDefinition;
-                var patientName = Connection.First<PatientsRow>(new Criteria(PatientsRow.Fields.PatientId) == Row.PatientId.ToString()).Name;
-
+                
                 if (IsUpdate)
                 {
-
-                    var notification = string.Format(Texts.Site.Notifications.VisitChangedNotification, user.DisplayName, patientName);
-                    notificationHub.Clients.Group(user.TenantId.ToString()).visitChangedNotification(notification, Row.StartDate, Row.EndDate);
+                    VisitsNotificationHelpers.SendVisitNotification(
+                        Row.StartDate ?? DateTime.Now,
+                        Row.EndDate ?? DateTime.Now.AddMonths(1),
+                        Row.PatientId ?? 0,
+                        EVisitNotificationStatus.Updated);
                 }
                 else
                 {
-                    var notification = string.Format(Texts.Site.Notifications.VisitAddedNotification, user.DisplayName, Row.PatientName);
-                    notificationHub.Clients.AllExcept().Group(user.TenantId.ToString()).visitChangedNotification(notification, Row.StartDate, Row.EndDate);
+                    VisitsNotificationHelpers.SendVisitNotification(
+                        Row.StartDate ?? DateTime.Now,
+                        Row.EndDate ?? DateTime.Now.AddMonths(1),
+                        Row.PatientId ?? 0,
+                        EVisitNotificationStatus.Created);
                 }
                 
             }
@@ -96,13 +99,11 @@ namespace PatientManagement.PatientManagement.Repositories
 
                 base.OnAfterDelete();
 
-                var notificationHub = Dependency.Resolver.Resolve<IConnectionManager>().GetHubContext<NotificationHub>();
-                var user = (UserDefinition)Authorization.UserDefinition;
-                var patientName = Connection.First<PatientsRow>(new Criteria(PatientsRow.Fields.PatientId) == Row.PatientId.ToString()).Name;
-
-                var notification = string.Format(Texts.Site.Notifications.VisitAddedNotification, user.DisplayName, patientName);
-                notificationHub.Clients.Group(user.TenantId.ToString()).visitChangedNotification(notification, Row.StartDate, Row.EndDate);
-
+                VisitsNotificationHelpers.SendVisitNotification(
+                    Row.StartDate ?? DateTime.Now,
+                    Row.EndDate ?? DateTime.Now.AddMonths(1),
+                    Row.PatientId ?? 0,
+                    EVisitNotificationStatus.Deleted);
 
             }
         }

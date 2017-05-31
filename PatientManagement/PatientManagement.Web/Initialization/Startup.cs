@@ -17,6 +17,8 @@ using System;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.IO;
+using Microsoft.AspNetCore.SignalR;
+using PatientManagement.Web.Modules.Administration.User;
 
 namespace PatientManagement
 {
@@ -57,6 +59,7 @@ namespace PatientManagement
             services.AddSingleton<IUserRetrieveService, Administration.UserRetrieveService>();
             services.AddSingleton<IPermissionService, Administration.PermissionService>();
 
+            services.AddSingleton<IUserIdProvider, CustomUserIdProvider>();
             services.AddSignalR(options => options.Hubs.EnableDetailedErrors = true);
         }
 
