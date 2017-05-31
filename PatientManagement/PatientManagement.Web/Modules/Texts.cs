@@ -170,6 +170,9 @@ namespace PatientManagement
 
             public static class Layout
             {
+                public static LocalText RecieveNotificationToggleOn = "ON";
+                public static LocalText RecieveNotificationToggleOff = "OFF";
+
                 public static LocalText RecieveNotificationToggle = "Recieve notifications?";
                 public static LocalText NewVisitFloatedButton = "New Visit";
                 public static LocalText NewPatientFloatedButton = "New Patient";

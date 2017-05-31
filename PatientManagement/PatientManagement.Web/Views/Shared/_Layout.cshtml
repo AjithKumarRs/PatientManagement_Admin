@@ -8,6 +8,8 @@
     var hideNav = (string)Context.Request.Query["hideNav"] == "1";
     var logged = Serenity.Authorization.Username;
     var themeCookie = Context.Request.Cookies["ThemePreference"];
+    var notificationCookie = Context.Request.Cookies["NotificationPreference"];
+    var notificationState = !themeCookie.IsEmptyOrNull() ? notificationCookie : "true";
     var theme = !themeCookie.IsEmptyOrNull() ? themeCookie : "purple";
     var rtl = System.Globalization.CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft;
     var user = (UserDefinition)Serenity.Authorization.UserDefinition;
@@ -191,9 +193,10 @@
                             <hr />
                             <div class="form-group">
                                 <label class="control-sidebar-subheading">
-                                    <input id="NotificationCheck" type="checkbox" data-layout="sidebar-collapse" class="pull-right"> 
                                     @Texts.Site.Layout.RecieveNotificationToggle
                                 </label>
+                                
+                                <input id="NotificationCheck" type="checkbox" data-layout="sidebar-collapse" class="pull-right"> 
                             </div>
                             <hr />
                             <div class="form-group">
@@ -234,7 +237,7 @@
         <script type="text/javascript">
             $().ready(function () {
 
-            new PatientManagement.Common.RecieveNotificationToggle($('#NotificationCheck'));
+                new PatientManagement.Common.RecieveNotificationToggle($('#NotificationCheck'),{ state:@notificationState});
             new PatientManagement.Common.SidebarSearch($('#SidebarSearch'), $('#SidebarMenu')).init();
             new PatientManagement.Common.LanguageSelection($('#LanguageSelect'), '@(System.Globalization.CultureInfo.CurrentUICulture.Name)');
             new PatientManagement.Common.ThemeSelection($('#ThemeSelect'));

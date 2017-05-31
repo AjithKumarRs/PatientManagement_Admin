@@ -4367,17 +4367,51 @@ var PatientManagement;
     (function (Common) {
         var RecieveNotificationToggle = (function (_super) {
             __extends(RecieveNotificationToggle, _super);
-            function RecieveNotificationToggle(input) {
-                var _this = _super.call(this, input) || this;
-                new Serenity.BooleanEditor(input);
-                _this.change(function (e) {
-                    console.log("asdas");
-                });
+            function RecieveNotificationToggle(input, opt) {
+                var _this = _super.call(this, input, opt) || this;
+                console.log(_this.options.state);
+                _this.options.onSwitchChange = function (event, state) {
+                    $.cookie('NotificationPreference', state, {
+                        path: Q.Config.applicationPath,
+                        expires: 365
+                    });
+                };
+                _this.options.onText = Q.text("Site.Layout.RecieveNotificationToggleOn");
+                _this.options.offText = Q.text("Site.Layout.RecieveNotificationToggleOff");
+                _this.options.onColor = "success";
+                _this.options.offColor = "warning";
+                input.attr('type', 'checkbox').bootstrapSwitch(_this.options);
                 return _this;
             }
             return RecieveNotificationToggle;
         }(Serenity.Widget));
         Common.RecieveNotificationToggle = RecieveNotificationToggle;
     })(Common = PatientManagement.Common || (PatientManagement.Common = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var BsSwitchEditor = (function (_super) {
+        __extends(BsSwitchEditor, _super);
+        function BsSwitchEditor(element, opt) {
+            var _this = _super.call(this, element, opt) || this;
+            _this.options.size = "mini";
+            element.attr('type', 'checkbox').bootstrapSwitch(_this.options);
+            return _this;
+        }
+        BsSwitchEditor.prototype.setEditValue = function (source, property) {
+            if (this.element.hasClass('required'))
+                this.element.removeClass('required');
+            this.element.bootstrapSwitch('state', source[property.name]);
+        };
+        BsSwitchEditor.prototype.getEditValue = function (property, target) {
+            target[property.name] = this.element.bootstrapSwitch('state');
+        };
+        return BsSwitchEditor;
+    }(Serenity.Widget));
+    BsSwitchEditor = __decorate([
+        Serenity.Decorators.element('<input type="checkbox"/>'),
+        Serenity.Decorators.registerClass([Serenity.IGetEditValue, Serenity.ISetEditValue])
+    ], BsSwitchEditor);
+    PatientManagement.BsSwitchEditor = BsSwitchEditor;
 })(PatientManagement || (PatientManagement = {}));
 //# sourceMappingURL=PatientManagement.Web.js.map

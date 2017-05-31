@@ -1881,6 +1881,34 @@ declare namespace PatientManagement.PatientManagement {
 }
 declare namespace PatientManagement.Common {
     class RecieveNotificationToggle extends Serenity.Widget<any> {
-        constructor(input: JQuery);
+        constructor(input: JQuery, opt: BootstrapSwitchOptions);
+    }
+}
+declare namespace PatientManagement {
+    class BsSwitchEditor extends Serenity.Widget<BootstrapSwitchOptions> implements Serenity.IGetEditValue, Serenity.ISetEditValue {
+        constructor(element: JQuery, opt: BootstrapSwitchOptions);
+        setEditValue(source: any, property: Serenity.PropertyItem): void;
+        getEditValue(property: Serenity.PropertyItem, target: any): void;
+    }
+    interface BootstrapSwitchOptions {
+        state?: boolean;
+        size?: string;
+        animate?: boolean;
+        disabled?: boolean;
+        readonly?: boolean;
+        indeterminate?: boolean;
+        invers?: boolean;
+        radioAllOff?: boolean;
+        onColor?: string;
+        offColor?: string;
+        onText?: string;
+        offText?: string;
+        labelText?: string;
+        handleWidth?: string;
+        labelWidth?: string;
+        baseClass?: string;
+        wrapperClass?: string;
+        onInit?: any;
+        onSwitchChange?: any;
     }
 }
