@@ -6,17 +6,18 @@ using Microsoft.AspNetCore.SignalR;
 using Microsoft.AspNetCore.SignalR.Infrastructure;
 using PatientManagement.Administration.Entities;
 using PatientManagement.PatientManagement.Entities;
+using PatientManagement.PatientManagement.Repositories;
 using PatientManagement.Web.Hubs;
 using Serenity;
 using Serenity.Data;
 
 namespace PatientManagement.Web.Modules.Common.Helpers
 {
-    public class VisitsNotificationHelpers
+    public class NotificationHelpers
     {
         private static readonly IHubContext notificationHub = Dependency.Resolver.Resolve<IConnectionManager>().GetHubContext<NotificationHub>();
  
-        public static void SendVisitNotification(DateTime start, DateTime end, int patientId, EVisitNotificationStatus status)
+        public static void SendVisitNotification(int VisitId, DateTime start, DateTime end, int patientId, EVisitNotificationStatus status)
         {
             var user = (UserDefinition)Authorization.UserDefinition;
 
@@ -39,9 +40,16 @@ namespace PatientManagement.Web.Modules.Common.Helpers
 
                 default: break;
             }
-
+          
             notificationHub.Clients.Users(users.ToList()).visitChangedNotification(notification, start, end);
-
+            connection.InsertAndGetID(new NotificationsRow
+            {
+                EntityType = VisitsRow.Fields.TableName,
+                EntityId = VisitId,
+                Text = notification,
+                InsertDate = DateTime.Now,
+                InsertUserId = user.UserId
+            });
         }
     }
 

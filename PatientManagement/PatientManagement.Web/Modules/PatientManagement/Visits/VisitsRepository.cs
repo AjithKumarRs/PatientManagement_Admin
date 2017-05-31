@@ -60,7 +60,8 @@ namespace PatientManagement.PatientManagement.Repositories
                 
                 if (IsUpdate)
                 {
-                    VisitsNotificationHelpers.SendVisitNotification(
+                    NotificationHelpers.SendVisitNotification(
+                        Row.VisitId ?? 0,
                         Row.StartDate ?? DateTime.Now,
                         Row.EndDate ?? DateTime.Now.AddMonths(1),
                         Row.PatientId ?? 0,
@@ -68,7 +69,8 @@ namespace PatientManagement.PatientManagement.Repositories
                 }
                 else
                 {
-                    VisitsNotificationHelpers.SendVisitNotification(
+                    NotificationHelpers.SendVisitNotification(
+                        Row.VisitId ?? 0,
                         Row.StartDate ?? DateTime.Now,
                         Row.EndDate ?? DateTime.Now.AddMonths(1),
                         Row.PatientId ?? 0,
@@ -99,7 +101,8 @@ namespace PatientManagement.PatientManagement.Repositories
 
                 base.OnAfterDelete();
 
-                VisitsNotificationHelpers.SendVisitNotification(
+                NotificationHelpers.SendVisitNotification(
+                    Row.VisitId??0,
                     Row.StartDate ?? DateTime.Now,
                     Row.EndDate ?? DateTime.Now.AddMonths(1),
                     Row.PatientId ?? 0,

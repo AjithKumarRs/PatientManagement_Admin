@@ -8830,3 +8830,21 @@ section.content > .s-DataGrid {
 .s-PatientManagement-ActivityDialog .caption {
   width: 150px;
 }
+.s-PatientManagement-NotificationsDialog > .size {
+  width: 650px;
+}
+.s-PatientManagement-NotificationsDialog .caption {
+  width: 150px;
+}
+.s-PatientManagement-NotificationsDialog > .size {
+  width: 650px;
+}
+.s-PatientManagement-NotificationsDialog .caption {
+  width: 150px;
+}
+.s-PatientManagement-UserNotificationsDialog > .size {
+  width: 650px;
+}
+.s-PatientManagement-UserNotificationsDialog .caption {
+  width: 150px;
+}
