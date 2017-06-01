@@ -42,7 +42,8 @@ namespace PatientManagement.Web.Modules.Common.Helpers
             }
           
             notificationHub.Clients.Users(users.ToList()).visitChangedNotification(notification, start, end);
-            connection.InsertAndGetID(new NotificationsRow
+
+            var notificationId = connection.InsertAndGetID(new NotificationsRow
             {
                 EntityType = VisitsRow.Fields.TableName,
                 EntityId = VisitId,
@@ -50,6 +51,8 @@ namespace PatientManagement.Web.Modules.Common.Helpers
                 InsertDate = DateTime.Now,
                 InsertUserId = user.UserId
             });
+
+
         }
     }
 

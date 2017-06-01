@@ -1249,6 +1249,10 @@ declare namespace PatientManagement.Administration {
         protected usePager(): boolean;
     }
 }
+declare namespace PatientManagement.Authorization {
+    let userDefinition: ScriptUserDefinition;
+    function hasPermission(permissionKey: string): boolean;
+}
 declare namespace PatientManagement.Administration {
     class UserDialog extends Serenity.EntityDialog<UserRow, any> {
         protected getFormKey(): string;
@@ -1276,10 +1280,6 @@ declare namespace PatientManagement.Administration {
         constructor(container: JQuery);
         protected getDefaultSortBy(): string[];
     }
-}
-declare namespace PatientManagement.Authorization {
-    let userDefinition: ScriptUserDefinition;
-    function hasPermission(permissionKey: string): boolean;
 }
 declare namespace PatientManagement.Administration {
     class PermissionCheckEditor extends Serenity.DataGrid<PermissionCheckItem, PermissionCheckEditorOptions> {
@@ -1351,11 +1351,6 @@ declare namespace PatientManagement.Administration {
         username: string;
     }
 }
-declare namespace PatientManagement.LanguageList {
-    function getValue(): string[][];
-}
-declare namespace PatientManagement.ScriptInitialization {
-}
 declare namespace PatientManagement {
     class BasicProgressDialog extends Serenity.TemplatedDialog<any> {
         constructor();
@@ -1367,6 +1362,34 @@ declare namespace PatientManagement {
         getDialogOptions(): JQueryUI.DialogOptions;
         initDialog(): void;
         getTemplate(): string;
+    }
+}
+declare namespace PatientManagement {
+    class BsSwitchEditor extends Serenity.Widget<BootstrapSwitchOptions> implements Serenity.IGetEditValue, Serenity.ISetEditValue {
+        constructor(element: JQuery, opt: BootstrapSwitchOptions);
+        setEditValue(source: any, property: Serenity.PropertyItem): void;
+        getEditValue(property: Serenity.PropertyItem, target: any): void;
+    }
+    interface BootstrapSwitchOptions {
+        state?: boolean;
+        size?: string;
+        animate?: boolean;
+        disabled?: boolean;
+        readonly?: boolean;
+        indeterminate?: boolean;
+        invers?: boolean;
+        radioAllOff?: boolean;
+        onColor?: string;
+        offColor?: string;
+        onText?: string;
+        offText?: string;
+        labelText?: string;
+        handleWidth?: string;
+        labelWidth?: string;
+        baseClass?: string;
+        wrapperClass?: string;
+        onInit?: any;
+        onSwitchChange?: any;
     }
 }
 declare namespace PatientManagement.Common {
@@ -1467,9 +1490,17 @@ declare namespace PatientManagement.Common {
         protected deleteHandler(options: Serenity.ServiceOptions<Serenity.DeleteResponse>, callback: (response: Serenity.DeleteResponse) => void): void;
     }
 }
+declare namespace PatientManagement.LanguageList {
+    function getValue(): string[][];
+}
 declare namespace PatientManagement.Common {
     class LanguageSelection extends Serenity.Widget<any> {
         constructor(select: JQuery, currentLanguage: string);
+    }
+}
+declare namespace PatientManagement.Common {
+    class RecieveNotificationToggle extends Serenity.Widget<any> {
+        constructor(input: JQuery, opt: BootstrapSwitchOptions);
     }
 }
 declare namespace PatientManagement.Common {
@@ -1564,17 +1595,12 @@ declare namespace PatientManagement.Common {
         protected reportLinkClick(e: any): void;
     }
 }
+declare namespace PatientManagement.ScriptInitialization {
+}
 declare namespace PatientManagement.Common {
     class UserPreferenceStorage implements Serenity.SettingStorage {
         getItem(key: string): string;
         setItem(key: string, data: string): void;
-    }
-}
-declare namespace PatientManagement.Membership {
-    class LoginPanel extends Serenity.PropertyPanel<LoginRequest, any> {
-        protected getFormKey(): string;
-        private form;
-        constructor(container: JQuery);
     }
 }
 declare namespace PatientManagement.Membership {
@@ -1586,6 +1612,13 @@ declare namespace PatientManagement.Membership {
 }
 declare namespace PatientManagement.Membership {
     class ForgotPasswordPanel extends Serenity.PropertyPanel<ForgotPasswordRequest, any> {
+        protected getFormKey(): string;
+        private form;
+        constructor(container: JQuery);
+    }
+}
+declare namespace PatientManagement.Membership {
+    class LoginPanel extends Serenity.PropertyPanel<LoginRequest, any> {
         protected getFormKey(): string;
         private form;
         constructor(container: JQuery);
@@ -1877,38 +1910,5 @@ declare namespace PatientManagement.PatientManagement {
         protected getLocalTextPrefix(): string;
         protected getService(): string;
         constructor(container: JQuery);
-    }
-}
-declare namespace PatientManagement.Common {
-    class RecieveNotificationToggle extends Serenity.Widget<any> {
-        constructor(input: JQuery, opt: BootstrapSwitchOptions);
-    }
-}
-declare namespace PatientManagement {
-    class BsSwitchEditor extends Serenity.Widget<BootstrapSwitchOptions> implements Serenity.IGetEditValue, Serenity.ISetEditValue {
-        constructor(element: JQuery, opt: BootstrapSwitchOptions);
-        setEditValue(source: any, property: Serenity.PropertyItem): void;
-        getEditValue(property: Serenity.PropertyItem, target: any): void;
-    }
-    interface BootstrapSwitchOptions {
-        state?: boolean;
-        size?: string;
-        animate?: boolean;
-        disabled?: boolean;
-        readonly?: boolean;
-        indeterminate?: boolean;
-        invers?: boolean;
-        radioAllOff?: boolean;
-        onColor?: string;
-        offColor?: string;
-        onText?: string;
-        offText?: string;
-        labelText?: string;
-        handleWidth?: string;
-        labelWidth?: string;
-        baseClass?: string;
-        wrapperClass?: string;
-        onInit?: any;
-        onSwitchChange?: any;
     }
 }
