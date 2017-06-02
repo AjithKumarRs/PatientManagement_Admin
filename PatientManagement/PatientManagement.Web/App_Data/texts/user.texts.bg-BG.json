@@ -134,6 +134,9 @@
   "Site.Layout.RecieveNotificationToggleOff": "Изкл.",
   "Site.Layout.RecieveNotificationToggleOn": "Вкл,",
   "Site.Layout.Theme": "Тема",
+  "Site.Notifications.PatientAddedNotification": "{0} добави пациент {1}",
+  "Site.Notifications.PatientChangedNotification": "{0} промени пациент {1}",
+  "Site.Notifications.PatientDeletedNotification": "{0} изтри пациент {1}",
   "Site.Notifications.VisitAddedNotification": "{0} добави визита за пациент {1}",
   "Site.Notifications.VisitChangedNotification": "{0} промени визита за пациент {1}",
   "Site.Notifications.VisitDeletedNotification": "{0} изтри визита за пациент {1}"

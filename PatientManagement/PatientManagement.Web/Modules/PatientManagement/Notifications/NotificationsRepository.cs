@@ -46,43 +46,13 @@ namespace PatientManagement.PatientManagement.Repositories
             return new MyListHandler().Process(connection, request);
         }
 
-        private class MySaveHandler : SaveRequestHandler<MyRow>
-        {
-            protected override void AfterSave()
-            {
-                base.AfterSave();
-
-                //if (IsCreate)
-                //{
-                //    var user = (UserDefinition)Authorization.UserDefinition;
-                //    var connection = SqlConnections.NewFor<UserRow>();
-                //    var users = connection.List<UserRow>().Where(e => e.TenantId == user.TenantId && e.UserId != Int32.Parse(user.Id)).Select(e => e.UserId).ToList();
-
-                //    foreach (var userToNotify in users)
-                //    {
-                //        using (var connectionUserNotifications = SqlConnections.NewFor<UserNotificationsRow>())
-                //        using (var uow = new UnitOfWork(connectionUserNotifications))
-                //        {
-                //            var saveRequest = new SaveRequest<UserNotificationsRow>
-                //            {
-                //                Entity = new UserNotificationsRow
-                //                {
-                //                    NotificationId = Row.NotificationId,
-                //                    UserId = userToNotify
-                //                }
-                //            };
-
-                //            new UserNotificationsRepository().Create(uow, saveRequest);
-                //        }
-                //    }
-                //}
-            }
-        }
+        private class MySaveHandler : SaveRequestHandler<MyRow>{ }
         private class MyDeleteHandler : DeleteRequestHandler<MyRow> { }
         private class MyRetrieveHandler : RetrieveRequestHandler<MyRow> { }
 
         private class MyListHandler : ListRequestHandler<MyRow>
         {
+
             protected override void OnReturn()
             {
                 base.OnReturn();

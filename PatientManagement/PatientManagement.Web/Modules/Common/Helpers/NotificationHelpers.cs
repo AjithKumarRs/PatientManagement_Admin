@@ -19,45 +19,52 @@ namespace PatientManagement.Web.Modules.Common.Helpers
     {
         private static readonly IHubContext notificationHub = Dependency.Resolver.Resolve<IConnectionManager>().GetHubContext<NotificationHub>();
 
-        public static void SendVisitNotification(int VisitId, DateTime start, DateTime end, int patientId, EVisitNotificationStatus status)
+        #region Private Methods
+
+        private static List<string> GetOtherUsersIdForTenant(int tenantId, int userId)
         {
-            var user = (UserDefinition)Authorization.UserDefinition;
-            var patientName = string.Empty;
             List<string> users = new List<string>();
-
-            using (var connectionPatients = SqlConnections.NewFor<PatientsRow>())
-            {
-                patientName = connectionPatients.First<PatientsRow>(new Criteria(PatientsRow.Fields.PatientId) == patientId.ToString()).Name;
-            }
-
             using (var connectionUsers = SqlConnections.NewFor<UserRow>())
             {
-                users = connectionUsers.List<UserRow>().Where(e => e.TenantId == user.TenantId && e.UserId != Int32.Parse(user.Id)).Select(e => e.UserId.ToString()).ToList();
-
+                users = connectionUsers.List<UserRow>().Where(e => e.TenantId == tenantId && e.UserId != userId).Select(e => e.UserId.ToString()).ToList();
             }
+            return users;
+        }
 
+        /// <summary>
+        /// Formates the message for status.
+        /// Check <see cref="EEntityNotificationStatus"/> for order!
+        /// </summary>
+        /// <param name="status">The status.</param>
+        /// <param name="format">The format.</param>
+        /// <param name="args">The arguments.</param>
+        /// <returns></returns>
+        private static string FormatedMessageForStatus(EEntityNotificationStatus status, string[] format, object[] args)
+        {
             var message = string.Empty;
             switch (status)
             {
-                case EVisitNotificationStatus.Created:
-                    message = string.Format(Texts.Site.Notifications.VisitAddedNotification, user.DisplayName, patientName);
+                case EEntityNotificationStatus.Created:
+                    message = string.Format(format[0], args);
                     break;
-                case EVisitNotificationStatus.Updated:
-                    message = string.Format(Texts.Site.Notifications.VisitChangedNotification, user.DisplayName, patientName);
+                case EEntityNotificationStatus.Updated:
+                    message = string.Format(format[1], args);
                     break;
-                case EVisitNotificationStatus.Deleted:
-                    message = string.Format(Texts.Site.Notifications.VisitDeletedNotification, user.DisplayName, patientName);
+                case EEntityNotificationStatus.Deleted:
+                    message = string.Format(format[2], args);
                     break;
 
                 default: break;
             }
+            return message;
+        }
 
-            notificationHub.Clients.Users(users.ToList()).visitChangedNotification(user.DisplayName, user.UserImage, message, start, end);
-
+        private static void InsertNotificationForCurrentTable(string tableName, int visitId, string message)
+        {
             var notificationRow = new NotificationsRow
             {
-                EntityType = VisitsRow.Fields.TableName,
-                EntityId = VisitId,
+                EntityType = tableName,
+                EntityId = visitId,
                 Text = message
             };
 
@@ -71,10 +78,74 @@ namespace PatientManagement.Web.Modules.Common.Helpers
                 new NotificationsRepository().Create(uow, saveRequest);
             }
         }
+
+        #endregion
+
+        #region Visits Notification
+        public static void SendVisitNotification(int VisitId, DateTime start, DateTime end, int patientId, EEntityNotificationStatus status)
+        {
+            var user = (UserDefinition)Authorization.UserDefinition;
+
+            var patientName = string.Empty;
+            using (var connectionPatients = SqlConnections.NewFor<PatientsRow>())
+            {
+                patientName = connectionPatients.First<PatientsRow>(new Criteria(PatientsRow.Fields.PatientId) == patientId.ToString()).Name;
+            }
+
+            var message = FormatedMessageForStatus(
+                status, new string[]{
+                    Texts.Site.Notifications.VisitAddedNotification,
+                    Texts.Site.Notifications.VisitChangedNotification,
+                    Texts.Site.Notifications.VisitDeletedNotification
+                    },
+                    new Object[]
+                    {
+                        user.DisplayName,
+                        patientName
+                    }
+
+            );
+
+            List<string> users = GetOtherUsersIdForTenant(user.TenantId, Int32.Parse(user.Id));
+            notificationHub.Clients.Users(users.ToList()).visitChangedNotification(user.DisplayName, user.UserImage, message, start, end);
+
+            InsertNotificationForCurrentTable(VisitsRow.Fields.TableName, VisitId, message);
+        }
+
+        #endregion
+
+        #region Patient Notification
+
+        public static void SendPatientNotification(int patientId, string patientName, EEntityNotificationStatus status)
+        {
+            var user = (UserDefinition)Authorization.UserDefinition;
+
+            var message = FormatedMessageForStatus(
+                status, new string[]{
+                    Texts.Site.Notifications.PatientAddedNotification,
+                    Texts.Site.Notifications.PatientChangedNotification,
+                    Texts.Site.Notifications.PatientDeletedNotification
+                },
+                new Object[]
+                {
+                    user.DisplayName,
+                    patientName
+                }
+
+            );
+
+            List<string> users = GetOtherUsersIdForTenant(user.TenantId, Int32.Parse(user.Id));
+            notificationHub.Clients.Users(users.ToList()).patientChangedNotification(user.DisplayName, user.UserImage, message);
+
+            InsertNotificationForCurrentTable(PatientsRow.Fields.TableName, patientId, message);
+        }
+
+        #endregion
+        
     }
 
 
-    public enum EVisitNotificationStatus
+    public enum EEntityNotificationStatus
     {
         Created = 0,
         Updated = 1,

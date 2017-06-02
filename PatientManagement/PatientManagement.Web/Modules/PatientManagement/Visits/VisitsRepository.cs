@@ -65,7 +65,7 @@ namespace PatientManagement.PatientManagement.Repositories
                         Row.StartDate ?? DateTime.Now,
                         Row.EndDate ?? DateTime.Now.AddMonths(1),
                         Row.PatientId ?? 0,
-                        EVisitNotificationStatus.Updated);
+                        EEntityNotificationStatus.Updated);
                 }
                 else
                 {
@@ -74,7 +74,7 @@ namespace PatientManagement.PatientManagement.Repositories
                         Row.StartDate ?? DateTime.Now,
                         Row.EndDate ?? DateTime.Now.AddMonths(1),
                         Row.PatientId ?? 0,
-                        EVisitNotificationStatus.Created);
+                        EEntityNotificationStatus.Created);
                 }
                 
             }
@@ -106,7 +106,7 @@ namespace PatientManagement.PatientManagement.Repositories
                     Row.StartDate ?? DateTime.Now,
                     Row.EndDate ?? DateTime.Now.AddMonths(1),
                     Row.PatientId ?? 0,
-                    EVisitNotificationStatus.Deleted);
+                    EEntityNotificationStatus.Deleted);
 
             }
         }

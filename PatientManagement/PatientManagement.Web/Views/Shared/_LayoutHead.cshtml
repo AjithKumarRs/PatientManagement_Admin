@@ -61,20 +61,33 @@
             var to = {};
             to.timeOut = 6000;
             to.closeButton = true;
-
-            console.log(userDisplayName);
+            
 
             if ($('#NotificationCheck').bootstrapSwitch('state')) {
                 Q.notifyInfo(notification, '', to);
             }
             RefreshFullCalendar(start, end);
-
-            // Keep this?
+            
             if ($('#VisitsGridDiv').length){
                 $('#VisitsGridDiv .refresh-button').click();
             }
 
         };
+
+        hub.client.patientChangedNotification = function (userDisplayName, userPicture, notification) {
+            var to = {};
+        
+            if ($('#NotificationCheck').bootstrapSwitch('state')) {
+                Q.notifyInfo(notification, '', to);
+            }
+            
+            if ($('.s-PatientsGrid').length) {
+                $('.s-PatientsGrid .refresh-button').click();
+            }
+
+        };
+
+
         $.connection.hub.start();
 
     });

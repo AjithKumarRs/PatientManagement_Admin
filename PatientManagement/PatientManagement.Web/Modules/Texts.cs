@@ -103,7 +103,9 @@ namespace PatientManagement
                 public static LocalText VisitAddedNotification = "{0} just add a visit for patient {1}";
                 public static LocalText VisitDeletedNotification = "{0} just delete a visit for patient {1}";
 
-
+                public static LocalText PatientAddedNotification = "{0} just add a patient {1}";
+                public static LocalText PatientChangedNotification = "{0} just change a patient {1}";
+                public static LocalText PatientDeletedNotification = "{0} just delete a patient {1}";
             }
 
             public static class Dashboard
