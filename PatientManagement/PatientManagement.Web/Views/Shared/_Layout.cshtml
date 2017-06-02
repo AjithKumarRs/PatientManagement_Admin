@@ -2,14 +2,17 @@
 @using Microsoft.AspNetCore.Html
 @using PatientManagement
 @using Serenity
+@using Serenity.Navigation
 <!DOCTYPE html>
 @{
     Func<string, HtmlString> json = x => new HtmlString(Serenity.JSON.Stringify(x));
     var hideNav = (string)Context.Request.Query["hideNav"] == "1";
     var logged = Serenity.Authorization.Username;
     var themeCookie = Context.Request.Cookies["ThemePreference"];
+
     var notificationCookie = Context.Request.Cookies["NotificationPreference"];
-    var notificationState = !themeCookie.IsEmptyOrNull() ? notificationCookie : "true";
+    var notificationState = !notificationCookie.IsEmptyOrNull() ? notificationCookie : "true";
+
     var theme = !themeCookie.IsEmptyOrNull() ? themeCookie : "purple";
     var rtl = System.Globalization.CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft;
     var user = (UserDefinition)Serenity.Authorization.UserDefinition;
@@ -59,11 +62,11 @@
                         <ul class="nav navbar-nav">
                             <li class="dropdown messages-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-envelope-o"></i>
-                                    <span class="label label-success">4</span>
+                                    <i class="fa fa-bell-o"></i>
+                                    <span id="NotificationCounterLabel" class="label label-success">4</span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li class="header">Tem 4 Mensagens</li>
+                                    <li class="header">@Texts.Site.Layout.NotificationMenuHeader</li>
                                     <li>
                                         <!-- inner menu: contains the actual data -->
                                         <ul class="menu">
@@ -82,7 +85,7 @@
                                             </li><!-- end message -->
                                         </ul>
                                     </li>
-                                    <li class="footer"><a href="#">Ver todas as Mensagens</a></li>
+                                    <li class="footer"><a href="~/PatientManagement/Visits">@Texts.Site.Layout.NotificationMenuFooter</a></li>
                                 </ul>
                             </li>
 

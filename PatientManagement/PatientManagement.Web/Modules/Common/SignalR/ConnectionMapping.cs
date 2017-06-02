@@ -84,11 +84,19 @@ namespace PatientManagement.Web.Modules.Common.SignalR
             }
         }
 
+
         public HashSet<string> GetConnectionIdByUserId(int userId)
         {
             HashSet<string> connectionId = null;
             _connections.TryGetValue(userId, out connectionId);
             return connectionId;
+        }
+
+        public int GetUserByConnectionId(string connectionId)
+        {
+            int userId = 0;
+            userId = _connections.FirstOrDefault(x => x.Value.Contains(connectionId)).Key;
+            return userId;
         }
 
     }

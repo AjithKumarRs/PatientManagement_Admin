@@ -33,10 +33,13 @@ namespace PatientManagement.Web.Hubs
 
         public override Task OnDisconnected(bool stopCalled)
         {
-            var user = (UserDefinition)Authorization.UserDefinition;
+            if (Authorization.IsLoggedIn)
+            {
+                var user = (UserDefinition) Authorization.UserDefinition;
 
-            _connections.Remove(Convert.ToInt32(user.Id), Context.ConnectionId);
 
+                _connections.Remove(Convert.ToInt32(user.Id), Context.ConnectionId);
+            }
             return base.OnDisconnected(stopCalled);
         }
 

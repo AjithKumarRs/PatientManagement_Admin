@@ -128,6 +128,8 @@
   "Site.Layout.Language": "Език",
   "Site.Layout.NewPatientFloatedButton": "Нов Пациент",
   "Site.Layout.NewVisitFloatedButton": "Нова Визита",
+  "Site.Layout.NotificationMenuFooter": "Показване на известия",
+  "Site.Layout.NotificationMenuHeader": "Всички получени известия",
   "Site.Layout.RecieveNotificationToggle": "Получавай известия?",
   "Site.Layout.RecieveNotificationToggleOff": "Изкл.",
   "Site.Layout.RecieveNotificationToggleOn": "Вкл,",

@@ -57,10 +57,12 @@
     $(function () {
         var hub = $.connection.notificationHub;
 
-        hub.client.visitChangedNotification = function (notification, start, end) {
+        hub.client.visitChangedNotification = function (userDisplayName, userPicture, notification, start, end) {
             var to = {};
             to.timeOut = 6000;
             to.closeButton = true;
+
+            console.log(userDisplayName);
 
             if ($('#NotificationCheck').bootstrapSwitch('state')) {
                 Q.notifyInfo(notification, '', to);

@@ -23,7 +23,8 @@ namespace PatientManagement.Migrations.PatientManagementDB
                 .WithColumn("NotificationId").AsInt32().NotNullable()
                 .ForeignKey("FK_UserNotifications_NotificationId", "Notifications", "NotificationId")
                 .WithColumn("SeenAt").AsDateTime().Nullable()
-                .WithColumn("UserId").AsInt32().NotNullable();
+                .WithColumn("UserId").AsInt32().NotNullable()
+                .WithColumn("TenantId").AsInt32().NotNullable().WithDefaultValue(1); ;
         }
     }
 }

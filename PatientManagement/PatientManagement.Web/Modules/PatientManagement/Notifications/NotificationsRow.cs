@@ -1,4 +1,6 @@
 ﻿
+using PatientManagement.PatientManagement.Scripts;
+
 namespace PatientManagement.PatientManagement.Entities
 {
     using Serenity;
@@ -12,30 +14,32 @@ namespace PatientManagement.PatientManagement.Entities
     [ConnectionKey("PatientManagement"), TableName("[dbo].[Notifications]"), DisplayName("Notifications"), InstanceName("Notifications"), TwoLevelCached]
     [ReadPermission("PatientManagement:Notifications:Read")]
     [ModifyPermission("PatientManagement:Notifications:Modify")]
-    public sealed class NotificationsRow : Row, IIdRow, INameRow, IInsertLogRow
+    [LookupScript("PatientManagement.Notifications", LookupType = typeof(MultiTenantRowLookupScript<>))]
+
+    public sealed class NotificationsRow : Row, IIdRow, INameRow, IInsertLogRow, IMultiTenantRow
     {
-        [DisplayName("Notification Id"), Identity]
+        [DisplayName("Notification Id"), Identity, Column("NotificationId"), Updatable(false)]
         public Int32? NotificationId
         {
             get { return Fields.NotificationId[this]; }
             set { Fields.NotificationId[this] = value; }
         }
 
-        [DisplayName("Entity Type"), Size(100), NotNull, QuickSearch]
+        [DisplayName("Entity Type"), Size(100), NotNull, QuickSearch, Updatable(false)]
         public String EntityType
         {
             get { return Fields.EntityType[this]; }
             set { Fields.EntityType[this] = value; }
         }
 
-        [DisplayName("Entity Id"), Column("EntityID"), NotNull]
+        [DisplayName("Entity Id"), Column("EntityID"), NotNull, Updatable(false)]
         public Int64? EntityId
         {
             get { return Fields.EntityId[this]; }
             set { Fields.EntityId[this] = value; }
         }
 
-        [DisplayName("Text"), Size(-1), NotNull]
+        [DisplayName("Text"),  NotNull, Updatable(false), QuickSearch]
         public String Text
         {
             get { return Fields.Text[this]; }
@@ -49,6 +53,14 @@ namespace PatientManagement.PatientManagement.Entities
             set { Fields.InsertUserId[this] = value; }
         }
 
+        [DisplayName("Insert User"), NotMapped]
+        public String InsertUserDisplayName
+        {
+            get { return Fields.InsertUserDisplayName[this]; }
+            set { Fields.InsertUserDisplayName[this] = value; }
+        }
+
+        [DisplayFormat("dd/MM/yyyy HH:mm")]
         [DisplayName("Insert Date"), NotNull, Insertable(false), Updatable(false)]
         public DateTime? InsertDate
         {
@@ -85,11 +97,26 @@ namespace PatientManagement.PatientManagement.Entities
             public Int32Field InsertUserId;
             public DateTimeField InsertDate;
 
+
+            public StringField InsertUserDisplayName;
+            public readonly Int32Field TenantId;
+
             public RowFields()
                 : base()
             {
                 LocalTextPrefix = "PatientManagement.Notifications";
             }
+        }
+
+        [Insertable(false), Updatable(false)]
+        public Int32? TenantId
+        {
+            get { return Fields.TenantId[this]; }
+            set { Fields.TenantId[this] = value; }
+        }
+        public Int32Field TenantIdField
+        {
+            get { return Fields.TenantId; }
         }
     }
 }

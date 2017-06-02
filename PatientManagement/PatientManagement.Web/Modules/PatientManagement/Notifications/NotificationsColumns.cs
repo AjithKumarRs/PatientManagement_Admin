@@ -1,4 +1,7 @@
 ﻿
+using PatientManagement.PatientManagement.Entities;
+using Serenity.Data.Mapping;
+
 namespace PatientManagement.PatientManagement.Columns
 {
     using Serenity;
@@ -13,13 +16,21 @@ namespace PatientManagement.PatientManagement.Columns
     [BasedOnRow(typeof(Entities.NotificationsRow))]
     public class NotificationsColumns
     {
-        [EditLink, DisplayName("Db.Shared.RecordId"), AlignRight]
+        [DisplayName("Db.Shared.RecordId")]
         public Int32 NotificationId { get; set; }
+
         [EditLink]
         public String EntityType { get; set; }
+
         public Int64 EntityId { get; set; }
+        
+        [Size(400)]
         public String Text { get; set; }
-        public Int32 InsertUserId { get; set; }
+
+        [Size(150)]
+        public String InsertUserDisplayName { get; set; }
+
+        [Size(150)]
         public DateTime InsertDate { get; set; }
     }
 }
