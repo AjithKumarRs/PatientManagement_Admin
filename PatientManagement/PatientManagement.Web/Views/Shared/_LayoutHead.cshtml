@@ -71,7 +71,12 @@
             if ($('#VisitsGridDiv').length){
                 $('#VisitsGridDiv .refresh-button').click();
             }
-
+            if ($('.s-VisitsGrid').length) {
+                $('.s-VisitsGrid .refresh-button').click();
+            }
+            if ($('.s-NotificationsGrid').length) {
+                $('.s-NotificationsGrid .refresh-button').click();
+            }
         };
 
         hub.client.patientChangedNotification = function (userDisplayName, userPicture, notification) {
@@ -85,6 +90,10 @@
                 $('.s-PatientsGrid .refresh-button').click();
             }
 
+
+            if ($('.s-NotificationsGrid').length) {
+                $('.s-NotificationsGrid .refresh-button').click();
+            }
         };
 
 

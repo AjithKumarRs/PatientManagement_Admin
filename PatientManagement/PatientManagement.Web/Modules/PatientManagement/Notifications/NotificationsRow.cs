@@ -18,7 +18,7 @@ namespace PatientManagement.PatientManagement.Entities
 
     public sealed class NotificationsRow : Row, IIdRow, INameRow, IInsertLogRow, IMultiTenantRow
     {
-        [DisplayName("Notification Id"), Identity, Column("NotificationId"), Updatable(false)]
+        [DisplayName("Notification Id"), SortOrder(1, true), Identity, Column("NotificationId"), Updatable(false)]
         public Int32? NotificationId
         {
             get { return Fields.NotificationId[this]; }

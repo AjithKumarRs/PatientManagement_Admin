@@ -18,6 +18,8 @@ namespace PatientManagement.Web.Modules.Common.Helpers
     public class NotificationHelpers
     {
         private static readonly IHubContext notificationHub = Dependency.Resolver.Resolve<IConnectionManager>().GetHubContext<NotificationHub>();
+        private static UserDefinition user = (UserDefinition)Authorization.UserDefinition;
+        
 
         #region Private Methods
 
@@ -65,18 +67,24 @@ namespace PatientManagement.Web.Modules.Common.Helpers
             {
                 EntityType = tableName,
                 EntityId = visitId,
-                Text = message
+                Text = message,
+                TenantId = user.TenantId,
+                InsertUserId = user.UserId,
+                InsertDate = DateTime.Now
             };
 
             using (var connectionNotification = SqlConnections.NewFor<NotificationsRow>())
-            using (var uow = new UnitOfWork(connectionNotification))
-            {
-                var saveRequest = new SaveRequest<NotificationsRow>
-                {
-                    Entity = notificationRow
-                };
-                new NotificationsRepository().Create(uow, saveRequest);
-            }
+                connectionNotification.InsertAndGetID(notificationRow);
+
+            // TODO Unit of work is not committing the transaction #49
+            //using (var uow = new UnitOfWork(connectionNotification))
+            //{
+            //    var saveRequest = new SaveRequest<NotificationsRow>
+            //    {
+            //        Entity = notificationRow
+            //    };
+            //    new NotificationsRepository().Create(uow, saveRequest);
+            //}
         }
 
         #endregion
@@ -84,8 +92,6 @@ namespace PatientManagement.Web.Modules.Common.Helpers
         #region Visits Notification
         public static void SendVisitNotification(int VisitId, DateTime start, DateTime end, int patientId, EEntityNotificationStatus status)
         {
-            var user = (UserDefinition)Authorization.UserDefinition;
-
             var patientName = string.Empty;
             using (var connectionPatients = SqlConnections.NewFor<PatientsRow>())
             {
