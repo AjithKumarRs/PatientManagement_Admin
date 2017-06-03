@@ -60,12 +60,25 @@ namespace PatientManagement.PatientManagement.Entities
             set { Fields.InsertUserDisplayName[this] = value; }
         }
 
+        [DisplayName("Insert User Picture"), NotMapped]
+        public String InsertUserPicture
+        {
+            get { return Fields.InsertUserPicture[this]; }
+            set { Fields.InsertUserPicture[this] = value; }
+        }
+
         [DisplayFormat("dd/MM/yyyy HH:mm")]
         [DisplayName("Insert Date"), NotNull, Insertable(false), Updatable(false)]
         public DateTime? InsertDate
         {
             get { return Fields.InsertDate[this]; }
             set { Fields.InsertDate[this] = value; }
+        }
+        
+        [DisplayName("Insert Date Formated"),NotMapped]
+        public string InsertDateFormated
+        {
+            get { return Fields.InsertDate[this]?.ToString("hh:mm:ss MMM-yy"); }
         }
 
         IIdField IIdRow.IdField
@@ -99,6 +112,7 @@ namespace PatientManagement.PatientManagement.Entities
 
 
             public StringField InsertUserDisplayName;
+            public StringField InsertUserPicture;
             public readonly Int32Field TenantId;
 
             public RowFields()

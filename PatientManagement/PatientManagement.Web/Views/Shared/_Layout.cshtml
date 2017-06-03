@@ -60,36 +60,15 @@
 
                     <div class="navbar-custom-menu">
                         <ul class="nav navbar-nav">
-                            <li class="dropdown messages-menu">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-bell-o"></i>
-                                    <span id="NotificationCounterLabel" class="label label-success">4</span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="header">@Texts.Site.Layout.NotificationMenuHeader</li>
-                                    <li>
-                                        <!-- inner menu: contains the actual data -->
-                                        <ul class="menu">
-                                            <li>
-                                                <!-- start message -->
-                                                <a href="#">
-                                                    <div class="pull-left">
-                                                        <img src="/Content/adminlte/img/avatar5.png" class="img-circle" alt="User Image">
-                                                    </div>
-                                                    <h4>
-                                                        Bial Group
-                                                        <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                                                    </h4>
-                                                    <p>Oportunidade de realização de Estudo ?</p>
-                                                </a>
-                                            </li><!-- end message -->
-                                        </ul>
-                                    </li>
-                                    <li class="footer"><a href="~/PatientManagement/Visits">@Texts.Site.Layout.NotificationMenuFooter</a></li>
-                                </ul>
-                            </li>
+                   
+                            <li id="NotificationDropdownMenu" class="dropdown messages-menu"></li>
 
-
+                            <script type="text/javascript">
+                                jQuery(function () {
+                                    new PatientManagement.PatientManagement.NotificationDropdownMenu($('#NotificationDropdownMenu'), {}).updateNotifications();
+                            
+                                });
+                            </script>
 
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -299,7 +278,7 @@
                 }
             };
         });
-
+        
 
         </script>
                 }

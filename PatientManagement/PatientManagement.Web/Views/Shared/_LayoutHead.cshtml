@@ -77,6 +77,8 @@
             if ($('.s-NotificationsGrid').length) {
                 $('.s-NotificationsGrid .refresh-button').click();
             }
+            //TODO Fix notification counter in menu dropdown
+            //new NotificationDropdownMenu.updateNotifications();
         };
 
         hub.client.patientChangedNotification = function (userDisplayName, userPicture, notification) {
@@ -94,6 +96,8 @@
             if ($('.s-NotificationsGrid').length) {
                 $('.s-NotificationsGrid .refresh-button').click();
             }
+
+            
         };
 
 

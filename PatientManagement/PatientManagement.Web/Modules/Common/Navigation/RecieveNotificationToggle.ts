@@ -1,6 +1,7 @@
 ﻿namespace PatientManagement.Common {
 
     export class RecieveNotificationToggle extends Serenity.Widget<any> {
+
         constructor(input: JQuery, opt: BootstrapSwitchOptions) {
             super(input, opt);
 

@@ -6,7 +6,10 @@ namespace PatientManagement.PatientManagement {
         EntityId?: number;
         Text?: string;
         InsertUserId?: number;
+        InsertUserDisplayName?: string;
+        InsertUserPicture?: string;
         InsertDate?: string;
+        InsertDateFormated?: string;
     }
 
     export namespace NotificationsRow {
@@ -20,10 +23,13 @@ namespace PatientManagement.PatientManagement {
             export declare const EntityId;
             export declare const Text;
             export declare const InsertUserId;
+            export declare const InsertUserDisplayName;
+            export declare const InsertUserPicture;
             export declare const InsertDate;
+            export declare const InsertDateFormated;
         }
 
-        ['NotificationId', 'EntityType', 'EntityId', 'Text', 'InsertUserId', 'InsertDate'].forEach(x => (<any>Fields)[x] = x);
+        ['NotificationId', 'EntityType', 'EntityId', 'Text', 'InsertUserId', 'InsertUserDisplayName', 'InsertUserPicture', 'InsertDate', 'InsertDateFormated'].forEach(x => (<any>Fields)[x] = x);
     }
 }
 

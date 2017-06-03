@@ -28,7 +28,8 @@ namespace PatientManagement.Web.Modules.Common.Helpers
             List<string> users = new List<string>();
             using (var connectionUsers = SqlConnections.NewFor<UserRow>())
             {
-                users = connectionUsers.List<UserRow>().Where(e => e.TenantId == tenantId && e.UserId != userId).Select(e => e.UserId.ToString()).ToList();
+                users = connectionUsers.List<UserRow>().Where(
+                    e => e.TenantId == tenantId).Where( e => e.UserId != userId).Select(e => e.UserId.ToString()).ToList();
             }
             return users;
         }

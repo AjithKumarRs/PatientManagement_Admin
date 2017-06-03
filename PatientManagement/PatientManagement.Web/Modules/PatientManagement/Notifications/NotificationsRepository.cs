@@ -45,14 +45,12 @@ namespace PatientManagement.PatientManagement.Repositories
         {
             return new MyListHandler().Process(connection, request);
         }
-
         private class MySaveHandler : SaveRequestHandler<MyRow>{ }
         private class MyDeleteHandler : DeleteRequestHandler<MyRow> { }
         private class MyRetrieveHandler : RetrieveRequestHandler<MyRow> { }
 
         private class MyListHandler : ListRequestHandler<MyRow>
         {
-
             protected override void OnReturn()
             {
                 base.OnReturn();
@@ -65,19 +63,29 @@ namespace PatientManagement.PatientManagement.Repositories
                 if (userIdList.Any())
                 {
                     var u = UserRow.Fields;
-                    IDictionary<int, string> userDisplayNames;
+
+                    IDictionary<int, List<string>> userDisplayNames;
+
                     using (var connection = SqlConnections.NewFor<UserRow>())
                         userDisplayNames = connection.Query(new SqlQuery()
                                 .From(u)
                                 .Select(u.UserId)
                                 .Select(u.DisplayName)
+                                .Select(u.UserImage)
                                 .Where(u.UserId.In(userIdList)))
-                            .ToDictionary(x => (int)(x.UserId ?? x.USERID), x => (string)x.DisplayName);
+                            .ToDictionary(x =>
+                                (int) (x.UserId ?? x.USERID), x => new List<string>() { x.DisplayName, x.UserImage }
+                            );
 
-                    string s;
+                    List<string> s;
                     foreach (var x in Response.Entities)
                         if (x.InsertUserId != null && userDisplayNames.TryGetValue(x.InsertUserId.Value, out s))
-                            x.InsertUserDisplayName = s;
+                        {
+                            x.InsertUserDisplayName = s[0];
+                            x.InsertUserPicture = System.Web.VirtualPathUtility.ToAbsolute(
+                                (string.IsNullOrEmpty(s[1])) ? "~/Content/adminlte/img/avatar04.png" :
+                                    "~/upload/" + s[1]);
+                        }
                 }
 
             }
