@@ -91,6 +91,26 @@
             allDaySlot: false,
             editable: true,
             droppable: false,
+            selectable: true,
+            selectHelper: true,
+            select: function(start, end) {
+                //var title = prompt('Event Title:');
+                //var eventData;
+                //if (title) {
+                //    eventData = {
+                //        title: title,
+                //        start: start,
+                //        end: end
+                //    };
+                //    $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+                //}
+                //$('#calendar').fullCalendar('unselect');
+                var dialog = new PatientManagement.PatientManagement.CalendarVisitsDialog();
+                dialog.newPredifinedVisit(start.format("YYYY-MM-DD HH:mm:ss"),end.format("YYYY-MM-DD HH:mm:ss"));
+                
+                $('#calendar').fullCalendar('unselect');
+
+            },
             eventDrop: function (event, dayDelta, minuteDelta, allDay, revertFunc) {
                 
                 if (!confirm(FormatAlertMessage(event.title, event.start, event.end))) {

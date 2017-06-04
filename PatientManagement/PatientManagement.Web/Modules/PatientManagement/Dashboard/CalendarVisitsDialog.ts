@@ -17,7 +17,18 @@ namespace PatientManagement.PatientManagement {
 
             }
         }
+        public newPredifinedVisit = (start, end): void => {
 
+            var p = <PatientManagement.VisitsRow>{};
+            var dlg = new PatientManagement.CalendarVisitsDialog();
+
+            p.StartDate = start;
+            p.EndDate = end;
+            dlg.loadEntityAndOpenDialog(<PatientManagement.VisitsRow>{
+                StartDate: start,
+              EndDate: end
+            });
+        }
         public updateVisit = (visitId, start, end): void => {
 
             var p = <PatientManagement.VisitsRow>{};
