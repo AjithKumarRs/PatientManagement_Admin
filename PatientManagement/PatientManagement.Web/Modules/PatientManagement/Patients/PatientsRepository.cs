@@ -2,6 +2,7 @@
 
 using System.Linq;
 using PatientManagement.PatientManagement.Entities;
+using PatientManagement.Web.Modules.Common.Helpers;
 
 namespace PatientManagement.PatientManagement.Repositories
 {
@@ -33,7 +34,7 @@ namespace PatientManagement.PatientManagement.Repositories
 
         public RetrieveResponse<MyRow> Retrieve(IDbConnection connection, RetrieveRequest request)
         {
-            
+
             return new MyRetrieveHandler().Process(connection, request);
         }
 
@@ -49,38 +50,38 @@ namespace PatientManagement.PatientManagement.Repositories
 
                 base.AfterSave();
 
-                if (!this.Connection.ExistsById<PatientHealthRow>(Row.PatientId))
-                {
-                    var ent = new PatientHealthRow
-                    {
-                        PatientId = Row.PatientId,
-                        InsertUserId = Authorization.UserId.TryParseID32(),
-                        InsertDate = DateTime.Now,
-                        TenantId = ((UserDefinition)Authorization.UserDefinition).TenantId
-                    };
-                    this.Connection.Insert(ent);
-                }
-                if (!this.Connection.ExistsById<LifeStylesRow>(Row.PatientId))
-                {
-                    var ent2 = new LifeStylesRow
-                    {
-                        PatientId = Row.PatientId,
-                        InsertUserId = Authorization.UserId.TryParseID32(),
-                        InsertDate = DateTime.Now,
-                        TenantId = ((UserDefinition)Authorization.UserDefinition).TenantId
-                    };
-                    this.Connection.Insert(ent2);
-                }
+                NotificationHelpers.SendPatientNotification(Row.PatientId ?? 0, Row.Name,
+                    IsCreate ? EEntityNotificationStatus.Created : EEntityNotificationStatus.Updated);
 
-                if (!this.Connection.ExistsById<ActivityRow>(Row.PatientId))
+                // TODO #48
+                if (IsCreate)
                 {
-                    var ent2 = new ActivityRow
+                    var entHealth = new PatientHealthRow
+                    {
+                        PatientId = Row.PatientId,
+                        InsertUserId = Authorization.UserId.TryParseID32(),
+                        InsertDate = DateTime.Now,
+                        TenantId = ((UserDefinition)Authorization.UserDefinition).TenantId
+                    };
+                    this.Connection.Insert(entHealth);
+
+                    var entLife = new LifeStylesRow
+                    {
+                        PatientId = Row.PatientId,
+                        InsertUserId = Authorization.UserId.TryParseID32(),
+                        InsertDate = DateTime.Now,
+                        TenantId = ((UserDefinition)Authorization.UserDefinition).TenantId
+                    };
+                    this.Connection.Insert(entLife);
+
+                    var entAct = new ActivityRow
                     {
                         PatientId = Row.PatientId,
                         InsertUserId = Authorization.UserId.TryParseID32(),
                         InsertDate = DateTime.Now
                     };
-                    this.Connection.Insert(ent2);
+                    this.Connection.Insert(entAct);
+
                 }
             }
         }
@@ -90,26 +91,22 @@ namespace PatientManagement.PatientManagement.Repositories
             protected override void OnBeforeDelete()
             {
                 base.OnBeforeDelete();
-
-                using (var connection = SqlConnections.NewFor<PatientHealthRow>())
-                using (var uow = new UnitOfWork(connection))
+                
+                using (var uow = new UnitOfWork(Connection))
                 {
-                    if(connection.ExistsById<LifeStylesRow>(Row.PatientId))
-                        uow.Connection.DeleteById<LifeStylesRow>(Row.PatientId);
+                    uow.Connection.DeleteById<LifeStylesRow>(Row.PatientId);
 
-                    if (connection.ExistsById<PatientHealthRow>(Row.PatientId))
-                        uow.Connection.DeleteById<PatientHealthRow>(Row.PatientId);
+                    uow.Connection.DeleteById<PatientHealthRow>(Row.PatientId);
 
-                    if (connection.ExistsById<ActivityRow>(Row.PatientId))
-                        uow.Connection.DeleteById<ActivityRow>(Row.PatientId);
+                    uow.Connection.DeleteById<ActivityRow>(Row.PatientId);
 
-                    var ls = connection.List<VisitsRow>().Where(p => p.PatientId == Row.PatientId);
+                    var ls = uow.Connection.List<VisitsRow>().Where(p => p.PatientId == Row.PatientId);
                     foreach (var item in ls)
                     {
 
                         uow.Connection.DeleteById<VisitsRow>(item.VisitId);
                     }
-                    var fU = connection.List<PatientsFileUploadsRow>().Where(p => p.PatientId == Row.PatientId);
+                    var fU = uow.Connection.List<PatientsFileUploadsRow>().Where(p => p.PatientId == Row.PatientId);
                     foreach (var item in fU)
                     {
                         uow.Connection.DeleteById<PatientsFileUploadsRow>(item.PatientFileUploadId);
@@ -125,16 +122,6 @@ namespace PatientManagement.PatientManagement.Repositories
             {
                 base.OnAfterExecuteQuery();
 
-                if (!this.Connection.ExistsById<ActivityRow>(Row.PatientId))
-                {
-                    var ent2 = new ActivityRow
-                    {
-                        PatientId = Row.PatientId,
-                        InsertUserId = Authorization.UserId.TryParseID32(),
-                        InsertDate = DateTime.Now
-                    };
-                    this.Connection.Insert(ent2);
-                }
             }
         }
         private class MyListHandler : ListRequestHandler<MyRow> { }

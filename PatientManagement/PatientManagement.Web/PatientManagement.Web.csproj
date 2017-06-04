@@ -22,12 +22,14 @@
   <ItemGroup>
     <Content Include="Modules\PatientManagement\Patients\PatientManagement.PatientsDialog.Template.html" />
     <Content Include="Views\Templates\EntityDialog.Template.html" />
+    <Content Include="Views\Templates\NotificationDropdownMenu.Template.html" />
     <Content Include="wwwroot\Content\site\site.theme.css" />
     <Content Include="wwwroot\Content\site\site.theme.min.css" />
     <Content Include="wwwroot\Scripts\serenity\Serenity.Script.UI.es5.js" />
+    <Content Include="wwwroot\Scripts\site\FullCalendarExtensions.js" />
     <EmbeddedResource Include="Views\Templates\PropertyDialog.Template.html" />
   </ItemGroup>
-  <ItemGroup>
+  <ItemGroup> 
     <None Update="wwwroot\**\*">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>
@@ -42,6 +44,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Routing" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Server.IISIntegration" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="1.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Server" Version="0.2.0-preview2-22683" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.1" />
     <PackageReference Include="Microsoft.Data.Sqlite" Version="1.1.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="1.1.1" />
@@ -52,7 +55,7 @@
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="1.1.1" />
     <PackageReference Include="MySql.Data" Version="7.0.7-m61" />
     <PackageReference Include="Serenity.FluentMigrator.Runner" Version="1.6.904" />
-    <PackageReference Include="Serenity.Web" Version="2.9.22" />
+    <PackageReference Include="Serenity.Web" Version="2.9.23" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.1' ">
     <DefineConstants>$(DefineConstants);COREFX;ASPNETCORE</DefineConstants>
@@ -70,6 +73,6 @@
 
   </Target>
   <ItemGroup>
-    <DotNetCliToolReference Include="Serenity.CodeGenerator" Version="2.9.22" />
+    <DotNetCliToolReference Include="Serenity.CodeGenerator" Version="2.9.23" />
   </ItemGroup>
 </Project>
