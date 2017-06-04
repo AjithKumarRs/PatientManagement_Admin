@@ -172,6 +172,8 @@ namespace PatientManagement
 
             public static class Layout
             {
+                public static LocalText NoNotificationMenu = "There is no new notifications";
+
                 public static LocalText NotificationMenuHeader = "All received notifications";
                 public static LocalText NotificationMenuFooter = "Go to notifications";
 

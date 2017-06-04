@@ -24,7 +24,7 @@ namespace PatientManagement.PatientManagement {
 
         public updateNotifications = (): void => {
 
-            PatientManagement.NotificationsService.List({},
+            PatientManagement.NotificationsService.ListForDropdown({},
                 resp => {
 
                     this.byId('NotificationCounterLabel').text(resp.Entities.length);
@@ -61,7 +61,10 @@ namespace PatientManagement.PatientManagement {
                         }
                     } else {
                         var a = $('<a/>');
-                        a.append("<h4>There is no new notifications</h4>")
+                        var h4 = $('<h4/>');
+
+                        h4.text(Q.text("Site.Layout.NoNotificationMenu"));
+                        a.append(h4)
                         notifactionList.append(a);
                     }
 
@@ -86,7 +89,26 @@ namespace PatientManagement.PatientManagement {
         }
 
         protected markAsSeen() {
-            console.log(this.notificationIds);
+            this.byId('NotificationCounterLabel').text(0);
+
+            var entities = new Array<PatientManagement.UserNotificationsRow>();
+            for (var id in this.notificationIds) {
+                var entity = <PatientManagement.UserNotificationsRow>{};
+
+                entity.NotificationId = this.notificationIds[Number(id)];
+
+                if (entities.indexOf(this.notificationIds[Number(id)]) > -1)
+                    return;
+
+                entities.push(entity);
+            }
+            console.log(entities);
+
+            PatientManagement.UserNotificationsService.CreateList({
+                Entity: entities
+            }, resp => {
+                console.log("asas");
+            });
         }
 }
 

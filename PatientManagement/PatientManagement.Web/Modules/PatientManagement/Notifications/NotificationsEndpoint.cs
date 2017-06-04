@@ -40,10 +40,13 @@ namespace PatientManagement.PatientManagement.Endpoints
         {
             return new MyRepository().List(connection, request);
         }
-
+        public ListResponse<MyRow> ListForDropdown(IDbConnection connection, ListRequest request)
+        {
+            return new MyRepository().ListForDropdown(connection, request);
+        }
         public int CountNotifications(IDbConnection connection, ListRequest request)
         {
-           return new MyRepository().List(connection, new ListRequest()).TotalCount;
+           return new MyRepository().ListForDropdown(connection, new ListRequest()).TotalCount;
         }
     }
 }

@@ -654,7 +654,7 @@ var PatientManagement;
             var Methods;
             (function (Methods) {
             })(Methods = NotificationsService.Methods || (NotificationsService.Methods = {}));
-            ['Create', 'Update', 'Delete', 'Retrieve', 'List', 'CountNotifications'].forEach(function (x) {
+            ['Create', 'Update', 'Delete', 'Retrieve', 'List', 'CountNotifications', 'ListForDropdown'].forEach(function (x) {
                 NotificationsService[x] = function (r, s, o) { return Q.serviceRequest(NotificationsService.baseUrl + '/' + x, r, s, o); };
                 Methods[x] = NotificationsService.baseUrl + '/' + x;
             });
@@ -864,7 +864,7 @@ var PatientManagement;
             var Methods;
             (function (Methods) {
             })(Methods = UserNotificationsService.Methods || (UserNotificationsService.Methods = {}));
-            ['Create', 'Update', 'Delete', 'Retrieve', 'List'].forEach(function (x) {
+            ['Create', 'Update', 'Delete', 'Retrieve', 'List', 'CreateList'].forEach(function (x) {
                 UserNotificationsService[x] = function (r, s, o) { return Q.serviceRequest(UserNotificationsService.baseUrl + '/' + x, r, s, o); };
                 Methods[x] = UserNotificationsService.baseUrl + '/' + x;
             });
@@ -2618,7 +2618,7 @@ var PatientManagement;
             function NotificationDropdownMenu(elem, opt) {
                 var _this = _super.call(this, elem, opt) || this;
                 _this.updateNotifications = function () {
-                    PatientManagement.NotificationsService.List({}, function (resp) {
+                    PatientManagement.NotificationsService.ListForDropdown({}, function (resp) {
                         _this.byId('NotificationCounterLabel').text(resp.Entities.length);
                         var notifactionList = _this.byId('NotificationDropdownMenuMessages');
                         notifactionList.children().remove();
@@ -2642,7 +2642,9 @@ var PatientManagement;
                         }
                         else {
                             var a = $('<a/>');
-                            a.append("<h4>There is no new notifications</h4>");
+                            var h4 = $('<h4/>');
+                            h4.text(Q.text("Site.Layout.NoNotificationMenu"));
+                            a.append(h4);
                             notifactionList.append(a);
                         }
                         _this.markAsSeen();
@@ -2667,7 +2669,21 @@ var PatientManagement;
                 this.updateNotifications();
             };
             NotificationDropdownMenu.prototype.markAsSeen = function () {
-                console.log(this.notificationIds);
+                this.byId('NotificationCounterLabel').text(0);
+                var entities = new Array();
+                for (var id in this.notificationIds) {
+                    var entity = {};
+                    entity.NotificationId = this.notificationIds[Number(id)];
+                    if (entities.indexOf(this.notificationIds[Number(id)]) > -1)
+                        return;
+                    entities.push(entity);
+                }
+                console.log(entities);
+                PatientManagement.UserNotificationsService.CreateList({
+                    Entity: entities
+                }, function (resp) {
+                    console.log("asas");
+                });
             };
             return NotificationDropdownMenu;
         }(Serenity.TemplatedWidget));

@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace PatientManagement.PatientManagement.Endpoints
 {
     using Serenity;
@@ -17,6 +19,22 @@ namespace PatientManagement.PatientManagement.Endpoints
         public SaveResponse Create(IUnitOfWork uow, SaveRequest<MyRow> request)
         {
             return new MyRepository().Create(uow, request);
+        }
+
+        [HttpPost, AuthorizeCreate(typeof(MyRow))]
+        public SaveResponse CreateList(IUnitOfWork uow, SaveRequest<MyRow[]> request)
+        {
+            
+            var user = (UserDefinition)Authorization.UserDefinition;
+
+            foreach (var userNotificationsRow in request.Entity)
+            {
+                userNotificationsRow.UserId = user.UserId;
+                userNotificationsRow.SeenAt = DateTime.Now;
+                new MyRepository().Create(uow, new SaveRequest<MyRow>() {Entity = userNotificationsRow});
+            }
+
+            return new SaveResponse();
         }
 
         [HttpPost, AuthorizeUpdate(typeof(MyRow))]
