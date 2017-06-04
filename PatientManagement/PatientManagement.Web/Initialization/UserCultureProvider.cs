@@ -40,7 +40,7 @@ namespace PatientManagement.AppServices
 
         public static readonly List<CultureInfo> SupportedCultures = new List<CultureInfo>
         {
-            new CultureInfo("bg-BG"),
+            new CultureInfo("bg-BG"), 
 
             new CultureInfo("de-DE"),
             new CultureInfo("en-US"),

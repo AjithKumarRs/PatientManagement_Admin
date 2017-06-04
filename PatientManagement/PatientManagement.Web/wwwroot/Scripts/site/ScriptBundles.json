@@ -34,10 +34,12 @@
     "~/Scripts/jquery.iframe-transport.js",
     "~/Scripts/jquery.slimscroll.js",
     "~/Scripts/mousetrap.js",
-    "~/Scripts/fastclick/fastclick.js"
+    "~/Scripts/fastclick/fastclick.js",
+    "~/Scripts/jquery.signalR.min.js"
   ],
-    "Site": [
-        "~/Scripts/adminlte/app.js",
-        "~/Scripts/site/PatientManagement.Web.js"
-    ]
+  "Site": [
+    "~/Scripts/adminlte/app.js",
+    "~/Scripts/site/PatientManagement.Web.js",
+    "~/Scripts/site/FullCalendarExtensions.js"
+  ]
 }

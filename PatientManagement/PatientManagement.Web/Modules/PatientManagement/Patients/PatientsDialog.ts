@@ -261,29 +261,32 @@ namespace PatientManagement.PatientManagement {
             if (this.isNewOrDeleted()) {
                 // no patient is selected, just load an empty entity
                 this.patientHealthGrid.load({});
+                this.patientActivityGrid.load({});
+                this.lifeStyleGrid.load({});
+
                 return;
-            }
-
-            PatientHealthService.Retrieve({
-                EntityId: entity.PatientId
-            }, response => {
-                this.patientHealthGrid.load(response.Entity);
-            });
-
-            LifeStylesService.Retrieve({
-                EntityId: entity.PatientId
-            },
-            response => {
-                this.lifeStyleGrid.load(response.Entity);
-            });
-
-
-            ActivityService.Retrieve({
+            } else {
+                PatientHealthService.Retrieve({
                     EntityId: entity.PatientId
-                },
-                response => {
-                    this.patientActivityGrid.load(response.Entity);
+                }, response => {
+                    this.patientHealthGrid.load(response.Entity);
                 });
+
+                LifeStylesService.Retrieve({
+                        EntityId: entity.PatientId
+                    },
+                    response => {
+                        this.lifeStyleGrid.load(response.Entity);
+                    });
+
+
+                ActivityService.Retrieve({
+                        EntityId: entity.PatientId
+                    },
+                    response => {
+                        this.patientActivityGrid.load(response.Entity);
+                    });
+            }
 
 
             this.visitsGrid.patientId = entity.PatientId;

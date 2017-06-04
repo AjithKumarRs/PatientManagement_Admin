@@ -1,5 +1,12 @@
 ﻿
 
+using System.Linq;
+using Microsoft.AspNetCore.SignalR.Infrastructure;
+using PatientManagement.Administration.Entities;
+using PatientManagement.PatientManagement.Entities;
+using PatientManagement.Web.Hubs;
+using PatientManagement.Web.Modules.Common.Helpers;
+
 namespace PatientManagement.PatientManagement.Repositories
 {
     using Serenity;
@@ -45,7 +52,33 @@ namespace PatientManagement.PatientManagement.Repositories
             return new MyListHandler().Process(connection, request);
         }
 
-        private class MySaveHandler : SaveRequestHandler<MyRow> { }
+        private class MySaveHandler : SaveRequestHandler<MyRow>
+        {
+            protected override void AfterSave()
+            {
+                base.AfterSave();
+                
+                if (IsUpdate)
+                {
+                    NotificationHelpers.SendVisitNotification(
+                        Row.VisitId ?? 0,
+                        Row.StartDate ?? DateTime.Now,
+                        Row.EndDate ?? DateTime.Now.AddMonths(1),
+                        Row.PatientId ?? 0,
+                        EEntityNotificationStatus.Updated);
+                }
+                else
+                {
+                    NotificationHelpers.SendVisitNotification(
+                        Row.VisitId ?? 0,
+                        Row.StartDate ?? DateTime.Now,
+                        Row.EndDate ?? DateTime.Now.AddMonths(1),
+                        Row.PatientId ?? 0,
+                        EEntityNotificationStatus.Created);
+                }
+                
+            }
+        }
 
         private class MyDeleteHandler : DeleteRequestHandler<MyRow>
         {
@@ -61,6 +94,20 @@ namespace PatientManagement.PatientManagement.Repositories
                     SqlExceptionHelper.HandleDeleteForeignKeyException(e);
                     throw;
                 }
+            }
+
+            protected override void OnAfterDelete()
+            {
+
+                base.OnAfterDelete();
+
+                NotificationHelpers.SendVisitNotification(
+                    Row.VisitId??0,
+                    Row.StartDate ?? DateTime.Now,
+                    Row.EndDate ?? DateTime.Now.AddMonths(1),
+                    Row.PatientId ?? 0,
+                    EEntityNotificationStatus.Deleted);
+
             }
         }
         private class MyRetrieveHandler : RetrieveRequestHandler<MyRow> { }

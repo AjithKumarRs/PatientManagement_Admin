@@ -41,11 +41,6 @@ namespace MVC
 
         public static class Common
         {
-            public static class Dashboard
-            {
-                public const string DashboardIndex = "~/Modules/Common/Dashboard/DashboardIndex.cshtml";
-            }
-
             public static class Reporting
             {
                 public const string ReportPage = "~/Modules/Common/Reporting/ReportPage.cshtml";
@@ -108,6 +103,11 @@ namespace MVC
                 public const string LifeStylesIndex = "~/Modules/PatientManagement/LifeStyles/LifeStylesIndex.cshtml";
             }
 
+            public static class Notifications
+            {
+                public const string NotificationsIndex = "~/Modules/PatientManagement/Notifications/NotificationsIndex.cshtml";
+            }
+
             public static class PatientHealth
             {
                 public const string PatientHealthIndex = "~/Modules/PatientManagement/PatientHealth/PatientHealthIndex.cshtml";
@@ -121,6 +121,11 @@ namespace MVC
             public static class PatientsFileUploads
             {
                 public const string PatientsFileUploadsIndex = "~/Modules/PatientManagement/PatientsFileUploads/PatientsFileUploadsIndex.cshtml";
+            }
+
+            public static class UserNotifications
+            {
+                public const string UserNotificationsIndex = "~/Modules/PatientManagement/UserNotifications/UserNotificationsIndex.cshtml";
             }
 
             public static class Visits

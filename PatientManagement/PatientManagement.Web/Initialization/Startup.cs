@@ -17,6 +17,8 @@ using System;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.IO;
+using Microsoft.AspNetCore.SignalR;
+using PatientManagement.Web.Modules.Administration.User;
 
 namespace PatientManagement
 {
@@ -46,7 +48,7 @@ namespace PatientManagement
             {
                 options.SerializerSettings.ContractResolver = new DefaultContractResolver();
             });
-
+            
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddConfig(Configuration);
             services.AddCaching();
@@ -57,6 +59,8 @@ namespace PatientManagement
             services.AddSingleton<IUserRetrieveService, Administration.UserRetrieveService>();
             services.AddSingleton<IPermissionService, Administration.PermissionService>();
 
+            services.AddSingleton<IUserIdProvider, CustomUserIdProvider>();
+            services.AddSignalR(options => options.Hubs.EnableDetailedErrors = true);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -128,6 +132,7 @@ namespace PatientManagement
             app.UseMvc(routes =>
             {
             });
+            app.UseSignalR();
 
             DataMigrations.Initialize();
         }
@@ -135,13 +140,14 @@ namespace PatientManagement
         public static void RegisterDataProviders()
         {
             DbProviderFactories.RegisterFactory("System.Data.SqlClient", SqlClientFactory.Instance);
-            DbProviderFactories.RegisterFactory("Microsoft.Data.Sqlite", Microsoft.Data.Sqlite.SqliteFactory.Instance);
+            
+            //DbProviderFactories.RegisterFactory("Microsoft.Data.Sqlite", Microsoft.Data.Sqlite.SqliteFactory.Instance);
 
             // to enable FIREBIRD: add FirebirdSql.Data.FirebirdClient reference, set connections, and uncomment line below
             // DbProviderFactories.RegisterFactory("FirebirdSql.Data.FirebirdClient", FirebirdSql.Data.FirebirdClient.FirebirdClientFactory.Instance);
 
             // to enable MYSQL: add MySql.Data reference, set connections, and uncomment line below
-            DbProviderFactories.RegisterFactory("MySql.Data.MySqlClient", MySql.Data.MySqlClient.MySqlClientFactory.Instance);
+            //DbProviderFactories.RegisterFactory("MySql.Data.MySqlClient", MySql.Data.MySqlClient.MySqlClientFactory.Instance);
 
             // to enable POSTGRES: add Npgsql reference, set connections, and uncomment line below
             // DbProviderFactories.RegisterFactory("Npgsql", Npgsql.NpgsqlFactory.Instance);
