@@ -16,8 +16,12 @@
     <script src="~/Scripts/fullcalendar/locale-all.js"></script>
     <script src="~/Scripts/jquery-migrate-3.0.0.js"></script>
 
+
+    <link href="~/Scripts/contextMenu/jquery.contextMenu.css" rel="stylesheet" />
+    <script src="~/Scripts/contextMenu/jquery.ui.position.js"></script>
+    <script src="~/Scripts/contextMenu/jquery.contextMenu.js"></script>
 }
-    
+
 @{
     var localeCalendar = $"../Scripts/fullcalendar/locale/{System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName}.js";
 }
@@ -53,14 +57,67 @@
 </div><!-- /.row -->
 
 <script>
+
+    $(function() {
+        $.contextMenu({
+            selector: '.context_menu',
+            callback: function (key, options) {
+                options.$trigger.toggleClass('context_menu');
+
+                switch(key)
+                {
+                    case 'viewPatinet':
+                        options.$trigger.click();
+                    break;
+                    case 'openVisit':
+                        new PatientManagement.PatientManagement.CalendarVisitsDialog().loadByIdAndOpenDialog(options.$trigger.data('visitId'));
+                    break;
+                    case 'delete':
+
+                        var dialog = new PatientManagement.PatientManagement.CalendarVisitsDialog();
+                        dialog.deleteVisit(options.$trigger.data('visitId'));
+
+                    break;
+
+                }
+
+
+            },
+            items: {
+                "viewPatinet": { name: "@Html.Raw(Texts.Site.Dashboard.ViewPatinet)", icon: "fa-user" },
+                "sep3": "---------",
+
+                "openVisit": { name: "@Html.Raw(Texts.Site.Dashboard.ViewVisit)", icon: "fa-calendar-o" },
+                "sep2": "---------",
+
+                "delete": { name: "@Html.Raw(Texts.Site.Dashboard.DeleteVisit)", icon: "fa-trash-o" },
+                "sep1": "---------",
+                "quit": {name: "@Html.Raw(Texts.Site.Dashboard.QuitContextMenu)", icon: function(){
+
+                    return 'context-menu-icon context-menu-icon-quit';
+                }}
+            }
+        });
+
+        $('.context-menu-one').on('click',
+            function(e) {
+                console.log(e);
+            });
+    });
+
     function FormatAlertMessage(title, startDate, endDate) {
         var str = Q.text("Site.Dashboard.AlertOnCalendarChange") + "\n " +
             Q.text("Site.Dashboard.CalendarPatient")+ " " +  title + "\n" +
             Q.text("Site.Dashboard.CalendarStartDate") + " " + startDate.format("DD.MM.YYYY HH:mm:ss") + "\n" +
             Q.text("Site.Dashboard.CalendarEndDate") + " " + endDate.format("DD.MM.YYYY HH:mm:ss");
+
         return str;
     }
 
+    $('#calendar:not(".fc-event")').on('contextmenu',
+        function(e) {
+            e.preventDefault();
+        });
     $(document).ready(function() {
         var initialLocaleCode =  '@System.Globalization.CultureInfo.CurrentUICulture.Name';
         /* initialize the calendar   -----------------------------------------------------------------*/
@@ -98,39 +155,54 @@
             droppable: false,
             selectable: true,
             selectHelper: true,
+            eventRender: function (event, element) {
+                element.bind('mousedown', function (e) {
+                    if (e.which == 3) {
 
+                        element.data('visitId', event.id);
+                        element.toggleClass('context_menu');
+                        element.contextMenu();
+                    }
+                });
+            },
             select: function(start, end) {
                 var dialog = new PatientManagement.PatientManagement.CalendarVisitsDialog();
                 dialog.newPredifinedVisit(start.format("YYYY-MM-DD HH:mm:ss"),end.format("YYYY-MM-DD HH:mm:ss"));
 
-                $('#calendar').fullCalendar('unselect');
+                //$('#calendar').fullCalendar('unselect');
 
             },
             eventDrop: function (event, dayDelta, minuteDelta, allDay, revertFunc) {
+                Q.confirm(FormatAlertMessage(event.title, event.start, event.end), () => {
+                        var dialog = new PatientManagement.PatientManagement.CalendarVisitsDialog();
 
-                if (!confirm(FormatAlertMessage(event.title, event.start, event.end))) {
-                    revertFunc();
-                }
-                var dialog = new PatientManagement.PatientManagement.CalendarVisitsDialog();
-                dialog.updateVisit(event.id, event.start.format("YYYY-MM-DD HH:mm:ss"), event.end.format("YYYY-MM-DD HH:mm:ss"));
+                        dialog.updateVisit(event.id, event.start.format("YYYY-MM-DD HH:mm:ss"), event.end.format("YYYY-MM-DD HH:mm:ss"));
 
+                    },
+                    {
+                        onCancel: () => {
+                            $("#calendar").fullCalendar('refetchEvents');
+
+                        }
+                    }
+                );
             },
-            eventResize: function(event,dayDelta,minuteDelta,revertFunc) {
+            eventResize: function(event,dayDelta,minuteDelta, revertFunc) {
+                Q.confirm(FormatAlertMessage(event.title, event.start, event.end), () => {
+                        var dialog = new PatientManagement.PatientManagement.CalendarVisitsDialog();
+                        dialog.updateVisit(event.id, event.start.format("YYYY-MM-DD HH:mm:ss"), event.end.format("YYYY-MM-DD HH:mm:ss"));
+                },
+                    {
+                        onCancel: () => {
+                            $("#calendar").fullCalendar('refetchEvents');
 
-                if (!confirm(FormatAlertMessage(event.title, event.start, event.end))) {
-                    revertFunc();
-                }
-                var dialog = new PatientManagement.PatientManagement.CalendarVisitsDialog();
-
-                dialog.updateVisit(event.id, event.start.format("YYYY-MM-DD HH:mm:ss"), event.end.format("YYYY-MM-DD HH:mm:ss"));
-
-
+                        }
+                    }
+                );
             }
-
-
         });
         $('#calendar').fullCalendar('addEventSource', "/Dashboard/GetVisitsTasks/");
-        
+
 
     });
 </script>

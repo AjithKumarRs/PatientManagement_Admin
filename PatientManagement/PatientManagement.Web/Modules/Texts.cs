@@ -110,11 +110,19 @@ namespace PatientManagement
 
             public static class Dashboard
             {
+                public static LocalText ViewPatinet = "View Patient";
+                public static LocalText ViewVisit = "View Visit";
+                public static LocalText DeleteVisit = "Delete Visit";
+                public static LocalText QuitContextMenu = "Quit";
+
+
                 public static LocalText SuccessChangedVisitDates = "You successfully change visit with patient name: ";
+                public static LocalText SuccessDeletingVisitDates = "You successfully deleted a visit with patient name: ";
                 public static LocalText ErrorEndDateBiggerThanStartDate = "End Date can't be earlier than Start Date";
                 public static LocalText ErrorEndDateEqualStartDate = "End Date can't be equal to Start Date";
 
                 public static LocalText AlertOnCalendarChange ="Are you sure with this changes: ";
+                public static LocalText AlertOnCalendarRemove = "Are you sure you want to remove: ";
 
                 public static LocalText CalendarStartDate = "Start date: ";
                 public static LocalText CalendarEndDate = "End date: ";

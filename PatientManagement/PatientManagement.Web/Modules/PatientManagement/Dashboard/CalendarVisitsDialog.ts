@@ -36,10 +36,10 @@ namespace PatientManagement.PatientManagement {
             VisitsService.Retrieve(<any>{
                 EntityId: visitId
             }, resp => {
-                var text = Q.format(Q.text("Site.Dashboard.SuccessChangedVisitDates"), resp.Entity.PatientName, resp.Entity.StartDate, resp.Entity.EndDate);
-                Q.notifyInfo(text + resp.Entity.PatientName);
 
                 p = resp.Entity;
+                Q.notifyInfo(Q.text("Site.Dashboard.SuccessChangedVisitDates") + p.PatientName);
+
             });
 
             p.StartDate = start;
@@ -55,6 +55,33 @@ namespace PatientManagement.PatientManagement {
                     $('#VisitsGridDiv .refresh-button').click();
                 });
         }
+
+        public deleteVisit = (visitId): void => {
+            var p = <PatientManagement.VisitsRow>{};
+
+            VisitsService.Retrieve(<any>{
+                EntityId: visitId
+            }, resp => {
+              
+                p = resp.Entity;
+
+                Q.confirm(this.formatAlertMessage(Q.text("Site.Dashboard.AlertOnCalendarRemove"), p.PatientName, (p.StartDate) as any, (p.EndDate) as any), () => {
+                    VisitsService.Delete({
+                            EntityId: visitId
+                        },
+                        resp => {
+                            Q.notifyInfo(Q.text("Site.Dashboard.SuccessDeletingVisitDates") + p.PatientName);
+
+                            $("#calendar").fullCalendar('refetchEvents');
+                        });
+                },{});
+
+
+     
+                
+            });
+
+        }
         protected onSaveSuccess(response: Serenity.SaveResponse): void {
             VisitsService.Retrieve(<any>{
                 EntityId: response.EntityId
@@ -68,6 +95,25 @@ namespace PatientManagement.PatientManagement {
             console.log(response);
 
             $("#calendar").fullCalendar('refetchEvents');
+        }
+
+        protected formatAlertMessage(firstLine, title, startDate: Date, endDate: Date): string {
+
+            var str = firstLine +
+                "\n" +
+                Q.text("Site.Dashboard.CalendarPatient") +
+                " " +
+                title +
+                "\n\n" +
+                Q.text("Site.Dashboard.CalendarStartDate") +
+                " " +
+                startDate.toLocaleString() +
+                "\n" +
+                Q.text("Site.Dashboard.CalendarEndDate") +
+                " " +
+                endDate.toLocaleString();
+
+            return str;
         }
     }
 }

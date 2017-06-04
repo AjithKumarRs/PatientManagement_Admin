@@ -16,6 +16,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot/favicon-16x16.png" />
+    <Content Remove="wwwroot/Scripts\moment\jquery.min.js" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Modules\PatientManagement\Patients\PatientManagement.PatientsDialog.Template.html" />
@@ -77,5 +78,9 @@
   </Target>
   <ItemGroup>
     <DotNetCliToolReference Include="Serenity.CodeGenerator" Version="2.9.23" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\Scripts\moment\" />
+    <Folder Include="wwwroot\Scripts\contextMenu\" />
   </ItemGroup>
 </Project>
