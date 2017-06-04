@@ -1,4 +1,6 @@
 ﻿
+using PatientManagement.Administration;
+
 namespace PatientManagement.PatientManagement.Forms
 {
     using Serenity;
@@ -14,6 +16,7 @@ namespace PatientManagement.PatientManagement.Forms
     public class NotificationsForm
     {
         public String EntityType { get; set; }
+        
         public Int64 EntityId { get; set; }
         public String Text { get; set; }
         public Int32 InsertUserId { get; set; }

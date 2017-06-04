@@ -26,6 +26,7 @@ namespace PatientManagement.PatientManagement.Entities
         }
 
         [DisplayName("Entity Type"), Size(100), NotNull, QuickSearch, Updatable(false)]
+        [ReadPermission("Administration:Notifications:Read")]
         public String EntityType
         {
             get { return Fields.EntityType[this]; }
@@ -33,6 +34,7 @@ namespace PatientManagement.PatientManagement.Entities
         }
 
         [DisplayName("Entity Id"), Column("EntityID"), NotNull, Updatable(false)]
+        [ReadPermission("Administration:Notifications:Read")]
         public Int64? EntityId
         {
             get { return Fields.EntityId[this]; }
@@ -68,7 +70,7 @@ namespace PatientManagement.PatientManagement.Entities
         }
 
         [DisplayFormat("dd/MM/yyyy HH:mm")]
-        [DisplayName("Insert Date"), NotNull, Insertable(false), Updatable(false)]
+        [DisplayName("Insert Date"), NotNull, Insertable(false), Updatable(false), QuickFilter()]
         public DateTime? InsertDate
         {
             get { return Fields.InsertDate[this]; }

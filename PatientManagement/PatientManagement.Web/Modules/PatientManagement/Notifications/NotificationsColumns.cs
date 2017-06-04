@@ -24,13 +24,13 @@ namespace PatientManagement.PatientManagement.Columns
 
         public Int64 EntityId { get; set; }
         
-        [Size(400)]
+        [Width(500)]
         public String Text { get; set; }
 
-        [Size(150)]
+        [Width(150)]
         public String InsertUserDisplayName { get; set; }
 
-        [Size(150)]
+        [Width(150)]
         public DateTime InsertDate { get; set; }
     }
 }

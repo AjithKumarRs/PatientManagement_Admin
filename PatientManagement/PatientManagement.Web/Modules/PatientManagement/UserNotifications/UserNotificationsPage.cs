@@ -6,8 +6,6 @@ using PatientManagement.PatientManagement.Repositories;
 using Serenity.Data;
 using Serenity.Services;
 
-[assembly: Serenity.Navigation.NavigationLink(int.MaxValue, "PatientManagement/UserNotifications", typeof(PatientManagement.PatientManagement.Pages.UserNotificationsController))]
-
 namespace PatientManagement.PatientManagement.Pages
 {
     using Serenity;
