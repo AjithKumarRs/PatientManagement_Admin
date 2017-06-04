@@ -40,5 +40,10 @@ namespace PatientManagement.PatientManagement.Endpoints
         {
             return new MyRepository().List(connection, request);
         }
+
+        public int CountNotifications(IDbConnection connection, ListRequest request)
+        {
+           return new MyRepository().List(connection, new ListRequest()).TotalCount;
+        }
     }
 }

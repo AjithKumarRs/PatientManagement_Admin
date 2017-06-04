@@ -4,6 +4,7 @@ namespace PatientManagement.PatientManagement {
 
     export class NotificationDropdownMenu extends Serenity.TemplatedWidget<any> {
         protected getService() { return NotificationsService.baseUrl; }
+        private notificationIds: number[];
 
         constructor(elem: JQuery, opt: {}) {
             super(elem, opt);
@@ -13,10 +14,16 @@ namespace PatientManagement.PatientManagement {
 
             var toggleMenuButton = this.byId('NotificationDropdownMenuToggle');
             toggleMenuButton.click((e) => this.openClick(e));
-            
+            PatientManagement.NotificationsService.CountNotifications({},
+                resp => {
+                    this.byId('NotificationCounterLabel').text(resp);
+
+                });
+
         };
 
         public updateNotifications = (): void => {
+
             PatientManagement.NotificationsService.List({},
                 resp => {
 
@@ -30,8 +37,12 @@ namespace PatientManagement.PatientManagement {
 
 
                         var index = 0;
+                        this.notificationIds = new Array<number>();
+
                         for (var t1 = 0; t1 < resp.Entities.length; t1++) {
                             var item = resp.Entities[t1];
+
+                            this.notificationIds.push(item.NotificationId);
                             var a = $('<a/>');
 
                             var div = "<div class='pull-left'><img src='" + item.InsertUserPicture + "' class='img-circle' alt='User Image'></div>";
@@ -53,6 +64,10 @@ namespace PatientManagement.PatientManagement {
                         a.append("<h4>There is no new notifications</h4>")
                         notifactionList.append(a);
                     }
+
+
+                    this.markAsSeen();
+
                 });
         };
 
@@ -62,7 +77,16 @@ namespace PatientManagement.PatientManagement {
             if ($('#NotificationDropdownMenu').hasClass("open"))
                 return;
 
-            
+            //if (this.byId('Preloader').length) {
+                this.updateNotifications();
+
+
+         
+
+        }
+
+        protected markAsSeen() {
+            console.log(this.notificationIds);
         }
 }
 

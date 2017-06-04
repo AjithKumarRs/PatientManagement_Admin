@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using PatientManagement.Administration.Entities;
 using PatientManagement.PatientManagement.Entities;
 using PatientManagement.PatientManagement.Repositories;
@@ -28,23 +29,6 @@ namespace PatientManagement.PatientManagement.Pages
             return View("~/Modules/PatientManagement/Notifications/NotificationsIndex.cshtml");
         }
         
-
-        [PageAuthorize]
-        public JsonResult GetNotifications()
-        {
-            var user = (UserDefinition)Authorization.UserDefinition;
-
-            var model = new List<NotificationsRow>();
-            using (var connection = SqlConnections.NewFor<NotificationsRow>())
-            {
-                var listRequest = new ListRequest();
-
-                var entities = new NotificationsRepository().List(connection, listRequest).Entities;
-                model = entities;
-            }
-            return Json(model);
-        }
-
         [PageAuthorize]
         public IActionResult SeenAllNotifications()
         {
@@ -53,7 +37,7 @@ namespace PatientManagement.PatientManagement.Pages
             {
                // TODO Insert every notification in userNotifications table as seen
             }
-            return Ok();
+            return Ok("It all looks fine mate");
         }
     }
 }

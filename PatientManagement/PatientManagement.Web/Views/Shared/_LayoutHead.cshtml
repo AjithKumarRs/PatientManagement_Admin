@@ -77,8 +77,8 @@
             if ($('.s-NotificationsGrid').length) {
                 $('.s-NotificationsGrid .refresh-button').click();
             }
-            //TODO Fix notification counter in menu dropdown
-            //new NotificationDropdownMenu.updateNotifications();
+            var number = +($('.notiffication-counter').find('span').text());
+            $('.notiffication-counter span').text(number + 1);
         };
 
         hub.client.patientChangedNotification = function (userDisplayName, userPicture, notification) {
@@ -97,6 +97,8 @@
                 $('.s-NotificationsGrid .refresh-button').click();
             }
 
+            var number = +($('.notiffication-counter').find('span').text());
+            $('.notiffication-counter span').text(number + 1);
             
         };
 

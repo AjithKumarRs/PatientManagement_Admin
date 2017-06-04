@@ -811,12 +811,14 @@ declare namespace PatientManagement.PatientManagement {
         function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<NotificationsRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<NotificationsRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function CountNotifications(request: Serenity.ListRequest, onSuccess?: (response: number) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         namespace Methods {
             const Create: string;
             const Update: string;
             const Delete: string;
             const Retrieve: string;
             const List: string;
+            const CountNotifications: number;
         }
     }
 }
@@ -1566,9 +1568,11 @@ declare namespace PatientManagement.Common {
 declare namespace PatientManagement.PatientManagement {
     class NotificationDropdownMenu extends Serenity.TemplatedWidget<any> {
         protected getService(): string;
+        private notificationIds;
         constructor(elem: JQuery, opt: {});
         updateNotifications: () => void;
         protected openClick(e: any): void;
+        protected markAsSeen(): void;
     }
 }
 declare namespace PatientManagement.Common {

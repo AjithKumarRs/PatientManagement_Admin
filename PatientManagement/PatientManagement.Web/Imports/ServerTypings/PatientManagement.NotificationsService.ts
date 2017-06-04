@@ -10,16 +10,18 @@ namespace PatientManagement.PatientManagement {
         export declare function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<NotificationsRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
 
         export declare function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<NotificationsRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        
+        export declare function CountNotifications(request: Serenity.ListRequest, onSuccess?: (response: number) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+
         export namespace Methods {
             export declare const Create: string;
             export declare const Update: string;
             export declare const Delete: string;
             export declare const Retrieve: string;
             export declare const List: string;
+            export declare const CountNotifications: number;
         }
 
-        ['Create', 'Update', 'Delete', 'Retrieve', 'List'].forEach(x => {
+        ['Create', 'Update', 'Delete', 'Retrieve', 'List', 'CountNotifications'].forEach(x => {
             (<any>NotificationsService)[x] = function (r, s, o) { return Q.serviceRequest(baseUrl + '/' + x, r, s, o); };
             (<any>Methods)[x] = baseUrl + '/' + x;
         });

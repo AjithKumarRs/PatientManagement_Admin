@@ -654,7 +654,7 @@ var PatientManagement;
             var Methods;
             (function (Methods) {
             })(Methods = NotificationsService.Methods || (NotificationsService.Methods = {}));
-            ['Create', 'Update', 'Delete', 'Retrieve', 'List'].forEach(function (x) {
+            ['Create', 'Update', 'Delete', 'Retrieve', 'List', 'CountNotifications'].forEach(function (x) {
                 NotificationsService[x] = function (r, s, o) { return Q.serviceRequest(NotificationsService.baseUrl + '/' + x, r, s, o); };
                 Methods[x] = NotificationsService.baseUrl + '/' + x;
             });
@@ -2624,8 +2624,10 @@ var PatientManagement;
                         notifactionList.children().remove();
                         if (resp.Entities.length > 0) {
                             var index = 0;
+                            _this.notificationIds = new Array();
                             for (var t1 = 0; t1 < resp.Entities.length; t1++) {
                                 var item = resp.Entities[t1];
+                                _this.notificationIds.push(item.NotificationId);
                                 var a = $('<a/>');
                                 var div = "<div class='pull-left'><img src='" + item.InsertUserPicture + "' class='img-circle' alt='User Image'></div>";
                                 a.append(div);
@@ -2643,12 +2645,16 @@ var PatientManagement;
                             a.append("<h4>There is no new notifications</h4>");
                             notifactionList.append(a);
                         }
+                        _this.markAsSeen();
                     });
                 };
                 _this.byId('NotificationDropdownMenuHeader').text(Q.text("Site.Layout.NotificationMenuHeader"));
                 _this.byId('NotificationDropdownMenuFooter').text(Q.text("Site.Layout.NotificationMenuFooter"));
                 var toggleMenuButton = _this.byId('NotificationDropdownMenuToggle');
                 toggleMenuButton.click(function (e) { return _this.openClick(e); });
+                PatientManagement.NotificationsService.CountNotifications({}, function (resp) {
+                    _this.byId('NotificationCounterLabel').text(resp);
+                });
                 return _this;
             }
             NotificationDropdownMenu.prototype.getService = function () { return PatientManagement.NotificationsService.baseUrl; };
@@ -2657,6 +2663,11 @@ var PatientManagement;
                 e.preventDefault();
                 if ($('#NotificationDropdownMenu').hasClass("open"))
                     return;
+                //if (this.byId('Preloader').length) {
+                this.updateNotifications();
+            };
+            NotificationDropdownMenu.prototype.markAsSeen = function () {
+                console.log(this.notificationIds);
             };
             return NotificationDropdownMenu;
         }(Serenity.TemplatedWidget));
