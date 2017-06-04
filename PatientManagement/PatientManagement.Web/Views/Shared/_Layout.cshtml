@@ -26,9 +26,14 @@
 <html lang="@System.Globalization.CultureInfo.CurrentUICulture.Name" class="no-js@(hideNav ? " no-navigation" : "")">
 <!--<![endif]-->
 <head>
+    
+    <meta name="theme-color" content="@theme">
     @{Html.RenderPartial(MVC.Views.Shared._LayoutHead);}
+    @{Html.RenderPartial(MVC.Views.Shared._LayoutSeoTags);}
+
+
     @RenderSection("Head", false)
-    <title>@(ViewData["Title"]) - PatientManagement</title>
+    <title>@(ViewData["Title"]) - Clario</title>
 </head>
 <body id="s-@(ViewData["PageId"])Page" class="@(ViewData["BodyClass"]) fixed sidebar-mini hold-transition skin-@theme@(hideNav ? " no-navigation" : " has-layout-event")@(rtl ? " rtl" : "")">
 
