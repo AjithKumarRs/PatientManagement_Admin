@@ -1860,4 +1860,9 @@ Blog Page Single
 
 .terms-title{
     text-align: center;
+    vertical-align: middle;
+}
+
+.back-area{
+    margin-top: 20px;
 }
