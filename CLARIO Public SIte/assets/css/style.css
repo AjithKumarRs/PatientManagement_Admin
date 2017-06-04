@@ -43,6 +43,15 @@ Table of content
 /*----------------------------------------
 General Styles
 ----------------------------------------*/
+
+/*custom fonts*/
+@font-face { 
+    font-family: Lexio; 
+    src: url('assets/fonts/LEXIO-DEMO.TTF'); 
+} 
+
+
+
 html{
     font-size: 62.5%;
     -webkit-font-smoothing: antialiased;
@@ -497,7 +506,7 @@ Navigation
 }
 .navbar-default .navbar-brand{
     color: #1193d4;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Lexio', sans-serif;
     font-weight: 700;
     font-size: 3.4rem;
     height: 60px;
