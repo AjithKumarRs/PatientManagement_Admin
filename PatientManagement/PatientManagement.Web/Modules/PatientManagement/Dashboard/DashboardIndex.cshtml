@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="~/Scripts/fullcalendar/fullcalendar.print.css" media="print">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
     <script src="~/Scripts/fullcalendar/fullcalendar.min.js"></script>
-    <script src="~/Scripts/adminlte/demo.js"></script>
+    <script src="~/Scripts/adminlte/demo.js"></script><script src="~/Scripts/fullcalendar/locale-all.js"></script>
     <script src="~/Scripts/jquery-migrate-3.0.0.js"></script>
 
 }
@@ -56,10 +56,10 @@
             Q.text("Site.Dashboard.CalendarStartDate") + " " + startDate.format("DD.MM.YYYY HH:mm:ss") + "\n" +
             Q.text("Site.Dashboard.CalendarEndDate") + " " + endDate.format("DD.MM.YYYY HH:mm:ss");
         return str;
-    } 
+    }
 
     $(function () {
-        
+        var initialLocaleCode =  '@System.Globalization.CultureInfo.CurrentUICulture.Name';
         /* initialize the calendar   -----------------------------------------------------------------*/
         $('#calendar').fullCalendar({
             header: {
@@ -67,11 +67,13 @@
                 center: 'title',
                 right: 'month,agendaWeek,agendaDay, listWeek'
             },
+            locale: initialLocaleCode,
+
             defaultView: 'agendaWeek',
             //businessHours: {
             //    dow: [ 1, 2, 3, 4, 5 ], // Monday - Friday
 
-            //    start: '8:00', 
+            //    start: '8:00',
             //    end: '20:00'
             //},
             slotDuration: '00:15:00',
@@ -92,7 +94,8 @@
             editable: true,
             droppable: false,
             selectable: true,
-            selectHelper: true,
+            selectHelper: true,
+
             select: function(start, end) {
                 //var title = prompt('Event Title:');
                 //var eventData;
@@ -107,12 +110,12 @@
                 //$('#calendar').fullCalendar('unselect');
                 var dialog = new PatientManagement.PatientManagement.CalendarVisitsDialog();
                 dialog.newPredifinedVisit(start.format("YYYY-MM-DD HH:mm:ss"),end.format("YYYY-MM-DD HH:mm:ss"));
-                
+
                 $('#calendar').fullCalendar('unselect');
 
             },
             eventDrop: function (event, dayDelta, minuteDelta, allDay, revertFunc) {
-                
+
                 if (!confirm(FormatAlertMessage(event.title, event.start, event.end))) {
                     revertFunc();
                 }
@@ -128,10 +131,10 @@
                 var dialog = new PatientManagement.PatientManagement.CalendarVisitsDialog();
 
                 dialog.updateVisit(event.id, event.start.format("YYYY-MM-DD HH:mm:ss"), event.end.format("YYYY-MM-DD HH:mm:ss"));
-                
+
 
             }
-           
+
 
         });
         $('#calendar').fullCalendar('addEventSource', "/Dashboard/GetVisitsTasks/");

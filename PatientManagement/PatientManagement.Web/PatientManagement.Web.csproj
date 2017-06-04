@@ -15,6 +15,9 @@
     <None Remove="Modules\Common\Dashboard\**" />
   </ItemGroup>
   <ItemGroup>
+    <Content Remove="wwwroot/favicon-16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="Modules\PatientManagement\Patients\PatientManagement.PatientsDialog.Template.html" />
     <None Remove="Views\Templates\EntityDialog.Template.html" />
     <None Remove="Views\Templates\PropertyDialog.Template.html" />
