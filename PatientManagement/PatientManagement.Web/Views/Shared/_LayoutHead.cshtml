@@ -79,8 +79,8 @@
             if ($('.s-NotificationsGrid').length) {
                 $('.s-NotificationsGrid .refresh-button').click();
             }
-            var number = +($('.notiffication-counter').find('span').text());
-            $('.notiffication-counter span').text(number + 1);
+            var number = +($('.counter-label-notifications').text());
+            $('.counter-label-notifications').text(number + 1);
         };
 
         hub.client.patientChangedNotification = function (userDisplayName, userPicture, notification) {
@@ -99,8 +99,8 @@
                 $('.s-NotificationsGrid .refresh-button').click();
             }
 
-            var number = +($('.notiffication-counter').find('span').text());
-            $('.notiffication-counter span').text(number + 1);
+            var number = +($('.counter-label-notifications').text());
+            $('.counter-label-notifications').text(number + 1);
             
         };
 

@@ -16,7 +16,9 @@ namespace PatientManagement.Migrations.PatientManagementDB
                 .WithColumn("EntityID").AsInt64().NotNullable()
                 .WithColumn("Text").AsString(int.MaxValue).NotNullable()
                 .WithColumn("InsertUserId").AsInt32().NotNullable()
-                .WithColumn("InsertDate").AsDateTime().NotNullable();
+                .WithColumn("InsertDate").AsDateTime().NotNullable()
+                .WithColumn("TenantId").AsInt32().NotNullable().WithDefaultValue(1);
+
 
             Create.Table("UserNotifications")
                 .WithColumn("UserNotificationId").AsInt32().Identity().PrimaryKey().NotNullable()
@@ -24,7 +26,7 @@ namespace PatientManagement.Migrations.PatientManagementDB
                 .ForeignKey("FK_UserNotifications_NotificationId", "Notifications", "NotificationId")
                 .WithColumn("SeenAt").AsDateTime().Nullable()
                 .WithColumn("UserId").AsInt32().NotNullable()
-                .WithColumn("TenantId").AsInt32().NotNullable().WithDefaultValue(1); ;
+                .WithColumn("TenantId").AsInt32().NotNullable().WithDefaultValue(1); 
         }
     }
 }
