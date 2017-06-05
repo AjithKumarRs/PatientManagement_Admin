@@ -2654,7 +2654,7 @@ var PatientManagement;
                 this.updateNotifications();
             };
             NotificationDropdownMenu.prototype.markAsSeen = function () {
-                this.byId('NotificationCounterLabel').text(0);
+                var _this = this;
                 var entities = new Array();
                 for (var id in this.notificationIds) {
                     var entity = {};
@@ -2663,11 +2663,10 @@ var PatientManagement;
                         return;
                     entities.push(entity);
                 }
-                console.log(entities);
                 PatientManagement.UserNotificationsService.CreateList({
                     Entity: entities
                 }, function (resp) {
-                    console.log("asas");
+                    _this.byId('NotificationCounterLabel').text(0);
                 });
             };
             return NotificationDropdownMenu;
@@ -3773,14 +3772,23 @@ var PatientManagement;
             __extends(CalendarVisitsDialog, _super);
             function CalendarVisitsDialog() {
                 var _this = _super !== null && _super.apply(this, arguments) || this;
+                _this.newPredifinedVisit = function (start, end) {
+                    var p = {};
+                    var dlg = new PatientManagement.CalendarVisitsDialog();
+                    p.StartDate = start;
+                    p.EndDate = end;
+                    dlg.loadEntityAndOpenDialog({
+                        StartDate: start,
+                        EndDate: end
+                    });
+                };
                 _this.updateVisit = function (visitId, start, end) {
                     var p = {};
                     PatientManagement.VisitsService.Retrieve({
                         EntityId: visitId
                     }, function (resp) {
-                        var text = Q.format(Q.text("Site.Dashboard.SuccessChangedVisitDates"), resp.Entity.PatientName, resp.Entity.StartDate, resp.Entity.EndDate);
-                        Q.notifyInfo(text + resp.Entity.PatientName);
                         p = resp.Entity;
+                        Q.notifyInfo(Q.text("Site.Dashboard.SuccessChangedVisitDates") + p.PatientName);
                     });
                     p.StartDate = start;
                     p.EndDate = end;
@@ -3790,6 +3798,22 @@ var PatientManagement;
                     }, function (response) {
                         Q.reloadLookup(PatientManagement.VisitsRow.lookupKey);
                         $('#VisitsGridDiv .refresh-button').click();
+                    });
+                };
+                _this.deleteVisit = function (visitId) {
+                    var p = {};
+                    PatientManagement.VisitsService.Retrieve({
+                        EntityId: visitId
+                    }, function (resp) {
+                        p = resp.Entity;
+                        Q.confirm(_this.formatAlertMessage(Q.text("Site.Dashboard.AlertOnCalendarRemove"), p.PatientName, (p.StartDate), (p.EndDate)), function () {
+                            PatientManagement.VisitsService.Delete({
+                                EntityId: visitId
+                            }, function (resp) {
+                                Q.notifyInfo(Q.text("Site.Dashboard.SuccessDeletingVisitDates") + p.PatientName);
+                                $("#calendar").fullCalendar('refetchEvents');
+                            });
+                        }, {});
                     });
                 };
                 return _this;
@@ -3810,6 +3834,22 @@ var PatientManagement;
             CalendarVisitsDialog.prototype.onDeleteSuccess = function (response) {
                 console.log(response);
                 $("#calendar").fullCalendar('refetchEvents');
+            };
+            CalendarVisitsDialog.prototype.formatAlertMessage = function (firstLine, title, startDate, endDate) {
+                var str = firstLine +
+                    "\n" +
+                    Q.text("Site.Dashboard.CalendarPatient") +
+                    " " +
+                    title +
+                    "\n\n" +
+                    Q.text("Site.Dashboard.CalendarStartDate") +
+                    " " +
+                    startDate.toLocaleString() +
+                    "\n" +
+                    Q.text("Site.Dashboard.CalendarEndDate") +
+                    " " +
+                    endDate.toLocaleString();
+                return str;
             };
             return CalendarVisitsDialog;
         }(PatientManagement.VisitsDialog));

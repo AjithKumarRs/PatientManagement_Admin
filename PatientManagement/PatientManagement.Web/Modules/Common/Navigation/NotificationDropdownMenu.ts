@@ -89,7 +89,6 @@ namespace PatientManagement.PatientManagement {
         }
 
         protected markAsSeen() {
-            this.byId('NotificationCounterLabel').text(0);
 
             var entities = new Array<PatientManagement.UserNotificationsRow>();
             for (var id in this.notificationIds) {
@@ -102,12 +101,12 @@ namespace PatientManagement.PatientManagement {
 
                 entities.push(entity);
             }
-            console.log(entities);
 
             PatientManagement.UserNotificationsService.CreateList({
                 Entity: entities
             }, resp => {
-                console.log("asas");
+                this.byId('NotificationCounterLabel').text(0);
+
             });
         }
 }

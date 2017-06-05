@@ -91,28 +91,25 @@ namespace PatientManagement.PatientManagement.Repositories
             protected override void OnBeforeDelete()
             {
                 base.OnBeforeDelete();
-                
-                using (var uow = new UnitOfWork(Connection))
+
+                Connection.DeleteById<LifeStylesRow>(Row.PatientId);
+
+                Connection.DeleteById<PatientHealthRow>(Row.PatientId);
+
+                Connection.DeleteById<ActivityRow>(Row.PatientId);
+
+                var ls = Connection.List<VisitsRow>().Where(p => p.PatientId == Row.PatientId);
+                foreach (var item in ls)
                 {
-                    uow.Connection.DeleteById<LifeStylesRow>(Row.PatientId);
 
-                    uow.Connection.DeleteById<PatientHealthRow>(Row.PatientId);
-
-                    uow.Connection.DeleteById<ActivityRow>(Row.PatientId);
-
-                    var ls = uow.Connection.List<VisitsRow>().Where(p => p.PatientId == Row.PatientId);
-                    foreach (var item in ls)
-                    {
-
-                        uow.Connection.DeleteById<VisitsRow>(item.VisitId);
-                    }
-                    var fU = uow.Connection.List<PatientsFileUploadsRow>().Where(p => p.PatientId == Row.PatientId);
-                    foreach (var item in fU)
-                    {
-                        uow.Connection.DeleteById<PatientsFileUploadsRow>(item.PatientFileUploadId);
-                    }
-                    uow.Commit();
+                    Connection.DeleteById<VisitsRow>(item.VisitId);
                 }
+                var fU = Connection.List<PatientsFileUploadsRow>().Where(p => p.PatientId == Row.PatientId);
+                foreach (var item in fU)
+                {
+                    Connection.DeleteById<PatientsFileUploadsRow>(item.PatientFileUploadId);
+                }
+
             }
         }
 

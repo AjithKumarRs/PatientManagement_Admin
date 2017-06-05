@@ -29,6 +29,8 @@
 <script type="application/json" id="ScriptCulture">
     @Html.Raw(Serenity.JSON.Stringify(new ScriptCulture()))
 </script>
+
+<script src="~/Scripts/moment/moment.min.js"></script>
 <script type="text/javascript">window.paceOptions = { minTime: 250, ghostTime: 250, restartOnRequestAfter: 250, ajax: { trackMethods: ['GET', 'POST'], trackWebSockets: true, ignoreURLs: [] } };</script>
 @Html.Script("~/Scripts/pace.js")
 @foreach (var x in CommonIncludes.Scripts)
@@ -77,8 +79,8 @@
             if ($('.s-NotificationsGrid').length) {
                 $('.s-NotificationsGrid .refresh-button').click();
             }
-            var number = +($('.notiffication-counter').find('span').text());
-            $('.notiffication-counter span').text(number + 1);
+            var number = +($('.counter-label-notifications').text());
+            $('.counter-label-notifications').text(number + 1);
         };
 
         hub.client.patientChangedNotification = function (userDisplayName, userPicture, notification) {
@@ -97,8 +99,8 @@
                 $('.s-NotificationsGrid .refresh-button').click();
             }
 
-            var number = +($('.notiffication-counter').find('span').text());
-            $('.notiffication-counter span').text(number + 1);
+            var number = +($('.counter-label-notifications').text());
+            $('.counter-label-notifications').text(number + 1);
             
         };
 
@@ -107,4 +109,3 @@
 
     });
 </script>
-<meta name="mobile-web-app-capable" content="yes">

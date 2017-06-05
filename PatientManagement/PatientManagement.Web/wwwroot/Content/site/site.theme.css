@@ -7662,3 +7662,6 @@ section.content > .s-DataGrid {
 .skin-purple .sidebar-menu > li.active > a {
   border-left-color: #531152;
 }
+.context-menu-list {
+  font-size: 16px !important;
+}

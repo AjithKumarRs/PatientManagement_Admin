@@ -9,6 +9,8 @@ var rtl = System.Globalization.CultureInfo.CurrentUICulture.TextInfo.IsRightToLe
     <title>@ViewData["Title"]</title>
 </head>
 <body id="s-@(ViewData["PageId"])Page" class="@(ViewData["BodyClass"]) no-navigation@(rtl ? " rtl" : "")">
-    @RenderBody()
+
+
+@RenderBody()
 </body>
 </html>
