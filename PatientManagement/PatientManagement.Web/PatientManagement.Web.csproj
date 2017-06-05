@@ -24,14 +24,14 @@
     <None Remove="Views\Templates\PropertyDialog.Template.html" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Modules\PatientManagement\Patients\PatientManagement.PatientsDialog.Template.html" />
-    <Content Include="Views\Templates\EntityDialog.Template.html" />
-    <Content Include="Views\Templates\NotificationDropdownMenu.Template.html" />
+    <Content Include="Modules\PatientManagement\Patients\PatientManagement.PatientsDialog.Template.html" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="Views\Templates\EntityDialog.Template.html" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="Views\Templates\NotificationDropdownMenu.Template.html" CopyToPublishDirectory="PreserveNewest" />
     <Content Include="wwwroot\Content\site\site.theme.css" />
     <Content Include="wwwroot\Content\site\site.theme.min.css" />
     <Content Include="wwwroot\Scripts\serenity\Serenity.Script.UI.es5.js" />
     <Content Include="wwwroot\Scripts\site\FullCalendarExtensions.js" />
-    <EmbeddedResource Include="Views\Templates\PropertyDialog.Template.html" />
+    <EmbeddedResource Include="Views\Templates\PropertyDialog.Template.html" CopyToPublishDirectory="PreserveNewest" />
   </ItemGroup>
   <ItemGroup> 
     <None Update="wwwroot\**\*">
