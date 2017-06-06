@@ -9,6 +9,21 @@
     <h1>@LocalText.Get("Navigation.Dashboard")<small>@Html.Raw(Texts.Site.Dashboard.ContentDescription)</small></h1>
 }
 
+@section BottoMenuLeftNavigation
+{
+    <li id="Left-bottom-menu-visit-types" class="header">VISIT TYPES</li>
+    
+    <script type="text/javascript">
+        jQuery(function () {
+            new PatientManagement.VisiTypesBottomLeftMenu($('#Left-bottom-menu-visit-types'), {});
+                            
+        });
+    </script>
+    <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
+    <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
+    <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
+}
+
 @section Head {
     <link rel="stylesheet" href="~/Scripts/fullcalendar/fullcalendar.min.css">
     <link rel="stylesheet" href="~/Scripts/fullcalendar/fullcalendar.print.css" media="print">

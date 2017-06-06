@@ -94,7 +94,10 @@ namespace PatientManagement
             public static LocalText LogoutLink = "Logout";
             public static LocalText SiteTitle = "PatientManagement";
         }
-
+        public static class LeftNavigation
+        {
+            public static LocalText LeftNavigationHeader = "MAIN MENU";
+        }
         public static class Site
         {
             public static class Notifications
