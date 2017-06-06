@@ -97,13 +97,32 @@ namespace PatientManagement
 
         public static class Site
         {
+            public static class Notifications
+            {
+                public static LocalText VisitChangedNotification = "{0} just change a visit for patient {1}";
+                public static LocalText VisitAddedNotification = "{0} just add a visit for patient {1}";
+                public static LocalText VisitDeletedNotification = "{0} just delete a visit for patient {1}";
+
+                public static LocalText PatientAddedNotification = "{0} just add a patient {1}";
+                public static LocalText PatientChangedNotification = "{0} just change a patient {1}";
+                public static LocalText PatientDeletedNotification = "{0} just delete a patient {1}";
+            }
+
             public static class Dashboard
             {
+                public static LocalText ViewPatinet = "View Patient";
+                public static LocalText ViewVisit = "View Visit";
+                public static LocalText DeleteVisit = "Delete Visit";
+                public static LocalText QuitContextMenu = "Quit";
+
+
                 public static LocalText SuccessChangedVisitDates = "You successfully change visit with patient name: ";
+                public static LocalText SuccessDeletingVisitDates = "You successfully deleted a visit with patient name: ";
                 public static LocalText ErrorEndDateBiggerThanStartDate = "End Date can't be earlier than Start Date";
                 public static LocalText ErrorEndDateEqualStartDate = "End Date can't be equal to Start Date";
 
                 public static LocalText AlertOnCalendarChange ="Are you sure with this changes: ";
+                public static LocalText AlertOnCalendarRemove = "Are you sure you want to remove: ";
 
                 public static LocalText CalendarStartDate = "Start date: ";
                 public static LocalText CalendarEndDate = "End date: ";
@@ -161,6 +180,19 @@ namespace PatientManagement
 
             public static class Layout
             {
+                public static LocalText NoNotificationMenu = "There is no new notifications";
+
+                public static LocalText NotificationMenuHeader = "All received notifications";
+                public static LocalText NotificationMenuFooter = "Go to notifications";
+
+                public static LocalText RecieveNotificationToggleOn = "ON";
+                public static LocalText RecieveNotificationToggleOff = "OFF";
+
+                public static LocalText RecieveNotificationToggle = "Recieve notifications?";
+                public static LocalText NewVisitFloatedButton = "New Visit";
+                public static LocalText NewPatientFloatedButton = "New Patient";
+                public static LocalText AddFloatedButton = "Add";
+
                 public static LocalText FooterCopyright = "Copyright (c) 2017.";
                 public static LocalText FooterInfo = "S2KDesign Platform";
                 public static LocalText FooterRights = "All rights reserved.";

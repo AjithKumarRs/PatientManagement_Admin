@@ -2,12 +2,17 @@
 @using Microsoft.AspNetCore.Html
 @using PatientManagement
 @using Serenity
+@using Serenity.Navigation
 <!DOCTYPE html>
 @{
     Func<string, HtmlString> json = x => new HtmlString(Serenity.JSON.Stringify(x));
     var hideNav = (string)Context.Request.Query["hideNav"] == "1";
     var logged = Serenity.Authorization.Username;
     var themeCookie = Context.Request.Cookies["ThemePreference"];
+
+    var notificationCookie = Context.Request.Cookies["NotificationPreference"];
+    var notificationState = !notificationCookie.IsEmptyOrNull() ? notificationCookie : "true";
+
     var theme = !themeCookie.IsEmptyOrNull() ? themeCookie : "purple";
     var rtl = System.Globalization.CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft;
     var user = (UserDefinition)Serenity.Authorization.UserDefinition;
@@ -21,161 +26,205 @@
 <html lang="@System.Globalization.CultureInfo.CurrentUICulture.Name" class="no-js@(hideNav ? " no-navigation" : "")">
 <!--<![endif]-->
 <head>
+    
+    <meta name="theme-color" content="@theme">
     @{Html.RenderPartial(MVC.Views.Shared._LayoutHead);}
-    @RenderSection("Head", false)
-    <title>@(ViewData["Title"]) - PatientManagement</title>
-</head>
-<body id="s-@(ViewData["PageId"])Page" class="@(ViewData["BodyClass"]) fixed sidebar-mini hold-transition sidebar-collapse skin-@theme@(hideNav ? " no-navigation" : " has-layout-event")@(rtl ? " rtl" : "")">
+    @{Html.RenderPartial(MVC.Views.Shared._LayoutSeoTags);}
 
-@if (hideNav)
-{
-    <script type="text/javascript">
+
+    @RenderSection("Head", false)
+    <title>@(ViewData["Title"]) - Clario</title>
+</head>
+<body id="s-@(ViewData["PageId"])Page" class="@(ViewData["BodyClass"]) fixed sidebar-mini hold-transition skin-@theme@(hideNav ? " no-navigation" : " has-layout-event")@(rtl ? " rtl" : "")">
+
+    @if (hideNav)
+    {
+        <script type="text/javascript">
         $(function () {
             @RenderSection("PageInitScript", false)
         });
-    </script>
-    <div id="page-outer-nonav">
-        <div id="page-container" class="page-container-common">
-            @RenderBody()
-        </div>
-    </div>
-}
-else
-{
-    <div class="wrapper">
-        <header class="main-header">
-            <a href="~/" class="logo">
-                <span class="logo-mini"><i></i></span>
-                <span class="logo-lg"><i></i><b>@LocalText.Get("Navigation.SiteTitle")</b></span>
-            </a>
-            <nav class="navbar navbar-static-top" role="navigation">
-                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-                    <span class="sr-only">Toggle navigation</span>
-                </a>
-
-                <div class="navbar-custom-menu">
-                    <ul class="nav navbar-nav">
-                        <li class="dropdown user user-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="@userImage" class="user-image" alt="User Image">
-                                <span class="hidden-xs">@Serenity.Authorization.Username</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <!-- User image -->
-                                <li class="user-header">
-                                    <img src="@userImage" class="img-circle" alt="User Image">
-
-                                    <p>
-                                        @(user != null ? user.DisplayName : "")
-                                    </p>
-                                </li>
-
-                                <!-- Menu Footer-->
-                                <li class="user-footer">
-                                    <div class="pull-left">
-                                        <a href="~/Account/ChangePassword" class="btn btn-default btn-flat"><i class="fa fa-lock fa-fw"></i> @Texts.Forms.Membership.ChangePassword.FormTitle</a>
-                                    </div>
-                                    <div class="pull-right">
-                                        <a href="~/Account/Signout" class="btn btn-default btn-flat"><i class="fa fa-sign-out fa-fw"></i> @LocalText.Get("Navigation.LogoutLink")</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
-
-        <aside class="main-sidebar">
-            <section class="sidebar">
-                <form action="#" method="get" class="sidebar-form">
-                    <div class="input-group">
-                        <input type="text" id="SidebarSearch" name="q" class="form-control" autocomplete="off">
-                        <span class="input-group-btn">
-                            <button type="button" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
-                        </span>
-                    </div>
-                </form>
-                <ul class="sidebar-menu" id="SidebarMenu">
-                    @{Html.RenderPartial(MVC.Views.Shared.LeftNavigation, new PatientManagement.Navigation.NavigationModel()); }
-                </ul>
-            </section>
-        </aside>
-
-        <div class="content-wrapper">
-            @if (IsSectionDefined("ContentHeader"))
-            {
-                <section class="content-header">
-                    @RenderSection("ContentHeader")
-                </section>
-            }
-            <section class="content">
+        </script>
+        <div id="page-outer-nonav">
+            <div id="page-container" class="page-container-common">
                 @RenderBody()
-            </section>
-        </div>
-             
-        @{
-            var runtimeVersion = typeof(Startup)
-                .GetTypeInfo()
-                .Assembly
-                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
-                .InformationalVersion;
-        }
-        <footer class="main-footer">
-            <div class="pull-right hidden-xs">
-                @Texts.Site.Layout.FooterInfo
-                -
-                Version: @runtimeVersion
-           
             </div>
-            <strong>@Texts.Site.Layout.FooterCopyright</strong> @Texts.Site.Layout.FooterRights
+        </div>
+    }
+    else
+    {
+        <div class="wrapper">
+            <header class="main-header">
+                <a href="~/" class="logo">
+                    <span class="logo-mini"><i></i></span>
+                    <span class="logo-lg"><i></i><b>@LocalText.Get("Navigation.SiteTitle")</b></span>
+                </a>
+                <nav class="navbar navbar-static-top" role="navigation">
+                    <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                        <span class="sr-only">Toggle navigation</span>
+                    </a>
 
-        </footer>
+                    <div class="navbar-custom-menu">
+                        <ul class="nav navbar-nav">
+                   
+                            <li id="NotificationDropdownMenu" class="dropdown messages-menu"></li>
 
-        <aside class="control-sidebar control-sidebar-dark">
-            <div class="tab-content">
-                <div class="tab-pane active" id="control-sidebar-settings-tab">
-                    <form method="post">
-                        <h3 class="control-sidebar-heading">@Texts.Site.Layout.GeneralSettings</h3>
+                            <script type="text/javascript">
+                                jQuery(function () {
+                                    new PatientManagement.PatientManagement.NotificationDropdownMenu($('#NotificationDropdownMenu'), {});
+                            
+                                });
+                            </script>
 
-                        <div class="form-group">
-                            <label class="control-sidebar-subheading">@Texts.Site.Layout.Language</label>
-                            <select id="LanguageSelect" class="form-control"></select>
+                            <li class="dropdown user user-menu">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <img src="@userImage" class="user-image" alt="User Image">
+                                    <span class="hidden-xs">@Serenity.Authorization.Username</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <!-- User image -->
+                                    <li class="user-header">
+                                        <img src="@userImage" class="img-circle" alt="User Image">
+
+                                        <p>
+                                            @(user != null ? user.DisplayName : "")
+                                        </p>
+                                    </li>
+
+                                    <!-- Menu Footer-->
+                                    <li class="user-footer">
+                                        <div class="pull-left">
+                                            <a href="~/Account/ChangePassword" class="btn btn-default btn-flat"><i class="fa fa-lock fa-fw"></i> @Texts.Forms.Membership.ChangePassword.FormTitle</a>
+                                        </div>
+                                        <div class="pull-right">
+                                            <a href="~/Account/Signout" class="btn btn-default btn-flat"><i class="fa fa-sign-out fa-fw"></i> @LocalText.Get("Navigation.LogoutLink")</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+
+            <aside class="main-sidebar">
+                <section class="sidebar">
+                    <!-- Sidebar user panel -->
+                    <div class="user-panel">
+                        <div class="pull-left image">
+                            <img src="@userImage" class="img-circle" alt="User Image">
+                        </div>
+                        <div class="pull-left info">
+                            <p>
+                                @(user != null ? user.DisplayName : "")
+
+                            </p>
+                            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+
+                            <div class="clearfix"></div>
                         </div>
 
-                        <div class="form-group" style="margin-top: 15px;">
-                            <label class="control-sidebar-subheading">@Texts.Site.Layout.Theme</label>
-                            <select id="ThemeSelect" class="form-control"></select>
+                    </div>
+                    <form action="#" method="get" class="sidebar-form">
+                        <div class="input-group">
+                            <input type="text" id="SidebarSearch" name="q" class="form-control" autocomplete="off">
+                            <span class="input-group-btn">
+                                <button type="button" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+                            </span>
                         </div>
                     </form>
-                </div>
+                    <ul class="sidebar-menu" id="SidebarMenu">
+                        @{Html.RenderPartial(MVC.Views.Shared.LeftNavigation, new PatientManagement.Navigation.NavigationModel()); }
+                    </ul>
+                </section>
+            </aside>
+
+            <div class="content-wrapper">
+                @if (IsSectionDefined("ContentHeader"))
+                {
+                    <section class="content-header">
+                        @RenderSection("ContentHeader")
+                    </section>
+                }
+                <section class="content">
+                    @RenderBody()
+                </section>
             </div>
-        </aside>
-        <div class="control-sidebar-bg"></div>
-        
-        
-        <nav class="container-floated" > 
-    
-            @*<a class="floated-button"  tooltip="Нов администратор"><i class="fa fa-users small-icon"></i></a>*@
-    
-            <a class="floated-button" tooltip="Нова визита" onclick="new PatientManagement.PatientManagement.CalendarVisitsDialog().loadNewAndOpenDialog();"><i class="fa fa-calendar small-icon"></i></a>
-    
-            <a class="floated-button" tooltip="Нов пациент" onclick="new PatientManagement.PatientManagement.PatientsDialog().loadNewAndOpenDialog();"><i class="fa fa-user small-icon"></i></a>
 
-            <a class="floated-button" tooltip="Добави" href="#"><i class="fa fa-plus plus"></i></a>
+            @{
+                var runtimeVersion = typeof(Startup)
+                    .GetTypeInfo()
+                    .Assembly
+                    .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                    .InformationalVersion;
+            }
+            <footer class="main-footer">
+                <div class="pull-right hidden-xs">
+                    @Texts.Site.Layout.FooterInfo
+                    -
+                    Version: @runtimeVersion
 
-        </nav>
-  
+                </div>
+                <strong>@Texts.Site.Layout.FooterCopyright</strong> @Texts.Site.Layout.FooterRights
+
+            </footer>
+
+            <aside class="control-sidebar control-sidebar-dark">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="control-sidebar-settings-tab">
+                        <form method="post">
+                            <h3 class="control-sidebar-heading">@Texts.Site.Layout.GeneralSettings</h3>
+                            <hr />
+                            <div class="form-group">
+                                <label class="control-sidebar-subheading">
+                                    @Texts.Site.Layout.RecieveNotificationToggle
+                                </label>
+                                
+                                <input id="NotificationCheck" type="checkbox" data-layout="sidebar-collapse" class="pull-right"> 
+                            </div>
+                            <hr />
+                            <div class="form-group">
+                                <label class="control-sidebar-subheading">@Texts.Site.Layout.Language</label>
+                                <select id="LanguageSelect" class="form-control"></select>
+                            </div>
+                            <hr />
+                            <div class="form-group" style="margin-top: 15px;">
+                                <label class="control-sidebar-subheading">@Texts.Site.Layout.Theme</label>
+                                <select id="ThemeSelect" class="form-control"></select>
+                            </div>
+                            
+                        
+                        </form>
+                     
+                    </div>
+                </div>
+            </aside>
+            <div class="control-sidebar-bg"></div>
 
 
-    </div>
+            <nav class="container-floated">
 
-    <script type="text/javascript">
-        $().ready(function () {
+                @*<a class="floated-button"  tooltip="Нов администратор"><i class="fa fa-users small-icon"></i></a>*@
+
+                <a class="floated-button" tooltip="@Texts.Site.Layout.NewVisitFloatedButton" onclick="new PatientManagement.PatientManagement.CalendarVisitsDialog().loadNewAndOpenDialog();"><i class="fa fa-calendar small-icon"></i></a>
+
+                <a class="floated-button" tooltip="@Texts.Site.Layout.NewPatientFloatedButton" onclick="new PatientManagement.PatientManagement.PatientsDialog().loadNewAndOpenDialog();"><i class="fa fa-user small-icon"></i></a>
+
+                <a class="floated-button" tooltip="@Texts.Site.Layout.AddFloatedButton" href="#"><i class="fa fa-plus plus"></i></a>
+
+            </nav>
+
+
+
+        </div>
+
+        <script type="text/javascript">
+            $().ready(function () {
+
+                new PatientManagement.Common.RecieveNotificationToggle($('#NotificationCheck'),{ state:@notificationState});
             new PatientManagement.Common.SidebarSearch($('#SidebarSearch'), $('#SidebarMenu')).init();
             new PatientManagement.Common.LanguageSelection($('#LanguageSelect'), '@(System.Globalization.CultureInfo.CurrentUICulture.Name)');
             new PatientManagement.Common.ThemeSelection($('#ThemeSelect'));
@@ -234,9 +283,9 @@ else
                 }
             };
         });
+        
 
-
-    </script>
-}
+        </script>
+                }
 </body>
 </html>

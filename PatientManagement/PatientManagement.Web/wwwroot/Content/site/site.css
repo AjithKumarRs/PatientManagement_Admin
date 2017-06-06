@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Core: General Layout Style
  * -------------------------
  */
@@ -940,7 +940,7 @@ a:focus {
 .navbar-nav > .notifications-menu > .dropdown-menu,
 .navbar-nav > .messages-menu > .dropdown-menu,
 .navbar-nav > .tasks-menu > .dropdown-menu {
-  width: 280px;
+  width: 320px;
   padding: 0 0 0 0;
   margin: 0;
   top: 100%;
@@ -7698,6 +7698,9 @@ section.content > .s-DataGrid {
 .skin-purple .sidebar-menu > li.active > a {
   border-left-color: #531152;
 }
+.context-menu-list {
+  font-size: 16px !important;
+}
 .reset-box-sizing,
 .reset-box-sizing *,
 .reset-box-sizing *:before,
@@ -7927,7 +7930,7 @@ section.content > .s-DataGrid {
   margin: 0 auto 20px auto;
   width: 330px;
   height: 128px;
-  background: transparent url(../images/logo-frond-page.png) no-repeat center center;
+  background: transparent url(../../Content/images/logo-frond-page.png) no-repeat center center;
   background-size: contain;
 }
 .page-content .s-LoginPanel h3 {
@@ -8828,5 +8831,35 @@ section.content > .s-DataGrid {
   width: 650px;
 }
 .s-PatientManagement-ActivityDialog .caption {
+  width: 150px;
+}
+.s-PatientManagement-NotificationsDialog > .size {
+  width: 650px;
+}
+.s-PatientManagement-NotificationsDialog .caption {
+  width: 150px;
+}
+.s-PatientManagement-NotificationsDialog > .size {
+  width: 650px;
+}
+.s-PatientManagement-NotificationsDialog .caption {
+  width: 150px;
+}
+.s-PatientManagement-UserNotificationsDialog > .size {
+  width: 650px;
+}
+.s-PatientManagement-UserNotificationsDialog .caption {
+  width: 150px;
+}
+.s-PatientManagement-UserNotificationsDialog > .size {
+  width: 650px;
+}
+.s-PatientManagement-UserNotificationsDialog .caption {
+  width: 150px;
+}
+.s-PatientManagement-UserNotificationsDialog > .size {
+  width: 650px;
+}
+.s-PatientManagement-UserNotificationsDialog .caption {
   width: 150px;
 }

@@ -1,4 +1,9 @@
 ﻿
+using System.Drawing;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.AspNetCore.SignalR.Infrastructure;
+using PatientManagement.Web.Hubs;
+
 namespace PatientManagement.PatientManagement.Endpoints
 {
     using Serenity;
@@ -13,6 +18,7 @@ namespace PatientManagement.PatientManagement.Endpoints
     [ConnectionKey(typeof(MyRow)), ServiceAuthorize(typeof(MyRow))]
     public class VisitsController : ServiceEndpoint
     {
+
         [HttpPost, AuthorizeCreate(typeof(MyRow))]
         public SaveResponse Create(IUnitOfWork uow, SaveRequest<MyRow> request)
         {

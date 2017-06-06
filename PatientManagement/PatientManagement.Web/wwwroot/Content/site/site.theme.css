@@ -940,7 +940,7 @@ a:focus {
 .navbar-nav > .notifications-menu > .dropdown-menu,
 .navbar-nav > .messages-menu > .dropdown-menu,
 .navbar-nav > .tasks-menu > .dropdown-menu {
-  width: 280px;
+  width: 320px;
   padding: 0 0 0 0;
   margin: 0;
   top: 100%;
@@ -7661,4 +7661,7 @@ section.content > .s-DataGrid {
 .skin-purple .sidebar-menu > li:hover > a,
 .skin-purple .sidebar-menu > li.active > a {
   border-left-color: #531152;
+}
+.context-menu-list {
+  font-size: 16px !important;
 }

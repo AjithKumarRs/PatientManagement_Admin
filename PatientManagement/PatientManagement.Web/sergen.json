@@ -39,6 +39,12 @@
           "PermissionKey": "PatientManagement:Notes"
         },
         {
+          "Tablename": "dbo.Notifications",
+          "Identifier": "Notifications",
+          "Module": "PatientManagement",
+          "PermissionKey": "PatientManagement:Notifications"
+        },
+        {
           "Tablename": "dbo.PatientHealth",
           "Identifier": "PatientHealth",
           "Module": "PatientManagement",
@@ -61,6 +67,12 @@
           "Identifier": "Sysdiagrams",
           "Module": "PatientManagement",
           "PermissionKey": "Administration:PatientManagement"
+        },
+        {
+          "Tablename": "dbo.UserNotifications",
+          "Identifier": "UserNotifications",
+          "Module": "PatientManagement",
+          "PermissionKey": "PatientManagement:UserNotifications"
         },
         {
           "Tablename": "dbo.Visits",
