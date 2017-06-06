@@ -18,7 +18,7 @@ namespace PatientManagement.Web.Modules.Common.Helpers
     public class NotificationHelpers
     {
         private static readonly IHubContext notificationHub = Dependency.Resolver.Resolve<IConnectionManager>().GetHubContext<NotificationHub>();
-        private static UserDefinition user = (UserDefinition)Authorization.UserDefinition;
+
         
 
         #region Private Methods
@@ -29,7 +29,7 @@ namespace PatientManagement.Web.Modules.Common.Helpers
             using (var connectionUsers = SqlConnections.NewFor<UserRow>())
             {
                 users = connectionUsers.List<UserRow>().Where(
-                    e => e.TenantId == tenantId).Where( e => e.UserId != userId).Select(e => e.UserId.ToString()).ToList();
+                    e => e.TenantId == tenantId && e.UserId != userId).Select(e => e.UserId.ToString()).ToList();
             }
             return users;
         }
@@ -64,6 +64,7 @@ namespace PatientManagement.Web.Modules.Common.Helpers
 
         private static void InsertNotificationForCurrentTable(string tableName, int visitId, string message)
         {
+            UserDefinition user = (UserDefinition) Authorization.UserDefinition;
             var notificationRow = new NotificationsRow
             {
                 EntityType = tableName,
@@ -93,6 +94,7 @@ namespace PatientManagement.Web.Modules.Common.Helpers
         #region Visits Notification
         public static void SendVisitNotification(int VisitId, DateTime start, DateTime end, int patientId, EEntityNotificationStatus status)
         {
+            UserDefinition user = (UserDefinition) Authorization.UserDefinition;
             var patientName = string.Empty;
             using (var connectionPatients = SqlConnections.NewFor<PatientsRow>())
             {
