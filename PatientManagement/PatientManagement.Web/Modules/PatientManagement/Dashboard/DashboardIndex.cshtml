@@ -122,6 +122,12 @@
         });
     //function to calculate window height
     function get_calendar_height() {
+        if (/Mobi/.test(navigator.userAgent)) {
+            if(window.innerHeight < window.innerWidth){
+                return $(window).height() -30;
+            }
+        }
+        
         return $(window).height() - 180;
     }
     

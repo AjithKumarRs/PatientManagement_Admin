@@ -26,7 +26,7 @@ namespace PatientManagement.Migrations.DefaultDB
 
             Insert.IntoTable("Users").Row(new {
                 Username = "admin",
-                DisplayName = "Светлин Кръстанов",
+                DisplayName = "Svetlin Krastanov",
                 Email = "admin@s2kdesign.com",
                 Source = "site",
                 PasswordHash = "YfWxjZbXmSJXQpohHgz+DnHKsQnSogQPoymxjzzV8AH2ZZdPrVkBkiv9kDQD9mQC9/9d6C32NXhfcDKMoClQsg",
