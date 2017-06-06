@@ -26,11 +26,11 @@ namespace PatientManagement.Migrations.DefaultDB
 
             Insert.IntoTable("Users").Row(new {
                 Username = "admin",
-                DisplayName = "admin",
-                Email = "admin@dummy.com",
+                DisplayName = "Светлин Кръстанов",
+                Email = "admin@s2kdesign.com",
                 Source = "site",
-                PasswordHash = "rfqpSPYs0ekFlPyvIRTXsdhE/qrTHFF+kKsAUla7pFkXL4BgLGlTe89GDX5DBysenMDj8AqbIZPybqvusyCjwQ",
-                PasswordSalt = "hJf_F",
+                PasswordHash = "YfWxjZbXmSJXQpohHgz+DnHKsQnSogQPoymxjzzV8AH2ZZdPrVkBkiv9kDQD9mQC9/9d6C32NXhfcDKMoClQsg",
+                PasswordSalt = "smzy5",
                 InsertDate = new DateTime(2014, 1, 1),
                 InsertUserId = 1,
                 IsActive = 1
@@ -56,6 +56,11 @@ namespace PatientManagement.Migrations.DefaultDB
             {
                 LanguageId = "es",
                 LanguageName = "Spanish"
+            });
+            Insert.IntoTable("Languages").Row(new
+            {
+                LanguageId = "bg-BG",
+                LanguageName = "Bulgarian"
             });
 
             Insert.IntoTable("Languages").Row(new
