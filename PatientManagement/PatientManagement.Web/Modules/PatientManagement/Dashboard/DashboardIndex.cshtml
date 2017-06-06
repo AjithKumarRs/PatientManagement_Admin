@@ -26,7 +26,7 @@
     var localeCalendar = $"../Scripts/fullcalendar/locale/{System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName}.js";
 }
 <script src="@localeCalendar"></script>
-<div class="row">
+<div class="row" id="calendar-holder">
     @*<div class="col-md-5">
             <div class="col-md-12">
                 <div class="box box-solid box-primary">
@@ -57,8 +57,10 @@
 </div><!-- /.row -->
 
 <script>
+    
 
-    $(function() {
+    $(function () {
+     
         $.contextMenu({
             selector: '.context_menu',
             callback: function (key, options) {
@@ -118,7 +120,17 @@
         function(e) {
             e.preventDefault();
         });
-    $(document).ready(function() {
+    //function to calculate window height
+    function get_calendar_height() {
+        return $(window).height() - 180;
+    }
+    
+    $(document).ready(function () {
+       
+        $(window).resize(function() {
+            $('#calendar').fullCalendar('option', 'height', get_calendar_height());
+        });
+
         var initialLocaleCode =  '@System.Globalization.CultureInfo.CurrentUICulture.Name';
         /* initialize the calendar   -----------------------------------------------------------------*/
         $('#calendar').fullCalendar({
@@ -131,7 +143,7 @@
             buttonIcons: false, // show the prev/next text
             weekNumbers: true,
             navLinks: true, // can click day/week names to navigate views
-
+            height: get_calendar_height,
             defaultView: 'agendaWeek',
             //businessHours: {
             //    dow: [ 1, 2, 3, 4, 5 ], // Monday - Friday
