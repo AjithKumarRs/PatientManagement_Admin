@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Core: General Layout Style
  * -------------------------
  */
@@ -7930,7 +7930,7 @@ section.content > .s-DataGrid {
   margin: 0 auto 20px auto;
   width: 330px;
   height: 128px;
-  background: transparent url(../../Content/images/logo-frond-page.png) no-repeat center center;
+  background: transparent url(../images/logo-frond-page.png) no-repeat center center;
   background-size: contain;
 }
 .page-content .s-LoginPanel h3 {
@@ -8701,6 +8701,11 @@ section.content > .s-DataGrid {
 }
 .s-NoteDialog .ui-dialog-content {
   padding-bottom: 10px;
+}
+@media only screen and (min-width: 992px) {
+  #Left-bottom-menu-visit-types {
+    margin-top: 150%;
+  }
 }
 .s-PatientManagement-PatientsDialog > .size {
   width: 650px;
