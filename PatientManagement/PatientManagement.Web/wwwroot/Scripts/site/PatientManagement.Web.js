@@ -4639,4 +4639,39 @@ var PatientManagement;
         PatientManagement.VisitTypesGrid = VisitTypesGrid;
     })(PatientManagement = PatientManagement_58.PatientManagement || (PatientManagement_58.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
+/// <reference types="jqueryui" />
+var PatientManagement;
+(function (PatientManagement) {
+    var VisiTypesBottomLeftMenu = (function (_super) {
+        __extends(VisiTypesBottomLeftMenu, _super);
+        function VisiTypesBottomLeftMenu(elem, opt) {
+            var _this = _super.call(this, elem, opt) || this;
+            PatientManagement.PatientManagement.VisitTypesService.List({}, function (resp) {
+                if (resp.Entities.length > 0) {
+                    for (var type in resp.Entities) {
+                        console.log(resp.Entities[type]);
+                        var item = resp.Entities[type];
+                        var li = $('<li/>');
+                        var a = $('<a/>');
+                        var i = $('<i/>');
+                        i.addClass('fa fa-circle-o');
+                        i.css('color', item.BackgroundColor);
+                        a.append(i);
+                        var span = $('<span/>');
+                        span.text(item.Name);
+                        a.append(span);
+                        li.append(a);
+                        elem.after(li);
+                    }
+                }
+            });
+            return _this;
+        }
+        return VisiTypesBottomLeftMenu;
+    }(Serenity.Widget));
+    VisiTypesBottomLeftMenu = __decorate([
+        Serenity.Decorators.registerClass()
+    ], VisiTypesBottomLeftMenu);
+    PatientManagement.VisiTypesBottomLeftMenu = VisiTypesBottomLeftMenu;
+})(PatientManagement || (PatientManagement = {}));
 //# sourceMappingURL=PatientManagement.Web.js.map

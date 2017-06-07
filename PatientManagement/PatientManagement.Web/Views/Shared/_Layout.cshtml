@@ -137,7 +137,10 @@
                         </div>
                     </form>
                     <ul class="sidebar-menu" id="SidebarMenu">
+                        <li class="header">@Texts.LeftNavigation.LeftNavigationHeader</li>
                         @{Html.RenderPartial(MVC.Views.Shared.LeftNavigation, new PatientManagement.Navigation.NavigationModel()); }
+                        
+                        @RenderSection("BottoMenuLeftNavigation", false)
                     </ul>
                 </section>
             </aside>

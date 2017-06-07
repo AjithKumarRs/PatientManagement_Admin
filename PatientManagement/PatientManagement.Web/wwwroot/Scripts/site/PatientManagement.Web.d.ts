@@ -2015,3 +2015,8 @@ declare namespace PatientManagement.PatientManagement {
         constructor(container: JQuery);
     }
 }
+declare namespace PatientManagement {
+    class VisiTypesBottomLeftMenu extends Serenity.Widget<any> {
+        constructor(elem: JQuery, opt: {});
+    }
+}
