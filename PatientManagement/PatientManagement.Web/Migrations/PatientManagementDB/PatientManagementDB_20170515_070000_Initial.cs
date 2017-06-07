@@ -63,7 +63,7 @@ namespace PatientManagement.Migrations.PatientManagementDB
             #region PatientsFileUploads Table
 
             Create.Table("PatientsFileUploads")
-                .WithColumn("PatientFileUploadId").AsInt32().PrimaryKey().NotNullable()
+                .WithColumn("PatientFileUploadId").AsInt32().Identity().PrimaryKey().NotNullable()
                 .WithColumn("PatientId").AsInt32().NotNullable()
                 .ForeignKey("FK_PatientsFileUploads_Patients1", "Patients", "PatientId")
                 .WithColumn("FilePath").AsString(Int32.MaxValue).NotNullable()
