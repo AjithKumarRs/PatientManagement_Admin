@@ -24,7 +24,6 @@ namespace PatientManagement.Migrations.PatientManagementDB
             Create.Table("Activity")
                 .WithColumn("PatientId")
                 .AsInt32()
-                .Identity()
                 .PrimaryKey()
                 .NotNullable()
                 .ForeignKey("FK_Activity_Patients1", "Patients", "PatientId")
