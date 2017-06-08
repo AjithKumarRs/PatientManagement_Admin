@@ -105,7 +105,12 @@ namespace PatientManagement.Administration.Entities
             get { return Fields.CurrencyName[this]; }
             set { Fields.CurrencyName[this] = value; }
         }
-        
+        [DisplayName("Currency Enabled"), Expression("jCurrency.[Enabled]")]
+        public Boolean? CurrencyEnabled
+        {
+            get { return Fields.CurrencyEnabled[this]; }
+            set { Fields.CurrencyEnabled[this] = value; }
+        }
 
         [DisplayName("Role Name"), Expression("jRole.[RoleName]")]
         public String RoleRoleName
@@ -183,6 +188,8 @@ namespace PatientManagement.Administration.Entities
 
             public StringField CurrencyCurrencyId;
             public StringField CurrencyName;
+            public BooleanField CurrencyEnabled;
+
             public StringField RoleRoleName;
 
             public RowFields()

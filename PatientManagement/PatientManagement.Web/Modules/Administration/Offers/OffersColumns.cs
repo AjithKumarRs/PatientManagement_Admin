@@ -17,20 +17,25 @@ namespace PatientManagement.Administration.Columns
         public Int32 OfferId { get; set; }
         [EditLink]
         public String Name { get; set; }
-        [Width(80)]
+        [Width(120)]
         public Int32 MaximumSubscriptionTime { get; set; }
-        [Width(80)]
+        [Width(120)]
         public Int32 MaximumUsersPerTenant { get; set; }
-        [Width(80)]
+        [Width(120)]
         public Int32 MaximumVisitsPerTenant { get; set; }
-        [Width(80)]
+        [Width(120)]
         public DateTimeField ExpirationDate { get; set; }
         [Width(180)]
         public String Description { get; set; }
         public Decimal Price { get; set; }
-        [Width(50)]
+        [Width(90)]
         public Boolean Enabled { get; set; }
+
+        [Width(50)]
         public String CurrencyCurrencyId { get; set; }
+        [Width(120)]
+
+        public Boolean CurrencyEnabled { get; set; }
         public String RoleRoleName { get; set; }
 
         public String UserName { get; set; }
