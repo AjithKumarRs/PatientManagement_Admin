@@ -34,11 +34,11 @@ namespace PatientManagement.Administration.Columns
         [Width(50)]
         public String CurrencyCurrencyId { get; set; }
         [Width(120)]
-
         public Boolean CurrencyEnabled { get; set; }
         public String RoleRoleName { get; set; }
-
+        [Width(120)]
         public String UserName { get; set; }
+        [Width(120)]
         public DateTime UpdateDateField { get; set; }
     }
 }

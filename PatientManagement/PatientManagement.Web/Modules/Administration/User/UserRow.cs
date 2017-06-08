@@ -114,6 +114,13 @@ namespace PatientManagement.Administration.Entities
             set { Fields.TenantName[this] = value; }
         }
 
+        [DisplayName("CurrencyId"), Expression("tnt.CurrencyId")]
+        public Int32? TenantCurrencyId
+        {
+            get { return Fields.TenantCurrencyId[this]; }
+            set { Fields.TenantCurrencyId[this] = value; }
+        }
+
         IIdField IIdRow.IdField
         {
             get { return Fields.UserId; }
@@ -154,6 +161,7 @@ namespace PatientManagement.Administration.Entities
 
             public readonly Int32Field TenantId;
             public readonly StringField TenantName;
+            public readonly Int32Field TenantCurrencyId;
 
 
             public RowFields()
