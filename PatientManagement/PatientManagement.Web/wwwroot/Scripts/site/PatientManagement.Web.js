@@ -1086,6 +1086,7 @@ var PatientManagement;
                                         Administration.CurrenciesService.UpdateAllCurrencies({
                                             Entity: row
                                         }, function (response) {
+                                            $('.refresh-button').click();
                                         });
                                     }
                                 });

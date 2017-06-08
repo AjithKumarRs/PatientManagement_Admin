@@ -45,6 +45,7 @@ namespace PatientManagement.Administration {
                                     CurrenciesService.UpdateAllCurrencies({
                                         Entity: row
                                     }, response => {
+                                        $('.refresh-button').click();
                                     });
                                 }
                             });

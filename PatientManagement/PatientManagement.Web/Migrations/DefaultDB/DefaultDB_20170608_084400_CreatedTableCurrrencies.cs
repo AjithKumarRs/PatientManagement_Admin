@@ -26,6 +26,7 @@ namespace PatientManagement.Migrations.DefaultDB
                 CurrencyId = "EUR",
                 Name = "Euro",
                 Rate = 1,
+                Enabled = true,
                 UpdateUserId = 1,
                 UpdateDateField = DateTime.Now,
 
