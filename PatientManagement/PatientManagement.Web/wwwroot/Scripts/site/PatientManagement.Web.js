@@ -116,6 +116,55 @@ var PatientManagement;
 (function (PatientManagement) {
     var Administration;
     (function (Administration) {
+        var OffersForm = (function (_super) {
+            __extends(OffersForm, _super);
+            function OffersForm() {
+                return _super !== null && _super.apply(this, arguments) || this;
+            }
+            return OffersForm;
+        }(Serenity.PrefixedContext));
+        OffersForm.formKey = 'Administration.Offers';
+        Administration.OffersForm = OffersForm;
+        [['Name', function () { return Serenity.StringEditor; }], ['MaximumSubscriptionTime', function () { return Serenity.StringEditor; }], ['Description', function () { return Serenity.StringEditor; }], ['CurrencyId', function () { return Serenity.IntegerEditor; }], ['RoleId', function () { return Serenity.IntegerEditor; }], ['UpdateUserId', function () { return Serenity.IntegerEditor; }], ['UpdateDateField', function () { return Serenity.DateEditor; }]].forEach(function (x) { return Object.defineProperty(OffersForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
+    })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var Administration;
+    (function (Administration) {
+        var OffersRow;
+        (function (OffersRow) {
+            OffersRow.idProperty = 'Id';
+            OffersRow.nameProperty = 'Name';
+            OffersRow.localTextPrefix = 'Administration.Offers';
+            var Fields;
+            (function (Fields) {
+            })(Fields = OffersRow.Fields || (OffersRow.Fields = {}));
+            ['Id', 'Name', 'MaximumSubscriptionTime', 'Description', 'CurrencyId', 'RoleId', 'UpdateUserId', 'UpdateDateField', 'CurrencyCurrencyId', 'CurrencyName', 'CurrencyRate', 'CurrencyEnabled', 'CurrencyBaseCurrencyId', 'CurrencyUpdateUserId', 'CurrencyUpdateDateField', 'RoleRoleName', 'RoleTenantId'].forEach(function (x) { return Fields[x] = x; });
+        })(OffersRow = Administration.OffersRow || (Administration.OffersRow = {}));
+    })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var Administration;
+    (function (Administration) {
+        var OffersService;
+        (function (OffersService) {
+            OffersService.baseUrl = 'Administration/Offers';
+            var Methods;
+            (function (Methods) {
+            })(Methods = OffersService.Methods || (OffersService.Methods = {}));
+            ['Create', 'Update', 'Delete', 'Retrieve', 'List'].forEach(function (x) {
+                OffersService[x] = function (r, s, o) { return Q.serviceRequest(OffersService.baseUrl + '/' + x, r, s, o); };
+                Methods[x] = OffersService.baseUrl + '/' + x;
+            });
+        })(OffersService = Administration.OffersService || (Administration.OffersService = {}));
+    })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var Administration;
+    (function (Administration) {
         var RoleForm = (function (_super) {
             __extends(RoleForm, _super);
             function RoleForm() {
@@ -1151,6 +1200,53 @@ var PatientManagement;
             Serenity.Decorators.registerClass()
         ], LanguageGrid);
         Administration.LanguageGrid = LanguageGrid;
+    })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var Administration;
+    (function (Administration) {
+        var OffersDialog = (function (_super) {
+            __extends(OffersDialog, _super);
+            function OffersDialog() {
+                var _this = _super !== null && _super.apply(this, arguments) || this;
+                _this.form = new Administration.OffersForm(_this.idPrefix);
+                return _this;
+            }
+            OffersDialog.prototype.getFormKey = function () { return Administration.OffersForm.formKey; };
+            OffersDialog.prototype.getIdProperty = function () { return Administration.OffersRow.idProperty; };
+            OffersDialog.prototype.getLocalTextPrefix = function () { return Administration.OffersRow.localTextPrefix; };
+            OffersDialog.prototype.getNameProperty = function () { return Administration.OffersRow.nameProperty; };
+            OffersDialog.prototype.getService = function () { return Administration.OffersService.baseUrl; };
+            return OffersDialog;
+        }(Serenity.EntityDialog));
+        OffersDialog = __decorate([
+            Serenity.Decorators.registerClass(),
+            Serenity.Decorators.responsive()
+        ], OffersDialog);
+        Administration.OffersDialog = OffersDialog;
+    })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var Administration;
+    (function (Administration) {
+        var OffersGrid = (function (_super) {
+            __extends(OffersGrid, _super);
+            function OffersGrid(container) {
+                return _super.call(this, container) || this;
+            }
+            OffersGrid.prototype.getColumnsKey = function () { return 'Administration.Offers'; };
+            OffersGrid.prototype.getDialogType = function () { return Administration.OffersDialog; };
+            OffersGrid.prototype.getIdProperty = function () { return Administration.OffersRow.idProperty; };
+            OffersGrid.prototype.getLocalTextPrefix = function () { return Administration.OffersRow.localTextPrefix; };
+            OffersGrid.prototype.getService = function () { return Administration.OffersService.baseUrl; };
+            return OffersGrid;
+        }(Serenity.EntityGrid));
+        OffersGrid = __decorate([
+            Serenity.Decorators.registerClass()
+        ], OffersGrid);
+        Administration.OffersGrid = OffersGrid;
     })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;

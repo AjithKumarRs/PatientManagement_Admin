@@ -42,7 +42,7 @@ namespace PatientManagement.Administration.Entities
             set { Fields.Enabled[this] = value; }
         }
 
-        [DisplayName("Rate"), Size(6), Scale(4), NotNull]
+        [DisplayName("Rate"), Size(8), Scale(4), NotNull]
         public Decimal? Rate
         {
             get { return Fields.Rate[this]; }

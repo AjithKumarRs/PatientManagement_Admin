@@ -14,7 +14,7 @@ namespace PatientManagement.Migrations.DefaultDB
             this.CreateTableWithId32("Currencies", "Id", s => s
                 .WithColumn("CurrencyId").AsString(3).NotNullable()
                 .WithColumn("Name").AsString(50).Nullable()
-                .WithColumn("Rate").AsDecimal(6, 4).NotNullable()
+                .WithColumn("Rate").AsDecimal(8, 4).NotNullable()
                 .WithColumn("Enabled").AsBoolean().NotNullable().WithDefaultValue(false)
                 .WithColumn("BaseCurrencyId").AsInt32().Nullable()
                     .ForeignKey("FK_Currencies_CurrencyId", "Currencies", "Id")

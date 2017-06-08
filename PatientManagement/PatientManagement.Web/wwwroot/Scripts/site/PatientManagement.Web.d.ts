@@ -102,6 +102,82 @@ declare namespace PatientManagement.Administration {
     }
 }
 declare namespace PatientManagement.Administration {
+    class OffersForm extends Serenity.PrefixedContext {
+        static formKey: string;
+    }
+    interface OffersForm {
+        Name: Serenity.StringEditor;
+        MaximumSubscriptionTime: Serenity.StringEditor;
+        Description: Serenity.StringEditor;
+        CurrencyId: Serenity.IntegerEditor;
+        RoleId: Serenity.IntegerEditor;
+        UpdateUserId: Serenity.IntegerEditor;
+        UpdateDateField: Serenity.DateEditor;
+    }
+}
+declare namespace PatientManagement.Administration {
+    interface OffersRow {
+        Id?: number;
+        Name?: string;
+        MaximumSubscriptionTime?: string;
+        Description?: string;
+        CurrencyId?: number;
+        RoleId?: number;
+        UpdateUserId?: number;
+        UpdateDateField?: string;
+        CurrencyCurrencyId?: string;
+        CurrencyName?: string;
+        CurrencyRate?: number;
+        CurrencyEnabled?: boolean;
+        CurrencyBaseCurrencyId?: number;
+        CurrencyUpdateUserId?: number;
+        CurrencyUpdateDateField?: string;
+        RoleRoleName?: string;
+        RoleTenantId?: number;
+    }
+    namespace OffersRow {
+        const idProperty = "Id";
+        const nameProperty = "Name";
+        const localTextPrefix = "Administration.Offers";
+        namespace Fields {
+            const Id: any;
+            const Name: any;
+            const MaximumSubscriptionTime: any;
+            const Description: any;
+            const CurrencyId: any;
+            const RoleId: any;
+            const UpdateUserId: any;
+            const UpdateDateField: any;
+            const CurrencyCurrencyId: string;
+            const CurrencyName: string;
+            const CurrencyRate: string;
+            const CurrencyEnabled: string;
+            const CurrencyBaseCurrencyId: string;
+            const CurrencyUpdateUserId: string;
+            const CurrencyUpdateDateField: string;
+            const RoleRoleName: string;
+            const RoleTenantId: string;
+        }
+    }
+}
+declare namespace PatientManagement.Administration {
+    namespace OffersService {
+        const baseUrl = "Administration/Offers";
+        function Create(request: Serenity.SaveRequest<OffersRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Serenity.ServiceOptions<any>): JQueryXHR;
+        function Update(request: Serenity.SaveRequest<OffersRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<OffersRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<OffersRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        namespace Methods {
+            const Create: string;
+            const Update: string;
+            const Delete: string;
+            const Retrieve: string;
+            const List: string;
+        }
+    }
+}
+declare namespace PatientManagement.Administration {
 }
 declare namespace PatientManagement.Administration {
     class RoleForm extends Serenity.PrefixedContext {
@@ -1308,6 +1384,26 @@ declare namespace PatientManagement.Administration {
         protected getService(): string;
         constructor(container: JQuery);
         protected getDefaultSortBy(): string[];
+    }
+}
+declare namespace PatientManagement.Administration {
+    class OffersDialog extends Serenity.EntityDialog<OffersRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getService(): string;
+        protected form: OffersForm;
+    }
+}
+declare namespace PatientManagement.Administration {
+    class OffersGrid extends Serenity.EntityGrid<OffersRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof OffersDialog;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        constructor(container: JQuery);
     }
 }
 declare namespace PatientManagement.Administration {
