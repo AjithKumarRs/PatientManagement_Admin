@@ -37,7 +37,7 @@ var PatientManagement;
             var Fields;
             (function (Fields) {
             })(Fields = CurrenciesRow.Fields || (CurrenciesRow.Fields = {}));
-            ['Id', 'CurrencyId', 'Name', 'Rate', 'BaseCurrency', 'UpdateUserId', 'UpdateDateField'].forEach(function (x) { return Fields[x] = x; });
+            ['Id', 'CurrencyId', 'Name', 'Rate', 'Enabled', 'BaseCurrencyId', 'UpdateUserId', 'UpdateDateField'].forEach(function (x) { return Fields[x] = x; });
         })(CurrenciesRow = Administration.CurrenciesRow || (Administration.CurrenciesRow = {}));
     })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
 })(PatientManagement || (PatientManagement = {}));
@@ -51,7 +51,7 @@ var PatientManagement;
             var Methods;
             (function (Methods) {
             })(Methods = CurrenciesService.Methods || (CurrenciesService.Methods = {}));
-            ['Create', 'Update', 'Delete', 'Retrieve', 'List'].forEach(function (x) {
+            ['Create', 'Update', 'UpdateAllCurrencies', 'Delete', 'Retrieve', 'List'].forEach(function (x) {
                 CurrenciesService[x] = function (r, s, o) { return Q.serviceRequest(CurrenciesService.baseUrl + '/' + x, r, s, o); };
                 Methods[x] = CurrenciesService.baseUrl + '/' + x;
             });
@@ -1047,6 +1047,7 @@ var PatientManagement;
         Administration.CurrenciesDialog = CurrenciesDialog;
     })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
 })(PatientManagement || (PatientManagement = {}));
+/// <reference types="jqueryui" />
 var PatientManagement;
 (function (PatientManagement) {
     var Administration;
@@ -1061,6 +1062,39 @@ var PatientManagement;
             CurrenciesGrid.prototype.getIdProperty = function () { return Administration.CurrenciesRow.idProperty; };
             CurrenciesGrid.prototype.getLocalTextPrefix = function () { return Administration.CurrenciesRow.localTextPrefix; };
             CurrenciesGrid.prototype.getService = function () { return Administration.CurrenciesService.baseUrl; };
+            CurrenciesGrid.prototype.getButtons = function () {
+                var buttons = _super.prototype.getButtons.call(this);
+                buttons.push({
+                    title: 'Update All Currencies ',
+                    cssClass: 'multiple-add-button',
+                    onClick: function () {
+                        Q.confirm("Are You sure that you want to update all Currencies?", function () {
+                            var joined = "";
+                            var url = "http://api.fixer.io/latest";
+                            var entities = Administration.CurrenciesService.List({}, function (response) {
+                                joined = response.Entities.map(function (o) { return o.CurrencyId; }).join(',');
+                                ;
+                                if (response.Entities.length > 1) {
+                                    url = url + "?symbols=" + joined;
+                                }
+                                $.get(url, function (data) {
+                                    for (var curr in data.rates) {
+                                        var row = {};
+                                        row.CurrencyId = curr;
+                                        row.BaseCurrencyId = 1;
+                                        row.Rate = data.rates[curr];
+                                        Administration.CurrenciesService.UpdateAllCurrencies({
+                                            Entity: row
+                                        }, function (response) {
+                                        });
+                                    }
+                                });
+                            });
+                        });
+                    }
+                });
+                return buttons;
+            };
             return CurrenciesGrid;
         }(Serenity.EntityGrid));
         CurrenciesGrid = __decorate([

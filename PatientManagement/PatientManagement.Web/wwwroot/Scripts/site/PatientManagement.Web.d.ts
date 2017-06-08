@@ -14,7 +14,8 @@ declare namespace PatientManagement.Administration {
         CurrencyId?: string;
         Name?: string;
         Rate?: number;
-        BaseCurrency?: string;
+        Enabled?: boolean;
+        BaseCurrencyId?: number;
         UpdateUserId?: string;
         UpdateDateField?: string;
     }
@@ -27,7 +28,8 @@ declare namespace PatientManagement.Administration {
             const CurrencyId: any;
             const Name: any;
             const Rate: any;
-            const BaseCurrency: any;
+            const Enabled: any;
+            const BaseCurrencyId: any;
             const UpdateUserId: any;
             const UpdateDateField: any;
         }
@@ -38,12 +40,14 @@ declare namespace PatientManagement.Administration {
         const baseUrl = "Administration/Currencies";
         function Create(request: Serenity.SaveRequest<CurrenciesRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Serenity.ServiceOptions<any>): JQueryXHR;
         function Update(request: Serenity.SaveRequest<CurrenciesRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function UpdateAllCurrencies(request: Serenity.SaveRequest<CurrenciesRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<CurrenciesRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<CurrenciesRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         namespace Methods {
             const Create: string;
             const Update: string;
+            const UpdateAllCurrencies: string;
             const Delete: string;
             const Retrieve: string;
             const List: string;
@@ -1282,6 +1286,7 @@ declare namespace PatientManagement.Administration {
         protected getLocalTextPrefix(): string;
         protected getService(): string;
         constructor(container: JQuery);
+        protected getButtons(): Serenity.ToolButton[];
     }
 }
 declare namespace PatientManagement.Administration {

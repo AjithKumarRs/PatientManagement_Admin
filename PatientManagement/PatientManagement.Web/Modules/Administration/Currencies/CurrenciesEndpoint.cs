@@ -24,7 +24,21 @@ namespace PatientManagement.Administration.Endpoints
         {
             return new MyRepository().Update(uow, request);
         }
- 
+
+        [HttpPost, AuthorizeUpdate(typeof(MyRow))]
+        public SaveResponse UpdateAllCurrencies(IUnitOfWork uow, SaveRequest<MyRow> request)
+        {
+            var fields = MyRow.Fields;
+
+            if (uow.Connection.Exists<MyRow>(fields.CurrencyId == request.Entity.CurrencyId))
+            {
+                var entity = uow.Connection.First<MyRow>(fields.CurrencyId == request.Entity.CurrencyId);
+                request.EntityId = entity.Id;
+                return new MyRepository().Update(uow, request);
+            }
+            return new MyRepository().Create(uow, request);
+
+        }
         [HttpPost, AuthorizeDelete(typeof(MyRow))]
         public DeleteResponse Delete(IUnitOfWork uow, DeleteRequest request)
         {

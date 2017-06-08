@@ -12,5 +12,7 @@ namespace PatientManagement.Administration {
         protected getService() { return CurrenciesService.baseUrl; }
 
         protected form = new CurrenciesForm(this.idPrefix);
+
+  
     }
 }

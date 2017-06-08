@@ -18,6 +18,9 @@ namespace PatientManagement.Administration.Columns
         [EditLink]
         public String CurrencyId { get; set; }
         public String Name { get; set; }
+
+        public Boolean Enabled { get; set; }
+
         public Decimal Rate { get; set; }
         public String BaseCurrencyName { get; set; }
 

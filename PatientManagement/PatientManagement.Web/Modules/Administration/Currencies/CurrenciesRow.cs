@@ -35,6 +35,12 @@ namespace PatientManagement.Administration.Entities
             get { return Fields.Name[this]; }
             set { Fields.Name[this] = value; }
         }
+        [DisplayName("Enabled"), BsSwitchEditor, NotNull]
+        public Boolean? Enabled
+        {
+            get { return Fields.Enabled[this]; }
+            set { Fields.Enabled[this] = value; }
+        }
 
         [DisplayName("Rate"), Size(6), Scale(4), NotNull]
         public Decimal? Rate
@@ -110,6 +116,7 @@ namespace PatientManagement.Administration.Entities
             public StringField CurrencyId;
             public StringField Name;
             public DecimalField Rate;
+            public BooleanField Enabled;
             public Int32Field BaseCurrencyId;
             public StringField BaseCurrencyName;
             public Int32Field UpdateUserId;

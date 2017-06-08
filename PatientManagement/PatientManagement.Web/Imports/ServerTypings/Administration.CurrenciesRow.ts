@@ -5,7 +5,8 @@ namespace PatientManagement.Administration {
         CurrencyId?: string;
         Name?: string;
         Rate?: number;
-        BaseCurrency?: string;
+        Enabled?: boolean;
+        BaseCurrencyId?: number;
         UpdateUserId?: string;
         UpdateDateField?: string;
     }
@@ -20,12 +21,13 @@ namespace PatientManagement.Administration {
             export declare const CurrencyId;
             export declare const Name;
             export declare const Rate;
-            export declare const BaseCurrency;
+            export declare const Enabled;
+            export declare const BaseCurrencyId;
             export declare const UpdateUserId;
             export declare const UpdateDateField;
         }
 
-        ['Id', 'CurrencyId', 'Name', 'Rate', 'BaseCurrency', 'UpdateUserId', 'UpdateDateField'].forEach(x => (<any>Fields)[x] = x);
+        ['Id', 'CurrencyId', 'Name', 'Rate', 'Enabled','BaseCurrencyId', 'UpdateUserId', 'UpdateDateField'].forEach(x => (<any>Fields)[x] = x);
     }
 }
 

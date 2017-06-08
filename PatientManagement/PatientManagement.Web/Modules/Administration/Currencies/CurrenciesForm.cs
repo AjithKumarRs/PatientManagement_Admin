@@ -16,6 +16,8 @@ namespace PatientManagement.Administration.Forms
         public String CurrencyId { get; set; }
         public String Name { get; set; }
         public Decimal Rate { get; set; }
+
+        public Boolean Enabled { get; set; }
         public Int32 BaseCurrencyId { get; set; }
     }
 }
