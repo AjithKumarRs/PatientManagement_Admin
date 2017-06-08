@@ -7,6 +7,18 @@
     <PackageId>PatientManagement.Web</PackageId>
     <RuntimeFrameworkVersion>1.1.1</RuntimeFrameworkVersion>
     <PackageTargetFallback>$(PackageTargetFallback);dotnet5.6;portable-net45+win8</PackageTargetFallback>
+    <Version>0.8.0</Version>
+    <Product>Clario Admin</Product>
+    <Company>s2kdesign</Company>
+    <Authors>Svetlin Krastanov, Petya Petkova</Authors>
+    <AssemblyVersion>0.8.0.0</AssemblyVersion>
+    <FileVersion>0.8.0.0</FileVersion>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <Copyright>s2kdesign</Copyright>
+    <PackageLicenseUrl>https://github.com/Magik3a/PatientManagement_Admin/blob/master/license</PackageLicenseUrl>
+    <PackageProjectUrl>http://admin-myclario.azurewebsites.net/</PackageProjectUrl>
+    <PackageIconUrl>https://github.com/Magik3a/PatientManagement_Admin/blob/master/PatientManagement/PatientManagement.Web/wwwroot/favicon.ico</PackageIconUrl>
+    <RepositoryUrl>https://github.com/Magik3a/PatientManagement_Admin</RepositoryUrl>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Modules\Common\Dashboard\**" />
@@ -73,7 +85,7 @@
   <Target Name="PostcompileScript" AfterTargets="Build">
     <Exec Command="node_modules/.bin/lessc ./wwwroot/Content/site/site.less ./wwwroot/content/site/site.css" ContinueOnError="true" />
     <Exec Command="node_modules/.bin/tsc -p ./tsconfig.json" ContinueOnError="true" />
-    <Exec Command="dotnet sergen servertypings" ContinueOnError="true" />
+    <!--<Exec Command="dotnet sergen servertypings" ContinueOnError="true" />-->
 
   </Target>
   <ItemGroup>

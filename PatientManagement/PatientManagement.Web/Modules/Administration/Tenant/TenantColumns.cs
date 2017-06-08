@@ -17,5 +17,8 @@ namespace PatientManagement.Administration.Columns
         public Int32 TenantId { get; set; }
         [EditLink]
         public String TenantName { get; set; }
+
+
+        public String CurrencyName { get; set; }
     }
 }

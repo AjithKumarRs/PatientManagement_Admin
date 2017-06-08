@@ -6,6 +6,11 @@ namespace MVC
     {
         public static class Administration
         {
+            public static class Currencies
+            {
+                public const string CurrenciesIndex = "~/Modules/Administration/Currencies/CurrenciesIndex.cshtml";
+            }
+
             public static class Language
             {
                 public const string LanguageIndex = "~/Modules/Administration/Language/LanguageIndex.cshtml";

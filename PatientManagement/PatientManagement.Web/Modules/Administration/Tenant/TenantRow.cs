@@ -29,6 +29,22 @@ namespace PatientManagement.Administration.Entities
             set { Fields.TenantName[this] = value; }
         }
 
+        [DisplayName("Base Currency"), ForeignKey("Currencies", "Id"), LeftJoin("crnc"), Required]
+        [LookupEditor(typeof(CurrenciesRow))]
+        [ReadPermission(PermissionKeys.Currencies)]
+        public Int32? CurrencyId
+        {
+            get { return Fields.CurrencyId[this]; }
+            set { Fields.CurrencyId[this] = value; }
+        }
+
+        [DisplayName("Base Currency"), Expression("crnc.Name")]
+        public String CurrencyName
+        {
+            get { return Fields.CurrencyName[this]; }
+            set { Fields.CurrencyName[this] = value; }
+        }
+
         IIdField IIdRow.IdField
         {
             get { return Fields.TenantId; }
@@ -51,6 +67,8 @@ namespace PatientManagement.Administration.Entities
             public Int32Field TenantId;
             public StringField TenantName;
 
+            public Int32Field CurrencyId;
+            public StringField CurrencyName;
             public RowFields()
                 : base()
             {

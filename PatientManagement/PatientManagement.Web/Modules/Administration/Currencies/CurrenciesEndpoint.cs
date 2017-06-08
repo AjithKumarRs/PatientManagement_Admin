@@ -1,17 +1,18 @@
-﻿namespace PatientManagement.PatientManagement.Endpoints
+﻿
+namespace PatientManagement.Administration.Endpoints
 {
+    using Serenity;
     using Serenity.Data;
     using Serenity.Services;
     using System.Data;
     using Microsoft.AspNetCore.Mvc;
-    using MyRepository = Repositories.VisitsRepository;
-    using MyRow = Entities.VisitsRow;
+    using MyRepository = Repositories.CurrenciesRepository;
+    using MyRow = Entities.CurrenciesRow;
 
-    [Route("Services/PatientManagement/Visits/[action]")]
+    [Route("Services/Administration/Currencies/[action]")]
     [ConnectionKey(typeof(MyRow)), ServiceAuthorize(typeof(MyRow))]
-    public class VisitsController : ServiceEndpoint
+    public class CurrenciesController : ServiceEndpoint
     {
-
         [HttpPost, AuthorizeCreate(typeof(MyRow))]
         public SaveResponse Create(IUnitOfWork uow, SaveRequest<MyRow> request)
         {

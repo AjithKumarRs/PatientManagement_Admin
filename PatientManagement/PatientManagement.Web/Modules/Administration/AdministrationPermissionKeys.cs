@@ -19,6 +19,7 @@ namespace PatientManagement.Administration
     /// </summary>
     public class PermissionKeys
     {
+        public const string Currencies = "Administration:Currencies";
         public const string Security = "Administration:Security";
         public const string Translation = "Administration:Translation";
         public const string Tenants = "Administration:Tenants";

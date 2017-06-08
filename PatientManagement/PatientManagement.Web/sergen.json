@@ -10,6 +10,12 @@
       "Key": "Default",
       "Tables": [
         {
+          "Tablename": "dbo.Currencies",
+          "Identifier": "Currencies",
+          "Module": "Administration",
+          "PermissionKey": "Administration:Currencies"
+        },
+        {
           "Tablename": "dbo.Tenants",
           "Identifier": "Tenant",
           "Module": "Administration",

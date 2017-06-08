@@ -2,10 +2,11 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
+using PatientManagement;
 using PatientManagement.Web.Modules.Common.SignalR;
 using Serenity;
 
-namespace PatientManagement.Web.Hubs
+namespace Hubs
 {
 
     public class NotificationHub : Hub

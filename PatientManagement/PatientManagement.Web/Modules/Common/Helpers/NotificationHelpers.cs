@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Hubs;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.AspNetCore.SignalR.Infrastructure;
 using Microsoft.CodeAnalysis;
 using PatientManagement.Administration.Entities;
 using PatientManagement.PatientManagement.Entities;
 using PatientManagement.PatientManagement.Repositories;
-using PatientManagement.Web.Hubs;
 using Serenity;
 using Serenity.Data;
 using Serenity.Services;

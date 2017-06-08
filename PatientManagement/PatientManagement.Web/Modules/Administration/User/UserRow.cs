@@ -152,8 +152,10 @@ namespace PatientManagement.Administration.Entities
             public StringField Password;
             public StringField PasswordConfirm;
 
-              public readonly Int32Field TenantId;
+            public readonly Int32Field TenantId;
             public readonly StringField TenantName;
+
+
             public RowFields()
                 : base("Users")
             {

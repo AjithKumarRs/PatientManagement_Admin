@@ -8863,3 +8863,9 @@ section.content > .s-DataGrid {
 .s-PatientManagement-UserNotificationsDialog .caption {
   width: 150px;
 }
+.s-Administration-CurrenciesDialog > .size {
+  width: 650px;
+}
+.s-Administration-CurrenciesDialog .caption {
+  width: 150px;
+}
