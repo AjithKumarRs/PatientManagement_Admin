@@ -135,8 +135,11 @@
     //function to calculate window height
     function get_calendar_height() {
         if (/Mobi/.test(navigator.userAgent)) {
-            if(window.innerHeight < window.innerWidth){
-                return $(window).height() -30;
+            if (window.innerHeight < window.innerWidth) {
+                return $(window).height() - 30;
+            } else {
+                return $(window).height() + 50;
+                
             }
         }
         
@@ -232,7 +235,9 @@
             }
         });
         $('#calendar').fullCalendar('addEventSource', "/Dashboard/GetVisitsTasks/");
-
+        if (/Mobi/.test(navigator.userAgent)) {
+            $('#calendar').fullCalendar('changeView', 'agendaDay');
+        }
 
     });
 </script>
