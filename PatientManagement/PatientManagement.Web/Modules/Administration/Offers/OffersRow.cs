@@ -12,13 +12,15 @@ namespace PatientManagement.Administration.Entities
     [ConnectionKey("Default"), TableName("[dbo].[Offers]"), DisplayName("Offers"), InstanceName("Offers"), TwoLevelCached]
     [ReadPermission(PermissionKeys.Offers)]
     [ModifyPermission(PermissionKeys.Offers)]
+    [LookupScript("Administration.Offers")]
+    [LocalizationRow(typeof(OfferLangRow))]
     public sealed class OffersRow : Row, IIdRow, INameRow, IUpdateLogRow
     {
-        [DisplayName("Id"), Identity]
-        public Int32? Id
+        [DisplayName("OfferId"), Identity]
+        public Int32? OfferId
         {
-            get { return Fields.Id[this]; }
-            set { Fields.Id[this] = value; }
+            get { return Fields.OfferId[this]; }
+            set { Fields.OfferId[this] = value; }
         }
 
         [DisplayName("Name"), Size(500), NotNull, QuickSearch]
@@ -28,23 +30,32 @@ namespace PatientManagement.Administration.Entities
             set { Fields.Name[this] = value; }
         }
 
-        [DisplayName("Maximum Days"), IntegerEditor]
+        [DisplayName("Maximum Using Days"), IntegerEditor]
         public Int32? MaximumSubscriptionTime
         {
             get { return Fields.MaximumSubscriptionTime[this]; }
             set { Fields.MaximumSubscriptionTime[this] = value; }
         }
+
+
         [DisplayName("Expiration Date"), DateTimeEditor]
         public DateTime? ExpirationDate
         {
             get { return Fields.ExpirationDate[this]; }
             set { Fields.ExpirationDate[this] = value; }
         }
-        [DisplayName("Maximum Users"), IntegerEditor]
-        public Int32? MaximumUsers
+        [DisplayName("Maximum Users Per Tenant"), IntegerEditor]
+        public Int32? MaximumUsersPerTenant
         {
-            get { return Fields.MaximumUsers[this]; }
-            set { Fields.MaximumUsers[this] = value; }
+            get { return Fields.MaximumUsersPerTenant[this]; }
+            set { Fields.MaximumUsersPerTenant[this] = value; }
+        }
+
+        [DisplayName("Maximum Visits Per Tenant"), IntegerEditor]
+        public Int32? MaximumVisitsPerTenant
+        {
+            get { return Fields.MaximumVisitsPerTenant[this]; }
+            set { Fields.MaximumVisitsPerTenant[this] = value; }
         }
         [DisplayName("Description"), Size(500), TextAreaEditor]
         public String Description
@@ -136,7 +147,7 @@ namespace PatientManagement.Administration.Entities
 
         IIdField IIdRow.IdField
         {
-            get { return Fields.Id; }
+            get { return Fields.OfferId; }
         }
 
         StringField INameRow.NameField
@@ -153,10 +164,12 @@ namespace PatientManagement.Administration.Entities
 
         public class RowFields : RowFieldsBase
         {
-            public Int32Field Id;
+            public Int32Field OfferId;
             public StringField Name;
             public Int32Field MaximumSubscriptionTime;
-            public Int32Field MaximumUsers;
+            public Int32Field MaximumUsersPerTenant;
+            public Int32Field MaximumVisitsPerTenant;
+
             public DateTimeField ExpirationDate;
             public StringField Description;
             public DecimalField Price;

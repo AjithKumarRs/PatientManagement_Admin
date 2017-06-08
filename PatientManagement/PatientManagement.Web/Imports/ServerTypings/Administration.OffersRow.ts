@@ -1,7 +1,7 @@
 ﻿
 namespace PatientManagement.Administration {
     export interface OffersRow {
-        Id?: number;
+        OfferId?: number;
         Name?: string;
         MaximumSubscriptionTime?: string;
         Description?: string;
@@ -21,7 +21,7 @@ namespace PatientManagement.Administration {
     }
 
     export namespace OffersRow {
-        export const idProperty = 'Id';
+        export const idProperty = 'OfferId';
         export const nameProperty = 'Name';
         export const localTextPrefix = 'Administration.Offers';
 
@@ -45,7 +45,7 @@ namespace PatientManagement.Administration {
             export declare const RoleTenantId: string;
         }
 
-        ['Id', 'Name', 'MaximumSubscriptionTime', 'Description', 'CurrencyId', 'RoleId', 'UpdateUserId', 'UpdateDateField', 'CurrencyCurrencyId', 'CurrencyName', 'CurrencyRate', 'CurrencyEnabled', 'CurrencyBaseCurrencyId', 'CurrencyUpdateUserId', 'CurrencyUpdateDateField', 'RoleRoleName', 'RoleTenantId'].forEach(x => (<any>Fields)[x] = x);
+        ['OfferId', 'Name', 'MaximumSubscriptionTime', 'Description', 'CurrencyId', 'RoleId', 'UpdateUserId', 'UpdateDateField', 'CurrencyCurrencyId', 'CurrencyName', 'CurrencyRate', 'CurrencyEnabled', 'CurrencyBaseCurrencyId', 'CurrencyUpdateUserId', 'CurrencyUpdateDateField', 'RoleRoleName', 'RoleTenantId'].forEach(x => (<any>Fields)[x] = x);
     }
 }
 

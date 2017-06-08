@@ -14,13 +14,15 @@ namespace PatientManagement.Administration.Columns
     public class OffersColumns
     {
         [EditLink, DisplayName("Db.Shared.RecordId"), AlignRight]
-        public Int32 Id { get; set; }
+        public Int32 OfferId { get; set; }
         [EditLink]
         public String Name { get; set; }
         [Width(80)]
-        public Int32Field MaximumSubscriptionTime { get; set; }
+        public Int32 MaximumSubscriptionTime { get; set; }
         [Width(80)]
-        public Int32Field MaximumUsers { get; set; }
+        public Int32 MaximumUsersPerTenant { get; set; }
+        [Width(80)]
+        public Int32 MaximumVisitsPerTenant { get; set; }
         [Width(80)]
         public DateTimeField ExpirationDate { get; set; }
         [Width(180)]

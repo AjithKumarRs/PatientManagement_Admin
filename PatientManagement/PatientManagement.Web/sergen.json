@@ -16,6 +16,12 @@
           "PermissionKey": "Administration:Currencies"
         },
         {
+          "Tablename": "dbo.OfferLang",
+          "Identifier": "OfferLang",
+          "Module": "Administration",
+          "PermissionKey": "Administration:Offers"
+        },
+        {
           "Tablename": "dbo.Offers",
           "Identifier": "Offers",
           "Module": "Administration",

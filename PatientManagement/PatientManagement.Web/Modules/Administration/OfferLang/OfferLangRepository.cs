@@ -7,9 +7,9 @@ namespace PatientManagement.Administration.Repositories
     using Serenity.Services;
     using System;
     using System.Data;
-    using MyRow = Entities.OffersRow;
+    using MyRow = Entities.OfferLangRow;
 
-    public class OffersRepository
+    public class OfferLangRepository
     {
         private static MyRow.RowFields fld { get { return MyRow.Fields; } }
 
@@ -38,19 +38,7 @@ namespace PatientManagement.Administration.Repositories
             return new MyListHandler().Process(connection, request);
         }
 
-        private class MySaveHandler : SaveRequestHandler<MyRow>
-        {
-            protected override void AfterSave()
-            {
-                base.AfterSave();
-                if (Request.Localizations != null)
-                    foreach (var pair in Request.Localizations)
-                    {
-                        pair.Value.OfferId = Row.OfferId.Value;
-                        new LocalizationRowHandler<MyRow>().Update<Entities.OfferLangRow>(this.UnitOfWork, pair.Value, Convert.ToInt32(pair.Key));
-                    }
-            }
-        }
+        private class MySaveHandler : SaveRequestHandler<MyRow> { }
         private class MyDeleteHandler : DeleteRequestHandler<MyRow> { }
         private class MyRetrieveHandler : RetrieveRequestHandler<MyRow> { }
         private class MyListHandler : ListRequestHandler<MyRow> { }

@@ -12,10 +12,11 @@ namespace PatientManagement.Migrations.DefaultDB
     {
         public override void Up()
         {
-            this.CreateTableWithId32("Offers", "Id", s => s
+            this.CreateTableWithId32("Offers", "OfferId", s => s
             .WithColumn("Name").AsString(500).NotNullable()
             .WithColumn("MaximumSubscriptionTime").AsInt32().Nullable()
-            .WithColumn("MaximumUsers").AsInt32().Nullable()
+            .WithColumn("MaximumUsersPerTenant").AsInt32().Nullable()
+            .WithColumn("MaximumVisitsPerTenant").AsInt32().Nullable()
             .WithColumn("ExpirationDate").AsDateTime().Nullable()
             .WithColumn("Description").AsString(int.MaxValue).Nullable()
                 .WithColumn("Price").AsDecimal(8, 4).NotNullable()

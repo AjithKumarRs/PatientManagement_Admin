@@ -14,8 +14,9 @@ namespace PatientManagement.Administration.Forms
     public class OffersForm
     {
         public String Name { get; set; }
-        public Int32Field MaximumSubscriptionTime { get; set; }
-        public Int32Field MaximumUsers { get; set; }
+        public Int32 MaximumSubscriptionTime { get; set; }
+        public Int32 MaximumUsersPerTenant { get; set; }
+        public Int32 MaximumVisitsPerTenant { get; set; }
         public DateTimeField ExpirationDate { get; set; }
         public String Description { get; set; }
         public Decimal Price { get; set; }
