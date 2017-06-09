@@ -14,8 +14,8 @@ namespace PatientManagement.Administration.Forms
     public class TenantForm
     {
         public String TenantName { get; set; }
-
-
-        public Int32? CurrencyId { get; set; }
+        public Int32 CurrencyId { get; set; }
+        public Int64 SubscriptionId { get; set; }
+        public Boolean SubscriptionRequired { get; set; }
     }
 }

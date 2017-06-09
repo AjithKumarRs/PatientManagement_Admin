@@ -2144,10 +2144,10 @@ a.s-LinkDropDown input {
   font-weight: 600;
 }
 .s-PropertyGrid .category-links {
-    background: #531152;
-    border-radius: 0;
-    border: 0;
-    margin-bottom: 6px;
+  background: #7380C4;
+  border-radius: 0;
+  border: 0;
+  margin-bottom: 6px;
 }
 .quick-filters-bar {
   border: 1px solid #e7e7e7;

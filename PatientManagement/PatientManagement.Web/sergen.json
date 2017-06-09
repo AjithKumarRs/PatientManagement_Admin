@@ -28,10 +28,34 @@
           "PermissionKey": "Administration:Offers"
         },
         {
+          "Tablename": "dbo.PaymentOptions",
+          "Identifier": "PaymentOptions",
+          "Module": "Administration",
+          "PermissionKey": "Administration:PaymentOptions"
+        },
+        {
+          "Tablename": "dbo.Payments",
+          "Identifier": "Payments",
+          "Module": "Administration",
+          "PermissionKey": "AdministrationTenants:Payments"
+        },
+        {
+          "Tablename": "dbo.PaymentsDetails",
+          "Identifier": "PaymentsDetails",
+          "Module": "Administration",
+          "PermissionKey": "AdministrationTenants:PaymentsDetails"
+        },
+        {
+          "Tablename": "dbo.Subscriptions",
+          "Identifier": "Subscriptions",
+          "Module": "Administration",
+          "PermissionKey": "AdministrationTenants:Subscriptions"
+        },
+        {
           "Tablename": "dbo.Tenants",
           "Identifier": "Tenant",
           "Module": "Administration",
-          "PermissionKey": "Administration:General"
+          "PermissionKey": "Administration:Tenants"
         }
       ]
     },

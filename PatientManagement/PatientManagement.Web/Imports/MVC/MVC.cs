@@ -21,6 +21,21 @@ namespace MVC
                 public const string OffersIndex = "~/Modules/Administration/Offers/OffersIndex.cshtml";
             }
 
+            public static class PaymentOptions
+            {
+                public const string PaymentOptionsIndex = "~/Modules/Administration/PaymentOptions/PaymentOptionsIndex.cshtml";
+            }
+
+            public static class Payments
+            {
+                public const string PaymentsIndex = "~/Modules/Administration/Payments/PaymentsIndex.cshtml";
+            }
+
+            public static class PaymentsDetails
+            {
+                public const string PaymentsDetailsIndex = "~/Modules/Administration/PaymentsDetails/PaymentsDetailsIndex.cshtml";
+            }
+
             public static class Role
             {
                 public const string RoleIndex = "~/Modules/Administration/Role/RoleIndex.cshtml";
@@ -30,6 +45,11 @@ namespace MVC
             {
                 public const string SergenError = "~/Modules/Administration/Sergen/SergenError.cshtml";
                 public const string SergenIndex = "~/Modules/Administration/Sergen/SergenIndex.cshtml";
+            }
+
+            public static class Subscriptions
+            {
+                public const string SubscriptionsIndex = "~/Modules/Administration/Subscriptions/SubscriptionsIndex.cshtml";
             }
 
             public static class Tenant

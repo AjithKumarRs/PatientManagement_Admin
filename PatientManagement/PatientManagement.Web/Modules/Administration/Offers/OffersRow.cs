@@ -10,7 +10,7 @@ namespace PatientManagement.Administration.Entities
     using System.IO;
 
     [ConnectionKey("Default"), TableName("[dbo].[Offers]"), DisplayName("Offers"), InstanceName("Offers"), TwoLevelCached]
-    [ReadPermission("Administration:Offers:Read")]
+    [ReadPermission("AdministrationTenants:Offers:Read")]
     [ModifyPermission("Administration:Offers:Modify")]
     [LookupScript("Administration.Offers")]
     [LocalizationRow(typeof(OfferLangRow))]
@@ -122,7 +122,6 @@ namespace PatientManagement.Administration.Entities
             get { return Fields.RoleRoleName[this]; }
             set { Fields.RoleRoleName[this] = value; }
         }
-        [DisplayFormat("dd/MM/yyyy HH:mm")]
         [DisplayName("Update User Id"), NotNull, ForeignKey("Users", "UserId"), LeftJoin("usr")]
         public Int32? UpdateUserId
         {
@@ -146,7 +145,7 @@ namespace PatientManagement.Administration.Entities
         {
             get { return Fields.UpdateDateField; }
         }
-
+        [DisplayFormat("dd/MM/yyyy HH:mm")]
         [DisplayName("Update Date Field"), NotNull]
         public DateTime? UpdateDateField
         {
