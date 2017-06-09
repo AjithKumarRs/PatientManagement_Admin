@@ -10,6 +10,7 @@ namespace PatientManagement
         IListBehavior, IRetrieveBehavior
     {
         private Int32Field fldTenantId;
+        public const string Tenants = "Administration:Tenants";
 
         public bool ActivateFor(Row row)
         {
@@ -25,7 +26,7 @@ namespace PatientManagement
             SqlQuery query)
         {
             var user = (UserDefinition)Authorization.UserDefinition;
-            if (!Authorization.HasPermission(PermissionKeys.Tenants))
+            if (!Authorization.HasPermission(Tenants))
                 query.Where(fldTenantId == user.TenantId);
         }
 
@@ -33,7 +34,7 @@ namespace PatientManagement
             SqlQuery query)
         {
             var user = (UserDefinition)Authorization.UserDefinition;
-            if (!Authorization.HasPermission(PermissionKeys.Tenants))
+            if (!Authorization.HasPermission(Tenants))
                 query.Where(fldTenantId == user.TenantId);
         }
 
@@ -51,7 +52,7 @@ namespace PatientManagement
             {
                 var user = (UserDefinition)Authorization.UserDefinition;
                 if (fldTenantId[handler.Old] != fldTenantId[handler.Row])
-                    Authorization.ValidatePermission(PermissionKeys.Tenants);
+                    Authorization.ValidatePermission(Tenants);
             }
         }
 
@@ -59,8 +60,7 @@ namespace PatientManagement
         {
             var user = (UserDefinition)Authorization.UserDefinition;
             if (fldTenantId[handler.Row] != user.TenantId)
-                Authorization.ValidatePermission(
-                    PermissionKeys.Tenants);
+                Authorization.ValidatePermission(Tenants);
         }
 
         public void OnAfterDelete(IDeleteRequestHandler handler) { }

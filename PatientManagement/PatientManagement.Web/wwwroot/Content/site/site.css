@@ -7737,7 +7737,6 @@ section.content > .s-DataGrid {
   padding: 0 3px;
 }
 .s-UserPermissionDialog > .size,
-.s-RolePermissionDialog > .size,
 .s-UserRoleDialog > .size {
   min-width: 650px;
   width: 650px;
@@ -7745,13 +7744,23 @@ section.content > .s-DataGrid {
   height: 450px;
 }
 .s-UserPermissionDialog .s-DataGrid,
-.s-RolePermissionDialog .s-DataGrid,
 .s-UserRoleDialog .s-DataGrid {
   height: 100%;
 }
 .s-UserPermissionDialog .ui-dialog-content,
-.s-RolePermissionDialog .ui-dialog-content,
 .s-UserRoleDialog .ui-dialog-content {
+  padding: 8px;
+}
+.s-RolePermissionDialog > .size {
+  min-width: 650px;
+  width: 650px;
+  min-height: 750px;
+  height: 750px;
+}
+.s-RolePermissionDialog .s-DataGrid {
+  height: 100%;
+}
+.s-RolePermissionDialog .ui-dialog-content {
   padding: 8px;
 }
 .s-PermissionCheckEditor .check-box {

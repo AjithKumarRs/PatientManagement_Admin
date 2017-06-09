@@ -10,8 +10,8 @@ namespace PatientManagement.Administration.Entities
     using System.IO;
 
     [ConnectionKey("Default"), TableName("[dbo].[Tenants]"), DisplayName("Tenant"), InstanceName("Tenant"), TwoLevelCached]
-    [ReadPermission(PermissionKeys.Tenants)]
-    [ModifyPermission(PermissionKeys.Tenants)]
+    [ReadPermission("Administration:Tenants:Read")]
+    [ModifyPermission("Administration:Tenants:Modify")]
     [LookupScript("Administration.Tenant")]
     public sealed class TenantRow : Row, IIdRow, INameRow
     {
@@ -31,7 +31,6 @@ namespace PatientManagement.Administration.Entities
 
         [DisplayName("Base Currency"), ForeignKey("Currencies", "Id"), LeftJoin("crnc"), Required]
         [LookupEditor(typeof(CurrenciesRow))]
-        [ReadPermission(PermissionKeys.Currencies)]
         public Int32? CurrencyId
         {
             get { return Fields.CurrencyId[this]; }

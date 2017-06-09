@@ -1,4 +1,5 @@
-﻿using Serenity.Navigation;
+﻿using PatientManagement.Administration;
+using Serenity.Navigation;
 using Administration = PatientManagement.Administration.Pages;
 
 [assembly: NavigationMenu(9000, "Administration", icon: "icon-screen-desktop")]

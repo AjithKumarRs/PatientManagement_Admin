@@ -10,8 +10,8 @@ namespace PatientManagement.Administration.Entities
     using System.IO;
 
     [ConnectionKey("Default"), TableName("[dbo].[Currencies]"), DisplayName("Currencies"), InstanceName("Currencies"), TwoLevelCached]
-    [ReadPermission(PermissionKeys.Currencies)]
-    [ModifyPermission(PermissionKeys.Currencies)]
+    [ReadPermission("Administration:Currencies:Read")]
+    [ModifyPermission("Administration:Currencies:Modify")]
     [LookupScript("Administration.Currencies")]
     public sealed class CurrenciesRow : Row, IIdRow, INameRow, IUpdateLogRow
     {

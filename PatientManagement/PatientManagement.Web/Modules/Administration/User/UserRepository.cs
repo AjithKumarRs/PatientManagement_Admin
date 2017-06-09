@@ -108,7 +108,7 @@ namespace PatientManagement.Administration.Repositories
             {
                 base.GetEditableFields(editable);
 
-                if (!Authorization.HasPermission(Administration.PermissionKeys.Security))
+                if (!Authorization.HasPermission("Administration:User:Modify"))
                 {
                     editable.Remove(fld.Source);
                     editable.Remove(fld.IsActive);

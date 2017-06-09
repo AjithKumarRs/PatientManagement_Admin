@@ -10,8 +10,8 @@ namespace PatientManagement.Administration.Entities
     using System.IO;
 
     [ConnectionKey("Default"), TableName("[dbo].[Offers]"), DisplayName("Offers"), InstanceName("Offers"), TwoLevelCached]
-    [ReadPermission(PermissionKeys.Offers)]
-    [ModifyPermission(PermissionKeys.Offers)]
+    [ReadPermission("Administration:Offers:Read")]
+    [ModifyPermission("Administration:Offers:Modify")]
     [LookupScript("Administration.Offers")]
     [LocalizationRow(typeof(OfferLangRow))]
     public sealed class OffersRow : Row, IIdRow, INameRow, IUpdateLogRow
@@ -30,33 +30,6 @@ namespace PatientManagement.Administration.Entities
             set { Fields.Name[this] = value; }
         }
 
-        [DisplayName("Maximum Using Days"), IntegerEditor]
-        public Int32? MaximumSubscriptionTime
-        {
-            get { return Fields.MaximumSubscriptionTime[this]; }
-            set { Fields.MaximumSubscriptionTime[this] = value; }
-        }
-
-
-        [DisplayName("Expiration Date"), DateTimeEditor]
-        public DateTime? ExpirationDate
-        {
-            get { return Fields.ExpirationDate[this]; }
-            set { Fields.ExpirationDate[this] = value; }
-        }
-        [DisplayName("Maximum Users Per Tenant"), IntegerEditor]
-        public Int32? MaximumUsersPerTenant
-        {
-            get { return Fields.MaximumUsersPerTenant[this]; }
-            set { Fields.MaximumUsersPerTenant[this] = value; }
-        }
-
-        [DisplayName("Maximum Visits Per Tenant"), IntegerEditor]
-        public Int32? MaximumVisitsPerTenant
-        {
-            get { return Fields.MaximumVisitsPerTenant[this]; }
-            set { Fields.MaximumVisitsPerTenant[this] = value; }
-        }
         [DisplayName("Description"), Size(500), TextAreaEditor]
         public String Description
         {
@@ -76,6 +49,37 @@ namespace PatientManagement.Administration.Entities
             get { return Fields.Enabled[this]; }
             set { Fields.Enabled[this] = value; }
         }
+
+        
+        [DisplayName("Maximum Using Days"), IntegerEditor]
+        public Int32? MaximumSubscriptionTime
+        {
+            get { return Fields.MaximumSubscriptionTime[this]; }
+            set { Fields.MaximumSubscriptionTime[this] = value; }
+        }
+
+        [DisplayFormat("dd/MM/yyyy HH:mm")]
+        [DisplayName("Expiration Date"), DateTimeEditor]
+        public DateTime? ExpirationDate
+        {
+            get { return Fields.ExpirationDate[this]; }
+            set { Fields.ExpirationDate[this] = value; }
+        }
+        [DisplayName("Maximum Users Per Tenant"), IntegerEditor]
+        public Int32? MaximumUsersPerTenant
+        {
+            get { return Fields.MaximumUsersPerTenant[this]; }
+            set { Fields.MaximumUsersPerTenant[this] = value; }
+        }
+
+        [DisplayName("Maximum Visits Per Tenant"), IntegerEditor]
+        public Int32? MaximumVisitsPerTenant
+        {
+            get { return Fields.MaximumVisitsPerTenant[this]; }
+            set { Fields.MaximumVisitsPerTenant[this] = value; }
+        }
+
+
         [DisplayName("Currency"), NotNull, ForeignKey("[dbo].[Currencies]", "Id"), LeftJoin("jCurrency"), TextualField("CurrencyCurrencyId")]
         [LookupEditor(typeof(CurrenciesRow))]
         public Int32? CurrencyId
@@ -118,7 +122,7 @@ namespace PatientManagement.Administration.Entities
             get { return Fields.RoleRoleName[this]; }
             set { Fields.RoleRoleName[this] = value; }
         }
-        
+        [DisplayFormat("dd/MM/yyyy HH:mm")]
         [DisplayName("Update User Id"), NotNull, ForeignKey("Users", "UserId"), LeftJoin("usr")]
         public Int32? UpdateUserId
         {

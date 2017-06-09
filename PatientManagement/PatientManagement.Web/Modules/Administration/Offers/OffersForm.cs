@@ -13,16 +13,22 @@ namespace PatientManagement.Administration.Forms
     [BasedOnRow(typeof(Entities.OffersRow))]
     public class OffersForm
     {
+
+        [Category("General settings")]
         public String Name { get; set; }
-        public Int32 MaximumSubscriptionTime { get; set; }
-        public Int32 MaximumUsersPerTenant { get; set; }
-        public Int32 MaximumVisitsPerTenant { get; set; }
-        public DateTimeField ExpirationDate { get; set; }
+
         public String Description { get; set; }
         public Decimal Price { get; set; }
         public Boolean Enabled { get; set; }
 
         public Int32 CurrencyId { get; set; }
         public Int32 RoleId { get; set; }
+
+        [Category("Tenant Restriction settings")]
+        public DateTimeField ExpirationDate { get; set; }
+
+        public Int32 MaximumSubscriptionTime { get; set; }
+        public Int32 MaximumUsersPerTenant { get; set; }
+        public Int32 MaximumVisitsPerTenant { get; set; }
     }
 }
