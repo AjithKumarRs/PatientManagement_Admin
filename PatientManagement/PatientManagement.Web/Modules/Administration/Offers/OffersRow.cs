@@ -36,7 +36,7 @@ namespace PatientManagement.Administration.Entities
             get { return Fields.Description[this]; }
             set { Fields.Description[this] = value; }
         }
-        [DisplayName("Price"), Size(8), Scale(4), NotNull]
+        [DisplayName("Price per month"), Size(8), Scale(4), NotNull]
         public Decimal? Price
         {
             get { return Fields.Price[this]; }

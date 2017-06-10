@@ -17,12 +17,17 @@ namespace PatientManagement.Administration.Columns
         public Int64 SubscriptionId { get; set; }
         [EditLink]
         public String Name { get; set; }
-        public Int32 OfferId { get; set; }
-        public Int32 TenantId { get; set; }
+        public Int32 OfferName { get; set; }
+        [DisplayFormat("dd/MM/yyyy HH:mm")]
         public DateTime SubscriptionEndDate { get; set; }
-        public Int32 InsertUserId { get; set; }
+
+        public string TenantName { get; set; }
+
+        public String InsertUserName { get; set; }
+        [DisplayFormat("dd/MM/yyyy HH:mm")]
         public DateTime InsertDate { get; set; }
-        public Int32 UpdateUserId { get; set; }
+        public String UpdateUserName { get; set; }
+        [DisplayFormat("dd/MM/yyyy HH:mm")]
         public DateTime UpdateDateField { get; set; }
     }
 }
