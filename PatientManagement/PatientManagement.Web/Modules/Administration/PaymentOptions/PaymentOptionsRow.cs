@@ -10,7 +10,7 @@ namespace PatientManagement.Administration.Entities
     using System.IO;
 
     [ConnectionKey("Default"), TableName("[dbo].[PaymentOptions]"), DisplayName("Payment Options"), InstanceName("Payment Options"), TwoLevelCached]
-    [ReadPermission("Administration:PaymentOptions:Read")]
+    [ReadPermission("AdministrationTenants:PaymentOptions:Read")]
     [ModifyPermission("Administration:PaymentOptions:Modify")]
     [LookupScript("Administration.PaymentOptions")]
     public sealed class PaymentOptionsRow : Row, IIdRow, INameRow, ILoggingRow

@@ -1,7 +1,4 @@
 ﻿
-
-[assembly:Serenity.Navigation.NavigationLink(int.MaxValue, "Administration/Subscriptions", typeof(PatientManagement.Administration.Pages.SubscriptionsController))]
-
 namespace PatientManagement.Administration.Pages
 {
     using Serenity;

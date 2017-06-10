@@ -7,7 +7,8 @@ namespace PatientManagement.Administration.Pages
     using Serenity.Web;
     using Microsoft.AspNetCore.Mvc;
 
-    [PageAuthorize(typeof(Entities.CurrenciesRow))]
+    [PageAuthorize("Administration:Currencies:Page")]
+
     public class CurrenciesController : Controller
     {
         [Route("Administration/Currencies")]

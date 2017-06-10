@@ -5,7 +5,8 @@ namespace PatientManagement.Administration.Pages
     using Serenity.Web;
     using Microsoft.AspNetCore.Mvc;
 
-    [PageAuthorize(typeof(Entities.PaymentOptionsRow))]
+
+    [PageAuthorize("Administration:PaymentOptions:Page")]
     public class PaymentOptionsController : Controller
     {
         [Route("Administration/PaymentOptions")]

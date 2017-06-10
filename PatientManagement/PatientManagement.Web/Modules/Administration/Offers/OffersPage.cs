@@ -6,7 +6,7 @@ namespace PatientManagement.Administration.Pages
     using Microsoft.AspNetCore.Mvc;
 
     
-    [PageAuthorize(typeof(Entities.OffersRow))]
+    [PageAuthorize("Administration:Offers:Page")]
     public class OffersController : Controller
     {
         [Route("Administration/Offers")]
