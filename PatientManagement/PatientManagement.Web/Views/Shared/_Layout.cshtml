@@ -13,7 +13,7 @@
     var notificationCookie = Context.Request.Cookies["NotificationPreference"];
     var notificationState = !notificationCookie.IsEmptyOrNull() ? notificationCookie : "true";
 
-    var theme = !themeCookie.IsEmptyOrNull() ? themeCookie : "purple";
+    var theme = !themeCookie.IsEmptyOrNull() ? themeCookie : "blue";
     var rtl = System.Globalization.CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft;
     var user = (UserDefinition)Serenity.Authorization.UserDefinition;
     var userImage = System.Web.VirtualPathUtility.ToAbsolute(
@@ -34,6 +34,7 @@
 
     @RenderSection("Head", false)
     <title>@(ViewData["Title"]) - Clario</title>
+    
 </head>
 <body id="s-@(ViewData["PageId"])Page" class="@(ViewData["BodyClass"]) fixed sidebar-mini hold-transition skin-@theme@(hideNav ? " no-navigation" : " has-layout-event")@(rtl ? " rtl" : "")">
 
@@ -56,7 +57,7 @@
             <header class="main-header">
                 <a href="~/" class="logo">
                     <span class="logo-mini"><i></i></span>
-                    <span class="logo-lg"><i></i><b>@LocalText.Get("Navigation.SiteTitle")</b></span>
+                <span class="logo-lg"><i></i><b>@LocalText.Get("Navigation.SiteTitle").ToUpper()</b></span>
                 </a>
                 <nav class="navbar navbar-static-top" role="navigation">
                     <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
