@@ -992,8 +992,8 @@ Description
 How it works
 ----------------------------------------*/
 .how-it-works{
-    background-image: url(../img/bg/4.jpg);
-    padding: 200px 0;
+   background-image: url(../img/bg/clario-demo2.gif);
+   padding: 200px 0;
 }
 .video-play-icon{
     display: block;
