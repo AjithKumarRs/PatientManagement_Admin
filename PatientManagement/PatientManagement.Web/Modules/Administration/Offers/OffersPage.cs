@@ -31,8 +31,10 @@ namespace PatientManagement.Administration.Pages
         [Route("api/Offers/{currencyCode}")]
         public JsonResult Index(string currencyCode)
         {
+            if (string.IsNullOrWhiteSpace(currencyCode))
+                return new JsonResult(NotFound());
 
-
+            currencyCode = currencyCode.ToUpper();
             var model = new List<OffersPublicModel>();
             using (var connection = SqlConnections.NewFor<OffersRow>())
             {
@@ -44,48 +46,78 @@ namespace PatientManagement.Administration.Pages
 
                 var offerFields = OffersRow.Fields;
                 var offers = connection.List<OffersRow>()
-                    .Select(x => new {x.OfferId, x.Name, x.Price, x.CurrencyId});
-     
+                    .Select(x => new { x.OfferId, x.Name, x.Price, x.CurrencyId });
+
                 foreach (var offer in offers)
                 {
                     var currencyOffer = connection.First<CurrenciesRow>(currencyFields.Id == offer.CurrencyId.Value);
 
                     var neededCurrency = connection.First<CurrenciesRow>(currencyFields.CurrencyId == currencyCode);
 
-                    Money priceOffer = Decimal.Zero;
-
-                    ExchangeRate exchangeRate;
-                    if (currencyOffer.BaseCurrencyId.HasValue)
+                    if (offer.CurrencyId == neededCurrency.Id)
                     {
-                        var baseCurrency = connection.First<CurrenciesRow>(currencyFields.Id == currencyOffer.BaseCurrencyId.Value);
-
-                        exchangeRate = new ExchangeRate(Currency.FromCode(baseCurrency.CurrencyId),
-                            Currency.FromCode(currencyOffer.CurrencyId),
-                            currencyOffer.Rate ?? 0);
-
-                        priceOffer = exchangeRate.Convert(
-                            new Money(offer.Price ?? 0, Currency.FromCode(currencyOffer.CurrencyId)));
-                        
-                        exchangeRate = new ExchangeRate(Currency.FromCode(baseCurrency.CurrencyId), Currency.FromCode(neededCurrency.CurrencyId), neededCurrency.Rate ?? 0);
-
+                        model.Add(new OffersPublicModel
+                        {
+                            OfferId = offer.OfferId ?? 0,
+                            OfferName = offer.Name,
+                            Price = new Money(offer.Price ?? 0, Currency.FromCode(currencyOffer.CurrencyId)).ToString()
+                        });
                     }
                     else
                     {
-                        exchangeRate = new ExchangeRate(Currency.FromCode(currencyOffer.CurrencyId), Currency.FromCode(neededCurrency.CurrencyId), neededCurrency.Rate??0);
-                        priceOffer = new Money(offer.Price ?? 0, Currency.FromCode(currencyOffer.CurrencyId));
+                        ExchangeRate exchangeRateOffer;
+
+                        if (currencyOffer.BaseCurrencyId.HasValue)
+                        {
+                            var baseCurrency =
+                                connection.First<CurrenciesRow>(
+                                    currencyFields.Id == currencyOffer.BaseCurrencyId.Value);
+
+                            exchangeRateOffer = new ExchangeRate(Currency.FromCode(baseCurrency.CurrencyId),
+                                Currency.FromCode(currencyOffer.CurrencyId),
+                                currencyOffer.Rate ?? 0);
+
+                            if (baseCurrency.CurrencyId == currencyCode)
+                            {
+                                model.Add(new OffersPublicModel
+                                {
+                                    OfferId = offer.OfferId ?? 0,
+                                    OfferName = offer.Name,
+                                    Price = exchangeRateOffer
+                                        .Convert(new Money(offer.Price ?? 0,
+                                            Currency.FromCode(currencyOffer.CurrencyId)))
+                                        .ToString()
+                                });
+                            }
+                            else
+                            {
+                                var tempPriceOffer = exchangeRateOffer.Convert(
+                                    new Money(offer.Price ?? 0, Currency.FromCode(currencyOffer.CurrencyId)));
+
+                                var exchangeRateNeeded = new ExchangeRate(Currency.FromCode(baseCurrency.CurrencyId),
+                                    Currency.FromCode(neededCurrency.CurrencyId), neededCurrency.Rate ?? 0);
+                                model.Add(new OffersPublicModel
+                                {
+                                    OfferId = offer.OfferId ?? 0,
+                                    OfferName = offer.Name,
+                                    Price = exchangeRateNeeded.Convert(tempPriceOffer).ToString()
+                                });
+                            }
+                        }
+                        else
+                        {
+                            var exchangeRateNeeded = new ExchangeRate(Currency.FromCode(currencyOffer.CurrencyId),
+                                Currency.FromCode(neededCurrency.CurrencyId), neededCurrency.Rate ?? 0);
+
+                            model.Add(new OffersPublicModel
+                            {
+                                OfferId = offer.OfferId ?? 0,
+                                OfferName = offer.Name,
+                                Price = exchangeRateNeeded.Convert(new Money(offer.Price ?? 0, Currency.FromCode(currencyOffer.CurrencyId))).ToString()
+                            });
+                        }
 
                     }
-
-                    var offerPrice = exchangeRate.Convert(priceOffer);
-
-
-
-                    model.Add(new OffersPublicModel
-                    {
-                        OfferId = offer.OfferId ?? 0,
-                        OfferName = offer.Name,
-                        Price = offerPrice.ToString()
-                    });
                 }
 
 
