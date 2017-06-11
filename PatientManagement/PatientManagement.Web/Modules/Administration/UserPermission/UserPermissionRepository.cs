@@ -247,8 +247,8 @@ namespace PatientManagement.Administration.Repositories
                     }
                 }
 
-                var user = (UserDefinition)Authorization.UserDefinition;
-                if (!Authorization.HasPermission(PermissionKeys.Tenants))
+                var user = (UserDefinition)Authorization.UserDefinition; 
+                if (user.TenantId != 1)
                 {
                     result.RemoveWhere(x => x.StartsWith("Administration"));
                 }

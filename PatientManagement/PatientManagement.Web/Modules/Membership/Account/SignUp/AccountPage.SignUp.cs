@@ -27,10 +27,10 @@ namespace PatientManagement.Membership.Pages
         [HttpGet]
         public ActionResult SignUp()
         {
-            if (UseAdminLTELoginBox)
+           // if (UseAdminLTELoginBox)
                 return View(MVC.Views.Membership.Account.SignUp.AccountSignUp_AdminLTE);
-            else
-                return View(MVC.Views.Membership.Account.SignUp.AccountSignUp);
+            //else
+            //    return View(MVC.Views.Membership.Account.SignUp.AccountSignUp);
         }
 
         [HttpPost, JsonFilter]

@@ -9,6 +9,10 @@ namespace PatientManagement.Membership
     {
         [Required(true), Placeholder("Full name")]
         public String DisplayName { get; set; }
+
+        [Required(true), Placeholder("Clinic Name")]
+        public String TenantName { get; set; }
+
         [EmailEditor, Required(true), Placeholder("Email")]
         public String Email { get; set; }
         [EmailEditor, Required(true), Placeholder("Confirm email")]

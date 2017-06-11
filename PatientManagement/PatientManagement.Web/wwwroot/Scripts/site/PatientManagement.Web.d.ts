@@ -2355,6 +2355,11 @@ declare namespace PatientManagement.Membership {
         constructor(container: JQuery);
     }
 }
+declare namespace PatientManagement.PatientManagement {
+    class OfferDropDownEditor extends Serenity.Select2Editor<any, any> {
+        constructor(container: JQuery);
+    }
+}
 declare namespace PatientManagement.Membership {
     class SignUpPanel extends Serenity.PropertyPanel<SignUpRequest, any> {
         protected getFormKey(): string;

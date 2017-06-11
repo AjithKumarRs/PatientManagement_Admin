@@ -75,6 +75,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="1.1.1" />
     <PackageReference Include="MySql.Data" Version="7.0.7-m61" />
+    <PackageReference Include="NodaMoney" Version="1.0.0" />
     <PackageReference Include="Serenity.FluentMigrator.Runner" Version="1.6.904" />
     <PackageReference Include="Serenity.Web" Version="2.9.24" />
   </ItemGroup>
