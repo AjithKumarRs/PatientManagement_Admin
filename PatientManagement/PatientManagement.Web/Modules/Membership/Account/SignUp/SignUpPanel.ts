@@ -24,6 +24,7 @@
                 }
             });
 
+            
             this.byId('SubmitButton').click(e => {
                 e.preventDefault();
 

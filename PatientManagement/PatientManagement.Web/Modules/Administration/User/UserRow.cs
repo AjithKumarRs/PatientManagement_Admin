@@ -98,7 +98,7 @@ namespace PatientManagement.Administration.Entities
             set { Fields.LastDirectoryUpdate[this] = value; }
         }
 
-        [DisplayName("Tenant"), ForeignKey("Tenants", "TenantId"), LeftJoin("tnt")]
+        [DisplayName("Tenant"), ForeignKey("Tenants", "TenantId"), LeftJoin("tnt"), QuickFilter]
         [LookupEditor(typeof(TenantRow))]
         [ReadPermission(PermissionKeys.Tenants)]
         public Int32? TenantId

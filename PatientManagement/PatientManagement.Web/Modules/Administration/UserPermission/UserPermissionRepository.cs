@@ -218,7 +218,7 @@ namespace PatientManagement.Administration.Repositories
 
         public ListResponse<string> ListPermissionKeys()
         {
-            return LocalCache.Get("Administration:PermissionKeys", TimeSpan.Zero, () =>
+            return LocalCache.Get("Administration:PermissionKeys", TimeSpan.FromMilliseconds(1), () =>
             {
                 var result = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 

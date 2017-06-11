@@ -8937,3 +8937,6 @@ section.content > .s-DataGrid {
 .s-Administration-SubscriptionsDialog .caption {
   width: 150px;
 }
+.s-PatientManagement-OfferDropDownEditor {
+  width: 320px;
+}

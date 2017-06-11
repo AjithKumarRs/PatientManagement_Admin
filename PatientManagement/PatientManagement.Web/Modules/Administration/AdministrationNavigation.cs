@@ -3,9 +3,9 @@ using Serenity.Navigation;
 using Administration = PatientManagement.Administration.Pages;
 
 [assembly: NavigationMenu(8000, "Billing", icon: "fa-credit-card")]
-[assembly: NavigationLink(8000, "Billing/Subscriptions", typeof(Administration.SubscriptionsController))]
-[assembly: NavigationLink(8000, "Billing/Payments", typeof(Administration.PaymentsController))]
-[assembly: NavigationLink(8000, "Billing/Payments Details", typeof(Administration.PaymentsDetailsController))]
+[assembly: NavigationLink(8000, "Billing/Subscriptions", typeof(Administration.SubscriptionsController), icon: "fa-hospital-o")]
+[assembly: NavigationLink(8000, "Billing/Payments", typeof(Administration.PaymentsController), icon: "fa-credit-card")]
+[assembly: NavigationLink(8000, "Billing/Payments Details", typeof(Administration.PaymentsDetailsController), icon: "fa-pie-chart")]
 
 
 [assembly: NavigationMenu(9000, "Administration", icon: "icon-screen-desktop")]

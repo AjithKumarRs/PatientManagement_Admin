@@ -4052,7 +4052,10 @@ var PatientManagement;
         var OfferDropDownEditor = (function (_super) {
             __extends(OfferDropDownEditor, _super);
             function OfferDropDownEditor(container) {
-                return _super.call(this, container, null) || this;
+                var _this = _super.call(this, container, null) || this;
+                _this.addOption("key1", "Text 1");
+                _this.addOption("key2", "Text 2");
+                return _this;
             }
             return OfferDropDownEditor;
         }(Serenity.Select2Editor));

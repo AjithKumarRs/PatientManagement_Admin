@@ -19,7 +19,7 @@
                 <div class="col-xs-7">
                     <div class="checkbox icheck">
                         <label>
-                            <input type="checkbox"> @Texts.Forms.Membership.SignUp.AcceptTerms
+                            <input type="checkbox" > @Texts.Forms.Membership.SignUp.AcceptTerms
                         </label>
                     </div>
                 </div>
@@ -54,6 +54,7 @@ $(function() {
     $('.field.Password input').after("<span class='glyphicon glyphicon-lock form-control-feedback'></span>");
     $('.field.ConfirmPassword input').after("<span class='glyphicon glyphicon-log-in form-control-feedback'></span>");
     $('input').iCheck({
+        tap: true,
         checkboxClass: 'icheckbox_square-blue',
         radioClass: 'iradio_square-blue',
         increaseArea: '20%'

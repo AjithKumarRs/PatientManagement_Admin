@@ -48,7 +48,7 @@ namespace Hubs
         {
             var user = (UserDefinition)Authorization.UserDefinition;
 
-            if (!_connections.GetConnections(Convert.ToInt32(user.Id)).Contains(Context.ConnectionId))
+            if (Authorization.IsLoggedIn && !_connections.GetConnections(Convert.ToInt32(user.Id)).Contains(Context.ConnectionId))
             {
                 _connections.Add(Convert.ToInt32(user.Id), Context.ConnectionId);
             }
