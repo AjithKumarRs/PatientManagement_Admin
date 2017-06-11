@@ -52,6 +52,7 @@ namespace PatientManagement.Membership.Pages
                     throw new ValidationError("EmailInUse", Texts.Validation.CantFindUserWithEmail);
                 }
 
+
                 using (var uow = new UnitOfWork(connection))
                 {
                     string salt = null;
@@ -59,6 +60,9 @@ namespace PatientManagement.Membership.Pages
                     var displayName = request.DisplayName.TrimToEmpty();
                     var email = request.Email;
                     var username = request.Email;
+
+                    // TODO insert and get tenant 
+                    // TODO insert and get subscription
 
                     var fld = UserRow.Fields;
                     var userId = (int)connection.InsertAndGetID(new UserRow

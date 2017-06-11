@@ -48,7 +48,7 @@ namespace PatientManagement.Administration.Repositories
             {
                 base.ApplyFilters(query);
                 
-               // if (!Authorization.HasPermission(PermissionKeys.Tenants))
+               if (!Authorization.HasPermission("Administration:Currencies:Modify"))
                     query.Where((Row.Enabled.Value).ToString());
             }
         }
