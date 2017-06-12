@@ -19,7 +19,11 @@ namespace PatientManagement.PatientManagement.Columns
         [DisplayName("Db.Shared.RecordId")]
         public Int32 NotificationId { get; set; }
 
-        [EditLink]
+        [NotificationsUserImageFormatter]
+        [Width(60)]
+        public String InsertUserPicture { get; set; }
+
+       [EditLink]
         public String EntityType { get; set; }
 
         public Int64 EntityId { get; set; }

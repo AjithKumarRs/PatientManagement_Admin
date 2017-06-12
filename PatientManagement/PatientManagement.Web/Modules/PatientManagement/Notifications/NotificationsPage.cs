@@ -24,20 +24,9 @@ namespace PatientManagement.PatientManagement.Pages
         [Route("~/Notifications")]
         public ActionResult Index()
         {
-            // TODO Extend notiffications for super admins (primary tenant) with new action 
-
+            // TODO All notifications should change to seen 
+            
             return View("~/Modules/PatientManagement/Notifications/NotificationsIndex.cshtml");
-        }
-        
-        [PageAuthorize]
-        public IActionResult SeenAllNotifications()
-        {
-
-            using (var connection = SqlConnections.NewFor<NotificationsRow>())
-            {
-               // TODO Insert every notification in userNotifications table as seen
-            }
-            return Ok("It all looks fine mate");
         }
     }
 }
