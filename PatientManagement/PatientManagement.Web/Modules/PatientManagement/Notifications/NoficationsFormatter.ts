@@ -1,7 +1,7 @@
 ﻿namespace PatientManagement.PatientManagement {
     @Serenity.Decorators.registerFormatter()
     export class NotificationsUserImageFormatter
-    implements Slick.Formatter, Serenity.IInitializeColumn {
+        implements Slick.Formatter, Serenity.IInitializeColumn {
 
 
         format(ctx: Slick.FormatterContext): string {
@@ -9,7 +9,7 @@
             var file = (this.fileProperty ? ctx.item[this.fileProperty] : ctx.value) as string;
             if (!file || !file.length)
                 return "";
-                
+
             let href = Q.resolveUrl("~/upload/" + file);
 
             if (this.thumb) {
@@ -19,13 +19,8 @@
 
             let src;
 
-            if (file.indexOf("Content") > 0) {
-                src = Q.resolveUrl('~' + file);
+            src = Q.resolveUrl('~' + file);
 
-            } else {
-                src = Q.resolveUrl('~/upload/' + file);
-
-            }
             return `<div style='height:50px; width: 50px'><img src="${src}" class='img-responsive img-circle img-thumbnail' /> </div>`;
         }
 
