@@ -1,4 +1,5 @@
 ﻿
+using PatientManagement.PatientManagement.Entities;
 using PatientManagement.PatientManagement.Scripts;
 
 namespace PatientManagement.Administration.Entities
@@ -80,10 +81,10 @@ namespace PatientManagement.Administration.Entities
         }
 
         [DisplayName("Payment Status")]
-        public Int32? PaymentStatus
+        public PaymentStatus? PaymentStatus
         {
-            get { return Fields.PaymentStatus[this]; }
-            set { Fields.PaymentStatus[this] = value; }
+            get { return (PaymentStatus?)Fields.PaymentStatus[this]; }
+            set { Fields.PaymentStatus[this] = (Int32?)value; }
         }
         
         [DisplayName("Subscription Offer Id"), Expression("jSubscription.[OfferId]")]

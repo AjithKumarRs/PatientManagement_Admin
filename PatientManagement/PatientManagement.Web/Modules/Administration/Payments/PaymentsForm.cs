@@ -20,6 +20,8 @@ namespace PatientManagement.Administration.Forms
 
         [ReadOnly(true), Required(true)]
         public Decimal Value { get; set; }
+
+        [ReadOnly(true), DefaultValue(2)]
         public Int32 PaymentStatus { get; set; }
 
     }
