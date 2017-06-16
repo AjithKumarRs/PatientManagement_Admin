@@ -374,7 +374,7 @@ declare namespace PatientManagement.Administration {
         SubscriptionInsertDate?: string;
         SubscriptionUpdateUserId?: number;
         SubscriptionUpdateDateField?: string;
-        PaymentDetailsBeneficiaryName?: string;
+        PaymentDetailName?: string;
         PaymentDetailsBankName?: string;
         PaymentDetailsIbanBeneficient?: string;
         PaymentDetailsTenantId?: number;
@@ -422,7 +422,7 @@ declare namespace PatientManagement.Administration {
             const SubscriptionInsertDate: string;
             const SubscriptionUpdateUserId: string;
             const SubscriptionUpdateDateField: string;
-            const PaymentDetailsBeneficiaryName: string;
+            const PaymentDetailName: string;
             const PaymentDetailsBankName: string;
             const PaymentDetailsIbanBeneficient: string;
             const PaymentDetailsTenantId: string;

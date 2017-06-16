@@ -22,7 +22,7 @@ namespace PatientManagement.Administration {
         SubscriptionInsertDate?: string;
         SubscriptionUpdateUserId?: number;
         SubscriptionUpdateDateField?: string;
-        PaymentDetailsBeneficiaryName?: string;
+        PaymentDetailName?: string;
         PaymentDetailsBankName?: string;
         PaymentDetailsIbanBeneficient?: string;
         PaymentDetailsTenantId?: number;
@@ -72,7 +72,7 @@ namespace PatientManagement.Administration {
             export declare const SubscriptionInsertDate: string;
             export declare const SubscriptionUpdateUserId: string;
             export declare const SubscriptionUpdateDateField: string;
-            export declare const PaymentDetailsBeneficiaryName: string;
+            export declare const PaymentDetailName: string;
             export declare const PaymentDetailsBankName: string;
             export declare const PaymentDetailsIbanBeneficient: string;
             export declare const PaymentDetailsTenantId: string;
@@ -95,7 +95,7 @@ namespace PatientManagement.Administration {
             export declare const CurrencyUpdateDateField: string;
         }
 
-        ['PaymentId', 'SubscriptionId', 'TenantId', 'PaymentDetailsId', 'PaymentOptionId', 'CurrencyId', 'Value', 'RoleBefore', 'RoleAfter', 'PaymentStatus', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'SubscriptionOfferId', 'SubscriptionTenantId', 'SubscriptionSubscriptionEndDate', 'SubscriptionInsertUserId', 'SubscriptionInsertDate', 'SubscriptionUpdateUserId', 'SubscriptionUpdateDateField', 'PaymentDetailsBeneficiaryName', 'PaymentDetailsBankName', 'PaymentDetailsIbanBeneficient', 'PaymentDetailsTenantId', 'PaymentDetailsInsertUserId', 'PaymentDetailsInsertDate', 'PaymentDetailsUpdateUserId', 'PaymentDetailsUpdateDateField', 'PaymentOptionDays', 'PaymentOptionName', 'PaymentOptionInsertUserId', 'PaymentOptionInsertDate', 'PaymentOptionUpdateUserId', 'PaymentOptionUpdateDateField', 'CurrencyCurrencyId', 'CurrencyName', 'CurrencyRate', 'CurrencyEnabled', 'CurrencyBaseCurrencyId', 'CurrencyUpdateUserId', 'CurrencyUpdateDateField'].forEach(x => (<any>Fields)[x] = x);
+        ['PaymentId', 'SubscriptionId', 'TenantId', 'PaymentDetailsId', 'PaymentOptionId', 'CurrencyId', 'Value', 'RoleBefore', 'RoleAfter', 'PaymentStatus', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'SubscriptionOfferId', 'SubscriptionTenantId', 'SubscriptionSubscriptionEndDate', 'SubscriptionInsertUserId', 'SubscriptionInsertDate', 'SubscriptionUpdateUserId', 'SubscriptionUpdateDateField', 'PaymentDetailName', 'PaymentDetailsBankName', 'PaymentDetailsIbanBeneficient', 'PaymentDetailsTenantId', 'PaymentDetailsInsertUserId', 'PaymentDetailsInsertDate', 'PaymentDetailsUpdateUserId', 'PaymentDetailsUpdateDateField', 'PaymentOptionDays', 'PaymentOptionName', 'PaymentOptionInsertUserId', 'PaymentOptionInsertDate', 'PaymentOptionUpdateUserId', 'PaymentOptionUpdateDateField', 'CurrencyCurrencyId', 'CurrencyName', 'CurrencyRate', 'CurrencyEnabled', 'CurrencyBaseCurrencyId', 'CurrencyUpdateUserId', 'CurrencyUpdateDateField'].forEach(x => (<any>Fields)[x] = x);
     }
 }
 

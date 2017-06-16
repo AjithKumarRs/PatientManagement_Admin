@@ -27,7 +27,7 @@ namespace PatientManagement.Administration.Entities
         }
 
         [DisplayName("Subscription"), NotNull, ForeignKey("[dbo].[Subscriptions]", "SubscriptionId"), LeftJoin("jSubscription")]
-        [LookupEditor(typeof(SubscriptionsRow))]
+        [LookupEditor(typeof(SubscriptionsRow), InplaceAdd = true)]
         public Int64? SubscriptionId
         {
             get { return Fields.SubscriptionId[this]; }
@@ -35,8 +35,8 @@ namespace PatientManagement.Administration.Entities
         }
 
 
-        [DisplayName("Payment Details"), NotNull, ForeignKey("[dbo].[PaymentsDetails]", "PaymentDetailsId"), LeftJoin("jPaymentDetails"), TextualField("PaymentDetailsBeneficiaryName")]
-        [LookupEditor(typeof(PaymentsDetailsRow))]
+        [DisplayName("Payment Details"), NotNull, ForeignKey("[dbo].[PaymentsDetails]", "PaymentDetailsId"), LeftJoin("jPaymentDetails"), TextualField("PaymentDetailName")]
+        [LookupEditor(typeof(PaymentsDetailsRow), InplaceAdd = true)]
         public Int64? PaymentDetailsId
         {
             get { return Fields.PaymentDetailsId[this]; }
@@ -101,11 +101,11 @@ namespace PatientManagement.Administration.Entities
             set { Fields.SubscriptionSubscriptionEndDate[this] = value; }
         }
         
-        [DisplayName("Payment Details Beneficiary Name"), Expression("jPaymentDetails.[BeneficiaryName]")]
-        public String PaymentDetailsBeneficiaryName
+        [DisplayName("Payment Detail Name"), Expression("jPaymentDetails.[Name]")]
+        public String PaymentDetailName
         {
-            get { return Fields.PaymentDetailsBeneficiaryName[this]; }
-            set { Fields.PaymentDetailsBeneficiaryName[this] = value; }
+            get { return Fields.PaymentDetailName[this]; }
+            set { Fields.PaymentDetailName[this] = value; }
         }
 
         [DisplayName("Payment Details Bank Name"), Expression("jPaymentDetails.[BankName]")]
@@ -274,7 +274,7 @@ namespace PatientManagement.Administration.Entities
             public Int32Field SubscriptionOfferId;
             public DateTimeField SubscriptionSubscriptionEndDate;
 
-            public StringField PaymentDetailsBeneficiaryName;
+            public StringField PaymentDetailName;
             public StringField PaymentDetailsBankName;
             public StringField PaymentDetailsIbanBeneficient;
 

@@ -53,7 +53,7 @@ namespace PatientManagement.Administration.Entities
         }
 
         [DisplayName("Subscription"), ForeignKey("[dbo].[Subscriptions]", "SubscriptionId"), LeftJoin("jSubscription")]
-        [LookupEditor(typeof(SubscriptionsRow))]
+        [LookupEditor(typeof(SubscriptionsRow), InplaceAdd = true)]
         public Int64? SubscriptionId
         {
             get { return Fields.SubscriptionId[this]; }
