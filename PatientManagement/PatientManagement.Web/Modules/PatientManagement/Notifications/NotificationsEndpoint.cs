@@ -44,9 +44,22 @@ namespace PatientManagement.PatientManagement.Endpoints
         {
             return new MyRepository().ListForDropdown(connection, request);
         }
-        public int CountNotifications(IDbConnection connection, ListRequest request)
+        public CountNotificationsResponse CountNotifications(IDbConnection connection, ListRequest request)
         {
-           return new MyRepository().ListForDropdown(connection, new ListRequest()).TotalCount;
+           return new CountNotificationsResponse
+           {
+               Count = connection.Count<MyRow>()
+           };
         }
     }
+
+    public class CountNotificationsRequest : ServiceRequest
+    {
+        public decimal Count { get; set; }
+    }
+    public class CountNotificationsResponse : ServiceResponse
+    {
+        public int Count { get; set; }
+    }
+
 }

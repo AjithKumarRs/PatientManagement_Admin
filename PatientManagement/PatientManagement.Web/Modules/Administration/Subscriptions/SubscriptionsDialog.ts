@@ -11,6 +11,5 @@ namespace PatientManagement.Administration {
         protected getService() { return SubscriptionsService.baseUrl; }
 
         protected form = new SubscriptionsForm(this.idPrefix);
-
     }
 }

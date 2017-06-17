@@ -12,5 +12,15 @@ namespace PatientManagement.Administration {
         constructor(container: JQuery) {
             super(container);
         }
+
+        protected getItemCssClass(item: SubscriptionsRow, index: number): string {
+            let klass: string = "";
+
+            if (item.IsActive == 1) {
+                klass += " active";
+            }
+
+            return Q.trimToNull(klass);
+        }
     }
 }

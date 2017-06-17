@@ -1,11 +1,9 @@
-﻿
-
-namespace PatientManagement.PatientManagement {
+﻿namespace PatientManagement.PatientManagement {
     export namespace UserNotificationsService {
         export const baseUrl = 'PatientManagement/UserNotifications';
 
-        export declare function Create(request: Serenity.SaveRequest<UserNotificationsRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Serenity.ServiceOptions<any>): JQueryXHR;
-        export declare function CreateList(request: Serenity.SaveRequest<UserNotificationsRow[]>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Serenity.ServiceOptions<any>): JQueryXHR;
+        export declare function Create(request: Serenity.SaveRequest<UserNotificationsRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        export declare function CreateList(request: Serenity.SaveRequest<UserNotificationsRow[]>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         export declare function Update(request: Serenity.SaveRequest<UserNotificationsRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         export declare function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         export declare function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<UserNotificationsRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
@@ -20,7 +18,7 @@ namespace PatientManagement.PatientManagement {
             export declare const List: string;
         }
 
-        ['Create', 'Update', 'Delete', 'Retrieve', 'List', 'CreateList'].forEach(x => {
+        ['Create', 'CreateList', 'Update', 'Delete', 'Retrieve', 'List'].forEach(x => {
             (<any>UserNotificationsService)[x] = function (r, s, o) { return Q.serviceRequest(baseUrl + '/' + x, r, s, o); };
             (<any>Methods)[x] = baseUrl + '/' + x;
         });

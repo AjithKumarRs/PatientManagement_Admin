@@ -1,35 +1,46 @@
-﻿
-namespace PatientManagement.Administration {
+﻿namespace PatientManagement.Administration {
     export interface PaymentsDetailsRow {
         PaymentDetailsId?: number;
         BeneficiaryName?: string;
         BankName?: string;
+        Name?: string;
         IbanBeneficient?: string;
         TenantId?: number;
         InsertUserId?: number;
         InsertDate?: string;
         UpdateUserId?: number;
         UpdateDateField?: string;
+        TenantName?: string;
+        InsertUserName?: string;
+        UpdateUserName?: string;
     }
 
     export namespace PaymentsDetailsRow {
         export const idProperty = 'PaymentDetailsId';
         export const nameProperty = 'BeneficiaryName';
         export const localTextPrefix = 'Administration.PaymentsDetails';
+        export const lookupKey = 'Administration.PaymentsDetails';
 
-        export namespace Fields {
-            export declare const PaymentDetailsId;
-            export declare const BeneficiaryName;
-            export declare const BankName;
-            export declare const IbanBeneficient;
-            export declare const TenantId;
-            export declare const InsertUserId;
-            export declare const InsertDate;
-            export declare const UpdateUserId;
-            export declare const UpdateDateField;
+        export function getLookup(): Q.Lookup<PaymentsDetailsRow> {
+            return Q.getLookup<PaymentsDetailsRow>('Administration.PaymentsDetails');
         }
 
-        ['PaymentDetailsId', 'BeneficiaryName', 'BankName', 'IbanBeneficient', 'TenantId', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField'].forEach(x => (<any>Fields)[x] = x);
+        export namespace Fields {
+            export declare const PaymentDetailsId: string;
+            export declare const BeneficiaryName: string;
+            export declare const BankName: string;
+            export declare const Name: string;
+            export declare const IbanBeneficient: string;
+            export declare const TenantId: string;
+            export declare const InsertUserId: string;
+            export declare const InsertDate: string;
+            export declare const UpdateUserId: string;
+            export declare const UpdateDateField: string;
+            export declare const TenantName: string;
+            export declare const InsertUserName: string;
+            export declare const UpdateUserName: string;
+        }
+
+        ['PaymentDetailsId', 'BeneficiaryName', 'BankName', 'Name', 'IbanBeneficient', 'TenantId', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'TenantName', 'InsertUserName', 'UpdateUserName'].forEach(x => (<any>Fields)[x] = x);
     }
 }
-

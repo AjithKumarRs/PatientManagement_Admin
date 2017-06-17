@@ -16,7 +16,7 @@ namespace PatientManagement.Administration.Entities
     [ModifyPermission("AdministrationTenants:Subscriptions:Modify")]
     [LookupScript("Administration.Subscriptions",
         LookupType = typeof(MultiTenantRowLookupScript<>))]
-    public sealed class SubscriptionsRow : Row, IIdRow, ILoggingRow, INameRow,  IMultiTenantRow
+    public sealed class SubscriptionsRow : Row, IIdRow, ILoggingRow, INameRow,  IMultiTenantRow, IIsActiveRow
     {
         [DisplayName("Subscription Id"), Identity]
         public Int64? SubscriptionId
@@ -149,6 +149,7 @@ namespace PatientManagement.Administration.Entities
 
         DateTimeField IUpdateLogRow.UpdateDateField { get; } = Fields.UpdateDateField;
 
+
         #endregion
 
         #region Tenant
@@ -173,6 +174,13 @@ namespace PatientManagement.Administration.Entities
         #endregion
 
 
+        [NotNull, Insertable(false), Updatable(true), SortOrder(1, true)]
+        [BsSwitchEditor]
+        public Int16? IsActive
+        {
+            get { return Fields.IsActive[this]; }
+            set { Fields.IsActive[this] = value; }
+        }
         public static readonly RowFields Fields = new RowFields().Init();
 
         public SubscriptionsRow()
@@ -187,6 +195,7 @@ namespace PatientManagement.Administration.Entities
             public Int32Field OfferId;
             public Int32Field TenantId;
             public DateTimeField SubscriptionEndDate;
+            public Int16Field IsActive;
 
             public Int32Field InsertUserId;
             public DateTimeField InsertDate;
@@ -208,5 +217,7 @@ namespace PatientManagement.Administration.Entities
                 LocalTextPrefix = "Administration.Subscriptions";
             }
         }
+
+        public Int16Field IsActiveField { get; } = Fields.IsActive;
     }
 }

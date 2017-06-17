@@ -1,16 +1,15 @@
-﻿
-
-namespace PatientManagement.Administration {
+﻿namespace PatientManagement.Administration {
     export class TenantForm extends Serenity.PrefixedContext {
         static formKey = 'Administration.Tenant';
+
     }
 
     export interface TenantForm {
         TenantName: Serenity.StringEditor;
-        CurrencyId: Serenity.IntegerEditor;
-        SubscriptionRequired: Serenity.BooleanEditor;
-        SubscriptionId: Serenity.IntegerEditor;
+        CurrencyId: Serenity.LookupEditor;
+        SubscriptionId: Serenity.LookupEditor;
+        SubscriptionRequired: BsSwitchEditor;
     }
 
-    [['TenantName', () => Serenity.StringEditor], ['CurrencyId', () => Serenity.IntegerEditor], ['SubscriptionRequired', () => Serenity.BooleanEditor], ['SubscriptionId', () => Serenity.IntegerEditor]].forEach(x => Object.defineProperty(TenantForm.prototype, <string>x[0], { get: function () { return this.w(x[0], (x[1] as any)()); }, enumerable: true, configurable: true }));
+    [['TenantName', () => Serenity.StringEditor], ['CurrencyId', () => Serenity.LookupEditor], ['SubscriptionId', () => Serenity.LookupEditor], ['SubscriptionRequired', () => BsSwitchEditor]].forEach(x => Object.defineProperty(TenantForm.prototype, <string>x[0], { get: function () { return this.w(x[0], (x[1] as any)()); }, enumerable: true, configurable: true }));
 }

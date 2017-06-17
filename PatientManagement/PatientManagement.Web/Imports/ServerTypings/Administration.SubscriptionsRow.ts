@@ -1,59 +1,55 @@
-﻿
-namespace PatientManagement.Administration {
+﻿namespace PatientManagement.Administration {
     export interface SubscriptionsRow {
         SubscriptionId?: number;
         Name?: string;
         OfferId?: number;
         TenantId?: number;
         SubscriptionEndDate?: string;
+        IsActive?: number;
         InsertUserId?: number;
         InsertDate?: string;
         UpdateUserId?: number;
         UpdateDateField?: string;
         OfferName?: string;
-        OfferMaximumSubscriptionTime?: number;
-        OfferMaximumUsersPerTenant?: number;
-        OfferMaximumVisitsPerTenant?: number;
-        OfferExpirationDate?: string;
         OfferDescription?: string;
         OfferPrice?: number;
-        OfferEnabled?: boolean;
-        OfferCurrencyId?: number;
         OfferRoleId?: number;
-        OfferUpdateUserId?: number;
-        OfferUpdateDateField?: string;
+        TenantName?: string;
+        InsertUserName?: string;
+        UpdateUserName?: string;
     }
 
     export namespace SubscriptionsRow {
         export const idProperty = 'SubscriptionId';
+        export const isActiveProperty = 'IsActive';
         export const nameProperty = 'Name';
         export const localTextPrefix = 'Administration.Subscriptions';
+        export const lookupKey = 'Administration.Subscriptions';
 
-        export namespace Fields {
-            export declare const SubscriptionId;
-            export declare const Name;
-            export declare const OfferId;
-            export declare const TenantId;
-            export declare const SubscriptionEndDate;
-            export declare const InsertUserId;
-            export declare const InsertDate;
-            export declare const UpdateUserId;
-            export declare const UpdateDateField;
-            export declare const OfferName: string;
-            export declare const OfferMaximumSubscriptionTime: string;
-            export declare const OfferMaximumUsersPerTenant: string;
-            export declare const OfferMaximumVisitsPerTenant: string;
-            export declare const OfferExpirationDate: string;
-            export declare const OfferDescription: string;
-            export declare const OfferPrice: string;
-            export declare const OfferEnabled: string;
-            export declare const OfferCurrencyId: string;
-            export declare const OfferRoleId: string;
-            export declare const OfferUpdateUserId: string;
-            export declare const OfferUpdateDateField: string;
+        export function getLookup(): Q.Lookup<SubscriptionsRow> {
+            return Q.getLookup<SubscriptionsRow>('Administration.Subscriptions');
         }
 
-        ['SubscriptionId', 'Name', 'OfferId', 'TenantId', 'SubscriptionEndDate', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'OfferName', 'OfferMaximumSubscriptionTime', 'OfferMaximumUsersPerTenant', 'OfferMaximumVisitsPerTenant', 'OfferExpirationDate', 'OfferDescription', 'OfferPrice', 'OfferEnabled', 'OfferCurrencyId', 'OfferRoleId', 'OfferUpdateUserId', 'OfferUpdateDateField'].forEach(x => (<any>Fields)[x] = x);
+        export namespace Fields {
+            export declare const SubscriptionId: string;
+            export declare const Name: string;
+            export declare const OfferId: string;
+            export declare const TenantId: string;
+            export declare const SubscriptionEndDate: string;
+            export declare const IsActive: string;
+            export declare const InsertUserId: string;
+            export declare const InsertDate: string;
+            export declare const UpdateUserId: string;
+            export declare const UpdateDateField: string;
+            export declare const OfferName: string;
+            export declare const OfferDescription: string;
+            export declare const OfferPrice: string;
+            export declare const OfferRoleId: string;
+            export declare const TenantName: string;
+            export declare const InsertUserName: string;
+            export declare const UpdateUserName: string;
+        }
+
+        ['SubscriptionId', 'Name', 'OfferId', 'TenantId', 'SubscriptionEndDate', 'IsActive', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'OfferName', 'OfferDescription', 'OfferPrice', 'OfferRoleId', 'TenantName', 'InsertUserName', 'UpdateUserName'].forEach(x => (<any>Fields)[x] = x);
     }
 }
-

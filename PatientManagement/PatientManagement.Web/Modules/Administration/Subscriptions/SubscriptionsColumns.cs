@@ -1,4 +1,6 @@
 ﻿
+using PatientManagement.PatientManagement;
+
 namespace PatientManagement.Administration.Columns
 {
     using Serenity;
@@ -17,6 +19,9 @@ namespace PatientManagement.Administration.Columns
         public Int64 SubscriptionId { get; set; }
         [EditLink]
         public String Name { get; set; }
+        
+        public SubscriptionState IsActive { get; set; }
+
         public Int32 OfferName { get; set; }
         [DisplayFormat("dd/MM/yyyy HH:mm")]
         public DateTime SubscriptionEndDate { get; set; }

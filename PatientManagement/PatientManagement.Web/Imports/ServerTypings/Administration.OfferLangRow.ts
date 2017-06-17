@@ -1,27 +1,25 @@
-﻿
-namespace PatientManagement.Administration {
+﻿namespace PatientManagement.Administration {
     export interface OfferLangRow {
         Id?: number;
         OfferId?: number;
         LanguageId?: number;
-        OfferName?: string;
+        Name?: string;
         Description?: string;
     }
 
     export namespace OfferLangRow {
         export const idProperty = 'Id';
-        export const nameProperty = 'OfferName';
+        export const nameProperty = 'Name';
         export const localTextPrefix = 'Administration.OfferLang';
 
         export namespace Fields {
-            export declare const Id;
-            export declare const OfferId;
-            export declare const LanguageId;
-            export declare const OfferName;
-            export declare const Description;
+            export declare const Id: string;
+            export declare const OfferId: string;
+            export declare const LanguageId: string;
+            export declare const Name: string;
+            export declare const Description: string;
         }
 
-        ['Id', 'OfferId', 'LanguageId', 'OfferName', 'Description'].forEach(x => (<any>Fields)[x] = x);
+        ['Id', 'OfferId', 'LanguageId', 'Name', 'Description'].forEach(x => (<any>Fields)[x] = x);
     }
 }
-

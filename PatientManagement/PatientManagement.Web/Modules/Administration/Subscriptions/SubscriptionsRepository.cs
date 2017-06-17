@@ -1,5 +1,8 @@
 ﻿
 
+using System.Linq;
+using MVC;
+
 namespace PatientManagement.Administration.Repositories
 {
     using Serenity;
@@ -38,7 +41,24 @@ namespace PatientManagement.Administration.Repositories
             return new MyListHandler().Process(connection, request);
         }
 
-        private class MySaveHandler : SaveRequestHandler<MyRow> { }
+        private class MySaveHandler : SaveRequestHandler<MyRow>
+        {
+            protected override void BeforeSave()
+            {
+                base.AfterSave();
+
+                if (Row.IsActive == 1)
+                {
+                    var tmp = Connection.List<MyRow>().Where(p => p.IsActive == 1);
+
+                    foreach (var subscriptionsRow in tmp)
+                    {
+                        subscriptionsRow.IsActive = 0;
+                        Connection.UpdateById(subscriptionsRow);
+                    }
+                }
+            }
+        }
         private class MyDeleteHandler : DeleteRequestHandler<MyRow> { }
         private class MyRetrieveHandler : RetrieveRequestHandler<MyRow> { }
         private class MyListHandler : ListRequestHandler<MyRow> { }

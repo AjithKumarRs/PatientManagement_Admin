@@ -1,51 +1,56 @@
-﻿
-namespace PatientManagement.Administration {
+﻿namespace PatientManagement.Administration {
     export interface OffersRow {
         OfferId?: number;
         Name?: string;
-        MaximumSubscriptionTime?: string;
+        MaximumSubscriptionTime?: number;
+        MaximumUsersPerTenant?: number;
+        MaximumVisitsPerTenant?: number;
+        ExpirationDate?: string;
         Description?: string;
+        Price?: number;
+        Enabled?: boolean;
         CurrencyId?: number;
         RoleId?: number;
         UpdateUserId?: number;
+        UserName?: string;
         UpdateDateField?: string;
         CurrencyCurrencyId?: string;
         CurrencyName?: string;
-        CurrencyRate?: number;
         CurrencyEnabled?: boolean;
-        CurrencyBaseCurrencyId?: number;
-        CurrencyUpdateUserId?: number;
-        CurrencyUpdateDateField?: string;
         RoleRoleName?: string;
-        RoleTenantId?: number;
     }
 
     export namespace OffersRow {
         export const idProperty = 'OfferId';
         export const nameProperty = 'Name';
         export const localTextPrefix = 'Administration.Offers';
+        export const lookupKey = 'Administration.Offers';
 
-        export namespace Fields {
-            export declare const Id;
-            export declare const Name;
-            export declare const MaximumSubscriptionTime;
-            export declare const Description;
-            export declare const CurrencyId;
-            export declare const RoleId;
-            export declare const UpdateUserId;
-            export declare const UpdateDateField;
-            export declare const CurrencyCurrencyId: string;
-            export declare const CurrencyName: string;
-            export declare const CurrencyRate: string;
-            export declare const CurrencyEnabled: string;
-            export declare const CurrencyBaseCurrencyId: string;
-            export declare const CurrencyUpdateUserId: string;
-            export declare const CurrencyUpdateDateField: string;
-            export declare const RoleRoleName: string;
-            export declare const RoleTenantId: string;
+        export function getLookup(): Q.Lookup<OffersRow> {
+            return Q.getLookup<OffersRow>('Administration.Offers');
         }
 
-        ['OfferId', 'Name', 'MaximumSubscriptionTime', 'Description', 'CurrencyId', 'RoleId', 'UpdateUserId', 'UpdateDateField', 'CurrencyCurrencyId', 'CurrencyName', 'CurrencyRate', 'CurrencyEnabled', 'CurrencyBaseCurrencyId', 'CurrencyUpdateUserId', 'CurrencyUpdateDateField', 'RoleRoleName', 'RoleTenantId'].forEach(x => (<any>Fields)[x] = x);
+        export namespace Fields {
+            export declare const OfferId: string;
+            export declare const Name: string;
+            export declare const MaximumSubscriptionTime: string;
+            export declare const MaximumUsersPerTenant: string;
+            export declare const MaximumVisitsPerTenant: string;
+            export declare const ExpirationDate: string;
+            export declare const Description: string;
+            export declare const Price: string;
+            export declare const Enabled: string;
+            export declare const CurrencyId: string;
+            export declare const RoleId: string;
+            export declare const UpdateUserId: string;
+            export declare const UserName: string;
+            export declare const UpdateDateField: string;
+            export declare const CurrencyCurrencyId: string;
+            export declare const CurrencyName: string;
+            export declare const CurrencyEnabled: string;
+            export declare const RoleRoleName: string;
+        }
+
+        ['OfferId', 'Name', 'MaximumSubscriptionTime', 'MaximumUsersPerTenant', 'MaximumVisitsPerTenant', 'ExpirationDate', 'Description', 'Price', 'Enabled', 'CurrencyId', 'RoleId', 'UpdateUserId', 'UserName', 'UpdateDateField', 'CurrencyCurrencyId', 'CurrencyName', 'CurrencyEnabled', 'RoleRoleName'].forEach(x => (<any>Fields)[x] = x);
     }
 }
-

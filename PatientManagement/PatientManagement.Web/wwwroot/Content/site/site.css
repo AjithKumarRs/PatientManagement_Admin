@@ -8940,3 +8940,6 @@ section.content > .s-DataGrid {
 .s-PatientManagement-OfferDropDownEditor {
   width: 320px;
 }
+.s-SubscriptionsGrid .active {
+  background-color: #4fff62;
+}

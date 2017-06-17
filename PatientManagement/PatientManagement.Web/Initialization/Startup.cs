@@ -18,7 +18,7 @@ using System.Data.SqlClient;
 using System.Globalization;
 using System.IO;
 using Microsoft.AspNetCore.SignalR;
-using PatientManagement.Web.Modules.Administration.User;
+using PatientManagement.Administration;
 
 namespace PatientManagement
 {

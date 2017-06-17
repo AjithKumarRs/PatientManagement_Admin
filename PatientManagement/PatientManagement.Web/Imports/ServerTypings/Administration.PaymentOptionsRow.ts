@@ -1,5 +1,4 @@
-﻿
-namespace PatientManagement.Administration {
+﻿namespace PatientManagement.Administration {
     export interface PaymentOptionsRow {
         PaymentOptionId?: number;
         Days?: number;
@@ -8,24 +7,32 @@ namespace PatientManagement.Administration {
         InsertDate?: string;
         UpdateUserId?: number;
         UpdateDateField?: string;
+        InsertUserName?: string;
+        UpdateUserName?: string;
     }
 
     export namespace PaymentOptionsRow {
         export const idProperty = 'PaymentOptionId';
         export const nameProperty = 'Name';
         export const localTextPrefix = 'Administration.PaymentOptions';
+        export const lookupKey = 'Administration.PaymentOptions';
 
-        export namespace Fields {
-            export declare const PaymentOptionId;
-            export declare const Days;
-            export declare const Name;
-            export declare const InsertUserId;
-            export declare const InsertDate;
-            export declare const UpdateUserId;
-            export declare const UpdateDateField;
+        export function getLookup(): Q.Lookup<PaymentOptionsRow> {
+            return Q.getLookup<PaymentOptionsRow>('Administration.PaymentOptions');
         }
 
-        ['PaymentOptionId', 'Days', 'Name', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField'].forEach(x => (<any>Fields)[x] = x);
+        export namespace Fields {
+            export declare const PaymentOptionId: string;
+            export declare const Days: string;
+            export declare const Name: string;
+            export declare const InsertUserId: string;
+            export declare const InsertDate: string;
+            export declare const UpdateUserId: string;
+            export declare const UpdateDateField: string;
+            export declare const InsertUserName: string;
+            export declare const UpdateUserName: string;
+        }
+
+        ['PaymentOptionId', 'Days', 'Name', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'InsertUserName', 'UpdateUserName'].forEach(x => (<any>Fields)[x] = x);
     }
 }
-

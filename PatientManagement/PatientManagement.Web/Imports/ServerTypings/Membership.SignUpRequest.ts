@@ -3,5 +3,6 @@
         DisplayName?: string;
         Email?: string;
         Password?: string;
+        ClinicName?: string;
     }
 }

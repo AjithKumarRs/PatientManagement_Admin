@@ -16,5 +16,7 @@ namespace PatientManagement.Administration.Forms
         public String Name { get; set; }
         public Int32 OfferId { get; set; }
         public DateTime SubscriptionEndDate { get; set; }
+
+        public int IsActive { get; set; }
     }
 }

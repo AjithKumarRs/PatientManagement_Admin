@@ -92,11 +92,11 @@
   <Target Name="PostcompileScript" AfterTargets="Build">
     <Exec Command="node_modules/.bin/lessc ./wwwroot/Content/site/site.less ./wwwroot/content/site/site.css" ContinueOnError="true" />
     <Exec Command="node_modules/.bin/tsc -p ./tsconfig.json" ContinueOnError="true" />
-    <!--<Exec Command="dotnet sergen servertypings" ContinueOnError="true" />-->
+    <Exec Command="dotnet sergen servertypings" ContinueOnError="true" />
 
   </Target>
   <ItemGroup>
-    <DotNetCliToolReference Include="Serenity.CodeGenerator" Version="2.9.23" />
+    <DotNetCliToolReference Include="Serenity.CodeGenerator" Version="2.9.24" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\Scripts\moment\" />
