@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.SignalR;
 using Serenity;
 
-namespace PatientManagement.Web.Modules.Administration.User
+namespace PatientManagement.Administration
 {
     public class CustomUserIdProvider : IUserIdProvider
     {
