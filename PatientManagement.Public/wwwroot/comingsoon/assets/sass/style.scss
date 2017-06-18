@@ -1,0 +1,44 @@
+/*
+Theme Name: Trendy
+Theme URI: http://themeforest.net/user/Medhati/portfolio
+Author: Medhati
+Author URI: http://medhati.com
+Description: Trendy Multipurpose Coming Soon template
+Version: 1.0
+License: ThemeForest Regular & Extended License
+License URI: http://themeforest.net/licenses/regular_extended
+
+[Table of contents]
+1. Typography ---------------- #line 55
+2. Background ---------------- #line 457
+3. Preloader ----------------- #line 609
+4. Countdown Timer ----------- #line 639
+5. Map ----------------------- #line 664
+6. Button -------------------- #line 978
+7. Portfolio ----------------- #line 1200
+8. Icon box ------------------ #line 1224
+9. Progress ------------------ #line 1240
+11. Team --------------------- #line 1264
+12. Alert -------------------- #line 1304
+13. Form --------------------- #line 1310
+14. Contact form ------------- #line 1402
+15. Modal -------------------- #line 1428
+16. Tooltip ------------------ #line 1494
+17. Medhati icon font -------- #line 1514
+*/
+// Import Bootstrap Compass integration
+//@import "bootstrap-compass";
+// Import Bootstrap for Sass
+//@import "bootstrap";
+
+
+// change this for custom
+@import "variables";
+@import "mixin";
+// Import Template SASS
+@import "base";
+@import "typography";
+@import "backgrounds";
+@import "elements";
+@import "medhati-font";
+
