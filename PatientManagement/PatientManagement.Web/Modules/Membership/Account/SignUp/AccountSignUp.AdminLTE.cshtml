@@ -48,8 +48,10 @@
 <script type="text/javascript">
 $(function() {
     new PatientManagement.Membership.SignUpPanel($('#SignUpPanel')).init();
-    $('.field.DisplayName,.field.Email,.field.ConfirmEmail,.field.Password,.field.ConfirmPassword').addClass("has-icon");
+    $('.field.DisplayName,.field.TenantName,.field.Email,.field.ConfirmEmail,.field.Password,.field.ConfirmPassword').addClass("has-icon");
     $('.field.DisplayName input').after("<span class='glyphicon glyphicon-user form-control-feedback'></span>");
+    $('.field.TenantName input').after("<span class='fa fa-h-square form-control-feedback'></span>");
+
     $('.emaildomain').after("<span class='glyphicon glyphicon-envelope form-control-feedback'></span>");
     $('.field.Password input').after("<span class='glyphicon glyphicon-lock form-control-feedback'></span>");
     $('.field.ConfirmPassword input').after("<span class='glyphicon glyphicon-log-in form-control-feedback'></span>");

@@ -11,7 +11,7 @@ namespace PatientManagement.Administration.Entities
     [ReadPermission("Administration:User:Read")]
     [ModifyPermission("Administration:User:Modify")]
     [LookupScript("Administration.User", Permission = "Administration:User:Read")]
-    public sealed class UserRow : LoggingRow, IIdRow, INameRow, IIsActiveRow
+    public sealed class UserRow : LoggingRow, IIdRow, INameRow, IIsActiveDeletedRow
     {
         [DisplayName("User Id"), Identity]
         public Int32? UserId

@@ -2,6 +2,7 @@
 
 using System.Linq;
 using MVC;
+using PatientManagement.Administration.Entities;
 
 namespace PatientManagement.Administration.Repositories
 {
@@ -47,9 +48,17 @@ namespace PatientManagement.Administration.Repositories
             {
                 base.AfterSave();
 
+                var user = (UserDefinition)Authorization.UserDefinition;
+
                 if (Row.IsActive == 1)
                 {
-                    var tmp = Connection.List<MyRow>().Where(p => p.IsActive == 1);
+                    var tenantFld = TenantRow.Fields;
+                    var con = SqlConnections.NewFor<TenantRow>();
+                    var tenant = con.First<TenantRow>(c => c.Where(tenantFld.TenantId == user.TenantId));
+                    tenant.SubscriptionId = Row.SubscriptionId;
+                    con.UpdateById(tenant);
+
+                    var tmp = Connection.List<MyRow>().Where(p => p.IsActive == 1 && p.TenantId == user.TenantId);
 
                     foreach (var subscriptionsRow in tmp)
                     {

@@ -1,4 +1,6 @@
-﻿using PatientManagement.Administration.Entities;
+﻿using System.Linq;
+using PatientManagement.Administration.Entities;
+using PatientManagement.PatientManagement;
 
 namespace PatientManagement.Administration
 {
@@ -19,6 +21,12 @@ namespace PatientManagement.Administration
             if (user == null)
                 return false;
 
+
+            if (!GetTenantPermissions(user.TenantId))
+            {
+
+            }
+
             bool grant;
             if (GetUserPermissions(user.UserId).TryGetValue(permission, out grant))
                 return grant;
@@ -28,6 +36,43 @@ namespace PatientManagement.Administration
                 if (GetRolePermissions(roleId).Contains(permission))
                     return true;
             }
+
+            return false;
+        }
+
+        private bool GetTenantPermissions(int tenantId)
+        {
+            var connection = SqlConnections.NewFor<TenantRow>();
+            //using (var connection = SqlConnections.NewFor<TenantRow>())
+            //{
+            // First we get the current tenant for user 
+            var tenantFld = TenantRow.Fields;
+                var tenant = connection.First<TenantRow>(tenantFld.TenantId == tenantId);
+                if (tenant?.SubscriptionRequired != null && !tenant.SubscriptionRequired.Value)
+                {
+                    return true;
+                }
+
+                // Then we check if the tenant have active subscription
+                var subsFld = SubscriptionsRow.Fields;
+                var subscription = connection.First<SubscriptionsRow>(subsFld.TenantId == tenantId && subsFld.IsActive == (int)SubscriptionState.Active);
+
+            var subsId = (int)subscription.SubscriptionId;
+                var paymentsFld = PaymentsRow.Fields;
+                //var payments = connection.List<PaymentsRow>(c => c.Where(
+                //    paymentsFld.TenantId == tenantId 
+                //    && paymentsFld.SubscriptionId == subsId
+                //    ));
+
+                //if (!payments.Any())
+                //{
+                    
+                //}
+                //else
+                //{
+                    
+                //}
+           // }
 
             return false;
         }

@@ -7,13 +7,18 @@ namespace PatientManagement.PatientManagement {
             super(container, null);
 
             $.get("/api/offers/bgn", data => {
-                console.log(data);
-              //  var offers = $.parseJSON(data);
-              
+
+            for (var offer in data) {
+
+                var off =data[offer];
+                console.log(off);
+
+                this.addOption(off.OfferId, off.OfferName);
+
+            }
             });
 
             
-            this.addOption("key2", "Text 2");
         }
     }
 }

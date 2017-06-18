@@ -36,8 +36,10 @@
                     url: Q.resolveUrl('~/Account/SignUp'),
                     request: {
                         DisplayName: this.form.DisplayName.value,
+                        TenantName: this.form.TenantName.value,
                         Email: this.form.Email.value,
-                        Password: this.form.Password.value
+                        Password: this.form.Password.value,
+                        OfferId: this.form.OfferId.value
                     },
                     onSuccess: response => {
                         Q.information(Q.text('Forms.Membership.SignUp.Success'), () => {

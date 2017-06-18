@@ -16,7 +16,7 @@ namespace PatientManagement.Administration.Entities
     [ModifyPermission("AdministrationTenants:Subscriptions:Modify")]
     [LookupScript("Administration.Subscriptions",
         LookupType = typeof(MultiTenantRowLookupScript<>))]
-    public sealed class SubscriptionsRow : Row, IIdRow, ILoggingRow, INameRow,  IMultiTenantRow, IIsActiveRow
+    public sealed class SubscriptionsRow : Row, IIdRow, ILoggingRow, INameRow,  IMultiTenantRow, IIsActiveDeletedRow
     {
         [DisplayName("Subscription Id"), Identity]
         public Int64? SubscriptionId
@@ -40,8 +40,19 @@ namespace PatientManagement.Administration.Entities
             set { Fields.SubscriptionEndDate[this] = value; }
         }
 
+        [DisplayName("Activated On"), NotNull]
+        public DateTime? ActivatedOn
+        {
+            get { return Fields.ActivatedOn[this]; }
+            set { Fields.ActivatedOn[this] = value; }
+        }
 
-
+        [DisplayName("Deactivated On"), NotNull]
+        public DateTime? DeactivatedOn
+        {
+            get { return Fields.DeactivatedOn[this]; }
+            set { Fields.DeactivatedOn[this] = value; }
+        }
         [DisplayName("Subscription Name"), NotNull]
         public String Name
         {
@@ -196,6 +207,8 @@ namespace PatientManagement.Administration.Entities
             public Int32Field TenantId;
             public DateTimeField SubscriptionEndDate;
             public Int16Field IsActive;
+            public DateTimeField DeactivatedOn;
+            public DateTimeField ActivatedOn;
 
             public Int32Field InsertUserId;
             public DateTimeField InsertDate;

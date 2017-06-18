@@ -10,6 +10,8 @@ namespace PatientManagement.Membership
         public String Email { get; set; }
         public String Password { get; set; }
 
-        public string ClinicName { get; set; }
+        public string TenantName { get; set; }
+
+        public Int32 OfferId { get; set; }
     }
 }

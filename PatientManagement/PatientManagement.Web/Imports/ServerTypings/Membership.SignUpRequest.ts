@@ -3,6 +3,7 @@
         DisplayName?: string;
         Email?: string;
         Password?: string;
-        ClinicName?: string;
+        TenantName?: string;
+        OfferId?: number;
     }
 }

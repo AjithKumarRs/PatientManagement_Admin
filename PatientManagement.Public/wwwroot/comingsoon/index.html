@@ -1,0 +1,471 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+    <head>
+		<title>CLARIO</title>
+		<meta name="description" content="Софтуер за менажиране на клиники и пациенти">
+		<meta name="keywords" content="CLARIO, клиники, пациенти, онлайн график, онлайн календар">
+		<meta name="author" content="Петя Петкова">
+        
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+		
+		<!-- Apple Icon -->
+        <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+
+		<!-- Plugins CSS -->
+        <link rel="stylesheet" href="assets/css/bootstrap.css">
+        <link rel="stylesheet" href="assets/css/scroll.css">
+        <link rel="stylesheet" href="assets/css/animate.css">
+        <link rel="stylesheet" href="assets/css/lightbox/lightbox.css">
+        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="assets/css/skin.css">
+		
+		<!-- Fonts CSS -->
+		<link rel="stylesheet" href="assets/css/fa.css">
+		<link rel="stylesheet" href="assets/css/ti.css">
+		
+		
+		<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+    </head>
+
+    <body class="dark" id="lime">
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+		
+		<!-- PRELOADER -->
+		<div class="preloader">
+			<div class="loader">
+				<svg width="200" height="200" viewBox="0 0 40 60"><polygon class="triangle" fill="none" stroke="#fff" stroke-width="1" points="16,1 32,32 1,32"/></svg>
+			</div>
+		</div>
+		<!-- /END PRELOADER -->
+		
+		<!-- BACKGROUND -->
+		<aside>
+			<div id="background" class="background">
+				<div class="image layer" data-depth="0.10"></div>
+			</div>
+		</aside>
+		<!-- /END BACKGROUND -->
+		
+		<main>
+			<div class="header-wrap" data-m3d-perspective="300" data-m3d-speed="400" data-m3d-max="10" data-m3d>
+				<!-- HOME PAGE -->
+				<header>
+					<div class="container">
+						<div class="row">
+							<div class="text-wrap col-md-12">
+								<div class="content-wrap">
+									<div class="content">
+										<!-- HOME PAGE CONTENT -->
+										<div class="row parallax">
+											<div class="col-md-12 layer" data-depth="0.20">
+												<!-- LOGO -->
+												<img src="assets/img/clario-logo-medium-white.png" width="250" alt="logo CLARIO" class="mb-20 an-start" data-an="fadeInUp" data-an-delay="0.7s" data-an-duration="1s">
+												<!-- /END LOGO -->
+												
+												<!-- TITLE -->
+												<h1 class="an-start" data-an="fadeInUp" data-an-delay="1s" data-an-duration="1s">Революция в менажирането<br/>на клиники</h1>
+												<!-- /END TITLE -->
+												
+												<!-- COUNTDOWN -->
+												<div class="countdown mb-20 an-start" data-an="fadeInUp" data-an-delay="1.3s" data-an-duration="1s">
+													<span class="digits days"></span> :
+													<span class="digits hours"></span> :
+													<span class="digits minutes"></span> :
+													<span class="digits seconds"></span>
+												</div>
+												<!-- /END COUNTDOWN -->
+												
+												<!-- CONTENT -->
+												<p class="an-start" data-an="fadeInUp" data-an-delay="1.6s" data-an-duration="1s">Да, искам да бъда част от революцията<br/>CLARIO!</p>
+												<!-- /END CONTENT -->
+												
+												<!-- BUTTONS -->
+												<a href="#" data-toggle="modal" data-target=".newsletter" class="btn btn-white btn-border btn-icon an-start" data-an="fadeInUp" data-an-delay="1.9s" data-an-duration="1s"><span>Абонирай се</span><i class="ti-bell"></i></a>
+												<a href="#" class="btn btn-primary an-start readmore" data-an="fadeInUp" data-an-delay="2.2s" data-an-duration="1s"><span>Научи повече</span></a>
+												<!-- /END BUTTONS -->
+											</div>
+										</div>
+										<!-- /HOME PAGE CONTENT -->
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</header>
+				<!-- /END HOME PAGE -->
+			</div>
+			
+			<!-- HOME PAGE SOCIAL ICON -->
+			<footer class="socials">
+				<a href="http://facebook.com/clariomanagement" target="_blank" class="an-start" data-an="fadeInUp" data-an-delay="2s" data-an-duration=".7s"><i class="ti-facebook"></i></a>
+				<a href="https://plus.google.com/b/100918329169099980657/100918329169099980657" target="_blank" class="an-start" data-an="fadeInUp" data-an-delay="2.6s" data-an-duration=".7s"><i class="ti-google"></i></a>
+				<a href="https://twitter.com/MyClario" target="_blank" class="an-start" data-an="fadeInUp" data-an-delay="2.9s" data-an-duration=".7s"><i class="ti-twitter-alt"></i></a>
+			</footer>
+			<!-- /END HOME PAGE SOCIAL ICON -->
+			
+			<!-- SIDE SECTIONS -->
+			<div class="body-wrap">
+			
+				<!-- ABOUT SECTION -->
+				<section id="about">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12">
+								<!-- CONTENT -->
+								<h2 class="text-center display-5">За CLARIO</h2>
+								<p class="lead mb-50 text-center">Най-доброто решение за клиники, медицински и стоматологични кабинети.</p>
+								<p class="mb-50">CLARIO е софтуерен продукт, предназначен за дигитализиране на досиета на пациенти и съпътстващите ги визити. Благодарение на модерният и освободен от излишни детайли дизайн, CLARIO е изключително лесен за употреба софтуер и обучението за работа с него е минимално.<br/>
+								Стани част от революцията, управлявай времето и ресурсите си по нов и незаменим начин! </p>
+								<!-- /END CONTENT -->
+							</div>
+						</div>
+
+
+<!--progress bar
+
+						<div class="row">
+							<div class="col-md-6">
+								
+								<div class="progress">
+									<span class="title">JAVASCRIPT</span>
+									<div class="bar"><div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;"></div></div>
+								</div>
+								<div class="progress">
+									<span class="title">HTML5</span>
+									<div class="bar"><div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%;"></div></div>
+								</div>
+								<div class="progress">
+									<span class="title">CSS3</span>
+									<div class="bar"><div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;"></div></div>
+								</div>
+								
+							</div>
+							<div class="col-md-6">
+								
+								<div class="progress">
+									<span class="title">BOOTSTRAP</span>
+									<div class="bar"><div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%;"></div></div>
+								</div>
+								<div class="progress">
+									<span class="title">PHP</span>
+									<div class="bar"><div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;"></div></div>
+								</div>
+								<div class="progress">
+									<span class="title">WORDPRESS</span>
+									<div class="bar"><div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div></div>
+								</div>
+								
+							</div>
+						</div>
+
+						-->
+					</div>
+				</section>
+				<!-- /END ABOUT SECTION -->
+				
+				
+				
+				<!-- FEATURE SECTION -->
+				<section id="feature">
+					<div class="container">
+						<div class="row">
+							<!-- ICON BOX -->
+							<div class="icon-box col-md-6">
+								<i class="me-calendar"></i>
+								<h4>Избор на свободни часове</h4>
+								<p>Лесен достъп до всички свободни часове за предварително зададен период.</p>
+							</div>
+							<!-- /END ICON BOX -->
+							
+							<!-- ICON BOX -->
+							<div class="icon-box col-md-6">
+								<i class="me-people"></i>
+								<h4>Подробно досие на пациента</h4>
+								<p>Всички данни за пациента на едно място. Добавяне на файлове към индивидуално досие.</p>
+							</div>
+							<!-- /END ICON BOX -->
+							
+							<!-- ICON BOX -->
+							<div class="icon-box col-md-6">
+								<i class="me-mail"></i>
+								<h4>Автоматичен имейл </h4>
+								<p>Веднага след запазване на час съответният пациент получава email известие.</p>
+							</div>
+							<!-- /END ICON BOX -->
+							
+							<!-- ICON BOX -->
+							<div class="icon-box col-md-6">
+								<i class="me-users"></i>
+								<h4>Работна група</h4>
+								<p>Всеки от членовете на екипа има собствен профил с индивидуални логин данни.</p>
+							</div>
+							<!-- /END ICON BOX -->
+						</div>
+					</div>
+				</section>
+				<!-- /END FEATURE SECTION -->
+				
+				<!-- PORTFOLIO SECTION -->
+				<section id="portfolio" class="pb-60">
+					<div class="container-fluid">
+						<div class="row">
+							<!-- PORTFOLIO -->
+							<a class="card col-md-6" data-lightbox-gallery="gallery1" href="assets/img/work1.jpg"><!-- portfolio image light box -->
+								<div class="box-front" data-image-src="assets/img/work1.jpg"><!-- portfolio image -->
+									<div class="inner">
+										<i class="ti-mobile"></i><!-- portfolio icon -->
+										<h3>Адаптивен<br><!-- portfolio title -->
+										<small>на всяко устройство</small></h3><!-- portfolio small title -->
+									</div>
+								</div>
+								<div class="box-back">
+									<div class="inner">
+										С напълно адаптивният си дизайн, CLARIO е достъпен от настолен компютър, лаптоп, таблет или мобилно устройство. Всички твои клиенти и всички записани часове на едно място, достъпни от всякъде.<!-- portfolio description -->
+									</div>
+								</div>
+							</a>
+							<!-- /END PORTFOLIO -->
+							
+							<!-- PORTFOLIO -->
+							<a class="card col-md-6" data-lightbox-gallery="gallery1" href="assets/img/work2.jpg"><!-- portfolio image light box -->
+								<div class="box-front" data-image-src="assets/img/work2.jpg"><!-- portfolio image -->
+									<div class="inner">
+										<i class="ti-comments"></i><!-- portfolio icon -->
+										<h3>Известия<br><!-- portfolio title -->
+										<small>в работната група</small></h3><!-- portfolio small title -->
+									</div>
+								</div>
+								<div class="box-back">
+									<div class="inner">
+										При добавяне на нов пациент или визита, както и при тяхното редактиране, всеки един от членовете на екипа получават известие.<!-- portfolio description -->
+									</div>
+								</div>
+							</a>
+							<!-- /END PORTFOLIO -->
+							
+							<!-- PORTFOLIO -->
+							<a class="card col-md-6" data-lightbox-gallery="gallery1" href="assets/img/work3.jpg"><!-- portfolio image light box -->
+								<div class="box-front" data-image-src="assets/img/work3.jpg"><!-- portfolio image -->
+									<div class="inner">
+										<i class="ti-calendar"></i><!-- portfolio icon -->
+										<h3>Нова визита<br><!-- portfolio title -->
+										<small>само с един клик</small></h3><!-- portfolio small title -->
+									</div>
+								</div>
+								<div class="box-back">
+									<div class="inner">
+										Добавяш нова визита с един клик върху избраното от теб свободно място на календара.<!-- portfolio description -->
+									</div>
+								</div>
+							</a>
+							<!-- /END PORTFOLIO -->
+							
+							<!-- PORTFOLIO -->
+							<a class="card col-md-6" data-lightbox-gallery="gallery1" href="assets/img/work4.jpg"><!-- portfolio image light box -->
+								<div class="box-front" data-image-src="assets/img/work4.jpg"><!-- portfolio image -->
+									<div class="inner">
+										<i class="ti-time"></i><!-- portfolio icon -->
+										<h3>Промени<br><!-- portfolio title -->
+										<small>в реално време</small></h3><!-- portfolio small title -->
+									</div>
+								</div>
+								<div class="box-back">
+									<div class="inner">
+										В случай, че повече от един човек работи в системата, то вторият (или всички от екипа, които междувременно я ползват) виждат промените, нанесени от останалите - автоматично.<!-- portfolio description -->
+									</div>
+								</div>
+							</a>
+							<!-- /END PORTFOLIO -->
+						</div>
+					</div>
+				</section>
+				<!-- /END PORTFOLIO SECTION -->
+				
+				<!-- CONTACT SECTION -->
+				<section id="contact" class="contact">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12">
+								<!-- CONTENT -->
+								<h2 class="text-center display-5">Свържи се с нас</h2>
+								<p class="lead mb-50 text-center">Имаш въпроси? Не се колебай да ги зададеш тук!</p>
+								<!-- /END CONTENT -->
+							</div>
+						</div>
+						<div class="row">
+							<!-- ICON BOX -->
+							<div class="icon-box col-md-4 text-center">
+								<i class="me-journalist"></i><!-- icon box -->
+								<p>
+									<a href="tel:012345678991"> 0884 418 443</a><!-- phone number -->
+									<br>
+									<a href="tel:012345678991"> 0888 017 004</a><!-- phone number -->
+								</p>
+							</div>
+							<!-- /END ICON BOX -->
+							
+							<!-- ICON BOX -->
+							<div class="icon-box col-md-4 text-center">
+								<i class="me-placeholder"></i><!-- icon box -->
+								<p>
+									<abbr title="виж на картата" data-toggle="tooltip" data-placement="bottom" data-map="collapse">ул. Осъм 12, Пловдив</abbr><!-- postal address // you can change map address from js/lib/map.js and you can config from document file-->
+								</p>
+							</div>
+							<!-- /END ICON BOX -->
+							
+							<!-- ICON BOX -->
+							<div class="icon-box col-md-4 text-center">
+								<i class="me-24-hours-1"></i><!-- icon box -->
+								<p>
+									<a href="mailto:sales@domain.com">support@myclario.com</a><!-- email address -->
+									<br>
+									<a href="mailto:hello@domain.com">sales@myclario.com</a><!-- email address -->
+								</p>
+							</div>
+							<!-- /END ICON BOX -->
+						</div>
+						<div class="row">
+							<div class="col-sm-12">
+								<!-- CONTACT FORM -->
+								<form id="contactform" method="post" autocomplete="off" novalidate="novalidate">
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="input-icon">
+												<input type="text" name="name" placeholder="име и фамилия">
+												<i class="icon me-people"></i>
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="input-icon">
+												<input type="email" name="email" placeholder="you@yourwebsite.com">
+												<i class="icon me-mail"></i>
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="input-icon">
+												<input type="tel" name="phone" placeholder="0888 888 888">
+												<i class="icon me-technology-3"></i>
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="input-icon">
+												<input type="text" id="captcha" name="answer" placeholder="7 + 3 = ?">
+												<i class="icon me-security-2"></i>
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="input-icon">
+												<textarea rows="3" name="message" placeholder="твоето съобщение тук"></textarea>
+												<i class="icon me-technology-4"></i>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-4 col-md-offset-4">
+											<button class="btn btn-white btn-block btn-icon" type="submit"><span>Изпрати запитване</span><i class="ti-arrow-right"></i></button>
+										</div>
+									</div>
+									<div class="message-contact"></div>
+								</form>
+								<!-- /END CONTACT FORM -->
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 socials">
+								<!-- SOCIAL ICONS -->
+								<a href="http://facebook.com/clariomanagement" target="_blank"><i class="ti-facebook"></i></a>
+								<a href="https://plus.google.com/b/100918329169099980657/100918329169099980657" target="_blank"><i class="ti-google"></i></a>
+                                <a href="https://twitter.com/MyClario" target="_blank"><i class="ti-twitter-alt"></i></a>
+								<!-- /END SOCIAL ICONS -->
+							</div>
+						</div>
+					</div>
+				</section>
+				<!-- /END CONTACT SECTION -->
+				
+				<div class="section-close"></div>
+			</div>
+			<!-- /END SIDE SECTIONS -->
+			
+			<!-- WARNING ELEMENTS!! PLEASE DON'T REMOVE THIS LINES, IF YOU REMOVE OR CHANGE THIS LINES, WILL BE BREAK TEMPLATE -->
+			<div class="overlay"></div>
+			<div id="map"></div>
+			<div class="btn-map-close"><span></span></div>
+			<div class="loading">
+				<div class="reveal-1"></div>
+				<div class="reveal-2"></div>
+			</div>
+			<!-- // END WARNING ELEMENTS -->
+		</main>
+
+		<!-- NEWSLETTER -->
+		<div class="modal fade MEDscale newsletter" tabindex="-1" role="dialog">
+			<div class="modal-dialog modal-md" role="document">
+				<div class="modal-content text-white text-center" data-image-src="assets/img/notify.jpg"><!-- newsletter background -->
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- CONTENT -->
+								<h1>Получи известие!</h1>
+								<p>Въведи своят имейл, за да те уведомим, когато CLARIO е готов!</p>
+								
+								<!-- newsletter form config -->
+								<form action="http://pooyaa.us6.list-manage.com/subscribe/post-json?u=133664e969&id=42bb716bf8&c=?" method="post" id="newsletter" autocomplete="off">
+								<!-- /newsletter form config / PLEASE CONFIG YOUR MAILCHIMP FORM OF DOCUMENT FILE-->
+								
+									<!-- if your mailchimp form have 2 fields(email and name field), remove this line 
+									<div class="col-xs-12">
+										<input type="text" name="NAME" placeholder="Your Name">
+									</div>
+									if your mailchimp form have 2 fields(email and name field), remove this line //-->
+									<div class="col-xs-12">
+										<input type="email" name="EMAIL" placeholder="you@yourwebsite.com">
+									</div>
+									<div class="col-xs-12">
+										<button class="btn btn-gradient btn-border btn-block btn-icon submit" type="submit" name="subscribe"><span>Изпрати</span><i class="ti-angle-right"></i></button>
+									</div>
+								</form>
+								<!-- /END CONTENT -->
+							</div>
+						</div>
+					</div>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="ti-close"></i></button>
+				</div>
+			</div>
+		</div>
+		<!-- /END NEWSLETTER -->
+		
+		<!--  Javascript Plugins -->
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+		<script type="text/javascript" src="assets/js/lib/jquery.js"></script>
+		<script type="text/javascript" src="assets/js/lib/bootstrap.js"></script>
+		<script type="text/javascript" src="assets/js/lib/plugin.js"></script>
+		<script type="text/javascript" src="assets/js/lib/map.js"></script>
+		<script type="text/javascript" src="assets/js/main.js"></script>
+		
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+		<!-- NOTE: this feature disabled. for enable, remove this line and line bottom of </script>
+        <script>
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='//www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-XXXXX-X','auto');ga('send','pageview');
+        </script>
+		//-->
+    </body>
+</html>

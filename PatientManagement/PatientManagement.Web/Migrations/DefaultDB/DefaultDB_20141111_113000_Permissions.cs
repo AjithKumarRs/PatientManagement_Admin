@@ -30,6 +30,11 @@ namespace PatientManagement.Migrations.DefaultDB
             {
                 RoleName = "Demo",
             });
+
+            Insert.IntoTable("Roles").Row(new
+            {
+                RoleName = "Expired",
+            });
             this.CreateTableWithId64("RolePermissions", "RolePermissionId", s => s
                 .WithColumn("RoleId").AsInt32().NotNullable()
                     .ForeignKey("FK_RolePermissions_RoleId", "Roles", "RoleId")

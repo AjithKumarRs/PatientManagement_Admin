@@ -85,6 +85,8 @@ namespace PatientManagement
 
                     public static LocalText AcceptTerms = "I agree to the terms";
                     public static LocalText BackToLogin = "I already have a membership";
+
+                    public static LocalText FormatSubscriptionName = "{0} - First registration";
                 }
             }
         }

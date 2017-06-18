@@ -49,7 +49,7 @@ namespace PatientManagement.Membership.Pages
                         UserRow.Fields.Username == request.Email |
                         UserRow.Fields.Email == request.Email))
                 {
-                    throw new ValidationError("EmailInUse", Texts.Validation.CantFindUserWithEmail);
+                    throw new ValidationError("EmailInUse", Texts.Validation.EmailInUse);
                 }
 
 
@@ -61,11 +61,8 @@ namespace PatientManagement.Membership.Pages
                     var email = request.Email;
                     var username = request.Email;
 
-                    // TODO insert and get tenant 
-                    // TODO insert and get subscription
-
                     var fld = UserRow.Fields;
-                    var userId = (int)connection.InsertAndGetID(new UserRow
+                    var userModel = new UserRow
                     {
                         Username = username,
                         Source = "sign",
@@ -77,7 +74,46 @@ namespace PatientManagement.Membership.Pages
                         InsertDate = DateTime.Now,
                         InsertUserId = 1,
                         LastDirectoryUpdate = DateTime.Now
+                    };
+                    var userId = (int)connection.InsertAndGetID(userModel);
+                    userModel.UserId = userId;
+
+                    var tenant = new TenantRow
+                    {
+                        TenantName = request.TenantName,
+                        CurrencyId = 1,
+                        SubscriptionRequired = true
+                    };
+                    tenant.TenantId = Int32.Parse(connection.InsertAndGetID(tenant).ToString());
+
+                    var offer = connection.ById<OffersRow>(request.OfferId);
+
+                    var subscriptionId = (int)connection.InsertAndGetID(new SubscriptionsRow
+                    {
+                        // TODO Get local string 
+                        Name = string.Format(Texts.Forms.Membership.SignUp.FormatSubscriptionName, offer.Name),
+                        OfferId = offer.OfferId,
+                        TenantId = Int32.Parse(tenant.TenantId.ToString()),
+                        SubscriptionEndDate = DateTime.Now.AddMonths(1),
+                        IsActive = 1,
+                        InsertUserId =  userId,
+                        InsertDate = DateTime.Now,
+                        ActivatedOn = DateTime.Now
                     });
+
+                    tenant.SubscriptionId = subscriptionId;
+
+                    connection.UpdateById(tenant, ExpectedRows.One);
+
+                    var userRoleId = (int)connection.InsertAndGetID(new UserRoleRow
+                    {
+                        UserId = userId,
+                        RoleId = offer.RoleId
+                    });
+
+                    userModel.TenantId = tenant.TenantId??2;
+                    
+                    connection.UpdateById(userModel, ExpectedRows.One);
 
                     byte[] bytes;
                     using (var ms = new MemoryStream())

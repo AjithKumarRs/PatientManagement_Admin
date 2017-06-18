@@ -1,0 +1,43 @@
+/*
+Theme Name: Trendy Skin
+Theme URI: http://themeforest.net/user/Medhati/portfolio
+Author: Medhati
+Author URI: http://medhati.com
+Description: Trendy Multipurpose Coming Soon template
+License: ThemeForest Regular & Extended License
+License URI: http://themeforest.net/licenses/regular_extended
+*/
+
+/* Variables
+---------------------------------------- */
+$white:#ffffff;
+$black:#16181E;
+@import "skins";
+
+/* Colour
+---------------------------------------- */
+@include skins(#red,#E60000);
+@include skins(#light-red,#FF1000);
+@include skins(#orange,#FF411A);
+@include skins(#amber,#FF9800);
+@include skins(#yellow,#FFC600);
+@include skins(#maroon,#830300);
+@include skins(#brown,#795548);
+@include skins(#lemon,#FFDD8E);
+@include skins(#purple,#6D00E6);
+@include skins(#violet,#9F62FE);
+@include skins(#pink,#FF3850);
+@include skins(#light-pink,#FF4081);
+@include skins(#navy,#05386B);
+@include skins(#moody,#163346);
+@include skins(#ocean,#252AFF);
+@include skins(#teal,#25FFED);
+@include skins(#blue,#0080FF);
+@include skins(#light-blue,#00D2E6);
+@include skins(#torquoise,#00DD61);
+@include skins(#green,#7ED321);
+@include skins(#spring,#00FF7F);
+@include skins(#lime,#00E63B);
+@include skins(#bronze,#BF7869);
+@include skins(#silver,#CCCCCC);
+@include skins(#gold,#E5CB61);
