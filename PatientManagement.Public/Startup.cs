@@ -44,7 +44,7 @@ namespace PatientManagement.Public
                     RequestPath = new PathString(rootDirectory),
                     OnPrepareResponse = ctx =>
                     {
-                        ctx.Context.Response.Headers.Append("Cache-Control", "public,max-age=60000");
+                        ctx.Context.Response.Headers.Append("Cache-Control", "public,max-age=115690161600");
                     }
                 });
             }
