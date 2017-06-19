@@ -1,0 +1,552 @@
+/*
+Medhati icon font	
+Author: Medhati
+Author URI: http://medhati.com
+License: ThemeForest Regular & Extended License
+License URI: http://themeforest.net/licenses/regular_extended
+*/
+
+@font-face {
+	font-family: "medhati";
+	src: url("../fonts/medhati.eot");
+	src: url("../fonts/medhati.eot?#iefix") format("embedded-opentype"),
+	url("../fonts/medhati.woff") format("woff"),
+	url("../fonts/medhati.ttf") format("truetype"),
+	url("../fonts/medhati.svg#medhati") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+	@font-face {
+		font-family: "medhati";
+		src: url("../fonts/medhati.svg#medhati") format("svg");
+	}
+}
+
+*[class*='me-']:before{
+	display: inline-block;
+	font-family: "medhati";
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	line-height: 1;
+	text-decoration: inherit;
+	text-rendering: optimizeLegibility;
+	text-transform: none;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	font-smoothing: antialiased;
+}
+
+.me-cyclist:before { content: "\f100"; }
+.me-medal-2:before { content: "\f101"; }
+.me-paint-roller:before { content: "\f102"; }
+.me-goal:before { content: "\f103"; }
+.me-compass-1:before { content: "\f104"; }
+.me-chess-1:before { content: "\f105"; }
+.me-helmet:before { content: "\f106"; }
+.me-call-center:before { content: "\f107"; }
+.me-crown-1:before { content: "\f108"; }
+.me-shopping-cart:before { content: "\f109"; }
+.me-shopping-bag-1:before { content: "\f10a"; }
+.me-cocktail:before { content: "\f10b"; }
+.me-american-football-cup:before { content: "\f10c"; }
+.me-gaming:before { content: "\f10d"; }
+.me-cup-1:before { content: "\f10e"; }
+.me-sailor:before { content: "\f10f"; }
+.me-barber:before { content: "\f110"; }
+.me-knitting:before { content: "\f111"; }
+.me-painter:before { content: "\f112"; }
+.me-chessplayer:before { content: "\f113"; }
+.me-body-building:before { content: "\f114"; }
+.me-knight:before { content: "\f115"; }
+.me-football:before { content: "\f116"; }
+.me-archery:before { content: "\f117"; }
+.me-trophy:before { content: "\f118"; }
+.me-drink:before { content: "\f119"; }
+.me-cards-1:before { content: "\f11a"; }
+.me-game-1:before { content: "\f11b"; }
+.me-satellite-tv:before { content: "\f11c"; }
+.me-microphone:before { content: "\f11d"; }
+.me-microscope:before { content: "\f11e"; }
+.me-cruise:before { content: "\f11f"; }
+.me-radio:before { content: "\f120"; }
+.me-luggage:before { content: "\f121"; }
+.me-position:before { content: "\f122"; }
+.me-network:before { content: "\f123"; }
+.me-journalist:before { content: "\f124"; }
+.me-share-1:before { content: "\f125"; }
+.me-share:before { content: "\f126"; }
+.me-technology-12:before { content: "\f127"; }
+.me-witch:before { content: "\f128"; }
+.me-signs-4:before { content: "\f129"; }
+.me-arrows-3:before { content: "\f12a"; }
+.me-arrows-2:before { content: "\f12b"; }
+.me-music-5:before { content: "\f12c"; }
+.me-music-4:before { content: "\f12d"; }
+.me-music-3:before { content: "\f12e"; }
+.me-technology-11:before { content: "\f12f"; }
+.me-music-player:before { content: "\f130"; }
+.me-technology-10:before { content: "\f131"; }
+.me-technology-9:before { content: "\f132"; }
+.me-photo-camera:before { content: "\f133"; }
+.me-technology-8:before { content: "\f134"; }
+.me-photo-1:before { content: "\f135"; }
+.me-photo:before { content: "\f136"; }
+.me-multimedia-2:before { content: "\f137"; }
+.me-video-player:before { content: "\f138"; }
+.me-technology-7:before { content: "\f139"; }
+.me-headphones-1:before { content: "\f13a"; }
+.me-business-1:before { content: "\f13b"; }
+.me-feather-pen:before { content: "\f13c"; }
+.me-technology-6:before { content: "\f13d"; }
+.me-settings-1:before { content: "\f13e"; }
+.me-writing-tool:before { content: "\f13f"; }
+.me-pen:before { content: "\f140"; }
+.me-security-2:before { content: "\f141"; }
+.me-security-1:before { content: "\f142"; }
+.me-light-bulb-2:before { content: "\f143"; }
+.me-technology-5:before { content: "\f144"; }
+.me-headset-1:before { content: "\f145"; }
+.me-construction:before { content: "\f146"; }
+.me-placeholder-3:before { content: "\f147"; }
+.me-cup:before { content: "\f148"; }
+.me-compass:before { content: "\f149"; }
+.me-clover:before { content: "\f14a"; }
+.me-cards:before { content: "\f14b"; }
+.me-anchor:before { content: "\f14c"; }
+.me-writing-1:before { content: "\f14d"; }
+.me-wifi:before { content: "\f14e"; }
+.me-writing:before { content: "\f14f"; }
+.me-customer-service:before { content: "\f150"; }
+.me-monitor:before { content: "\f151"; }
+.me-science:before { content: "\f152"; }
+.me-transport-1:before { content: "\f153"; }
+.me-signs-3:before { content: "\f154"; }
+.me-baby:before { content: "\f155"; }
+.me-people-1:before { content: "\f156"; }
+.me-light-bulb-1:before { content: "\f157"; }
+.me-plug:before { content: "\f158"; }
+.me-flash:before { content: "\f159"; }
+.me-business:before { content: "\f15a"; }
+.me-balance:before { content: "\f15b"; }
+.me-shop:before { content: "\f15c"; }
+.me-money:before { content: "\f15d"; }
+.me-shopping-bag:before { content: "\f15e"; }
+.me-sport:before { content: "\f15f"; }
+.me-sun:before { content: "\f160"; }
+.me-rain:before { content: "\f161"; }
+.me-woman:before { content: "\f162"; }
+.me-medical:before { content: "\f163"; }
+.me-eye-1:before { content: "\f164"; }
+.me-music-2:before { content: "\f165"; }
+.me-armchair:before { content: "\f166"; }
+.me-cutlery:before { content: "\f167"; }
+.me-lemonade:before { content: "\f168"; }
+.me-fruit-1:before { content: "\f169"; }
+.me-fruit:before { content: "\f16a"; }
+.me-fingerprint:before { content: "\f16b"; }
+.me-24-hours-1:before { content: "\f16c"; }
+.me-delivery-truck:before { content: "\f16d"; }
+.me-paint-palette-1:before { content: "\f16e"; }
+.me-star-1:before { content: "\f16f"; }
+.me-like-1:before { content: "\f170"; }
+.me-clock-4:before { content: "\f171"; }
+.me-piggy-bank:before { content: "\f172"; }
+.me-stats:before { content: "\f173"; }
+.me-handshake:before { content: "\f174"; }
+.me-target-2:before { content: "\f175"; }
+.me-target-1:before { content: "\f176"; }
+.me-chess:before { content: "\f177"; }
+.me-puzzle-1:before { content: "\f178"; }
+.me-startup-1:before { content: "\f179"; }
+.me-queen:before { content: "\f17a"; }
+.me-axe:before { content: "\f17b"; }
+.me-vision:before { content: "\f17c"; }
+.me-profile:before { content: "\f17d"; }
+.me-users-1:before { content: "\f17e"; }
+.me-users:before { content: "\f17f"; }
+.me-message-1:before { content: "\f180"; }
+.me-house:before { content: "\f181"; }
+.me-message:before { content: "\f182"; }
+.me-signs-2:before { content: "\f183"; }
+.me-placeholder-2:before { content: "\f184"; }
+.me-location-2:before { content: "\f185"; }
+.me-direction:before { content: "\f186"; }
+.me-location-1:before { content: "\f187"; }
+.me-technology-4:before { content: "\f188"; }
+.me-bluetooth:before { content: "\f189"; }
+.me-suitcase:before { content: "\f18a"; }
+.me-interface-3:before { content: "\f18b"; }
+.me-technology-3:before { content: "\f18c"; }
+.me-smartphone:before { content: "\f18d"; }
+.me-technology-2:before { content: "\f18e"; }
+.me-calendar:before { content: "\f18f"; }
+.me-interface-2:before { content: "\f190"; }
+.me-interface-1:before { content: "\f191"; }
+.me-stopwatch-1:before { content: "\f192"; }
+.me-time:before { content: "\f193"; }
+.me-clock-3:before { content: "\f194"; }
+.me-search:before { content: "\f195"; }
+.me-edit:before { content: "\f196"; }
+.me-global-1:before { content: "\f197"; }
+.me-key:before { content: "\f198"; }
+.me-global:before { content: "\f199"; }
+.me-music-1:before { content: "\f19a"; }
+.me-present:before { content: "\f19b"; }
+.me-layers-1:before { content: "\f19c"; }
+.me-settings:before { content: "\f19d"; }
+.me-attachment:before { content: "\f19e"; }
+.me-luxury:before { content: "\f19f"; }
+.me-interface:before { content: "\f1a0"; }
+.me-magnet:before { content: "\f1a1"; }
+.me-security:before { content: "\f1a2"; }
+.me-weather:before { content: "\f1a3"; }
+.me-symbol-1:before { content: "\f1a4"; }
+.me-symbol:before { content: "\f1a5"; }
+.me-technology-1:before { content: "\f1a6"; }
+.me-layers:before { content: "\f1a7"; }
+.me-clock-2:before { content: "\f1a8"; }
+.me-clock-1:before { content: "\f1a9"; }
+.me-target:before { content: "\f1aa"; }
+.me-placeholder-1:before { content: "\f1ab"; }
+.me-signs-1:before { content: "\f1ac"; }
+.me-placeholder:before { content: "\f1ad"; }
+.me-location:before { content: "\f1ae"; }
+.me-star:before { content: "\f1af"; }
+.me-like:before { content: "\f1b0"; }
+.me-shapes-1:before { content: "\f1b1"; }
+.me-idea:before { content: "\f1b2"; }
+.me-computer-1:before { content: "\f1b3"; }
+.me-connection:before { content: "\f1b4"; }
+.me-signs:before { content: "\f1b5"; }
+.me-eye:before { content: "\f1b6"; }
+.me-power:before { content: "\f1b7"; }
+.me-multimedia-1:before { content: "\f1b8"; }
+.me-multimedia:before { content: "\f1b9"; }
+.me-arrows-1:before { content: "\f1ba"; }
+.me-play:before { content: "\f1bb"; }
+.me-play-button:before { content: "\f1bc"; }
+.me-arrows:before { content: "\f1bd"; }
+.me-web:before { content: "\f1be"; }
+.me-telephone-1:before { content: "\f1bf"; }
+.me-people:before { content: "\f1c0"; }
+.me-paint-palette-and-brush:before { content: "\f1c1"; }
+.me-transport:before { content: "\f1c2"; }
+.me-stopwatch:before { content: "\f1c3"; }
+.me-graph:before { content: "\f1c4"; }
+.me-bullseye:before { content: "\f1c5"; }
+.me-scale:before { content: "\f1c6"; }
+.me-technology:before { content: "\f1c7"; }
+.me-shiny-diamond:before { content: "\f1c8"; }
+.me-social-media:before { content: "\f1c9"; }
+.me-telemarketer:before { content: "\f1ca"; }
+.me-podium:before { content: "\f1cb"; }
+.me-jester:before { content: "\f1cc"; }
+.me-crown:before { content: "\f1cd"; }
+.me-magic-wand:before { content: "\f1ce"; }
+.me-picture:before { content: "\f1cf"; }
+.me-syringe:before { content: "\f1d0"; }
+.me-vector-1:before { content: "\f1d1"; }
+.me-vector:before { content: "\f1d2"; }
+.me-eyedropper:before { content: "\f1d3"; }
+.me-paint-palette:before { content: "\f1d4"; }
+.me-bucket:before { content: "\f1d5"; }
+.me-spray:before { content: "\f1d6"; }
+.me-ruler:before { content: "\f1d7"; }
+.me-brush:before { content: "\f1d8"; }
+.me-restaurant:before { content: "\f1d9"; }
+.me-medal-1:before { content: "\f1da"; }
+.me-backpack:before { content: "\f1db"; }
+.me-megaphone:before { content: "\f1dc"; }
+.me-headset:before { content: "\f1dd"; }
+.me-operator:before { content: "\f1de"; }
+.me-24-hours:before { content: "\f1df"; }
+.me-telephone:before { content: "\f1e0"; }
+.me-tools-1:before { content: "\f1e1"; }
+.me-tools:before { content: "\f1e2"; }
+.me-drawing-1:before { content: "\f1e3"; }
+.me-hammer:before { content: "\f1e4"; }
+.me-drawing:before { content: "\f1e5"; }
+.me-startup:before { content: "\f1e6"; }
+.me-game:before { content: "\f1e7"; }
+.me-music:before { content: "\f1e8"; }
+.me-computer:before { content: "\f1e9"; }
+.me-gamepad:before { content: "\f1ea"; }
+.me-shapes:before { content: "\f1eb"; }
+.me-clock:before { content: "\f1ec"; }
+.me-mail:before { content: "\f1ed"; }
+.me-playstore:before { content: "\f1ee"; }
+.me-microsoft:before { content: "\f1ef"; }
+.me-rocket-launch:before { content: "\f1f0"; }
+.me-medal:before { content: "\f1f1"; }
+.me-puzzle:before { content: "\f1f2"; }
+.me-headphones:before { content: "\f1f3"; }
+.me-loudspeaker:before { content: "\f1f4"; }
+.me-arrow:before { content: "\f1f5"; }
+.me-projection-screen-with-bar-chart:before { content: "\f1f6"; }
+.me-percentage-symbol:before { content: "\f1f7"; }
+.me-globe:before { content: "\f1f8"; }
+.me-justice-balance:before { content: "\f1f9"; }
+.me-necktie:before { content: "\f1fa"; }
+.me-light-bulb:before { content: "\f1fb"; }
+.me-gold-bars:before { content: "\f1fc"; }
+.me-pie-chart:before { content: "\f1fd"; }
+.me-apple:before { content: "\f1fe"; }
+    
+    $font-me-cyclist: "\f100";
+    $font-me-medal-2: "\f101";
+    $font-me-paint-roller: "\f102";
+    $font-me-goal: "\f103";
+    $font-me-compass-1: "\f104";
+    $font-me-chess-1: "\f105";
+    $font-me-helmet: "\f106";
+    $font-me-call-center: "\f107";
+    $font-me-crown-1: "\f108";
+    $font-me-shopping-cart: "\f109";
+    $font-me-shopping-bag-1: "\f10a";
+    $font-me-cocktail: "\f10b";
+    $font-me-american-football-cup: "\f10c";
+    $font-me-gaming: "\f10d";
+    $font-me-cup-1: "\f10e";
+    $font-me-sailor: "\f10f";
+    $font-me-barber: "\f110";
+    $font-me-knitting: "\f111";
+    $font-me-painter: "\f112";
+    $font-me-chessplayer: "\f113";
+    $font-me-body-building: "\f114";
+    $font-me-knight: "\f115";
+    $font-me-football: "\f116";
+    $font-me-archery: "\f117";
+    $font-me-trophy: "\f118";
+    $font-me-drink: "\f119";
+    $font-me-cards-1: "\f11a";
+    $font-me-game-1: "\f11b";
+    $font-me-satellite-tv: "\f11c";
+    $font-me-microphone: "\f11d";
+    $font-me-microscope: "\f11e";
+    $font-me-cruise: "\f11f";
+    $font-me-radio: "\f120";
+    $font-me-luggage: "\f121";
+    $font-me-position: "\f122";
+    $font-me-network: "\f123";
+    $font-me-journalist: "\f124";
+    $font-me-share-1: "\f125";
+    $font-me-share: "\f126";
+    $font-me-technology-12: "\f127";
+    $font-me-witch: "\f128";
+    $font-me-signs-4: "\f129";
+    $font-me-arrows-3: "\f12a";
+    $font-me-arrows-2: "\f12b";
+    $font-me-music-5: "\f12c";
+    $font-me-music-4: "\f12d";
+    $font-me-music-3: "\f12e";
+    $font-me-technology-11: "\f12f";
+    $font-me-music-player: "\f130";
+    $font-me-technology-10: "\f131";
+    $font-me-technology-9: "\f132";
+    $font-me-photo-camera: "\f133";
+    $font-me-technology-8: "\f134";
+    $font-me-photo-1: "\f135";
+    $font-me-photo: "\f136";
+    $font-me-multimedia-2: "\f137";
+    $font-me-video-player: "\f138";
+    $font-me-technology-7: "\f139";
+    $font-me-headphones-1: "\f13a";
+    $font-me-business-1: "\f13b";
+    $font-me-feather-pen: "\f13c";
+    $font-me-technology-6: "\f13d";
+    $font-me-settings-1: "\f13e";
+    $font-me-writing-tool: "\f13f";
+    $font-me-pen: "\f140";
+    $font-me-security-2: "\f141";
+    $font-me-security-1: "\f142";
+    $font-me-light-bulb-2: "\f143";
+    $font-me-technology-5: "\f144";
+    $font-me-headset-1: "\f145";
+    $font-me-construction: "\f146";
+    $font-me-placeholder-3: "\f147";
+    $font-me-cup: "\f148";
+    $font-me-compass: "\f149";
+    $font-me-clover: "\f14a";
+    $font-me-cards: "\f14b";
+    $font-me-anchor: "\f14c";
+    $font-me-writing-1: "\f14d";
+    $font-me-wifi: "\f14e";
+    $font-me-writing: "\f14f";
+    $font-me-customer-service: "\f150";
+    $font-me-monitor: "\f151";
+    $font-me-science: "\f152";
+    $font-me-transport-1: "\f153";
+    $font-me-signs-3: "\f154";
+    $font-me-baby: "\f155";
+    $font-me-people-1: "\f156";
+    $font-me-light-bulb-1: "\f157";
+    $font-me-plug: "\f158";
+    $font-me-flash: "\f159";
+    $font-me-business: "\f15a";
+    $font-me-balance: "\f15b";
+    $font-me-shop: "\f15c";
+    $font-me-money: "\f15d";
+    $font-me-shopping-bag: "\f15e";
+    $font-me-sport: "\f15f";
+    $font-me-sun: "\f160";
+    $font-me-rain: "\f161";
+    $font-me-woman: "\f162";
+    $font-me-medical: "\f163";
+    $font-me-eye-1: "\f164";
+    $font-me-music-2: "\f165";
+    $font-me-armchair: "\f166";
+    $font-me-cutlery: "\f167";
+    $font-me-lemonade: "\f168";
+    $font-me-fruit-1: "\f169";
+    $font-me-fruit: "\f16a";
+    $font-me-fingerprint: "\f16b";
+    $font-me-24-hours-1: "\f16c";
+    $font-me-delivery-truck: "\f16d";
+    $font-me-paint-palette-1: "\f16e";
+    $font-me-star-1: "\f16f";
+    $font-me-like-1: "\f170";
+    $font-me-clock-4: "\f171";
+    $font-me-piggy-bank: "\f172";
+    $font-me-stats: "\f173";
+    $font-me-handshake: "\f174";
+    $font-me-target-2: "\f175";
+    $font-me-target-1: "\f176";
+    $font-me-chess: "\f177";
+    $font-me-puzzle-1: "\f178";
+    $font-me-startup-1: "\f179";
+    $font-me-queen: "\f17a";
+    $font-me-axe: "\f17b";
+    $font-me-vision: "\f17c";
+    $font-me-profile: "\f17d";
+    $font-me-users-1: "\f17e";
+    $font-me-users: "\f17f";
+    $font-me-message-1: "\f180";
+    $font-me-house: "\f181";
+    $font-me-message: "\f182";
+    $font-me-signs-2: "\f183";
+    $font-me-placeholder-2: "\f184";
+    $font-me-location-2: "\f185";
+    $font-me-direction: "\f186";
+    $font-me-location-1: "\f187";
+    $font-me-technology-4: "\f188";
+    $font-me-bluetooth: "\f189";
+    $font-me-suitcase: "\f18a";
+    $font-me-interface-3: "\f18b";
+    $font-me-technology-3: "\f18c";
+    $font-me-smartphone: "\f18d";
+    $font-me-technology-2: "\f18e";
+    $font-me-calendar: "\f18f";
+    $font-me-interface-2: "\f190";
+    $font-me-interface-1: "\f191";
+    $font-me-stopwatch-1: "\f192";
+    $font-me-time: "\f193";
+    $font-me-clock-3: "\f194";
+    $font-me-search: "\f195";
+    $font-me-edit: "\f196";
+    $font-me-global-1: "\f197";
+    $font-me-key: "\f198";
+    $font-me-global: "\f199";
+    $font-me-music-1: "\f19a";
+    $font-me-present: "\f19b";
+    $font-me-layers-1: "\f19c";
+    $font-me-settings: "\f19d";
+    $font-me-attachment: "\f19e";
+    $font-me-luxury: "\f19f";
+    $font-me-interface: "\f1a0";
+    $font-me-magnet: "\f1a1";
+    $font-me-security: "\f1a2";
+    $font-me-weather: "\f1a3";
+    $font-me-symbol-1: "\f1a4";
+    $font-me-symbol: "\f1a5";
+    $font-me-technology-1: "\f1a6";
+    $font-me-layers: "\f1a7";
+    $font-me-clock-2: "\f1a8";
+    $font-me-clock-1: "\f1a9";
+    $font-me-target: "\f1aa";
+    $font-me-placeholder-1: "\f1ab";
+    $font-me-signs-1: "\f1ac";
+    $font-me-placeholder: "\f1ad";
+    $font-me-location: "\f1ae";
+    $font-me-star: "\f1af";
+    $font-me-like: "\f1b0";
+    $font-me-shapes-1: "\f1b1";
+    $font-me-idea: "\f1b2";
+    $font-me-computer-1: "\f1b3";
+    $font-me-connection: "\f1b4";
+    $font-me-signs: "\f1b5";
+    $font-me-eye: "\f1b6";
+    $font-me-power: "\f1b7";
+    $font-me-multimedia-1: "\f1b8";
+    $font-me-multimedia: "\f1b9";
+    $font-me-arrows-1: "\f1ba";
+    $font-me-play: "\f1bb";
+    $font-me-play-button: "\f1bc";
+    $font-me-arrows: "\f1bd";
+    $font-me-web: "\f1be";
+    $font-me-telephone-1: "\f1bf";
+    $font-me-people: "\f1c0";
+    $font-me-paint-palette-and-brush: "\f1c1";
+    $font-me-transport: "\f1c2";
+    $font-me-stopwatch: "\f1c3";
+    $font-me-graph: "\f1c4";
+    $font-me-bullseye: "\f1c5";
+    $font-me-scale: "\f1c6";
+    $font-me-technology: "\f1c7";
+    $font-me-shiny-diamond: "\f1c8";
+    $font-me-social-media: "\f1c9";
+    $font-me-telemarketer: "\f1ca";
+    $font-me-podium: "\f1cb";
+    $font-me-jester: "\f1cc";
+    $font-me-crown: "\f1cd";
+    $font-me-magic-wand: "\f1ce";
+    $font-me-picture: "\f1cf";
+    $font-me-syringe: "\f1d0";
+    $font-me-vector-1: "\f1d1";
+    $font-me-vector: "\f1d2";
+    $font-me-eyedropper: "\f1d3";
+    $font-me-paint-palette: "\f1d4";
+    $font-me-bucket: "\f1d5";
+    $font-me-spray: "\f1d6";
+    $font-me-ruler: "\f1d7";
+    $font-me-brush: "\f1d8";
+    $font-me-restaurant: "\f1d9";
+    $font-me-medal-1: "\f1da";
+    $font-me-backpack: "\f1db";
+    $font-me-megaphone: "\f1dc";
+    $font-me-headset: "\f1dd";
+    $font-me-operator: "\f1de";
+    $font-me-24-hours: "\f1df";
+    $font-me-telephone: "\f1e0";
+    $font-me-tools-1: "\f1e1";
+    $font-me-tools: "\f1e2";
+    $font-me-drawing-1: "\f1e3";
+    $font-me-hammer: "\f1e4";
+    $font-me-drawing: "\f1e5";
+    $font-me-startup: "\f1e6";
+    $font-me-game: "\f1e7";
+    $font-me-music: "\f1e8";
+    $font-me-computer: "\f1e9";
+    $font-me-gamepad: "\f1ea";
+    $font-me-shapes: "\f1eb";
+    $font-me-clock: "\f1ec";
+    $font-me-mail: "\f1ed";
+    $font-me-playstore: "\f1ee";
+    $font-me-microsoft: "\f1ef";
+    $font-me-rocket-launch: "\f1f0";
+    $font-me-medal: "\f1f1";
+    $font-me-puzzle: "\f1f2";
+    $font-me-headphones: "\f1f3";
+    $font-me-loudspeaker: "\f1f4";
+    $font-me-arrow: "\f1f5";
+    $font-me-projection-screen-with-bar-chart: "\f1f6";
+    $font-me-percentage-symbol: "\f1f7";
+    $font-me-globe: "\f1f8";
+    $font-me-justice-balance: "\f1f9";
+    $font-me-necktie: "\f1fa";
+    $font-me-light-bulb: "\f1fb";
+    $font-me-gold-bars: "\f1fc";
+    $font-me-pie-chart: "\f1fd";
+    $font-me-apple: "\f1fe";
