@@ -87,8 +87,8 @@ $(".countdown").each(function() {
 	$('.countdown').countdown({
 		//Set your target date here!
 		day: 1,//Set your target Days
-		month: 1,//Set your target Month
-		year: 2018,//Set your target Year
+		month: 8,//Set your target Month
+		year: 2017,//Set your target Year
 		onChange: function() {m3dAnimate($('.digits span'));}
 	});
 	function m3dAnimate($el) {
