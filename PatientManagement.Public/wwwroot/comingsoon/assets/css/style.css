@@ -2040,3 +2040,9 @@ License URI: http://themeforest.net/licenses/regular_extended
 .me-pie-chart:before { content: "\f1fd"; }
 
 .me-apple:before { content: "\f1fe"; }
+
+
+/*MailChimp customization*/
+#mc_embed_signup #mce-success-response {
+  color: #0084FF;
+}
