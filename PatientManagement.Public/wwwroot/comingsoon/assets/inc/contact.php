@@ -1,5 +1,5 @@
 <?php
-	$to = "johndoe@gmail.com"; //Change email here
+	$to = "support@myclario.com"; //Change email here
 	$from = $_REQUEST['email']; 
 	$name = $_REQUEST['name']; 
 	$headers = "From: $from"; 
