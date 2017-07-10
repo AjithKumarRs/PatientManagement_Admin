@@ -255,7 +255,7 @@ $("#contact").each(function() {
 			$(form).ajaxSubmit({
 				type: "POST",
 				data: $(form).serialize(),
-				url: "assets/inc/contact.php",
+				url: "../../api/email",
 				success: function() {
 					setTimeout(function(){$("#contact .message-contact").addClass("bg-success")},300);
 					setTimeout(function(){$('#contact .message-contact').prepend("<div><i class='me-message-1'></i>Thanks!We'll be in touch real soon!</div>")},300);
