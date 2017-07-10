@@ -1216,23 +1216,19 @@ declare namespace PatientManagement.PatientManagement {
     }
     interface LifeStylesForm {
         PatientId: Serenity.LookupEditor;
-        BadHabits: Serenity.TextAreaEditor;
-        RemarksForFoodTake: Serenity.TextAreaEditor;
+        BadHabits: Serenity.StringEditor;
+        RemarksForFoodTake: Serenity.StringEditor;
         Regime: Serenity.TextAreaEditor;
         DailyMeals: Serenity.TextAreaEditor;
-        FavoriteFood: Serenity.TextAreaEditor;
-        NotEating: Serenity.TextAreaEditor;
+        FavoriteFood: Serenity.StringEditor;
+        NotEating: Serenity.StringEditor;
     }
 }
 declare namespace PatientManagement.PatientManagement {
     interface LifeStylesRow {
         PatientId?: number;
-        RemarksForFoodTake?: string;
         Regime?: string;
         DailyMeals?: string;
-        FavoriteFood?: string;
-        NotEating?: string;
-        BadHabits?: string;
         InsertUserId?: number;
         InsertDate?: string;
         PatientName?: string;
@@ -1246,12 +1242,8 @@ declare namespace PatientManagement.PatientManagement {
         function getLookup(): Q.Lookup<LifeStylesRow>;
         namespace Fields {
             const PatientId: string;
-            const RemarksForFoodTake: string;
             const Regime: string;
             const DailyMeals: string;
-            const FavoriteFood: string;
-            const NotEating: string;
-            const BadHabits: string;
             const InsertUserId: string;
             const InsertDate: string;
             const PatientName: string;

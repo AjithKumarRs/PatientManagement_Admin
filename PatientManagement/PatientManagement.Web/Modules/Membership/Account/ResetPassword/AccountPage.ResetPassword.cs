@@ -45,10 +45,10 @@ namespace PatientManagement.Membership.Pages
                     return Error(Texts.Validation.InvalidResetToken);
             }
 
-            if (UseAdminLTELoginBox)
+         //   if (UseAdminLTELoginBox)
                 return View(MVC.Views.Membership.Account.ResetPassword.AccountResetPassword_AdminLTE, new ResetPasswordModel { Token = t });
-            else
-                return View(MVC.Views.Membership.Account.ResetPassword.AccountResetPassword, new ResetPasswordModel { Token = t });
+        //    else
+              //  return View(MVC.Views.Membership.Account.ResetPassword.AccountResetPassword, new ResetPasswordModel { Token = t });
 
         }
 

@@ -908,7 +908,7 @@ var PatientManagement;
         }(Serenity.PrefixedContext));
         LifeStylesForm.formKey = 'PatientManagement.LifeStyles';
         PatientManagement.LifeStylesForm = LifeStylesForm;
-        [['PatientId', function () { return Serenity.LookupEditor; }], ['BadHabits', function () { return Serenity.TextAreaEditor; }], ['RemarksForFoodTake', function () { return Serenity.TextAreaEditor; }], ['Regime', function () { return Serenity.TextAreaEditor; }], ['DailyMeals', function () { return Serenity.TextAreaEditor; }], ['FavoriteFood', function () { return Serenity.TextAreaEditor; }], ['NotEating', function () { return Serenity.TextAreaEditor; }]].forEach(function (x) { return Object.defineProperty(LifeStylesForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
+        [['PatientId', function () { return Serenity.LookupEditor; }], ['BadHabits', function () { return Serenity.StringEditor; }], ['RemarksForFoodTake', function () { return Serenity.StringEditor; }], ['Regime', function () { return Serenity.TextAreaEditor; }], ['DailyMeals', function () { return Serenity.TextAreaEditor; }], ['FavoriteFood', function () { return Serenity.StringEditor; }], ['NotEating', function () { return Serenity.StringEditor; }]].forEach(function (x) { return Object.defineProperty(LifeStylesForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
     })(PatientManagement = PatientManagement_5.PatientManagement || (PatientManagement_5.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
@@ -928,7 +928,7 @@ var PatientManagement;
             var Fields;
             (function (Fields) {
             })(Fields = LifeStylesRow.Fields || (LifeStylesRow.Fields = {}));
-            ['PatientId', 'RemarksForFoodTake', 'Regime', 'DailyMeals', 'FavoriteFood', 'NotEating', 'BadHabits', 'InsertUserId', 'InsertDate', 'PatientName', 'TenantId'].forEach(function (x) { return Fields[x] = x; });
+            ['PatientId', 'Regime', 'DailyMeals', 'InsertUserId', 'InsertDate', 'PatientName', 'TenantId'].forEach(function (x) { return Fields[x] = x; });
         })(LifeStylesRow = PatientManagement.LifeStylesRow || (PatientManagement.LifeStylesRow = {}));
     })(PatientManagement = PatientManagement_6.PatientManagement || (PatientManagement_6.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));

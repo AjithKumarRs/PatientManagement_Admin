@@ -78,7 +78,7 @@
     <PackageReference Include="NodaMoney" Version="1.0.0" />
     <PackageReference Include="Sendgrid" Version="9.4.1" />
     <PackageReference Include="Serenity.FluentMigrator.Runner" Version="1.6.904" />
-    <PackageReference Include="Serenity.Web" Version="2.9.24" />
+    <PackageReference Include="Serenity.Web" Version="2.9.25" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.1' ">
     <DefineConstants>$(DefineConstants);COREFX;ASPNETCORE</DefineConstants>
@@ -96,7 +96,7 @@
 
   </Target>
   <ItemGroup>
-    <DotNetCliToolReference Include="Serenity.CodeGenerator" Version="2.9.24" />
+    <DotNetCliToolReference Include="Serenity.CodeGenerator" Version="2.9.25" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\Scripts\moment\" />
