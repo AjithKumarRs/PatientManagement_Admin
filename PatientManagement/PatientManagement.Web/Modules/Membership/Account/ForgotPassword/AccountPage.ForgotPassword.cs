@@ -25,10 +25,10 @@ namespace PatientManagement.Membership.Pages
         [HttpGet]
         public ActionResult ForgotPassword()
         {
-            if (UseAdminLTELoginBox)
+           // if (UseAdminLTELoginBox)
                 return View(MVC.Views.Membership.Account.ForgotPassword.AccountForgotPassword_AdminLTE);
-            else
-                return View(MVC.Views.Membership.Account.ForgotPassword.AccountForgotPassword);
+          //  else
+           //     return View(MVC.Views.Membership.Account.ForgotPassword.AccountForgotPassword);
         }
 
         [HttpPost, JsonFilter]

@@ -1,4 +1,6 @@
 ﻿
+using System.Linq;
+
 namespace PatientManagement.PatientManagement.Endpoints
 {
     using Serenity;
@@ -38,6 +40,7 @@ namespace PatientManagement.PatientManagement.Endpoints
 
         public ListResponse<MyRow> List(IDbConnection connection, ListRequest request)
         {
+
             return new MyRepository().List(connection, request);
         }
     }

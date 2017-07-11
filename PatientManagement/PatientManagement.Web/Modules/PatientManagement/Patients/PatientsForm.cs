@@ -30,7 +30,6 @@ namespace PatientManagement.PatientManagement.Forms
         public String Address { get; set; }
         public Int32 Height { get; set; }
         public Int32 Weight { get; set; }
-        public String WantedWeight { get; set; }
         public List<object> NoteList { get; set; }
 
         // TODO Add when you figure out how to add permissions here

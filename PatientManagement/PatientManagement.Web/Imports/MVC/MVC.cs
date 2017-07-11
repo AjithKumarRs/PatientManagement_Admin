@@ -6,9 +6,34 @@ namespace MVC
     {
         public static class Administration
         {
+            public static class Currencies
+            {
+                public const string CurrenciesIndex = "~/Modules/Administration/Currencies/CurrenciesIndex.cshtml";
+            }
+
             public static class Language
             {
                 public const string LanguageIndex = "~/Modules/Administration/Language/LanguageIndex.cshtml";
+            }
+
+            public static class Offers
+            {
+                public const string OffersIndex = "~/Modules/Administration/Offers/OffersIndex.cshtml";
+            }
+
+            public static class PaymentOptions
+            {
+                public const string PaymentOptionsIndex = "~/Modules/Administration/PaymentOptions/PaymentOptionsIndex.cshtml";
+            }
+
+            public static class Payments
+            {
+                public const string PaymentsIndex = "~/Modules/Administration/Payments/PaymentsIndex.cshtml";
+            }
+
+            public static class PaymentsDetails
+            {
+                public const string PaymentsDetailsIndex = "~/Modules/Administration/PaymentsDetails/PaymentsDetailsIndex.cshtml";
             }
 
             public static class Role
@@ -20,6 +45,11 @@ namespace MVC
             {
                 public const string SergenError = "~/Modules/Administration/Sergen/SergenError.cshtml";
                 public const string SergenIndex = "~/Modules/Administration/Sergen/SergenIndex.cshtml";
+            }
+
+            public static class Subscriptions
+            {
+                public const string SubscriptionsIndex = "~/Modules/Administration/Subscriptions/SubscriptionsIndex.cshtml";
             }
 
             public static class Tenant

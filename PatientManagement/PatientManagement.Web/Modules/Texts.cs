@@ -85,6 +85,8 @@ namespace PatientManagement
 
                     public static LocalText AcceptTerms = "I agree to the terms";
                     public static LocalText BackToLogin = "I already have a membership";
+
+                    public static LocalText FormatSubscriptionName = "{0} - First registration";
                 }
             }
         }
@@ -94,7 +96,10 @@ namespace PatientManagement
             public static LocalText LogoutLink = "Logout";
             public static LocalText SiteTitle = "PatientManagement";
         }
-
+        public static class LeftNavigation
+        {
+            public static LocalText LeftNavigationHeader = "MAIN MENU";
+        }
         public static class Site
         {
             public static class Notifications
@@ -115,6 +120,7 @@ namespace PatientManagement
                 public static LocalText DeleteVisit = "Delete Visit";
                 public static LocalText QuitContextMenu = "Quit";
 
+                public static LocalText VisitTypesLeftMenu = "VISIT TYPES";
 
                 public static LocalText SuccessChangedVisitDates = "You successfully change visit with patient name: ";
                 public static LocalText SuccessDeletingVisitDates = "You successfully deleted a visit with patient name: ";

@@ -8,10 +8,10 @@ namespace PatientManagement.Administration.Entities
     using System.ComponentModel;
 
     [ConnectionKey("Default"), DisplayName("Users"), InstanceName("User"), TwoLevelCached]
-    [ReadPermission(PermissionKeys.Security)]
-    [ModifyPermission(PermissionKeys.Security)]
-    [LookupScript("Administration.User", Permission = PermissionKeys.Security)]
-    public sealed class UserRow : LoggingRow, IIdRow, INameRow, IIsActiveRow
+    [ReadPermission("Administration:User:Read")]
+    [ModifyPermission("Administration:User:Modify")]
+    [LookupScript("Administration.User", Permission = "Administration:User:Read")]
+    public sealed class UserRow : LoggingRow, IIdRow, INameRow, IIsActiveDeletedRow
     {
         [DisplayName("User Id"), Identity]
         public Int32? UserId
@@ -98,7 +98,7 @@ namespace PatientManagement.Administration.Entities
             set { Fields.LastDirectoryUpdate[this] = value; }
         }
 
-        [DisplayName("Tenant"), ForeignKey("Tenants", "TenantId"), LeftJoin("tnt")]
+        [DisplayName("Tenant"), ForeignKey("Tenants", "TenantId"), LeftJoin("tnt"), QuickFilter]
         [LookupEditor(typeof(TenantRow))]
         [ReadPermission(PermissionKeys.Tenants)]
         public Int32? TenantId
@@ -112,6 +112,13 @@ namespace PatientManagement.Administration.Entities
         {
             get { return Fields.TenantName[this]; }
             set { Fields.TenantName[this] = value; }
+        }
+
+        [DisplayName("CurrencyId"), Expression("tnt.CurrencyId")]
+        public Int32? TenantCurrencyId
+        {
+            get { return Fields.TenantCurrencyId[this]; }
+            set { Fields.TenantCurrencyId[this] = value; }
         }
 
         IIdField IIdRow.IdField
@@ -152,8 +159,11 @@ namespace PatientManagement.Administration.Entities
             public StringField Password;
             public StringField PasswordConfirm;
 
-              public readonly Int32Field TenantId;
+            public readonly Int32Field TenantId;
             public readonly StringField TenantName;
+            public readonly Int32Field TenantCurrencyId;
+
+
             public RowFields()
                 : base("Users")
             {

@@ -218,7 +218,7 @@ namespace PatientManagement.Administration.Repositories
 
         public ListResponse<string> ListPermissionKeys()
         {
-            return LocalCache.Get("Administration:PermissionKeys", TimeSpan.Zero, () =>
+            return LocalCache.Get("Administration:PermissionKeys", TimeSpan.FromMilliseconds(1), () =>
             {
                 var result = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
@@ -247,7 +247,12 @@ namespace PatientManagement.Administration.Repositories
                     }
                 }
 
-                result.Remove(Administration.PermissionKeys.Tenants);
+                var user = (UserDefinition)Authorization.UserDefinition; 
+                if (user.TenantId != 1)
+                {
+                    result.RemoveWhere(x => x.StartsWith("Administration"));
+                }
+
                 result.Remove("*");
                 result.Remove("?");
 

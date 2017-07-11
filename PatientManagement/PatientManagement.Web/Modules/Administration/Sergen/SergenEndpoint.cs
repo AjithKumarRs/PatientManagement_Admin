@@ -10,7 +10,7 @@ namespace PatientManagement.Administration.Endpoints
     using System.Linq;
 
     [Route("Services/Administration/Sergen/[action]")]
-    [ServiceAuthorize(PermissionKeys.Security)]
+    [ServiceAuthorize("Administration:Sergen")]
     public class SergenController : ServiceEndpoint
     {
         private IHostingEnvironment hostingEnvironment;

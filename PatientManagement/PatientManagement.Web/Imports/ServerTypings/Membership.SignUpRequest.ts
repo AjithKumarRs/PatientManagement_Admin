@@ -3,5 +3,7 @@
         DisplayName?: string;
         Email?: string;
         Password?: string;
+        TenantName?: string;
+        OfferId?: number;
     }
 }

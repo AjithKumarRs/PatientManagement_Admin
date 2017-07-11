@@ -18,5 +18,7 @@ namespace PatientManagement.Administration.Columns
         public String Email { get; set; }
         [Width(100)]
         public String Source { get; set; }
+
+        public string TenantName { get; set; }
     }
 }
