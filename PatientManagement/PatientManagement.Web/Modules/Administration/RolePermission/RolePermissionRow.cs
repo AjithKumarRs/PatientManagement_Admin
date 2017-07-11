@@ -7,8 +7,8 @@ namespace PatientManagement.Administration.Entities
     using System.ComponentModel;
 
     [ConnectionKey("Default"), DisplayName("Role Permissions"), InstanceName("Role Permission"), TwoLevelCached]
-    [ReadPermission(PermissionKeys.Security)]
-    [ModifyPermission(PermissionKeys.Security)]
+    [ReadPermission("Administration:RolePermission:Read")]
+    [ModifyPermission("Administration:RolePermission:Modify")]
     public sealed class RolePermissionRow : Row, IIdRow, INameRow
     {
         [DisplayName("Role Permission Id"), Identity]

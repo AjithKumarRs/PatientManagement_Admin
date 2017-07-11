@@ -6,7 +6,7 @@ namespace PatientManagement.Administration.Pages
     using Microsoft.AspNetCore.Http;
     using System.Net;
 
-    [PageAuthorize(PermissionKeys.Security)]
+    [PageAuthorize("Administration:Sergen")]
     public class SergenController : Controller
     {
         [Route("Administration/Sergen")]

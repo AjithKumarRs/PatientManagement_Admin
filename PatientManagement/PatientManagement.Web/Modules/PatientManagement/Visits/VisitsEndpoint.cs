@@ -1,12 +1,5 @@
-﻿
-using System.Drawing;
-using Microsoft.AspNetCore.SignalR;
-using Microsoft.AspNetCore.SignalR.Infrastructure;
-using PatientManagement.Web.Hubs;
-
-namespace PatientManagement.PatientManagement.Endpoints
+﻿namespace PatientManagement.PatientManagement.Endpoints
 {
-    using Serenity;
     using Serenity.Data;
     using Serenity.Services;
     using System.Data;

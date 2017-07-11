@@ -16,7 +16,7 @@ namespace PatientManagement.PatientManagement {
             toggleMenuButton.click((e) => this.openClick(e));
             PatientManagement.NotificationsService.CountNotifications({},
                 resp => {
-                    this.byId('NotificationCounterLabel').text(resp);
+                    this.byId('NotificationCounterLabel').text(resp.Count);
 
                 });
 

@@ -7,11 +7,27 @@
     <PackageId>PatientManagement.Web</PackageId>
     <RuntimeFrameworkVersion>1.1.1</RuntimeFrameworkVersion>
     <PackageTargetFallback>$(PackageTargetFallback);dotnet5.6;portable-net45+win8</PackageTargetFallback>
+    <Version>0.8.0</Version>
+    <Product>Clario Admin</Product>
+    <Company>s2kdesign</Company>
+    <Authors>Svetlin Krastanov, Petya Petkova</Authors>
+    <AssemblyVersion>0.8.0.0</AssemblyVersion>
+    <FileVersion>0.8.0.0</FileVersion>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <Copyright>s2kdesign</Copyright>
+    <PackageLicenseUrl>https://github.com/Magik3a/PatientManagement_Admin/blob/master/license</PackageLicenseUrl>
+    <PackageProjectUrl>http://admin-myclario.azurewebsites.net/</PackageProjectUrl>
+    <PackageIconUrl>https://github.com/Magik3a/PatientManagement_Admin/blob/master/PatientManagement/PatientManagement.Web/wwwroot/favicon.ico</PackageIconUrl>
+    <RepositoryUrl>https://github.com/Magik3a/PatientManagement_Admin</RepositoryUrl>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Modules\Administration\OffersLang\**" />
     <Compile Remove="Modules\Common\Dashboard\**" />
+    <Content Remove="Modules\Administration\OffersLang\**" />
     <Content Remove="Modules\Common\Dashboard\**" />
+    <EmbeddedResource Remove="Modules\Administration\OffersLang\**" />
     <EmbeddedResource Remove="Modules\Common\Dashboard\**" />
+    <None Remove="Modules\Administration\OffersLang\**" />
     <None Remove="Modules\Common\Dashboard\**" />
   </ItemGroup>
   <ItemGroup>
@@ -19,6 +35,7 @@
     <Content Remove="wwwroot/Scripts\moment\jquery.min.js" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Modules\Administration\Tenant\TenantColumns.cs.20170609_162523.bak" />
     <None Remove="Modules\PatientManagement\Patients\PatientManagement.PatientsDialog.Template.html" />
     <None Remove="Views\Templates\EntityDialog.Template.html" />
     <None Remove="Views\Templates\PropertyDialog.Template.html" />
@@ -58,8 +75,10 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="1.1.1" />
     <PackageReference Include="MySql.Data" Version="7.0.7-m61" />
+    <PackageReference Include="NodaMoney" Version="1.0.0" />
+    <PackageReference Include="Sendgrid" Version="9.4.1" />
     <PackageReference Include="Serenity.FluentMigrator.Runner" Version="1.6.904" />
-    <PackageReference Include="Serenity.Web" Version="2.9.23" />
+    <PackageReference Include="Serenity.Web" Version="2.9.25" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.1' ">
     <DefineConstants>$(DefineConstants);COREFX;ASPNETCORE</DefineConstants>
@@ -77,10 +96,13 @@
 
   </Target>
   <ItemGroup>
-    <DotNetCliToolReference Include="Serenity.CodeGenerator" Version="2.9.23" />
+    <DotNetCliToolReference Include="Serenity.CodeGenerator" Version="2.9.25" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\Scripts\moment\" />
     <Folder Include="wwwroot\Scripts\contextMenu\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Migrations\DefaultDB\DefaultDB_20170609_131800_CreatedBillingsAndInvoices.cs" />
   </ItemGroup>
 </Project>

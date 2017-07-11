@@ -13,7 +13,7 @@
     var notificationCookie = Context.Request.Cookies["NotificationPreference"];
     var notificationState = !notificationCookie.IsEmptyOrNull() ? notificationCookie : "true";
 
-    var theme = !themeCookie.IsEmptyOrNull() ? themeCookie : "purple";
+    var theme = !themeCookie.IsEmptyOrNull() ? themeCookie : "blue";
     var rtl = System.Globalization.CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft;
     var user = (UserDefinition)Serenity.Authorization.UserDefinition;
     var userImage = System.Web.VirtualPathUtility.ToAbsolute(
@@ -34,6 +34,7 @@
 
     @RenderSection("Head", false)
     <title>@(ViewData["Title"]) - Clario</title>
+    
 </head>
 <body id="s-@(ViewData["PageId"])Page" class="@(ViewData["BodyClass"]) fixed sidebar-mini hold-transition skin-@theme@(hideNav ? " no-navigation" : " has-layout-event")@(rtl ? " rtl" : "")">
 
@@ -56,7 +57,7 @@
             <header class="main-header">
                 <a href="~/" class="logo">
                     <span class="logo-mini"><i></i></span>
-                    <span class="logo-lg"><i></i><b>@LocalText.Get("Navigation.SiteTitle")</b></span>
+                <span class="logo-lg"><i></i><b>@LocalText.Get("Navigation.SiteTitle").ToUpper()</b></span>
                 </a>
                 <nav class="navbar navbar-static-top" role="navigation">
                     <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
@@ -228,67 +229,134 @@
             $().ready(function () {
 
                 new PatientManagement.Common.RecieveNotificationToggle($('#NotificationCheck'),{ state:@notificationState});
-            new PatientManagement.Common.SidebarSearch($('#SidebarSearch'), $('#SidebarMenu')).init();
-            new PatientManagement.Common.LanguageSelection($('#LanguageSelect'), '@(System.Globalization.CultureInfo.CurrentUICulture.Name)');
-            new PatientManagement.Common.ThemeSelection($('#ThemeSelect'));
-            @RenderSection("PageInitScript", false);
+                new PatientManagement.Common.SidebarSearch($('#SidebarSearch'), $('#SidebarMenu')).init();
+                new PatientManagement.Common.LanguageSelection($('#LanguageSelect'), '@(System.Globalization.CultureInfo.CurrentUICulture.Name)');
+                new PatientManagement.Common.ThemeSelection($('#ThemeSelect'));
+                @RenderSection("PageInitScript", false);
 
-            var doLayout = function () {
-                height = (this.window.innerHeight > 0) ? this.window.innerHeight : this.screen.height;
-                height -= $('header.main-header').outerHeight() || 0;
-                height -= $('section.content-header').outerHeight() || 0;
-                height -= $('footer.main-footer').outerHeight() || 0;
-                if (height < 200) height = 200;
-                $("section.content").css("min-height", (height) + "px");
+                var doLayout = function () {
+                    height = (this.window.innerHeight > 0) ? this.window.innerHeight : this.screen.height;
+                    height -= $('header.main-header').outerHeight() || 0;
+                    height -= $('section.content-header').outerHeight() || 0;
+                    height -= $('footer.main-footer').outerHeight() || 0;
+                    if (height < 200) height = 200;
+                    $("section.content").css("min-height", (height) + "px");
 
-                $('body').triggerHandler('layout');
-            };
+                    $('body').triggerHandler('layout');
+                };
 
-            $(window).bind("load resize layout", doLayout);
+                $(window).bind("load resize layout", doLayout);
 
-            doLayout();
-
-
-
-            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-                // Hide Header on on scroll down
-                var didScroll;
-                var lastScrollTop = 0;
-                var delta = 5;
-                var navbarHeight = $('.logo').outerHeight();
+                doLayout();
 
 
-                $(window).scroll(function (event) {
-                    didScroll = true;
-                });
 
-                setInterval(function () {
-                    if (didScroll) {
-                        hasScrolled();
-                        didScroll = false;
-                    }
-                },
-                    250);
+                if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                    // Hide Header on on scroll down
+                    var didScroll;
+                    var lastScrollTop = 0;
+                    var delta = 5;
+                    var navbarHeight = $('.logo').outerHeight();
 
-                function hasScrolled() {
-                    var st = $(this).scrollTop();
-                    if (Math.abs(lastScrollTop - st) <= delta)
-                        return;
-                    if (st > lastScrollTop && st > navbarHeight) {
-                        $('.logo').slideUp(500);
-                    } else {
-                        if (st + $(window).height() < $(document).height()) {
-                            $('.logo').slideDown(500);
+
+                    $(window).scroll(function (event) {
+                        didScroll = true;
+                    });
+
+                    setInterval(function () {
+                            if (didScroll) {
+                                hasScrolled();
+                                didScroll = false;
+                            }
+                        },
+                        250);
+
+                    function hasScrolled() {
+                        var st = $(this).scrollTop();
+                        if (Math.abs(lastScrollTop - st) <= delta)
+                            return;
+                        if (st > lastScrollTop && st > navbarHeight) {
+                            $('.logo').slideUp(500);
+                        } else {
+                            if (st + $(window).height() < $(document).height()) {
+                                $('.logo').slideDown(500);
+                            }
                         }
-                    }
 
-                    lastScrollTop = st;
-                }
-            };
-        });
+                        lastScrollTop = st;
+                    }
+                };
+            });
         
 
         </script>
+
+
+        
+        <script src="~/signalr/hubs"></script>
+        <script>
+            $(function () {
+                var hub = $.connection.notificationHub;
+
+                $.connection.hub.start().done(function () {
+
+                    if ($.connection.hub && $.connection.hub.state ===$.signalR.connectionState.connected) {
+
+                        hub.client.visitChangedNotification = function (userDisplayName, userPicture, notification, start, end) {
+                            var to = {};
+                            to.timeOut = 6000;
+                            to.closeButton = true;
+
+
+                            if ($('#NotificationCheck').bootstrapSwitch('state')) {
+                                Q.notifyInfo(notification, '', to);
+                            }
+                            RefreshFullCalendar(start, end);
+
+                            if ($('#VisitsGridDiv').length) {
+                                $('#VisitsGridDiv .refresh-button').click();
+                            }
+                            if ($('.s-VisitsGrid').length) {
+                                $('.s-VisitsGrid .refresh-button').click();
+                            }
+                            if ($('.s-NotificationsGrid').length) {
+                                $('.s-NotificationsGrid .refresh-button').click();
+                            }
+                            var number = +($('.counter-label-notifications').text());
+                            $('.counter-label-notifications').text(number + 1);
+                        };
+
+                        hub.client.patientChangedNotification = function (userDisplayName, userPicture, notification) {
+                            var to = {};
+
+                            if ($('#NotificationCheck').bootstrapSwitch('state')) {
+                                Q.notifyInfo(notification, '', to);
+                            }
+
+                            if ($('.s-PatientsGrid').length) {
+                                $('.s-PatientsGrid .refresh-button').click();
+                            }
+
+
+                            if ($('.s-NotificationsGrid').length) {
+                                $('.s-NotificationsGrid .refresh-button').click();
+                            }
+
+                            var number = +($('.counter-label-notifications').text());
+                            $('.counter-label-notifications').text(number + 1);
+
+                        };
+                    }
+                    else {
+                        // TODO: Add notification somewhere that the connection cant be made
+                    }
+            
+
+                });
+
+            });
+        </script>
+
                 }
 </body>
 </html>

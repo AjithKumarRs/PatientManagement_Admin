@@ -1,4 +1,6 @@
 ﻿
+using PatientManagement.PatientManagement;
+
 namespace PatientManagement.Membership
 {
     using Serenity.ComponentModel;
@@ -9,6 +11,11 @@ namespace PatientManagement.Membership
     {
         [Required(true), Placeholder("Full name")]
         public String DisplayName { get; set; }
+
+        [Required(true), Placeholder("Clinic Name")]
+        public String TenantName { get; set; }
+        [OfferDropDownEditor]
+        public Int32 OfferId { get; set; }
         [EmailEditor, Required(true), Placeholder("Email")]
         public String Email { get; set; }
         [EmailEditor, Required(true), Placeholder("Confirm email")]

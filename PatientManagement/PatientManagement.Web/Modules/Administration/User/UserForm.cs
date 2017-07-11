@@ -20,5 +20,7 @@
         public string Source { get; set; }
 
         public Int32? TenantId { get; set; }
+
+
     }
 }

@@ -1,4 +1,5 @@
-﻿
+﻿using PatientManagement.PatientManagement.Scripts;
+
 namespace PatientManagement.Administration.Entities
 {
     using Serenity.ComponentModel;
@@ -8,9 +9,10 @@ namespace PatientManagement.Administration.Entities
     using System.ComponentModel;
 
     [ConnectionKey("Default"), DisplayName("Roles"), InstanceName("Role"), TwoLevelCached]
-    [ReadPermission(PermissionKeys.Security)]
-    [ModifyPermission(PermissionKeys.Security)]
-    [LookupScript("Administration.Role")]
+    [ReadPermission("Administration:Role:Read")]
+    [ModifyPermission("Administration:Role:Modify")]
+    [LookupScript("Administration.Role", 
+        LookupType = typeof(MultiTenantRowLookupScript<>) )]
     public sealed class RoleRow : Row, IIdRow, INameRow, IMultiTenantRow
     {
         [DisplayName("Role Id"), Identity, ForeignKey("Roles", "RoleId"), LeftJoin("jRole")]

@@ -17,5 +17,10 @@ namespace PatientManagement.Administration.Columns
         public Int32 TenantId { get; set; }
         [EditLink]
         public String TenantName { get; set; }
+        public Int32 CurrencyId { get; set; }
+        public String CurrencyName { get; set; }
+
+        public Boolean SubscriptionRequired { get; set; }
+        public Int64 SubscriptionId { get; set; }
     }
 }

@@ -1,35 +1,38 @@
-﻿
-namespace PatientManagement.PatientManagement {
+﻿namespace PatientManagement.PatientManagement {
     export interface NotificationsRow {
         NotificationId?: number;
         EntityType?: string;
         EntityId?: number;
         Text?: string;
         InsertUserId?: number;
+        InsertDate?: string;
         InsertUserDisplayName?: string;
         InsertUserPicture?: string;
-        InsertDate?: string;
-        InsertDateFormated?: string;
+        TenantId?: number;
     }
 
     export namespace NotificationsRow {
         export const idProperty = 'NotificationId';
         export const nameProperty = 'EntityType';
         export const localTextPrefix = 'PatientManagement.Notifications';
+        export const lookupKey = 'PatientManagement.Notifications';
 
-        export namespace Fields {
-            export declare const NotificationId;
-            export declare const EntityType;
-            export declare const EntityId;
-            export declare const Text;
-            export declare const InsertUserId;
-            export declare const InsertUserDisplayName;
-            export declare const InsertUserPicture;
-            export declare const InsertDate;
-            export declare const InsertDateFormated;
+        export function getLookup(): Q.Lookup<NotificationsRow> {
+            return Q.getLookup<NotificationsRow>('PatientManagement.Notifications');
         }
 
-        ['NotificationId', 'EntityType', 'EntityId', 'Text', 'InsertUserId', 'InsertUserDisplayName', 'InsertUserPicture', 'InsertDate', 'InsertDateFormated'].forEach(x => (<any>Fields)[x] = x);
+        export namespace Fields {
+            export declare const NotificationId: string;
+            export declare const EntityType: string;
+            export declare const EntityId: string;
+            export declare const Text: string;
+            export declare const InsertUserId: string;
+            export declare const InsertDate: string;
+            export declare const InsertUserDisplayName: string;
+            export declare const InsertUserPicture: string;
+            export declare const TenantId: string;
+        }
+
+        ['NotificationId', 'EntityType', 'EntityId', 'Text', 'InsertUserId', 'InsertDate', 'InsertUserDisplayName', 'InsertUserPicture', 'TenantId'].forEach(x => (<any>Fields)[x] = x);
     }
 }
-
