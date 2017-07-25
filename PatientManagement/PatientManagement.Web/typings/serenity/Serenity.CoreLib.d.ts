@@ -793,6 +793,14 @@ declare namespace Serenity {
         };
     }
 }
+declare namespace Q.Router {
+    let enabled: boolean;
+    function navigate(hash: string, tryBack?: boolean, silent?: boolean): void;
+    function replace(hash: string, tryBack?: boolean): void;
+    function replaceLast(hash: string, tryBack?: boolean): void;
+    function dialog(owner: JQuery, element: JQuery, hash: () => string): void;
+    function resolve(hash?: string): void;
+}
 declare namespace Serenity {
     class ColumnsKeyAttribute {
         value: string;
@@ -1053,8 +1061,8 @@ declare namespace Serenity {
 declare namespace Serenity {
     namespace SubDialogHelper {
         function bindToDataChange(dialog: any, owner: Serenity.Widget<any>, dataChange: (p1: any, p2: DataChangeInfo) => void, useTimeout?: boolean): any;
-        function triggerDataChange(dialog: any): any;
-        function triggerDataChange(element: JQuery): JQuery;
+        function triggerDataChange(dialog: Serenity.Widget<any>): any;
+        function triggerDataChanged(element: JQuery): JQuery;
         function bubbleDataChange(dialog: any, owner: Serenity.Widget<any>, useTimeout?: boolean): any;
         function cascade(cascadedDialog: any, ofElement: JQuery): any;
         function cascadedDialogOffset(element: JQuery): any;

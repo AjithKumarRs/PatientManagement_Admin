@@ -1216,12 +1216,8 @@ declare namespace PatientManagement.PatientManagement {
     }
     interface LifeStylesForm {
         PatientId: Serenity.LookupEditor;
-        BadHabits: Serenity.StringEditor;
-        RemarksForFoodTake: Serenity.StringEditor;
         Regime: Serenity.TextAreaEditor;
         DailyMeals: Serenity.TextAreaEditor;
-        FavoriteFood: Serenity.StringEditor;
-        NotEating: Serenity.StringEditor;
     }
 }
 declare namespace PatientManagement.PatientManagement {
@@ -1489,7 +1485,6 @@ declare namespace PatientManagement.PatientManagement {
         Address: Serenity.StringEditor;
         Height: Serenity.IntegerEditor;
         Weight: Serenity.IntegerEditor;
-        WantedWeight: Serenity.StringEditor;
         NoteList: NotesEditor;
     }
 }
