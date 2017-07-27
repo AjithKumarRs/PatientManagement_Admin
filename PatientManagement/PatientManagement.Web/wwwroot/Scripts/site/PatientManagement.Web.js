@@ -457,6 +457,55 @@ var PatientManagement;
 (function (PatientManagement) {
     var Administration;
     (function (Administration) {
+        var SentEmailsForm = (function (_super) {
+            __extends(SentEmailsForm, _super);
+            function SentEmailsForm() {
+                return _super !== null && _super.apply(this, arguments) || this;
+            }
+            return SentEmailsForm;
+        }(Serenity.PrefixedContext));
+        SentEmailsForm.formKey = 'Administration.SentEmails';
+        Administration.SentEmailsForm = SentEmailsForm;
+        [['FromEmail', function () { return Serenity.StringEditor; }], ['FromName', function () { return Serenity.StringEditor; }], ['Subject', function () { return Serenity.StringEditor; }], ['Body', function () { return Serenity.StringEditor; }], ['ToEmail', function () { return Serenity.StringEditor; }], ['ToName', function () { return Serenity.StringEditor; }], ['TenantId', function () { return Serenity.IntegerEditor; }], ['InsertUserId', function () { return Serenity.IntegerEditor; }], ['InsertDate', function () { return Serenity.DateEditor; }], ['UpdateUserId', function () { return Serenity.IntegerEditor; }], ['UpdateDateField', function () { return Serenity.DateEditor; }], ['IsActive', function () { return Serenity.IntegerEditor; }]].forEach(function (x) { return Object.defineProperty(SentEmailsForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
+    })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var Administration;
+    (function (Administration) {
+        var SentEmailsRow;
+        (function (SentEmailsRow) {
+            SentEmailsRow.idProperty = 'SentEmailId';
+            SentEmailsRow.nameProperty = 'FromEmail';
+            SentEmailsRow.localTextPrefix = 'Administration.SentEmails';
+            var Fields;
+            (function (Fields) {
+            })(Fields = SentEmailsRow.Fields || (SentEmailsRow.Fields = {}));
+            ['SentEmailId', 'FromEmail', 'FromName', 'Subject', 'Body', 'ToEmail', 'ToName', 'TenantId', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'IsActive'].forEach(function (x) { return Fields[x] = x; });
+        })(SentEmailsRow = Administration.SentEmailsRow || (Administration.SentEmailsRow = {}));
+    })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var Administration;
+    (function (Administration) {
+        var SentEmailsService;
+        (function (SentEmailsService) {
+            SentEmailsService.baseUrl = 'Administration/SentEmails';
+            var Methods;
+            (function (Methods) {
+            })(Methods = SentEmailsService.Methods || (SentEmailsService.Methods = {}));
+            ['Create', 'Update', 'Delete', 'Retrieve', 'List'].forEach(function (x) {
+                SentEmailsService[x] = function (r, s, o) { return Q.serviceRequest(SentEmailsService.baseUrl + '/' + x, r, s, o); };
+                Methods[x] = SentEmailsService.baseUrl + '/' + x;
+            });
+        })(SentEmailsService = Administration.SentEmailsService || (Administration.SentEmailsService = {}));
+    })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var Administration;
+    (function (Administration) {
         var SergenService;
         (function (SergenService) {
             SergenService.baseUrl = 'Administration/Sergen';
@@ -1821,6 +1870,59 @@ var PatientManagement;
             Serenity.Decorators.registerClass()
         ], RolePermissionDialog);
         Administration.RolePermissionDialog = RolePermissionDialog;
+    })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var Administration;
+    (function (Administration) {
+        var SentEmailsDialog = (function (_super) {
+            __extends(SentEmailsDialog, _super);
+            function SentEmailsDialog() {
+                var _this = _super !== null && _super.apply(this, arguments) || this;
+                _this.form = new Administration.SentEmailsForm(_this.idPrefix);
+                return _this;
+            }
+            SentEmailsDialog.prototype.getFormKey = function () { return Administration.SentEmailsForm.formKey; };
+            SentEmailsDialog.prototype.getIdProperty = function () { return Administration.SentEmailsRow.idProperty; };
+            SentEmailsDialog.prototype.getLocalTextPrefix = function () { return Administration.SentEmailsRow.localTextPrefix; };
+            SentEmailsDialog.prototype.getNameProperty = function () { return Administration.SentEmailsRow.nameProperty; };
+            SentEmailsDialog.prototype.getService = function () { return Administration.SentEmailsService.baseUrl; };
+            SentEmailsDialog.prototype.loadEntity = function (entity) {
+                _super.prototype.loadEntity.call(this, entity);
+                if (this.isNewOrDeleted) {
+                    console.log("sa");
+                }
+            };
+            return SentEmailsDialog;
+        }(Serenity.EntityDialog));
+        SentEmailsDialog = __decorate([
+            Serenity.Decorators.registerClass(),
+            Serenity.Decorators.responsive()
+        ], SentEmailsDialog);
+        Administration.SentEmailsDialog = SentEmailsDialog;
+    })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var Administration;
+    (function (Administration) {
+        var SentEmailsGrid = (function (_super) {
+            __extends(SentEmailsGrid, _super);
+            function SentEmailsGrid(container) {
+                return _super.call(this, container) || this;
+            }
+            SentEmailsGrid.prototype.getColumnsKey = function () { return 'Administration.SentEmails'; };
+            SentEmailsGrid.prototype.getDialogType = function () { return Administration.SentEmailsDialog; };
+            SentEmailsGrid.prototype.getIdProperty = function () { return Administration.SentEmailsRow.idProperty; };
+            SentEmailsGrid.prototype.getLocalTextPrefix = function () { return Administration.SentEmailsRow.localTextPrefix; };
+            SentEmailsGrid.prototype.getService = function () { return Administration.SentEmailsService.baseUrl; };
+            return SentEmailsGrid;
+        }(Serenity.EntityGrid));
+        SentEmailsGrid = __decorate([
+            Serenity.Decorators.registerClass()
+        ], SentEmailsGrid);
+        Administration.SentEmailsGrid = SentEmailsGrid;
     })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;

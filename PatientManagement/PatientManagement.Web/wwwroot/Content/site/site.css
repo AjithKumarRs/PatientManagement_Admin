@@ -8943,3 +8943,10 @@ section.content > .s-DataGrid {
 .s-SubscriptionsGrid .active {
   background-color: #4fff62;
 }
+.s-Administration-SentEmailsDialog > .size {
+  width: 700px;
+  min-height: 500px;
+}
+.s-Administration-SentEmailsDialog .caption {
+  width: 150px;
+}

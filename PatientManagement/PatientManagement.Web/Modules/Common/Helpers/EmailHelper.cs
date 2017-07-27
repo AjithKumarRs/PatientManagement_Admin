@@ -60,5 +60,22 @@ namespace PatientManagement.Common
             client.Send(message);
 #endif
         }
+
+        public static void SendToPatient(string fromEmail, string FromName, string subject, string body, string toEmail,
+            string toName = "")
+        {
+            var apiKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
+
+            var client = new SendGridClient(apiKey);
+            var from = new EmailAddress(fromEmail, FromName);
+            var to = new EmailAddress(toEmail, toName);
+            var plainTextContent = body;
+            var htmlContent = body;
+            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+            var response = client.SendEmailAsync(msg).Result;
+        }
+
     }
+
+
 }

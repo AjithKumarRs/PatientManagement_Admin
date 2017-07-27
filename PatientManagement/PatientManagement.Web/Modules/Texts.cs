@@ -117,6 +117,7 @@ namespace PatientManagement
             {
                 public static LocalText ViewPatinet = "View Patient";
                 public static LocalText ViewVisit = "View Visit";
+                public static LocalText SendEmail = "Send Email";
                 public static LocalText DeleteVisit = "Delete Visit";
                 public static LocalText QuitContextMenu = "Quit";
 
@@ -197,6 +198,8 @@ namespace PatientManagement
                 public static LocalText RecieveNotificationToggle = "Recieve notifications?";
                 public static LocalText NewVisitFloatedButton = "New Visit";
                 public static LocalText NewPatientFloatedButton = "New Patient";
+                public static LocalText NewEmailFloatedButton = "New Email";
+
                 public static LocalText AddFloatedButton = "Add";
 
                 public static LocalText FooterCopyright = "Copyright (c) 2017.";

@@ -559,6 +559,79 @@ declare namespace PatientManagement.Administration {
     }
 }
 declare namespace PatientManagement.Administration {
+    class SentEmailsForm extends Serenity.PrefixedContext {
+        static formKey: string;
+    }
+    interface SentEmailsForm {
+        FromEmail: Serenity.StringEditor;
+        FromName: Serenity.StringEditor;
+        Subject: Serenity.StringEditor;
+        Body: Serenity.StringEditor;
+        ToEmail: Serenity.StringEditor;
+        ToName: Serenity.StringEditor;
+        TenantId: Serenity.IntegerEditor;
+        InsertUserId: Serenity.IntegerEditor;
+        InsertDate: Serenity.DateEditor;
+        UpdateUserId: Serenity.IntegerEditor;
+        UpdateDateField: Serenity.DateEditor;
+        IsActive: Serenity.IntegerEditor;
+    }
+}
+declare namespace PatientManagement.Administration {
+    interface SentEmailsRow {
+        SentEmailId?: number;
+        FromEmail?: string;
+        FromName?: string;
+        Subject?: string;
+        Body?: string;
+        ToEmail?: string;
+        ToName?: string;
+        TenantId?: number;
+        InsertUserId?: number;
+        InsertDate?: string;
+        UpdateUserId?: number;
+        UpdateDateField?: string;
+        IsActive?: number;
+    }
+    namespace SentEmailsRow {
+        const idProperty = "SentEmailId";
+        const nameProperty = "FromEmail";
+        const localTextPrefix = "Administration.SentEmails";
+        namespace Fields {
+            const SentEmailId: any;
+            const FromEmail: any;
+            const FromName: any;
+            const Subject: any;
+            const Body: any;
+            const ToEmail: any;
+            const ToName: any;
+            const TenantId: any;
+            const InsertUserId: any;
+            const InsertDate: any;
+            const UpdateUserId: any;
+            const UpdateDateField: any;
+            const IsActive: any;
+        }
+    }
+}
+declare namespace PatientManagement.Administration {
+    namespace SentEmailsService {
+        const baseUrl = "Administration/SentEmails";
+        function Create(request: Serenity.SaveRequest<SentEmailsRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Serenity.ServiceOptions<any>): JQueryXHR;
+        function Update(request: Serenity.SaveRequest<SentEmailsRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<SentEmailsRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<SentEmailsRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        namespace Methods {
+            const Create: string;
+            const Update: string;
+            const Delete: string;
+            const Retrieve: string;
+            const List: string;
+        }
+    }
+}
+declare namespace PatientManagement.Administration {
     interface SergenConnection {
         Key?: string;
     }
@@ -1923,6 +1996,27 @@ declare namespace PatientManagement.Administration {
     interface RolePermissionDialogOptions {
         roleID?: number;
         title?: string;
+    }
+}
+declare namespace PatientManagement.Administration {
+    class SentEmailsDialog extends Serenity.EntityDialog<SentEmailsRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getService(): string;
+        protected form: SentEmailsForm;
+        loadEntity(entity: SentEmailsRow): void;
+    }
+}
+declare namespace PatientManagement.Administration {
+    class SentEmailsGrid extends Serenity.EntityGrid<SentEmailsRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof SentEmailsDialog;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        constructor(container: JQuery);
     }
 }
 declare var Vue: any;
