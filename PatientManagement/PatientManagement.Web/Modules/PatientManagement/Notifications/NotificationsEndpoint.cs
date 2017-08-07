@@ -1,4 +1,6 @@
 ﻿
+using PatientManagement.Administration;
+
 namespace PatientManagement.PatientManagement.Endpoints
 {
     using Serenity;
@@ -46,9 +48,11 @@ namespace PatientManagement.PatientManagement.Endpoints
         }
         public CountNotificationsResponse CountNotifications(IDbConnection connection, ListRequest request)
         {
-           return new CountNotificationsResponse
+            var some = new MyRepository().ListForDropdown(connection, request);
+            return new CountNotificationsResponse
            {
-               Count = connection.Count<MyRow>()
+
+               Count = some.TotalCount
            };
         }
     }
