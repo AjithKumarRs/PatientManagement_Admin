@@ -1554,6 +1554,8 @@ declare namespace PatientManagement.PatientManagement {
         Gender: Serenity.EnumEditor;
         PersonalNumber: Serenity.StringEditor;
         PhoneNumber: Serenity.StringEditor;
+        Email: Serenity.EmailEditor;
+        NotifyOnchange: Serenity.BooleanEditor;
         FirstRegistrationDate: Serenity.DateTimeEditor;
         Address: Serenity.StringEditor;
         Height: Serenity.IntegerEditor;

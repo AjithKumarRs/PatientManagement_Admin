@@ -23,11 +23,15 @@ namespace PatientManagement.PatientManagement.Columns
         public Int64 PersonalNumber { get; set; }
         [Width(150), PatientsPhoneFormatter]
         public Int64 PhoneNumber { get; set; }
+
+        public string Email { get; set; }
+
         public DateTime FirstRegistrationDate { get; set; }
         public String Address { get; set; }
         public Int32 Height { get; set; }
         public Int32 Weight { get; set; }
-        
+        public bool NotifyOnChange { get; set; }
+
         // TODO Add when you figure out how to add permissions here
         //public Int32 InsertUserId { get; set; }
 
