@@ -15,9 +15,8 @@ namespace PatientManagement.Administration {
 
         loadEntity(entity: SentEmailsRow) {
             super.loadEntity(entity);
-
-            if (this.isNewOrDeleted) {
-                console.log("sa"); 
+            if (this.isEditMode()) {
+                Serenity.EditorUtils.setReadOnly(this.form.Subject, true);
             }
         }
 
