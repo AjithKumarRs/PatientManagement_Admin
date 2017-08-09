@@ -1569,6 +1569,8 @@ declare namespace PatientManagement.PatientManagement {
         Name?: string;
         PersonalNumber?: number;
         PhoneNumber?: string;
+        Email?: string;
+        NotifyOnchange?: boolean;
         Gender?: Gender;
         FirstRegistrationDate?: string;
         Address?: string;
@@ -1591,6 +1593,8 @@ declare namespace PatientManagement.PatientManagement {
             const Name: string;
             const PersonalNumber: string;
             const PhoneNumber: string;
+            const Email: string;
+            const NotifyOnchange: boolean;
             const Gender: string;
             const FirstRegistrationDate: string;
             const Address: string;
@@ -2333,6 +2337,20 @@ declare namespace PatientManagement.Common {
 }
 declare namespace PatientManagement.LanguageList {
     function getValue(): string[][];
+}
+declare namespace PatientManagement {
+    interface LKCodeDescOptions extends Serenity.LookupEditorOptions {
+        codeFieldName: string;
+        descrFieldName: string;
+    }
+}
+declare namespace PatientManagement {
+    class LKCodeDescr extends Serenity.LookupEditorBase<LKCodeDescOptions, any> {
+        constructor(container: JQuery, opt?: LKCodeDescOptions);
+        getSelect2Options(): Select2Options;
+        protected myFormatSelection(item: Serenity.Select2Item): string;
+        protected myFormatResult(item: Serenity.Select2Item): string;
+    }
 }
 declare namespace PatientManagement.Common {
     class LanguageSelection extends Serenity.Widget<any> {

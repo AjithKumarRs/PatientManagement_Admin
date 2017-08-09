@@ -1,4 +1,6 @@
 ﻿
+using PatientManagement.PatientManagement.Entities;
+
 namespace PatientManagement.Administration.Forms
 {
     using Serenity;
@@ -13,7 +15,7 @@ namespace PatientManagement.Administration.Forms
     [BasedOnRow(typeof(Entities.SentEmailsRow))]
     public class SentEmailsForm
     {
-        [EmailEditor]
+        [LookupCodeDescr(typeof(PatientsRow), "Email", "Name")]
         public String ToEmail { get; set; }
         // public String ToName { get; set; }
         public String Subject { get; set; }

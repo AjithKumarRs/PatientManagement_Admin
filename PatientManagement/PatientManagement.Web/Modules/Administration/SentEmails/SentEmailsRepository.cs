@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Mvc;
 using MVC;
 using PatientManagement.Common;
 using PatientManagement.PatientManagement.Entities;
@@ -26,6 +27,17 @@ namespace PatientManagement.Administration.Repositories
             {
                 request.Entity.ToName = request.Entity.ToEmail;
             }
+
+            var connection = SqlConnections.NewFor<PatientsRow>();
+            var patientFields = PatientsRow.Fields;
+
+            var patient = connection.First<PatientsRow>(patientFields.PatientId == request.Entity.ToEmail);
+            if (string.IsNullOrEmpty(patient.Email))
+                return null;
+
+            request.Entity.ToEmail = patient.Email;
+            request.Entity.ToName = patient.Name;
+
             return new MySaveHandler().Process(uow, request, SaveRequestType.Create);
         }
 

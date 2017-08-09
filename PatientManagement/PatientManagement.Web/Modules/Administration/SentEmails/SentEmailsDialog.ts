@@ -20,5 +20,6 @@ namespace PatientManagement.Administration {
                 console.log("sa"); 
             }
         }
+
     }
 }

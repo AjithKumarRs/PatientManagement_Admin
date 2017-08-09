@@ -88,7 +88,8 @@ namespace PatientManagement.PatientManagement.Entities
             set { Fields.Height[this] = value; }
         }
 
-        [DisplayName("Email"), Size(100)]
+        [DisplayName("Email"), Size(100), QuickSearch]
+        [LookupInclude]
         public String Email
         {
             get { return Fields.Email[this]; }

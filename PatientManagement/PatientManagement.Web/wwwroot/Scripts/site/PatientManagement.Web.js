@@ -1209,7 +1209,7 @@ var PatientManagement;
             var Fields;
             (function (Fields) {
             })(Fields = PatientsRow.Fields || (PatientsRow.Fields = {}));
-            ['PatientId', 'Name', 'PersonalNumber', 'PhoneNumber', 'Gender', 'FirstRegistrationDate', 'Address', 'Height', 'Weight', 'WantedWeight', 'InsertUserId', 'InsertDate', 'NoteList', 'TenantId'].forEach(function (x) { return Fields[x] = x; });
+            ['PatientId', 'Name', 'PersonalNumber', 'PhoneNumber', 'Email', 'NotifyOnchange', 'Gender', 'FirstRegistrationDate', 'Address', 'Height', 'Weight', 'WantedWeight', 'InsertUserId', 'InsertDate', 'NoteList', 'TenantId'].forEach(function (x) { return Fields[x] = x; });
         })(PatientsRow = PatientManagement.PatientsRow || (PatientManagement.PatientsRow = {}));
     })(PatientManagement = PatientManagement_19.PatientManagement || (PatientManagement_19.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
@@ -3382,6 +3382,49 @@ var PatientManagement;
         }
         LanguageList.getValue = getValue;
     })(LanguageList = PatientManagement.LanguageList || (PatientManagement.LanguageList = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var LKCodeDescr = (function (_super) {
+        __extends(LKCodeDescr, _super);
+        function LKCodeDescr(container, opt) {
+            var _this = _super.call(this, container, opt) || this;
+            container.data("codeName", opt.codeFieldName);
+            container.data("descrName", opt.descrFieldName);
+            return _this;
+        }
+        LKCodeDescr.prototype.getSelect2Options = function () {
+            var selec2Options = _super.prototype.getSelect2Options.call(this);
+            selec2Options.formatResult = this.myFormatResult;
+            selec2Options.formatSelection = this.myFormatSelection;
+            return selec2Options;
+        };
+        LKCodeDescr.prototype.myFormatSelection = function (item) {
+            var code = item.source[this.element.data("codeName")];
+            var descr = item.source[this.element.data("descrName")];
+            var title = "Code: " + code;
+            title += " - " + descr;
+            return "<div title='" + title + "'><b>" + code + "</b>&nbsp;-&nbsp;" + descr + "</div>";
+        };
+        LKCodeDescr.prototype.myFormatResult = function (item) {
+            var code = item.source[this.element.data("codeName")];
+            var descr = item.source[this.element.data("descrName")];
+            var title = "Code: " + code;
+            title += " - " + descr;
+            var markup = '<div class="row">' +
+                '<div class="col-xs-6" style="white-space: nowrap"><b>' + code + "</b>" + "</div>" +
+                '<div class="col-xs-6"><small>' + descr + '</small></div>' +
+                '</div>';
+            // This for search on code and description
+            item.text = code + " " + descr;
+            return markup;
+        };
+        return LKCodeDescr;
+    }(Serenity.LookupEditorBase));
+    LKCodeDescr = __decorate([
+        Serenity.Decorators.registerEditor()
+    ], LKCodeDescr);
+    PatientManagement.LKCodeDescr = LKCodeDescr;
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
 (function (PatientManagement) {
