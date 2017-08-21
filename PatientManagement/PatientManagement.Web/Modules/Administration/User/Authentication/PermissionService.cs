@@ -20,18 +20,12 @@ namespace PatientManagement.Administration
             var user = (UserDefinition)Authorization.UserDefinition;
             if (user == null)
                 return false;
-
-
-            if (!GetTenantPermissions(user.TenantId))
-            {
-
-            }
-
+            
             bool grant;
             if (GetUserPermissions(user.UserId).TryGetValue(permission, out grant))
                 return grant;
 
-            foreach (var roleId in GetUserRoles(user.UserId))
+            foreach (var roleId in GetUserRoles(user.UserId, user.TenantId))
             {
                 if (GetRolePermissions(roleId).Contains(permission))
                     return true;
@@ -39,44 +33,7 @@ namespace PatientManagement.Administration
 
             return false;
         }
-
-        private bool GetTenantPermissions(int tenantId)
-        {
-            var connection = SqlConnections.NewFor<TenantRow>();
-            //using (var connection = SqlConnections.NewFor<TenantRow>())
-            //{
-            // First we get the current tenant for user 
-            var tenantFld = TenantRow.Fields;
-                var tenant = connection.First<TenantRow>(tenantFld.TenantId == tenantId);
-                if (tenant?.SubscriptionRequired != null && !tenant.SubscriptionRequired.Value)
-                {
-                    return true;
-                }
-
-                // Then we check if the tenant have active subscription
-                var subsFld = SubscriptionsRow.Fields;
-                var subscription = connection.First<SubscriptionsRow>(subsFld.TenantId == tenantId && subsFld.IsActive == (int)SubscriptionState.Active);
-
-            var subsId = (int)subscription.SubscriptionId;
-                var paymentsFld = PaymentsRow.Fields;
-                //var payments = connection.List<PaymentsRow>(c => c.Where(
-                //    paymentsFld.TenantId == tenantId 
-                //    && paymentsFld.SubscriptionId == subsId
-                //    ));
-
-                //if (!payments.Any())
-                //{
-                    
-                //}
-                //else
-                //{
-                    
-                //}
-           // }
-
-            return false;
-        }
-
+        
         private Dictionary<string, bool> GetUserPermissions(int userId)
         {
             var fld = UserPermissionRow.Fields;
@@ -118,7 +75,7 @@ namespace PatientManagement.Administration
             });
         }
 
-        private HashSet<int> GetUserRoles(int userId)
+        private HashSet<int> GetUserRoles(int userId, int tenantId)
         {
             var fld = UserRoleRow.Fields;
 
@@ -128,10 +85,46 @@ namespace PatientManagement.Administration
                 {
                     var result = new HashSet<int>();
 
-                    connection.List<UserRoleRow>(q => q
-                            .Select(fld.RoleId)
-                            .Where(new Criteria(fld.UserId) == userId))
-                        .ForEach(x => result.Add(x.RoleId.Value));
+                    //TODO Restrict access when subscription is required 
+                    var tenantFld = TenantRow.Fields;
+                    var tenant = connection.First<TenantRow>(tenantFld.TenantId == tenantId);
+                    if (tenant?.SubscriptionRequired != null && tenant.SubscriptionRequired.Value)
+                    {
+                        // We check if the tenant have active subscription
+                        var subsFld = SubscriptionsRow.Fields;
+                        var subscriptions =
+                            connection.List<SubscriptionsRow>(subsFld.TenantId == tenantId);
+
+                        if (subscriptions.Any() && subscriptions.Any(s => s.IsActive == 1) )//subscription.SubscriptionEndDate >= DateTime.Now)
+                        {
+                            //TODO Check user payments here 
+
+
+                            // All looks fine, get current user roles 
+                            connection.List<UserRoleRow>(q => q
+                                    .Select(fld.RoleId)
+                                    .Where(new Criteria(fld.UserId) == userId))
+                                .ForEach(x => result.Add(x.RoleId.Value));
+                        }
+                        else
+                        {
+                            // TODO Don't use this shit like number! 3 = Expired role 
+                            result.Add(3);
+
+                            // Return expired role
+                            return result;
+                        }
+                    }
+                    else
+                    {
+                        // TODO: Clean this code and keep it simple stupid 
+                        connection.List<UserRoleRow>(q => q
+                                .Select(fld.RoleId)
+                                .Where(new Criteria(fld.UserId) == userId))
+                            .ForEach(x => result.Add(x.RoleId.Value));
+                    }
+
+
 
                     return result;
                 }

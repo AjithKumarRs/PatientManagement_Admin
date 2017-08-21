@@ -21,6 +21,6 @@ using Administration = PatientManagement.Administration.Pages;
 [assembly: NavigationLink(9000, "Administration/Translations", typeof(Administration.TranslationController), icon: "icon-speech")]
 
 
-[assembly: NavigationLink(9000, "Administration/SentEmails", typeof(Administration.SentEmailsController), icon: "fa-envelope-open")]
+//[assembly: NavigationLink(9000, "Administration/SentEmails", typeof(Administration.SentEmailsController), icon: "fa-envelope-open")]
 
 [assembly: NavigationLink(9000, "Administration/Sergen", typeof(Administration.SergenController), icon: "icon-magic-wand")]

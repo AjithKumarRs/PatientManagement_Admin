@@ -1881,11 +1881,39 @@ var PatientManagement;
 (function (PatientManagement) {
     var Administration;
     (function (Administration) {
-        var SentEmailsDialog = (function (_super) {
+        var SentEmailsDialog = SentEmailsDialog_1 = (function (_super) {
             __extends(SentEmailsDialog, _super);
             function SentEmailsDialog() {
                 var _this = _super !== null && _super.apply(this, arguments) || this;
                 _this.form = new Administration.SentEmailsForm(_this.idPrefix);
+                _this.sendPredefinedEmail = function (visitId) {
+                    PatientManagement.PatientManagement.VisitsService.Retrieve({
+                        EntityId: visitId
+                    }, function (resp) {
+                        var visit = {};
+                        visit = resp.Entity;
+                        //TODO: Remove this service call! 
+                        PatientManagement.PatientManagement.PatientsService.Retrieve({
+                            EntityId: visit.PatientId
+                        }, function (resp) {
+                            var patient = {};
+                            patient = resp.Entity;
+                            if (!patient.Email) {
+                                Q.confirm(Q.text("Site.Dashboard.AlertOnPatientNoEmail"), function () {
+                                    new PatientManagement.PatientManagement.PatientsDialog().loadByIdAndOpenDialog(patient.PatientId);
+                                });
+                            }
+                            else {
+                                var sentEmail = {};
+                                var sentEmailDialog = new SentEmailsDialog_1();
+                                sentEmail.ToEmail = patient.Email;
+                                sentEmail.ToName = patient.Name;
+                                // TODO: Default value for email lookup
+                                sentEmailDialog.loadNewAndOpenDialog();
+                            }
+                        });
+                    });
+                };
                 return _this;
             }
             SentEmailsDialog.prototype.getFormKey = function () { return Administration.SentEmailsForm.formKey; };
@@ -1901,11 +1929,12 @@ var PatientManagement;
             };
             return SentEmailsDialog;
         }(Serenity.EntityDialog));
-        SentEmailsDialog = __decorate([
+        SentEmailsDialog = SentEmailsDialog_1 = __decorate([
             Serenity.Decorators.registerClass(),
             Serenity.Decorators.responsive()
         ], SentEmailsDialog);
         Administration.SentEmailsDialog = SentEmailsDialog;
+        var SentEmailsDialog_1;
     })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;

@@ -115,6 +115,9 @@ namespace PatientManagement
 
             public static class Dashboard
             {
+                public static LocalText AlertOnPatientNoEmail = "The patient dosn't have an email address, add now?";
+
+
                 public static LocalText ViewPatinet = "View Patient";
                 public static LocalText ViewVisit = "View Visit";
                 public static LocalText SendEmail = "Send Email";

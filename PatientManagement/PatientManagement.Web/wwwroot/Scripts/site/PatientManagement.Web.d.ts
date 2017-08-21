@@ -2013,6 +2013,7 @@ declare namespace PatientManagement.Administration {
         protected getService(): string;
         protected form: SentEmailsForm;
         loadEntity(entity: SentEmailsRow): void;
+        sendPredefinedEmail: (visitId: any) => void;
     }
 }
 declare namespace PatientManagement.Administration {

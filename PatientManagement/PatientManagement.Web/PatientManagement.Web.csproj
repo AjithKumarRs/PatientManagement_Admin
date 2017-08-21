@@ -19,6 +19,7 @@
     <PackageProjectUrl>http://admin-myclario.azurewebsites.net/</PackageProjectUrl>
     <PackageIconUrl>https://github.com/Magik3a/PatientManagement_Admin/blob/master/PatientManagement/PatientManagement.Web/wwwroot/favicon.ico</PackageIconUrl>
     <RepositoryUrl>https://github.com/Magik3a/PatientManagement_Admin</RepositoryUrl>
+    <TypeScriptToolsVersion>2.3</TypeScriptToolsVersion>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Modules\Administration\OffersLang\**" />
@@ -82,6 +83,7 @@
   </ItemGroup>
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.1' ">
     <DefineConstants>$(DefineConstants);COREFX;ASPNETCORE</DefineConstants>
+    <EnableDefaultContentItems>false</EnableDefaultContentItems>
   </PropertyGroup>
   <Target Name="PrecompileScript" BeforeTargets="BeforeBuild">
     <Exec Command="npm install" />

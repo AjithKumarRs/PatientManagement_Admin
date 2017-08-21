@@ -89,13 +89,13 @@
                         break;
 
                     case 'sendEmail':
-                        //TODO FIX This
-                        new PatientManagement.Administration.SentEmailsDialog().loadNewAndOpenDialog();
+                        var dialogSendEmails = new PatientManagement.Administration.SentEmailsDialog();
+                        dialogSendEmails.sendPredefinedEmail(options.$trigger.data('visitId'));
                         break;
                     case 'delete':
 
-                        var dialog = new PatientManagement.PatientManagement.CalendarVisitsDialog();
-                        dialog.deleteVisit(options.$trigger.data('visitId'));
+                        var dialogCalendarVisit = new PatientManagement.PatientManagement.CalendarVisitsDialog();
+                        dialogCalendarVisit.deleteVisit(options.$trigger.data('visitId'));
 
                     break;
 
