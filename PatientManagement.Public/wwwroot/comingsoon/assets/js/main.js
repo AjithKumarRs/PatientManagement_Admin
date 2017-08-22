@@ -86,7 +86,7 @@ $(".zoom").each(function() {
 $(".countdown").each(function() {
 	$('.countdown').countdown({
 		//Set your target date here!
-		day: 1,//Set your target Days
+		day: 20,//Set your target Days
 		month: 8,//Set your target Month
 		year: 2017,//Set your target Year
 		onChange: function() {m3dAnimate($('.digits span'));}
