@@ -187,6 +187,7 @@ namespace PatientManagement.Administration.Entities
 
         [NotNull, Insertable(false), Updatable(true), SortOrder(1, true)]
         [BsSwitchEditor]
+        [LookupInclude]
         public Int16? IsActive
         {
             get { return Fields.IsActive[this]; }

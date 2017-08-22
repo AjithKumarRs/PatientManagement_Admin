@@ -1642,6 +1642,7 @@ var PatientManagement;
         Administration.PaymentOptionsGrid = PaymentOptionsGrid;
     })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
 })(PatientManagement || (PatientManagement = {}));
+/// <reference types="jqueryui" />
 var PatientManagement;
 (function (PatientManagement) {
     var Administration;
@@ -1651,22 +1652,33 @@ var PatientManagement;
             function PaymentsDialog() {
                 var _this = _super.call(this) || this;
                 _this.form = new Administration.PaymentsForm(_this.idPrefix);
+                _this.form.PaymentOptionId.changeSelect2(function (e) {
+                    _this.CheckIfFieldsAreEmpty();
+                });
+                _this.form.SubscriptionId.changeSelect2(function (e) {
+                    _this.CheckIfFieldsAreEmpty();
+                });
+                _this.form.CurrencyId.changeSelect2(function (e) {
+                    _this.CheckIfFieldsAreEmpty();
+                });
                 return _this;
-                //this.form.SubscriptionId.changeSelect2(e => {
-                //    //var customerID = this.form.SubscriptionId.value;
-                //    //SubscriptionsService.Retrieve({
-                //    //    EntityId: customerID
-                //    //}, response => {
-                //    //    this.setCustomerDetails(response.Entity);
-                //    //});
-                //    console.log("hey")
-                //});
             }
             PaymentsDialog.prototype.getFormKey = function () { return Administration.PaymentsForm.formKey; };
             PaymentsDialog.prototype.getIdProperty = function () { return Administration.PaymentsRow.idProperty; };
             PaymentsDialog.prototype.getLocalTextPrefix = function () { return Administration.PaymentsRow.localTextPrefix; };
             PaymentsDialog.prototype.getNameProperty = function () { return Administration.PaymentsRow.nameProperty; };
             PaymentsDialog.prototype.getService = function () { return Administration.PaymentsService.baseUrl; };
+            PaymentsDialog.prototype.CheckIfFieldsAreEmpty = function () {
+                if (this.form.SubscriptionId.value && this.form.PaymentOptionId.value && this.form.CurrencyId.value) {
+                    $.get('../Administration/Payments/GetPrice', {
+                        SubscriptionId: this.form.SubscriptionId.value,
+                        PaymentOptionId: this.form.PaymentOptionId.value,
+                        CurrencyId: this.form.CurrencyId.value
+                    }, function (price) {
+                        $("input[name='Value']").val(price);
+                    });
+                }
+            };
             PaymentsDialog.prototype.setCustomerDetails = function (details) {
             };
             return PaymentsDialog;

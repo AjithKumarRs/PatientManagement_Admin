@@ -27,7 +27,7 @@ namespace PatientManagement.Administration.Entities
         }
 
         [DisplayName("Subscription"), NotNull, ForeignKey("[dbo].[Subscriptions]", "SubscriptionId"), LeftJoin("jSubscription")]
-        [LookupEditor(typeof(SubscriptionsRow), InplaceAdd = true)]
+        [LookupEditor(typeof(SubscriptionsRow), InplaceAdd = false, FilterField = "IsActive", FilterValue = 1)]
         public Int64? SubscriptionId
         {
             get { return Fields.SubscriptionId[this]; }
@@ -52,14 +52,14 @@ namespace PatientManagement.Administration.Entities
         }
 
         [DisplayName("Currency"), NotNull,ForeignKey("[dbo].[Currencies]", "Id"), LeftJoin("jCurrency"), TextualField("CurrencyCurrencyId")]
-        [LookupEditor(typeof(CurrenciesRow))]
+        [LookupEditor(typeof(CurrenciesRow), FilterField = "Enabled", FilterValue = true)]
         public Int32? CurrencyId
         {
             get { return Fields.CurrencyId[this]; }
             set { Fields.CurrencyId[this] = value; }
         }
 
-        [DisplayName("Value"), Size(8), Scale(4), NotNull]
+        [DisplayName("Value"),  NotNull]
         public Decimal? Value
         {
             get { return Fields.Value[this]; }

@@ -1937,6 +1937,7 @@ declare namespace PatientManagement.Administration {
         protected getService(): string;
         protected form: PaymentsForm;
         constructor();
+        protected CheckIfFieldsAreEmpty(): void;
         private setCustomerDetails(details);
     }
 }
