@@ -41,9 +41,9 @@
     @if (hideNav)
     {
         <script type="text/javascript">
-        $(function () {
-            @RenderSection("PageInitScript", false)
-        });
+            $(function () {
+                @RenderSection("PageInitScript", false)
+            });
         </script>
         <div id="page-outer-nonav">
             <div id="page-container" class="page-container-common">
@@ -88,7 +88,19 @@
 
                                         <p>
                                             @(user != null ? user.DisplayName : "")
+                                            <br />
+                                            <small id="role-list"></small>
+                                            <script>
+                                                $(function () {
+                                                    // Show user permision
+                                                    var userData = new Q.getRemoteData('UserData');
+                                                    if (userData.RolesList) {
+                                                        $("#role-list").text(userData.RolesList.join());
+                                                    }
+                                                })
+                                            </script>
                                         </p>
+
                                     </li>
 
                                     <!-- Menu Footer-->

@@ -162,8 +162,7 @@ namespace PatientManagement.Administration.Entities
             public readonly Int32Field TenantId;
             public readonly StringField TenantName;
             public readonly Int32Field TenantCurrencyId;
-
-
+            
             public RowFields()
                 : base("Users")
             {
