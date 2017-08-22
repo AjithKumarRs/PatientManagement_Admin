@@ -86,11 +86,16 @@
                     break;
                     case 'openVisit':
                         new PatientManagement.PatientManagement.CalendarVisitsDialog().loadByIdAndOpenDialog(options.$trigger.data('visitId'));
-                    break;
+                        break;
+
+                    case 'sendEmail':
+                        var dialogSendEmails = new PatientManagement.Administration.SentEmailsDialog();
+                        dialogSendEmails.sendPredefinedEmail(options.$trigger.data('visitId'));
+                        break;
                     case 'delete':
 
-                        var dialog = new PatientManagement.PatientManagement.CalendarVisitsDialog();
-                        dialog.deleteVisit(options.$trigger.data('visitId'));
+                        var dialogCalendarVisit = new PatientManagement.PatientManagement.CalendarVisitsDialog();
+                        dialogCalendarVisit.deleteVisit(options.$trigger.data('visitId'));
 
                     break;
 
@@ -100,9 +105,12 @@
             },
             items: {
                 "viewPatinet": { name: "@Html.Raw(Texts.Site.Dashboard.ViewPatinet)", icon: "fa-user" },
-                "sep3": "---------",
+                "sep4": "---------",
 
                 "openVisit": { name: "@Html.Raw(Texts.Site.Dashboard.ViewVisit)", icon: "fa-calendar-o" },
+                "sep3": "---------",
+
+                "sendEmail": { name: "@Html.Raw(Texts.Site.Dashboard.SendEmail)", icon: "fa-envelope-open-o" },
                 "sep2": "---------",
 
                 "delete": { name: "@Html.Raw(Texts.Site.Dashboard.DeleteVisit)", icon: "fa-trash-o" },

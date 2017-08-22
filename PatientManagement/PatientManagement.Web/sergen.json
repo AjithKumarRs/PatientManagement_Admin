@@ -46,6 +46,12 @@
           "PermissionKey": "AdministrationTenants:PaymentsDetails"
         },
         {
+          "Tablename": "dbo.SentEmails",
+          "Identifier": "SentEmails",
+          "Module": "Administration",
+          "PermissionKey": "Administration:SentEmails"
+        },
+        {
           "Tablename": "dbo.Subscriptions",
           "Identifier": "Subscriptions",
           "Module": "Administration",

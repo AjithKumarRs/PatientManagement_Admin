@@ -1,5 +1,7 @@
 ﻿
 
+using PatientManagement.Web.Modules.Common;
+
 namespace PatientManagement.Administration.Endpoints
 {
     using Entities;
@@ -32,7 +34,7 @@ namespace PatientManagement.Administration.Endpoints
         {
             return new MyRepository().Update(uow, request);
         }
- 
+
         [HttpPost, AuthorizeDelete(typeof(MyRow))]
         public DeleteResponse Delete(IUnitOfWork uow, DeleteRequest request)
         {
@@ -77,10 +79,17 @@ namespace PatientManagement.Administration.Endpoints
             result.Username = user.Username;
             result.DisplayName = user.DisplayName;
             result.IsAdmin = user.Username == "admin";
-
             result.Permissions = TwoLevelCache.GetLocalStoreOnly("ScriptUserPermissions:" + user.Id, TimeSpan.Zero,
                 UserPermissionRow.Fields.GenerationKey, () =>
                 {
+                    //TODO: User role may be is incorect
+                    var connection = SqlConnections.NewFor<UserRoleRow>();
+                    var rolesFld = RoleRow.Fields;
+                    var roleIdList = UserSubscriptionHelper.GetUserRolesIdBasedOnSubscription(user.UserId, user.TenantId);
+                    if (roleIdList.Any())
+                        result.RolesList = connection.List<RoleRow>(rolesFld.RoleId.In(roleIdList)).Select(r => r.RoleName).ToList();
+
+
                     var permissions = new Dictionary<string, bool>(StringComparer.OrdinalIgnoreCase);
 
                     if (permissionsUsedFromScript == null)

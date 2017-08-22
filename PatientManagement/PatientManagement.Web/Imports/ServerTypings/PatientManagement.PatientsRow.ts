@@ -4,6 +4,8 @@
         Name?: string;
         PersonalNumber?: number;
         PhoneNumber?: string;
+        Email?: string;
+        NotifyOnchange?: boolean;
         Gender?: Gender;
         FirstRegistrationDate?: string;
         Address?: string;
@@ -31,6 +33,8 @@
             export declare const Name: string;
             export declare const PersonalNumber: string;
             export declare const PhoneNumber: string;
+            export declare const Email: string;
+            export declare const NotifyOnchange: boolean;
             export declare const Gender: string;
             export declare const FirstRegistrationDate: string;
             export declare const Address: string;
@@ -43,6 +47,6 @@
             export declare const TenantId: string;
         }
 
-        ['PatientId', 'Name', 'PersonalNumber', 'PhoneNumber', 'Gender', 'FirstRegistrationDate', 'Address', 'Height', 'Weight', 'WantedWeight', 'InsertUserId', 'InsertDate', 'NoteList', 'TenantId'].forEach(x => (<any>Fields)[x] = x);
+        ['PatientId', 'Name', 'PersonalNumber', 'PhoneNumber', 'Email', 'NotifyOnchange', 'Gender', 'FirstRegistrationDate', 'Address', 'Height', 'Weight', 'WantedWeight', 'InsertUserId', 'InsertDate', 'NoteList', 'TenantId'].forEach(x => (<any>Fields)[x] = x);
     }
 }

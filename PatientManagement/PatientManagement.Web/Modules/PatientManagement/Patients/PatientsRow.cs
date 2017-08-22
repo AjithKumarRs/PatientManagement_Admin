@@ -88,6 +88,21 @@ namespace PatientManagement.PatientManagement.Entities
             set { Fields.Height[this] = value; }
         }
 
+        [DisplayName("Email"), Size(100), QuickSearch]
+        [LookupInclude]
+        public String Email
+        {
+            get { return Fields.Email[this]; }
+            set { Fields.Email[this] = value; }
+        }
+        [DisplayName("Notify On Change")]
+        [BsSwitchEditor]
+        public Boolean? NotifyOnChange
+        {
+            get { return Fields.NotifyOnChange[this]; }
+            set { Fields.NotifyOnChange[this] = value; }
+        }
+
         [DisplayName("Weight")]
         public Int32? Weight
         {
@@ -145,6 +160,8 @@ namespace PatientManagement.PatientManagement.Entities
             public StringField Address;
             public Int32Field Height;
             public Int32Field Weight;
+            public StringField Email;
+            public BooleanField NotifyOnChange;
 
             public StringField WantedWeight;
 

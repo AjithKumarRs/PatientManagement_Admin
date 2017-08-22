@@ -54,7 +54,7 @@ namespace PatientManagement.Administration.Repositories
                 {
                     var tenantFld = TenantRow.Fields;
                     var con = SqlConnections.NewFor<TenantRow>();
-                    var tenant = con.First<TenantRow>(c => c.Where(tenantFld.TenantId == user.TenantId));
+                    var tenant = con.First<TenantRow>(tenantFld.TenantId == user.TenantId);
                     tenant.SubscriptionId = Row.SubscriptionId;
                     con.UpdateById(tenant);
 

@@ -41,6 +41,11 @@ namespace MVC
                 public const string RoleIndex = "~/Modules/Administration/Role/RoleIndex.cshtml";
             }
 
+            public static class SentEmails
+            {
+                public const string SentEmailsIndex = "~/Modules/Administration/SentEmails/SentEmailsIndex.cshtml";
+            }
+
             public static class Sergen
             {
                 public const string SergenError = "~/Modules/Administration/Sergen/SergenError.cshtml";

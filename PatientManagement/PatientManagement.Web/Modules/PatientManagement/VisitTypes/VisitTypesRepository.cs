@@ -42,6 +42,18 @@ namespace PatientManagement.PatientManagement.Repositories
 
         private class MyDeleteHandler : DeleteRequestHandler<MyRow>{ }
         private class MyRetrieveHandler : RetrieveRequestHandler<MyRow> { }
-        private class MyListHandler : ListRequestHandler<MyRow> { }
+
+        private class MyListHandler : ListRequestHandler<MyRow>
+        {
+            protected override void ApplyFilters(SqlQuery query)
+            {
+                base.ApplyFilters(query);
+
+                var user = (UserDefinition)Authorization.UserDefinition;
+
+                // if (!Authorization.HasPermission(PermissionKeys.Tenants))
+                query.Where(fld.TenantId == user.TenantId);
+            }
+        }
     }
 }

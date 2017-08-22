@@ -1,19 +1,17 @@
 ﻿
-using PatientManagement.Administration;
-
-namespace PatientManagement.PatientManagement.Endpoints
+namespace PatientManagement.Administration.Endpoints
 {
     using Serenity;
     using Serenity.Data;
     using Serenity.Services;
     using System.Data;
     using Microsoft.AspNetCore.Mvc;
-    using MyRepository = Repositories.NotificationsRepository;
-    using MyRow = Entities.NotificationsRow;
+    using MyRepository = Repositories.SentEmailsRepository;
+    using MyRow = Entities.SentEmailsRow;
 
-    [Route("Services/PatientManagement/Notifications/[action]")]
+    [Route("Services/Administration/SentEmails/[action]")]
     [ConnectionKey(typeof(MyRow)), ServiceAuthorize(typeof(MyRow))]
-    public class NotificationsController : ServiceEndpoint
+    public class SentEmailsController : ServiceEndpoint
     {
         [HttpPost, AuthorizeCreate(typeof(MyRow))]
         public SaveResponse Create(IUnitOfWork uow, SaveRequest<MyRow> request)
@@ -42,28 +40,5 @@ namespace PatientManagement.PatientManagement.Endpoints
         {
             return new MyRepository().List(connection, request);
         }
-        public ListResponse<MyRow> ListForDropdown(IDbConnection connection, ListRequest request)
-        {
-            return new MyRepository().ListForDropdown(connection, request);
-        }
-        public CountNotificationsResponse CountNotifications(IDbConnection connection, ListRequest request)
-        {
-            var some = new MyRepository().ListForDropdown(connection, request);
-            return new CountNotificationsResponse
-           {
-
-               Count = some.TotalCount
-           };
-        }
     }
-
-    public class CountNotificationsRequest : ServiceRequest
-    {
-        public decimal Count { get; set; }
-    }
-    public class CountNotificationsResponse : ServiceResponse
-    {
-        public int Count { get; set; }
-    }
-
 }

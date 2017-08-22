@@ -64,7 +64,7 @@ namespace PatientManagement.PatientManagement.Repositories
 
                 var user = (UserDefinition)Authorization.UserDefinition;
 
-                if (!Authorization.HasPermission(PermissionKeys.Tenants))
+               // if (!Authorization.HasPermission(PermissionKeys.Tenants))
                     query.Where(fld.InsertUserId != user.UserId);
             }
 

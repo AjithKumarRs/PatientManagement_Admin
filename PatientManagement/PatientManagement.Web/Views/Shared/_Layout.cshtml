@@ -41,9 +41,9 @@
     @if (hideNav)
     {
         <script type="text/javascript">
-        $(function () {
-            @RenderSection("PageInitScript", false)
-        });
+            $(function () {
+                @RenderSection("PageInitScript", false)
+            });
         </script>
         <div id="page-outer-nonav">
             <div id="page-container" class="page-container-common">
@@ -88,7 +88,19 @@
 
                                         <p>
                                             @(user != null ? user.DisplayName : "")
+                                            <br />
+                                            <small id="role-list"></small>
+                                            <script>
+                                                $(function () {
+                                                    // Show user permision
+                                                    var userData = new Q.getRemoteData('UserData');
+                                                    if (userData.RolesList) {
+                                                        $("#role-list").text(userData.RolesList.join());
+                                                    }
+                                                })
+                                            </script>
                                         </p>
+
                                     </li>
 
                                     <!-- Menu Footer-->
@@ -211,11 +223,12 @@
 
             <nav class="container-floated">
 
-                @*<a class="floated-button"  tooltip="Нов администратор"><i class="fa fa-users small-icon"></i></a>*@
 
                 <a class="floated-button" tooltip="@Texts.Site.Layout.NewVisitFloatedButton" onclick="new PatientManagement.PatientManagement.CalendarVisitsDialog().loadNewAndOpenDialog();"><i class="fa fa-calendar small-icon"></i></a>
 
                 <a class="floated-button" tooltip="@Texts.Site.Layout.NewPatientFloatedButton" onclick="new PatientManagement.PatientManagement.PatientsDialog().loadNewAndOpenDialog();"><i class="fa fa-user small-icon"></i></a>
+                
+                <a class="floated-button" tooltip="@Texts.Site.Layout.NewEmailFloatedButton" onclick="new PatientManagement.Administration.SentEmailsDialog().loadNewAndOpenDialog();"><i class="fa fa-envelope-open small-icon"></i></a>
 
                 <a class="floated-button" tooltip="@Texts.Site.Layout.AddFloatedButton" href="#"><i class="fa fa-plus plus"></i></a>
 
