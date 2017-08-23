@@ -325,7 +325,7 @@ var PatientManagement;
         }(Serenity.PrefixedContext));
         PaymentsForm.formKey = 'Administration.Payments';
         Administration.PaymentsForm = PaymentsForm;
-        [['SubscriptionId', function () { return Serenity.LookupEditor; }], ['PaymentDetailsId', function () { return Serenity.LookupEditor; }], ['PaymentOptionId', function () { return Serenity.LookupEditor; }], ['CurrencyId', function () { return Serenity.LookupEditor; }], ['Value', function () { return Serenity.DecimalEditor; }], ['PaymentStatus', function () { return Serenity.EnumEditor; }]].forEach(function (x) { return Object.defineProperty(PaymentsForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
+        [['SubscriptionId', function () { return Serenity.LookupEditor; }], ['PaymentDetailsId', function () { return Serenity.LookupEditor; }], ['PaymentOptionId', function () { return Serenity.LookupEditor; }], ['CurrencyId', function () { return Serenity.LookupEditor; }], ['Value', function () { return Serenity.StringEditor; }], ['PaymentStatus', function () { return Serenity.EnumEditor; }]].forEach(function (x) { return Object.defineProperty(PaymentsForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
     })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
@@ -466,7 +466,7 @@ var PatientManagement;
         }(Serenity.PrefixedContext));
         SentEmailsForm.formKey = 'Administration.SentEmails';
         Administration.SentEmailsForm = SentEmailsForm;
-        [['FromEmail', function () { return Serenity.StringEditor; }], ['FromName', function () { return Serenity.StringEditor; }], ['Subject', function () { return Serenity.StringEditor; }], ['Body', function () { return Serenity.StringEditor; }], ['ToEmail', function () { return Serenity.StringEditor; }], ['ToName', function () { return Serenity.StringEditor; }], ['TenantId', function () { return Serenity.IntegerEditor; }], ['InsertUserId', function () { return Serenity.IntegerEditor; }], ['InsertDate', function () { return Serenity.DateEditor; }], ['UpdateUserId', function () { return Serenity.IntegerEditor; }], ['UpdateDateField', function () { return Serenity.DateEditor; }], ['IsActive', function () { return Serenity.IntegerEditor; }]].forEach(function (x) { return Object.defineProperty(SentEmailsForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
+        [['ToEmail', function () { return PatientManagement.LKCodeDescr; }], ['Subject', function () { return Serenity.StringEditor; }], ['Body', function () { return Serenity.HtmlContentEditor; }]].forEach(function (x) { return Object.defineProperty(SentEmailsForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
     })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
@@ -476,12 +476,18 @@ var PatientManagement;
         var SentEmailsRow;
         (function (SentEmailsRow) {
             SentEmailsRow.idProperty = 'SentEmailId';
+            SentEmailsRow.isActiveProperty = 'IsActive';
             SentEmailsRow.nameProperty = 'FromEmail';
             SentEmailsRow.localTextPrefix = 'Administration.SentEmails';
+            SentEmailsRow.lookupKey = 'AdministrationTenants.Payment';
+            function getLookup() {
+                return Q.getLookup('AdministrationTenants.Payment');
+            }
+            SentEmailsRow.getLookup = getLookup;
             var Fields;
             (function (Fields) {
             })(Fields = SentEmailsRow.Fields || (SentEmailsRow.Fields = {}));
-            ['SentEmailId', 'FromEmail', 'FromName', 'Subject', 'Body', 'ToEmail', 'ToName', 'TenantId', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'IsActive'].forEach(function (x) { return Fields[x] = x; });
+            ['SentEmailId', 'FromEmail', 'FromName', 'Subject', 'Body', 'ToEmail', 'ToName', 'TenantId', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'IsActive', 'TenantName', 'InsertUserName', 'UpdateUserName'].forEach(function (x) { return Fields[x] = x; });
         })(SentEmailsRow = Administration.SentEmailsRow || (Administration.SentEmailsRow = {}));
     })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
 })(PatientManagement || (PatientManagement = {}));
@@ -1189,7 +1195,7 @@ var PatientManagement;
         }(Serenity.PrefixedContext));
         PatientsForm.formKey = 'PatientManagement.Patients';
         PatientManagement.PatientsForm = PatientsForm;
-        [['PatientId', function () { return Serenity.IntegerEditor; }], ['Name', function () { return Serenity.StringEditor; }], ['Gender', function () { return Serenity.EnumEditor; }], ['PersonalNumber', function () { return Serenity.StringEditor; }], ['PhoneNumber', function () { return Serenity.StringEditor; }], ['Email', function () { return Serenity.EmailEditor; }], ['NotifyOnChange', function () { return Serenity.BooleanEditor; }], ['FirstRegistrationDate', function () { return Serenity.DateTimeEditor; }], ['Address', function () { return Serenity.StringEditor; }], ['Height', function () { return Serenity.IntegerEditor; }], ['Weight', function () { return Serenity.IntegerEditor; }], ['NoteList', function () { return PatientManagement.NotesEditor; }]].forEach(function (x) { return Object.defineProperty(PatientsForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
+        [['PatientId', function () { return Serenity.IntegerEditor; }], ['Name', function () { return Serenity.StringEditor; }], ['Gender', function () { return Serenity.EnumEditor; }], ['PersonalNumber', function () { return Serenity.StringEditor; }], ['PhoneNumber', function () { return Serenity.StringEditor; }], ['Email', function () { return Serenity.EmailEditor; }], ['FirstRegistrationDate', function () { return Serenity.DateTimeEditor; }], ['Address', function () { return Serenity.StringEditor; }], ['Height', function () { return Serenity.IntegerEditor; }], ['Weight', function () { return Serenity.IntegerEditor; }], ['NotifyOnChange', function () { return PatientManagement_18.BsSwitchEditor; }], ['NoteList', function () { return PatientManagement.NotesEditor; }]].forEach(function (x) { return Object.defineProperty(PatientsForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
     })(PatientManagement = PatientManagement_18.PatientManagement || (PatientManagement_18.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
@@ -1209,7 +1215,7 @@ var PatientManagement;
             var Fields;
             (function (Fields) {
             })(Fields = PatientsRow.Fields || (PatientsRow.Fields = {}));
-            ['PatientId', 'Name', 'PersonalNumber', 'PhoneNumber', 'Email', 'NotifyOnchange', 'Gender', 'FirstRegistrationDate', 'Address', 'Height', 'Weight', 'WantedWeight', 'InsertUserId', 'InsertDate', 'NoteList', 'TenantId'].forEach(function (x) { return Fields[x] = x; });
+            ['PatientId', 'Name', 'PersonalNumber', 'PhoneNumber', 'Gender', 'FirstRegistrationDate', 'Address', 'Height', 'Weight', 'Email', 'NotifyOnChange', 'WantedWeight', 'InsertUserId', 'InsertDate', 'NoteList', 'TenantId'].forEach(function (x) { return Fields[x] = x; });
         })(PatientsRow = PatientManagement.PatientsRow || (PatientManagement.PatientsRow = {}));
     })(PatientManagement = PatientManagement_19.PatientManagement || (PatientManagement_19.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));

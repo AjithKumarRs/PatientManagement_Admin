@@ -4,6 +4,6 @@
         DisplayName?: string;
         IsAdmin?: boolean;
         Permissions?: { [key: string]: boolean };
-        RolesList?: [string];
+        RolesList?: string[];
     }
 }

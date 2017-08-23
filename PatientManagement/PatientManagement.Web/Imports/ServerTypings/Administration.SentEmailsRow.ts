@@ -1,5 +1,4 @@
-﻿
-namespace PatientManagement.Administration {
+﻿namespace PatientManagement.Administration {
     export interface SentEmailsRow {
         SentEmailId?: number;
         FromEmail?: string;
@@ -14,30 +13,41 @@ namespace PatientManagement.Administration {
         UpdateUserId?: number;
         UpdateDateField?: string;
         IsActive?: number;
+        TenantName?: string;
+        InsertUserName?: string;
+        UpdateUserName?: string;
     }
 
     export namespace SentEmailsRow {
         export const idProperty = 'SentEmailId';
+        export const isActiveProperty = 'IsActive';
         export const nameProperty = 'FromEmail';
         export const localTextPrefix = 'Administration.SentEmails';
+        export const lookupKey = 'AdministrationTenants.Payment';
 
-        export namespace Fields {
-            export declare const SentEmailId;
-            export declare const FromEmail;
-            export declare const FromName;
-            export declare const Subject;
-            export declare const Body;
-            export declare const ToEmail;
-            export declare const ToName;
-            export declare const TenantId;
-            export declare const InsertUserId;
-            export declare const InsertDate;
-            export declare const UpdateUserId;
-            export declare const UpdateDateField;
-            export declare const IsActive;
+        export function getLookup(): Q.Lookup<SentEmailsRow> {
+            return Q.getLookup<SentEmailsRow>('AdministrationTenants.Payment');
         }
 
-        ['SentEmailId', 'FromEmail', 'FromName', 'Subject', 'Body', 'ToEmail', 'ToName', 'TenantId', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'IsActive'].forEach(x => (<any>Fields)[x] = x);
+        export namespace Fields {
+            export declare const SentEmailId: string;
+            export declare const FromEmail: string;
+            export declare const FromName: string;
+            export declare const Subject: string;
+            export declare const Body: string;
+            export declare const ToEmail: string;
+            export declare const ToName: string;
+            export declare const TenantId: string;
+            export declare const InsertUserId: string;
+            export declare const InsertDate: string;
+            export declare const UpdateUserId: string;
+            export declare const UpdateDateField: string;
+            export declare const IsActive: string;
+            export declare const TenantName: string;
+            export declare const InsertUserName: string;
+            export declare const UpdateUserName: string;
+        }
+
+        ['SentEmailId', 'FromEmail', 'FromName', 'Subject', 'Body', 'ToEmail', 'ToName', 'TenantId', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'IsActive', 'TenantName', 'InsertUserName', 'UpdateUserName'].forEach(x => (<any>Fields)[x] = x);
     }
 }
-

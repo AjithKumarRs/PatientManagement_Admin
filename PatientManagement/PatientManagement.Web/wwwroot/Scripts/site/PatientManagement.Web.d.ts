@@ -375,7 +375,7 @@ declare namespace PatientManagement.Administration {
         PaymentDetailsId: Serenity.LookupEditor;
         PaymentOptionId: Serenity.LookupEditor;
         CurrencyId: Serenity.LookupEditor;
-        Value: Serenity.DecimalEditor;
+        Value: Serenity.StringEditor;
         PaymentStatus: Serenity.EnumEditor;
     }
 }
@@ -559,22 +559,15 @@ declare namespace PatientManagement.Administration {
     }
 }
 declare namespace PatientManagement.Administration {
+}
+declare namespace PatientManagement.Administration {
     class SentEmailsForm extends Serenity.PrefixedContext {
         static formKey: string;
     }
     interface SentEmailsForm {
-        FromEmail: Serenity.StringEditor;
-        FromName: Serenity.StringEditor;
+        ToEmail: LKCodeDescr;
         Subject: Serenity.StringEditor;
-        Body: Serenity.StringEditor;
-        ToEmail: Serenity.StringEditor;
-        ToName: Serenity.StringEditor;
-        TenantId: Serenity.IntegerEditor;
-        InsertUserId: Serenity.IntegerEditor;
-        InsertDate: Serenity.DateEditor;
-        UpdateUserId: Serenity.IntegerEditor;
-        UpdateDateField: Serenity.DateEditor;
-        IsActive: Serenity.IntegerEditor;
+        Body: Serenity.HtmlContentEditor;
     }
 }
 declare namespace PatientManagement.Administration {
@@ -592,32 +585,41 @@ declare namespace PatientManagement.Administration {
         UpdateUserId?: number;
         UpdateDateField?: string;
         IsActive?: number;
+        TenantName?: string;
+        InsertUserName?: string;
+        UpdateUserName?: string;
     }
     namespace SentEmailsRow {
         const idProperty = "SentEmailId";
+        const isActiveProperty = "IsActive";
         const nameProperty = "FromEmail";
         const localTextPrefix = "Administration.SentEmails";
+        const lookupKey = "AdministrationTenants.Payment";
+        function getLookup(): Q.Lookup<SentEmailsRow>;
         namespace Fields {
-            const SentEmailId: any;
-            const FromEmail: any;
-            const FromName: any;
-            const Subject: any;
-            const Body: any;
-            const ToEmail: any;
-            const ToName: any;
-            const TenantId: any;
-            const InsertUserId: any;
-            const InsertDate: any;
-            const UpdateUserId: any;
-            const UpdateDateField: any;
-            const IsActive: any;
+            const SentEmailId: string;
+            const FromEmail: string;
+            const FromName: string;
+            const Subject: string;
+            const Body: string;
+            const ToEmail: string;
+            const ToName: string;
+            const TenantId: string;
+            const InsertUserId: string;
+            const InsertDate: string;
+            const UpdateUserId: string;
+            const UpdateDateField: string;
+            const IsActive: string;
+            const TenantName: string;
+            const InsertUserName: string;
+            const UpdateUserName: string;
         }
     }
 }
 declare namespace PatientManagement.Administration {
     namespace SentEmailsService {
         const baseUrl = "Administration/SentEmails";
-        function Create(request: Serenity.SaveRequest<SentEmailsRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Serenity.ServiceOptions<any>): JQueryXHR;
+        function Create(request: Serenity.SaveRequest<SentEmailsRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Update(request: Serenity.SaveRequest<SentEmailsRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<SentEmailsRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
@@ -1555,11 +1557,11 @@ declare namespace PatientManagement.PatientManagement {
         PersonalNumber: Serenity.StringEditor;
         PhoneNumber: Serenity.StringEditor;
         Email: Serenity.EmailEditor;
-        NotifyOnchange: Serenity.BooleanEditor;
         FirstRegistrationDate: Serenity.DateTimeEditor;
         Address: Serenity.StringEditor;
         Height: Serenity.IntegerEditor;
         Weight: Serenity.IntegerEditor;
+        NotifyOnChange: BsSwitchEditor;
         NoteList: NotesEditor;
     }
 }
@@ -1569,13 +1571,13 @@ declare namespace PatientManagement.PatientManagement {
         Name?: string;
         PersonalNumber?: number;
         PhoneNumber?: string;
-        Email?: string;
-        NotifyOnchange?: boolean;
         Gender?: Gender;
         FirstRegistrationDate?: string;
         Address?: string;
         Height?: number;
         Weight?: number;
+        Email?: string;
+        NotifyOnChange?: boolean;
         WantedWeight?: string;
         InsertUserId?: number;
         InsertDate?: string;
@@ -1593,13 +1595,13 @@ declare namespace PatientManagement.PatientManagement {
             const Name: string;
             const PersonalNumber: string;
             const PhoneNumber: string;
-            const Email: string;
-            const NotifyOnchange: boolean;
             const Gender: string;
             const FirstRegistrationDate: string;
             const Address: string;
             const Height: string;
             const Weight: string;
+            const Email: string;
+            const NotifyOnChange: string;
             const WantedWeight: string;
             const InsertUserId: string;
             const InsertDate: string;
@@ -1843,7 +1845,7 @@ declare namespace PatientManagement {
         Permissions?: {
             [key: string]: boolean;
         };
-        RolesList?: [string];
+        RolesList?: string[];
     }
 }
 declare namespace PatientManagement.Administration {
