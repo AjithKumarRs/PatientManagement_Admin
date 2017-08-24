@@ -30,8 +30,13 @@ namespace PatientManagement.Web.Modules.Common
 
                     if (subscriptions.Any() && subscriptions.Any(s => s.IsActive == 1))//subscription.SubscriptionEndDate >= DateTime.Now)
                     {
-                        //TODO Check user payments here 
-
+                        //Checking if user has correct payments
+                        if (DateTime.Now >
+                            GetTenantPaidDaysForSubscription((int) subscriptions.FirstOrDefault().SubscriptionId))
+                        {
+                            result.Add(3);
+                            return result;
+                        }
                         var offersFld = OffersRow.Fields;
                         var offers = connection.List<OffersRow>(offersFld.OfferId.In(subscriptions.Select(s => s.OfferId)));
                         offers.ForEach(o =>
@@ -92,7 +97,7 @@ namespace PatientManagement.Web.Modules.Common
 
             if (!payments.Any() && offer.MaximumSubscriptionTime != null)
             {
-                return activatedDate.AddMonths(offer.MaximumSubscriptionTime ?? 0);
+                return activatedDate.AddDays(offer.MaximumSubscriptionTime ?? 0);
             }
             else
             {

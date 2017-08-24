@@ -5,5 +5,6 @@
         IsAdmin?: boolean;
         Permissions?: { [key: string]: boolean };
         RolesList?: string[];
+        PaidPeriod?: string;
     }
 }

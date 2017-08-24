@@ -102,6 +102,22 @@ namespace PatientManagement
         }
         public static class Site
         {
+            public static class Subscriptions
+            {
+                public static class Expired
+                {
+                    public static LocalText SubscriptionInfoBoxHeader = "Subscription expired!";
+                    public static LocalText SubscriptionInfoBoxBody = "Your subscription is expired! Please make a payment to gain access to the site.";
+                }
+
+                public static class WillExpire
+                {
+                    public static LocalText SubscriptionInfoBoxHeader = "Subscription will expire!";
+                    public static LocalText SubscriptionInfoBoxBody = "Your subscription will expired after: {0} days.";
+                }
+                
+            }
+
             public static class Notifications
             {
                 public static LocalText VisitChangedNotification = "{0} just change a visit for patient {1}";

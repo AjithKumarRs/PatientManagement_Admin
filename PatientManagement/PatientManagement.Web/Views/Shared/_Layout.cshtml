@@ -26,7 +26,7 @@
 <html lang="@System.Globalization.CultureInfo.CurrentUICulture.Name" class="no-js@(hideNav ? " no-navigation" : "")">
 <!--<![endif]-->
 <head>
-    
+
     <meta name="theme-color" content="@theme">
     @{Html.RenderPartial(MVC.Views.Shared._LayoutHead);}
     @{Html.RenderPartial(MVC.Views.Shared._LayoutSeoTags);}
@@ -34,7 +34,7 @@
 
     @RenderSection("Head", false)
     <title>@(ViewData["Title"]) - Clario</title>
-    
+
 </head>
 <body id="s-@(ViewData["PageId"])Page" class="@(ViewData["BodyClass"]) fixed sidebar-mini hold-transition skin-@theme@(hideNav ? " no-navigation" : " has-layout-event")@(rtl ? " rtl" : "")">
 
@@ -57,7 +57,7 @@
             <header class="main-header">
                 <a href="~/" class="logo">
                     <span class="logo-mini"><i></i></span>
-                <span class="logo-lg"><i></i><b>@LocalText.Get("Navigation.SiteTitle").ToUpper()</b></span>
+                    <span class="logo-lg"><i></i><b>@LocalText.Get("Navigation.SiteTitle").ToUpper()</b></span>
                 </a>
                 <nav class="navbar navbar-static-top" role="navigation">
                     <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
@@ -66,13 +66,13 @@
 
                     <div class="navbar-custom-menu">
                         <ul class="nav navbar-nav">
-                   
+
                             <li id="NotificationDropdownMenu" class="dropdown messages-menu"></li>
 
                             <script type="text/javascript">
                                 jQuery(function () {
                                     new PatientManagement.PatientManagement.NotificationDropdownMenu($('#NotificationDropdownMenu'), {});
-                            
+
                                 });
                             </script>
 
@@ -152,7 +152,7 @@
                     <ul class="sidebar-menu" id="SidebarMenu">
                         <li class="header">@Texts.LeftNavigation.LeftNavigationHeader</li>
                         @{Html.RenderPartial(MVC.Views.Shared.LeftNavigation, new PatientManagement.Navigation.NavigationModel()); }
-                        
+
                         @RenderSection("BottoMenuLeftNavigation", false)
                     </ul>
                 </section>
@@ -166,6 +166,71 @@
                     </section>
                 }
                 <section class="content">
+                    <div class="row" style="display: none">
+                        <div class="col-md-12">
+                            <div class="box box-default">
+                                <div class="box-header with-border">
+                                    <i class="fa fa-bullhorn"></i>
+                                    <h3 class="box-title">Subscription Information</h3>
+                                    <div class="box-tools pull-right">
+                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                    </div>
+                                </div><!-- /.box-header -->
+                                <div class="box-body">
+                                    <div class="callout" id="subscription-information-box">
+                                        <h4>Subscription Information!</h4>
+                                        <p>Loading....</p>
+
+                                        <script>
+                                                $(function () {
+                                                    // Show user permision
+                                                    var userData = new Q.getRemoteData('UserData');
+                                                    if (userData.PaidPeriod) {
+                                                        String.prototype.format = function () {
+                                                            var args = arguments;
+                                                            return this.replace(/\{\{|\}\}|\{(\d+)\}/g, function (m, n) {
+                                                                if (m == "{{") { return "{"; }
+                                                                if (m == "}}") { return "}"; }
+                                                                return args[n];
+                                                            });
+                                                        };
+                                                        
+                                                        var expireDate = new Date(userData.PaidPeriod);
+                                                        var todayDate = new Date();
+
+                                                        if (userData.PaidPeriod !== "0001-01-01T00:00:00" && todayDate > expireDate) {
+                                                            $('#subscription-information-box h4').text(Q.text("Site.Subscriptions.Expired.SubscriptionInfoBoxHeader"));
+
+                                                            $('#subscription-information-box p').text(Q.text("Site.Subscriptions.Expired.SubscriptionInfoBoxBody"));
+
+                                                            $('#subscription-information-box').addClass('callout-danger');
+                                                            $('#subscription-information-box').parents('.row').show();
+                                                        } else if (userData.PaidPeriod !== "0001-01-01T00:00:00" &&
+                                                            todayDate.setMonth(todayDate.getMonth() + 1) > expireDate) {
+
+                                                            var diff = Math.floor((Date.parse(expireDate) - Date.parse(new Date())) / 86400000); 
+
+                                                            $('#subscription-information-box h4').text(
+                                                                Q.text("Site.Subscriptions.WillExpire.SubscriptionInfoBoxHeader"));
+
+                                                            $('#subscription-information-box p')
+                                                                .text(
+                                                                Q.text("Site.Subscriptions.WillExpire.SubscriptionInfoBoxBody").format(diff));
+
+                                                            $('#subscription-information-box').addClass('callout-warning');
+                                                            $('#subscription-information-box').parents('.row').show();
+                                                        }
+
+                                                    }
+                                                })
+                                        </script>
+                                    </div>
+                                </div><!-- /.box-body -->
+                            </div><!-- /.box -->
+                        </div><!-- /.col -->
+                    </div>
+
                     @RenderBody()
                 </section>
             </div>
@@ -198,8 +263,8 @@
                                 <label class="control-sidebar-subheading">
                                     @Texts.Site.Layout.RecieveNotificationToggle
                                 </label>
-                                
-                                <input id="NotificationCheck" type="checkbox" data-layout="sidebar-collapse" class="pull-right"> 
+
+                                <input id="NotificationCheck" type="checkbox" data-layout="sidebar-collapse" class="pull-right">
                             </div>
                             <hr />
                             <div class="form-group">
@@ -211,10 +276,10 @@
                                 <label class="control-sidebar-subheading">@Texts.Site.Layout.Theme</label>
                                 <select id="ThemeSelect" class="form-control"></select>
                             </div>
-                            
-                        
+
+
                         </form>
-                     
+
                     </div>
                 </div>
             </aside>
@@ -227,7 +292,7 @@
                 <a class="floated-button" tooltip="@Texts.Site.Layout.NewVisitFloatedButton" onclick="new PatientManagement.PatientManagement.CalendarVisitsDialog().loadNewAndOpenDialog();"><i class="fa fa-calendar small-icon"></i></a>
 
                 <a class="floated-button" tooltip="@Texts.Site.Layout.NewPatientFloatedButton" onclick="new PatientManagement.PatientManagement.PatientsDialog().loadNewAndOpenDialog();"><i class="fa fa-user small-icon"></i></a>
-                
+
                 <a class="floated-button" tooltip="@Texts.Site.Layout.NewEmailFloatedButton" onclick="new PatientManagement.Administration.SentEmailsDialog().loadNewAndOpenDialog();"><i class="fa fa-envelope-open small-icon"></i></a>
 
                 <a class="floated-button" tooltip="@Texts.Site.Layout.AddFloatedButton" href="#"><i class="fa fa-plus plus"></i></a>
@@ -300,75 +365,75 @@
                     }
                 };
             });
-        
+
 
         </script>
 
 
-        
-        <script src="~/signalr/hubs"></script>
-        <script>
-            $(function () {
-                var hub = $.connection.notificationHub;
 
-                $.connection.hub.start().done(function () {
+       <script src="~/signalr/hubs"></script>
+            <script>
+                $(function () {
+                    var hub = $.connection.notificationHub;
 
-                    if ($.connection.hub && $.connection.hub.state ===$.signalR.connectionState.connected) {
+                    $.connection.hub.start().done(function () {
 
-                        hub.client.visitChangedNotification = function (userDisplayName, userPicture, notification, start, end) {
-                            var to = {};
-                            to.timeOut = 6000;
-                            to.closeButton = true;
+                        if ($.connection.hub && $.connection.hub.state ===$.signalR.connectionState.connected) {
 
-
-                            if ($('#NotificationCheck').bootstrapSwitch('state')) {
-                                Q.notifyInfo(notification, '', to);
-                            }
-                            RefreshFullCalendar(start, end);
-
-                            if ($('#VisitsGridDiv').length) {
-                                $('#VisitsGridDiv .refresh-button').click();
-                            }
-                            if ($('.s-VisitsGrid').length) {
-                                $('.s-VisitsGrid .refresh-button').click();
-                            }
-                            if ($('.s-NotificationsGrid').length) {
-                                $('.s-NotificationsGrid .refresh-button').click();
-                            }
-                            var number = +($('.counter-label-notifications').text());
-                            $('.counter-label-notifications').text(number + 1);
-                        };
-
-                        hub.client.patientChangedNotification = function (userDisplayName, userPicture, notification) {
-                            var to = {};
-
-                            if ($('#NotificationCheck').bootstrapSwitch('state')) {
-                                Q.notifyInfo(notification, '', to);
-                            }
-
-                            if ($('.s-PatientsGrid').length) {
-                                $('.s-PatientsGrid .refresh-button').click();
-                            }
+                            hub.client.visitChangedNotification = function (userDisplayName, userPicture, notification, start, end) {
+                                var to = {};
+                                to.timeOut = 6000;
+                                to.closeButton = true;
 
 
-                            if ($('.s-NotificationsGrid').length) {
-                                $('.s-NotificationsGrid .refresh-button').click();
-                            }
+                                if ($('#NotificationCheck').bootstrapSwitch('state')) {
+                                    Q.notifyInfo(notification, '', to);
+                                }
+                                RefreshFullCalendar(start, end);
 
-                            var number = +($('.counter-label-notifications').text());
-                            $('.counter-label-notifications').text(number + 1);
+                                if ($('#VisitsGridDiv').length) {
+                                    $('#VisitsGridDiv .refresh-button').click();
+                                }
+                                if ($('.s-VisitsGrid').length) {
+                                    $('.s-VisitsGrid .refresh-button').click();
+                                }
+                                if ($('.s-NotificationsGrid').length) {
+                                    $('.s-NotificationsGrid .refresh-button').click();
+                                }
+                                var number = +($('.counter-label-notifications').text());
+                                $('.counter-label-notifications').text(number + 1);
+                            };
 
-                        };
-                    }
-                    else {
-                        // TODO: Add notification somewhere that the connection cant be made
-                    }
-            
+                            hub.client.patientChangedNotification = function (userDisplayName, userPicture, notification) {
+                                var to = {};
+
+                                if ($('#NotificationCheck').bootstrapSwitch('state')) {
+                                    Q.notifyInfo(notification, '', to);
+                                }
+
+                                if ($('.s-PatientsGrid').length) {
+                                    $('.s-PatientsGrid .refresh-button').click();
+                                }
+
+
+                                if ($('.s-NotificationsGrid').length) {
+                                    $('.s-NotificationsGrid .refresh-button').click();
+                                }
+
+                                var number = +($('.counter-label-notifications').text());
+                                $('.counter-label-notifications').text(number + 1);
+
+                            };
+                        }
+                        else {
+                            // TODO: Add notification somewhere that the connection cant be made
+                        }
+
+
+                    });
 
                 });
-
-            });
-        </script>
+            </script>
 
                 }
 </body>

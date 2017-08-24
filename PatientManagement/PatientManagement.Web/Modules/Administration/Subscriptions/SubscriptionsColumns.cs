@@ -28,6 +28,12 @@ namespace PatientManagement.Administration.Columns
         public DateTime PaidPeriod { get; set; }
 
         [DisplayFormat("dd/MM/yyyy")]
+        public DateTime ActivatedOn { get; set; }
+
+        [DisplayFormat("dd/MM/yyyy")]
+        public DateTime DeactivatedOn { get; set; }
+
+        [DisplayFormat("dd/MM/yyyy")]
         public DateTime SubscriptionEndDate { get; set; }
 
         public string TenantName { get; set; }

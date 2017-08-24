@@ -1846,6 +1846,7 @@ declare namespace PatientManagement {
             [key: string]: boolean;
         };
         RolesList?: string[];
+        PaidPeriod?: string;
     }
 }
 declare namespace PatientManagement.Administration {

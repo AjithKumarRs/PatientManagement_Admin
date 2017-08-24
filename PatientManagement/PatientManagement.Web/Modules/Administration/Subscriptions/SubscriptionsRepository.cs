@@ -45,6 +45,7 @@ namespace PatientManagement.Administration.Repositories
 
         private class MySaveHandler : SaveRequestHandler<MyRow>
         {
+
             protected override void BeforeSave()
             {
                 base.AfterSave();
@@ -53,14 +54,9 @@ namespace PatientManagement.Administration.Repositories
 
                 if (Row.IsActive == 1)
                 {
-                    Row.ActivatedOn = DateTime.Now;
-
-                    var tenantFld = TenantRow.Fields;
-                    var con = SqlConnections.NewFor<TenantRow>();
-                    var tenant = con.First<TenantRow>(tenantFld.TenantId == user.TenantId);
-                    tenant.SubscriptionId = Row.SubscriptionId;
-                    con.UpdateById(tenant);
-
+                    if (Row.ActivatedOn == null)
+                        Row.ActivatedOn = DateTime.Now;
+                    
                     var tmp = Connection.List<MyRow>().Where(p => p.IsActive == 1 && p.TenantId == user.TenantId);
 
                     foreach (var subscriptionsRow in tmp)
@@ -76,6 +72,24 @@ namespace PatientManagement.Administration.Repositories
                     if (Row.IsActive == 0)
                     {
                         Row.DeactivatedOn = DateTime.Now;
+                    }
+                }
+            }
+
+            protected override void AfterSave()
+            {
+                base.AfterSave();
+
+                if (IsCreate)
+                {
+                    var user = (UserDefinition)Authorization.UserDefinition;
+
+                    if (Row.IsActive == 1)
+                    {
+                        var tenantFld = TenantRow.Fields;
+                        var tenant = Connection.First<TenantRow>(tenantFld.TenantId == user.TenantId);
+                        tenant.SubscriptionId = Row.SubscriptionId;
+                        Connection.UpdateById(tenant);
                     }
                 }
             }

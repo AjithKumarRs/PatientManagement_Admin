@@ -16,6 +16,6 @@
         public Boolean IsAdmin { get; set; }
         public Dictionary<string, bool> Permissions { get; set; }
         public List<string> RolesList { get; set; }
-
+        public DateTime PaidPeriod { get; set; }
     }
 }
