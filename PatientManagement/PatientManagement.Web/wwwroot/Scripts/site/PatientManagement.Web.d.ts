@@ -243,14 +243,14 @@ declare namespace PatientManagement.Administration {
         static formKey: string;
     }
     interface PaymentOptionsForm {
-        Days: Serenity.IntegerEditor;
+        Months: Serenity.IntegerEditor;
         Name: Serenity.StringEditor;
     }
 }
 declare namespace PatientManagement.Administration {
     interface PaymentOptionsRow {
         PaymentOptionId?: number;
-        Days?: number;
+        Months?: number;
         Name?: string;
         InsertUserId?: number;
         InsertDate?: string;
@@ -267,7 +267,7 @@ declare namespace PatientManagement.Administration {
         function getLookup(): Q.Lookup<PaymentOptionsRow>;
         namespace Fields {
             const PaymentOptionId: string;
-            const Days: string;
+            const Months: string;
             const Name: string;
             const InsertUserId: string;
             const InsertDate: string;
@@ -388,15 +388,14 @@ declare namespace PatientManagement.Administration {
         PaymentOptionId?: number;
         CurrencyId?: number;
         Value?: number;
-        RoleBefore?: string;
-        RoleAfter?: string;
         PaymentStatus?: PatientManagement.PaymentStatus;
         SubscriptionOfferId?: number;
         SubscriptionSubscriptionEndDate?: string;
+        SubscriptionName?: string;
         PaymentDetailName?: string;
         PaymentDetailsBankName?: string;
         PaymentDetailsIbanBeneficient?: string;
-        PaymentOptionDays?: number;
+        PaymentOptionMonths?: number;
         PaymentOptionName?: string;
         CurrencyCurrencyId?: string;
         CurrencyName?: string;
@@ -411,7 +410,7 @@ declare namespace PatientManagement.Administration {
     }
     namespace PaymentsRow {
         const idProperty = "PaymentId";
-        const nameProperty = "RoleBefore";
+        const nameProperty = "SubscriptionName";
         const localTextPrefix = "Administration.Payments";
         const lookupKey = "AdministrationTenants.Payment";
         function getLookup(): Q.Lookup<PaymentsRow>;
@@ -423,15 +422,14 @@ declare namespace PatientManagement.Administration {
             const PaymentOptionId: string;
             const CurrencyId: string;
             const Value: string;
-            const RoleBefore: string;
-            const RoleAfter: string;
             const PaymentStatus: string;
             const SubscriptionOfferId: string;
             const SubscriptionSubscriptionEndDate: string;
+            const SubscriptionName: string;
             const PaymentDetailName: string;
             const PaymentDetailsBankName: string;
             const PaymentDetailsIbanBeneficient: string;
-            const PaymentOptionDays: string;
+            const PaymentOptionMonths: string;
             const PaymentOptionName: string;
             const CurrencyCurrencyId: string;
             const CurrencyName: string;
@@ -698,6 +696,7 @@ declare namespace PatientManagement.Administration {
         OfferId?: number;
         TenantId?: number;
         SubscriptionEndDate?: string;
+        PaidPeriod?: string;
         IsActive?: number;
         DeactivatedOn?: string;
         ActivatedOn?: string;
@@ -726,6 +725,7 @@ declare namespace PatientManagement.Administration {
             const OfferId: string;
             const TenantId: string;
             const SubscriptionEndDate: string;
+            const PaidPeriod: string;
             const IsActive: string;
             const DeactivatedOn: string;
             const ActivatedOn: string;

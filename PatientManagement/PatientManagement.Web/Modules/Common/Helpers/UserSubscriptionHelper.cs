@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using PatientManagement.Administration.Entities;
@@ -62,6 +63,46 @@ namespace PatientManagement.Web.Modules.Common
 
 
                 return result;
+            }
+        }
+
+
+        public static DateTime GetTenantPaidDays(int tenantId)
+        {
+            var connection = SqlConnections.NewFor<TenantRow>();
+
+            var subscriptionId = connection.ById<TenantRow>(tenantId).SubscriptionId;
+            if (subscriptionId != null)
+                return GetTenantPaidDaysForSubscription((int) subscriptionId);
+            else
+                return DateTime.MinValue;
+        }
+
+
+        public static DateTime GetTenantPaidDaysForSubscription(int subscriptionId)
+        {
+            var paymentsFlds = PaymentsRow.Fields;
+            var connection = SqlConnections.NewFor<PaymentsRow>();
+
+            var subscriptions = connection.ById<SubscriptionsRow>(subscriptionId);
+            var payments = connection.List<PaymentsRow>(paymentsFlds.SubscriptionId == subscriptionId);
+
+            var offer = connection.ById<OffersRow>(subscriptions.OfferId);
+            var activatedDate = subscriptions.ActivatedOn ?? DateTime.MinValue;
+
+            if (!payments.Any() && offer.MaximumSubscriptionTime != null)
+            {
+                return activatedDate.AddMonths(offer.MaximumSubscriptionTime ?? 0);
+            }
+            else
+            {
+                var payDays = 0;
+                foreach (var payment in payments)
+                {
+                    payDays += connection.ById<PaymentOptionsRow>(payment.PaymentOptionId).Months ?? 0;
+                }
+                return activatedDate.AddMonths(payDays);
+
             }
         }
     }

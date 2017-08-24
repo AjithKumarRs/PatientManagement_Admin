@@ -5,9 +5,9 @@
     }
 
     export interface PaymentOptionsForm {
-        Days: Serenity.IntegerEditor;
+        Months: Serenity.IntegerEditor;
         Name: Serenity.StringEditor;
     }
 
-    [['Days', () => Serenity.IntegerEditor], ['Name', () => Serenity.StringEditor]].forEach(x => Object.defineProperty(PaymentOptionsForm.prototype, <string>x[0], { get: function () { return this.w(x[0], (x[1] as any)()); }, enumerable: true, configurable: true }));
+    [['Months', () => Serenity.IntegerEditor], ['Name', () => Serenity.StringEditor]].forEach(x => Object.defineProperty(PaymentOptionsForm.prototype, <string>x[0], { get: function () { return this.w(x[0], (x[1] as any)()); }, enumerable: true, configurable: true }));
 }

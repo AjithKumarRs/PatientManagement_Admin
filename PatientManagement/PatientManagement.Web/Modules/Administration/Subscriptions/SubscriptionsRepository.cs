@@ -3,6 +3,7 @@
 using System.Linq;
 using MVC;
 using PatientManagement.Administration.Entities;
+using PatientManagement.Web.Modules.Common;
 
 namespace PatientManagement.Administration.Repositories
 {
@@ -52,6 +53,8 @@ namespace PatientManagement.Administration.Repositories
 
                 if (Row.IsActive == 1)
                 {
+                    Row.ActivatedOn = DateTime.Now;
+
                     var tenantFld = TenantRow.Fields;
                     var con = SqlConnections.NewFor<TenantRow>();
                     var tenant = con.First<TenantRow>(tenantFld.TenantId == user.TenantId);
@@ -63,13 +66,45 @@ namespace PatientManagement.Administration.Repositories
                     foreach (var subscriptionsRow in tmp)
                     {
                         subscriptionsRow.IsActive = 0;
+                        subscriptionsRow.DeactivatedOn = DateTime.Now;
                         Connection.UpdateById(subscriptionsRow);
+                    }
+                }
+
+                if (IsUpdate)
+                {
+                    if (Row.IsActive == 0)
+                    {
+                        Row.DeactivatedOn = DateTime.Now;
                     }
                 }
             }
         }
         private class MyDeleteHandler : DeleteRequestHandler<MyRow> { }
-        private class MyRetrieveHandler : RetrieveRequestHandler<MyRow> { }
-        private class MyListHandler : ListRequestHandler<MyRow> { }
+
+        private class MyRetrieveHandler : RetrieveRequestHandler<MyRow>
+        {
+            protected override void OnReturn()
+            {
+                base.OnReturn();
+
+                Response.Entity.PaidPeriod = UserSubscriptionHelper.GetTenantPaidDaysForSubscription((int)Row.SubscriptionId);
+
+            }
+        }
+
+
+        private class MyListHandler : ListRequestHandler<MyRow>
+        {
+            protected override void OnReturn()
+            {
+                base.OnReturn();
+
+                foreach (var subscriptionsRow in Response.Entities)
+                {
+                    subscriptionsRow.PaidPeriod = UserSubscriptionHelper.GetTenantPaidDaysForSubscription((int)subscriptionsRow.SubscriptionId);
+                }
+            }
+        }
     }
 }

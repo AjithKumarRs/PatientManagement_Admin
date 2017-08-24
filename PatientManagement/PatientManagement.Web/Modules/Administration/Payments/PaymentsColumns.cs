@@ -15,15 +15,14 @@ namespace PatientManagement.Administration.Columns
     {
         [EditLink, DisplayName("Db.Shared.RecordId"), AlignRight]
         public Int64 PaymentId { get; set; }
-        public Int64 SubscriptionId { get; set; }
+        public Int64 SubscriptionName { get; set; }
         public Int64 PaymentDetailsId { get; set; }
-        public Int32 PaymentOptionId { get; set; }
-        public Int32 CurrencyId { get; set; }
+        public Int32 PaymentOptionName { get; set; }
         [ReadOnly(true)]
         public Decimal Value { get; set; }
-        [EditLink]
-        public String RoleBefore { get; set; }
-        public String RoleAfter { get; set; }
+        [Width(50)]
+        public Int32 CurrencyCurrencyId { get; set; }
+        
         public Int32 PaymentStatus { get; set; }
 
         [Width(80)]

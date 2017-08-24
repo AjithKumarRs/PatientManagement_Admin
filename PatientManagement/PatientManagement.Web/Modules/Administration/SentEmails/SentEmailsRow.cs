@@ -28,7 +28,7 @@ namespace PatientManagement.Administration.Entities
             set { Fields.SentEmailId[this] = value; }
         }
 
-        [DisplayName("From Email"), Size(200), NotNull, QuickSearch]
+        [DisplayName("From Email"), Size(200), NotNull, QuickSearch, Updatable(false)]
         public String FromEmail
         {
             get { return Fields.FromEmail[this]; }
@@ -48,35 +48,35 @@ namespace PatientManagement.Administration.Entities
             }
         }
 
-        [DisplayName("From Name"), Size(200), NotNull]
+        [DisplayName("From Name"), Size(200), NotNull, Updatable(false)]
         public String FromName
         {
             get { return Fields.FromName[this]; }
             set { Fields.FromName[this] = value; }
         }
 
-        [DisplayName("Subject"), Size(200), NotNull, QuickFilter]
+        [DisplayName("Subject"), Size(200), NotNull, QuickFilter, Updatable(false)]
         public String Subject
         {
             get { return Fields.Subject[this]; }
             set { Fields.Subject[this] = value; }
         }
 
-        [DisplayName("Body"), Size(-1), NotNull, HtmlContentEditor]
+        [DisplayName("Body"), Size(-1), NotNull, HtmlContentEditor, Updatable(false)]
         public String Body
         {
             get { return Fields.Body[this]; }
             set { Fields.Body[this] = value; }
         }
 
-        [DisplayName("To Email"), Size(200), NotNull, QuickFilter()]
+        [DisplayName("To Email"), Size(200), NotNull, QuickFilter(), Updatable(false)]
         public String ToEmail
         {
             get { return Fields.ToEmail[this]; }
             set { Fields.ToEmail[this] = value; }
         }
 
-        [DisplayName("To Name"), Size(200), NotNull, QuickFilter()]
+        [DisplayName("To Name"), Size(200), NotNull, QuickFilter(), Updatable(false)]
         public String ToName
         {
             get { return Fields.ToName[this]; }

@@ -26,7 +26,7 @@ namespace PatientManagement.Administration.Entities
             set { Fields.PaymentId[this] = value; }
         }
 
-        [DisplayName("Subscription"), NotNull, ForeignKey("[dbo].[Subscriptions]", "SubscriptionId"), LeftJoin("jSubscription")]
+        [DisplayName("Subscription"), NotNull, ForeignKey("[dbo].[Subscriptions]", "SubscriptionId"), LeftJoin("jSubscription"), TextualField("SubscriptionName")]
         [LookupEditor(typeof(SubscriptionsRow), InplaceAdd = false, FilterField = "IsActive", FilterValue = 1)]
         public Int64? SubscriptionId
         {
@@ -34,6 +34,12 @@ namespace PatientManagement.Administration.Entities
             set { Fields.SubscriptionId[this] = value; }
         }
 
+        [DisplayName("Subscription Name"), Expression("jSubscription.[Name]")]
+        public String SubscriptionName
+        {
+            get { return Fields.SubscriptionName[this]; }
+            set { Fields.SubscriptionName[this] = value; }
+        }
 
         [DisplayName("Payment Details"), NotNull, ForeignKey("[dbo].[PaymentsDetails]", "PaymentDetailsId"), LeftJoin("jPaymentDetails"), TextualField("PaymentDetailName")]
         [LookupEditor(typeof(PaymentsDetailsRow), InplaceAdd = true)]
@@ -65,21 +71,7 @@ namespace PatientManagement.Administration.Entities
             get { return Fields.Value[this]; }
             set { Fields.Value[this] = value; }
         }
-
-        [DisplayName("Role Before"), Size(200),  QuickSearch]
-        public String RoleBefore
-        {
-            get { return Fields.RoleBefore[this]; }
-            set { Fields.RoleBefore[this] = value; }
-        }
-
-        [DisplayName("Role After"), Size(200)]
-        public String RoleAfter
-        {
-            get { return Fields.RoleAfter[this]; }
-            set { Fields.RoleAfter[this] = value; }
-        }
-
+        
         [DisplayName("Payment Status")]
         public PaymentStatus? PaymentStatus
         {
@@ -122,11 +114,11 @@ namespace PatientManagement.Administration.Entities
             set { Fields.PaymentDetailsIbanBeneficient[this] = value; }
         }
         
-        [DisplayName("Payment Option Days"), Expression("jPaymentOption.[Days]")]
-        public Int32? PaymentOptionDays
+        [DisplayName("Payment Option Months"), Expression("jPaymentOption.[Months]")]
+        public Int32? PaymentOptionMonths
         {
-            get { return Fields.PaymentOptionDays[this]; }
-            set { Fields.PaymentOptionDays[this] = value; }
+            get { return Fields.PaymentOptionMonths[this]; }
+            set { Fields.PaymentOptionMonths[this] = value; }
         }
 
         [DisplayName("Payment Option Name"), Expression("jPaymentOption.[Name]")]
@@ -248,7 +240,7 @@ namespace PatientManagement.Administration.Entities
 
         StringField INameRow.NameField
         {
-            get { return Fields.RoleBefore; }
+            get { return Fields.SubscriptionName; }
         }
 
         public static readonly RowFields Fields = new RowFields().Init();
@@ -267,18 +259,17 @@ namespace PatientManagement.Administration.Entities
             public Int32Field PaymentOptionId;
             public Int32Field CurrencyId;
             public DecimalField Value;
-            public StringField RoleBefore;
-            public StringField RoleAfter;
             public Int32Field PaymentStatus;
 
             public Int32Field SubscriptionOfferId;
             public DateTimeField SubscriptionSubscriptionEndDate;
+            public StringField SubscriptionName;
 
             public StringField PaymentDetailName;
             public StringField PaymentDetailsBankName;
             public StringField PaymentDetailsIbanBeneficient;
 
-            public Int32Field PaymentOptionDays;
+            public Int32Field PaymentOptionMonths;
             public StringField PaymentOptionName;
 
             public StringField CurrencyCurrencyId;

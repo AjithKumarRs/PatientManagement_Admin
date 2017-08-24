@@ -217,7 +217,7 @@ var PatientManagement;
         }(Serenity.PrefixedContext));
         PaymentOptionsForm.formKey = 'Administration.PaymentOptions';
         Administration.PaymentOptionsForm = PaymentOptionsForm;
-        [['Days', function () { return Serenity.IntegerEditor; }], ['Name', function () { return Serenity.StringEditor; }]].forEach(function (x) { return Object.defineProperty(PaymentOptionsForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
+        [['Months', function () { return Serenity.IntegerEditor; }], ['Name', function () { return Serenity.StringEditor; }]].forEach(function (x) { return Object.defineProperty(PaymentOptionsForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
     })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
@@ -237,7 +237,7 @@ var PatientManagement;
             var Fields;
             (function (Fields) {
             })(Fields = PaymentOptionsRow.Fields || (PaymentOptionsRow.Fields = {}));
-            ['PaymentOptionId', 'Days', 'Name', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'InsertUserName', 'UpdateUserName'].forEach(function (x) { return Fields[x] = x; });
+            ['PaymentOptionId', 'Months', 'Name', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'InsertUserName', 'UpdateUserName'].forEach(function (x) { return Fields[x] = x; });
         })(PaymentOptionsRow = Administration.PaymentOptionsRow || (Administration.PaymentOptionsRow = {}));
     })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
 })(PatientManagement || (PatientManagement = {}));
@@ -335,7 +335,7 @@ var PatientManagement;
         var PaymentsRow;
         (function (PaymentsRow) {
             PaymentsRow.idProperty = 'PaymentId';
-            PaymentsRow.nameProperty = 'RoleBefore';
+            PaymentsRow.nameProperty = 'SubscriptionName';
             PaymentsRow.localTextPrefix = 'Administration.Payments';
             PaymentsRow.lookupKey = 'AdministrationTenants.Payment';
             function getLookup() {
@@ -345,7 +345,7 @@ var PatientManagement;
             var Fields;
             (function (Fields) {
             })(Fields = PaymentsRow.Fields || (PaymentsRow.Fields = {}));
-            ['PaymentId', 'SubscriptionId', 'TenantId', 'PaymentDetailsId', 'PaymentOptionId', 'CurrencyId', 'Value', 'RoleBefore', 'RoleAfter', 'PaymentStatus', 'SubscriptionOfferId', 'SubscriptionSubscriptionEndDate', 'PaymentDetailName', 'PaymentDetailsBankName', 'PaymentDetailsIbanBeneficient', 'PaymentOptionDays', 'PaymentOptionName', 'CurrencyCurrencyId', 'CurrencyName', 'CurrencyRate', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'TenantName', 'InsertUserName', 'UpdateUserName'].forEach(function (x) { return Fields[x] = x; });
+            ['PaymentId', 'SubscriptionId', 'TenantId', 'PaymentDetailsId', 'PaymentOptionId', 'CurrencyId', 'Value', 'PaymentStatus', 'SubscriptionOfferId', 'SubscriptionSubscriptionEndDate', 'SubscriptionName', 'PaymentDetailName', 'PaymentDetailsBankName', 'PaymentDetailsIbanBeneficient', 'PaymentOptionMonths', 'PaymentOptionName', 'CurrencyCurrencyId', 'CurrencyName', 'CurrencyRate', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'TenantName', 'InsertUserName', 'UpdateUserName'].forEach(function (x) { return Fields[x] = x; });
         })(PaymentsRow = Administration.PaymentsRow || (Administration.PaymentsRow = {}));
     })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
 })(PatientManagement || (PatientManagement = {}));
@@ -559,7 +559,7 @@ var PatientManagement;
             var Fields;
             (function (Fields) {
             })(Fields = SubscriptionsRow.Fields || (SubscriptionsRow.Fields = {}));
-            ['SubscriptionId', 'Name', 'OfferId', 'TenantId', 'SubscriptionEndDate', 'IsActive', 'DeactivatedOn', 'ActivatedOn', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'OfferName', 'OfferDescription', 'OfferPrice', 'OfferRoleId', 'TenantName', 'InsertUserName', 'UpdateUserName'].forEach(function (x) { return Fields[x] = x; });
+            ['SubscriptionId', 'Name', 'OfferId', 'TenantId', 'SubscriptionEndDate', 'PaidPeriod', 'IsActive', 'DeactivatedOn', 'ActivatedOn', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'OfferName', 'OfferDescription', 'OfferPrice', 'OfferRoleId', 'TenantName', 'InsertUserName', 'UpdateUserName'].forEach(function (x) { return Fields[x] = x; });
         })(SubscriptionsRow = Administration.SubscriptionsRow || (Administration.SubscriptionsRow = {}));
     })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
 })(PatientManagement || (PatientManagement = {}));
