@@ -90,15 +90,7 @@
                                             @(user != null ? user.DisplayName : "")
                                             <br />
                                             <small id="role-list"></small>
-                                            <script>
-                                                $(function () {
-                                                    // Show user permision
-                                                    var userData = new Q.getRemoteData('UserData');
-                                                    if (userData.RolesList) {
-                                                        $("#role-list").text(userData.RolesList.join());
-                                                    }
-                                                })
-                                            </script>
+                                       
                                         </p>
 
                                     </li>
@@ -181,50 +173,6 @@
                                     <div class="callout" id="subscription-information-box">
                                         <h4>Subscription Information!</h4>
                                         <p>Loading....</p>
-
-                                        <script>
-                                                $(function () {
-                                                    // Show user permision
-                                                    var userData = new Q.getRemoteData('UserData');
-                                                    if (userData.PaidPeriod) {
-                                                        String.prototype.format = function () {
-                                                            var args = arguments;
-                                                            return this.replace(/\{\{|\}\}|\{(\d+)\}/g, function (m, n) {
-                                                                if (m == "{{") { return "{"; }
-                                                                if (m == "}}") { return "}"; }
-                                                                return args[n];
-                                                            });
-                                                        };
-                                                        
-                                                        var expireDate = new Date(userData.PaidPeriod);
-                                                        var todayDate = new Date();
-
-                                                        if (userData.PaidPeriod !== "0001-01-01T00:00:00" && todayDate > expireDate) {
-                                                            $('#subscription-information-box h4').text(Q.text("Site.Subscriptions.Expired.SubscriptionInfoBoxHeader"));
-
-                                                            $('#subscription-information-box p').text(Q.text("Site.Subscriptions.Expired.SubscriptionInfoBoxBody"));
-
-                                                            $('#subscription-information-box').addClass('callout-danger');
-                                                            $('#subscription-information-box').parents('.row').show();
-                                                        } else if (userData.PaidPeriod !== "0001-01-01T00:00:00" &&
-                                                            todayDate.setMonth(todayDate.getMonth() + 1) > expireDate) {
-
-                                                            var diff = Math.floor((Date.parse(expireDate) - Date.parse(new Date())) / 86400000); 
-
-                                                            $('#subscription-information-box h4').text(
-                                                                Q.text("Site.Subscriptions.WillExpire.SubscriptionInfoBoxHeader"));
-
-                                                            $('#subscription-information-box p')
-                                                                .text(
-                                                                Q.text("Site.Subscriptions.WillExpire.SubscriptionInfoBoxBody").format(diff));
-
-                                                            $('#subscription-information-box').addClass('callout-warning');
-                                                            $('#subscription-information-box').parents('.row').show();
-                                                        }
-
-                                                    }
-                                                })
-                                        </script>
                                     </div>
                                 </div><!-- /.box-body -->
                             </div><!-- /.box -->
@@ -369,7 +317,59 @@
 
         </script>
 
+        
+        <script>
 
+            //TODO: Finded major speed issue here! Cache user data or make a cookie if user is closing the subscription box
+
+            var userData = new Q.getRemoteData('UserData');
+            $(function() {
+                // Show user permision
+                if (userData.RolesList) {
+                    $("#role-list").text(userData.RolesList.join());
+                }
+            });
+            $(function () {
+                // Show user permision
+                if (userData.PaidPeriod) {
+                    String.prototype.format = function () {
+                        var args = arguments;
+                        return this.replace(/\{\{|\}\}|\{(\d+)\}/g, function (m, n) {
+                            if (m == "{{") { return "{"; }
+                            if (m == "}}") { return "}"; }
+                            return args[n];
+                        });
+                    };
+                                                        
+                    var expireDate = new Date(userData.PaidPeriod);
+                    var todayDate = new Date();
+
+                    if (userData.PaidPeriod !== "0001-01-01T00:00:00" && todayDate > expireDate) {
+                        $('#subscription-information-box h4').text(Q.text("Site.Subscriptions.Expired.SubscriptionInfoBoxHeader"));
+
+                        $('#subscription-information-box p').text(Q.text("Site.Subscriptions.Expired.SubscriptionInfoBoxBody"));
+
+                        $('#subscription-information-box').addClass('callout-danger');
+                        $('#subscription-information-box').parents('.row').show();
+                    } else if (userData.PaidPeriod !== "0001-01-01T00:00:00" &&
+                        todayDate.setMonth(todayDate.getMonth() + 1) > expireDate) {
+
+                        var diff = Math.floor((Date.parse(expireDate) - Date.parse(new Date())) / 86400000); 
+
+                        $('#subscription-information-box h4').text(
+                            Q.text("Site.Subscriptions.WillExpire.SubscriptionInfoBoxHeader"));
+
+                        $('#subscription-information-box p')
+                            .text(
+                                Q.text("Site.Subscriptions.WillExpire.SubscriptionInfoBoxBody").format(diff));
+
+                        $('#subscription-information-box').addClass('callout-warning');
+                        $('#subscription-information-box').parents('.row').show();
+                    }
+
+                }
+            })
+        </script>
 
        <script src="~/signalr/hubs"></script>
             <script>

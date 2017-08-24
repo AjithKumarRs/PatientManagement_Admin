@@ -74,11 +74,18 @@ namespace PatientManagement.Web.Modules.Common
 
         public static DateTime GetTenantPaidDays(int tenantId)
         {
-            var connection = SqlConnections.NewFor<TenantRow>();
+            var connection = SqlConnections.NewFor<SubscriptionsRow>();
 
-            var subscriptionId = connection.ById<TenantRow>(tenantId).SubscriptionId;
+            var tenant = connection.ById<TenantRow>(tenantId);
+            if (!tenant.SubscriptionRequired.Value)
+            {
+                return DateTime.MinValue;
+            }
+
+            var subsFlds = SubscriptionsRow.Fields;
+            var subscriptionId = connection.First<SubscriptionsRow>(subsFlds.TenantId == tenantId && subsFlds.IsActive == 1);
             if (subscriptionId != null)
-                return GetTenantPaidDaysForSubscription((int) subscriptionId);
+                return GetTenantPaidDaysForSubscription((int) subscriptionId.SubscriptionId);
             else
                 return DateTime.MinValue;
         }
