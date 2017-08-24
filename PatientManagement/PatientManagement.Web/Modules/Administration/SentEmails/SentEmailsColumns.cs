@@ -19,7 +19,6 @@ namespace PatientManagement.Administration.Columns
         public String FromEmail { get; set; }
         public String FromName { get; set; }
         public String Subject { get; set; }
-        public String Body { get; set; }
         public String ToEmail { get; set; }
         public String ToName { get; set; }
 

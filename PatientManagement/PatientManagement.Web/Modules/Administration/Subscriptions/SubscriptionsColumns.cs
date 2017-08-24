@@ -23,7 +23,17 @@ namespace PatientManagement.Administration.Columns
         public SubscriptionState IsActive { get; set; }
 
         public Int32 OfferName { get; set; }
-        [DisplayFormat("dd/MM/yyyy HH:mm")]
+
+        [DisplayFormat("dd/MM/yyyy")]
+        public DateTime PaidPeriod { get; set; }
+
+        [DisplayFormat("dd/MM/yyyy")]
+        public DateTime ActivatedOn { get; set; }
+
+        [DisplayFormat("dd/MM/yyyy")]
+        public DateTime DeactivatedOn { get; set; }
+
+        [DisplayFormat("dd/MM/yyyy")]
         public DateTime SubscriptionEndDate { get; set; }
 
         public string TenantName { get; set; }

@@ -66,7 +66,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Routing" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Server.IISIntegration" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="1.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Server" Version="0.2.0-preview2-22683" />
+   <PackageReference Include="Microsoft.AspNetCore.SignalR.Server" Version="0.2.0-preview2-22683" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.1" />
     <PackageReference Include="Microsoft.Data.Sqlite" Version="1.1.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="1.1.1" />
@@ -79,7 +79,7 @@
     <PackageReference Include="NodaMoney" Version="1.0.0" />
     <PackageReference Include="Sendgrid" Version="9.4.1" />
     <PackageReference Include="Serenity.FluentMigrator.Runner" Version="1.6.904" />
-    <PackageReference Include="Serenity.Web" Version="2.10.0" />
+    <PackageReference Include="Serenity.Web" Version="2.10.3" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.1' ">
     <DefineConstants>$(DefineConstants);COREFX;ASPNETCORE</DefineConstants>
@@ -98,7 +98,7 @@
 
   </Target>
   <ItemGroup>
-    <DotNetCliToolReference Include="Serenity.CodeGenerator" Version="2.10.0" />
+    <DotNetCliToolReference Include="Serenity.CodeGenerator" Version="2.10.3" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\Scripts\moment\" />

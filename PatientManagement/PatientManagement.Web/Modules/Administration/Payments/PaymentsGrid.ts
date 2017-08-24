@@ -11,6 +11,8 @@ namespace PatientManagement.Administration {
 
         constructor(container: JQuery) {
             super(container);
+
+            
         }
     }
 }

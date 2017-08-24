@@ -1,4 +1,5 @@
-﻿
+﻿/// <reference types="jqueryui" />
+
 namespace PatientManagement.Administration {
 
     @Serenity.Decorators.registerClass()
@@ -14,19 +15,33 @@ namespace PatientManagement.Administration {
 
         constructor() {
             super();
-            //this.form.SubscriptionId.changeSelect2(e => {
-            //    //var customerID = this.form.SubscriptionId.value;
-              
-            //    //SubscriptionsService.Retrieve({
-            //    //    EntityId: customerID
-            //    //}, response => {
-            //    //    this.setCustomerDetails(response.Entity);
-            //    //});
+            this.form.PaymentOptionId.changeSelect2(e => {
+                     this.CheckIfFieldsAreEmpty();
+            });
 
+            this.form.SubscriptionId.changeSelect2(e => {
+                this.CheckIfFieldsAreEmpty();
+            });
 
-            //    console.log("hey")
-            //});
+            this.form.CurrencyId.changeSelect2(e => {
+                this.CheckIfFieldsAreEmpty();
+            });
         }
+
+        protected CheckIfFieldsAreEmpty() : void {
+            if (this.form.SubscriptionId.value && this.form.PaymentOptionId.value && this.form.CurrencyId.value) {
+                $.get('../Administration/Payments/GetPrice',
+                    {
+                        SubscriptionId: this.form.SubscriptionId.value,
+                        PaymentOptionId: this.form.PaymentOptionId.value,
+                        CurrencyId: this.form.CurrencyId.value
+                    }, function (price) {
+                    
+                        $("input[name='Value']").val(price);
+                });
+            }
+        }
+
         private setCustomerDetails(details: SubscriptionsRow) {
 
         }

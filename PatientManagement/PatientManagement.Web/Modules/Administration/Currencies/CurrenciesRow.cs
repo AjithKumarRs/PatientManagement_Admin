@@ -36,6 +36,7 @@ namespace PatientManagement.Administration.Entities
             set { Fields.Name[this] = value; }
         }
         [DisplayName("Enabled"), BsSwitchEditor, NotNull]
+        [LookupInclude]
         public Boolean? Enabled
         {
             get { return Fields.Enabled[this]; }

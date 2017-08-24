@@ -25,7 +25,7 @@ namespace PatientManagement.Administration.Entities
             set { Fields.SubscriptionId[this] = value; }
         }
 
-        [DisplayName("Offer"), NotNull, ForeignKey("[dbo].[Offers]", "OfferId"), LeftJoin("jOffer"), TextualField("OfferName")]
+        [DisplayName("Offer"), NotNull, ForeignKey("[dbo].[Offers]", "OfferId"), LeftJoin("jOffer"), TextualField("OfferName"), Updatable(false)]
         [LookupEditor(typeof(OffersRow))]
         public Int32? OfferId
         {
@@ -60,6 +60,12 @@ namespace PatientManagement.Administration.Entities
             set { Fields.Name[this] = value; }
         }
 
+        [DisplayName("Paid Period"), NotMapped, Insertable(false), Updatable(false)]
+        public DateTime? PaidPeriod
+        {
+            get { return Fields.PaidPeriod[this]; }
+            set { Fields.PaidPeriod[this] = value; }
+        }
 
         [DisplayName("Offer Name"), Expression("jOffer.[Name]")]
         public String OfferName
@@ -187,6 +193,7 @@ namespace PatientManagement.Administration.Entities
 
         [NotNull, Insertable(false), Updatable(true), SortOrder(1, true)]
         [BsSwitchEditor]
+        [LookupInclude]
         public Int16? IsActive
         {
             get { return Fields.IsActive[this]; }
@@ -206,6 +213,8 @@ namespace PatientManagement.Administration.Entities
             public Int32Field OfferId;
             public Int32Field TenantId;
             public DateTimeField SubscriptionEndDate;
+            public DateTimeField PaidPeriod;
+
             public Int16Field IsActive;
             public DateTimeField DeactivatedOn;
             public DateTimeField ActivatedOn;

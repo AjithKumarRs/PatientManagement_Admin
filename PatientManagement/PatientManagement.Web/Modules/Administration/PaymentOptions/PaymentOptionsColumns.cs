@@ -15,7 +15,8 @@ namespace PatientManagement.Administration.Columns
     {
         [EditLink, DisplayName("Db.Shared.RecordId"), AlignRight]
         public Int32 PaymentOptionId { get; set; }
-        public Int32 Days { get; set; }
+        
+        public Int16 Months { get; set; }
         [EditLink]
         [Width(250)]
         public String Name { get; set; }

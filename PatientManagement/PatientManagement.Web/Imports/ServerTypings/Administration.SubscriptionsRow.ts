@@ -5,6 +5,7 @@
         OfferId?: number;
         TenantId?: number;
         SubscriptionEndDate?: string;
+        PaidPeriod?: string;
         IsActive?: number;
         DeactivatedOn?: string;
         ActivatedOn?: string;
@@ -38,6 +39,7 @@
             export declare const OfferId: string;
             export declare const TenantId: string;
             export declare const SubscriptionEndDate: string;
+            export declare const PaidPeriod: string;
             export declare const IsActive: string;
             export declare const DeactivatedOn: string;
             export declare const ActivatedOn: string;
@@ -54,6 +56,6 @@
             export declare const UpdateUserName: string;
         }
 
-        ['SubscriptionId', 'Name', 'OfferId', 'TenantId', 'SubscriptionEndDate', 'IsActive', 'DeactivatedOn', 'ActivatedOn', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'OfferName', 'OfferDescription', 'OfferPrice', 'OfferRoleId', 'TenantName', 'InsertUserName', 'UpdateUserName'].forEach(x => (<any>Fields)[x] = x);
+        ['SubscriptionId', 'Name', 'OfferId', 'TenantId', 'SubscriptionEndDate', 'PaidPeriod', 'IsActive', 'DeactivatedOn', 'ActivatedOn', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'OfferName', 'OfferDescription', 'OfferPrice', 'OfferRoleId', 'TenantName', 'InsertUserName', 'UpdateUserName'].forEach(x => (<any>Fields)[x] = x);
     }
 }

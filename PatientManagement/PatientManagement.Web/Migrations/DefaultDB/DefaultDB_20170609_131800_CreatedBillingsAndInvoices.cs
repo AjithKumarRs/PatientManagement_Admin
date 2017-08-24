@@ -85,8 +85,6 @@ namespace PatientManagement.Migrations.DefaultDB
             .ForeignKey("Currencies", "Id")
 
             .WithColumn("Value").AsDecimal(8, 4).NotNullable()
-            .WithColumn("RoleBefore").AsString(200).Nullable()
-            .WithColumn("RoleAfter").AsString(200).Nullable()
             .WithColumn("PaymentStatus").AsInt32().Nullable()
 
                 .WithColumn("InsertUserId").AsInt32().NotNullable()

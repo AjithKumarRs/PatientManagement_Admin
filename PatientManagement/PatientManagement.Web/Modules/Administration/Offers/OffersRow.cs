@@ -81,7 +81,7 @@ namespace PatientManagement.Administration.Entities
 
 
         [DisplayName("Currency"), NotNull, ForeignKey("[dbo].[Currencies]", "Id"), LeftJoin("jCurrency"), TextualField("CurrencyCurrencyId")]
-        [LookupEditor(typeof(CurrenciesRow), InplaceAdd = true)]
+        [LookupEditor(typeof(CurrenciesRow), InplaceAdd = true, FilterField = "Enabled", FilterValue = true)]
         public Int32? CurrencyId
         {
             get { return Fields.CurrencyId[this]; }

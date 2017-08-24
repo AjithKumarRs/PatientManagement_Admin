@@ -13,7 +13,7 @@ namespace PatientManagement.Administration.Forms
     [BasedOnRow(typeof(Entities.PaymentOptionsRow))]
     public class PaymentOptionsForm
     {
-        public Int32 Days { get; set; }
+        public Int32 Months { get; set; }
         public String Name { get; set; }
     }
 }
