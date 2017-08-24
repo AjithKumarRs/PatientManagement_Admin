@@ -25,11 +25,6 @@ namespace PatientManagement.Administration.Repositories
             request.Entity.FromEmail = user.Email;
             request.Entity.FromName = user.DisplayName;
 
-            if (string.IsNullOrEmpty(request.Entity.ToName))
-            {
-                request.Entity.ToName = request.Entity.ToEmail;
-            }
-
             var connection = SqlConnections.NewFor<PatientsRow>();
             var patientFields = PatientsRow.Fields;
 
@@ -37,8 +32,8 @@ namespace PatientManagement.Administration.Repositories
             if (string.IsNullOrEmpty(patient.Email))
                 return null;
 
-            //request.Entity.ToEmail = patient.Email;
-            //request.Entity.ToName = patient.Name;
+            request.Entity.ToEmail = patient.Email;
+            request.Entity.ToName = patient.Name;
 
             return new MySaveHandler().Process(uow, request, SaveRequestType.Create);
         }
