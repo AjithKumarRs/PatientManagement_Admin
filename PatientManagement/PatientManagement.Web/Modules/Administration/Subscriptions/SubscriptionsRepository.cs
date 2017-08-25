@@ -80,7 +80,7 @@ namespace PatientManagement.Administration.Repositories
             {
                 base.AfterSave();
 
-                if (IsCreate)
+                if (IsCreate || IsUpdate)
                 {
                     var user = (UserDefinition)Authorization.UserDefinition;
 
@@ -90,6 +90,14 @@ namespace PatientManagement.Administration.Repositories
                         var tenant = Connection.First<TenantRow>(tenantFld.TenantId == user.TenantId);
                         tenant.SubscriptionId = Row.SubscriptionId;
                         Connection.UpdateById(tenant);
+                        
+                        var offerRole = Connection.ById<OffersRow>(Row.OfferId).RoleId;
+                        
+                        var userRoleFld = UserRoleRow.Fields;
+                        var userRoles = Connection.First<UserRoleRow>(userRoleFld.UserId == user.UserId);
+                        userRoles.RoleId = offerRole;
+                        Connection.UpdateById(userRoles);
+
                     }
                 }
             }

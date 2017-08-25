@@ -21,7 +21,7 @@ namespace PatientManagement.Web.Modules.Common
                 //TODO Restrict access when subscription is required 
                 var tenantFld = TenantRow.Fields;
                 var tenant = connection.First<TenantRow>(tenantFld.TenantId == tenantId);
-                if (tenant?.SubscriptionRequired != null && tenant.SubscriptionRequired.Value && GetTenantPaidDays(tenantId) > DateTime.Now)
+                if (tenant?.SubscriptionRequired != null && tenant.SubscriptionRequired.Value && GetTenantPaidDays(tenantId) < DateTime.Now)
                 {
                     result.Add(3);
                 }
@@ -77,7 +77,7 @@ namespace PatientManagement.Web.Modules.Common
             {
                 var payDays = 0;
                 var paymentsFlds = PaymentsRow.Fields;
-                var payments = connection.List<PaymentsRow>(paymentsFlds.SubscriptionId == subscriptionId);
+                var payments = connection.List<PaymentsRow>(paymentsFlds.SubscriptionId == subscriptionId && paymentsFlds.PaymentStatus == 0);
 
                 foreach (var payment in payments)
                 {

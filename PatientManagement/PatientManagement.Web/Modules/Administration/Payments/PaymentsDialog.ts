@@ -27,7 +27,12 @@ namespace PatientManagement.Administration {
                 this.CheckIfFieldsAreEmpty();
             });
         }
-
+        loadEntity(entity: SentEmailsRow) {
+            super.loadEntity(entity);
+            if (this.isNew()) {
+                Serenity.EditorUtils.setReadOnly(this.form.PaymentStatus, true);
+            }
+        }
         protected CheckIfFieldsAreEmpty() : void {
             if (this.form.SubscriptionId.value && this.form.PaymentOptionId.value && this.form.CurrencyId.value) {
                 $.get('../Administration/Payments/GetPrice',

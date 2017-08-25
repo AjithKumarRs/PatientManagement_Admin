@@ -1674,6 +1674,12 @@ var PatientManagement;
             PaymentsDialog.prototype.getLocalTextPrefix = function () { return Administration.PaymentsRow.localTextPrefix; };
             PaymentsDialog.prototype.getNameProperty = function () { return Administration.PaymentsRow.nameProperty; };
             PaymentsDialog.prototype.getService = function () { return Administration.PaymentsService.baseUrl; };
+            PaymentsDialog.prototype.loadEntity = function (entity) {
+                _super.prototype.loadEntity.call(this, entity);
+                if (this.isNew()) {
+                    Serenity.EditorUtils.setReadOnly(this.form.PaymentStatus, true);
+                }
+            };
             PaymentsDialog.prototype.CheckIfFieldsAreEmpty = function () {
                 if (this.form.SubscriptionId.value && this.form.PaymentOptionId.value && this.form.CurrencyId.value) {
                     $.get('../Administration/Payments/GetPrice', {

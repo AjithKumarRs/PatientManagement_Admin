@@ -90,7 +90,7 @@
                                             @(user != null ? user.DisplayName : "")
                                             <br />
                                             <small id="role-list"></small>
-                                       
+
                                         </p>
 
                                     </li>
@@ -317,26 +317,22 @@
 
         </script>
 
-        
+
         <script async>
 
             //TODO: Finded major speed issue here! Cache user data or make a cookie if user is closing the subscription box
-            $(document).ready(function() {
+            $(document).ready(function () {
 
-                var userData = new Q.getRemoteData('UserData');
-                $(function() {
+                //var userData = new Q.getRemoteData('UserData');
+                $.get('../Administration/GetTenantSubscriptionEndDate', function (date) {
+                    var subscriptionEndDate = date;
+                    
                     // Show user permision
-                    if (userData.RolesList) {
-                        $("#role-list").text(userData.RolesList.join());
-                    }
-                });
-                $(function() {
-                    // Show user permision
-                    if (userData.PaidPeriod) {
-                        String.prototype.format = function() {
+                    if (subscriptionEndDate) {
+                        String.prototype.format = function () {
                             var args = arguments;
                             return this.replace(/\{\{|\}\}|\{(\d+)\}/g,
-                                function(m, n) {
+                                function (m, n) {
                                     if (m == "{{") {
                                         return "{";
                                     }
@@ -347,10 +343,10 @@
                                 });
                         };
 
-                        var expireDate = new Date(userData.PaidPeriod);
+                        var expireDate = new Date(subscriptionEndDate);
                         var todayDate = new Date();
 
-                        if (userData.PaidPeriod !== "0001-01-01T00:00:00" && todayDate > expireDate) {
+                        if (subscriptionEndDate !== "0001-01-01T00:00:00" && todayDate > expireDate) {
                             $('#subscription-information-box h4')
                                 .text(Q.text("Site.Subscriptions.Expired.SubscriptionInfoBoxHeader"));
 
@@ -359,7 +355,7 @@
 
                             $('#subscription-information-box').addClass('callout-danger');
                             $('#subscription-information-box').parents('.row').show();
-                        } else if (userData.PaidPeriod !== "0001-01-01T00:00:00" &&
+                        } else if (subscriptionEndDate !== "0001-01-01T00:00:00" &&
                             todayDate.setMonth(todayDate.getMonth() + 1) > expireDate) {
 
                             var diff = Math.floor((Date.parse(expireDate) - Date.parse(new Date())) / 86400000);
@@ -377,73 +373,80 @@
 
                     }
                 });
+                $.get('../Administration/GetTenantRole', function (role) {
+                    // Show user permision
+                    if (role) {
+                        $("#role-list").text(role);
+                    }
+                });
+
 
             });
         </script>
 
-       <script src="~/signalr/hubs"></script>
-            <script>
-                $(function () {
-                    var hub = $.connection.notificationHub;
+        <script src="~/signalr/hubs"></script>
+        <script>
+            $(function () {
+                var hub = $.connection.notificationHub;
 
-                    $.connection.hub.start().done(function () {
+                $.connection.hub.start().done(function () {
 
-                        if ($.connection.hub && $.connection.hub.state ===$.signalR.connectionState.connected) {
+                    if ($.connection.hub && $.connection.hub.state === $.signalR.connectionState.connected) {
 
-                            hub.client.visitChangedNotification = function (userDisplayName, userPicture, notification, start, end) {
-                                var to = {};
-                                to.timeOut = 6000;
-                                to.closeButton = true;
-
-
-                                if ($('#NotificationCheck').bootstrapSwitch('state')) {
-                                    Q.notifyInfo(notification, '', to);
-                                }
-                                RefreshFullCalendar(start, end);
-
-                                if ($('#VisitsGridDiv').length) {
-                                    $('#VisitsGridDiv .refresh-button').click();
-                                }
-                                if ($('.s-VisitsGrid').length) {
-                                    $('.s-VisitsGrid .refresh-button').click();
-                                }
-                                if ($('.s-NotificationsGrid').length) {
-                                    $('.s-NotificationsGrid .refresh-button').click();
-                                }
-                                var number = +($('.counter-label-notifications').text());
-                                $('.counter-label-notifications').text(number + 1);
-                            };
-
-                            hub.client.patientChangedNotification = function (userDisplayName, userPicture, notification) {
-                                var to = {};
-
-                                if ($('#NotificationCheck').bootstrapSwitch('state')) {
-                                    Q.notifyInfo(notification, '', to);
-                                }
-
-                                if ($('.s-PatientsGrid').length) {
-                                    $('.s-PatientsGrid .refresh-button').click();
-                                }
+                        hub.client.visitChangedNotification = function (userDisplayName, userPicture, notification, start, end) {
+                            var to = {};
+                            to.timeOut = 6000;
+                            to.closeButton = true;
 
 
-                                if ($('.s-NotificationsGrid').length) {
-                                    $('.s-NotificationsGrid .refresh-button').click();
-                                }
+                            if ($('#NotificationCheck').bootstrapSwitch('state')) {
+                                Q.notifyInfo(notification, '', to);
+                            }
+                            RefreshFullCalendar(start, end);
 
-                                var number = +($('.counter-label-notifications').text());
-                                $('.counter-label-notifications').text(number + 1);
+                            if ($('#VisitsGridDiv').length) {
+                                $('#VisitsGridDiv .refresh-button').click();
+                            }
+                            if ($('.s-VisitsGrid').length) {
+                                $('.s-VisitsGrid .refresh-button').click();
+                            }
+                            if ($('.s-NotificationsGrid').length) {
+                                $('.s-NotificationsGrid .refresh-button').click();
+                            }
+                            var number = +($('.counter-label-notifications').text());
+                            $('.counter-label-notifications').text(number + 1);
+                        };
 
-                            };
-                        }
-                        else {
-                            // TODO: Add notification somewhere that the connection cant be made
-                        }
+                        hub.client.patientChangedNotification = function (userDisplayName, userPicture, notification) {
+                            var to = {};
+
+                            if ($('#NotificationCheck').bootstrapSwitch('state')) {
+                                Q.notifyInfo(notification, '', to);
+                            }
+
+                            if ($('.s-PatientsGrid').length) {
+                                $('.s-PatientsGrid .refresh-button').click();
+                            }
 
 
-                    });
+                            if ($('.s-NotificationsGrid').length) {
+                                $('.s-NotificationsGrid .refresh-button').click();
+                            }
+
+                            var number = +($('.counter-label-notifications').text());
+                            $('.counter-label-notifications').text(number + 1);
+
+                        };
+                    }
+                    else {
+                        // TODO: Add notification somewhere that the connection cant be made
+                    }
+
 
                 });
-            </script>
+
+            });
+        </script>
 
                 }
 </body>

@@ -78,32 +78,32 @@ namespace PatientManagement.Administration.Repositories
                 base.OnReturn();
 
                 //patients might be in another database, in another db server, so we can't simply use a join here
-                var patientsList = Response.Entities.Select(x => x.ToName).Distinct();
-                if (patientsList.Any())
-                {
-                    var patientsFields = PatientsRow.Fields;
-                    IDictionary<int, List<string>> patients;
+                //var patientsList = Response.Entities.Select(x => x.ToName).Distinct();
+                //if (patientsList.Any())
+                //{
+                //    var patientsFields = PatientsRow.Fields;
+                //    IDictionary<int, List<string>> patients;
 
-                    using (var connection = SqlConnections.NewFor<PatientsRow>())
-                        patients = connection.Query(new SqlQuery()
-                                .From(patientsFields)
-                                .Select(patientsFields.PatientId)
-                                .Select(patientsFields.Name)
-                                .Select(patientsFields.Email)
-                                .Where(patientsFields.PatientId.In(patientsList)))
-                            .ToDictionary(x =>
-                                (int) (x.PatientId ?? x.PATIENTID), x => new List<string>() { x.Name, x.Email });
+                //    using (var connection = SqlConnections.NewFor<PatientsRow>())
+                //        patients = connection.Query(new SqlQuery()
+                //                .From(patientsFields)
+                //                .Select(patientsFields.PatientId)
+                //                .Select(patientsFields.Name)
+                //                .Select(patientsFields.Email)
+                //                .Where(patientsFields.PatientId.In(patientsList)))
+                //            .ToDictionary(x =>
+                //                (int) (x.PatientId ?? x.PATIENTID), x => new List<string>() { x.Name, x.Email });
 
-                    List<string> s;
-                    foreach (var responseEntity in Response.Entities)
-                    {
-                        if (patients.TryGetValue(int.Parse(responseEntity.ToName), out s))
-                        {
-                            responseEntity.ToName = s[0];
-                            responseEntity.ToEmail = s[1];
-                        }
-                    }
-                }
+                //    List<string> s;
+                //    foreach (var responseEntity in Response.Entities)
+                //    {
+                //        if (patients.TryGetValue(int.Parse(responseEntity.ToName), out s))
+                //        {
+                //            responseEntity.ToName = s[0];
+                //            responseEntity.ToEmail = s[1];
+                //        }
+                //    }
+                //}
             }
         }
     }
