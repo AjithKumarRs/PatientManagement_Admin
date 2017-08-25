@@ -1940,6 +1940,7 @@ declare namespace PatientManagement.Administration {
         protected getService(): string;
         protected form: PaymentsForm;
         constructor();
+        loadEntity(entity: SentEmailsRow): void;
         protected CheckIfFieldsAreEmpty(): void;
         private setCustomerDetails(details);
     }

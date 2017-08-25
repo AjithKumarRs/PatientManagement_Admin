@@ -21,44 +21,13 @@ namespace PatientManagement.Web.Modules.Common
                 //TODO Restrict access when subscription is required 
                 var tenantFld = TenantRow.Fields;
                 var tenant = connection.First<TenantRow>(tenantFld.TenantId == tenantId);
-                if (tenant?.SubscriptionRequired != null && tenant.SubscriptionRequired.Value)
+                if (tenant?.SubscriptionRequired != null && tenant.SubscriptionRequired.Value && GetTenantPaidDays(tenantId) < DateTime.Now)
                 {
-                    // We check if the tenant have active subscription
-                    var subsFld = SubscriptionsRow.Fields;
-                    var subscriptions =
-                        connection.List<SubscriptionsRow>(subsFld.TenantId == tenantId);
-
-                    if (subscriptions.Any() && subscriptions.Any(s => s.IsActive == 1))//subscription.SubscriptionEndDate >= DateTime.Now)
-                    {
-                        //Checking if user has correct payments
-                        if (DateTime.Now >
-                            GetTenantPaidDaysForSubscription((int) subscriptions.FirstOrDefault().SubscriptionId))
-                        {
-                            result.Add(3);
-                            return result;
-                        }
-                        var offersFld = OffersRow.Fields;
-                        var offers = connection.List<OffersRow>(offersFld.OfferId.In(subscriptions.Select(s => s.OfferId)));
-                        offers.ForEach(o =>
-                        {
-                            // Add roles from offers
-                            result.Add(o.RoleId ?? 3);
-                        });
-                    }
-                    else
-                    {
-                        // TODO Don't use this shit like number! 3 = Expired role 
-                        result.Add(3);
-
-                        // Return expired role
-                        return result;
-                    }
+                    result.Add(3);
                 }
                 else
                 {
                     // All looks fine, get current user roles 
-
-                    // TODO: Clean this code and keep it simple stupid 
                     connection.List<UserRoleRow>(q => q
                             .Select(fld.RoleId)
                             .Where(new Criteria(fld.UserId) == userId))
@@ -85,7 +54,7 @@ namespace PatientManagement.Web.Modules.Common
             var subsFlds = SubscriptionsRow.Fields;
             var subscriptionId = connection.First<SubscriptionsRow>(subsFlds.TenantId == tenantId && subsFlds.IsActive == 1);
             if (subscriptionId != null)
-                return GetTenantPaidDaysForSubscription((int) subscriptionId.SubscriptionId);
+                return GetTenantPaidDaysForSubscription((int)subscriptionId.SubscriptionId);
             else
                 return DateTime.MinValue;
         }
@@ -93,22 +62,23 @@ namespace PatientManagement.Web.Modules.Common
 
         public static DateTime GetTenantPaidDaysForSubscription(int subscriptionId)
         {
-            var paymentsFlds = PaymentsRow.Fields;
             var connection = SqlConnections.NewFor<PaymentsRow>();
 
             var subscriptions = connection.ById<SubscriptionsRow>(subscriptionId);
-            var payments = connection.List<PaymentsRow>(paymentsFlds.SubscriptionId == subscriptionId);
 
-            var offer = connection.ById<OffersRow>(subscriptions.OfferId);
+            var offerMaximumSubscriptionTime = connection.ById<OffersRow>(subscriptions.OfferId).MaximumSubscriptionTime;
             var activatedDate = subscriptions.ActivatedOn ?? DateTime.MinValue;
 
-            if (!payments.Any() && offer.MaximumSubscriptionTime != null)
+            if (connection.Count<PaymentsRow>() == 0 && offerMaximumSubscriptionTime != null)
             {
-                return activatedDate.AddDays(offer.MaximumSubscriptionTime ?? 0);
+                return activatedDate.AddDays(offerMaximumSubscriptionTime.Value);
             }
             else
             {
                 var payDays = 0;
+                var paymentsFlds = PaymentsRow.Fields;
+                var payments = connection.List<PaymentsRow>(paymentsFlds.SubscriptionId == subscriptionId && paymentsFlds.PaymentStatus == 0);
+
                 foreach (var payment in payments)
                 {
                     payDays += connection.ById<PaymentOptionsRow>(payment.PaymentOptionId).Months ?? 0;

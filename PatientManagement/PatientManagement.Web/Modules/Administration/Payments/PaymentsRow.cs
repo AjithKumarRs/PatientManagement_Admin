@@ -72,7 +72,7 @@ namespace PatientManagement.Administration.Entities
             set { Fields.Value[this] = value; }
         }
         
-        [DisplayName("Payment Status")]
+        [DisplayName("Payment Status"), UpdatePermission("Administration:PaymentStatus")]
         public PaymentStatus? PaymentStatus
         {
             get { return (PaymentStatus?)Fields.PaymentStatus[this]; }
@@ -171,7 +171,7 @@ namespace PatientManagement.Administration.Entities
         }
 
 
-        [DisplayName("Insert Date"), NotNull]
+        [DisplayName("Insert Date"), NotNull, SortOrder(1, true)]
         [ReadPermission("Administration:Tenants")]
         public DateTime? InsertDate
         {

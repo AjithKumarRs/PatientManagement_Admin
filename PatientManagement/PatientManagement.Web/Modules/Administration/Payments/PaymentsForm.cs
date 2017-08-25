@@ -21,7 +21,7 @@ namespace PatientManagement.Administration.Forms
         [ReadOnly(true), Required(true)]
         public String Value { get; set; }
 
-        [ReadOnly(true), DefaultValue(2)]
+        [DefaultValue(2)]
         public Int32 PaymentStatus { get; set; }
 
     }

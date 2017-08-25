@@ -80,16 +80,19 @@ namespace PatientManagement.Administration.Endpoints
             result.DisplayName = user.DisplayName;
             result.IsAdmin = user.Username == "admin";
 
-            result.PaidPeriod = UserSubscriptionHelper.GetTenantPaidDays(user.TenantId);
+            //TODO: Major speed issue when using in the Frond End
+            //result.PaidPeriod = UserSubscriptionHelper.GetTenantPaidDays(user.TenantId);
+
             result.Permissions = TwoLevelCache.GetLocalStoreOnly("ScriptUserPermissions:" + user.Id, TimeSpan.Zero,
                 UserPermissionRow.Fields.GenerationKey, () =>
                 {
-                    //TODO: User role may be is incorect
-                    var connection = SqlConnections.NewFor<UserRoleRow>();
-                    var rolesFld = RoleRow.Fields;
-                    var roleIdList = UserSubscriptionHelper.GetUserRolesIdBasedOnSubscription(user.UserId, user.TenantId);
-                    if (roleIdList.Any())
-                        result.RolesList = connection.List<RoleRow>(rolesFld.RoleId.In(roleIdList)).Select(r => r.RoleName).ToList();
+                  
+                    //TODO: Major speed issue when using in the Frond End
+                    //var connection = SqlConnections.NewFor<UserRoleRow>();
+                    //var rolesFld = RoleRow.Fields;
+                    //var roleIdList = UserSubscriptionHelper.GetUserRolesIdBasedOnSubscription(user.UserId, user.TenantId);
+                    //if (roleIdList.Any())
+                    //    result.RolesList = connection.List<RoleRow>(rolesFld.RoleId.In(roleIdList)).Select(r => r.RoleName).ToList();
 
 
                     var permissions = new Dictionary<string, bool>(StringComparer.OrdinalIgnoreCase);
