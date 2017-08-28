@@ -4,6 +4,7 @@
         BeneficiaryName?: string;
         BankName?: string;
         Name?: string;
+        PaymentType?: PatientManagement.PaymentTypes;
         IbanBeneficient?: string;
         TenantId?: number;
         InsertUserId?: number;
@@ -30,6 +31,7 @@
             export declare const BeneficiaryName: string;
             export declare const BankName: string;
             export declare const Name: string;
+            export declare const PaymentType: string;
             export declare const IbanBeneficient: string;
             export declare const TenantId: string;
             export declare const InsertUserId: string;
@@ -41,6 +43,6 @@
             export declare const UpdateUserName: string;
         }
 
-        ['PaymentDetailsId', 'BeneficiaryName', 'BankName', 'Name', 'IbanBeneficient', 'TenantId', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'TenantName', 'InsertUserName', 'UpdateUserName'].forEach(x => (<any>Fields)[x] = x);
+        ['PaymentDetailsId', 'BeneficiaryName', 'BankName', 'Name', 'PaymentType', 'IbanBeneficient', 'TenantId', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'TenantName', 'InsertUserName', 'UpdateUserName'].forEach(x => (<any>Fields)[x] = x);
     }
 }

@@ -305,6 +305,7 @@ declare namespace PatientManagement.Administration {
     }
     interface PaymentsDetailsForm {
         Name: Serenity.StringEditor;
+        PaymentTypes: Serenity.IntegerEditor;
         BeneficiaryName: Serenity.StringEditor;
         BankName: Serenity.StringEditor;
         IbanBeneficient: Serenity.StringEditor;
@@ -316,6 +317,7 @@ declare namespace PatientManagement.Administration {
         BeneficiaryName?: string;
         BankName?: string;
         Name?: string;
+        PaymentType?: PatientManagement.PaymentTypes;
         IbanBeneficient?: string;
         TenantId?: number;
         InsertUserId?: number;
@@ -337,6 +339,7 @@ declare namespace PatientManagement.Administration {
             const BeneficiaryName: string;
             const BankName: string;
             const Name: string;
+            const PaymentType: string;
             const IbanBeneficient: string;
             const TenantId: string;
             const InsertUserId: string;
@@ -1639,6 +1642,12 @@ declare namespace PatientManagement.PatientManagement {
         Onhold = 7,
         Blocked = 8,
         Cancelled = 9,
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    enum PaymentTypes {
+        BankTransfer = 0,
+        CreditCard = 1,
     }
 }
 declare namespace PatientManagement.PatientManagement {
