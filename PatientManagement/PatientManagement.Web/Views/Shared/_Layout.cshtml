@@ -389,9 +389,9 @@
             $(function () {
                 var hub = $.connection.notificationHub;
 
-                $.connection.hub.start().done(function () {
-
-                    if ($.connection.hub && $.connection.hub.state === $.signalR.connectionState.connected) {
+                //TODO: Clean this code!
+              //  $.connection.hub.start().done(function () {
+                //    if ($.connection.hub && $.connection.hub.state === $.signalR.connectionState.connected) {
 
                         hub.client.visitChangedNotification = function (userDisplayName, userPicture, notification, start, end) {
                             var to = {};
@@ -437,14 +437,16 @@
                             $('.counter-label-notifications').text(number + 1);
 
                         };
-                    }
-                    else {
-                        // TODO: Add notification somewhere that the connection cant be made
-                    }
+                //    }
+                //    else {
+                //        // TODO: Add notification somewhere that the connection cant be made
+                //    }
 
 
-                });
-
+                //});
+                $.connection.hub.start()
+                    .done(function(){ console.log('Now connected, connection ID=' + $.connection.hub.id); })
+                    .fail(function(){ console.log('Could not Connect!'); });
             });
         </script>
 
