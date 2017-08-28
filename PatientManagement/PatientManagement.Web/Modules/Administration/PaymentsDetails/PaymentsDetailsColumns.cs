@@ -18,8 +18,8 @@ namespace PatientManagement.Administration.Columns
 
 
         public String Name { get; set; }
-
-        public Int32 PaymentTypes { get; set; }
+        [Width(80)]
+        public Int32 PaymentType { get; set; }
 
 
         [EditLink]
