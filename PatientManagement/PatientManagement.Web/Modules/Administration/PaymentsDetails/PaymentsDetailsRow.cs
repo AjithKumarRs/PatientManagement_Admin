@@ -1,4 +1,6 @@
 ﻿
+using PatientManagement.PatientManagement.Scripts;
+
 namespace PatientManagement.Administration.Entities
 {
     using Serenity;
@@ -10,9 +12,10 @@ namespace PatientManagement.Administration.Entities
     using System.IO;
 
     [ConnectionKey("Default"), TableName("[dbo].[PaymentsDetails]"), DisplayName("Payments Details"), InstanceName("Payments Details"), TwoLevelCached]
-    [ReadPermission("AdministrationTenants:PaymentsDetails")]
-    [ModifyPermission("AdministrationTenants:PaymentsDetails")]
-    [LookupScript("Administration.PaymentsDetails")]
+    [ReadPermission("AdministrationTenants:PaymentsDetails:Read")]
+    [ModifyPermission("AdministrationTenants:PaymentsDetails:Modify")]
+    [LookupScript("Administration.PaymentsDetails", 
+        LookupType = typeof(MultiTenantRowLookupScript<>))]
     public sealed class PaymentsDetailsRow : Row, IIdRow, INameRow, ILoggingRow, IMultiTenantRow
     {
         [DisplayName("Payment Details Id"), Identity]
