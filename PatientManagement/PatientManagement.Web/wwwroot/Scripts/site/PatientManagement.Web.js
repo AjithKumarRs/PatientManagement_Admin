@@ -1,8 +1,13 @@
-﻿var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+﻿var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -271,7 +276,7 @@ var PatientManagement;
         }(Serenity.PrefixedContext));
         PaymentsDetailsForm.formKey = 'Administration.PaymentsDetails';
         Administration.PaymentsDetailsForm = PaymentsDetailsForm;
-        [['Name', function () { return Serenity.StringEditor; }], ['BeneficiaryName', function () { return Serenity.StringEditor; }], ['BankName', function () { return Serenity.StringEditor; }], ['IbanBeneficient', function () { return Serenity.StringEditor; }]].forEach(function (x) { return Object.defineProperty(PaymentsDetailsForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
+        [['Name', function () { return Serenity.StringEditor; }], ['PaymentType', function () { return Serenity.EnumEditor; }], ['BeneficiaryName', function () { return Serenity.StringEditor; }], ['BankName', function () { return Serenity.StringEditor; }], ['IbanBeneficient', function () { return Serenity.StringEditor; }]].forEach(function (x) { return Object.defineProperty(PaymentsDetailsForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
     })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
@@ -291,7 +296,7 @@ var PatientManagement;
             var Fields;
             (function (Fields) {
             })(Fields = PaymentsDetailsRow.Fields || (PaymentsDetailsRow.Fields = {}));
-            ['PaymentDetailsId', 'BeneficiaryName', 'BankName', 'Name', 'IbanBeneficient', 'TenantId', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'TenantName', 'InsertUserName', 'UpdateUserName'].forEach(function (x) { return Fields[x] = x; });
+            ['PaymentDetailsId', 'BeneficiaryName', 'BankName', 'Name', 'PaymentType', 'IbanBeneficient', 'TenantId', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'TenantName', 'InsertUserName', 'UpdateUserName'].forEach(function (x) { return Fields[x] = x; });
         })(PaymentsDetailsRow = Administration.PaymentsDetailsRow || (Administration.PaymentsDetailsRow = {}));
     })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
 })(PatientManagement || (PatientManagement = {}));
@@ -1716,6 +1721,53 @@ var PatientManagement;
             PaymentsGrid.prototype.getIdProperty = function () { return Administration.PaymentsRow.idProperty; };
             PaymentsGrid.prototype.getLocalTextPrefix = function () { return Administration.PaymentsRow.localTextPrefix; };
             PaymentsGrid.prototype.getService = function () { return Administration.PaymentsService.baseUrl; };
+            PaymentsGrid.prototype.getColumns = function () {
+                var columns = _super.prototype.getColumns.call(this);
+                columns.splice(1, 0, {
+                    field: 'Print Invoice',
+                    name: 'Invoice',
+                    format: function (ctx) { return '<a class="inline-action print-invoice" title="Invoice">' +
+                        '<i class="fa fa-file-pdf-o text-red"></i> PDF</a>'; },
+                    width: 76,
+                    minWidth: 54,
+                    maxWidth: 76
+                });
+                return columns;
+            };
+            PaymentsGrid.prototype.getButtons = function () {
+                var _this = this;
+                var buttons = _super.prototype.getButtons.call(this);
+                buttons.push(PatientManagement.Common.ExcelExportHelper.createToolButton({
+                    grid: this,
+                    hint: 'Export to Excel',
+                    title: 'Export to Excel',
+                    service: Administration.PaymentsService.baseUrl + '/ListExcel',
+                    onViewSubmit: function () { return _this.onViewSubmit(); },
+                    separator: true
+                }));
+                return buttons;
+            };
+            PaymentsGrid.prototype.onClick = function (e, row, cell) {
+                _super.prototype.onClick.call(this, e, row, cell);
+                if (e.isDefaultPrevented())
+                    return;
+                var item = this.itemAt(row);
+                var target = $(e.target);
+                // if user clicks "i" element, e.g. icon
+                if (target.parent().hasClass('inline-action'))
+                    target = target.parent();
+                if (target.hasClass('inline-action')) {
+                    e.preventDefault();
+                    if (target.hasClass('print-invoice')) {
+                        PatientManagement.Common.ReportHelper.execute({
+                            reportKey: 'Administration.PaymentInvoice',
+                            params: {
+                                PaymentId: item.PaymentId
+                            }
+                        });
+                    }
+                }
+            };
             return PaymentsGrid;
         }(Serenity.EntityGrid));
         PaymentsGrid = __decorate([
@@ -2337,22 +2389,6 @@ var PatientManagement;
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
 (function (PatientManagement) {
-    var Authorization;
-    (function (Authorization) {
-        Object.defineProperty(Authorization, 'userDefinition', {
-            get: function () {
-                return Q.getRemoteData('UserData');
-            }
-        });
-        function hasPermission(permissionKey) {
-            var ud = Authorization.userDefinition;
-            return ud.Username === 'admin' || !!ud.Permissions[permissionKey];
-        }
-        Authorization.hasPermission = hasPermission;
-    })(Authorization = PatientManagement.Authorization || (PatientManagement.Authorization = {}));
-})(PatientManagement || (PatientManagement = {}));
-var PatientManagement;
-(function (PatientManagement) {
     var Administration;
     (function (Administration) {
         var UserDialog = (function (_super) {
@@ -2455,6 +2491,22 @@ var PatientManagement;
         ], UserGrid);
         Administration.UserGrid = UserGrid;
     })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var Authorization;
+    (function (Authorization) {
+        Object.defineProperty(Authorization, 'userDefinition', {
+            get: function () {
+                return Q.getRemoteData('UserData');
+            }
+        });
+        function hasPermission(permissionKey) {
+            var ud = Authorization.userDefinition;
+            return ud.Username === 'admin' || !!ud.Permissions[permissionKey];
+        }
+        Authorization.hasPermission = hasPermission;
+    })(Authorization = PatientManagement.Authorization || (PatientManagement.Authorization = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
 (function (PatientManagement) {
@@ -2878,6 +2930,33 @@ var PatientManagement;
         ], UserRoleDialog);
         Administration.UserRoleDialog = UserRoleDialog;
     })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var LanguageList;
+    (function (LanguageList) {
+        function getValue() {
+            var result = [];
+            for (var _i = 0, _a = PatientManagement.Administration.LanguageRow.getLookup().items; _i < _a.length; _i++) {
+                var k = _a[_i];
+                if (k.LanguageId !== 'en') {
+                    result.push([k.Id.toString(), k.LanguageName]);
+                }
+            }
+            return result;
+        }
+        LanguageList.getValue = getValue;
+    })(LanguageList = PatientManagement.LanguageList || (PatientManagement.LanguageList = {}));
+})(PatientManagement || (PatientManagement = {}));
+/// <reference path="../Common/Helpers/LanguageList.ts" />
+var PatientManagement;
+(function (PatientManagement) {
+    var ScriptInitialization;
+    (function (ScriptInitialization) {
+        Q.Config.responsiveDialogs = true;
+        Q.Config.rootNamespaces.push('PatientManagement');
+        Serenity.EntityDialog.defaultLanguageList = PatientManagement.LanguageList.getValue;
+    })(ScriptInitialization = PatientManagement.ScriptInitialization || (PatientManagement.ScriptInitialization = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
 (function (PatientManagement) {
@@ -3418,23 +3497,6 @@ var PatientManagement;
         ], GridEditorDialog);
         Common.GridEditorDialog = GridEditorDialog;
     })(Common = PatientManagement.Common || (PatientManagement.Common = {}));
-})(PatientManagement || (PatientManagement = {}));
-var PatientManagement;
-(function (PatientManagement) {
-    var LanguageList;
-    (function (LanguageList) {
-        function getValue() {
-            var result = [];
-            for (var _i = 0, _a = PatientManagement.Administration.LanguageRow.getLookup().items; _i < _a.length; _i++) {
-                var k = _a[_i];
-                if (k.LanguageId !== 'en') {
-                    result.push([k.Id.toString(), k.LanguageName]);
-                }
-            }
-            return result;
-        }
-        LanguageList.getValue = getValue;
-    })(LanguageList = PatientManagement.LanguageList || (PatientManagement.LanguageList = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
 (function (PatientManagement) {
@@ -4100,16 +4162,6 @@ var PatientManagement;
         Common.ReportPage = ReportPage;
     })(Common = PatientManagement.Common || (PatientManagement.Common = {}));
 })(PatientManagement || (PatientManagement = {}));
-/// <reference path="../Common/Helpers/LanguageList.ts" />
-var PatientManagement;
-(function (PatientManagement) {
-    var ScriptInitialization;
-    (function (ScriptInitialization) {
-        Q.Config.responsiveDialogs = true;
-        Q.Config.rootNamespaces.push('PatientManagement');
-        Serenity.EntityDialog.defaultLanguageList = PatientManagement.LanguageList.getValue;
-    })(ScriptInitialization = PatientManagement.ScriptInitialization || (PatientManagement.ScriptInitialization = {}));
-})(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
 (function (PatientManagement) {
     var Common;
@@ -4138,6 +4190,60 @@ var PatientManagement;
         }());
         Common.UserPreferenceStorage = UserPreferenceStorage;
     })(Common = PatientManagement.Common || (PatientManagement.Common = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var Membership;
+    (function (Membership) {
+        var LoginPanel = (function (_super) {
+            __extends(LoginPanel, _super);
+            function LoginPanel(container) {
+                var _this = _super.call(this, container) || this;
+                $(function () {
+                    $('body').vegas({
+                        delay: 10000,
+                        cover: true,
+                        overlay: Q.resolveUrl("~/Scripts/vegas/overlays/01.png"),
+                        slides: [
+                            { src: Q.resolveUrl('~/Content/site/slides/slide1.jpg'), transition: 'fade' },
+                            { src: Q.resolveUrl('~/Content/site/slides/slide2.jpg'), transition: 'fade' },
+                            { src: Q.resolveUrl('~/Content/site/slides/slide3.jpg'), transition: 'zoomOut' },
+                            { src: Q.resolveUrl('~/Content/site/slides/slide4.jpg'), transition: 'blur' }
+                        ]
+                    });
+                });
+                _this.form = new Membership.LoginForm(_this.idPrefix);
+                _this.byId('LoginButton').click(function (e) {
+                    e.preventDefault();
+                    if (!_this.validateForm()) {
+                        return;
+                    }
+                    var request = _this.getSaveEntity();
+                    Q.serviceCall({
+                        url: Q.resolveUrl('~/Account/Login'),
+                        request: request,
+                        onSuccess: function (response) {
+                            var q = Q.parseQueryString();
+                            var returnUrl = q['returnUrl'] || q['ReturnUrl'];
+                            if (returnUrl) {
+                                window.location.href = returnUrl;
+                            }
+                            else {
+                                window.location.href = Q.resolveUrl('~/');
+                            }
+                        }
+                    });
+                });
+                return _this;
+            }
+            LoginPanel.prototype.getFormKey = function () { return Membership.LoginForm.formKey; };
+            return LoginPanel;
+        }(Serenity.PropertyPanel));
+        LoginPanel = __decorate([
+            Serenity.Decorators.registerClass()
+        ], LoginPanel);
+        Membership.LoginPanel = LoginPanel;
+    })(Membership = PatientManagement.Membership || (PatientManagement.Membership = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
 (function (PatientManagement) {
@@ -4219,60 +4325,6 @@ var PatientManagement;
             Serenity.Decorators.registerClass()
         ], ForgotPasswordPanel);
         Membership.ForgotPasswordPanel = ForgotPasswordPanel;
-    })(Membership = PatientManagement.Membership || (PatientManagement.Membership = {}));
-})(PatientManagement || (PatientManagement = {}));
-var PatientManagement;
-(function (PatientManagement) {
-    var Membership;
-    (function (Membership) {
-        var LoginPanel = (function (_super) {
-            __extends(LoginPanel, _super);
-            function LoginPanel(container) {
-                var _this = _super.call(this, container) || this;
-                $(function () {
-                    $('body').vegas({
-                        delay: 10000,
-                        cover: true,
-                        overlay: Q.resolveUrl("~/Scripts/vegas/overlays/01.png"),
-                        slides: [
-                            { src: Q.resolveUrl('~/Content/site/slides/slide1.jpg'), transition: 'fade' },
-                            { src: Q.resolveUrl('~/Content/site/slides/slide2.jpg'), transition: 'fade' },
-                            { src: Q.resolveUrl('~/Content/site/slides/slide3.jpg'), transition: 'zoomOut' },
-                            { src: Q.resolveUrl('~/Content/site/slides/slide4.jpg'), transition: 'blur' }
-                        ]
-                    });
-                });
-                _this.form = new Membership.LoginForm(_this.idPrefix);
-                _this.byId('LoginButton').click(function (e) {
-                    e.preventDefault();
-                    if (!_this.validateForm()) {
-                        return;
-                    }
-                    var request = _this.getSaveEntity();
-                    Q.serviceCall({
-                        url: Q.resolveUrl('~/Account/Login'),
-                        request: request,
-                        onSuccess: function (response) {
-                            var q = Q.parseQueryString();
-                            var returnUrl = q['returnUrl'] || q['ReturnUrl'];
-                            if (returnUrl) {
-                                window.location.href = returnUrl;
-                            }
-                            else {
-                                window.location.href = Q.resolveUrl('~/');
-                            }
-                        }
-                    });
-                });
-                return _this;
-            }
-            LoginPanel.prototype.getFormKey = function () { return Membership.LoginForm.formKey; };
-            return LoginPanel;
-        }(Serenity.PropertyPanel));
-        LoginPanel = __decorate([
-            Serenity.Decorators.registerClass()
-        ], LoginPanel);
-        Membership.LoginPanel = LoginPanel;
     })(Membership = PatientManagement.Membership || (PatientManagement.Membership = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
@@ -5646,5 +5698,17 @@ var PatientManagement;
         Serenity.Decorators.registerClass()
     ], VisiTypesBottomLeftMenu);
     PatientManagement.VisiTypesBottomLeftMenu = VisiTypesBottomLeftMenu;
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement_63) {
+    var PatientManagement;
+    (function (PatientManagement) {
+        var PaymentTypes;
+        (function (PaymentTypes) {
+            PaymentTypes[PaymentTypes["BankTransfer"] = 0] = "BankTransfer";
+            PaymentTypes[PaymentTypes["CreditCard"] = 1] = "CreditCard";
+        })(PaymentTypes = PatientManagement.PaymentTypes || (PatientManagement.PaymentTypes = {}));
+        Serenity.Decorators.registerEnum(PaymentTypes, 'PatientManagement.PatientManagement.PaymentTypes');
+    })(PatientManagement = PatientManagement_63.PatientManagement || (PatientManagement_63.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 //# sourceMappingURL=PatientManagement.Web.js.map

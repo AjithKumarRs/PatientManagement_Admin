@@ -25,7 +25,9 @@ namespace PatientManagement.PatientManagement.Scripts
         protected void AddTenantFilter(SqlQuery query)
         {
             var r = new TRow();
-            query.Where(r.TenantIdField ==
+
+            if (!Authorization.HasPermission(PermissionKeys.Tenants))
+                query.Where(r.TenantIdField ==
                         ((UserDefinition)Authorization.UserDefinition).TenantId);
         }
 

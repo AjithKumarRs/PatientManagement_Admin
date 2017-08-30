@@ -100,6 +100,7 @@
     <DotNetCliToolReference Include="Serenity.CodeGenerator" Version="2.10.3" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\Reporting\" />
     <Folder Include="wwwroot\Scripts\moment\" />
     <Folder Include="wwwroot\Scripts\contextMenu\" />
   </ItemGroup>

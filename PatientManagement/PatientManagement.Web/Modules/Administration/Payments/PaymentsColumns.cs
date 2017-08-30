@@ -13,7 +13,7 @@ namespace PatientManagement.Administration.Columns
     [BasedOnRow(typeof(Entities.PaymentsRow))]
     public class PaymentsColumns
     {
-        [EditLink, DisplayName("Db.Shared.RecordId"), AlignRight]
+        [DisplayName("Db.Shared.RecordId"), AlignCenter]
         public Int64 PaymentId { get; set; }
         public Int64 SubscriptionName { get; set; }
         public Int64 PaymentDetailsId { get; set; }
@@ -25,7 +25,7 @@ namespace PatientManagement.Administration.Columns
         
         public Int32 PaymentStatus { get; set; }
 
-        [Width(80)]
+        [Width(80), EditLink]
         public String TenantName { get; set; }
 
         [Width(80)]

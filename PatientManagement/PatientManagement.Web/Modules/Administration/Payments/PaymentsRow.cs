@@ -28,12 +28,14 @@ namespace PatientManagement.Administration.Entities
 
         [DisplayName("Subscription"), NotNull, ForeignKey("[dbo].[Subscriptions]", "SubscriptionId"), LeftJoin("jSubscription"), TextualField("SubscriptionName")]
         [LookupEditor(typeof(SubscriptionsRow), InplaceAdd = false, FilterField = "IsActive", FilterValue = 1)]
+        [Updatable(false)]
         public Int64? SubscriptionId
         {
             get { return Fields.SubscriptionId[this]; }
             set { Fields.SubscriptionId[this] = value; }
         }
 
+        [Updatable(false)]
         [DisplayName("Subscription Name"), Expression("jSubscription.[Name]")]
         public String SubscriptionName
         {
@@ -42,6 +44,7 @@ namespace PatientManagement.Administration.Entities
         }
 
         [DisplayName("Payment Details"), NotNull, ForeignKey("[dbo].[PaymentsDetails]", "PaymentDetailsId"), LeftJoin("jPaymentDetails"), TextualField("PaymentDetailName")]
+        [Updatable(false)]
         [LookupEditor(typeof(PaymentsDetailsRow), InplaceAdd = true)]
         public Int64? PaymentDetailsId
         {
@@ -50,6 +53,7 @@ namespace PatientManagement.Administration.Entities
         }
 
         [DisplayName("Payment Option"), NotNull, ForeignKey("[dbo].[PaymentOptions]", "PaymentOptionId"), LeftJoin("jPaymentOption"), TextualField("PaymentOptionName")]
+        [Updatable(false)]
         [LookupEditor(typeof(PaymentOptionsRow))]
         public Int32? PaymentOptionId
         {
@@ -58,6 +62,7 @@ namespace PatientManagement.Administration.Entities
         }
 
         [DisplayName("Currency"), NotNull,ForeignKey("[dbo].[Currencies]", "Id"), LeftJoin("jCurrency"), TextualField("CurrencyCurrencyId")]
+        [Updatable(false)]
         [LookupEditor(typeof(CurrenciesRow), FilterField = "Enabled", FilterValue = true)]
         public Int32? CurrencyId
         {
@@ -65,6 +70,7 @@ namespace PatientManagement.Administration.Entities
             set { Fields.CurrencyId[this] = value; }
         }
 
+        [Updatable(false)]
         [DisplayName("Value"),  NotNull]
         public Decimal? Value
         {

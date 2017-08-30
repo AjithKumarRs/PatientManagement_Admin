@@ -1,4 +1,7 @@
 ﻿
+using PatientManagement.PatientManagement;
+using PatientManagement.PatientManagement.Scripts;
+
 namespace PatientManagement.Administration.Entities
 {
     using Serenity;
@@ -10,9 +13,10 @@ namespace PatientManagement.Administration.Entities
     using System.IO;
 
     [ConnectionKey("Default"), TableName("[dbo].[PaymentsDetails]"), DisplayName("Payments Details"), InstanceName("Payments Details"), TwoLevelCached]
-    [ReadPermission("AdministrationTenants:PaymentsDetails")]
-    [ModifyPermission("AdministrationTenants:PaymentsDetails")]
-    [LookupScript("Administration.PaymentsDetails")]
+    [ReadPermission("AdministrationTenants:PaymentsDetails:Read")]
+    [ModifyPermission("AdministrationTenants:PaymentsDetails:Modify")]
+    [LookupScript("Administration.PaymentsDetails", 
+        LookupType = typeof(MultiTenantRowLookupScript<>))]
     public sealed class PaymentsDetailsRow : Row, IIdRow, INameRow, ILoggingRow, IMultiTenantRow
     {
         [DisplayName("Payment Details Id"), Identity]
@@ -29,6 +33,12 @@ namespace PatientManagement.Administration.Entities
             set { Fields.Name[this] = value; }
         }
 
+        [DisplayName("Payment Types"), NotNull]
+        public PaymentTypes? PaymentType
+        {
+            get { return (PaymentTypes?)Fields.PaymentType[this]; }
+            set { Fields.PaymentType[this] = (Int32?)value; }
+        }
 
         [DisplayName("Beneficiary Name"), Size(500), NotNull, QuickSearch]
         public String BeneficiaryName
@@ -157,6 +167,8 @@ namespace PatientManagement.Administration.Entities
             public StringField BeneficiaryName;
             public StringField BankName;
             public StringField Name;
+            public Int32Field PaymentType;
+
             public StringField IbanBeneficient;
             public Int32Field TenantId;
             public Int32Field InsertUserId;
