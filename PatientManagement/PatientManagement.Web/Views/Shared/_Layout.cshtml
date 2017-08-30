@@ -155,7 +155,7 @@
                             </div>
                             <div class="progress progress-xxs" style=" margin: 5px 0 0 0">
                                 <div class="progress-bar" id="today-visits-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                                    <span class="sr-only">60% Complete (warning)</span>
+                                    <span class="sr-only"></span>
                                 </div>
                             </div>
 
@@ -175,7 +175,7 @@
                                                     expiredVisits = expiredVisits + 1;
                                                 } 
                                             }
-                                            var width = 100 - (expiredVisits / data.length) * 100;
+                                            var width =  (expiredVisits / data.length) * 100;
                                             $('#today-visits-progress').attr('aria-valuemax', data.length);
                                             $('#today-visits-progress').attr('aria-valuenow', expiredVisits).css('width', width + '%');
 
