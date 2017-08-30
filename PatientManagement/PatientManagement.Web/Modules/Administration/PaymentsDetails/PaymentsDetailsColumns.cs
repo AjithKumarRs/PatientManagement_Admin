@@ -18,7 +18,7 @@ namespace PatientManagement.Administration.Columns
 
 
         public String Name { get; set; }
-        [Width(80)]
+        [Width(80)] 
         public Int32 PaymentType { get; set; }
 
 

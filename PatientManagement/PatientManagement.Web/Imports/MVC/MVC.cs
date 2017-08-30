@@ -28,6 +28,7 @@ namespace MVC
 
             public static class Payments
             {
+                public const string PaymentInvoicePage = "~/Modules/Administration/Payments/PaymentInvoicePage.cshtml";
                 public const string PaymentsIndex = "~/Modules/Administration/Payments/PaymentsIndex.cshtml";
             }
 
