@@ -93,8 +93,9 @@ namespace PatientManagement
 
         public static class Navigation
         {
+            public static LocalText VisitsForToday = "Visits For Today";
             public static LocalText LogoutLink = "Logout";
-            public static LocalText SiteTitle = "PatientManagement";
+            public static LocalText SiteTitle = "My Clario";
         }
         public static class LeftNavigation
         {

@@ -127,12 +127,43 @@
                                 @(user != null ? user.DisplayName : "")
 
                             </p>
-                            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                            <a href="#">
+                                <i class="fa fa-circle text-success"></i> Online
+                            </a>
+
+                            <a href="#" style="font-size: 1.4em; margin-left: 5px;" title="My Profile">
+                                <i class="fa fa-cog"></i>
+
+                            </a>
+                            <a href="~/Account/Signout" style="font-size: 1.4em; margin-left: 5px" title="@LocalText.Get("Navigation.LogoutLink")">
+                                <i class="fa fa-sign-out "></i>
+                            </a>
 
                             <div class="clearfix"></div>
                         </div>
 
                     </div>
+                    <div style="margin: 10px">
+                        <!-- small box -->
+                        <div class="small-box bg-@theme-gradient">
+                            <div class="inner">
+                                <h3 style="margin: 0; font-size: 25px">21</h3>
+                                <p style="margin: 0">@Texts.Navigation.VisitsForToday</p>
+                                
+                            </div>
+                            <div class="icon" style="font-size: 60px">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <div class="progress progress-xxs" style=" margin: 5px 0 0 0">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                                    <span class="sr-only">60% Complete (warning)</span>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div><!-- ./col -->
+                  
                     <form action="#" method="get" class="sidebar-form">
                         <div class="input-group">
                             <input type="text" id="SidebarSearch" name="q" class="form-control" autocomplete="off">
@@ -326,7 +357,7 @@
                 //var userData = new Q.getRemoteData('UserData');
                 $.get('../Administration/GetTenantSubscriptionEndDate', function (date) {
                     var subscriptionEndDate = date;
-                    
+
                     // Show user permision
                     if (subscriptionEndDate) {
                         String.prototype.format = function () {
@@ -365,7 +396,7 @@
 
                             $('#subscription-information-box p')
                                 .text(
-                                    Q.text("Site.Subscriptions.WillExpire.SubscriptionInfoBoxBody").format(diff));
+                                Q.text("Site.Subscriptions.WillExpire.SubscriptionInfoBoxBody").format(diff));
 
                             $('#subscription-information-box').addClass('callout-warning');
                             $('#subscription-information-box').parents('.row').show();
@@ -390,53 +421,53 @@
                 var hub = $.connection.notificationHub;
 
                 //TODO: Clean this code!
-              //  $.connection.hub.start().done(function () {
+                //  $.connection.hub.start().done(function () {
                 //    if ($.connection.hub && $.connection.hub.state === $.signalR.connectionState.connected) {
 
-                        hub.client.visitChangedNotification = function (userDisplayName, userPicture, notification, start, end) {
-                            var to = {};
-                            to.timeOut = 6000;
-                            to.closeButton = true;
+                hub.client.visitChangedNotification = function (userDisplayName, userPicture, notification, start, end) {
+                    var to = {};
+                    to.timeOut = 6000;
+                    to.closeButton = true;
 
 
-                            if ($('#NotificationCheck').bootstrapSwitch('state')) {
-                                Q.notifyInfo(notification, '', to);
-                            }
-                            RefreshFullCalendar(start, end);
+                    if ($('#NotificationCheck').bootstrapSwitch('state')) {
+                        Q.notifyInfo(notification, '', to);
+                    }
+                    RefreshFullCalendar(start, end);
 
-                            if ($('#VisitsGridDiv').length) {
-                                $('#VisitsGridDiv .refresh-button').click();
-                            }
-                            if ($('.s-VisitsGrid').length) {
-                                $('.s-VisitsGrid .refresh-button').click();
-                            }
-                            if ($('.s-NotificationsGrid').length) {
-                                $('.s-NotificationsGrid .refresh-button').click();
-                            }
-                            var number = +($('.counter-label-notifications').text());
-                            $('.counter-label-notifications').text(number + 1);
-                        };
+                    if ($('#VisitsGridDiv').length) {
+                        $('#VisitsGridDiv .refresh-button').click();
+                    }
+                    if ($('.s-VisitsGrid').length) {
+                        $('.s-VisitsGrid .refresh-button').click();
+                    }
+                    if ($('.s-NotificationsGrid').length) {
+                        $('.s-NotificationsGrid .refresh-button').click();
+                    }
+                    var number = +($('.counter-label-notifications').text());
+                    $('.counter-label-notifications').text(number + 1);
+                };
 
-                        hub.client.patientChangedNotification = function (userDisplayName, userPicture, notification) {
-                            var to = {};
+                hub.client.patientChangedNotification = function (userDisplayName, userPicture, notification) {
+                    var to = {};
 
-                            if ($('#NotificationCheck').bootstrapSwitch('state')) {
-                                Q.notifyInfo(notification, '', to);
-                            }
+                    if ($('#NotificationCheck').bootstrapSwitch('state')) {
+                        Q.notifyInfo(notification, '', to);
+                    }
 
-                            if ($('.s-PatientsGrid').length) {
-                                $('.s-PatientsGrid .refresh-button').click();
-                            }
+                    if ($('.s-PatientsGrid').length) {
+                        $('.s-PatientsGrid .refresh-button').click();
+                    }
 
 
-                            if ($('.s-NotificationsGrid').length) {
-                                $('.s-NotificationsGrid .refresh-button').click();
-                            }
+                    if ($('.s-NotificationsGrid').length) {
+                        $('.s-NotificationsGrid .refresh-button').click();
+                    }
 
-                            var number = +($('.counter-label-notifications').text());
-                            $('.counter-label-notifications').text(number + 1);
+                    var number = +($('.counter-label-notifications').text());
+                    $('.counter-label-notifications').text(number + 1);
 
-                        };
+                };
                 //    }
                 //    else {
                 //        // TODO: Add notification somewhere that the connection cant be made
@@ -445,8 +476,8 @@
 
                 //});
                 $.connection.hub.start()
-                    .done(function(){ console.log('Now connected, connection ID=' + $.connection.hub.id); })
-                    .fail(function(){ console.log('Could not Connect!'); });
+                    .done(function () { console.log('Now connected, connection ID=' + $.connection.hub.id); })
+                    .fail(function () { console.log('Could not Connect!'); });
             });
         </script>
 
