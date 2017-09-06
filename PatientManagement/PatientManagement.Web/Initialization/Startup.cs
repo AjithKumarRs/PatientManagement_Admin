@@ -19,23 +19,17 @@ using System.Globalization;
 using System.IO;
 using Microsoft.AspNetCore.SignalR;
 using PatientManagement.Administration;
-
+using Microsoft.AspNetCore.Authentication.Cookies;
 namespace PatientManagement
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
+        public Startup(IConfiguration configuration)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddJsonFile($"appsettings.machine.json", optional: true)
-                .AddEnvironmentVariables();
-            Configuration = builder.Build();
+            Configuration = configuration;
         }
 
-        public IConfigurationRoot Configuration { get; }
+        public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -48,7 +42,17 @@ namespace PatientManagement
             {
                 options.SerializerSettings.ContractResolver = new DefaultContractResolver();
             });
-            
+            services.AddAuthentication(o =>
+            {
+                o.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                o.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                o.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            }).AddCookie(o =>
+            {
+                o.Cookie.Name = ".AspNetAuth";
+                o.LoginPath = new PathString("/Account/Login/");
+                o.AccessDeniedPath = new PathString("/Account/AccessDenied");
+            });
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddConfig(Configuration);
             services.AddCaching();
@@ -68,12 +72,12 @@ namespace PatientManagement
         {
             Serenity.Extensibility.ExtensibilityHelper.SelfAssemblies = new System.Reflection.Assembly[]
             {
-                typeof(LocalTextRegistry).GetAssembly(),
-                typeof(SqlConnections).GetAssembly(),
-                typeof(Row).GetAssembly(),
-                typeof(SaveRequestHandler<>).GetAssembly(),
-                typeof(WebSecurityHelper).GetAssembly(),
-                typeof(Startup).GetAssembly()
+                typeof(LocalTextRegistry).Assembly,
+                typeof(SqlConnections).Assembly,
+                typeof(Row).Assembly,
+                typeof(SaveRequestHandler<>).Assembly,
+                typeof(WebSecurityHelper).Assembly,
+                typeof(Startup).Assembly
             };
 
             SqlSettings.AutoQuotedIdentifiers = true;
@@ -118,15 +122,7 @@ namespace PatientManagement
             }
 
             app.UseStaticFiles();
-            app.UseCookieAuthentication(new CookieAuthenticationOptions
-            {
-                AuthenticationScheme = "CookieAuthenticationScheme",
-                CookieName = ".AspNetAuth",
-                LoginPath = new PathString("/Account/Login/"),
-                AccessDeniedPath = new PathString("/Account/AccessDenied"),
-                AutomaticAuthenticate = true,
-                AutomaticChallenge = true
-            });
+            app.UseAuthentication();
 
             app.UseDynamicScripts();
             app.UseMvc(routes =>

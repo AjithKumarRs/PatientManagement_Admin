@@ -2,7 +2,7 @@
   "RootNamespace": "PatientManagement",
   "ServerTypings": {
     "Assemblies": [
-      "bin/Debug/netcoreapp1.1/PatientManagement.Web.dll"
+      "bin/Debug/netcoreapp2.0/PatientManagement.Web.dll"
     ]
   },
   "Connections": [
