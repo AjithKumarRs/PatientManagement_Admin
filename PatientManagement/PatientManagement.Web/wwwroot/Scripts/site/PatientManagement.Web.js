@@ -824,6 +824,22 @@ var PatientManagement;
 (function (PatientManagement) {
     var Membership;
     (function (Membership) {
+        var EditTenantForm = (function (_super) {
+            __extends(EditTenantForm, _super);
+            function EditTenantForm() {
+                return _super !== null && _super.apply(this, arguments) || this;
+            }
+            return EditTenantForm;
+        }(Serenity.PrefixedContext));
+        EditTenantForm.formKey = 'Membership.EditTenantRequest';
+        Membership.EditTenantForm = EditTenantForm;
+        [['Email', function () { return Serenity.EmailEditor; }]].forEach(function (x) { return Object.defineProperty(EditTenantForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
+    })(Membership = PatientManagement.Membership || (PatientManagement.Membership = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var Membership;
+    (function (Membership) {
         var ForgotPasswordForm = (function (_super) {
             __extends(ForgotPasswordForm, _super);
             function ForgotPasswordForm() {

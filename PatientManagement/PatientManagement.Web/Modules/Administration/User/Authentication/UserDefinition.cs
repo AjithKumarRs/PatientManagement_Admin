@@ -20,5 +20,7 @@
         public DateTime? LastDirectoryUpdate { get; set; }
         public int TenantId { get; set; }
         public int TenantCurrencyId { get; set; }
+        public string TenantName { get; set; }
+        public DateTime? InsertDate { get; set; }
     }
 }

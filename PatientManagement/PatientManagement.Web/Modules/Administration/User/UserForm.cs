@@ -9,7 +9,7 @@
     {
         public String Username { get; set; }
         public String DisplayName { get; set; }
-        [EmailEditor]
+        [EmailEditor, Required(true)]
         public String Email { get; set; }
         public String UserImage { get; set; }
         [PasswordEditor, Required(true)]

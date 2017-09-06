@@ -1153,6 +1153,19 @@ declare namespace PatientManagement.Membership {
     }
 }
 declare namespace PatientManagement.Membership {
+    class EditTenantForm extends Serenity.PrefixedContext {
+        static formKey: string;
+    }
+    interface EditTenantForm {
+        Email: Serenity.EmailEditor;
+    }
+}
+declare namespace PatientManagement.Membership {
+    interface EditTenantRequest extends Serenity.ServiceRequest {
+        Email?: string;
+    }
+}
+declare namespace PatientManagement.Membership {
     class ForgotPasswordForm extends Serenity.PrefixedContext {
         static formKey: string;
     }

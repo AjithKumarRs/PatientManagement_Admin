@@ -23,14 +23,7 @@ namespace PatientManagement.Membership.Pages
                 return View(MVC.Views.Membership.Account.AccountLogin);
         }
 
-        [HttpGet]
-        [ServiceAuthorize]
-        public ActionResult Profile()
-        {
-                return View(MVC.Views.Membership.Account.Profile.Profile_);
-            
-        }
-
+       
         [HttpGet]
         public ActionResult AccessDenied()
         {

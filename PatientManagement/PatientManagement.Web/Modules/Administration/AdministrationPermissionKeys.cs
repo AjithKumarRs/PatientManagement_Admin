@@ -24,6 +24,8 @@ namespace PatientManagement.Administration
         //public const string Security = "Administration:Security";
         //public const string Translation = "Administration:Translation";
         public const string Tenants = "Administration:Tenants";
+
+        public const string AdministrationTenantsTenantEditing = "AdministrationTenants:TenantEditing";
         //public const string Sergen = "Administration:Sergen";
 
     }

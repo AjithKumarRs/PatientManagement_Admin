@@ -107,7 +107,7 @@ namespace MVC
 
                 public static class Profile
                 {
-                    public const string Profile_ = "~/Modules/Membership/Account/Profile/Profile.cshtml";
+                    public const string AccountProfile = "~/Modules/Membership/Account/Profile/AccountProfile.cshtml";
                 }
 
                 public static class ResetPassword
