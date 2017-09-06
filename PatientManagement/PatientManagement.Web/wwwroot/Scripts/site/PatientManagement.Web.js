@@ -4354,6 +4354,42 @@ var PatientManagement;
 (function (PatientManagement) {
     var Membership;
     (function (Membership) {
+        var EditTenantPanel = (function (_super) {
+            __extends(EditTenantPanel, _super);
+            function EditTenantPanel(container) {
+                var _this = _super.call(this, container) || this;
+                _this.form = new Membership.EditTenantForm(_this.idPrefix);
+                _this.byId('EditTenantSubmitButton').click(function (e) {
+                    e.preventDefault();
+                    if (!_this.validateForm()) {
+                        return;
+                    }
+                    var request = _this.getSaveEntity();
+                    Q.serviceCall({
+                        url: Q.resolveUrl('~/Account/EditTenant'),
+                        request: request,
+                        onSuccess: function (response) {
+                            Q.information(Q.text('Forms.Membership.ChangePassword.Success'), function () {
+                                window.location.href = Q.resolveUrl('~/');
+                            });
+                        }
+                    });
+                });
+                return _this;
+            }
+            EditTenantPanel.prototype.getFormKey = function () { return Membership.EditTenantForm.formKey; };
+            return EditTenantPanel;
+        }(Serenity.PropertyPanel));
+        EditTenantPanel = __decorate([
+            Serenity.Decorators.registerClass()
+        ], EditTenantPanel);
+        Membership.EditTenantPanel = EditTenantPanel;
+    })(Membership = PatientManagement.Membership || (PatientManagement.Membership = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var Membership;
+    (function (Membership) {
         var ResetPasswordPanel = (function (_super) {
             __extends(ResetPasswordPanel, _super);
             function ResetPasswordPanel(container) {

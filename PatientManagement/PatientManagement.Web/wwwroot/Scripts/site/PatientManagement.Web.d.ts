@@ -2526,6 +2526,13 @@ declare namespace PatientManagement.Membership {
     }
 }
 declare namespace PatientManagement.Membership {
+    class EditTenantPanel extends Serenity.PropertyPanel<EditTenantRequest, any> {
+        protected getFormKey(): string;
+        private form;
+        constructor(container: JQuery);
+    }
+}
+declare namespace PatientManagement.Membership {
     class ResetPasswordPanel extends Serenity.PropertyPanel<ResetPasswordRequest, any> {
         protected getFormKey(): string;
         private form;

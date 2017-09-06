@@ -11,5 +11,7 @@ namespace PatientManagement.Membership
     {
         [Required(true), EmailEditor, DisplayName("E-mail Address")]
         public String Email { get; set; }
+
+        public string Name { get; set; }
     }
 }
