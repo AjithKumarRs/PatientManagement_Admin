@@ -24,6 +24,14 @@ namespace PatientManagement.Membership.Pages
         }
 
         [HttpGet]
+        [ServiceAuthorize]
+        public ActionResult Profile()
+        {
+                return View(MVC.Views.Membership.Account.Profile.Profile_);
+            
+        }
+
+        [HttpGet]
         public ActionResult AccessDenied()
         {
             ViewData["HideLeftNavigation"] = true;
