@@ -24,7 +24,9 @@
                     request: request,
                     onSuccess: response => {
                         Q.information(Q.text('Forms.Membership.ChangePassword.Success'), () => {
-                            window.location.href = Q.resolveUrl('~/');
+                            //window.location.href = Q.resolveUrl('~/');
+
+                            location.reload();
                         });
                     }
                 });

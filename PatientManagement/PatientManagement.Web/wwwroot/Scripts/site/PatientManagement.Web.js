@@ -833,7 +833,7 @@ var PatientManagement;
         }(Serenity.PrefixedContext));
         EditTenantForm.formKey = 'Membership.EditTenantRequest';
         Membership.EditTenantForm = EditTenantForm;
-        [['Email', function () { return Serenity.EmailEditor; }]].forEach(function (x) { return Object.defineProperty(EditTenantForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
+        [['Name', function () { return Serenity.StringEditor; }], ['TenantWebSite', function () { return Serenity.StringEditor; }], ['TenantImage', function () { return Serenity.ImageUploadEditor; }], ['OverrideUsersEmailSignature', function () { return PatientManagement.BsSwitchEditor; }], ['TenantEmailSignature', function () { return Serenity.HtmlContentEditor; }]].forEach(function (x) { return Object.defineProperty(EditTenantForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
     })(Membership = PatientManagement.Membership || (PatientManagement.Membership = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
@@ -4370,7 +4370,8 @@ var PatientManagement;
                         request: request,
                         onSuccess: function (response) {
                             Q.information(Q.text('Forms.Membership.ChangePassword.Success'), function () {
-                                window.location.href = Q.resolveUrl('~/');
+                                //window.location.href = Q.resolveUrl('~/');
+                                location.reload();
                             });
                         }
                     });

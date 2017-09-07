@@ -43,9 +43,7 @@ namespace PatientManagement.Membership.Pages
             return this.UseConnection("Default", connection =>
             {
                 request.CheckNotNull();
-
-                if (string.IsNullOrEmpty(request.Email))
-                    throw new ArgumentNullException("email");
+                
                 return new ServiceResponse();
             });
         }

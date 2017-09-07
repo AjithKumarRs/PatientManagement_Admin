@@ -1157,12 +1157,20 @@ declare namespace PatientManagement.Membership {
         static formKey: string;
     }
     interface EditTenantForm {
-        Email: Serenity.EmailEditor;
+        Name: Serenity.StringEditor;
+        TenantWebSite: Serenity.StringEditor;
+        TenantImage: Serenity.ImageUploadEditor;
+        OverrideUsersEmailSignature: BsSwitchEditor;
+        TenantEmailSignature: Serenity.HtmlContentEditor;
     }
 }
 declare namespace PatientManagement.Membership {
     interface EditTenantRequest extends Serenity.ServiceRequest {
-        Email?: string;
+        Name?: string;
+        TenantWebSite?: string;
+        TenantImage?: string;
+        OverrideUsersEmailSignature?: boolean;
+        TenantEmailSignature?: string;
     }
 }
 declare namespace PatientManagement.Membership {
