@@ -1160,6 +1160,8 @@ declare namespace PatientManagement.Membership {
         Name: Serenity.StringEditor;
         TenantWebSite: Serenity.StringEditor;
         TenantImage: Serenity.ImageUploadEditor;
+        WorkHoursStart: Serenity.TimeEditor;
+        WorkHoursEnd: Serenity.TimeEditor;
         OverrideUsersEmailSignature: BsSwitchEditor;
         TenantEmailSignature: Serenity.HtmlContentEditor;
     }
@@ -1169,8 +1171,29 @@ declare namespace PatientManagement.Membership {
         Name?: string;
         TenantWebSite?: string;
         TenantImage?: string;
+        WorkHoursStart?: number;
+        WorkHoursEnd?: number;
         OverrideUsersEmailSignature?: boolean;
         TenantEmailSignature?: string;
+    }
+}
+declare namespace PatientManagement.Membership {
+    class EditUserProfileForm extends Serenity.PrefixedContext {
+        static formKey: string;
+    }
+    interface EditUserProfileForm {
+        DisplayName: Serenity.StringEditor;
+        UserWebSite: Serenity.StringEditor;
+        UserImage: Serenity.ImageUploadEditor;
+        USerEmailSignature: Serenity.HtmlContentEditor;
+    }
+}
+declare namespace PatientManagement.Membership {
+    interface EditUserProfileRequest extends Serenity.ServiceRequest {
+        DisplayName?: string;
+        UserWebSite?: string;
+        UserImage?: string;
+        USerEmailSignature?: string;
     }
 }
 declare namespace PatientManagement.Membership {
@@ -2535,6 +2558,13 @@ declare namespace PatientManagement.Membership {
 }
 declare namespace PatientManagement.Membership {
     class EditTenantPanel extends Serenity.PropertyPanel<EditTenantRequest, any> {
+        protected getFormKey(): string;
+        private form;
+        constructor(container: JQuery);
+    }
+}
+declare namespace PatientManagement.Membership {
+    class EditUserProfilePanel extends Serenity.PropertyPanel<EditUserProfileRequest, any> {
         protected getFormKey(): string;
         private form;
         constructor(container: JQuery);

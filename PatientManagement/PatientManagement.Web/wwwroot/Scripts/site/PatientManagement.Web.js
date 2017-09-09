@@ -833,7 +833,23 @@ var PatientManagement;
         }(Serenity.PrefixedContext));
         EditTenantForm.formKey = 'Membership.EditTenantRequest';
         Membership.EditTenantForm = EditTenantForm;
-        [['Name', function () { return Serenity.StringEditor; }], ['TenantWebSite', function () { return Serenity.StringEditor; }], ['TenantImage', function () { return Serenity.ImageUploadEditor; }], ['OverrideUsersEmailSignature', function () { return PatientManagement.BsSwitchEditor; }], ['TenantEmailSignature', function () { return Serenity.HtmlContentEditor; }]].forEach(function (x) { return Object.defineProperty(EditTenantForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
+        [['Name', function () { return Serenity.StringEditor; }], ['TenantWebSite', function () { return Serenity.StringEditor; }], ['TenantImage', function () { return Serenity.ImageUploadEditor; }], ['WorkHoursStart', function () { return Serenity.TimeEditor; }], ['WorkHoursEnd', function () { return Serenity.TimeEditor; }], ['OverrideUsersEmailSignature', function () { return PatientManagement.BsSwitchEditor; }], ['TenantEmailSignature', function () { return Serenity.HtmlContentEditor; }]].forEach(function (x) { return Object.defineProperty(EditTenantForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
+    })(Membership = PatientManagement.Membership || (PatientManagement.Membership = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var Membership;
+    (function (Membership) {
+        var EditUserProfileForm = (function (_super) {
+            __extends(EditUserProfileForm, _super);
+            function EditUserProfileForm() {
+                return _super !== null && _super.apply(this, arguments) || this;
+            }
+            return EditUserProfileForm;
+        }(Serenity.PrefixedContext));
+        EditUserProfileForm.formKey = 'Membership.EditUserProfileRequest';
+        Membership.EditUserProfileForm = EditUserProfileForm;
+        [['DisplayName', function () { return Serenity.StringEditor; }], ['UserWebSite', function () { return Serenity.StringEditor; }], ['UserImage', function () { return Serenity.ImageUploadEditor; }], ['USerEmailSignature', function () { return Serenity.HtmlContentEditor; }]].forEach(function (x) { return Object.defineProperty(EditUserProfileForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
     })(Membership = PatientManagement.Membership || (PatientManagement.Membership = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
@@ -4369,7 +4385,7 @@ var PatientManagement;
                         url: Q.resolveUrl('~/Account/EditTenant'),
                         request: request,
                         onSuccess: function (response) {
-                            Q.information(Q.text('Forms.Membership.ChangePassword.Success'), function () {
+                            Q.information(Q.text('Forms.Membership.Profile.SuccessTenant'), function () {
                                 //window.location.href = Q.resolveUrl('~/');
                                 location.reload();
                             });
@@ -4385,6 +4401,43 @@ var PatientManagement;
             Serenity.Decorators.registerClass()
         ], EditTenantPanel);
         Membership.EditTenantPanel = EditTenantPanel;
+    })(Membership = PatientManagement.Membership || (PatientManagement.Membership = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var Membership;
+    (function (Membership) {
+        var EditUserProfilePanel = (function (_super) {
+            __extends(EditUserProfilePanel, _super);
+            function EditUserProfilePanel(container) {
+                var _this = _super.call(this, container) || this;
+                _this.form = new Membership.EditUserProfileForm(_this.idPrefix);
+                _this.byId('EditUserProfileSubmitButton').click(function (e) {
+                    e.preventDefault();
+                    if (!_this.validateForm()) {
+                        return;
+                    }
+                    var request = _this.getSaveEntity();
+                    Q.serviceCall({
+                        url: Q.resolveUrl('~/Account/EditUserProfile'),
+                        request: request,
+                        onSuccess: function (response) {
+                            Q.information(Q.text('Forms.Membership.Profile.Success'), function () {
+                                //window.location.href = Q.resolveUrl('~/');
+                                location.reload();
+                            });
+                        }
+                    });
+                });
+                return _this;
+            }
+            EditUserProfilePanel.prototype.getFormKey = function () { return Membership.EditUserProfileForm.formKey; };
+            return EditUserProfilePanel;
+        }(Serenity.PropertyPanel));
+        EditUserProfilePanel = __decorate([
+            Serenity.Decorators.registerClass()
+        ], EditUserProfilePanel);
+        Membership.EditUserProfilePanel = EditUserProfilePanel;
     })(Membership = PatientManagement.Membership || (PatientManagement.Membership = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;

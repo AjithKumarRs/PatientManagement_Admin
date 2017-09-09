@@ -1,17 +1,17 @@
 ﻿namespace PatientManagement.Membership {
 
     @Serenity.Decorators.registerClass()
-    export class EditTenantPanel extends Serenity.PropertyPanel<EditTenantRequest, any> {
+    export class EditUserProfilePanel extends Serenity.PropertyPanel<EditUserProfileRequest, any> {
 
-        protected getFormKey() { return EditTenantForm.formKey; }
+        protected getFormKey() { return EditUserProfileForm.formKey; }
 
-        private form: EditTenantForm;
+        private form: EditUserProfileForm;
 
         constructor(container: JQuery) {
             super(container);
 
-            this.form = new EditTenantForm(this.idPrefix);
-            this.byId('EditTenantSubmitButton').click(e => {
+            this.form = new EditUserProfileForm(this.idPrefix);
+            this.byId('EditUserProfileSubmitButton').click(e => {
                 e.preventDefault();
 
                 if (!this.validateForm()) {
@@ -20,10 +20,10 @@
 
                 var request = this.getSaveEntity();
                 Q.serviceCall({
-                    url: Q.resolveUrl('~/Account/EditTenant'),
+                    url: Q.resolveUrl('~/Account/EditUserProfile'),
                     request: request,
                     onSuccess: response => {
-                        Q.information(Q.text('Forms.Membership.Profile.SuccessTenant'), () => {
+                        Q.information(Q.text('Forms.Membership.Profile.Success'), () => {
                             //window.location.href = Q.resolveUrl('~/');
 
                             location.reload();

@@ -47,5 +47,18 @@ namespace PatientManagement.Membership.Pages
                 return new ServiceResponse();
             });
         }
+
+
+        [HttpPost, JsonFilter]
+        public Result<ServiceResponse> EditUserProfile(EditUserProfileRequest request)
+        {
+            return this.UseConnection("Default", connection =>
+            {
+                request.CheckNotNull();
+
+                
+                return new ServiceResponse();
+            });
+        }
     }
 }
