@@ -13,7 +13,7 @@ namespace PatientManagement.Administration.Entities
     [ReadPermission("Administration:Tenants:Read")]
     [ModifyPermission("Administration:Tenants:Modify")]
     [LookupScript("Administration.Tenant")]
-    public sealed class TenantRow : Row, IIdRow, INameRow
+    public sealed class TenantRow : Row, IIdRow, INameRow, ILoggingRow
     {
         [DisplayName("Tenant Id"), Identity]
         public Int32? TenantId
@@ -27,6 +27,51 @@ namespace PatientManagement.Administration.Entities
         {
             get { return Fields.TenantName[this]; }
             set { Fields.TenantName[this] = value; }
+        }
+
+        [DisplayName("Tenant Web Site"), Size(200), QuickSearch]
+        public String TenantWebSite
+        {
+            get { return Fields.TenantWebSite[this]; }
+            set { Fields.TenantWebSite[this] = value; }
+        }
+
+        [DisplayName("Tenant Image"), Size(100)]
+        [ImageUploadEditor(FilenameFormat = "TenantImage/~", CopyToHistory = true)]
+        public String TenantImage
+        {
+            get { return Fields.TenantImage[this]; }
+            set { Fields.TenantImage[this] = value; }
+        }
+
+        [DisplayName("Work Hours Start")]
+        [TimeEditor]
+        public Int16? WorkHoursStart
+        {
+            get { return Fields.WorkHoursStart[this]; }
+            set { Fields.WorkHoursStart[this] = value; }
+        }
+
+        [DisplayName("Work Hours End")]
+        [TimeEditor]
+        public Int16? WorkHoursEnd
+        {
+            get { return Fields.WorkHoursEnd[this]; }
+            set { Fields.WorkHoursEnd[this] = value; }
+        }
+
+        [DisplayName("Override Users Email Signature")]
+        public Boolean? OverrideUsersEmailSignature
+        {
+            get { return Fields.OverrideUsersEmailSignature[this]; }
+            set { Fields.OverrideUsersEmailSignature[this] = value; }
+        }
+
+        [DisplayName("Tenant Email Signature")]
+        public String TenantEmailSignature
+        {
+            get { return Fields.TenantEmailSignature[this]; }
+            set { Fields.TenantEmailSignature[this] = value; }
         }
 
         [DisplayName("Base Currency"), ForeignKey("Currencies", "Id"), LeftJoin("crnc"), Required]
@@ -45,6 +90,9 @@ namespace PatientManagement.Administration.Entities
         }
 
 
+
+        #region Subscription
+
         [DisplayName("Subscription Required"), NotNull, BsSwitchEditor]
         public Boolean? SubscriptionRequired
         {
@@ -58,6 +106,14 @@ namespace PatientManagement.Administration.Entities
         {
             get { return Fields.SubscriptionId[this]; }
             set { Fields.SubscriptionId[this] = value; }
+        }
+
+        [DisplayName("Subscription Name"), Expression("jSubscription.[Name]")]
+
+        public String SubscriptionName
+        {
+            get { return Fields.SubscriptionName[this]; }
+            set { Fields.SubscriptionName[this] = value; }
         }
 
         [DisplayName("Subscription Offer Id"), Expression("jSubscription.[OfferId]")]
@@ -109,6 +165,69 @@ namespace PatientManagement.Administration.Entities
             set { Fields.SubscriptionUpdateDateField[this] = value; }
         }
 
+        #endregion
+
+        #region ILoggingRow
+
+        [DisplayName("Insert User Id"), NotNull, ForeignKey("Users", "UserId"), LeftJoin("usrI"), TextualField("InsertUserName")]
+        [ReadPermission("Administration:Tenants")]
+        public Int32? InsertUserId
+        {
+            get { return Fields.InsertUserId[this]; }
+            set { Fields.InsertUserId[this] = value; }
+        }
+
+
+        [DisplayName("Created by"), Expression("usrI.UserName")]
+        [ReadPermission("Administration:Tenants")]
+        public String InsertUserName
+        {
+            get { return Fields.InsertUserName[this]; }
+            set { Fields.InsertUserName[this] = value; }
+        }
+
+
+        [DisplayName("Insert Date"), NotNull, QuickFilter()]
+        [ReadPermission("Administration:Tenants")]
+        public DateTime? InsertDate
+        {
+            get { return Fields.InsertDate[this]; }
+            set { Fields.InsertDate[this] = value; }
+        }
+
+        [DisplayName("Update User Id"), NotNull, ForeignKey("Users", "UserId"), LeftJoin("usrU"), TextualField("UpdateUserName")]
+        [ReadPermission("Administration:Tenants")]
+        public Int32? UpdateUserId
+        {
+            get { return Fields.UpdateUserId[this]; }
+            set { Fields.UpdateUserId[this] = value; }
+        }
+        [DisplayName("Last updated by"), Expression("usrU.UserName")]
+        [ReadPermission("Administration:Tenants")]
+        public String UpdateUserName
+        {
+            get { return Fields.UpdateUserName[this]; }
+            set { Fields.UpdateUserName[this] = value; }
+        }
+
+        [DisplayName("Update Date Field"), NotNull]
+        [ReadPermission("Administration:Tenants")]
+        public DateTime? UpdateDateField
+        {
+            get { return Fields.UpdateDateField[this]; }
+            set { Fields.UpdateDateField[this] = value; }
+        }
+        public IIdField InsertUserIdField => Fields.InsertUserId;
+
+        public DateTimeField InsertDateField => Fields.InsertDate;
+
+
+        public IIdField UpdateUserIdField { get; } = Fields.UpdateUserId;
+
+        DateTimeField IUpdateLogRow.UpdateDateField { get; } = Fields.UpdateDateField;
+
+        #endregion
+
         IIdField IIdRow.IdField
         {
             get { return Fields.TenantId; }
@@ -135,6 +254,13 @@ namespace PatientManagement.Administration.Entities
             public BooleanField SubscriptionRequired;
             public Int64Field SubscriptionId;
 
+            public StringField TenantWebSite;
+            public StringField TenantImage;
+            public Int16Field WorkHoursStart;
+            public Int16Field WorkHoursEnd;
+            public BooleanField OverrideUsersEmailSignature;
+            public StringField TenantEmailSignature;
+
             public Int32Field SubscriptionOfferId;
             public Int32Field SubscriptionTenantId;
             public DateTimeField SubscriptionSubscriptionEndDate;
@@ -142,7 +268,14 @@ namespace PatientManagement.Administration.Entities
             public DateTimeField SubscriptionInsertDate;
             public Int32Field SubscriptionUpdateUserId;
             public DateTimeField SubscriptionUpdateDateField;
+            public StringField SubscriptionName;
 
+            public Int32Field InsertUserId;
+            public DateTimeField InsertDate;
+            public Int32Field UpdateUserId;
+            public DateTimeField UpdateDateField;
+            public StringField InsertUserName;
+            public StringField UpdateUserName;
             public RowFields()
                 : base()
             {

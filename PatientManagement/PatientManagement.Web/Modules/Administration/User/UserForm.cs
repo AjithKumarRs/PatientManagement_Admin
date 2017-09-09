@@ -11,6 +11,11 @@
         public String DisplayName { get; set; }
         [EmailEditor, Required(true)]
         public String Email { get; set; }
+
+
+        public string UserPhone { get; set; }
+        public String WebSite { get; set; }
+
         public String UserImage { get; set; }
         [PasswordEditor, Required(true)]
         public String Password { get; set; }

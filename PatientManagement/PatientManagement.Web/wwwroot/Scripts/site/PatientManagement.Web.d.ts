@@ -771,6 +771,10 @@ declare namespace PatientManagement.Administration {
     }
     interface TenantForm {
         TenantName: Serenity.StringEditor;
+        TenantImage: Serenity.ImageUploadEditor;
+        TenantWebSite: Serenity.StringEditor;
+        WorkHoursStart: Serenity.TimeEditor;
+        WorkHoursEnd: Serenity.TimeEditor;
         CurrencyId: Serenity.LookupEditor;
         SubscriptionId: Serenity.LookupEditor;
         SubscriptionRequired: BsSwitchEditor;
@@ -784,6 +788,12 @@ declare namespace PatientManagement.Administration {
         CurrencyName?: string;
         SubscriptionRequired?: boolean;
         SubscriptionId?: number;
+        TenantWebSite?: string;
+        TenantImage?: string;
+        WorkHoursStart?: number;
+        WorkHoursEnd?: number;
+        OverrideUsersEmailSignature?: boolean;
+        TenantEmailSignature?: string;
         SubscriptionOfferId?: number;
         SubscriptionTenantId?: number;
         SubscriptionSubscriptionEndDate?: string;
@@ -791,6 +801,13 @@ declare namespace PatientManagement.Administration {
         SubscriptionInsertDate?: string;
         SubscriptionUpdateUserId?: number;
         SubscriptionUpdateDateField?: string;
+        SubscriptionName?: string;
+        InsertUserId?: number;
+        InsertDate?: string;
+        UpdateUserId?: number;
+        UpdateDateField?: string;
+        InsertUserName?: string;
+        UpdateUserName?: string;
     }
     namespace TenantRow {
         const idProperty = "TenantId";
@@ -805,6 +822,12 @@ declare namespace PatientManagement.Administration {
             const CurrencyName: string;
             const SubscriptionRequired: string;
             const SubscriptionId: string;
+            const TenantWebSite: string;
+            const TenantImage: string;
+            const WorkHoursStart: string;
+            const WorkHoursEnd: string;
+            const OverrideUsersEmailSignature: string;
+            const TenantEmailSignature: string;
             const SubscriptionOfferId: string;
             const SubscriptionTenantId: string;
             const SubscriptionSubscriptionEndDate: string;
@@ -812,6 +835,13 @@ declare namespace PatientManagement.Administration {
             const SubscriptionInsertDate: string;
             const SubscriptionUpdateUserId: string;
             const SubscriptionUpdateDateField: string;
+            const SubscriptionName: string;
+            const InsertUserId: string;
+            const InsertDate: string;
+            const UpdateUserId: string;
+            const UpdateDateField: string;
+            const InsertUserName: string;
+            const UpdateUserName: string;
         }
     }
 }
@@ -875,6 +905,8 @@ declare namespace PatientManagement.Administration {
         Username: Serenity.StringEditor;
         DisplayName: Serenity.StringEditor;
         Email: Serenity.EmailEditor;
+        UserPhone: Serenity.StringEditor;
+        WebSite: Serenity.StringEditor;
         UserImage: Serenity.ImageUploadEditor;
         Password: Serenity.PasswordEditor;
         PasswordConfirm: Serenity.PasswordEditor;
@@ -993,6 +1025,9 @@ declare namespace PatientManagement.Administration {
         UserImage?: string;
         LastDirectoryUpdate?: string;
         IsActive?: number;
+        WebSite?: string;
+        PhoneNumber?: string;
+        EmailSignature?: string;
         Password?: string;
         PasswordConfirm?: string;
         TenantId?: number;
@@ -1021,6 +1056,9 @@ declare namespace PatientManagement.Administration {
             const UserImage: string;
             const LastDirectoryUpdate: string;
             const IsActive: string;
+            const WebSite: string;
+            const PhoneNumber: string;
+            const EmailSignature: string;
             const Password: string;
             const PasswordConfirm: string;
             const TenantId: string;
@@ -1183,6 +1221,8 @@ declare namespace PatientManagement.Membership {
     }
     interface EditUserProfileForm {
         DisplayName: Serenity.StringEditor;
+        UserEmail: Serenity.EmailEditor;
+        UserPhone: Serenity.StringEditor;
         UserWebSite: Serenity.StringEditor;
         UserImage: Serenity.ImageUploadEditor;
         USerEmailSignature: Serenity.HtmlContentEditor;
@@ -1191,6 +1231,8 @@ declare namespace PatientManagement.Membership {
 declare namespace PatientManagement.Membership {
     interface EditUserProfileRequest extends Serenity.ServiceRequest {
         DisplayName?: string;
+        UserEmail?: string;
+        UserPhone?: string;
         UserWebSite?: string;
         UserImage?: string;
         USerEmailSignature?: string;
@@ -1892,12 +1934,14 @@ declare namespace PatientManagement.PatientManagement {
 }
 declare namespace PatientManagement {
     interface ScriptUserDefinition {
+        UserId?: number;
         Username?: string;
         DisplayName?: string;
         IsAdmin?: boolean;
         Permissions?: {
             [key: string]: boolean;
         };
+        TenantId?: number;
         RolesList?: string[];
         PaidPeriod?: string;
     }

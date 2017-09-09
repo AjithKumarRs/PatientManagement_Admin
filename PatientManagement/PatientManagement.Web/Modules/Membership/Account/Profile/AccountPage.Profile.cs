@@ -1,5 +1,6 @@
 ﻿using PatientManagement.Administration;
 using PatientManagement.PatientManagement.Entities;
+using Serenity.IO;
 
 namespace PatientManagement.Membership.Pages
 {
@@ -40,10 +41,58 @@ namespace PatientManagement.Membership.Pages
         [HttpPost, JsonFilter, ServiceAuthorize(PermissionKeys.AdministrationTenantsTenantEditing)]
         public Result<ServiceResponse> EditTenant(EditTenantRequest request)
         {
+
             return this.UseConnection("Default", connection =>
             {
+
                 request.CheckNotNull();
+
+                //var perminsion = Dependency.Resolve<IPermissionService>();
                 
+               // var grantor = Dependency.Resolve<ITransientGrantor>();
+              //  grantor.GrantAll();
+
+                try
+                {
+
+                    var user = (UserDefinition)Serenity.Authorization.UserDefinition;
+
+                    var tenant = new TenantRow();
+                    tenant.TenantId = user.TenantId;
+
+                    if (request.Name.IsEmptyOrNull())
+                        throw new ArgumentNullException("name");
+
+                    tenant.TenantName = request.Name;
+                    tenant.TenantWebSite = request.TenantWebSite;
+
+                    if (!request.TenantImage.IsNullOrEmpty())
+                        tenant.TenantImage = request.TenantImage;
+
+                    if (request.WorkHoursEnd > 0)
+                        tenant.WorkHoursStart = (Int16)request.WorkHoursStart;
+                    if (request.WorkHoursStart > 0)
+                        tenant.WorkHoursEnd = (Int16)request.WorkHoursEnd;
+
+                    tenant.OverrideUsersEmailSignature = request.OverrideUsersEmailSignature;
+                    tenant.TenantEmailSignature = request.TenantEmailSignature;
+
+                    var saveRequest = new SaveRequest<TenantRow>() { Entity = tenant };
+
+                    var uow = new UnitOfWork(connection);
+
+
+                    new TenantRepository().Update(uow, saveRequest);
+                    uow.Commit();
+
+                    UserRetrieveService.RemoveCachedUser(user.UserId, user.Username);
+                }
+                finally
+                {
+                  //  grantor.UndoGrant();
+                }
+
+
                 return new ServiceResponse();
             });
         }
@@ -52,11 +101,38 @@ namespace PatientManagement.Membership.Pages
         [HttpPost, JsonFilter]
         public Result<ServiceResponse> EditUserProfile(EditUserProfileRequest request)
         {
+           // new TransientGrantingPermissionService(new PermissionService()).Grant("Administration:User:Modify");
             return this.UseConnection("Default", connection =>
             {
                 request.CheckNotNull();
+                var user = (UserDefinition)Serenity.Authorization.UserDefinition;
 
-                
+                if (request.DisplayName.IsEmptyOrNull())
+                    throw new ArgumentNullException("name");
+
+                if (request.UserEmail.IsEmptyOrNull())
+                    throw new ArgumentNullException("email");
+
+                var saveRequest = new SaveRequest<UserRow>();
+                saveRequest.Entity = new UserRow();
+                saveRequest.EntityId = user.UserId;
+
+                saveRequest.Entity.UserId = user.UserId;
+                saveRequest.Entity.DisplayName = request.DisplayName;
+                saveRequest.Entity.Email = request.UserEmail;
+
+                if (!request.UserImage.IsNullOrEmpty())
+                    saveRequest.Entity.UserImage = request.UserImage;
+
+                saveRequest.Entity.EmailSignature = request.USerEmailSignature;
+                saveRequest.Entity.WebSite = request.UserWebSite;
+                saveRequest.Entity.PhoneNumber = request.UserPhone;
+
+                var uow = new UnitOfWork(connection);
+                new UserRepository().Update(uow, saveRequest);
+                uow.Commit();
+                UserRetrieveService.RemoveCachedUser(user.UserId, user.Username);
+
                 return new ServiceResponse();
             });
         }

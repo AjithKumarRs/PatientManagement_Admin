@@ -24,6 +24,7 @@
                     Username = user.Username,
                     Email = user.Email,
                     UserImage = user.UserImage,
+                    UserPhone = user.PhoneNumber,
                     DisplayName = user.DisplayName,
                     IsActive = user.IsActive.Value,
                     Source = user.Source,

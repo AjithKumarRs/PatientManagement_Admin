@@ -6,10 +6,12 @@
 
     export interface EditUserProfileForm {
         DisplayName: Serenity.StringEditor;
+        UserEmail: Serenity.EmailEditor;
+        UserPhone: Serenity.StringEditor;
         UserWebSite: Serenity.StringEditor;
         UserImage: Serenity.ImageUploadEditor;
         USerEmailSignature: Serenity.HtmlContentEditor;
     }
 
-    [['DisplayName', () => Serenity.StringEditor], ['UserWebSite', () => Serenity.StringEditor], ['UserImage', () => Serenity.ImageUploadEditor], ['USerEmailSignature', () => Serenity.HtmlContentEditor]].forEach(x => Object.defineProperty(EditUserProfileForm.prototype, <string>x[0], { get: function () { return this.w(x[0], (x[1] as any)()); }, enumerable: true, configurable: true }));
+    [['DisplayName', () => Serenity.StringEditor], ['UserEmail', () => Serenity.EmailEditor], ['UserPhone', () => Serenity.StringEditor], ['UserWebSite', () => Serenity.StringEditor], ['UserImage', () => Serenity.ImageUploadEditor], ['USerEmailSignature', () => Serenity.HtmlContentEditor]].forEach(x => Object.defineProperty(EditUserProfileForm.prototype, <string>x[0], { get: function () { return this.w(x[0], (x[1] as any)()); }, enumerable: true, configurable: true }));
 }

@@ -11,8 +11,14 @@ namespace PatientManagement.Membership
     [FormScript("Membership.EditUserProfileRequest")]
     public class EditUserProfileRequest : ServiceRequest
     {
-        [DisplayName("Display Name")]
+        [DisplayName("Display Name"), Required]
         public string DisplayName { get; set; }
+
+        [DisplayName("Your Email"), Required]
+        [EmailEditor]
+        public string UserEmail { get; set; }
+        [DisplayName("Your phone")]
+        public string UserPhone { get; set; }
 
         [DisplayName("User Web Site")]
         public String UserWebSite { get; set; }

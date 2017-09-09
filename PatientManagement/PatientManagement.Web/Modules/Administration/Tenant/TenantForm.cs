@@ -1,4 +1,6 @@
 ﻿
+using Serenity.Data.Mapping;
+
 namespace PatientManagement.Administration.Forms
 {
     using Serenity;
@@ -14,6 +16,15 @@ namespace PatientManagement.Administration.Forms
     public class TenantForm
     {
         public String TenantName { get; set; }
+
+        public String TenantImage { get; set; }
+
+        public String TenantWebSite { get; set; }
+
+        public Int16 WorkHoursStart { get; set; }
+
+        public Int16 WorkHoursEnd { get; set; }
+
         public Int32 CurrencyId { get; set; }
         public Int64 SubscriptionId { get; set; }
         public Boolean SubscriptionRequired { get; set; }

@@ -63,6 +63,8 @@ namespace PatientManagement
             services.AddSingleton<IUserRetrieveService, Administration.UserRetrieveService>();
             services.AddSingleton<IPermissionService, Administration.PermissionService>();
 
+            // services.AddSingleton<ITransientGrantor, Serenity.Web.TransientGrantingPermissionService>();
+
             services.AddSingleton<IUserIdProvider, CustomUserIdProvider>();
             services.AddSignalR(options => options.Hubs.EnableDetailedErrors = true);
         }
