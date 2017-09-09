@@ -20,6 +20,8 @@ using System.IO;
 using Microsoft.AspNetCore.SignalR;
 using PatientManagement.Administration;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Serenity.Web;
+
 namespace PatientManagement
 {
     public class Startup
@@ -61,10 +63,9 @@ namespace PatientManagement
             services.AddSingleton<IAuthenticationService, Administration.AuthenticationService>();
             services.AddSingleton<IAuthorizationService, Administration.AuthorizationService>();
             services.AddSingleton<IUserRetrieveService, Administration.UserRetrieveService>();
-            services.AddSingleton<IPermissionService, Administration.PermissionService>();
 
-            // services.AddSingleton<ITransientGrantor, Serenity.Web.TransientGrantingPermissionService>();
-
+            services.AddSingleton<IPermissionService>(new TransientGrantingPermissionService(new PermissionService()));
+            services.AddSingleton<IRequestContext, Serenity.Web.RequestContext>();
             services.AddSingleton<IUserIdProvider, CustomUserIdProvider>();
             services.AddSignalR(options => options.Hubs.EnableDetailedErrors = true);
         }

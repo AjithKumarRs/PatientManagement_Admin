@@ -110,14 +110,26 @@ namespace PatientManagement.PatientManagement.Entities
             set { Fields.Weight[this] = value; }
         }
 
-        [DisplayName("Insert User Id"), NotNull]
+        [DisplayName("Insert User Id"), NotNull, ForeignKey("Users", "UserId"), LeftJoin("usrI"), TextualField("InsertUserName")]
+        [ReadPermission("Administration:Tenants")]
         public Int32? InsertUserId
         {
             get { return Fields.InsertUserId[this]; }
             set { Fields.InsertUserId[this] = value; }
         }
 
-        [DisplayName("Insert Date"), NotNull]
+
+        [DisplayName("Created by"), Expression("usrI.UserName")]
+        [ReadPermission("Administration:Tenants")]
+        public String InsertUserName
+        {
+            get { return Fields.InsertUserName[this]; }
+            set { Fields.InsertUserName[this] = value; }
+        }
+
+
+        [DisplayName("Insert Date"), NotNull, QuickFilter()]
+        [ReadPermission("Administration:Tenants")]
         public DateTime? InsertDate
         {
             get { return Fields.InsertDate[this]; }
@@ -168,6 +180,9 @@ namespace PatientManagement.PatientManagement.Entities
             public Int32Field InsertUserId;
             public DateTimeField InsertDate;
 
+            public StringField TenantName;
+            public StringField InsertUserName;
+
             public RowListField<NotesRow> NoteList;
 
             public readonly Int32Field TenantId;
@@ -183,13 +198,19 @@ namespace PatientManagement.PatientManagement.Entities
 
         public DateTimeField InsertDateField => Fields.InsertDate;
 
-        [Insertable(false), Updatable(false)]
+        [Insertable(false), Updatable(false), ForeignKey("Tenants", "TenantId"), LeftJoin("tnt")]
         public Int32? TenantId
         {
             get { return Fields.TenantId[this]; }
             set { Fields.TenantId[this] = value; }
         }
-
+        [DisplayName("Tenant"), Expression("tnt.TenantName")]
+        [ReadPermission("Administration:Tenants")]
+        public String TenantName
+        {
+            get { return Fields.TenantName[this]; }
+            set { Fields.TenantName[this] = value; }
+        }
         public Int32Field TenantIdField
         {
             get { return Fields.TenantId; }

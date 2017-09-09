@@ -1,4 +1,5 @@
 ﻿using PatientManagement.Administration;
+using PatientManagement.AppServices;
 using PatientManagement.PatientManagement.Entities;
 using Serenity.IO;
 
@@ -35,6 +36,11 @@ namespace PatientManagement.Membership.Pages
             var sentEmailsCount = connection.Count<SentEmailsRow>(SentEmailFields.InsertUserId == user.UserId);
             ViewData["SentEmailsCount"] = sentEmailsCount;
 
+            var tenant = connection.ById<TenantRow>(user.TenantId);
+            ViewData["TenantName"] = tenant.TenantName;
+            ViewData["TenantWebSite"] = tenant.TenantWebSite;
+            ViewData["TenantWorkHours"] = $"{TimeSpan.FromMinutes(tenant.WorkHoursStart?? 420)} -- {TimeSpan.FromMinutes(tenant.WorkHoursEnd ?? 1200)}";
+
             return View(MVC.Views.Membership.Account.Profile.AccountProfile);
         }
 
@@ -47,11 +53,10 @@ namespace PatientManagement.Membership.Pages
 
                 request.CheckNotNull();
 
-                //var perminsion = Dependency.Resolve<IPermissionService>();
-                
-               // var grantor = Dependency.Resolve<ITransientGrantor>();
-              //  grantor.GrantAll();
+               var perminsion = Dependency.Resolve<IPermissionService>();
 
+                var grantor = new TransientGrantingPermissionService(perminsion);
+                grantor.GrantAll();
                 try
                 {
 
@@ -89,7 +94,7 @@ namespace PatientManagement.Membership.Pages
                 }
                 finally
                 {
-                  //  grantor.UndoGrant();
+                    grantor.UndoGrant();
                 }
 
 

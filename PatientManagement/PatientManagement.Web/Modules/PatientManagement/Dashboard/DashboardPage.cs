@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using PatientManagement.Administration.Entities;
 using PatientManagement.PatientManagement.Entities;
 using PatientManagement.Dashboard;
 using PatientManagement.PatientManagement.Repositories;
@@ -20,6 +21,13 @@ namespace PatientManagement.PatientManagement.Pages
         [PageAuthorize, HttpGet, Route("~/")]
         public ActionResult Index()
         {
+            var user = (UserDefinition)Serenity.Authorization.UserDefinition;
+            var connection = SqlConnections.NewFor<TenantRow>();
+            var tenant = connection.ById<TenantRow>(user.TenantId);
+            
+            ViewData["WorkHoursStart"] = TimeSpan.FromMinutes(tenant.WorkHoursStart??420);
+            ViewData["WorkHoursEnd"] = TimeSpan.FromMinutes(tenant.WorkHoursEnd ?? 1200);
+
             return View(MVC.Views.PatientManagement.Dashboard.DashboardIndex);
         }
 
@@ -27,7 +35,7 @@ namespace PatientManagement.PatientManagement.Pages
         [PageAuthorize]
         public JsonResult GetVisitsTasks(string start, string end)
         {
-            var user = (UserDefinition)Authorization.UserDefinition;
+            var user = (UserDefinition)Authorization.UserDefinition; 
 
             var connection = SqlConnections.NewFor<VisitsRow>();
             var startDate = DateTime.ParseExact(start, "yyyy-MM-dd", new CultureInfo("en-US"),

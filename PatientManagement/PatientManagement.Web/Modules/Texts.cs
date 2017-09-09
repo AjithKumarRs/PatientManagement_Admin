@@ -41,6 +41,13 @@ namespace PatientManagement
                     public static LocalText BoxAdditionalInfoEmail = "Your Email";
                     public static LocalText BoxAdditionalInfoPhoneNumber = "Your Phone Number";
                     public static LocalText BoxAdditionalInfoRegistaredDate = "You start using the system on";
+                    public static LocalText BoxTenantInfoTitle = "About the Clinic";
+                    public static LocalText BoxTenantInfoTenantName = "Tenant Name";
+                    public static LocalText BoxTenantInfoTenantWebSite = "Tenant Web Site";
+                    public static LocalText BoxTenantInfoTenantWorkHours = "Work Hours";
+
+                    public static LocalText TabMyVisits = "Added Visits By Me";
+
                     public static LocalText TabProfileEditingTitle = "Profile Settings";
                     public static LocalText TabTenantEditingTitle = "Tenant Settings";
                     public static LocalText ButtonSaveProfile = "Save Profile Settings";

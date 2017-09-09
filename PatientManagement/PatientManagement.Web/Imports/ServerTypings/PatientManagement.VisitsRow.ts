@@ -8,6 +8,8 @@
         EndDate?: string;
         InsertUserId?: number;
         InsertDate?: string;
+        TenantName?: string;
+        InsertUserName?: string;
         PatientGender?: Gender;
         PhoneNumber?: string;
         PatientName?: string;
@@ -35,6 +37,8 @@
             export declare const EndDate: string;
             export declare const InsertUserId: string;
             export declare const InsertDate: string;
+            export declare const TenantName: string;
+            export declare const InsertUserName: string;
             export declare const PatientGender: string;
             export declare const PhoneNumber: string;
             export declare const PatientName: string;
@@ -44,6 +48,6 @@
             export declare const TenantId: string;
         }
 
-        ['VisitId', 'PatientId', 'VisitTypeId', 'Description', 'StartDate', 'EndDate', 'InsertUserId', 'InsertDate', 'PatientGender', 'PhoneNumber', 'PatientName', 'VisitTypeName', 'VisitTypeBackgroundColor', 'VisitTypeBorderColor', 'TenantId'].forEach(x => (<any>Fields)[x] = x);
+        ['VisitId', 'PatientId', 'VisitTypeId', 'Description', 'StartDate', 'EndDate', 'InsertUserId', 'InsertDate', 'TenantName', 'InsertUserName', 'PatientGender', 'PhoneNumber', 'PatientName', 'VisitTypeName', 'VisitTypeBackgroundColor', 'VisitTypeBorderColor', 'TenantId'].forEach(x => (<any>Fields)[x] = x);
     }
 }

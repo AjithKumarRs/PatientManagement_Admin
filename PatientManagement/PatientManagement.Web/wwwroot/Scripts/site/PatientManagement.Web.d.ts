@@ -1670,6 +1670,8 @@ declare namespace PatientManagement.PatientManagement {
         WantedWeight?: string;
         InsertUserId?: number;
         InsertDate?: string;
+        TenantName?: string;
+        InsertUserName?: string;
         NoteList?: NotesRow[];
         TenantId?: number;
     }
@@ -1694,6 +1696,8 @@ declare namespace PatientManagement.PatientManagement {
             const WantedWeight: string;
             const InsertUserId: string;
             const InsertDate: string;
+            const TenantName: string;
+            const InsertUserName: string;
             const NoteList: string;
             const TenantId: string;
         }
@@ -1827,6 +1831,8 @@ declare namespace PatientManagement.PatientManagement {
         EndDate?: string;
         InsertUserId?: number;
         InsertDate?: string;
+        TenantName?: string;
+        InsertUserName?: string;
         PatientGender?: Gender;
         PhoneNumber?: string;
         PatientName?: string;
@@ -1849,6 +1855,8 @@ declare namespace PatientManagement.PatientManagement {
             const EndDate: string;
             const InsertUserId: string;
             const InsertDate: string;
+            const TenantName: string;
+            const InsertUserName: string;
             const PatientGender: string;
             const PhoneNumber: string;
             const PatientName: string;
@@ -2600,6 +2608,28 @@ declare namespace PatientManagement.Membership {
         constructor(container: JQuery);
     }
 }
+declare namespace PatientManagement.PatientManagement {
+    class VisitsGrid extends Serenity.EntityGrid<VisitsRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof VisitsDialog;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        constructor(container: JQuery);
+    }
+}
+declare namespace PatientManagement.Membership {
+    import VisitsGrid = PatientManagement.VisitsGrid;
+    class AddedVisitsFromUserPanel extends VisitsGrid {
+        private visitsGrid;
+        constructor(container: JQuery, userId: number);
+        protected getColumns(): Slick.Column[];
+        protected getInitialTitle(): any;
+        protected getGridCanLoad(): boolean;
+        private _insertUserId;
+        insertUserId: number;
+    }
+}
 declare namespace PatientManagement.Membership {
     class EditTenantPanel extends Serenity.PropertyPanel<EditTenantRequest, any> {
         protected getFormKey(): string;
@@ -2696,16 +2726,6 @@ declare namespace PatientManagement.PatientManagement {
         protected onSaveSuccess(response: Serenity.SaveResponse): void;
         protected onDeleteSuccess(response: Serenity.DeleteResponse): void;
         protected formatAlertMessage(firstLine: any, title: any, startDate: Date, endDate: Date): string;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class VisitsGrid extends Serenity.EntityGrid<VisitsRow, any> {
-        protected getColumnsKey(): string;
-        protected getDialogType(): typeof VisitsDialog;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getService(): string;
-        constructor(container: JQuery);
     }
 }
 declare namespace PatientManagement.PatientManagement {

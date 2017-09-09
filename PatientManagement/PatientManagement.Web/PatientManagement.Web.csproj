@@ -84,6 +84,12 @@
     <Exec Command="dotnet sergen servertypings" ContinueOnError="true" />
 
   </Target>
+  <Target Name="EnsureContentOnViews" BeforeTargets="BeforeBuild">
+    <ItemGroup>
+      <Filtered Include="@(None)" Condition="'%(Extension)' == '.cshtml'" />
+    </ItemGroup>
+    <Warning Condition="'@(Filtered)'!=''" Code="CSHTML" File="$(MSBuildProjectDirectory)\%(Filtered.Identity)" Text="View is not set to [BuildAction:Content]" />
+  </Target>
   <ItemGroup>
     <DotNetCliToolReference Include="Serenity.CodeGenerator" Version="3.0.4" />
   </ItemGroup>
