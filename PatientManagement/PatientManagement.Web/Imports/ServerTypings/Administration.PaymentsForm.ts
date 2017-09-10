@@ -9,9 +9,9 @@
         PaymentDetailsId: Serenity.LookupEditor;
         PaymentOptionId: Serenity.LookupEditor;
         CurrencyId: Serenity.LookupEditor;
-        Value: Serenity.DecimalEditor;
+        Value: Serenity.StringEditor;
         PaymentStatus: Serenity.EnumEditor;
     }
 
-    [['SubscriptionId', () => Serenity.LookupEditor], ['PaymentDetailsId', () => Serenity.LookupEditor], ['PaymentOptionId', () => Serenity.LookupEditor], ['CurrencyId', () => Serenity.LookupEditor], ['Value', () => Serenity.DecimalEditor], ['PaymentStatus', () => Serenity.EnumEditor]].forEach(x => Object.defineProperty(PaymentsForm.prototype, <string>x[0], { get: function () { return this.w(x[0], (x[1] as any)()); }, enumerable: true, configurable: true }));
+    [['SubscriptionId', () => Serenity.LookupEditor], ['PaymentDetailsId', () => Serenity.LookupEditor], ['PaymentOptionId', () => Serenity.LookupEditor], ['CurrencyId', () => Serenity.LookupEditor], ['Value', () => Serenity.StringEditor], ['PaymentStatus', () => Serenity.EnumEditor]].forEach(x => Object.defineProperty(PaymentsForm.prototype, <string>x[0], { get: function () { return this.w(x[0], (x[1] as any)()); }, enumerable: true, configurable: true }));
 }

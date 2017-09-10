@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.12
+VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatientManagement.Web", "PatientManagement\PatientManagement.Web\PatientManagement.Web.csproj", "{F9DB2820-B885-442D-AAF8-79DE62044147}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PatientManagement.Web", "PatientManagement\PatientManagement.Web\PatientManagement.Web.csproj", "{F9DB2820-B885-442D-AAF8-79DE62044147}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatientManagement.Public", "PatientManagement.Public\PatientManagement.Public.csproj", "{8A48E1EE-9FA3-479A-82EE-19EFEE999C14}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PatientManagement.Public", "PatientManagement.Public\PatientManagement.Public.csproj", "{8A48E1EE-9FA3-479A-82EE-19EFEE999C14}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,5 +24,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F30B8063-8EE9-4BA9-90D4-D93BEB5BB6AD}
 	EndGlobalSection
 EndGlobal

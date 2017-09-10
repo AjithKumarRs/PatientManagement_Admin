@@ -62,12 +62,32 @@ namespace PatientManagement.Administration.Entities
             set { Fields.Email[this] = value; }
         }
 
+        [DisplayName("Web Site"), Size(200), QuickSearch]
+        public String WebSite
+        {
+            get { return Fields.WebSite[this]; }
+            set { Fields.WebSite[this] = value; }
+        }
+
+        [DisplayName("Phone Number"), Size(200), QuickSearch]
+        public String PhoneNumber
+        {
+            get { return Fields.PhoneNumber[this]; }
+            set { Fields.PhoneNumber[this] = value; }
+        }
+
         [DisplayName("User Image"), Size(100)]
         [ImageUploadEditor(FilenameFormat = "UserImage/~", CopyToHistory = true)]
         public String UserImage
         {
             get { return Fields.UserImage[this]; }
             set { Fields.UserImage[this] = value; }
+        }
+        [DisplayName("Email Signature")]
+        public String EmailSignature
+        {
+            get { return Fields.EmailSignature[this]; }
+            set { Fields.EmailSignature[this] = value; }
         }
 
         [DisplayName("Password"), Size(50), NotMapped]
@@ -155,6 +175,9 @@ namespace PatientManagement.Administration.Entities
             public StringField UserImage;
             public DateTimeField LastDirectoryUpdate;
             public Int16Field IsActive;
+            public StringField WebSite;
+            public StringField PhoneNumber;
+            public StringField EmailSignature;
 
             public StringField Password;
             public StringField PasswordConfirm;
@@ -162,8 +185,7 @@ namespace PatientManagement.Administration.Entities
             public readonly Int32Field TenantId;
             public readonly StringField TenantName;
             public readonly Int32Field TenantCurrencyId;
-
-
+            
             public RowFields()
                 : base("Users")
             {

@@ -13,20 +13,19 @@ namespace PatientManagement.Administration.Columns
     [BasedOnRow(typeof(Entities.PaymentsRow))]
     public class PaymentsColumns
     {
-        [EditLink, DisplayName("Db.Shared.RecordId"), AlignRight]
+        [DisplayName("Db.Shared.RecordId"), AlignCenter]
         public Int64 PaymentId { get; set; }
-        public Int64 SubscriptionId { get; set; }
+        public Int64 SubscriptionName { get; set; }
         public Int64 PaymentDetailsId { get; set; }
-        public Int32 PaymentOptionId { get; set; }
-        public Int32 CurrencyId { get; set; }
+        public Int32 PaymentOptionName { get; set; }
         [ReadOnly(true)]
         public Decimal Value { get; set; }
-        [EditLink]
-        public String RoleBefore { get; set; }
-        public String RoleAfter { get; set; }
+        [Width(50)]
+        public Int32 CurrencyCurrencyId { get; set; }
+        
         public Int32 PaymentStatus { get; set; }
 
-        [Width(80)]
+        [Width(80), EditLink]
         public String TenantName { get; set; }
 
         [Width(80)]

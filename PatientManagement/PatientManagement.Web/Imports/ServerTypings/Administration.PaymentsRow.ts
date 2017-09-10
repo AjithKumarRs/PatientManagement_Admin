@@ -7,15 +7,14 @@
         PaymentOptionId?: number;
         CurrencyId?: number;
         Value?: number;
-        RoleBefore?: string;
-        RoleAfter?: string;
         PaymentStatus?: PatientManagement.PaymentStatus;
         SubscriptionOfferId?: number;
         SubscriptionSubscriptionEndDate?: string;
+        SubscriptionName?: string;
         PaymentDetailName?: string;
         PaymentDetailsBankName?: string;
         PaymentDetailsIbanBeneficient?: string;
-        PaymentOptionDays?: number;
+        PaymentOptionMonths?: number;
         PaymentOptionName?: string;
         CurrencyCurrencyId?: string;
         CurrencyName?: string;
@@ -31,7 +30,7 @@
 
     export namespace PaymentsRow {
         export const idProperty = 'PaymentId';
-        export const nameProperty = 'RoleBefore';
+        export const nameProperty = 'SubscriptionName';
         export const localTextPrefix = 'Administration.Payments';
         export const lookupKey = 'AdministrationTenants.Payment';
 
@@ -47,15 +46,14 @@
             export declare const PaymentOptionId: string;
             export declare const CurrencyId: string;
             export declare const Value: string;
-            export declare const RoleBefore: string;
-            export declare const RoleAfter: string;
             export declare const PaymentStatus: string;
             export declare const SubscriptionOfferId: string;
             export declare const SubscriptionSubscriptionEndDate: string;
+            export declare const SubscriptionName: string;
             export declare const PaymentDetailName: string;
             export declare const PaymentDetailsBankName: string;
             export declare const PaymentDetailsIbanBeneficient: string;
-            export declare const PaymentOptionDays: string;
+            export declare const PaymentOptionMonths: string;
             export declare const PaymentOptionName: string;
             export declare const CurrencyCurrencyId: string;
             export declare const CurrencyName: string;
@@ -69,6 +67,6 @@
             export declare const UpdateUserName: string;
         }
 
-        ['PaymentId', 'SubscriptionId', 'TenantId', 'PaymentDetailsId', 'PaymentOptionId', 'CurrencyId', 'Value', 'RoleBefore', 'RoleAfter', 'PaymentStatus', 'SubscriptionOfferId', 'SubscriptionSubscriptionEndDate', 'PaymentDetailName', 'PaymentDetailsBankName', 'PaymentDetailsIbanBeneficient', 'PaymentOptionDays', 'PaymentOptionName', 'CurrencyCurrencyId', 'CurrencyName', 'CurrencyRate', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'TenantName', 'InsertUserName', 'UpdateUserName'].forEach(x => (<any>Fields)[x] = x);
+        ['PaymentId', 'SubscriptionId', 'TenantId', 'PaymentDetailsId', 'PaymentOptionId', 'CurrencyId', 'Value', 'PaymentStatus', 'SubscriptionOfferId', 'SubscriptionSubscriptionEndDate', 'SubscriptionName', 'PaymentDetailName', 'PaymentDetailsBankName', 'PaymentDetailsIbanBeneficient', 'PaymentOptionMonths', 'PaymentOptionName', 'CurrencyCurrencyId', 'CurrencyName', 'CurrencyRate', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'TenantName', 'InsertUserName', 'UpdateUserName'].forEach(x => (<any>Fields)[x] = x);
     }
 }

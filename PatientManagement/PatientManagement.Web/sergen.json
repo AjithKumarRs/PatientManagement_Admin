@@ -2,7 +2,7 @@
   "RootNamespace": "PatientManagement",
   "ServerTypings": {
     "Assemblies": [
-      "bin/Debug/netcoreapp1.1/PatientManagement.Web.dll"
+      "bin/Debug/netcoreapp2.0/PatientManagement.Web.dll"
     ]
   },
   "Connections": [
@@ -44,6 +44,12 @@
           "Identifier": "PaymentsDetails",
           "Module": "Administration",
           "PermissionKey": "AdministrationTenants:PaymentsDetails"
+        },
+        {
+          "Tablename": "dbo.SentEmails",
+          "Identifier": "SentEmails",
+          "Module": "Administration",
+          "PermissionKey": "Administration:SentEmails"
         },
         {
           "Tablename": "dbo.Subscriptions",

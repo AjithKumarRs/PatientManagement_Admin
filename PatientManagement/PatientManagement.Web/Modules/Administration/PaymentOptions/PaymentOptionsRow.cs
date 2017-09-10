@@ -22,11 +22,11 @@ namespace PatientManagement.Administration.Entities
             set { Fields.PaymentOptionId[this] = value; }
         }
 
-        [DisplayName("Days"), NotNull]
-        public Int32? Days
+        [DisplayName("Months"), NotNull]
+        public Int32? Months
         {
-            get { return Fields.Days[this]; }
-            set { Fields.Days[this] = value; }
+            get { return Fields.Months[this]; }
+            set { Fields.Months[this] = value; }
         }
 
         [DisplayName("Name"), Size(200), NotNull, QuickSearch]
@@ -111,7 +111,7 @@ namespace PatientManagement.Administration.Entities
         public class RowFields : RowFieldsBase
         {
             public Int32Field PaymentOptionId;
-            public Int32Field Days;
+            public Int32Field Months;
             public StringField Name;
             public Int32Field InsertUserId;
             public DateTimeField InsertDate;

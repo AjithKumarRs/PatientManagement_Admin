@@ -21,6 +21,19 @@ namespace PatientManagement.Administration.Columns
         public String CurrencyName { get; set; }
 
         public Boolean SubscriptionRequired { get; set; }
-        public Int64 SubscriptionId { get; set; }
+        public Int64 SubscriptionName { get; set; }
+
+        public String TenantWebSite { get; set; }
+        [MinuteFormatter]
+        public Int16 WorkHoursStart { get; set; }
+        [MinuteFormatter]
+        public Int16 WorkHoursEnd { get; set; }
+
+        public String InsertUserName { get; set; }
+        [DisplayFormat("dd/MM/yyyy HH:mm")]
+        public DateTime InsertDate { get; set; }
+        public String UpdateUserName { get; set; }
+        [DisplayFormat("dd/MM/yyyy HH:mm")]
+        public DateTime UpdateDateField { get; set; }
     }
 }

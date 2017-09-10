@@ -12,5 +12,21 @@ namespace PatientManagement.PatientManagement {
         constructor(container: JQuery) {
             super(container);
         }
+
+        protected getButtons() {
+            var buttons = super.getButtons();
+
+            buttons.push(Common.ExcelExportHelper.createToolButton({
+                grid: this,
+                hint: 'Export to Excel',
+                title: 'Export to Excel',
+                service: PatientsService.baseUrl + '/ListExcel',
+                onViewSubmit: () => this.onViewSubmit(),
+                separator: true
+            }));
+
+            return buttons;
+        }
+
     }
 }

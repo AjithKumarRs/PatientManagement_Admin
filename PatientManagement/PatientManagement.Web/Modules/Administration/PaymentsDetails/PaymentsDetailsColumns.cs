@@ -18,6 +18,10 @@ namespace PatientManagement.Administration.Columns
 
 
         public String Name { get; set; }
+        [Width(80)] 
+        public Int32 PaymentType { get; set; }
+
+
         [EditLink]
         public String BeneficiaryName { get; set; }
         public String BankName { get; set; }

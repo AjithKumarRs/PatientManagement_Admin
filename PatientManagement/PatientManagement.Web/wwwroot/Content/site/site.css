@@ -7859,19 +7859,25 @@ section.content > .s-DataGrid {
 .container-floated .floated-button:not(:last-child):nth-last-child(2) {
   -webkit-transition-delay: 50ms;
   transition-delay: 20ms;
-  background-color: aquamarine;
+  background-color: #ec7b7d;
   background-size: contain;
 }
 .container-floated .floated-button:not(:last-child):nth-last-child(3) {
   -webkit-transition-delay: 75ms;
   transition-delay: 40ms;
-  background-color: lightpink;
+  background-color: #FDC168;
   background-size: contain;
 }
 .container-floated .floated-button:not(:last-child):nth-last-child(4) {
   -webkit-transition-delay: 100ms;
   transition-delay: 60ms;
-  background-color: slategrey;
+  background-color: #91d1be;
+  background-size: contain;
+}
+.container-floated .floated-button:not(:last-child):nth-last-child(5) {
+  -webkit-transition-delay: 100ms;
+  transition-delay: 60ms;
+  background-color: #768FDf;
   background-size: contain;
 }
 .container-floated [tooltip]:before {
@@ -8942,4 +8948,11 @@ section.content > .s-DataGrid {
 }
 .s-SubscriptionsGrid .active {
   background-color: #4fff62;
+}
+.s-Administration-SentEmailsDialog > .size {
+  width: 700px;
+  min-height: 500px;
+}
+.s-Administration-SentEmailsDialog .caption {
+  width: 150px;
 }

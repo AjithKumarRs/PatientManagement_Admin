@@ -15,6 +15,9 @@ namespace PatientManagement.Administration.Forms
     {
         [Placeholder("Bank transfer, VISA, Mastercard")]
         public String Name { get; set; }
+
+        public Int32 PaymentType { get; set; }
+
         public String BeneficiaryName { get; set; }
         public String BankName { get; set; }
         public String IbanBeneficient { get; set; }

@@ -1,7 +1,7 @@
 ﻿namespace PatientManagement.Administration {
     export interface PaymentOptionsRow {
         PaymentOptionId?: number;
-        Days?: number;
+        Months?: number;
         Name?: string;
         InsertUserId?: number;
         InsertDate?: string;
@@ -23,7 +23,7 @@
 
         export namespace Fields {
             export declare const PaymentOptionId: string;
-            export declare const Days: string;
+            export declare const Months: string;
             export declare const Name: string;
             export declare const InsertUserId: string;
             export declare const InsertDate: string;
@@ -33,6 +33,6 @@
             export declare const UpdateUserName: string;
         }
 
-        ['PaymentOptionId', 'Days', 'Name', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'InsertUserName', 'UpdateUserName'].forEach(x => (<any>Fields)[x] = x);
+        ['PaymentOptionId', 'Months', 'Name', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'InsertUserName', 'UpdateUserName'].forEach(x => (<any>Fields)[x] = x);
     }
 }

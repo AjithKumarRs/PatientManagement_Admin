@@ -28,6 +28,7 @@ namespace MVC
 
             public static class Payments
             {
+                public const string PaymentInvoicePage = "~/Modules/Administration/Payments/PaymentInvoicePage.cshtml";
                 public const string PaymentsIndex = "~/Modules/Administration/Payments/PaymentsIndex.cshtml";
             }
 
@@ -39,6 +40,11 @@ namespace MVC
             public static class Role
             {
                 public const string RoleIndex = "~/Modules/Administration/Role/RoleIndex.cshtml";
+            }
+
+            public static class SentEmails
+            {
+                public const string SentEmailsIndex = "~/Modules/Administration/SentEmails/SentEmailsIndex.cshtml";
             }
 
             public static class Sergen
@@ -97,6 +103,11 @@ namespace MVC
                 {
                     public const string AccountForgotPassword = "~/Modules/Membership/Account/ForgotPassword/AccountForgotPassword.cshtml";
                     public const string AccountForgotPassword_AdminLTE = "~/Modules/Membership/Account/ForgotPassword/AccountForgotPassword.AdminLTE.cshtml";
+                }
+
+                public static class Profile
+                {
+                    public const string AccountProfile = "~/Modules/Membership/Account/Profile/AccountProfile.cshtml";
                 }
 
                 public static class ResetPassword

@@ -19,9 +19,9 @@ namespace PatientManagement.Administration.Forms
         public Int32 CurrencyId { get; set; }
 
         [ReadOnly(true), Required(true)]
-        public Decimal Value { get; set; }
+        public String Value { get; set; }
 
-        [ReadOnly(true), DefaultValue(2)]
+        [DefaultValue(2)]
         public Int32 PaymentStatus { get; set; }
 
     }

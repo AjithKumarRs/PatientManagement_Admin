@@ -1,6 +1,8 @@
 ﻿using System.Linq;
 using PatientManagement.Administration.Entities;
 using PatientManagement.PatientManagement;
+using PatientManagement.Web.Modules.Common;
+using PatientManagement.Web.Modules.Common.Helpers;
 
 namespace PatientManagement.Administration
 {
@@ -20,18 +22,12 @@ namespace PatientManagement.Administration
             var user = (UserDefinition)Authorization.UserDefinition;
             if (user == null)
                 return false;
-
-
-            if (!GetTenantPermissions(user.TenantId))
-            {
-
-            }
-
+            
             bool grant;
             if (GetUserPermissions(user.UserId).TryGetValue(permission, out grant))
                 return grant;
 
-            foreach (var roleId in GetUserRoles(user.UserId))
+            foreach (var roleId in GetUserRoles(user.UserId, user.TenantId))
             {
                 if (GetRolePermissions(roleId).Contains(permission))
                     return true;
@@ -39,44 +35,7 @@ namespace PatientManagement.Administration
 
             return false;
         }
-
-        private bool GetTenantPermissions(int tenantId)
-        {
-            var connection = SqlConnections.NewFor<TenantRow>();
-            //using (var connection = SqlConnections.NewFor<TenantRow>())
-            //{
-            // First we get the current tenant for user 
-            var tenantFld = TenantRow.Fields;
-                var tenant = connection.First<TenantRow>(tenantFld.TenantId == tenantId);
-                if (tenant?.SubscriptionRequired != null && !tenant.SubscriptionRequired.Value)
-                {
-                    return true;
-                }
-
-                // Then we check if the tenant have active subscription
-                var subsFld = SubscriptionsRow.Fields;
-                var subscription = connection.First<SubscriptionsRow>(subsFld.TenantId == tenantId && subsFld.IsActive == (int)SubscriptionState.Active);
-
-            var subsId = (int)subscription.SubscriptionId;
-                var paymentsFld = PaymentsRow.Fields;
-                //var payments = connection.List<PaymentsRow>(c => c.Where(
-                //    paymentsFld.TenantId == tenantId 
-                //    && paymentsFld.SubscriptionId == subsId
-                //    ));
-
-                //if (!payments.Any())
-                //{
-                    
-                //}
-                //else
-                //{
-                    
-                //}
-           // }
-
-            return false;
-        }
-
+        
         private Dictionary<string, bool> GetUserPermissions(int userId)
         {
             var fld = UserPermissionRow.Fields;
@@ -118,23 +77,14 @@ namespace PatientManagement.Administration
             });
         }
 
-        private HashSet<int> GetUserRoles(int userId)
+        private HashSet<int> GetUserRoles(int userId, int tenantId)
         {
             var fld = UserRoleRow.Fields;
 
             return TwoLevelCache.GetLocalStoreOnly("UserRoles:" + userId, TimeSpan.Zero, fld.GenerationKey, () =>
             {
-                using (var connection = SqlConnections.NewByKey("Default"))
-                {
-                    var result = new HashSet<int>();
+                return UserSubscriptionHelper.GetUserRolesIdBasedOnSubscription(userId, tenantId);
 
-                    connection.List<UserRoleRow>(q => q
-                            .Select(fld.RoleId)
-                            .Where(new Criteria(fld.UserId) == userId))
-                        .ForEach(x => result.Add(x.RoleId.Value));
-
-                    return result;
-                }
             });
         }
     }
