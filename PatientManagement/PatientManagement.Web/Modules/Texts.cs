@@ -246,6 +246,7 @@ namespace PatientManagement
                 public static LocalText NewVisitFloatedButton = "New Visit";
                 public static LocalText NewPatientFloatedButton = "New Patient";
                 public static LocalText NewEmailFloatedButton = "New Email";
+                public static LocalText NewDocumentFloatedButton = "New Document";
 
                 public static LocalText AddFloatedButton = "Add";
 
