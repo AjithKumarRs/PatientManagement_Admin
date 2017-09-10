@@ -179,7 +179,7 @@
                                             $('#today-visits-progress').attr('aria-valuemax', data.length);
                                             $('#today-visits-progress').attr('aria-valuenow', expiredVisits).css('width', width + '%');
 
-                                    });
+                                        });
 
                                 });
                             </script>
@@ -295,6 +295,8 @@
 
                 <a class="floated-button" tooltip="@Texts.Site.Layout.NewPatientFloatedButton" onclick="new PatientManagement.PatientManagement.PatientsDialog().loadNewAndOpenDialog();"><i class="fa fa-user small-icon"></i></a>
 
+                <a class="floated-button" tooltip="@Texts.Site.Layout.NewDocumentFloatedButton" onclick="new PatientManagement.PatientManagement.PatientsFileUploadsDialog().loadNewAndOpenDialog();"><i class="fa fa-clipboard  small-icon"></i></a>
+
                 <a class="floated-button" tooltip="@Texts.Site.Layout.NewEmailFloatedButton" onclick="new PatientManagement.Administration.SentEmailsDialog().loadNewAndOpenDialog();"><i class="fa fa-envelope-open small-icon"></i></a>
 
                 <a class="floated-button" tooltip="@Texts.Site.Layout.AddFloatedButton" href="#"><i class="fa fa-plus plus"></i></a>
@@ -306,7 +308,19 @@
         </div>
 
         <script type="text/javascript">
-            $().ready(function () {
+            $(document).on('keydown', null, 'alt+v', function() {
+                new PatientManagement.PatientManagement.CalendarVisitsDialog().loadNewAndOpenDialog();
+            });
+            $(document).on('keydown', null, 'alt+c', function() {
+                new PatientManagement.PatientManagement.PatientsDialog().loadNewAndOpenDialog();
+            });
+            $(document).on('keydown', null, 'alt+d', function() {
+                new PatientManagement.PatientManagement.PatientsFileUploadsDialog().loadNewAndOpenDialog();
+            });
+            $(document).on('keydown', null, 'alt+s', function() {
+                new PatientManagement.Administration.SentEmailsDialog().loadNewAndOpenDialog();
+            });
+            $(document).ready(function () {
 
                 new PatientManagement.Common.RecieveNotificationToggle($('#NotificationCheck'),{ state:@notificationState});
                 new PatientManagement.Common.SidebarSearch($('#SidebarSearch'), $('#SidebarMenu')).init();
@@ -419,7 +433,7 @@
 
                             $('#subscription-information-box p')
                                 .text(
-                                Q.text("Site.Subscriptions.WillExpire.SubscriptionInfoBoxBody").format(diff));
+                                    Q.text("Site.Subscriptions.WillExpire.SubscriptionInfoBoxBody").format(diff));
 
                             $('#subscription-information-box').addClass('callout-warning');
                             $('#subscription-information-box').parents('.row').show();

@@ -4380,6 +4380,19 @@ var PatientManagement;
             VisitsGrid.prototype.getIdProperty = function () { return PatientManagement.VisitsRow.idProperty; };
             VisitsGrid.prototype.getLocalTextPrefix = function () { return PatientManagement.VisitsRow.localTextPrefix; };
             VisitsGrid.prototype.getService = function () { return PatientManagement.VisitsService.baseUrl; };
+            VisitsGrid.prototype.getButtons = function () {
+                var _this = this;
+                var buttons = _super.prototype.getButtons.call(this);
+                buttons.push(PatientManagement_34.Common.ExcelExportHelper.createToolButton({
+                    grid: this,
+                    hint: 'Export to Excel',
+                    title: 'Export to Excel',
+                    service: PatientManagement.VisitsService.baseUrl + '/ListExcel',
+                    onViewSubmit: function () { return _this.onViewSubmit(); },
+                    separator: true
+                }));
+                return buttons;
+            };
             return VisitsGrid;
         }(Serenity.EntityGrid));
         VisitsGrid = __decorate([
@@ -5377,8 +5390,17 @@ var PatientManagement;
             NotificationsGrid.prototype.getLocalTextPrefix = function () { return PatientManagement.NotificationsRow.localTextPrefix; };
             NotificationsGrid.prototype.getService = function () { return PatientManagement.NotificationsService.baseUrl; };
             NotificationsGrid.prototype.getButtons = function () {
+                var _this = this;
                 var buttons = _super.prototype.getButtons.call(this);
                 buttons.splice(Q.indexOf(buttons, function (x) { return x.cssClass == "add-button"; }), 1);
+                buttons.push(PatientManagement_48.Common.ExcelExportHelper.createToolButton({
+                    grid: this,
+                    hint: 'Export to Excel',
+                    title: 'Export to Excel',
+                    service: PatientManagement.NotificationsService.baseUrl + '/ListExcel',
+                    onViewSubmit: function () { return _this.onViewSubmit(); },
+                    separator: true
+                }));
                 return buttons;
             };
             NotificationsGrid.prototype.getSlickOptions = function () {
@@ -5620,6 +5642,19 @@ var PatientManagement;
             PatientsGrid.prototype.getIdProperty = function () { return PatientManagement.PatientsRow.idProperty; };
             PatientsGrid.prototype.getLocalTextPrefix = function () { return PatientManagement.PatientsRow.localTextPrefix; };
             PatientsGrid.prototype.getService = function () { return PatientManagement.PatientsService.baseUrl; };
+            PatientsGrid.prototype.getButtons = function () {
+                var _this = this;
+                var buttons = _super.prototype.getButtons.call(this);
+                buttons.push(PatientManagement_56.Common.ExcelExportHelper.createToolButton({
+                    grid: this,
+                    hint: 'Export to Excel',
+                    title: 'Export to Excel',
+                    service: PatientManagement.PatientsService.baseUrl + '/ListExcel',
+                    onViewSubmit: function () { return _this.onViewSubmit(); },
+                    separator: true
+                }));
+                return buttons;
+            };
             return PatientsGrid;
         }(Serenity.EntityGrid));
         PatientsGrid = __decorate([

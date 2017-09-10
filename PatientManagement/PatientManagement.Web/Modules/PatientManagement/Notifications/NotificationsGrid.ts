@@ -18,6 +18,15 @@ namespace PatientManagement.PatientManagement {
             var buttons = super.getButtons();
             buttons.splice(Q.indexOf(buttons, x => x.cssClass == "add-button"), 1);
 
+            buttons.push(Common.ExcelExportHelper.createToolButton({
+                grid: this,
+                hint: 'Export to Excel',
+                title: 'Export to Excel',
+                service: NotificationsService.baseUrl + '/ListExcel',
+                onViewSubmit: () => this.onViewSubmit(),
+                separator: true
+            }));
+
             return buttons;
         }
 

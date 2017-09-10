@@ -243,9 +243,10 @@ namespace PatientManagement
                 public static LocalText RecieveNotificationToggleOff = "OFF";
 
                 public static LocalText RecieveNotificationToggle = "Recieve notifications?";
-                public static LocalText NewVisitFloatedButton = "New Visit";
-                public static LocalText NewPatientFloatedButton = "New Patient";
-                public static LocalText NewEmailFloatedButton = "New Email";
+                public static LocalText NewVisitFloatedButton = "New Visit (alt+v)";
+                public static LocalText NewPatientFloatedButton = "New Patient (alt+c)";
+                public static LocalText NewEmailFloatedButton = "New Email (alt+s)";
+                public static LocalText NewDocumentFloatedButton = "New Document (alt+d)";
 
                 public static LocalText AddFloatedButton = "Add";
 
