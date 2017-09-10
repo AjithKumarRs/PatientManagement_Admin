@@ -18,9 +18,15 @@ namespace PatientManagement.Administration {
             if (this.isEditMode()) {
                 Serenity.EditorUtils.setReadOnly(this.form.Subject, true);
             }
-        }
-        public sendPredefinedEmail = (visitId): void => {
 
+            var items = this.form.ToEmail.get_items();
+            items = items.filter(item => typeof item.source["Email"] !== 'undefined');
+            this.form.ToEmail.items = items;
+            
+        }
+
+        public sendPredefinedEmail = (visitId): void => {
+            console.log(visitId);
             PatientManagement.VisitsService.Retrieve(<any>{
                 EntityId: visitId
             }, resp => {
@@ -41,14 +47,14 @@ namespace PatientManagement.Administration {
                                     new PatientManagement.PatientsDialog().loadByIdAndOpenDialog(patient.PatientId);
                                 });
                         } else {
-                            var sentEmail = <SentEmailsRow>{};
-                            var sentEmailDialog = new SentEmailsDialog();
-                            
-                            sentEmail.ToEmail = patient.Email;
-                            sentEmail.ToName = patient.Name;
 
-                            // TODO: Default value for email lookup
-                            sentEmailDialog.loadNewAndOpenDialog();
+                            var sentEmail = <SentEmailsRow>{};
+                            var dialog = new SentEmailsDialog();
+
+                            //TODO We open new dialog with PatientID. Correct?
+                            sentEmail.ToEmail = patient.PatientId.toString();
+                            dialog.form.ToEmail.readOnly = true;
+                            dialog.loadEntityAndOpenDialog(sentEmail);
                         }
                     });
 
