@@ -23,6 +23,7 @@ namespace PatientManagement.Membership.Pages
                 return View(MVC.Views.Membership.Account.AccountLogin);
         }
 
+       
         [HttpGet]
         public ActionResult AccessDenied()
         {

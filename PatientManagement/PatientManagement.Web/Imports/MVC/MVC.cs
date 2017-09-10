@@ -105,6 +105,11 @@ namespace MVC
                     public const string AccountForgotPassword_AdminLTE = "~/Modules/Membership/Account/ForgotPassword/AccountForgotPassword.AdminLTE.cshtml";
                 }
 
+                public static class Profile
+                {
+                    public const string AccountProfile = "~/Modules/Membership/Account/Profile/AccountProfile.cshtml";
+                }
+
                 public static class ResetPassword
                 {
                     public const string AccountResetPassword = "~/Modules/Membership/Account/ResetPassword/AccountResetPassword.cshtml";

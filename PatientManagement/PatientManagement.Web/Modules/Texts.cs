@@ -29,6 +29,33 @@ namespace PatientManagement
         {
             public static class Membership
             {
+                public static class Profile
+                {
+                    public static LocalText FormTitle = "User Profile";
+                    public static LocalText Success = "Your profile information is changed.";
+                    public static LocalText SuccessTenant = "Your tenant information is changed.";
+                    public static LocalText AddedPatients = "Added Patients";
+                    public static LocalText AddedVisits = "Added Visits";
+                    public static LocalText SentEmails = "Sent Emails";
+                    public static LocalText BoxAdditionalInfoTitle = "About me";
+                    public static LocalText BoxAdditionalInfoEmail = "Your Email";
+                    public static LocalText BoxAdditionalInfoPhoneNumber = "Your Phone Number";
+                    public static LocalText BoxAdditionalInfoRegistaredDate = "You start using the system on";
+                    public static LocalText BoxTenantInfoTitle = "About the Clinic";
+                    public static LocalText BoxTenantInfoTenantName = "Tenant Name";
+                    public static LocalText BoxTenantInfoTenantWebSite = "Tenant Web Site";
+                    public static LocalText BoxTenantInfoTenantWorkHours = "Work Hours";
+
+                    public static LocalText TabMyVisits = "Added Visits By Me";
+
+                    public static LocalText TabProfileEditingTitle = "Profile Settings";
+                    public static LocalText TabTenantEditingTitle = "Tenant Settings";
+                    public static LocalText ButtonSaveProfile = "Save Profile Settings";
+                    public static LocalText ButtonSaveTenant = "Save Tenant Settings";
+
+
+
+                }
                 public static class ChangePassword
                 {
                     public static LocalText FormTitle = "Change Password";
@@ -93,8 +120,9 @@ namespace PatientManagement
 
         public static class Navigation
         {
+            public static LocalText VisitsForToday = "Visits For Today";
             public static LocalText LogoutLink = "Logout";
-            public static LocalText SiteTitle = "PatientManagement";
+            public static LocalText SiteTitle = "My Clario";
         }
         public static class LeftNavigation
         {

@@ -33,7 +33,8 @@ namespace PatientManagement.PatientManagement.Forms
         public String Address { get; set; }
         public Int32 Height { get; set; }
         public Int32 Weight { get; set; }
-
+        
+        [Hint("When visit for the patient is changed, the user will receive email automatically (if email is added). ")]
         public bool NotifyOnChange { get; set; }
 
 

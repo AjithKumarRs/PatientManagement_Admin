@@ -75,11 +75,11 @@ namespace PatientManagement.Administration.Endpoints
                 result.Permissions = new Dictionary<string, bool>();
                 return result;
             }
-
+            result.UserId = user.UserId;
             result.Username = user.Username;
             result.DisplayName = user.DisplayName;
             result.IsAdmin = user.Username == "admin";
-
+            result.TenantId = user.TenantId;
             //TODO: Major speed issue when using in the Frond End
             //result.PaidPeriod = UserSubscriptionHelper.GetTenantPaidDays(user.TenantId);
 

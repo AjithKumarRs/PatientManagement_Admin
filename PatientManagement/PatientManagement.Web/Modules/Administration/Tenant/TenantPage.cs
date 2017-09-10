@@ -5,7 +5,7 @@ namespace PatientManagement.Administration.Pages
     using Serenity.Web;
     using Microsoft.AspNetCore.Mvc;
 
-    [PageAuthorize(typeof(Entities.TenantRow))]
+    [PageAuthorize("Administration:Tenants")]
     public class TenantController : Controller
     {
         [Route("Administration/Tenant")]
