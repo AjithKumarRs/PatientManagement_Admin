@@ -1,4 +1,6 @@
 ﻿
+using PatientManagement.Administration;
+
 namespace PatientManagement.PatientManagement.Endpoints
 {
     using Serenity;
@@ -44,9 +46,24 @@ namespace PatientManagement.PatientManagement.Endpoints
         {
             return new MyRepository().ListForDropdown(connection, request);
         }
-        public int CountNotifications(IDbConnection connection, ListRequest request)
+        public CountNotificationsResponse CountNotifications(IDbConnection connection, ListRequest request)
         {
-           return new MyRepository().ListForDropdown(connection, new ListRequest()).TotalCount;
+            var some = new MyRepository().ListForDropdown(connection, request);
+            return new CountNotificationsResponse
+           {
+
+               Count = some.TotalCount
+           };
         }
     }
+
+    public class CountNotificationsRequest : ServiceRequest
+    {
+        public decimal Count { get; set; }
+    }
+    public class CountNotificationsResponse : ServiceResponse
+    {
+        public int Count { get; set; }
+    }
+
 }

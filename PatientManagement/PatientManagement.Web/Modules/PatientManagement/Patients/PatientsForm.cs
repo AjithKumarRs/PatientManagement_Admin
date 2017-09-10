@@ -24,13 +24,20 @@ namespace PatientManagement.PatientManagement.Forms
         public Int32 Gender { get; set; }
         public Int64 PersonalNumber { get; set; }
         public string PhoneNumber { get; set; }
+        [EmailEditor]
+
+        public string Email { get; set; }
 
         [DefaultValue("now")]
         public DateTime FirstRegistrationDate { get; set; }
         public String Address { get; set; }
         public Int32 Height { get; set; }
         public Int32 Weight { get; set; }
-        public String WantedWeight { get; set; }
+        
+        [Hint("When visit for the patient is changed, the user will receive email automatically (if email is added). ")]
+        public bool NotifyOnChange { get; set; }
+
+
         public List<object> NoteList { get; set; }
 
         // TODO Add when you figure out how to add permissions here

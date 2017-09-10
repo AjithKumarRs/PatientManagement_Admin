@@ -384,13 +384,15 @@
 	var $Serenity_DateEditor = function(input) {
 		this.$4$MinValueField = null;
 		this.$4$MaxValueField = null;
+		this.yearRange = null;
 		Serenity.Widget.call(this, input, new Object());
 		input.addClass('dateQ');
 		input.datepicker({
 			showOn: 'button',
 			beforeShow: function() {
 				return !input.hasClass('readonly');
-			}
+			},
+			yearRange: ss.coalesce(this.yearRange, '-100:+50')
 		});
 		input.bind('keyup.' + this.uniqueName, ss.mkdel(this, function(e) {
 			if (e.which === 32 && !this.get_readOnly()) {
@@ -607,7 +609,8 @@
 			showOn: 'button',
 			beforeShow: function() {
 				return !input.hasClass('readonly');
-			}
+			},
+			yearRange: ss.coalesce(this.options.yearRange, '-100:+50')
 		});
 		input.bind('keyup.' + this.uniqueName, ss.mkdel(this, function(e) {
 			if (e.which === 32 && !this.get_readOnly()) {
@@ -657,6 +660,9 @@
 			}
 			this.set_valueAsDate(new Date());
 		}));
+		this.$time.on('change', function(e3) {
+			input.triggerHandler('change');
+		});
 	};
 	$Serenity_DateTimeEditor.__typeName = 'Serenity.DateTimeEditor';
 	$Serenity_DateTimeEditor.$getTimeOptions = function(fromHour, fromMin, toHour, toMin, stepMins) {
@@ -1282,6 +1288,31 @@
 		this.$service = null;
 		this.$dialogType = null;
 		$Serenity_DataGrid.call(this, container, opt);
+		this.element.addClass('route-handler').bind('handleroute.' + this.uniqueName, ss.mkdel(this, function(e, arg) {
+			if (!!arg.handled) {
+				return;
+			}
+			if (!!(arg.route === 'new')) {
+				arg.handled = true;
+				this.addButtonClick();
+				return;
+			}
+			var parts = arg.route.split('/');
+			if (!!(ss.referenceEquals(parts.length, 2) && parts[0] === 'edit')) {
+				arg.handled = true;
+				this.editItem(parts[1]);
+				return;
+			}
+			if (!!(ss.referenceEquals(parts.length, 2) && parts[1] === 'new')) {
+				arg.handled = true;
+				this.editItemOfType(ss.cast(parts[0], String), null);
+				return;
+			}
+			if (!!(ss.referenceEquals(parts.length, 3) && parts[1] === 'edit')) {
+				arg.handled = true;
+				this.editItemOfType(ss.cast(parts[0], String), parts[2]);
+			}
+		}));
 	};
 	$Serenity_EntityGrid.__typeName = 'Serenity.EntityGrid';
 	global.Serenity.EntityGrid = $Serenity_EntityGrid;
@@ -2241,6 +2272,7 @@
 		$this.minSize = 0;
 		$this.maxSize = 0;
 		$this.originalNameProperty = null;
+		$this.displayFileName = false;
 		$this.urlPrefix = null;
 		$this.allowNonImage = false;
 		return $this;
@@ -3950,7 +3982,7 @@
 		dialog.element.triggerHandler('ondatachange');
 		return dialog;
 	};
-	$Serenity_SubDialogHelper.triggerDataChange$1 = function(element) {
+	$Serenity_SubDialogHelper.triggerDataChanged = function(element) {
 		element.triggerHandler('ondatachange');
 		return element;
 	};
@@ -4147,18 +4179,8 @@
 		filename = ss.replaceAllString(ss.coalesce(filename, ''), '\\', '/');
 		return Q.resolveUrl('~/upload/') + filename;
 	};
-    $Serenity_UploadHelper.colorBox = function (link, options) {
-        console.log($(link).attr('href'));
-        link.colorbox({
-            current: Q.text('Controls.ImageUpload.ColorboxCurrent'),
-            previous: Q.text('Controls.ImageUpload.ColorboxPrior'),
-            next: Q.text('Controls.ImageUpload.ColorboxNext'),
-            close: Q.text('Controls.ImageUpload.ColorboxClose'),
-            title: function() {
-                var url = $(this).attr('href');
-                return '<a href="' + url + '" target="_blank">Open In New Window</a>';
-            } 
-        });
+	$Serenity_UploadHelper.colorBox = function(link, options) {
+		link.colorbox({ current: Q.text('Controls.ImageUpload.ColorboxCurrent'), previous: Q.text('Controls.ImageUpload.ColorboxPrior'), next: Q.text('Controls.ImageUpload.ColorboxNext'), close: Q.text('Controls.ImageUpload.ColorboxClose') });
 	};
 	$Serenity_UploadHelper.populateFileSymbols = function(container, items, displayOriginalName, urlPrefix) {
 		items = items || [];
@@ -4481,8 +4503,8 @@
 		},
 		getCreateSearchChoice: function(getName) {
 			return ss.mkdel(this, function(s) {
-				s = ss.coalesce(Select2.util.stripDiacritics(s), '').toLowerCase();
 				this.lastCreateTerm = s;
+				s = ss.coalesce(Select2.util.stripDiacritics(s), '').toLowerCase();
 				if (Q.isTrimmedEmpty(s)) {
 					return null;
 				}
@@ -8185,11 +8207,27 @@
 		getItemType: function() {
 			return this.getEntityType();
 		},
+		routeDialog: function(itemType, dialog) {
+			Q.Router.dialog(this.element, dialog.element, ss.mkdel(this, function() {
+				var hash = '';
+				if (!ss.referenceEquals(itemType, this.getItemType())) {
+					hash = itemType + '/';
+				}
+				if (!!(ss.isValue(dialog) && ss.isValue(dialog.entityId))) {
+					hash += 'edit/' + dialog.entityId.toString();
+				}
+				else {
+					hash += 'new';
+				}
+				return hash;
+			}));
+		},
 		initDialog: function(dialog) {
 			var self = this;
 			$Serenity_SubDialogHelper.bindToDataChange(dialog, this, function(e, dci) {
 				self.subDialogDataChange();
 			}, true);
+			this.routeDialog(this.getItemType(), dialog);
 		},
 		initEntityDialog: function(itemType, dialog) {
 			if (ss.referenceEquals(itemType, this.getItemType())) {
@@ -8200,6 +8238,7 @@
 			$Serenity_SubDialogHelper.bindToDataChange(dialog, this, function(e, dci) {
 				self.subDialogDataChange();
 			}, true);
+			this.routeDialog(this.getItemType(), dialog);
 		},
 		createEntityDialog: function(itemType, callback) {
 			var dialogClass = this.getDialogTypeFor(itemType);
@@ -9087,7 +9126,7 @@
 			return $t1;
 		},
 		populate: function() {
-			var displayOriginalName = !Q.isTrimmedEmpty(this.options.originalNameProperty);
+			var displayOriginalName = this.options.displayFileName || !Q.isTrimmedEmpty(this.options.originalNameProperty);
 			if (ss.isNullOrUndefined(this.entity)) {
 				$Serenity_UploadHelper.populateFileSymbols(this.fileSymbols, null, displayOriginalName, this.options.urlPrefix);
 			}
@@ -9146,7 +9185,21 @@
 		setEditValue: function(source, property) {
 			var value = {};
 			value.Filename = ss.cast(source[property.name], String);
-			value.OriginalName = ss.cast(source[this.options.originalNameProperty], String);
+			if (ss.isNullOrEmptyString(this.options.originalNameProperty)) {
+				if (this.options.displayFileName) {
+					var s = ss.coalesce(value.Filename, '');
+					var idx = ss.lastIndexOfAnyString(s, [47, 92]);
+					if (idx >= 0) {
+						value.OriginalName = s.substr(idx + 1);
+					}
+					else {
+						value.OriginalName = s;
+					}
+				}
+			}
+			else {
+				value.OriginalName = ss.cast(source[this.options.originalNameProperty], String);
+			}
 			this.set_value(value);
 		}
 	}, Serenity.Widget, [$Serenity_IGetEditValue, $Serenity_ISetEditValue, $Serenity_IReadOnly]);
@@ -10515,7 +10568,7 @@
 	ss.setMetadata($Serenity_CheckListEditor, { attr: [new Serenity.EditorAttribute(), new $System_ComponentModel_DisplayNameAttribute("Checkbox'lı Liste"), new Serenity.OptionsTypeAttribute($Serenity_CheckListEditorOptions), new Serenity.ElementAttribute('<ul/>')] });
 	ss.setMetadata($Serenity_CheckListEditorOptions, { members: [{ attr: [new $Serenity_HiddenAttribute()], name: 'Items', type: 16, returnType: Array, getter: { name: 'get_Items', type: 8, params: [], returnType: Array, fget: 'items' }, setter: { name: 'set_Items', type: 8, params: [Array], returnType: Object, fset: 'items' }, fname: 'items' }, { attr: [new $System_ComponentModel_DisplayNameAttribute('Tümünü Seç Metni')], name: 'SelectAllOptionText', type: 16, returnType: String, getter: { name: 'get_SelectAllOptionText', type: 8, params: [], returnType: String, fget: 'selectAllOptionText' }, setter: { name: 'set_SelectAllOptionText', type: 8, params: [String], returnType: Object, fset: 'selectAllOptionText' }, fname: 'selectAllOptionText' }] });
 	ss.setMetadata($Serenity_CheckTreeEditor, { attr: [new Serenity.ElementAttribute('<div/>'), new Serenity.IdPropertyAttribute('id')] });
-	ss.setMetadata($Serenity_DateEditor, { attr: [new Serenity.EditorAttribute(), new $System_ComponentModel_DisplayNameAttribute('Tarih'), new Serenity.ElementAttribute('<input type="text"/>')], members: [{ attr: [new Serenity.OptionAttribute()], name: 'MaxValue', type: 16, returnType: String, getter: { name: 'get_MaxValue', type: 8, sname: 'get_maxValue', returnType: String, params: [] }, setter: { name: 'set_MaxValue', type: 8, sname: 'set_maxValue', returnType: Object, params: [String] } }, { attr: [new Serenity.OptionAttribute()], name: 'MinValue', type: 16, returnType: String, getter: { name: 'get_MinValue', type: 8, sname: 'get_minValue', returnType: String, params: [] }, setter: { name: 'set_MinValue', type: 8, sname: 'set_minValue', returnType: Object, params: [String] } }, { attr: [new Serenity.OptionAttribute()], name: 'SqlMinMax', type: 16, returnType: Boolean, getter: { name: 'get_SqlMinMax', type: 8, sname: 'get_sqlMinMax', returnType: Boolean, params: [] }, setter: { name: 'set_SqlMinMax', type: 8, sname: 'set_sqlMinMax', returnType: Object, params: [Boolean] } }] });
+	ss.setMetadata($Serenity_DateEditor, { attr: [new Serenity.EditorAttribute(), new $System_ComponentModel_DisplayNameAttribute('Tarih'), new Serenity.ElementAttribute('<input type="text"/>')], members: [{ attr: [new Serenity.OptionAttribute()], name: 'MaxValue', type: 16, returnType: String, getter: { name: 'get_MaxValue', type: 8, sname: 'get_maxValue', returnType: String, params: [] }, setter: { name: 'set_MaxValue', type: 8, sname: 'set_maxValue', returnType: Object, params: [String] } }, { attr: [new Serenity.OptionAttribute()], name: 'MinValue', type: 16, returnType: String, getter: { name: 'get_MinValue', type: 8, sname: 'get_minValue', returnType: String, params: [] }, setter: { name: 'set_MinValue', type: 8, sname: 'set_minValue', returnType: Object, params: [String] } }, { attr: [new Serenity.OptionAttribute()], name: 'SqlMinMax', type: 16, returnType: Boolean, getter: { name: 'get_SqlMinMax', type: 8, sname: 'get_sqlMinMax', returnType: Boolean, params: [] }, setter: { name: 'set_SqlMinMax', type: 8, sname: 'set_sqlMinMax', returnType: Object, params: [Boolean] } }, { attr: [new Serenity.OptionAttribute()], name: 'YearRange', type: 16, returnType: String, getter: { name: 'get_YearRange', type: 8, params: [], returnType: String, fget: 'yearRange' }, setter: { name: 'set_YearRange', type: 8, params: [String], returnType: Object, fset: 'yearRange' }, fname: 'yearRange' }] });
 	ss.setMetadata($Serenity_DateFormatter, { members: [{ attr: [new Serenity.OptionAttribute()], name: 'DisplayFormat', type: 16, returnType: String, getter: { name: 'get_DisplayFormat', type: 8, sname: 'get_displayFormat', returnType: String, params: [] }, setter: { name: 'set_DisplayFormat', type: 8, sname: 'set_displayFormat', returnType: Object, params: [String] } }] });
 	ss.setMetadata($Serenity_DateTimeEditor, { attr: [new Serenity.EditorAttribute(), new $System_ComponentModel_DisplayNameAttribute('Date/Time'), new Serenity.ElementAttribute('<input type="text"/>')], members: [{ attr: [new Serenity.OptionAttribute()], name: 'MaxValue', type: 16, returnType: String, getter: { name: 'get_MaxValue', type: 8, sname: 'get_maxValue', returnType: String, params: [] }, setter: { name: 'set_MaxValue', type: 8, sname: 'set_maxValue', returnType: Object, params: [String] } }, { attr: [new Serenity.OptionAttribute()], name: 'MinValue', type: 16, returnType: String, getter: { name: 'get_MinValue', type: 8, sname: 'get_minValue', returnType: String, params: [] }, setter: { name: 'set_MinValue', type: 8, sname: 'set_minValue', returnType: Object, params: [String] } }, { attr: [new Serenity.OptionAttribute()], name: 'SqlMinMax', type: 16, returnType: Boolean, getter: { name: 'get_SqlMinMax', type: 8, sname: 'get_sqlMinMax', returnType: Boolean, params: [] }, setter: { name: 'set_SqlMinMax', type: 8, sname: 'set_sqlMinMax', returnType: Object, params: [Boolean] } }] });
 	ss.setMetadata($Serenity_DateYearEditor, { attr: [new Serenity.EditorAttribute(), new $System_ComponentModel_DisplayNameAttribute('Yıl'), new Serenity.OptionsTypeAttribute($Serenity_DateYearEditorOptions), new Serenity.ElementAttribute('<input type="hidden"/>')] });
@@ -10536,7 +10589,7 @@
 	ss.setMetadata($Serenity_HtmlNoteContentEditor, { attr: [new Serenity.EditorAttribute(), new $System_ComponentModel_DisplayNameAttribute('Html Content (Font Style and Color Only)'), new Serenity.OptionsTypeAttribute($Serenity_HtmlContentEditorOptions), new Serenity.ElementAttribute('<textarea />')] });
 	ss.setMetadata($Serenity_HtmlReportContentEditor, { attr: [new Serenity.EditorAttribute(), new $System_ComponentModel_DisplayNameAttribute('Html Content (Report Compatible Limited Set)'), new Serenity.OptionsTypeAttribute($Serenity_HtmlContentEditorOptions), new Serenity.ElementAttribute('<textarea />')] });
 	ss.setMetadata($Serenity_ImageUploadEditor, { attr: [new Serenity.EditorAttribute(), new $System_ComponentModel_DisplayNameAttribute('Image Upload'), new Serenity.OptionsTypeAttribute($Serenity_ImageUploadEditorOptions), new Serenity.ElementAttribute('<div/>')] });
-	ss.setMetadata($Serenity_ImageUploadEditorOptions, { members: [{ attr: [new $System_ComponentModel_DisplayNameAttribute('Allow Non Image Files')], name: 'AllowNonImage', type: 16, returnType: Boolean, getter: { name: 'get_AllowNonImage', type: 8, params: [], returnType: Boolean, fget: 'allowNonImage' }, setter: { name: 'set_AllowNonImage', type: 8, params: [Boolean], returnType: Object, fset: 'allowNonImage' }, fname: 'allowNonImage' }, { attr: [new $System_ComponentModel_DisplayNameAttribute('Max Height')], name: 'MaxHeight', type: 16, returnType: ss.Int32, getter: { name: 'get_MaxHeight', type: 8, params: [], returnType: ss.Int32, fget: 'maxHeight' }, setter: { name: 'set_MaxHeight', type: 8, params: [ss.Int32], returnType: Object, fset: 'maxHeight' }, fname: 'maxHeight' }, { attr: [new $System_ComponentModel_DisplayNameAttribute('Max Size')], name: 'MaxSize', type: 16, returnType: ss.Int32, getter: { name: 'get_MaxSize', type: 8, params: [], returnType: ss.Int32, fget: 'maxSize' }, setter: { name: 'set_MaxSize', type: 8, params: [ss.Int32], returnType: Object, fset: 'maxSize' }, fname: 'maxSize' }, { attr: [new $System_ComponentModel_DisplayNameAttribute('Min Width')], name: 'MaxWidth', type: 16, returnType: ss.Int32, getter: { name: 'get_MaxWidth', type: 8, params: [], returnType: ss.Int32, fget: 'maxWidth' }, setter: { name: 'set_MaxWidth', type: 8, params: [ss.Int32], returnType: Object, fset: 'maxWidth' }, fname: 'maxWidth' }, { attr: [new $System_ComponentModel_DisplayNameAttribute('Max Height')], name: 'MinHeight', type: 16, returnType: ss.Int32, getter: { name: 'get_MinHeight', type: 8, params: [], returnType: ss.Int32, fget: 'minHeight' }, setter: { name: 'set_MinHeight', type: 8, params: [ss.Int32], returnType: Object, fset: 'minHeight' }, fname: 'minHeight' }, { attr: [new $System_ComponentModel_DisplayNameAttribute('Min Size')], name: 'MinSize', type: 16, returnType: ss.Int32, getter: { name: 'get_MinSize', type: 8, params: [], returnType: ss.Int32, fget: 'minSize' }, setter: { name: 'set_MinSize', type: 8, params: [ss.Int32], returnType: Object, fset: 'minSize' }, fname: 'minSize' }, { attr: [new $System_ComponentModel_DisplayNameAttribute('Min Width')], name: 'MinWidth', type: 16, returnType: ss.Int32, getter: { name: 'get_MinWidth', type: 8, params: [], returnType: ss.Int32, fget: 'minWidth' }, setter: { name: 'set_MinWidth', type: 8, params: [ss.Int32], returnType: Object, fset: 'minWidth' }, fname: 'minWidth' }, { attr: [new $System_ComponentModel_DisplayNameAttribute('Original Name Property')], name: 'OriginalNameProperty', type: 16, returnType: String, getter: { name: 'get_OriginalNameProperty', type: 8, params: [], returnType: String, fget: 'originalNameProperty' }, setter: { name: 'set_OriginalNameProperty', type: 8, params: [String], returnType: Object, fset: 'originalNameProperty' }, fname: 'originalNameProperty' }, { attr: [new $System_ComponentModel_DisplayNameAttribute('UrlPrefix')], name: 'UrlPrefix', type: 16, returnType: String, getter: { name: 'get_UrlPrefix', type: 8, params: [], returnType: String, fget: 'urlPrefix' }, setter: { name: 'set_UrlPrefix', type: 8, params: [String], returnType: Object, fset: 'urlPrefix' }, fname: 'urlPrefix' }] });
+	ss.setMetadata($Serenity_ImageUploadEditorOptions, { members: [{ attr: [new $System_ComponentModel_DisplayNameAttribute('Allow Non Image Files')], name: 'AllowNonImage', type: 16, returnType: Boolean, getter: { name: 'get_AllowNonImage', type: 8, params: [], returnType: Boolean, fget: 'allowNonImage' }, setter: { name: 'set_AllowNonImage', type: 8, params: [Boolean], returnType: Object, fset: 'allowNonImage' }, fname: 'allowNonImage' }, { attr: [new $System_ComponentModel_DisplayNameAttribute('Display File Name')], name: 'DisplayFileName', type: 16, returnType: Boolean, getter: { name: 'get_DisplayFileName', type: 8, params: [], returnType: Boolean, fget: 'displayFileName' }, setter: { name: 'set_DisplayFileName', type: 8, params: [Boolean], returnType: Object, fset: 'displayFileName' }, fname: 'displayFileName' }, { attr: [new $System_ComponentModel_DisplayNameAttribute('Max Height')], name: 'MaxHeight', type: 16, returnType: ss.Int32, getter: { name: 'get_MaxHeight', type: 8, params: [], returnType: ss.Int32, fget: 'maxHeight' }, setter: { name: 'set_MaxHeight', type: 8, params: [ss.Int32], returnType: Object, fset: 'maxHeight' }, fname: 'maxHeight' }, { attr: [new $System_ComponentModel_DisplayNameAttribute('Max Size')], name: 'MaxSize', type: 16, returnType: ss.Int32, getter: { name: 'get_MaxSize', type: 8, params: [], returnType: ss.Int32, fget: 'maxSize' }, setter: { name: 'set_MaxSize', type: 8, params: [ss.Int32], returnType: Object, fset: 'maxSize' }, fname: 'maxSize' }, { attr: [new $System_ComponentModel_DisplayNameAttribute('Min Width')], name: 'MaxWidth', type: 16, returnType: ss.Int32, getter: { name: 'get_MaxWidth', type: 8, params: [], returnType: ss.Int32, fget: 'maxWidth' }, setter: { name: 'set_MaxWidth', type: 8, params: [ss.Int32], returnType: Object, fset: 'maxWidth' }, fname: 'maxWidth' }, { attr: [new $System_ComponentModel_DisplayNameAttribute('Max Height')], name: 'MinHeight', type: 16, returnType: ss.Int32, getter: { name: 'get_MinHeight', type: 8, params: [], returnType: ss.Int32, fget: 'minHeight' }, setter: { name: 'set_MinHeight', type: 8, params: [ss.Int32], returnType: Object, fset: 'minHeight' }, fname: 'minHeight' }, { attr: [new $System_ComponentModel_DisplayNameAttribute('Min Size')], name: 'MinSize', type: 16, returnType: ss.Int32, getter: { name: 'get_MinSize', type: 8, params: [], returnType: ss.Int32, fget: 'minSize' }, setter: { name: 'set_MinSize', type: 8, params: [ss.Int32], returnType: Object, fset: 'minSize' }, fname: 'minSize' }, { attr: [new $System_ComponentModel_DisplayNameAttribute('Min Width')], name: 'MinWidth', type: 16, returnType: ss.Int32, getter: { name: 'get_MinWidth', type: 8, params: [], returnType: ss.Int32, fget: 'minWidth' }, setter: { name: 'set_MinWidth', type: 8, params: [ss.Int32], returnType: Object, fset: 'minWidth' }, fname: 'minWidth' }, { attr: [new $System_ComponentModel_DisplayNameAttribute('Original Name Property')], name: 'OriginalNameProperty', type: 16, returnType: String, getter: { name: 'get_OriginalNameProperty', type: 8, params: [], returnType: String, fget: 'originalNameProperty' }, setter: { name: 'set_OriginalNameProperty', type: 8, params: [String], returnType: Object, fset: 'originalNameProperty' }, fname: 'originalNameProperty' }, { attr: [new $System_ComponentModel_DisplayNameAttribute('UrlPrefix')], name: 'UrlPrefix', type: 16, returnType: String, getter: { name: 'get_UrlPrefix', type: 8, params: [], returnType: String, fget: 'urlPrefix' }, setter: { name: 'set_UrlPrefix', type: 8, params: [String], returnType: Object, fset: 'urlPrefix' }, fname: 'urlPrefix' }] });
 	ss.setMetadata($Serenity_IntegerEditor, { attr: [new Serenity.EditorAttribute(), new $System_ComponentModel_DisplayNameAttribute('Tamsayı'), new Serenity.OptionsTypeAttribute($Serenity_IntegerEditorOptions), new Serenity.ElementAttribute('<input type="text"/>')] });
 	ss.setMetadata($Serenity_LookupEditor, { attr: [new Serenity.EditorAttribute(), new Serenity.OptionsTypeAttribute(Object)] });
 	ss.setMetadata($Serenity_LookupEditorBase, { attr: [new Serenity.ElementAttribute('<input type="hidden"/>')], members: [{ attr: [new Serenity.OptionAttribute()], name: 'CascadeField', type: 16, returnType: String, getter: { name: 'get_CascadeField', type: 8, sname: 'get_cascadeField', returnType: String, params: [] }, setter: { name: 'set_CascadeField', type: 8, sname: 'set_cascadeField', returnType: Object, params: [String] } }, { attr: [new Serenity.OptionAttribute()], name: 'CascadeFrom', type: 16, returnType: String, getter: { name: 'get_CascadeFrom', type: 8, sname: 'get_cascadeFrom', returnType: String, params: [] }, setter: { name: 'set_CascadeFrom', type: 8, sname: 'set_cascadeFrom', returnType: Object, params: [String] } }, { attr: [new Serenity.OptionAttribute()], name: 'CascadeValue', type: 16, returnType: Object, getter: { name: 'get_CascadeValue', type: 8, sname: 'get_cascadeValue', returnType: Object, params: [] }, setter: { name: 'set_CascadeValue', type: 8, sname: 'set_cascadeValue', returnType: Object, params: [Object] } }, { attr: [new Serenity.OptionAttribute()], name: 'FilterField', type: 16, returnType: String, getter: { name: 'get_FilterField', type: 8, sname: 'get_filterField', returnType: String, params: [] }, setter: { name: 'set_FilterField', type: 8, sname: 'set_filterField', returnType: Object, params: [String] } }, { attr: [new Serenity.OptionAttribute()], name: 'FilterValue', type: 16, returnType: Object, getter: { name: 'get_FilterValue', type: 8, sname: 'get_filterValue', returnType: Object, params: [] }, setter: { name: 'set_FilterValue', type: 8, sname: 'set_filterValue', returnType: Object, params: [Object] } }] });

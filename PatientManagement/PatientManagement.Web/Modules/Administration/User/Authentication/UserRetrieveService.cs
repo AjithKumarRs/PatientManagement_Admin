@@ -15,12 +15,16 @@
         {
             var user = connection.TrySingle<Entities.UserRow>(criteria);
             if (user != null)
+            {
+                var tenantName = connection.ById<Entities.TenantRow>(user.TenantId).TenantName;
+
                 return new UserDefinition
                 {
                     UserId = user.UserId.Value,
                     Username = user.Username,
                     Email = user.Email,
                     UserImage = user.UserImage,
+                    UserPhone = user.PhoneNumber,
                     DisplayName = user.DisplayName,
                     IsActive = user.IsActive.Value,
                     Source = user.Source,
@@ -28,9 +32,11 @@
                     PasswordSalt = user.PasswordSalt,
                     UpdateDate = user.UpdateDate,
                     LastDirectoryUpdate = user.LastDirectoryUpdate,
-                    TenantId = user.TenantId.Value
+                    TenantId = user.TenantId.Value,
+                    TenantName = tenantName,
+                    InsertDate = user.InsertDate
                 };
-
+            }
             return null;
         }
 

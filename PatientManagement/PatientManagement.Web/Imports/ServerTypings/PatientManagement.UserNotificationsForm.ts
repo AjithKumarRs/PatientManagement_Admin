@@ -1,8 +1,7 @@
-﻿
-
-namespace PatientManagement.PatientManagement {
+﻿namespace PatientManagement.PatientManagement {
     export class UserNotificationsForm extends Serenity.PrefixedContext {
         static formKey = 'PatientManagement.UserNotifications';
+
     }
 
     export interface UserNotificationsForm {

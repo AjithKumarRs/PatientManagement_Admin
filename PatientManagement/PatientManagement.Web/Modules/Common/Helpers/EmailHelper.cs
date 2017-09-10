@@ -1,5 +1,8 @@
-﻿using System.Web.Hosting;
+﻿using System;
+using System.Web.Hosting;
 using System.IO;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 #if COREFX
 using MailKit.Net.Smtp;
 using MimeKit;
@@ -15,16 +18,27 @@ namespace PatientManagement.Common
         public static void Send(string subject, string body, string address, string displayName = "")
         {
 #if COREFX
-            var message = new MimeMessage();
-            message.To.Add(new MailboxAddress(displayName, address));
-            message.Subject = subject;
-            var bodyBuilder = new BodyBuilder();
-            bodyBuilder.HtmlBody = body;
-            message.Body = bodyBuilder.ToMessageBody();
-            var client = new SmtpClient();
-            client.Connect("dummy", -1, false);
-            client.Send(message);
-            client.Disconnect(true);
+            var apiKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
+
+            var client = new SendGridClient(apiKey);
+            var from = new EmailAddress("no-reply@myclario.com", "Registration");
+            var to = new EmailAddress(address, displayName);
+            var plainTextContent = body;
+            var htmlContent = body;
+            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+            var response =  client.SendEmailAsync(msg).Result;
+
+
+            //var message = new MimeMessage();
+            //message.To.Add(new MailboxAddress(displayName, address));
+            //message.Subject = subject;
+            //var bodyBuilder = new BodyBuilder();
+            //bodyBuilder.HtmlBody = body;
+            //message.Body = bodyBuilder.ToMessageBody();
+            //var client = new SmtpClient();
+            //client.Connect("dummy", -1, false);
+            //client.Send(message);
+            //client.Disconnect(true);
 #else
             var message = new MailMessage();
             message.To.Add(new MailAddress(address, ""));
@@ -46,5 +60,22 @@ namespace PatientManagement.Common
             client.Send(message);
 #endif
         }
+
+        public static void SendToPatient(string fromEmail, string FromName, string subject, string body, string toEmail,
+            string toName = "")
+        {
+            var apiKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
+
+            var client = new SendGridClient(apiKey);
+            var from = new EmailAddress(fromEmail, FromName);
+            var to = new EmailAddress(toEmail, toName);
+            var plainTextContent = body;
+            var htmlContent = body;
+            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+            var response = client.SendEmailAsync(msg).Result;
+        }
+
     }
+
+
 }

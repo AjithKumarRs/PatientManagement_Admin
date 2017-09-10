@@ -11,6 +11,7 @@ namespace PatientManagement.Administration.Repositories
     using System.Configuration;
     using System.Data;
     using MyRow = Entities.UserRow;
+    using Serenity.Abstractions;
 
     public partial class UserRepository
     {
@@ -19,7 +20,8 @@ namespace PatientManagement.Administration.Repositories
 
         static UserRepository()
         {
-            isPublicDemo = ConfigurationManager.AppSettings["IsPublicDemo"] == "1";
+            isPublicDemo = Dependency.Resolve<IConfigurationManager>()
+                               .AppSetting("IsPublicDemo", typeof(string)) as string == "1";
         }
 
         public static void CheckPublicDemo(int? userID)
@@ -108,7 +110,7 @@ namespace PatientManagement.Administration.Repositories
             {
                 base.GetEditableFields(editable);
 
-                if (!Authorization.HasPermission(Administration.PermissionKeys.Security))
+                if (!Authorization.HasPermission("Administration:User:Modify"))
                 {
                     editable.Remove(fld.Source);
                     editable.Remove(fld.IsActive);

@@ -92,7 +92,6 @@ namespace PatientManagement.PatientManagement {
         }
 
         protected onDeleteSuccess(response: Serenity.DeleteResponse): void {
-            console.log(response);
 
             $("#calendar").fullCalendar('refetchEvents');
         }

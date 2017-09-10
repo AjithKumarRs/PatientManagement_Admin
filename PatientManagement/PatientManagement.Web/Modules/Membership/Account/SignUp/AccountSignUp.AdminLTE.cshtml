@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="~/Content/iCheck/square/blue.css" />
     <script src="~/Scripts/jquery.icheck.min.js"></script>
 }
-<script id="Template_Membership_SignUpPanel" type="text/template">
+<script id="Template_Membership_SignUpPanel" type="text/template" > 
     <div class="s-Form">
         <form id="~_Form" action="">
             <div class="fieldset">
@@ -19,7 +19,7 @@
                 <div class="col-xs-7">
                     <div class="checkbox icheck">
                         <label>
-                            <input type="checkbox"> @Texts.Forms.Membership.SignUp.AcceptTerms
+                            <input type="checkbox" > @Texts.Forms.Membership.SignUp.AcceptTerms
                         </label>
                     </div>
                 </div>
@@ -33,7 +33,8 @@
 
 <div class="register-box">
     <div class="register-logo">
-        @Texts.Navigation.SiteTitle
+        @*@Texts.Navigation.SiteTitle*@
+        <img src="~/Content/images/Clario/clario-logo-medium-white.png"  class="image img-responsive"/>
     </div>
     <div class="register-box-body">
         <h3 class="page-title">@Texts.Forms.Membership.SignUp.FormTitle</h3>
@@ -47,12 +48,15 @@
 <script type="text/javascript">
 $(function() {
     new PatientManagement.Membership.SignUpPanel($('#SignUpPanel')).init();
-    $('.field.DisplayName,.field.Email,.field.ConfirmEmail,.field.Password,.field.ConfirmPassword').addClass("has-icon");
+    $('.field.DisplayName,.field.TenantName,.field.Email,.field.ConfirmEmail,.field.Password,.field.ConfirmPassword').addClass("has-icon");
     $('.field.DisplayName input').after("<span class='glyphicon glyphicon-user form-control-feedback'></span>");
+    $('.field.TenantName input').after("<span class='fa fa-h-square form-control-feedback'></span>");
+
     $('.emaildomain').after("<span class='glyphicon glyphicon-envelope form-control-feedback'></span>");
     $('.field.Password input').after("<span class='glyphicon glyphicon-lock form-control-feedback'></span>");
     $('.field.ConfirmPassword input').after("<span class='glyphicon glyphicon-log-in form-control-feedback'></span>");
     $('input').iCheck({
+        tap: true,
         checkboxClass: 'icheckbox_square-blue',
         radioClass: 'iradio_square-blue',
         increaseArea: '20%'

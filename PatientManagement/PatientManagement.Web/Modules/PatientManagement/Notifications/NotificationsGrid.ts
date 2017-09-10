@@ -20,5 +20,12 @@ namespace PatientManagement.PatientManagement {
 
             return buttons;
         }
+
+        protected getSlickOptions(): Slick.GridOptions {
+            let opt = super.getSlickOptions();
+            opt.rowHeight = 55;
+            return opt;
+        }
+
     }
 }

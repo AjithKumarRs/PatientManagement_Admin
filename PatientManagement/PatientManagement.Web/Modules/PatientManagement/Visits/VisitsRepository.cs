@@ -1,15 +1,7 @@
-﻿
-
-using System.Linq;
-using Microsoft.AspNetCore.SignalR.Infrastructure;
-using PatientManagement.Administration.Entities;
-using PatientManagement.PatientManagement.Entities;
-using PatientManagement.Web.Hubs;
-using PatientManagement.Web.Modules.Common.Helpers;
+﻿using PatientManagement.Web.Modules.Common.Helpers;
 
 namespace PatientManagement.PatientManagement.Repositories
 {
-    using Serenity;
     using Serenity.Data;
     using Serenity.Services;
     using System;

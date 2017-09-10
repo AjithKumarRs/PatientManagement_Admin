@@ -1374,12 +1374,12 @@ body.mobile-device.modal-dialog-open {
 .ui-dialog.mobile-layout .ui-dialog-titlebar-close,
 .ui-dialog.mobile-layout .ui-dialog-titlebar-close:hover {
   border: none;
-  left: .3em;
-  width: 28px;
-  height: 28px;
+  left: 0;
+  width: 44px;
+  height: 36px;
   background-color: transparent;
   background-image: url(images/back-arrow-black.png);
-  top: 45%;
+  top: 30%;
 }
 .ui-dialog.mobile-layout .ui-dialog-titlebar-buttonpane {
   display: none;
@@ -2144,10 +2144,10 @@ a.s-LinkDropDown input {
   font-weight: 600;
 }
 .s-PropertyGrid .category-links {
-    background: #531152;
-    border-radius: 0;
-    border: 0;
-    margin-bottom: 6px;
+  background: #7380C4;
+  border-radius: 0;
+  border: 0;
+  margin-bottom: 6px;
 }
 .quick-filters-bar {
   border: 1px solid #e7e7e7;

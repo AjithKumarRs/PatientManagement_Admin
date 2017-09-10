@@ -29,8 +29,16 @@ namespace PatientManagement.PatientManagement.Columns
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 
-        // TODO Add when you figure out how to add permissions here
-        //public Int32 InsertUserId { get; set; }
-        //public DateTime InsertDate { get; set; }
+        [Hidden]
+        public Int32 InsertUserId { get; set; }
+
+        [Width(80)]
+        public String TenantName { get; set; }
+
+        [Width(80)]
+        public String InsertUserName { get; set; }
+        [DisplayFormat("dd/MM/yyyy HH:mm")]
+        [Width(120)]
+        public DateTime InsertDate { get; set; }
     }
 }

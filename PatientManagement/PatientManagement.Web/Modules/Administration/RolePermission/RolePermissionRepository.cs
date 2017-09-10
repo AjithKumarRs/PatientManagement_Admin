@@ -108,9 +108,11 @@ namespace PatientManagement.Administration.Repositories
 
             var response = new RolePermissionListResponse();
             
+
             response.Entities = GetExisting(connection, request.RoleID.Value, request.Module, request.Submodule)
                 .Select(x => x.PermissionKey).ToList();
 
+           
             return response;
         }
     }

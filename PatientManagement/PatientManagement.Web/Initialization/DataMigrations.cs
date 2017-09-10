@@ -202,9 +202,9 @@
                 {
                     Database = databaseType,
                     Connection = cs.ConnectionString,
-                    TargetAssemblies = new[] { typeof(DataMigrations).GetAssembly() },
+                    TargetAssemblies = new[] { typeof(DataMigrations).Assembly },
                     Task = "migrate:up",
-                    WorkingDirectory = Path.GetDirectoryName(typeof(DataMigrations).GetAssembly().Location),
+                    WorkingDirectory = Path.GetDirectoryName(typeof(DataMigrations).Assembly.Location),
                     Namespace = "PatientManagement.Migrations." + databaseKey + "DB",
                     Timeout = 90
                 };

@@ -29,6 +29,33 @@ namespace PatientManagement
         {
             public static class Membership
             {
+                public static class Profile
+                {
+                    public static LocalText FormTitle = "User Profile";
+                    public static LocalText Success = "Your profile information is changed.";
+                    public static LocalText SuccessTenant = "Your tenant information is changed.";
+                    public static LocalText AddedPatients = "Added Patients";
+                    public static LocalText AddedVisits = "Added Visits";
+                    public static LocalText SentEmails = "Sent Emails";
+                    public static LocalText BoxAdditionalInfoTitle = "About me";
+                    public static LocalText BoxAdditionalInfoEmail = "Your Email";
+                    public static LocalText BoxAdditionalInfoPhoneNumber = "Your Phone Number";
+                    public static LocalText BoxAdditionalInfoRegistaredDate = "You start using the system on";
+                    public static LocalText BoxTenantInfoTitle = "About the Clinic";
+                    public static LocalText BoxTenantInfoTenantName = "Tenant Name";
+                    public static LocalText BoxTenantInfoTenantWebSite = "Tenant Web Site";
+                    public static LocalText BoxTenantInfoTenantWorkHours = "Work Hours";
+
+                    public static LocalText TabMyVisits = "Added Visits By Me";
+
+                    public static LocalText TabProfileEditingTitle = "Profile Settings";
+                    public static LocalText TabTenantEditingTitle = "Tenant Settings";
+                    public static LocalText ButtonSaveProfile = "Save Profile Settings";
+                    public static LocalText ButtonSaveTenant = "Save Tenant Settings";
+
+
+
+                }
                 public static class ChangePassword
                 {
                     public static LocalText FormTitle = "Change Password";
@@ -85,14 +112,17 @@ namespace PatientManagement
 
                     public static LocalText AcceptTerms = "I agree to the terms";
                     public static LocalText BackToLogin = "I already have a membership";
+
+                    public static LocalText FormatSubscriptionName = "{0} - First registration";
                 }
             }
         }
 
         public static class Navigation
         {
+            public static LocalText VisitsForToday = "Visits For Today";
             public static LocalText LogoutLink = "Logout";
-            public static LocalText SiteTitle = "PatientManagement";
+            public static LocalText SiteTitle = "My Clario";
         }
         public static class LeftNavigation
         {
@@ -100,6 +130,22 @@ namespace PatientManagement
         }
         public static class Site
         {
+            public static class Subscriptions
+            {
+                public static class Expired
+                {
+                    public static LocalText SubscriptionInfoBoxHeader = "Subscription expired!";
+                    public static LocalText SubscriptionInfoBoxBody = "Your subscription is expired! Please make a payment to gain access to the site.";
+                }
+
+                public static class WillExpire
+                {
+                    public static LocalText SubscriptionInfoBoxHeader = "Subscription will expire!";
+                    public static LocalText SubscriptionInfoBoxBody = "Your subscription will expired after: {0} days.";
+                }
+                
+            }
+
             public static class Notifications
             {
                 public static LocalText VisitChangedNotification = "{0} just change a visit for patient {1}";
@@ -113,8 +159,12 @@ namespace PatientManagement
 
             public static class Dashboard
             {
+                public static LocalText AlertOnPatientNoEmail = "The patient dosn't have an email address, add now?";
+
+
                 public static LocalText ViewPatinet = "View Patient";
                 public static LocalText ViewVisit = "View Visit";
+                public static LocalText SendEmail = "Send Email";
                 public static LocalText DeleteVisit = "Delete Visit";
                 public static LocalText QuitContextMenu = "Quit";
 
@@ -195,6 +245,8 @@ namespace PatientManagement
                 public static LocalText RecieveNotificationToggle = "Recieve notifications?";
                 public static LocalText NewVisitFloatedButton = "New Visit";
                 public static LocalText NewPatientFloatedButton = "New Patient";
+                public static LocalText NewEmailFloatedButton = "New Email";
+
                 public static LocalText AddFloatedButton = "Add";
 
                 public static LocalText FooterCopyright = "Copyright (c) 2017.";

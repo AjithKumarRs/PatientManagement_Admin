@@ -16,7 +16,13 @@ namespace PatientManagement.Administration.Columns
         public String DisplayName { get; set; }
         [Width(250)]
         public String Email { get; set; }
+        
+        public string UserPhone { get; set; }
+        [Width(150)]
+        public String WebSite { get; set; }
         [Width(100)]
         public String Source { get; set; }
+
+        public string TenantName { get; set; }
     }
 }
