@@ -2,10 +2,11 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
+using PatientManagement;
 using PatientManagement.Web.Modules.Common.SignalR;
 using Serenity;
 
-namespace PatientManagement.Web.Hubs
+namespace Hubs
 {
 
     public class NotificationHub : Hub
@@ -47,7 +48,7 @@ namespace PatientManagement.Web.Hubs
         {
             var user = (UserDefinition)Authorization.UserDefinition;
 
-            if (!_connections.GetConnections(Convert.ToInt32(user.Id)).Contains(Context.ConnectionId))
+            if (Authorization.IsLoggedIn && !_connections.GetConnections(Convert.ToInt32(user.Id)).Contains(Context.ConnectionId))
             {
                 _connections.Add(Convert.ToInt32(user.Id), Context.ConnectionId);
             }

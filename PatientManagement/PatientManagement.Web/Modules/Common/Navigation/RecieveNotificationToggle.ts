@@ -4,9 +4,7 @@
 
         constructor(input: JQuery, opt: BootstrapSwitchOptions) {
             super(input, opt);
-
-            console.log(this.options.state);
-
+            
             this.options.onSwitchChange = (event, state) => {
                 $.cookie('NotificationPreference', state, {
                     path: Q.Config.applicationPath,

@@ -1,5 +1,4 @@
-﻿
-namespace PatientManagement.PatientManagement {
+﻿namespace PatientManagement.PatientManagement {
     export interface UserNotificationsRow {
         UserNotificationId?: number;
         NotificationId?: number;
@@ -18,10 +17,10 @@ namespace PatientManagement.PatientManagement {
         export const localTextPrefix = 'PatientManagement.UserNotifications';
 
         export namespace Fields {
-            export declare const UserNotificationId;
-            export declare const NotificationId;
-            export declare const SeenAt;
-            export declare const UserId;
+            export declare const UserNotificationId: string;
+            export declare const NotificationId: string;
+            export declare const SeenAt: string;
+            export declare const UserId: string;
             export declare const NotificationEntityType: string;
             export declare const NotificationEntityId: string;
             export declare const NotificationText: string;
@@ -33,4 +32,3 @@ namespace PatientManagement.PatientManagement {
         ['UserNotificationId', 'NotificationId', 'SeenAt', 'UserId', 'NotificationEntityType', 'NotificationEntityId', 'NotificationText', 'NotificationInsertUserId', 'NotificationInsertDate', 'NotificationTenantId'].forEach(x => (<any>Fields)[x] = x);
     }
 }
-

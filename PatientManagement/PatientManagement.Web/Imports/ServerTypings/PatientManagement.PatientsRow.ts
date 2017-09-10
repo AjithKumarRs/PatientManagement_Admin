@@ -9,9 +9,13 @@
         Address?: string;
         Height?: number;
         Weight?: number;
+        Email?: string;
+        NotifyOnChange?: boolean;
         WantedWeight?: string;
         InsertUserId?: number;
         InsertDate?: string;
+        TenantName?: string;
+        InsertUserName?: string;
         NoteList?: NotesRow[];
         TenantId?: number;
     }
@@ -36,13 +40,17 @@
             export declare const Address: string;
             export declare const Height: string;
             export declare const Weight: string;
+            export declare const Email: string;
+            export declare const NotifyOnChange: string;
             export declare const WantedWeight: string;
             export declare const InsertUserId: string;
             export declare const InsertDate: string;
+            export declare const TenantName: string;
+            export declare const InsertUserName: string;
             export declare const NoteList: string;
             export declare const TenantId: string;
         }
 
-        ['PatientId', 'Name', 'PersonalNumber', 'PhoneNumber', 'Gender', 'FirstRegistrationDate', 'Address', 'Height', 'Weight', 'WantedWeight', 'InsertUserId', 'InsertDate', 'NoteList', 'TenantId'].forEach(x => (<any>Fields)[x] = x);
+        ['PatientId', 'Name', 'PersonalNumber', 'PhoneNumber', 'Gender', 'FirstRegistrationDate', 'Address', 'Height', 'Weight', 'Email', 'NotifyOnChange', 'WantedWeight', 'InsertUserId', 'InsertDate', 'TenantName', 'InsertUserName', 'NoteList', 'TenantId'].forEach(x => (<any>Fields)[x] = x);
     }
 }

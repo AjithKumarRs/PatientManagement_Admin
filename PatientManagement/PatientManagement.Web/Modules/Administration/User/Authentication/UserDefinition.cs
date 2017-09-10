@@ -9,6 +9,7 @@
         public string Id { get { return UserId.ToInvariant(); } }
         public string DisplayName { get; set; }
         public string Email { get; set; }
+        public string UserPhone { get; set; }
         public string UserImage { get; set; }
         public short IsActive { get; set; }
         public int UserId { get; set; }
@@ -19,5 +20,8 @@
         public DateTime? UpdateDate { get; set; }
         public DateTime? LastDirectoryUpdate { get; set; }
         public int TenantId { get; set; }
+        public int TenantCurrencyId { get; set; }
+        public string TenantName { get; set; }
+        public DateTime? InsertDate { get; set; }
     }
 }

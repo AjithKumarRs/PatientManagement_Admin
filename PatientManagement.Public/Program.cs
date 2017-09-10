@@ -11,15 +11,34 @@ namespace PatientManagement.Public
     {
         public static void Main(string[] args)
         {
-            var host = new WebHostBuilder()
-                .UseKestrel()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
-                .UseStartup<Startup>()
-                .UseApplicationInsights()
-                .Build();
 
-            host.Run();
+            var apiKey = Environment.GetEnvironmentVariable("COMINGSOON_ENABLED");
+
+            if (apiKey != null && apiKey == "false")
+            {
+                var host = new WebHostBuilder()
+                    .UseKestrel()
+                    .UseIISIntegration()
+                    .UseStartup<Startup>()
+                    .UseApplicationInsights()
+                    .UseContentRoot(Directory.GetCurrentDirectory())
+                    .Build();
+
+                host.Run();
+            }
+            else
+            {
+                var host = new WebHostBuilder()
+                    .UseKestrel()
+                    .UseIISIntegration()
+                    .UseStartup<Startup>()
+                    .UseContentRoot(Directory.GetCurrentDirectory() +"/wwwroot/comingsoon")
+                    .UseApplicationInsights()
+                    .Build();
+
+                host.Run();
+            }
+
         }
     }
 }

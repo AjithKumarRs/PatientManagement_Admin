@@ -24,12 +24,25 @@
     }
 }
 
-.s-UserPermissionDialog, .s-RolePermissionDialog, .s-UserRoleDialog {
+.s-UserPermissionDialog, .s-UserRoleDialog {
     > .size { .widthAndMin(650px); .heightAndMin(450px); }
     .s-DataGrid { height: 100%; }
     .ui-dialog-content { padding: 8px; }
 }
+.s-RolePermissionDialog {
+    > .size {
+        .widthAndMin(650px);
+        .heightAndMin(750px);
+    }
 
+    .s-DataGrid {
+        height: 100%;
+    }
+
+    .ui-dialog-content {
+        padding: 8px;
+    }
+}
 .s-PermissionCheckEditor {
     .check-box {
         background-image: url(../serenity/images/tick-empty.png);

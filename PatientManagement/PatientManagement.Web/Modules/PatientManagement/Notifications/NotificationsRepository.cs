@@ -64,7 +64,7 @@ namespace PatientManagement.PatientManagement.Repositories
 
                 var user = (UserDefinition)Authorization.UserDefinition;
 
-                if (!Authorization.HasPermission(PermissionKeys.Tenants))
+               // if (!Authorization.HasPermission(PermissionKeys.Tenants))
                     query.Where(fld.InsertUserId != user.UserId);
             }
 
@@ -118,9 +118,8 @@ namespace PatientManagement.PatientManagement.Repositories
 
                 var user = (UserDefinition)Authorization.UserDefinition;
                 var seenNotifications = Connection.List<UserNotificationsRow>().Where(f => f.UserId == user.UserId).Select(f => f.NotificationId);
-
-                if (!Authorization.HasPermission(PermissionKeys.Tenants))
-                    query.Where(fld.InsertUserId != user.UserId);
+                
+                query.Where(fld.InsertUserId != user.UserId);
 
                 if (seenNotifications.Any())
                     query.Where(!fld.NotificationId.In(seenNotifications));

@@ -1,0 +1,41 @@
+/* Skin
+---------------------------------------- */
+body.light{.body-wrap{background:$white;color:$black;.socials i{color:$black;}form input[type], form textarea, form select{border-bottom:1px solid rgba($black,0.25)}}}
+
+@mixin skins($skin-name,$hexcode){
+	#{$skin-name}{
+		h1,h2,h3,h4,h5,h6{span{color:$hexcode;}}
+		.card .box-front .inner i, .card .box-back .inner i,.icon-box i{color:$hexcode}
+		.progress-bar-primary,.btn-map-close{background:$hexcode;}
+		.card .box-back{background-color:$hexcode;}
+		.team-img::after{
+			background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(0,0,0,0)),color-stop(100%, $hexcode));
+			background-image: -moz-linear-gradient(rgba(0,0,0,0),$hexcode);
+			background-image: -webkit-linear-gradient(rgba(0,0,0,0),$hexcode);
+			background-image: linear-gradient(rgba(0,0,0,0),$hexcode);
+		}
+		.tooltip{
+			.tooltip-inner{background:$hexcode;}
+			&.top ,&.top-left,&.top-right{.tooltip-arrow {border-top-color: $hexcode}}
+			&.right{.tooltip-arrow {border-right-color:$hexcode}}
+			&.left{.tooltip-arrow {border-left-color:$hexcode}}
+			&.bottom-right,&.bottom-left,&.bottom {.tooltip-arrow {border-bottom-color:$hexcode}}
+		}
+		.btn.btn-primary {
+			color: $hexcode;
+			-webkit-box-shadow: inset 0px 0px 0px 1px $hexcode;
+			-moz-box-shadow: inset 0px 0px 0px 1px $hexcode;
+			-ms-box-shadow: inset 0px 0px 0px 1px $hexcode;
+			-o-box-shadow: inset 0px 0px 0px 1px $hexcode;
+			box-shadow: inset 0px 0px 0px 1px $hexcode;
+			&::before{background:$hexcode;}
+			&:hover{color:$white;span{color: $hexcode;}i{color: $hexcode;}}
+			&:active:hover,&:focus:hover,&:active,&:focus{background-color:transparent;}
+		}
+		.btn.btn-border.btn-primary{
+			color: $hexcode;
+			span{color: $hexcode;}
+			&:hover{color:$white;span{color: $white;}i{color: $white;}}
+		}
+	}
+}

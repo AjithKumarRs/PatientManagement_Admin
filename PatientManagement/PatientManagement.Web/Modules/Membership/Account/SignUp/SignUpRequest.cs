@@ -9,5 +9,9 @@ namespace PatientManagement.Membership
         public String DisplayName { get; set; }
         public String Email { get; set; }
         public String Password { get; set; }
+
+        public string TenantName { get; set; }
+
+        public Int32 OfferId { get; set; }
     }
 }
