@@ -1997,6 +1997,7 @@ var PatientManagement;
                 var _this = _super !== null && _super.apply(this, arguments) || this;
                 _this.form = new Administration.SentEmailsForm(_this.idPrefix);
                 _this.sendPredefinedEmail = function (visitId) {
+                    console.log(visitId);
                     PatientManagement.PatientManagement.VisitsService.Retrieve({
                         EntityId: visitId
                     }, function (resp) {
@@ -2015,11 +2016,11 @@ var PatientManagement;
                             }
                             else {
                                 var sentEmail = {};
-                                var sentEmailDialog = new SentEmailsDialog_1();
-                                sentEmail.ToEmail = patient.Email;
-                                sentEmail.ToName = patient.Name;
-                                // TODO: Default value for email lookup
-                                sentEmailDialog.loadNewAndOpenDialog();
+                                var dialog = new SentEmailsDialog_1();
+                                //TODO We open new dialog with PatientID. Correct?
+                                sentEmail.ToEmail = patient.PatientId.toString();
+                                dialog.form.ToEmail.readOnly = true;
+                                dialog.loadEntityAndOpenDialog(sentEmail);
                             }
                         });
                     });
@@ -2036,6 +2037,9 @@ var PatientManagement;
                 if (this.isEditMode()) {
                     Serenity.EditorUtils.setReadOnly(this.form.Subject, true);
                 }
+                var items = this.form.ToEmail.get_items();
+                items = items.filter(function (item) { return typeof item.source["Email"] !== 'undefined'; });
+                this.form.ToEmail.items = items;
             };
             return SentEmailsDialog;
         }(Serenity.EntityDialog));
