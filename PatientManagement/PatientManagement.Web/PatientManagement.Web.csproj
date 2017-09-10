@@ -88,7 +88,7 @@
     <ItemGroup>
       <Filtered Include="@(None)" Condition="'%(Extension)' == '.cshtml'" />
     </ItemGroup>
-    <Warning Condition="'@(Filtered)'!=''" Code="CSHTML" File="$(MSBuildProjectDirectory)\%(Filtered.Identity)" Text="View is not set to [BuildAction:Content]" />
+    <Warning Condition="'@(Filtered)'!=''" Code="CSHTML" File="%(Filtered.Identity)" Text="View is not set to [BuildAction:Content]" />
   </Target>
   <ItemGroup>
     <DotNetCliToolReference Include="Serenity.CodeGenerator" Version="3.0.4" />
@@ -102,10 +102,133 @@
     <None Include="Migrations\DefaultDB\DefaultDB_20170609_131800_CreatedBillingsAndInvoices.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Update="%(Extension)' == '.cshtml'">
+    <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="appsettings.json">
+    <None Update="Modules\Administration\Currencies\CurrenciesIndex.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None> 
+    <None Update="Modules\Administration\Language\LanguageIndex.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\Administration\Offers\OffersIndex.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\Administration\PaymentOptions\PaymentOptionsIndex.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\Administration\PaymentsDetails\PaymentsDetailsIndex.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\Administration\Payments\PaymentInvoicePage.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\Administration\Payments\PaymentsIndex.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\Administration\Role\RoleIndex.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\Administration\SentEmails\SentEmailsIndex.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\Administration\Sergen\SergenError.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\Administration\Sergen\SergenIndex.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\Administration\Subscriptions\SubscriptionsIndex.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\Administration\Tenant\TenantIndex.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\Administration\Translation\TranslationIndex.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\Administration\User\UserIndex.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\Common\Reporting\ReportPage.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\Membership\Account\AccountLogin.AdminLTE.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\Membership\Account\AccountLogin.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\Membership\Account\ChangePassword\AccountChangePassword.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\Membership\Account\ForgotPassword\AccountForgotPassword.AdminLTE.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\Membership\Account\ForgotPassword\AccountForgotPassword.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\Membership\Account\Profile\AccountProfile.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\Membership\Account\ResetPassword\AccountResetPassword.AdminLTE.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\Membership\Account\ResetPassword\AccountResetPassword.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\Membership\Account\ResetPassword\AccountResetPasswordEmail.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\Membership\Account\SignUp\AccountActivateEmail.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\Membership\Account\SignUp\AccountSignUp.AdminLTE.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\Membership\Account\SignUp\AccountSignUp.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\Membership\_ViewStart.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\PatientManagement\Activity\ActivityIndex.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\PatientManagement\Dashboard\DashboardIndex.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\PatientManagement\LifeStyles\LifeStylesIndex.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\PatientManagement\Notifications\NotificationsIndex.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\PatientManagement\PatientHealth\PatientHealthIndex.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\PatientManagement\PatientsFileUploads\PatientsFileUploadsIndex.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\PatientManagement\Patients\PatientsIndex.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\PatientManagement\UserNotifications\UserNotificationsIndex.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\PatientManagement\Visits\VisitsIndex.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\PatientManagement\VisitTypes\VisitTypesIndex.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\_ViewImports.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\_ViewStart.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Views\Errors\ValidationError.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Views\Shared\Error.cshtml">
@@ -124,6 +247,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Views\Shared\_LayoutSeoTags.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Views\_ViewImports.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Views\_ViewStart.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
