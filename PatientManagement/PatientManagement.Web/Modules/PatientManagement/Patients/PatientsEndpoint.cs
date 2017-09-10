@@ -1,4 +1,8 @@
 ﻿
+using System;
+using Serenity.Reporting;
+using Serenity.Web;
+
 namespace PatientManagement.PatientManagement.Endpoints
 {
     using Serenity;
@@ -39,6 +43,15 @@ namespace PatientManagement.PatientManagement.Endpoints
         public ListResponse<MyRow> List(IDbConnection connection, ListRequest request)
         {
             return new MyRepository().List(connection, request);
+        }
+
+        public FileContentResult ListExcel(IDbConnection connection, ListRequest request)
+        {
+            var data = List(connection, request).Entities;
+            var report = new DynamicDataReport(data, request.IncludeColumns, typeof(Columns.PatientsColumns));
+            var bytes = new ReportRepository().Render(report);
+            return ExcelContentResult.Create(bytes, "PatinetsList_" +
+                                                    DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".xlsx");
         }
     }
 }

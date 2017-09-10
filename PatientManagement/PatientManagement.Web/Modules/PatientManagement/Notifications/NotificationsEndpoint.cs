@@ -1,5 +1,8 @@
 ﻿
+using System;
 using PatientManagement.Administration;
+using Serenity.Reporting;
+using Serenity.Web;
 
 namespace PatientManagement.PatientManagement.Endpoints
 {
@@ -54,6 +57,15 @@ namespace PatientManagement.PatientManagement.Endpoints
 
                Count = some.TotalCount
            };
+        }
+
+        public FileContentResult ListExcel(IDbConnection connection, ListRequest request)
+        {
+            var data = List(connection, request).Entities;
+            var report = new DynamicDataReport(data, request.IncludeColumns, typeof(Columns.NotificationsColumns));
+            var bytes = new ReportRepository().Render(report);
+            return ExcelContentResult.Create(bytes, "PaymentList_" +
+                                                    DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".xlsx");
         }
     }
 
