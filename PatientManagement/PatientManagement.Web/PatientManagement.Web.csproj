@@ -86,12 +86,12 @@
     <Exec Command="dotnet sergen servertypings" ContinueOnError="true" />
 
   </Target>
-  <Target Name="EnsureContentOnViews" BeforeTargets="BeforeBuild">
+  <!--<Target Name="EnsureContentOnViews" BeforeTargets="BeforeBuild">
     <ItemGroup>
       <Filtered Include="@(None)" Condition="'%(Extension)' == '.cshtml'" />
     </ItemGroup>
     <Warning Condition="'@(Filtered)'!=''" Code="CSHTML" File="%(Filtered.Identity)" Text="View is not set to [BuildAction:Content]" />
-  </Target>
+  </Target>-->
   <ItemGroup>
     <DotNetCliToolReference Include="Serenity.CodeGenerator" Version="3.0.4" />
   </ItemGroup>
@@ -159,6 +159,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Modules\Administration\User\UserIndex.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\Common\EmailTemplates\UserToPatientEmail\EmailTemplates.UserToPatientEmail.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Modules\Common\Reporting\ReportPage.cshtml">
