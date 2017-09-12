@@ -161,6 +161,9 @@
     <None Update="Modules\Administration\User\UserIndex.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Modules\Common\EmailTemplates\ChangedVisitAutomaticEmail\EmailTemplates.ChangedVisitAutomaticEmail.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Modules\Common\EmailTemplates\UserToPatientEmail\EmailTemplates.UserToPatientEmail.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

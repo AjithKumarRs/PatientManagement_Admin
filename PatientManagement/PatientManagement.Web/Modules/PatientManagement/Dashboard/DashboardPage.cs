@@ -37,7 +37,6 @@ namespace PatientManagement.PatientManagement.Pages
         {
             var user = (UserDefinition)Authorization.UserDefinition; 
 
-            var connection = SqlConnections.NewFor<VisitsRow>();
             var startDate = DateTime.ParseExact(start, "yyyy-MM-dd", new CultureInfo("en-US"),
                 DateTimeStyles.None);
 
@@ -45,22 +44,26 @@ namespace PatientManagement.PatientManagement.Pages
                 DateTimeStyles.None);
 
             var model = new DashboardPageModel();
+            var connection = SqlConnections.NewFor<VisitsRow>();
             List<VisitsRow> entity = connection.List<VisitsRow>()
                 .Where(e => e.StartDate >= startDate && e.EndDate <= endDate && e.TenantId == user.TenantId)
                 .ToList();
 
             foreach (var visit in entity)
             {
+                var patient = connection.ById<PatientsRow>(visit.PatientId);
+                var visitType = connection.ById<VisitTypesRow>(visit.VisitTypeId);
                 model.EventsList.Add(new Event
                 {
                     id = visit.VisitId ?? 0,
                     patientId = visit.PatientId ?? 0,
-                    title = connection.ById<PatientsRow>(visit.PatientId).Name + "\n" + visit.Description,
+                    patientAutoEmailActive = patient.NotifyOnChange??false,
+                    title = patient.Name + "\n" + visit.Description,
                     start = (visit.StartDate ?? DateTime.Now).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
                     end = (visit.EndDate ?? DateTime.Now).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
                     allDay = false,
-                    backgroundColor = connection.ById<VisitTypesRow>(visit.VisitTypeId).BackgroundColor,
-                    borderColor = connection.ById<VisitTypesRow>(visit.VisitTypeId).BorderColor
+                    backgroundColor = visitType.BackgroundColor,
+                    borderColor = visitType.BorderColor
                 });
             }
             return Json(model.EventsList);

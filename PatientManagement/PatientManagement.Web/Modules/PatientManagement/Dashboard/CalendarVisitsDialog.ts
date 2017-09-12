@@ -83,12 +83,7 @@ namespace PatientManagement.PatientManagement {
 
         }
         protected onSaveSuccess(response: Serenity.SaveResponse): void {
-            VisitsService.Retrieve(<any>{
-                EntityId: response.EntityId
-            }, resp => {
-                $("#calendar").fullCalendar('refetchEvents');
-            });
-
+            $("#calendar").fullCalendar('refetchEvents');
         }
 
         protected onDeleteSuccess(response: Serenity.DeleteResponse): void {

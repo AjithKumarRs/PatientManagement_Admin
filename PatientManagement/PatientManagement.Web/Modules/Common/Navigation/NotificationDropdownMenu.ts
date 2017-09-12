@@ -20,7 +20,7 @@ namespace PatientManagement.PatientManagement {
 
                 });
 
-        };
+        }
 
         public updateNotifications = (): void => {
 

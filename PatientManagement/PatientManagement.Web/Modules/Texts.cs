@@ -160,7 +160,7 @@ namespace PatientManagement
             public static class Dashboard
             {
                 public static LocalText AlertOnPatientNoEmail = "The patient dosn't have an email address, add now?";
-
+                public static LocalText AlertMessagePatientWithNotificationActiveVisitDialog = "Automatic email will be sent to patient when the visit is created or changed. You can change this behavior in patient profile.";
 
                 public static LocalText ViewPatinet = "View Patient";
                 public static LocalText ViewVisit = "View Visit";
