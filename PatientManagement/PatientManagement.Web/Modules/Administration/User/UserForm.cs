@@ -13,7 +13,8 @@
         public String Email { get; set; }
 
 
-        public string UserPhone { get; set; }
+        public string PhoneNumber { get; set; }
+
         public String WebSite { get; set; }
 
         public String UserImage { get; set; }

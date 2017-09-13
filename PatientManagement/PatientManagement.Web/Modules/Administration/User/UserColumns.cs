@@ -17,7 +17,7 @@ namespace PatientManagement.Administration.Columns
         [Width(250)]
         public String Email { get; set; }
         
-        public string UserPhone { get; set; }
+        public string PhoneNumber { get; set; }
         [Width(150)]
         public String WebSite { get; set; }
         [Width(100)]
