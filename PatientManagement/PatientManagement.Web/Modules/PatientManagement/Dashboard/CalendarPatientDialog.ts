@@ -5,6 +5,9 @@ namespace PatientManagement.PatientManagement {
     @Serenity.Decorators.registerClass()
     export class CalendarPatientDialog extends PatientsDialog {
 
+        public onSaveSuccess(response: Serenity.SaveResponse): void {
+            $("#calendar").fullCalendar('refetchEvents');
+        }
 
         loadEntity(entity: PatientsRow) {
             super.loadEntity(entity);

@@ -12,7 +12,6 @@ namespace PatientManagement {
                     if (resp.Entities.length > 0) {
 
                         for (var type in resp.Entities) {
-                            console.log(resp.Entities[type]);
                             var item = resp.Entities[type]; 
 
                             var li = $('<li/>');

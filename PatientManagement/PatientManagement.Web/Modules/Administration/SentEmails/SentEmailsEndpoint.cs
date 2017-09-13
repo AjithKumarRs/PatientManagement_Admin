@@ -1,4 +1,7 @@
 ﻿
+using PatientManagement.Common.EmailTemplates;
+using Serenity.Web;
+
 namespace PatientManagement.Administration.Endpoints
 {
     using Serenity;
@@ -16,6 +19,15 @@ namespace PatientManagement.Administration.Endpoints
         [HttpPost, AuthorizeCreate(typeof(MyRow))]
         public SaveResponse Create(IUnitOfWork uow, SaveRequest<MyRow> request)
         {
+            var emailModel = new UserToPatientEmailModel();
+
+            emailModel.Text = request.Entity.Body;
+
+            var emailBody = TemplateHelper.RenderViewToString(HttpContext.RequestServices,
+                MVC.Views.Common.EmailTemplates.UserToPatientEmail.EmailTemplates_UserToPatientEmail, emailModel);
+
+            request.Entity.Body = emailBody;
+
             return new MyRepository().Create(uow, request);
         }
 

@@ -1,5 +1,9 @@
-﻿@model PatientManagement.Membership.ActivateEmailModel
+﻿@model PatientManagement.Common.EmailTemplates.ChangedVisitAutomaticEmailModel
 
+@if ((bool?)ViewData["Printing"] == true)
+{
+    Layout = MVC.Views.Shared._LayoutNoNavigation;
+}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -136,16 +140,16 @@
             vertical-align: middle;
         }
         @@media only screen and (max-device-width: 480px) {
-        table[class=hide], img[class=hide], td[class=hide] {
-            display: none !important;
-        }
-        .contents1 {
-            width: 100%;
-        }
-        .contents1 {
-            width: 100%;
-        }
-    </style>
+            table[class=hide], img[class=hide], td[class=hide] {
+                display: none !important;
+            }
+            .contents1 {
+                width: 100%;
+            }
+            .contents1 {
+                width: 100%;
+            }}
+            </style>
     <!--[if (gte mso 9)|(IE)]>
         <style type="text/css">
             table {border-collapse: collapse !important;}
@@ -277,30 +281,20 @@
             <table class="one-column" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-spacing:0; border-left:1px solid #e8e7e5; border-right:1px solid #e8e7e5; border-bottom:1px solid #e8e7e5" bgcolor="#FFFFFF">
                 <tr>
                     <td align="left" style="padding:0px 40px 40px 40px"><p style="color:#262626; font-size:32px; text-align:left; font-family: Verdana, Geneva, sans-serif">
-                            Здравейте @Model.DisplayName,
+                            Здравейте @Model.PatientName,
+                                                                            <br />
                         </p>
 
 
                         <p style="color:#000000; font-size:16px; text-align:left; font-family: Verdana, Geneva, sans-serif; line-height:22px "> 
-                            Получихме заявка за създаване на нов акаунт с вашия имейл адрес. Моля потвърдете като посетите линка по долу.
+                            Вашата визита е насрочена за:
                             <br />
+                            <br />
+                            <i>
+                             @Model.VisitDate.ToString("HH:mm часа на dd(dddd), MM(MMMM), yyy година.")
+                            </i>
                         </p>
-                        <table border="0" align="center" cellpadding="0" cellspacing="0" style="Margin:0 auto;">
-                            <tbody>
-                            <tr>
-                                <td align="center"><table border="0" cellpadding="0" cellspacing="0" style="Margin:0 auto;">
-                                    <tbody><tr>
-                                        <td width="250" height="60" align="center" bgcolor="#1f3ca6" style="-moz-border-radius: 30px; -webkit-border-radius: 30px; border-radius: 30px;">
-                                            <a href="@Model.ActivateLink" style="width:250; display:block; text-decoration:none; border:0; text-align:center; font-weight:bold;font-size:18px; font-family: Arial, sans-serif; color: #ffffff" class="button_link">
-                                                Потвърди регистрация
-                                                <img src="https://gallery.mailchimp.com/fdcaf86ecc5056741eb5cbc18/images/582dc751-b0fc-4769-ad74-35932c7594dd.png" width="32" height="17" style="padding-top:5px" alt="" border="0">
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    </tbody></table></td>
-                            </tr>
-                            </tbody>
-                        </table>
+                       
                     </td>
                 </tr>
             </table>

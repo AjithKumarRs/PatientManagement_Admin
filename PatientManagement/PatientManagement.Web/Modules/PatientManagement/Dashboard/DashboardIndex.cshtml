@@ -128,12 +128,14 @@
             });
     });
 
-    function FormatAlertMessage(title, startDate, endDate) {
+    function FormatAlertMessage(title, startDate, endDate, patientAutoEmailActive) {
         var str = Q.text("Site.Dashboard.AlertOnCalendarChange") + "\n " +
             Q.text("Site.Dashboard.CalendarPatient")+ " " +  title + "\n" +
             Q.text("Site.Dashboard.CalendarStartDate") + " " + startDate.format("DD.MM.YYYY HH:mm:ss") + "\n" +
             Q.text("Site.Dashboard.CalendarEndDate") + " " + endDate.format("DD.MM.YYYY HH:mm:ss");
-
+        if (patientAutoEmailActive) {
+            str += "\n\n " +Q.text("Site.Dashboard.AlertMessagePatientWithNotificationActiveVisitDialog");
+        }
         return str;
     }
 
@@ -160,8 +162,6 @@
         $(window).resize(function() {
             $('#calendar').fullCalendar('option', 'height', get_calendar_height());
         });
-        console.log("@ViewData["WorkHoursStart"]");
-        console.log("@ViewData["WorkHoursEnd"]");
         var initialLocaleCode =  '@System.Globalization.CultureInfo.CurrentUICulture.Name';
         /* initialize the calendar   -----------------------------------------------------------------*/
         $('#calendar').fullCalendar({
@@ -216,7 +216,7 @@
 
             },
             eventDrop: function (event, dayDelta, minuteDelta, allDay, revertFunc) {
-                Q.confirm(FormatAlertMessage(event.title, event.start, event.end), () => {
+                Q.confirm(FormatAlertMessage(event.title, event.start, event.end, event.patientAutoEmailActive), () => {
                         var dialog = new PatientManagement.PatientManagement.CalendarVisitsDialog();
 
                         dialog.updateVisit(event.id, event.start.format("YYYY-MM-DD HH:mm:ss"), event.end.format("YYYY-MM-DD HH:mm:ss"));
@@ -231,7 +231,7 @@
                 );
             },
             eventResize: function(event,dayDelta,minuteDelta, revertFunc) {
-                Q.confirm(FormatAlertMessage(event.title, event.start, event.end), () => {
+                Q.confirm(FormatAlertMessage(event.title, event.start, event.end, event.patientAutoEmailActive), () => {
                         var dialog = new PatientManagement.PatientManagement.CalendarVisitsDialog();
                         dialog.updateVisit(event.id, event.start.format("YYYY-MM-DD HH:mm:ss"), event.end.format("YYYY-MM-DD HH:mm:ss"));
                 },
