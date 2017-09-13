@@ -69,7 +69,8 @@ namespace PatientManagement.Web.Modules.Common
             var offerMaximumSubscriptionTime = connection.ById<OffersRow>(subscriptions.OfferId).MaximumSubscriptionTime;
             var activatedDate = subscriptions.ActivatedOn ?? DateTime.MinValue;
 
-            if (connection.Count<PaymentsRow>() == 0 && offerMaximumSubscriptionTime != null)
+            var paymentsFields = PaymentsRow.Fields;
+            if (connection.Count<PaymentsRow>(paymentsFields.SubscriptionId == subscriptionId) == 0 && offerMaximumSubscriptionTime != null)
             {
                 return activatedDate.AddDays(offerMaximumSubscriptionTime.Value);
             }
