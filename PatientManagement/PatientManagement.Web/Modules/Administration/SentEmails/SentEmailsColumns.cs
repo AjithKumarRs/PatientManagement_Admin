@@ -13,9 +13,9 @@ namespace PatientManagement.Administration.Columns
     [BasedOnRow(typeof(Entities.SentEmailsRow))]
     public class SentEmailsColumns
     {
-        [EditLink, DisplayName("Db.Shared.RecordId"), AlignRight]
+        [DisplayName("Db.Shared.RecordId"), AlignRight]
         public Int64 SentEmailId { get; set; }
-        [EditLink]
+
         public String FromEmail { get; set; }
         public String FromName { get; set; }
         public String Subject { get; set; }
