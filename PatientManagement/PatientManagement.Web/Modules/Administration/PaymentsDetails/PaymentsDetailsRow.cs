@@ -151,7 +151,7 @@ namespace PatientManagement.Administration.Entities
 
         StringField INameRow.NameField
         {
-            get { return Fields.BeneficiaryName; }
+            get { return Fields.Name; }
         }
 
         public static readonly RowFields Fields = new RowFields().Init();

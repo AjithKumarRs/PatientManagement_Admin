@@ -18,7 +18,7 @@
 
     export namespace PaymentsDetailsRow {
         export const idProperty = 'PaymentDetailsId';
-        export const nameProperty = 'BeneficiaryName';
+        export const nameProperty = 'Name';
         export const localTextPrefix = 'Administration.PaymentsDetails';
         export const lookupKey = 'Administration.PaymentsDetails';
 
