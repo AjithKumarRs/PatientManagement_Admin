@@ -14,6 +14,7 @@ namespace PatientManagement.PatientManagement {
 
 
                 Serenity.EditorUtils.setReadOnly(this.form.PatientId, true);
+                Serenity.EditorUtils.setReadOnly(this.form.CabinetId, true);
                 var patientId = this.form.PatientId.value;
 
                 PatientsService.Retrieve({
@@ -25,13 +26,17 @@ namespace PatientManagement.PatientManagement {
                             console.log(parentCat);
                             var text = Q.text("Site.Dashboard.AlertMessagePatientWithNotificationActiveVisitDialog");
                             parentCat.append(
-                                "<div class='alert alert-info' style='display: none' id='automatic-notification-email'>" + text + "</div>");
+                                "<div class='alert alert-info' style='display: none' id='automatic-notification-email'>" +
+                                text +
+                                "</div>");
                             $("#automatic-notification-email").show(200);
 
                         } else {
                             $("#automatic-notification-email").hide(200);
                         }
                     });
+            } else {
+                this.form.CabinetId.value = $.cookie("CabinetPreference");
             }
         }
         public newPredifinedVisit = (start, end): void => {
@@ -41,10 +46,14 @@ namespace PatientManagement.PatientManagement {
 
             p.StartDate = start;
             p.EndDate = end;
+
             dlg.loadEntityAndOpenDialog(<PatientManagement.VisitsRow>{
                 StartDate: start,
-              EndDate: end
+                EndDate: end,
+                CabinetId: $.cookie("CabinetPreference")
             });
+            
+
         }
         public updateVisit = (visitId, start, end): void => {
 
@@ -100,6 +109,7 @@ namespace PatientManagement.PatientManagement {
 
         }
         protected onSaveSuccess(response: Serenity.SaveResponse): void {
+           
             $("#calendar").fullCalendar('refetchEvents');
         }
 

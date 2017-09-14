@@ -79,7 +79,12 @@ namespace PatientManagement.Administration.Entities
             set { Fields.MaximumVisitsPerTenant[this] = value; }
         }
 
-
+        [DisplayName("Maximum Cabinets"), IntegerEditor]
+        public Int32? MaximumCabinets
+        {
+            get { return Fields.MaximumCabinets[this]; }
+            set { Fields.MaximumCabinets[this] = value; }
+        }
         [DisplayName("Currency"), NotNull, ForeignKey("[dbo].[Currencies]", "Id"), LeftJoin("jCurrency"), TextualField("CurrencyCurrencyId")]
         [LookupEditor(typeof(CurrenciesRow), InplaceAdd = true, FilterField = "Enabled", FilterValue = true)]
         public Int32? CurrencyId
@@ -177,6 +182,7 @@ namespace PatientManagement.Administration.Entities
             public Int32Field MaximumSubscriptionTime;
             public Int32Field MaximumUsersPerTenant;
             public Int32Field MaximumVisitsPerTenant;
+            public Int32Field MaximumCabinets;
 
             public DateTimeField ExpirationDate;
             public StringField Description;

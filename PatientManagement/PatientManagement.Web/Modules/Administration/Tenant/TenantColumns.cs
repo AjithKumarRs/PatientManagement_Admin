@@ -24,10 +24,6 @@ namespace PatientManagement.Administration.Columns
         public Int64 SubscriptionName { get; set; }
 
         public String TenantWebSite { get; set; }
-        [MinuteFormatter]
-        public Int16 WorkHoursStart { get; set; }
-        [MinuteFormatter]
-        public Int16 WorkHoursEnd { get; set; }
 
         public String InsertUserName { get; set; }
         [DisplayFormat("dd/MM/yyyy HH:mm")]

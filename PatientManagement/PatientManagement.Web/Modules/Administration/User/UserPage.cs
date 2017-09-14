@@ -4,7 +4,8 @@ namespace PatientManagement.Administration.Pages
     using Serenity.Web;
     using Microsoft.AspNetCore.Mvc;
 
-    [PageAuthorize(typeof(Entities.UserRow))]
+    //[PageAuthorize(typeof(Entities.UserRow))]
+    [PageAuthorize("Administration:User:Page")]
     public class UserController : Controller
     {
         [Route("Administration/User")]

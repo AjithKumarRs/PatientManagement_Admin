@@ -12,8 +12,6 @@ namespace PatientManagement.Migrations.DefaultDB
             Alter.Table("Tenants")
                 .AddColumn("TenantWebSite").AsString(200).Nullable()
                 .AddColumn("TenantImage").AsString().Nullable()
-                .AddColumn("WorkHoursStart").AsInt16().Nullable()
-                .AddColumn("WorkHoursEnd").AsInt16().Nullable()
                 .AddColumn("OverrideUsersEmailSignature").AsBoolean().Nullable()
                 .AddColumn("TenantEmailSignature").AsString(Int32.MaxValue).Nullable()
                 .AddColumn("InsertUserId").AsInt32().NotNullable().WithDefaultValue(1)

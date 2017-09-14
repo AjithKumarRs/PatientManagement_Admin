@@ -44,21 +44,6 @@ namespace PatientManagement.Administration.Entities
             set { Fields.TenantImage[this] = value; }
         }
 
-        [DisplayName("Work Hours Start")]
-        [TimeEditor]
-        public Int16? WorkHoursStart
-        {
-            get { return Fields.WorkHoursStart[this]; }
-            set { Fields.WorkHoursStart[this] = value; }
-        }
-
-        [DisplayName("Work Hours End")]
-        [TimeEditor]
-        public Int16? WorkHoursEnd
-        {
-            get { return Fields.WorkHoursEnd[this]; }
-            set { Fields.WorkHoursEnd[this] = value; }
-        }
 
         [DisplayName("Override Users Email Signature")]
         public Boolean? OverrideUsersEmailSignature
@@ -256,8 +241,6 @@ namespace PatientManagement.Administration.Entities
 
             public StringField TenantWebSite;
             public StringField TenantImage;
-            public Int16Field WorkHoursStart;
-            public Int16Field WorkHoursEnd;
             public BooleanField OverrideUsersEmailSignature;
             public StringField TenantEmailSignature;
 

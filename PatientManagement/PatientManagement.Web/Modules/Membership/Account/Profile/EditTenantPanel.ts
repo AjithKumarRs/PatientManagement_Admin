@@ -28,8 +28,8 @@
 
                     this.form.TenantEmailSignature.value = tenant.TenantEmailSignature;
                    // this.form.OverrideUsersEmailSignature = tenant.OverrideUsersEmailSignature;
-                    this.form.WorkHoursEnd.value = tenant.WorkHoursEnd;
-                    this.form.WorkHoursStart.value = tenant.WorkHoursStart;
+                    //this.form.WorkHoursEnd.value = tenant.WorkHoursEnd;
+                    //this.form.WorkHoursStart.value = tenant.WorkHoursStart;
                 });
 
 

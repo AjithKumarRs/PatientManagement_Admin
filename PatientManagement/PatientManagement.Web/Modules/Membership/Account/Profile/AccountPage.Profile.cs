@@ -39,7 +39,6 @@ namespace PatientManagement.Membership.Pages
             var tenant = connection.ById<TenantRow>(user.TenantId);
             ViewData["TenantName"] = tenant.TenantName;
             ViewData["TenantWebSite"] = tenant.TenantWebSite;
-            ViewData["TenantWorkHours"] = $"{TimeSpan.FromMinutes(tenant.WorkHoursStart?? 420)} -- {TimeSpan.FromMinutes(tenant.WorkHoursEnd ?? 1200)}";
 
             return View(MVC.Views.Membership.Account.Profile.AccountProfile);
         }
@@ -73,12 +72,7 @@ namespace PatientManagement.Membership.Pages
 
                     if (!request.TenantImage.IsNullOrEmpty())
                         tenant.TenantImage = request.TenantImage;
-
-                    if (request.WorkHoursEnd > 0)
-                        tenant.WorkHoursStart = (Int16)request.WorkHoursStart;
-                    if (request.WorkHoursStart > 0)
-                        tenant.WorkHoursEnd = (Int16)request.WorkHoursEnd;
-
+                    
                     tenant.OverrideUsersEmailSignature = request.OverrideUsersEmailSignature;
                     tenant.TenantEmailSignature = request.TenantEmailSignature;
 
