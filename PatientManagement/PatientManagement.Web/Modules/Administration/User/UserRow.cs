@@ -101,6 +101,9 @@ namespace PatientManagement.Administration.Entities
         }
 
         [NotNull, Insertable(false), Updatable(true)]
+        [ModifyPermission("Administration:User:IsActiveRead")]
+        [ReadPermission("Administration:User:IsActiveRead")]
+        [BsSwitchEditor]
         public Int16? IsActive
         {
             get { return Fields.IsActive[this]; }

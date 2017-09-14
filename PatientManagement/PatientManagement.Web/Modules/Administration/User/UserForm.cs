@@ -22,6 +22,9 @@
         public String Password { get; set; }
         [PasswordEditor, OneWay, Required(true)]
         public String PasswordConfirm { get; set; }
+
+        public int IsActive { get; set; }
+
         [OneWay]
         public string Source { get; set; }
 

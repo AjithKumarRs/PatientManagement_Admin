@@ -907,6 +907,7 @@ declare namespace PatientManagement.Administration {
         UserImage: Serenity.ImageUploadEditor;
         Password: Serenity.PasswordEditor;
         PasswordConfirm: Serenity.PasswordEditor;
+        IsActive: Serenity.IntegerEditor;
         Source: Serenity.StringEditor;
         TenantId: Serenity.LookupEditor;
     }
