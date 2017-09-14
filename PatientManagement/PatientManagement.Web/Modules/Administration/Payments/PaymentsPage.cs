@@ -46,8 +46,11 @@ namespace PatientManagement.Administration.Pages
                 return 0;
 
             var offer = connection.ById<OffersRow>(subscription.OfferId);
+            var offerprice = OfferPriceHelper.CalculateOfferPrice(offer, currency);
 
-            return OfferPriceHelper.CalculateOfferPrice(offer, currency);
+            offerprice = offerprice * paymentOption.Months??1;
+
+            return offerprice;
         }
     }
 }
