@@ -114,6 +114,7 @@ namespace PatientManagement
                     public static LocalText BackToLogin = "I already have a membership";
 
                     public static LocalText FormatSubscriptionName = "{0} - First registration";
+                    public static LocalText FormatCabinetName = "{0} - First Room";
                 }
             }
         }
@@ -132,6 +133,11 @@ namespace PatientManagement
         {
             public static class Subscriptions
             {
+                public static LocalText SubscriptionTitle = "Subscription Information";
+                public static LocalText SubscriptionRightBox = "You can make direct payment from here!";
+                public static LocalText SubscriptionRightBoxButton = "Add Payment";
+
+
                 public static class Expired
                 {
                     public static LocalText SubscriptionInfoBoxHeader = "Subscription expired!";

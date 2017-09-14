@@ -8956,3 +8956,12 @@ section.content > .s-DataGrid {
 .s-Administration-SentEmailsDialog .caption {
   width: 150px;
 }
+.s-PatientManagement-CabinetsDialog > .size {
+  width: 650px;
+}
+.s-PatientManagement-CabinetsDialog .caption {
+  width: 150px;
+}
+.s-CalendarCabinetsEditor {
+  width: 100%;
+}

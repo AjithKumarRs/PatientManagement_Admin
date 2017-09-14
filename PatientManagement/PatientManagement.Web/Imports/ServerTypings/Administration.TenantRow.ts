@@ -8,8 +8,6 @@
         SubscriptionId?: number;
         TenantWebSite?: string;
         TenantImage?: string;
-        WorkHoursStart?: number;
-        WorkHoursEnd?: number;
         OverrideUsersEmailSignature?: boolean;
         TenantEmailSignature?: string;
         SubscriptionOfferId?: number;
@@ -47,8 +45,6 @@
             export declare const SubscriptionId: string;
             export declare const TenantWebSite: string;
             export declare const TenantImage: string;
-            export declare const WorkHoursStart: string;
-            export declare const WorkHoursEnd: string;
             export declare const OverrideUsersEmailSignature: string;
             export declare const TenantEmailSignature: string;
             export declare const SubscriptionOfferId: string;
@@ -67,6 +63,6 @@
             export declare const UpdateUserName: string;
         }
 
-        ['TenantId', 'TenantName', 'CurrencyId', 'CurrencyName', 'SubscriptionRequired', 'SubscriptionId', 'TenantWebSite', 'TenantImage', 'WorkHoursStart', 'WorkHoursEnd', 'OverrideUsersEmailSignature', 'TenantEmailSignature', 'SubscriptionOfferId', 'SubscriptionTenantId', 'SubscriptionSubscriptionEndDate', 'SubscriptionInsertUserId', 'SubscriptionInsertDate', 'SubscriptionUpdateUserId', 'SubscriptionUpdateDateField', 'SubscriptionName', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'InsertUserName', 'UpdateUserName'].forEach(x => (<any>Fields)[x] = x);
+        ['TenantId', 'TenantName', 'CurrencyId', 'CurrencyName', 'SubscriptionRequired', 'SubscriptionId', 'TenantWebSite', 'TenantImage', 'OverrideUsersEmailSignature', 'TenantEmailSignature', 'SubscriptionOfferId', 'SubscriptionTenantId', 'SubscriptionSubscriptionEndDate', 'SubscriptionInsertUserId', 'SubscriptionInsertDate', 'SubscriptionUpdateUserId', 'SubscriptionUpdateDateField', 'SubscriptionName', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'InsertUserName', 'UpdateUserName'].forEach(x => (<any>Fields)[x] = x);
     }
 }

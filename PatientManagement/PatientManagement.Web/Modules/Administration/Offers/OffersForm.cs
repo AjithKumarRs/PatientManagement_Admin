@@ -30,5 +30,6 @@ namespace PatientManagement.Administration.Forms
         public Int32 MaximumSubscriptionTime { get; set; }
         public Int32 MaximumUsersPerTenant { get; set; }
         public Int32 MaximumVisitsPerTenant { get; set; }
+        public Int32 MaximumCabinets { get; set; }
     }
 }

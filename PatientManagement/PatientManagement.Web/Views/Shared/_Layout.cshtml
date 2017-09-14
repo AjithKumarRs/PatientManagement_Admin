@@ -187,6 +187,8 @@
                         </div>
                     </div><!-- ./col -->
 
+                    @RenderSection("TopOfTheSearchLeftNavigation", false)
+
                     <form action="#" method="get" class="sidebar-form">
                         <div class="input-group">
                             <input type="text" id="SidebarSearch" name="q" class="form-control" autocomplete="off">
@@ -197,6 +199,7 @@
                     </form>
                     <ul class="sidebar-menu" id="SidebarMenu">
                         <li class="header">@Texts.LeftNavigation.LeftNavigationHeader</li>
+
                         @{Html.RenderPartial(MVC.Views.Shared.LeftNavigation, new PatientManagement.Navigation.NavigationModel()); }
 
                         @RenderSection("BottoMenuLeftNavigation", false)
@@ -214,25 +217,36 @@
                 <section class="content">
                     <div class="row" style="display: none">
                         <div class="col-md-12">
-                            <div class="box box-default">
+                            <div class="box box-warning">
                                 <div class="box-header with-border">
                                     <i class="fa fa-bullhorn"></i>
-                                    <h3 class="box-title">Subscription Information</h3>
+                                    <h3 class="box-title">@Texts.Site.Subscriptions.SubscriptionTitle</h3>
                                     <div class="box-tools pull-right">
                                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                     </div>
                                 </div><!-- /.box-header -->
                                 <div class="box-body">
-                                    <div class="callout" id="subscription-information-box">
+                                    <div class="callout col-md-8 " id="subscription-information-box">
                                         <h4>Subscription Information!</h4>
                                         <p>Loading....</p>
                                     </div>
+                                    
+                                    <div class="alert alert-warning col-md-3 pull-right" style="padding-top: 0px">
+                                        <h5>@Texts.Site.Subscriptions.SubscriptionRightBox </h5>
+                                        <button class="btn btn-flat btn-warning btn-sm" onclick="new PatientManagement.Administration.PaymentsDialog().loadNewAndOpenDialog();">
+                                            @Texts.Site.Subscriptions.SubscriptionRightBoxButton
+                                        </button>
+                                    </div>
+
                                 </div><!-- /.box-body -->
                             </div><!-- /.box -->
+
                         </div><!-- /.col -->
+
                     </div>
 
+                 
                     @RenderBody()
                 </section>
             </div>
@@ -389,66 +403,66 @@
         <script async>
 
             //TODO: Finded major speed issue here! Cache user data or make a cookie if user is closing the subscription box
-            $(document).ready(function () {
+            jQuery(document).ready(function() {
+                jQuery(document).ready(function() {
+                    //var userData = new Q.getRemoteData('UserData');
+                    $.get('../Administration/GetTenantSubscriptionEndDate', function (date) {
+                        var subscriptionEndDate = date;
 
-                //var userData = new Q.getRemoteData('UserData');
-                $.get('../Administration/GetTenantSubscriptionEndDate', function (date) {
-                    var subscriptionEndDate = date;
+                        // Show user permision
+                        if (subscriptionEndDate) {
+                            String.prototype.format = function () {
+                                var args = arguments;
+                                return this.replace(/\{\{|\}\}|\{(\d+)\}/g,
+                                    function (m, n) {
+                                        if (m == "{{") {
+                                            return "{";
+                                        }
+                                        if (m == "}}") {
+                                            return "}";
+                                        }
+                                        return args[n];
+                                    });
+                            };
 
-                    // Show user permision
-                    if (subscriptionEndDate) {
-                        String.prototype.format = function () {
-                            var args = arguments;
-                            return this.replace(/\{\{|\}\}|\{(\d+)\}/g,
-                                function (m, n) {
-                                    if (m == "{{") {
-                                        return "{";
-                                    }
-                                    if (m == "}}") {
-                                        return "}";
-                                    }
-                                    return args[n];
-                                });
-                        };
+                            var expireDate = new Date(subscriptionEndDate);
+                            var todayDate = new Date();
 
-                        var expireDate = new Date(subscriptionEndDate);
-                        var todayDate = new Date();
+                            if (subscriptionEndDate !== "0001-01-01T00:00:00" && todayDate > expireDate) {
+                                $('#subscription-information-box h4')
+                                    .text(Q.text("Site.Subscriptions.Expired.SubscriptionInfoBoxHeader"));
 
-                        if (subscriptionEndDate !== "0001-01-01T00:00:00" && todayDate > expireDate) {
-                            $('#subscription-information-box h4')
-                                .text(Q.text("Site.Subscriptions.Expired.SubscriptionInfoBoxHeader"));
+                                $('#subscription-information-box p')
+                                    .text(Q.text("Site.Subscriptions.Expired.SubscriptionInfoBoxBody"));
 
-                            $('#subscription-information-box p')
-                                .text(Q.text("Site.Subscriptions.Expired.SubscriptionInfoBoxBody"));
+                                $('#subscription-information-box').addClass('callout-danger');
+                                $('#subscription-information-box').parents('.row').show('slide', { direction: 'up' }, 500);
+                            } else if (subscriptionEndDate !== "0001-01-01T00:00:00" &&
+                                todayDate.setMonth(todayDate.getMonth() + 1) > expireDate) {
 
-                            $('#subscription-information-box').addClass('callout-danger');
-                            $('#subscription-information-box').parents('.row').show();
-                        } else if (subscriptionEndDate !== "0001-01-01T00:00:00" &&
-                            todayDate.setMonth(todayDate.getMonth() + 1) > expireDate) {
+                                var diff = Math.floor((Date.parse(expireDate) - Date.parse(new Date())) / 86400000);
 
-                            var diff = Math.floor((Date.parse(expireDate) - Date.parse(new Date())) / 86400000);
+                                $('#subscription-information-box h4').text(
+                                    Q.text("Site.Subscriptions.WillExpire.SubscriptionInfoBoxHeader"));
 
-                            $('#subscription-information-box h4').text(
-                                Q.text("Site.Subscriptions.WillExpire.SubscriptionInfoBoxHeader"));
+                                $('#subscription-information-box p')
+                                    .text(
+                                        Q.text("Site.Subscriptions.WillExpire.SubscriptionInfoBoxBody").format(diff));
 
-                            $('#subscription-information-box p')
-                                .text(
-                                    Q.text("Site.Subscriptions.WillExpire.SubscriptionInfoBoxBody").format(diff));
+                                $('#subscription-information-box').addClass('callout-warning');
+                                $('#subscription-information-box').parents('.row').show('slide', { direction: 'up' }, 500);
+                            }
 
-                            $('#subscription-information-box').addClass('callout-warning');
-                            $('#subscription-information-box').parents('.row').show();
                         }
+                    });
+                    $.get('../Administration/GetTenantRole', function (role) {
+                        // Show user permision
+                        if (role) {
+                            $("#role-list").text(role);
+                        }
+                    });
 
-                    }
                 });
-                $.get('../Administration/GetTenantRole', function (role) {
-                    // Show user permision
-                    if (role) {
-                        $("#role-list").text(role);
-                    }
-                });
-
-
             });
         </script>
 

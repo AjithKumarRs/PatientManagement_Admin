@@ -24,7 +24,9 @@ namespace PatientManagement.PatientManagement.Columns
 
         [VisitsTypesFormatter(BackgroundProperty = "VisitTypeBackgroundColor", BorderProperty = "VisitTypeBorderColor")]
         public Int32 VisitTypeName { get; set; }
-
+        [Width(200)]
+        public string CabinetName { get; set; }
+        [Width(300)]
         public String Description { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }

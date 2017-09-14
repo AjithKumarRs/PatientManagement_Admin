@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using PatientManagement.Administration.Entities;
+using PatientManagement.PatientManagement.Entities;
 using Serenity.Data;
 
 namespace PatientManagement.Web.Modules.Common
@@ -70,7 +71,7 @@ namespace PatientManagement.Web.Modules.Common
             var activatedDate = subscriptions.ActivatedOn ?? DateTime.MinValue;
 
             var paymentsFields = PaymentsRow.Fields;
-            if (connection.Count<PaymentsRow>(paymentsFields.SubscriptionId == subscriptionId) == 0 && offerMaximumSubscriptionTime != null)
+            if (connection.Count<PaymentsRow>(paymentsFields.SubscriptionId == subscriptionId && paymentsFields.PaymentStatus == (int)PaymentStatus.Success) == 0 && offerMaximumSubscriptionTime != null)
             {
                 return activatedDate.AddDays(offerMaximumSubscriptionTime.Value);
             }

@@ -9,14 +9,26 @@
     <h1>@LocalText.Get("Navigation.Dashboard")<small>@Html.Raw(Texts.Site.Dashboard.ContentDescription)</small></h1>
 }
 
+@section TopOfTheSearchLeftNavigation{
+    <div class="form-group-sm" id="dropdown-cabinets-dashboard" style="margin-left: 10px; margin-right: 10px; min-height: 30px ">
+        <input type="hidden" />
+        <script type="text/javascript">
+            jQuery(function() {
+                
+                new PatientManagement.PatientManagement.CalendarCabinetsEditor($('#dropdown-cabinets-dashboard input'));
+            });
+        </script>
+    </div>
+}
+
 @section BottoMenuLeftNavigation
-{
+    {
     <li id="Left-bottom-menu-visit-types" class="header">@Texts.Site.Dashboard.VisitTypesLeftMenu</li>
-    
+
     <script type="text/javascript">
         jQuery(function () {
             new PatientManagement.VisiTypesBottomLeftMenu($('#Left-bottom-menu-visit-types'), {});
-                            
+
         });
     </script>
 }
@@ -32,7 +44,7 @@
     <link href="~/Scripts/contextMenu/jquery.contextMenu.css" rel="stylesheet" />
     <script src="~/Scripts/contextMenu/jquery.ui.position.js"></script>
     <script src="~/Scripts/contextMenu/jquery.contextMenu.js"></script>
-<script src="~/Scripts/jquery.ui.touch-punch.min.js"></script>
+    <script src="~/Scripts/jquery.ui.touch-punch.min.js"></script>
 }
 
 @{

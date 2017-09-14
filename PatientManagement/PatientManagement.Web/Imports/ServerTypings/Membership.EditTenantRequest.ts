@@ -3,8 +3,6 @@
         Name?: string;
         TenantWebSite?: string;
         TenantImage?: string;
-        WorkHoursStart?: number;
-        WorkHoursEnd?: number;
         OverrideUsersEmailSignature?: boolean;
         TenantEmailSignature?: string;
     }

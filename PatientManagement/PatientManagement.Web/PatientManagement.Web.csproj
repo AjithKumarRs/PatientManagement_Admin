@@ -212,6 +212,9 @@
     <None Update="Modules\PatientManagement\Activity\ActivityIndex.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Modules\PatientManagement\Cabinets\CabinetsIndex.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Modules\PatientManagement\Dashboard\DashboardIndex.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

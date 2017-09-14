@@ -19,16 +19,7 @@ namespace PatientManagement.Membership
         [DisplayName("Tenant Image"), Size(100)]
         [ImageUploadEditor(FilenameFormat = "TenantImage/~", CopyToHistory = true)]
         public String TenantImage { get; set; }
-
-        [DisplayName("Work Hours Start")]
-        [TimeEditor]
-        public Int32 WorkHoursStart { get; set; }
-
-        [DisplayName("Work Hours End")]
-        [TimeEditor]
-        public Int32 WorkHoursEnd { get; set; }
-
-
+        
         [DisplayName("Override users email signature")]
         [BsSwitchEditor]
         public Boolean? OverrideUsersEmailSignature { get; set; }

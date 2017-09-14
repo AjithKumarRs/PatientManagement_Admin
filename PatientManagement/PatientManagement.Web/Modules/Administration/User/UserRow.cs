@@ -1,4 +1,6 @@
 ﻿
+using PatientManagement.PatientManagement.Scripts;
+
 namespace PatientManagement.Administration.Entities
 {
     using Serenity.ComponentModel;
@@ -8,10 +10,11 @@ namespace PatientManagement.Administration.Entities
     using System.ComponentModel;
 
     [ConnectionKey("Default"), DisplayName("Users"), InstanceName("User"), TwoLevelCached]
-    [ReadPermission("Administration:User:Read")]
+    [ReadPermission("AdministrationTenants:User:Read")]
     [ModifyPermission("Administration:User:Modify")]
-    [LookupScript("Administration.User", Permission = "Administration:User:Read")]
-    public sealed class UserRow : LoggingRow, IIdRow, INameRow, IIsActiveDeletedRow
+    [LookupScript("Administration.User",
+        LookupType = typeof(MultiTenantRowLookupScript<>))]
+    public sealed class UserRow : LoggingRow, IIdRow, INameRow, IIsActiveDeletedRow, IMultiTenantRow
     {
         [DisplayName("User Id"), Identity]
         public Int32? UserId
@@ -140,7 +143,10 @@ namespace PatientManagement.Administration.Entities
             get { return Fields.TenantCurrencyId[this]; }
             set { Fields.TenantCurrencyId[this] = value; }
         }
-
+        public Int32Field TenantIdField
+        {
+            get { return Fields.TenantId; }
+        }
         IIdField IIdRow.IdField
         {
             get { return Fields.UserId; }

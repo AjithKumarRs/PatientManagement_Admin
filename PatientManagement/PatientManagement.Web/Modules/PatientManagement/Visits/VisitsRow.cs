@@ -44,6 +44,27 @@ namespace PatientManagement.PatientManagement.Entities
             set => Fields.VisitTypeId[this] = value;
         }
 
+        [DisplayName("Cabinet"), NotNull, ForeignKey("[dbo].[Cabinets]", "CabinetId"), LeftJoin("jCabinets"), TextualField("CabinetName")]
+        [LookupEditor(typeof(CabinetsRow), InplaceAdd = true, FilterField = "IsActive", FilterValue = 1)]
+        public Int32? CabinetId
+        {
+            get => Fields.CabinetId[this];
+            set => Fields.CabinetId[this] = value;
+        }
+
+        [DisplayName("Cabinet Name"), Expression("jCabinets.[Name]"), QuickSearch]
+        public String CabinetName
+        {
+            get { return Fields.CabinetName[this]; }
+            set { Fields.CabinetName[this] = value; }
+        }
+
+        [DisplayName("Cabinet IsActive"), Expression("jCabinets.[IsActive]")]
+        public Int16? CabinetIsActive
+        {
+            get { return Fields.CabinetIsActive[this]; }
+            set { Fields.CabinetIsActive[this] = value; }
+        }
 
         [Expression("jVisitType.[BackgroundColor]")]
         public String VisitTypeBackgroundColor
@@ -156,6 +177,11 @@ namespace PatientManagement.PatientManagement.Entities
             public Int32Field VisitId;
             public Int32Field PatientId;
             public Int32Field VisitTypeId;
+
+            public Int32Field CabinetId;
+            public StringField CabinetName;
+            public Int16Field CabinetIsActive;
+
             public StringField Description;
             public DateTimeField StartDate;
             public DateTimeField EndDate;

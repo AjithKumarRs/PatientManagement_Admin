@@ -24,6 +24,8 @@ namespace PatientManagement.Administration.Columns
         [Width(120)]
         public Int32 MaximumVisitsPerTenant { get; set; }
         [Width(120)]
+        public Int32 MaximumCabinets { get; set; }
+        [Width(120)]
         public DateTimeField ExpirationDate { get; set; }
         [Width(180)]
         public String Description { get; set; }
