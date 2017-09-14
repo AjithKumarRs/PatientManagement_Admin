@@ -1996,7 +1996,7 @@ var PatientManagement;
 (function (PatientManagement) {
     var Administration;
     (function (Administration) {
-        var SentEmailsDialog = SentEmailsDialog_1 = (function (_super) {
+        var SentEmailsDialog = (function (_super) {
             __extends(SentEmailsDialog, _super);
             function SentEmailsDialog() {
                 var _this = _super !== null && _super.apply(this, arguments) || this;
@@ -2021,7 +2021,7 @@ var PatientManagement;
                             }
                             else {
                                 var sentEmail = {};
-                                var dialog = new SentEmailsDialog_1();
+                                var dialog = new SentEmailsDialog();
                                 //TODO We open new dialog with PatientID. Correct?
                                 sentEmail.ToEmail = patient.PatientId.toString();
                                 dialog.form.ToEmail.readOnly = true;
@@ -2048,12 +2048,11 @@ var PatientManagement;
             };
             return SentEmailsDialog;
         }(Serenity.EntityDialog));
-        SentEmailsDialog = SentEmailsDialog_1 = __decorate([
+        SentEmailsDialog = __decorate([
             Serenity.Decorators.registerClass(),
             Serenity.Decorators.responsive()
         ], SentEmailsDialog);
         Administration.SentEmailsDialog = SentEmailsDialog;
-        var SentEmailsDialog_1;
     })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
@@ -6080,6 +6079,8 @@ var PatientManagement;
         })(CabinetsService = PatientManagement.CabinetsService || (PatientManagement.CabinetsService = {}));
     })(PatientManagement = PatientManagement_66.PatientManagement || (PatientManagement_66.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
+/// <reference types="jqueryui" />
+/// <reference types="fullcalendar" />
 var PatientManagement;
 (function (PatientManagement_67) {
     var PatientManagement;
@@ -6118,7 +6119,9 @@ var PatientManagement;
                         });
                     }
                 });
-                $("#calendar").fullCalendar('refetchEvents');
+                if ($("#calendar").length > 0) {
+                    $("#calendar").fullCalendar('refetchEvents');
+                }
             };
             return CabinetsDialog;
         }(Serenity.EntityDialog));

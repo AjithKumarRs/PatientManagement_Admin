@@ -1,4 +1,6 @@
-﻿
+﻿/// <reference types="jqueryui" />
+/// <reference types="fullcalendar" />
+
 namespace PatientManagement.PatientManagement {
 
     @Serenity.Decorators.registerClass()
@@ -41,7 +43,10 @@ namespace PatientManagement.PatientManagement {
                         });
                     }
                 });
-            $("#calendar").fullCalendar('refetchEvents');
+            if ($("#calendar").length > 0 {
+                $("#calendar").fullCalendar('refetchEvents');
+
+            }
         }
     }
 }
