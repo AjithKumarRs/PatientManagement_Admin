@@ -49,7 +49,13 @@ namespace PatientManagement.PatientManagement.Pages
             var connection = SqlConnections.NewFor<VisitsRow>();
 
             var cabinetFlds = CabinetsRow.Fields;
-            var cabinets = connection.List<CabinetsRow>(cabinetFlds.TenantId == user.TenantId && cabinetFlds.IsActive == 1);
+            var cabinets = new List<CabinetsRow>();
+
+
+            if (Authorization.HasPermission("Administration:Tenants"))
+                cabinets = connection.List<CabinetsRow>(cabinetFlds.IsActive == 1);
+            else
+                cabinets = connection.List<CabinetsRow>(cabinetFlds.TenantId == user.TenantId && cabinetFlds.IsActive == 1);
 
             var cabinetCookie = Request.Cookies["CabinetPreference"];
             var cabinetIdActive = 0;
@@ -138,9 +144,18 @@ namespace PatientManagement.PatientManagement.Pages
             }
 
 
-            List<VisitsRow> entity = connection.List<VisitsRow>()
-                .Where(e => e.StartDate >= startDate && e.EndDate <= endDate && e.CabinetId == cabinetIdActive && e.TenantId == user.TenantId)
-                .ToList();
+
+            List<VisitsRow> entity = new List<VisitsRow>();
+
+            if (Authorization.HasPermission("Administration:Tenants"))
+                entity = connection.List<VisitsRow>()
+                    .Where(e => e.StartDate >= startDate && e.EndDate <= endDate && e.CabinetId == cabinetIdActive)
+                    .ToList();
+            else
+                entity = connection.List<VisitsRow>()
+                    .Where(e => e.StartDate >= startDate && e.EndDate <= endDate && e.CabinetId == cabinetIdActive && e.TenantId == user.TenantId)
+                    .ToList();
+
 
             foreach (var visit in entity)
             {
