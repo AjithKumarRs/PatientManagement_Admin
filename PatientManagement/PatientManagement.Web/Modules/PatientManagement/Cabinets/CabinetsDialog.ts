@@ -43,10 +43,10 @@ namespace PatientManagement.PatientManagement {
                         });
                     }
                 });
-            if ($("#calendar").length > 0 {
+            if ($("#calendar").length > 0) {
                 $("#calendar").fullCalendar('refetchEvents');
-
             }
+
         }
     }
 }

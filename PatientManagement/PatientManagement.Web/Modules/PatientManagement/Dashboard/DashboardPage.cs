@@ -26,6 +26,13 @@ namespace PatientManagement.PatientManagement.Pages
             var connection = SqlConnections.NewFor<TenantRow>();
             var tenant = connection.ById<TenantRow>(user.TenantId);
 
+            var cabinetCookie = Request.Cookies["CabinetPreference"];
+            if (!string.IsNullOrEmpty(cabinetCookie))
+            {
+                var connectionCabint = connection.ById<CabinetsRow>(cabinetCookie);
+                ViewData["CabinetHeaderName"] = connectionCabint?.Name;
+
+            }
             //ViewData["WorkHoursStart"] = TimeSpan.FromMinutes(tenant.WorkHoursStart??420);
             //ViewData["WorkHoursEnd"] = TimeSpan.FromMinutes(tenant.WorkHoursEnd ?? 1200);
             ViewData["WorkHoursStart"] = TimeSpan.FromMinutes( 420);
@@ -142,8 +149,6 @@ namespace PatientManagement.PatientManagement.Pages
                 }
 
             }
-
-
 
             List<VisitsRow> entity = new List<VisitsRow>();
 

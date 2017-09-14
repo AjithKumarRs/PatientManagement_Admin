@@ -6,7 +6,12 @@
 }
 
 @section ContentHeader {
-    <h1>@LocalText.Get("Navigation.Dashboard")<small>@Html.Raw(Texts.Site.Dashboard.ContentDescription)</small></h1>
+    <h1>@LocalText.Get("Navigation.Dashboard")<small>@Html.Raw(Texts.Site.Dashboard.ContentDescription)</small> 
+        <i class="pull-right" id="cabinet-name-right-header">
+            @ViewData["CabinetHeaderName"]
+        </i>
+    </h1>
+
 }
 
 @section TopOfTheSearchLeftNavigation{
@@ -23,7 +28,14 @@
 
 @section BottoMenuLeftNavigation
     {
-    <li id="Left-bottom-menu-visit-types" class="header">@Texts.Site.Dashboard.VisitTypesLeftMenu</li>
+    <li id="Left-bottom-menu-visit-types" class="treeview">
+        <a href="javascript:;">
+            <i class="fa fa-stethoscope"></i>
+            <span>@Texts.Site.Dashboard.VisitTypesLeftMenu</span>
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+    
+    </li>
 
     <script type="text/javascript">
         jQuery(function () {

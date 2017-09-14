@@ -49,6 +49,13 @@ namespace PatientManagement.PatientManagement {
 
                     $("#calendar").fullCalendar('refetchEvents');
 
+
+                    if ($('#cabinet-name-right-header').length > 0) {
+                        console.log();
+
+                        $('#cabinet-name-right-header').html(this.get_text());
+                    }
+
                 });
         }
     }
