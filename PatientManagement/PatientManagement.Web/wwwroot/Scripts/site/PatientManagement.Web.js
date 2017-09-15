@@ -4741,13 +4741,26 @@ var PatientManagement;
                         return false;
                     return true;
                 };
+                _this.checkPhone = function (phone) {
+                    if (phone.length > 30)
+                        return false;
+                    if (/[^0-9]/.test(phone))
+                        return false;
+                    return true;
+                };
                 _this.isValidDate = function (y, m, d) {
                     var date = new Date(y, m - 1, d);
                     return date && (date.getMonth() + 1) == m && date.getDate() == Number(d);
                 };
                 _this.form.PersonalNumber.addValidationRule(_this.uniqueName, function (e) {
                     if (!_this.checkEgn(_this.form.PersonalNumber.value)) {
-                        return Q.text("Site.ValidationError.ValidateEgnNotCorrect");
+                        return Q.text("Controls.EntityDialog.SaveSuccessMessage");
+                    }
+                    return null;
+                });
+                _this.form.PhoneNumber.addValidationRule(_this.uniqueName, function (s) {
+                    if (!_this.checkPhone(_this.form.PhoneNumber.value)) {
+                        return Q.text("Controls.EntityDialog.SaveSuccessMessage");
                     }
                     return null;
                 });

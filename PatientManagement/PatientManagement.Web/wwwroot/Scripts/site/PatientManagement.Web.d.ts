@@ -2697,6 +2697,7 @@ declare namespace PatientManagement.PatientManagement {
         private patientActivityGrid;
         private patientsFileUploadsGrid;
         private checkEgn;
+        private checkPhone;
         protected isValidDate: (y: any, m: any, d: any) => boolean;
         constructor();
         getSaveState(): string;
