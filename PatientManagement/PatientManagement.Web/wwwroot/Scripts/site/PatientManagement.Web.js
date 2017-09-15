@@ -1996,7 +1996,7 @@ var PatientManagement;
 (function (PatientManagement) {
     var Administration;
     (function (Administration) {
-        var SentEmailsDialog = SentEmailsDialog_1 = (function (_super) {
+        var SentEmailsDialog = (function (_super) {
             __extends(SentEmailsDialog, _super);
             function SentEmailsDialog() {
                 var _this = _super !== null && _super.apply(this, arguments) || this;
@@ -2021,7 +2021,7 @@ var PatientManagement;
                             }
                             else {
                                 var sentEmail = {};
-                                var dialog = new SentEmailsDialog_1();
+                                var dialog = new SentEmailsDialog();
                                 //TODO We open new dialog with PatientID. Correct?
                                 sentEmail.ToEmail = patient.PatientId.toString();
                                 dialog.form.ToEmail.readOnly = true;
@@ -2048,12 +2048,11 @@ var PatientManagement;
             };
             return SentEmailsDialog;
         }(Serenity.EntityDialog));
-        SentEmailsDialog = SentEmailsDialog_1 = __decorate([
+        SentEmailsDialog = __decorate([
             Serenity.Decorators.registerClass(),
             Serenity.Decorators.responsive()
         ], SentEmailsDialog);
         Administration.SentEmailsDialog = SentEmailsDialog;
-        var SentEmailsDialog_1;
     })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
@@ -5002,6 +5001,22 @@ var PatientManagement;
             VisitsDialog.prototype.getIdProperty = function () { return PatientManagement.VisitsRow.idProperty; };
             VisitsDialog.prototype.getLocalTextPrefix = function () { return PatientManagement.VisitsRow.localTextPrefix; };
             VisitsDialog.prototype.getService = function () { return PatientManagement.VisitsService.baseUrl; };
+            VisitsDialog.prototype.updateInterface = function () {
+                // by default cloneButton is hidden in base UpdateInterface method
+                _super.prototype.updateInterface.call(this);
+                // here we show it if it is edit mode (not new)
+                this.cloneButton.toggle(this.isEditMode());
+            };
+            VisitsDialog.prototype.getCloningEntity = function () {
+                var clone = _super.prototype.getCloningEntity.call(this);
+                var dateStart = Q.parseDate(clone.StartDate);
+                var dateEnd = Q.parseDate(clone.EndDate);
+                dateStart.setDate(dateStart.getDate() + parseInt("1"));
+                dateEnd.setDate(dateEnd.getDate() + parseInt("1"));
+                clone.StartDate = dateStart.toISOString();
+                clone.EndDate = dateEnd.toISOString();
+                return clone;
+            };
             return VisitsDialog;
         }(Serenity.EntityDialog));
         VisitsDialog = __decorate([
@@ -6225,7 +6240,6 @@ var PatientManagement;
                         }
                     }
                     var cookie = $.cookie("CabinetPreference");
-                    console.log(cookie);
                     _this.value = cookie + "";
                 });
                 _this.changeSelect2(function (e) {

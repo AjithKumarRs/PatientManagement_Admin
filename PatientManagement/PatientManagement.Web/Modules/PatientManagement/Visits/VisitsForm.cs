@@ -13,6 +13,8 @@ namespace PatientManagement.PatientManagement.Forms
     [BasedOnRow(typeof(Entities.VisitsRow))]
     public class VisitsForm
     {
+        [Category("Required Fields")]
+
         public Int32 PatientId { get; set; }
         public Int32 VisitTypeId { get; set; }
 
@@ -22,6 +24,9 @@ namespace PatientManagement.PatientManagement.Forms
         public DateTime StartDate { get; set; }
         [DefaultValue("now")]
         public DateTime EndDate { get; set; }
+
+        [Category("Additional Information")]
+
         public String Description { get; set; }
 
         // TODO Add when you figure out how to add permissions here

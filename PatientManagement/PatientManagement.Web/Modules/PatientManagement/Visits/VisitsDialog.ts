@@ -11,6 +11,14 @@ namespace PatientManagement.PatientManagement {
         protected getService() { return VisitsService.baseUrl; }
 
         protected form = new VisitsForm(this.idPrefix);
+        protected updateInterface() {
+
+            // by default cloneButton is hidden in base UpdateInterface method
+            super.updateInterface();
+
+            // here we show it if it is edit mode (not new)
+            this.cloneButton.toggle(this.isEditMode());
+        }
 
         constructor() {
             super();
@@ -51,6 +59,23 @@ namespace PatientManagement.PatientManagement {
                 var dateStart = this.form.StartDate.value;
                 this.form.EndDate.value = dateStart;
             });
+
+
+        }
+
+        protected getCloningEntity() {
+            var clone = super.getCloningEntity();
+
+            var dateStart = Q.parseDate(clone.StartDate);
+            var dateEnd = Q.parseDate(clone.EndDate);
+
+            dateStart.setDate(dateStart.getDate() + parseInt("1"));
+            dateEnd.setDate(dateEnd.getDate() + parseInt("1"));
+
+            clone.StartDate = dateStart.toISOString();
+            clone.EndDate = dateEnd.toISOString();
+
+            return clone;
         }
     }
 }

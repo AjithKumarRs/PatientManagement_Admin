@@ -13,6 +13,8 @@ namespace PatientManagement.PatientManagement.Forms
     [BasedOnRow(typeof(Entities.ActivityRow))]
     public class ActivityForm
     {
+        [Category("Additional Information")]
+
         public String MovementAndTraining { get; set; }
         public String Profession { get; set; }
     }

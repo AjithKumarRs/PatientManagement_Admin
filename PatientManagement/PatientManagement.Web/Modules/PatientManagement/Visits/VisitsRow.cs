@@ -26,7 +26,6 @@ namespace PatientManagement.PatientManagement.Entities
             get => Fields.VisitId[this];
             set => Fields.VisitId[this] = value;
         }
-        [Category("Properties")]
         [DisplayName("Patient"), NotNull, ForeignKey("[dbo].[Patients]", "PatientId"), LeftJoin("jPatient"), TextualField("PatientName")]
         [LookupEditor(typeof(PatientsRow), InplaceAdd = true)]
         public Int32? PatientId
@@ -123,8 +122,7 @@ namespace PatientManagement.PatientManagement.Entities
             get { return Fields.InsertDate[this]; }
             set { Fields.InsertDate[this] = value; }
         }
-
-        [Category("Extra Info")]
+        
         [DisplayName("Description"), Width(150)]
         [TextAreaEditor(Rows = 8)]
         public String Description

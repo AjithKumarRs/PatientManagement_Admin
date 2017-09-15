@@ -13,9 +13,11 @@ namespace PatientManagement.PatientManagement.Forms
     [BasedOnRow(typeof(Entities.PatientsFileUploadsRow))]
     public class PatientsFileUploadsForm
     {
+        [Category("Required Fields")]
         public Int32 PatientId { get; set; }
 
         public String Description { get; set; }
+        [Category("Attachments")]
 
         public String FilePath { get; set; }
 

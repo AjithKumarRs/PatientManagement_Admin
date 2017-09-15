@@ -2718,7 +2718,9 @@ declare namespace PatientManagement.PatientManagement {
         protected getLocalTextPrefix(): string;
         protected getService(): string;
         protected form: VisitsForm;
+        protected updateInterface(): void;
         constructor();
+        protected getCloningEntity(): VisitsRow;
     }
 }
 declare var FullCalendar: any;

@@ -42,7 +42,6 @@ namespace PatientManagement.PatientManagement.Entities
         {
             get { return Fields.Name; }
         }
-
         [DisplayName("Work Hours Start")]
         [TimeEditor]
         public Int16? WorkHoursStart

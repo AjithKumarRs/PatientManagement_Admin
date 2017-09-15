@@ -20,7 +20,6 @@ namespace PatientManagement.PatientManagement.Entities
     [LeftJoin("cd", "PatientHealth", "cd.[PatientId] = t0.[PatientId]", RowType = typeof(PatientHealthRow), TitlePrefix = "")]
     public sealed class PatientsRow : Row, IIdRow, INameRow, IInsertLogRow, IMultiTenantRow
     {
-        [Category("Required Fields")]
         [DisplayName("Patient Id"), Identity]
         public Int32? PatientId
         {
@@ -57,7 +56,6 @@ namespace PatientManagement.PatientManagement.Entities
             set { Fields.Gender[this] = (Int32?)value; }
         }
 
-        [Category("Additional Information")]
         [DisplayName("First Registration Date"), Size(200)]
         [DateTimeKind(DateTimeKind.Utc), DateTimeEditor]
 

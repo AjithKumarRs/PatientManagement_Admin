@@ -50,7 +50,7 @@ namespace PatientManagement.PatientManagement.Endpoints
             var data = List(connection, request).Entities;
             var report = new DynamicDataReport(data, request.IncludeColumns, typeof(Columns.PatientsColumns));
             var bytes = new ReportRepository().Render(report);
-            return ExcelContentResult.Create(bytes, "PatinetsList_" +
+            return ExcelContentResult.Create(bytes, "PatientsList_" +
                                                     DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".xlsx");
         }
     }

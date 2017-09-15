@@ -34,7 +34,6 @@ namespace PatientManagement.PatientManagement {
                     }
 
                     var cookie = $.cookie("CabinetPreference");
-                    console.log(cookie);
                         this.value = cookie + "";
 
                     

@@ -13,7 +13,10 @@ namespace PatientManagement.PatientManagement.Forms
     [BasedOnRow(typeof(Entities.CabinetsRow))]
     public class CabinetsForm
     {
+        [Category("Required Fields")]
+
         public String Name { get; set; }
+        [Category("Additional Information")]
 
         public Int16 WorkHoursStart { get; set; }
 

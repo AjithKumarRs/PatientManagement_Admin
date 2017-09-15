@@ -25,8 +25,7 @@ namespace PatientManagement.PatientManagement.Entities
             get { return Fields.PatientFileUploadId[this]; }
             set { Fields.PatientFileUploadId[this] = value; }
         }
-
-        [Category("General")]
+        
         [DisplayName("Patient"), NotNull, ForeignKey("[dbo].[Patients]", "PatientId"), LeftJoin("jPatient"), TextualField("PatientName")]
         [LookupEditor(typeof(PatientsRow), InplaceAdd = true)]
         public Int32? PatientId
@@ -35,7 +34,6 @@ namespace PatientManagement.PatientManagement.Entities
             set { Fields.PatientId[this] = value; }
         }
 
-        [Category("Attachments")]
         [DisplayName("File Path"), NotNull, MultipleFileUploadEditor]
         public String FilePath
         {
