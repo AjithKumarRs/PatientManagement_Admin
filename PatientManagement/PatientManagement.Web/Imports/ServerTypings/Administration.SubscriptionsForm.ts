@@ -8,8 +8,9 @@
         Name: Serenity.StringEditor;
         OfferId: Serenity.LookupEditor;
         SubscriptionEndDate: Serenity.DateEditor;
-        IsActive: BsSwitchEditor;
+        Enabled: BsSwitchEditor;
+        TenantId: Serenity.LookupEditor;
     }
 
-    [['Name', () => Serenity.StringEditor], ['OfferId', () => Serenity.LookupEditor], ['SubscriptionEndDate', () => Serenity.DateEditor], ['IsActive', () => BsSwitchEditor]].forEach(x => Object.defineProperty(SubscriptionsForm.prototype, <string>x[0], { get: function () { return this.w(x[0], (x[1] as any)()); }, enumerable: true, configurable: true }));
+    [['Name', () => Serenity.StringEditor], ['OfferId', () => Serenity.LookupEditor], ['SubscriptionEndDate', () => Serenity.DateEditor], ['Enabled', () => BsSwitchEditor], ['TenantId', () => Serenity.LookupEditor]].forEach(x => Object.defineProperty(SubscriptionsForm.prototype, <string>x[0], { get: function () { return this.w(x[0], (x[1] as any)()); }, enumerable: true, configurable: true }));
 }

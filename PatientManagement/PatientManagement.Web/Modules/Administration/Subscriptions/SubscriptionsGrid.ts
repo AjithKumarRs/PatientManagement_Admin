@@ -16,7 +16,7 @@ namespace PatientManagement.Administration {
         protected getItemCssClass(item: SubscriptionsRow, index: number): string {
             let klass: string = "";
 
-            if (item.IsActive == 1) {
+            if (item.Enabled == 1) {
                 klass += " active";
             }
 

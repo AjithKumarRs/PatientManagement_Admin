@@ -136,7 +136,7 @@ namespace PatientManagement
                 public static LocalText SubscriptionTitle = "Subscription Information";
                 public static LocalText SubscriptionRightBox = "You can make direct payment from here!";
                 public static LocalText SubscriptionRightBoxButton = "Add Payment";
-
+                public static LocalText DeleteActiveSubscriptionError = "You cant delete active subscription";
 
                 public static class Expired
                 {

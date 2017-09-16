@@ -117,7 +117,7 @@ namespace PatientManagement.PatientManagement.Pages
                     return Json(model);
                 }
 
-                if (cabinets.First(a => a.CabinetId == Int32.Parse(cabinetCookie)) == null)
+                if (cabinets.FirstOrDefault(a => a.CabinetId == Int32.Parse(cabinetCookie)) == null)
                 {
                     var reprFlds = CabinetRepresentativesRow.Fields;
                     var cabinetRepr =

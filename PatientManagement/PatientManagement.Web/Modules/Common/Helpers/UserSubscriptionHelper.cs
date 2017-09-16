@@ -53,7 +53,7 @@ namespace PatientManagement.Web.Modules.Common
             }
 
             var subsFlds = SubscriptionsRow.Fields;
-            var subscriptionId = connection.First<SubscriptionsRow>(subsFlds.TenantId == tenantId && subsFlds.IsActive == 1);
+            var subscriptionId = connection.First<SubscriptionsRow>(subsFlds.TenantId == tenantId && subsFlds.Enabled == 1);
             if (subscriptionId != null)
                 return GetTenantPaidDaysForSubscription((int)subscriptionId.SubscriptionId);
             else

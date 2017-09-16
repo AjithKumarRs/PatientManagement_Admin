@@ -33,7 +33,7 @@ namespace PatientManagement.Administration.Entities
             set { Fields.OfferId[this] = value; }
         }
         
-        [DisplayName("Subscription End Date"), NotNull]
+        [DisplayName("Subscription End Date")]
         public DateTime? SubscriptionEndDate
         {
             get { return Fields.SubscriptionEndDate[this]; }
@@ -171,7 +171,10 @@ namespace PatientManagement.Administration.Entities
 
         #region Tenant
 
-        [Insertable(false), Updatable(false), ForeignKey("Tenants", "TenantId"), LeftJoin("tnt")]
+        [DisplayName("Tenant"), ForeignKey("Tenants", "TenantId"), LeftJoin("tnt")]
+        [LookupEditor(typeof(TenantRow))]
+        [ReadPermission(PermissionKeys.Tenants)]
+        [ModifyPermission(PermissionKeys.Tenants)]
         public Int32? TenantId
         {
             get { return Fields.TenantId[this]; }
@@ -191,7 +194,7 @@ namespace PatientManagement.Administration.Entities
         #endregion
 
 
-        [NotNull, Insertable(false), Updatable(true), SortOrder(1, true)]
+        [NotNull, Insertable(false), Updatable(true)]
         [BsSwitchEditor]
         [LookupInclude]
         public Int16? IsActive
@@ -199,6 +202,16 @@ namespace PatientManagement.Administration.Entities
             get { return Fields.IsActive[this]; }
             set { Fields.IsActive[this] = value; }
         }
+
+        [NotNull, DisplayName("Is Active"),  SortOrder(1, true)]
+        [BsSwitchEditor]
+        [LookupInclude]
+        public Int16? Enabled
+        {
+            get { return Fields.Enabled[this]; }
+            set { Fields.Enabled[this] = value; }
+        }
+
         public static readonly RowFields Fields = new RowFields().Init();
 
         public SubscriptionsRow()
@@ -214,6 +227,7 @@ namespace PatientManagement.Administration.Entities
             public Int32Field TenantId;
             public DateTimeField SubscriptionEndDate;
             public DateTimeField PaidPeriod;
+            public Int16Field Enabled;
 
             public Int16Field IsActive;
             public DateTimeField DeactivatedOn;
