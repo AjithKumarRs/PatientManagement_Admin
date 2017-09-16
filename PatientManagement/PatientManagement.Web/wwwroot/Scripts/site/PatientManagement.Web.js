@@ -163,7 +163,7 @@ var PatientManagement;
         }(Serenity.PrefixedContext));
         OffersForm.formKey = 'Administration.Offers';
         Administration.OffersForm = OffersForm;
-        [['Name', function () { return Serenity.StringEditor; }], ['Description', function () { return Serenity.TextAreaEditor; }], ['Price', function () { return Serenity.DecimalEditor; }], ['Enabled', function () { return PatientManagement.BsSwitchEditor; }], ['CurrencyId', function () { return Serenity.LookupEditor; }], ['RoleId', function () { return Serenity.LookupEditor; }], ['ExpirationDate', function () { return Serenity.DateTimeEditor; }], ['MaximumSubscriptionTime', function () { return Serenity.IntegerEditor; }], ['MaximumUsersPerTenant', function () { return Serenity.IntegerEditor; }], ['MaximumVisitsPerTenant', function () { return Serenity.IntegerEditor; }], ['MaximumCabinets', function () { return Serenity.IntegerEditor; }]].forEach(function (x) { return Object.defineProperty(OffersForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
+        [['Name', function () { return Serenity.StringEditor; }], ['Description', function () { return Serenity.TextAreaEditor; }], ['Price', function () { return Serenity.DecimalEditor; }], ['Enabled', function () { return PatientManagement.BsSwitchEditor; }], ['CurrencyId', function () { return Serenity.LookupEditor; }], ['RoleId', function () { return Serenity.LookupEditor; }], ['ExpirationDate', function () { return Serenity.DateTimeEditor; }], ['MaximumSubscriptionTime', function () { return Serenity.IntegerEditor; }], ['MaximumUsersPerTenant', function () { return Serenity.IntegerEditor; }], ['MaximumVisitsPerTenant', function () { return Serenity.IntegerEditor; }], ['MaximumPatientsPerTenant', function () { return Serenity.IntegerEditor; }], ['MaximumCabinets', function () { return Serenity.IntegerEditor; }]].forEach(function (x) { return Object.defineProperty(OffersForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
     })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
@@ -183,7 +183,7 @@ var PatientManagement;
             var Fields;
             (function (Fields) {
             })(Fields = OffersRow.Fields || (OffersRow.Fields = {}));
-            ['OfferId', 'Name', 'MaximumSubscriptionTime', 'MaximumUsersPerTenant', 'MaximumVisitsPerTenant', 'MaximumCabinets', 'ExpirationDate', 'Description', 'Price', 'Enabled', 'CurrencyId', 'RoleId', 'UpdateUserId', 'UserName', 'UpdateDateField', 'CurrencyCurrencyId', 'CurrencyName', 'CurrencyEnabled', 'RoleRoleName'].forEach(function (x) { return Fields[x] = x; });
+            ['OfferId', 'Name', 'MaximumSubscriptionTime', 'MaximumUsersPerTenant', 'MaximumVisitsPerTenant', 'MaximumPatientsPerTenant', 'MaximumCabinets', 'ExpirationDate', 'Description', 'Price', 'Enabled', 'CurrencyId', 'RoleId', 'UpdateUserId', 'UserName', 'UpdateDateField', 'CurrencyCurrencyId', 'CurrencyName', 'CurrencyEnabled', 'RoleRoleName'].forEach(function (x) { return Fields[x] = x; });
         })(OffersRow = Administration.OffersRow || (Administration.OffersRow = {}));
     })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
 })(PatientManagement || (PatientManagement = {}));

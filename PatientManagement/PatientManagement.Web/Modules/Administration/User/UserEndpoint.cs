@@ -26,6 +26,12 @@ namespace PatientManagement.Administration.Endpoints
         [HttpPost, AuthorizeCreate(typeof(MyRow))]
         public SaveResponse Create(IUnitOfWork uow, SaveRequest<MyRow> request)
         {
+            var maximumInserts = UserSubscriptionHelper.GetTenantMaximumUsers();
+            if (this.List(uow.Connection, new ListRequest()).TotalCount >= maximumInserts)
+            {
+                throw new AccessViolationException(string.Format(Texts.Site.Subscriptions.MaximumUsersError, maximumInserts));
+            }
+
             return new MyRepository().Create(uow, request);
         }
 

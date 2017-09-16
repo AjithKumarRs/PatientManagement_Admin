@@ -1,5 +1,6 @@
 ﻿
 using System;
+using PatientManagement.Web.Modules.Common;
 using Serenity.Reporting;
 using Serenity.Web;
 
@@ -20,6 +21,12 @@ namespace PatientManagement.PatientManagement.Endpoints
         [HttpPost, AuthorizeCreate(typeof(MyRow))]
         public SaveResponse Create(IUnitOfWork uow, SaveRequest<MyRow> request)
         {
+            var maximumInserts = UserSubscriptionHelper.GetTenantMaximumPatients();
+            if (this.List(uow.Connection, new ListRequest()).TotalCount >= maximumInserts)
+            {
+                throw new AccessViolationException(string.Format(Texts.Site.Subscriptions.MaximumPatientsError, maximumInserts));
+            }
+
             return new MyRepository().Create(uow, request);
         }
 

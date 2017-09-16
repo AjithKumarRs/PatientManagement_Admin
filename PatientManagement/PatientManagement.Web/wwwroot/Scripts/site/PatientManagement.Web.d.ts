@@ -168,6 +168,7 @@ declare namespace PatientManagement.Administration {
         MaximumSubscriptionTime: Serenity.IntegerEditor;
         MaximumUsersPerTenant: Serenity.IntegerEditor;
         MaximumVisitsPerTenant: Serenity.IntegerEditor;
+        MaximumPatientsPerTenant: Serenity.IntegerEditor;
         MaximumCabinets: Serenity.IntegerEditor;
     }
 }
@@ -178,6 +179,7 @@ declare namespace PatientManagement.Administration {
         MaximumSubscriptionTime?: number;
         MaximumUsersPerTenant?: number;
         MaximumVisitsPerTenant?: number;
+        MaximumPatientsPerTenant?: number;
         MaximumCabinets?: number;
         ExpirationDate?: string;
         Description?: string;
@@ -205,6 +207,7 @@ declare namespace PatientManagement.Administration {
             const MaximumSubscriptionTime: string;
             const MaximumUsersPerTenant: string;
             const MaximumVisitsPerTenant: string;
+            const MaximumPatientsPerTenant: string;
             const MaximumCabinets: string;
             const ExpirationDate: string;
             const Description: string;

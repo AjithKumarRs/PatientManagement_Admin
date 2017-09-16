@@ -79,6 +79,13 @@ namespace PatientManagement.Administration.Entities
             set { Fields.MaximumVisitsPerTenant[this] = value; }
         }
 
+        [DisplayName("Maximum Patients Per Tenant"), IntegerEditor]
+        public Int32? MaximumPatientsPerTenant
+        {
+            get { return Fields.MaximumPatientsPerTenant[this]; }
+            set { Fields.MaximumPatientsPerTenant[this] = value; }
+        }
+
         [DisplayName("Maximum Cabinets"), IntegerEditor]
         public Int32? MaximumCabinets
         {
@@ -182,6 +189,7 @@ namespace PatientManagement.Administration.Entities
             public Int32Field MaximumSubscriptionTime;
             public Int32Field MaximumUsersPerTenant;
             public Int32Field MaximumVisitsPerTenant;
+            public Int32Field MaximumPatientsPerTenant;
             public Int32Field MaximumCabinets;
 
             public DateTimeField ExpirationDate;

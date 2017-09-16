@@ -3,6 +3,7 @@ using PatientManagement.Administration.Entities;
 using PatientManagement.Administration.Repositories;
 using PatientManagement.Common.EmailTemplates;
 using PatientManagement.PatientManagement.Entities;
+using PatientManagement.Web.Modules.Common;
 using Serenity;
 using Serenity.Reporting;
 using Serenity.Web;
@@ -24,6 +25,11 @@ namespace PatientManagement.PatientManagement.Endpoints
         [HttpPost, AuthorizeCreate(typeof(MyRow))]
         public SaveResponse Create(IUnitOfWork uow, SaveRequest<MyRow> request)
         {
+            var maximumInserts = UserSubscriptionHelper.GetTenantMaximumVisits();
+            if (this.List(uow.Connection, new ListRequest()).TotalCount >= maximumInserts)
+            {
+                throw new AccessViolationException(string.Format(Texts.Site.Subscriptions.MaximumVisitsError, maximumInserts));
+            }
             var patient = uow.Connection.ById<PatientsRow>(request.Entity.PatientId);
 
             SendAutomaticEmailToPatient(uow, patient, request.Entity.StartDate??DateTime.MinValue, true);

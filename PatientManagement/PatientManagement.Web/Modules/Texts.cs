@@ -138,6 +138,12 @@ namespace PatientManagement
                 public static LocalText SubscriptionRightBoxButton = "Add Payment";
                 public static LocalText DeleteActiveSubscriptionError = "You cant delete active subscription";
 
+                public static LocalText MaximumVisitsError = "Based on you current subscription, you can create maximum {0} visits.";
+                public static LocalText MaximumUsersError = "Based on you current subscription, you can create maximum {0} users.";
+                public static LocalText MaximumCabinetsError = "Based on you current subscription, you can create maximum {0} cabinets.";
+                public static LocalText MaximumPatientsError = "Based on you current subscription, you can create maximum {0} patients.";
+
+
                 public static class Expired
                 {
                     public static LocalText SubscriptionInfoBoxHeader = "Subscription expired!";

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
+using PatientManagement.Administration;
 using PatientManagement.Administration.Entities;
 using PatientManagement.PatientManagement.Entities;
 using PatientManagement.Dashboard;
@@ -22,13 +23,10 @@ namespace PatientManagement.PatientManagement.Pages
         [PageAuthorize, HttpGet, Route("~/")]
         public ActionResult Index()
         {
-            var user = (UserDefinition)Serenity.Authorization.UserDefinition;
-            var connection = SqlConnections.NewFor<TenantRow>();
-            var tenant = connection.ById<TenantRow>(user.TenantId);
-
             var cabinetCookie = Request.Cookies["CabinetPreference"];
             if (!string.IsNullOrEmpty(cabinetCookie))
             {
+                var connection = SqlConnections.NewFor<CabinetsRow>();
                 var connectionCabint = connection.ById<CabinetsRow>(cabinetCookie);
                 ViewData["CabinetHeaderName"] = connectionCabint?.Name;
 
@@ -59,7 +57,7 @@ namespace PatientManagement.PatientManagement.Pages
             var cabinets = new List<CabinetsRow>();
 
 
-            if (Authorization.HasPermission("Administration:Tenants"))
+            if (Authorization.HasPermission(PermissionKeys.Tenants))
                 cabinets = connection.List<CabinetsRow>(cabinetFlds.IsActive == 1);
             else
                 cabinets = connection.List<CabinetsRow>(cabinetFlds.TenantId == user.TenantId && cabinetFlds.IsActive == 1);
@@ -152,7 +150,7 @@ namespace PatientManagement.PatientManagement.Pages
 
             List<VisitsRow> entity = new List<VisitsRow>();
 
-            if (Authorization.HasPermission("Administration:Tenants"))
+            if (Authorization.HasPermission(PermissionKeys.Tenants))
                 entity = connection.List<VisitsRow>()
                     .Where(e => e.StartDate >= startDate && e.EndDate <= endDate && e.CabinetId == cabinetIdActive)
                     .ToList();

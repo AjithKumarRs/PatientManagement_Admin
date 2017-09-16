@@ -5,6 +5,7 @@
         MaximumSubscriptionTime?: number;
         MaximumUsersPerTenant?: number;
         MaximumVisitsPerTenant?: number;
+        MaximumPatientsPerTenant?: number;
         MaximumCabinets?: number;
         ExpirationDate?: string;
         Description?: string;
@@ -37,6 +38,7 @@
             export declare const MaximumSubscriptionTime: string;
             export declare const MaximumUsersPerTenant: string;
             export declare const MaximumVisitsPerTenant: string;
+            export declare const MaximumPatientsPerTenant: string;
             export declare const MaximumCabinets: string;
             export declare const ExpirationDate: string;
             export declare const Description: string;
@@ -53,6 +55,6 @@
             export declare const RoleRoleName: string;
         }
 
-        ['OfferId', 'Name', 'MaximumSubscriptionTime', 'MaximumUsersPerTenant', 'MaximumVisitsPerTenant', 'MaximumCabinets', 'ExpirationDate', 'Description', 'Price', 'Enabled', 'CurrencyId', 'RoleId', 'UpdateUserId', 'UserName', 'UpdateDateField', 'CurrencyCurrencyId', 'CurrencyName', 'CurrencyEnabled', 'RoleRoleName'].forEach(x => (<any>Fields)[x] = x);
+        ['OfferId', 'Name', 'MaximumSubscriptionTime', 'MaximumUsersPerTenant', 'MaximumVisitsPerTenant', 'MaximumPatientsPerTenant', 'MaximumCabinets', 'ExpirationDate', 'Description', 'Price', 'Enabled', 'CurrencyId', 'RoleId', 'UpdateUserId', 'UserName', 'UpdateDateField', 'CurrencyCurrencyId', 'CurrencyName', 'CurrencyEnabled', 'RoleRoleName'].forEach(x => (<any>Fields)[x] = x);
     }
 }
