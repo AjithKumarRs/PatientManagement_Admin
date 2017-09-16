@@ -40,7 +40,7 @@ namespace PatientManagement.Administration.Entities
             set { Fields.SubscriptionEndDate[this] = value; }
         }
 
-        [DisplayName("Activated On"), NotNull, SortOrder(1, true)]
+        [DisplayName("Activated On"), NotNull]
         public DateTime? ActivatedOn
         {
             get { return Fields.ActivatedOn[this]; }
