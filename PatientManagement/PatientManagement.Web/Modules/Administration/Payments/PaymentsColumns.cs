@@ -16,7 +16,11 @@ namespace PatientManagement.Administration.Columns
         [DisplayName("Db.Shared.RecordId"), AlignCenter]
         public Int64 PaymentId { get; set; }
         public Int64 SubscriptionName { get; set; }
-        public Int64 PaymentDetailsId { get; set; }
+
+        public String PaymentDetailName { get; set; }
+
+        public int PaymentOptionMonths { get; set; }
+
         public Int32 PaymentOptionName { get; set; }
         [ReadOnly(true)]
         public Decimal Value { get; set; }

@@ -1365,7 +1365,6 @@ var PatientManagement;
         var PaymentTypes;
         (function (PaymentTypes) {
             PaymentTypes[PaymentTypes["BankTransfer"] = 0] = "BankTransfer";
-            PaymentTypes[PaymentTypes["CreditCard"] = 1] = "CreditCard";
         })(PaymentTypes = PatientManagement.PaymentTypes || (PatientManagement.PaymentTypes = {}));
         Serenity.Decorators.registerEnum(PaymentTypes, 'PatientManagement.PatientManagement.PaymentTypes');
     })(PatientManagement = PatientManagement_26.PatientManagement || (PatientManagement_26.PatientManagement = {}));

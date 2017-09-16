@@ -1825,7 +1825,6 @@ declare namespace PatientManagement.PatientManagement {
 declare namespace PatientManagement.PatientManagement {
     enum PaymentTypes {
         BankTransfer = 0,
-        CreditCard = 1,
     }
 }
 declare namespace PatientManagement.PatientManagement {
