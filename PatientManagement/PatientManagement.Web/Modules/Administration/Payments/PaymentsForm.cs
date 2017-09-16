@@ -13,10 +13,13 @@ namespace PatientManagement.Administration.Forms
     [BasedOnRow(typeof(Entities.PaymentsRow))]
     public class PaymentsForm
     {
+        [Category("Required Fields")]
+
         public Int64 SubscriptionId { get; set; }
         public Int64 PaymentDetailsId { get; set; }
         public Int32 PaymentOptionId { get; set; }
         public Int32 CurrencyId { get; set; }
+        [Category("Additional Information")]
 
         [ReadOnly(true), Required(true)]
         public String Value { get; set; }

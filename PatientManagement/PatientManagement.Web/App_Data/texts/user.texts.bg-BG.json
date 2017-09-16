@@ -299,6 +299,8 @@
   "Enums.PatientManagement.PatientManagement.SubscriptionState.NotActive": "Не е Активен",
   "Forms.Administration.Offers.Categories.General settings": "Главни настройки",
   "Forms.Administration.Offers.Categories.Tenant Restriction settings": "Ограничения на права за клиника",
+  "Forms.Administration.Payments.Categories.Additional Information": "Допълнителна Информация",
+  "Forms.Administration.Payments.Categories.Required Fields": "Задължителни Полета",
   "Forms.Membership.ChangePassword.ConfirmPassword": "Потвърди Парола",
   "Forms.Membership.ChangePassword.FormTitle": "Смени Парола",
   "Forms.Membership.ChangePassword.NewPassword": "Нова Парола",
