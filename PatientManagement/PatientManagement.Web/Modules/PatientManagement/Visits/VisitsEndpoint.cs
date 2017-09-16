@@ -28,7 +28,7 @@ namespace PatientManagement.PatientManagement.Endpoints
             var maximumInserts = UserSubscriptionHelper.GetTenantMaximumVisits();
             if (this.List(uow.Connection, new ListRequest()).TotalCount >= maximumInserts)
             {
-                throw new AccessViolationException(string.Format(Texts.Site.Subscriptions.MaximumVisitsError, maximumInserts));
+                throw new ValidationError(string.Format(Texts.Site.Subscriptions.MaximumVisitsError, maximumInserts));
             }
             var patient = uow.Connection.ById<PatientsRow>(request.Entity.PatientId);
 

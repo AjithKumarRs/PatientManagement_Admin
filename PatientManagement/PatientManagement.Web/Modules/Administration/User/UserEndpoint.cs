@@ -29,7 +29,7 @@ namespace PatientManagement.Administration.Endpoints
             var maximumInserts = UserSubscriptionHelper.GetTenantMaximumUsers();
             if (this.List(uow.Connection, new ListRequest()).TotalCount >= maximumInserts)
             {
-                throw new AccessViolationException(string.Format(Texts.Site.Subscriptions.MaximumUsersError, maximumInserts));
+                throw new ValidationError(string.Format(Texts.Site.Subscriptions.MaximumUsersError, maximumInserts));
             }
 
             return new MyRepository().Create(uow, request);

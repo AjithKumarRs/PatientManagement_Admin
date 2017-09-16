@@ -22,7 +22,7 @@ namespace PatientManagement.PatientManagement.Endpoints
             var maximumInserts = UserSubscriptionHelper.GetTenantMaximumCabinets();
             if (this.List(uow.Connection, new ListRequest()).TotalCount >= maximumInserts)
             {
-                throw new AccessViolationException(string.Format(Texts.Site.Subscriptions.MaximumCabinetsError, maximumInserts));
+                throw new ValidationError(string.Format(Texts.Site.Subscriptions.MaximumCabinetsError, maximumInserts));
             }
 
             return new MyRepository().Create(uow, request);
