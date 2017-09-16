@@ -227,7 +227,7 @@ namespace PatientManagement.Administration.Entities
             set { Fields.TenantId[this] = value; }
         }
         [DisplayName("Tenant"), Expression("tnt.TenantName")]
-        [ReadPermission("Administration:Tenants")]
+        [ReadPermission(PermissionKeys.Tenants)]
         public String TenantName
         {
             get { return Fields.TenantName[this]; }

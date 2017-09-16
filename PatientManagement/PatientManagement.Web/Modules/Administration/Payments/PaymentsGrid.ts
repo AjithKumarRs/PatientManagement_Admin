@@ -18,6 +18,20 @@ namespace PatientManagement.Administration {
 
 
         }
+        protected getItemCssClass(item: PaymentsRow, index: number): string {
+            let klass: string = "";
+
+            if (item.PaymentStatus != PatientManagement.PaymentStatus.Success) {
+                klass += " not-success-payment";
+            }
+
+            if (item.PaymentStatus === PatientManagement.PaymentStatus.Success) {
+                klass += " payment-success";
+            }else  if (item.PaymentStatus === PatientManagement.PaymentStatus.Pending) {
+                klass += " payment-pending";
+            }
+            return Q.trimToNull(klass);
+        }
 
         protected getColumns() {
             var columns = super.getColumns();

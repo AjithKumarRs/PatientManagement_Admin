@@ -19,12 +19,10 @@ namespace PatientManagement.Administration.Forms
         public Int64 PaymentDetailsId { get; set; }
         public Int32 PaymentOptionId { get; set; }
         public Int32 CurrencyId { get; set; }
-        [Category("Additional Information")]
-
         [ReadOnly(true), Required(true)]
         public String Value { get; set; }
 
-        [DefaultValue(2)]
+        [DefaultValue(2), HideOnInsert]
         public Int32 PaymentStatus { get; set; }
 
     }

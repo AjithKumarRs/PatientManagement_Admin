@@ -1,5 +1,6 @@
 ﻿
 using System;
+using PatientManagement.PatientManagement.Entities;
 using Serenity.Reporting;
 using Serenity.Web;
 
@@ -21,9 +22,11 @@ namespace PatientManagement.Administration.Endpoints
         public SaveResponse Create(IUnitOfWork uow, SaveRequest<MyRow> request)
         {
             if (request.Entity.Value == 0)
-            {
                 throw new ValidationError(Texts.Site.Payments.PaymentEmptyValueError);
-            }
+
+            if(!request.Entity.PaymentStatus.HasValue)
+                request.Entity.PaymentStatus = PaymentStatus.Pending;
+
             return new MyRepository().Create(uow, request);
         }
 
