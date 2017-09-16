@@ -131,6 +131,10 @@ namespace PatientManagement
         }
         public static class Site
         {
+            public static class Payments
+            {
+                public static LocalText PaymentEmptyValueError = "You can't make empty payment!";
+            }
             public static class Subscriptions
             {
                 public static LocalText SubscriptionTitle = "Subscription Information";

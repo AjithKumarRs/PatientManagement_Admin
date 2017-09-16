@@ -427,6 +427,7 @@
   "Site.Notifications.VisitAddedNotification": "{0} добави визита за пациент {1}",
   "Site.Notifications.VisitChangedNotification": "{0} промени визита за пациент {1}",
   "Site.Notifications.VisitDeletedNotification": "{0} изтри визита за пациент {1}",
+  "Site.Payments.PaymentEmptyValueError": "Не може да добавите нулево плащане!",
   "Site.RolePermissionDialog.DialogTitle": "Редактирай Права За Роля ({0})",
   "Site.RolePermissionDialog.EditButton": "Редактирай Права",
   "Site.RolePermissionDialog.SaveSuccess": "Обнови права за ролята.",

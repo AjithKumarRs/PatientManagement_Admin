@@ -20,6 +20,10 @@ namespace PatientManagement.Administration.Endpoints
         [HttpPost, AuthorizeCreate(typeof(MyRow))]
         public SaveResponse Create(IUnitOfWork uow, SaveRequest<MyRow> request)
         {
+            if (request.Entity.Value == 0)
+            {
+                throw new ValidationError(Texts.Site.Payments.PaymentEmptyValueError);
+            }
             return new MyRepository().Create(uow, request);
         }
 
