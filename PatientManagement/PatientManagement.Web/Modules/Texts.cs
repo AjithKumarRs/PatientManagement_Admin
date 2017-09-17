@@ -164,9 +164,9 @@ namespace PatientManagement
 
             public static class Notifications
             {
-                public static LocalText VisitChangedNotification = "{0} just change a visit for patient {1}";
-                public static LocalText VisitAddedNotification = "{0} just add a visit for patient {1}";
-                public static LocalText VisitDeletedNotification = "{0} just delete a visit for patient {1}";
+                public static LocalText VisitChangedNotification = "{0} - {1} just change a visit for patient {2}. Start date: {3} End date: {4}";
+                public static LocalText VisitAddedNotification = "{0} - {1} just add a visit for patient {2}. Start date: {3} End date: {4}";
+                public static LocalText VisitDeletedNotification = "{0} - {1} just delete a visit for patient {2}. Start date: {3} End date: {4}";
 
                 public static LocalText PatientAddedNotification = "{0} just add a patient {1}";
                 public static LocalText PatientChangedNotification = "{0} just change a patient {1}";

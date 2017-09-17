@@ -13,7 +13,7 @@ namespace PatientManagement.Administration.Entities
     [ReadPermission("Administration:Tenants:Read")]
     [ModifyPermission("Administration:Tenants:Modify")]
     [LookupScript("Administration.Tenant")]
-    public sealed class TenantRow : Row, IIdRow, INameRow, ILoggingRow
+    public sealed class TenantRow : Row, IIdRow, INameRow, ILoggingRow , IIsActiveDeletedRow
     {
         [DisplayName("Tenant Id"), Identity]
         public Int32? TenantId
@@ -23,6 +23,7 @@ namespace PatientManagement.Administration.Entities
         }
 
         [DisplayName("Tenant Name"), Size(100), NotNull, QuickSearch]
+        [LookupInclude]
         public String TenantName
         {
             get { return Fields.TenantName[this]; }
@@ -213,6 +214,27 @@ namespace PatientManagement.Administration.Entities
 
         #endregion
 
+
+        #region IIsActive
+
+        [DisplayName("Is Active"), NotNull]
+        [ReadPermission(PermissionKeys.Tenants)]
+        [LookupInclude]
+        public Int16? IsActive
+        {
+            get { return Fields.IsActive[this]; }
+            set { Fields.IsActive[this] = value; }
+        }
+
+
+        Int16Field IIsActiveRow.IsActiveField
+        {
+            get { return Fields.IsActive; }
+        }
+
+
+        #endregion
+
         IIdField IIdRow.IdField
         {
             get { return Fields.TenantId; }
@@ -259,6 +281,8 @@ namespace PatientManagement.Administration.Entities
             public DateTimeField UpdateDateField;
             public StringField InsertUserName;
             public StringField UpdateUserName;
+            public Int16Field IsActive;
+
             public RowFields()
                 : base()
             {

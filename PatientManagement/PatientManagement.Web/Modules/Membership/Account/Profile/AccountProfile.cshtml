@@ -231,7 +231,14 @@
 <!-- /.row -->
 <script type="text/javascript">
     $(function () {
-        new PatientManagement.Membership.EditTenantPanel($('#EditTenantPanel')).init();
+        var hasTenantPermissions = "@Authorization.HasPermission(PermissionKeys.AdministrationTenantsTenantEditing)";
+        if(hasTenantPermissions === "true")
+        {
+            new PatientManagement.Membership.EditTenantPanel($('#EditTenantPanel')).init();
+        }
+
+        
+    
         new PatientManagement.Membership.EditUserProfilePanel($('#EditUserProfilePanel')).init();
 
         new PatientManagement.Membership.AddedVisitsFromUserPanel($('#VisitsGrid'), @user.UserId).init();

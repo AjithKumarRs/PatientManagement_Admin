@@ -1,13 +1,8 @@
-﻿var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
+﻿var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -178,6 +173,7 @@ var PatientManagement;
         var OffersRow;
         (function (OffersRow) {
             OffersRow.idProperty = 'OfferId';
+            OffersRow.isActiveProperty = 'IsActive';
             OffersRow.nameProperty = 'Name';
             OffersRow.localTextPrefix = 'Administration.Offers';
             OffersRow.lookupKey = 'Administration.Offers';
@@ -188,7 +184,7 @@ var PatientManagement;
             var Fields;
             (function (Fields) {
             })(Fields = OffersRow.Fields || (OffersRow.Fields = {}));
-            ['OfferId', 'Name', 'MaximumSubscriptionTime', 'MaximumUsersPerTenant', 'MaximumVisitsPerTenant', 'MaximumPatientsPerTenant', 'MaximumCabinets', 'ExpirationDate', 'Description', 'Price', 'Enabled', 'CurrencyId', 'RoleId', 'UpdateUserId', 'UserName', 'UpdateDateField', 'CurrencyCurrencyId', 'CurrencyName', 'CurrencyEnabled', 'RoleRoleName'].forEach(function (x) { return Fields[x] = x; });
+            ['OfferId', 'Name', 'MaximumSubscriptionTime', 'MaximumUsersPerTenant', 'MaximumVisitsPerTenant', 'MaximumPatientsPerTenant', 'MaximumCabinets', 'ExpirationDate', 'Description', 'Price', 'Enabled', 'CurrencyId', 'RoleId', 'CurrencyCurrencyId', 'CurrencyName', 'CurrencyEnabled', 'RoleRoleName', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'IsActive', 'InsertUserName', 'UpdateUserName'].forEach(function (x) { return Fields[x] = x; });
         })(OffersRow = Administration.OffersRow || (Administration.OffersRow = {}));
     })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
 })(PatientManagement || (PatientManagement = {}));
@@ -202,7 +198,7 @@ var PatientManagement;
             var Methods;
             (function (Methods) {
             })(Methods = OffersService.Methods || (OffersService.Methods = {}));
-            ['Create', 'Update', 'Delete', 'Retrieve', 'List'].forEach(function (x) {
+            ['Create', 'Update', 'Delete', 'Undelete', 'Retrieve', 'List'].forEach(function (x) {
                 OffersService[x] = function (r, s, o) { return Q.serviceRequest(OffersService.baseUrl + '/' + x, r, s, o); };
                 Methods[x] = OffersService.baseUrl + '/' + x;
             });
@@ -384,7 +380,7 @@ var PatientManagement;
         }(Serenity.PrefixedContext));
         RoleForm.formKey = 'Administration.Role';
         Administration.RoleForm = RoleForm;
-        [['RoleName', function () { return Serenity.StringEditor; }]].forEach(function (x) { return Object.defineProperty(RoleForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
+        [['RoleName', function () { return Serenity.StringEditor; }], ['TenantId', function () { return Serenity.LookupEditor; }]].forEach(function (x) { return Object.defineProperty(RoleForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
     })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
@@ -427,6 +423,7 @@ var PatientManagement;
         var RoleRow;
         (function (RoleRow) {
             RoleRow.idProperty = 'RoleId';
+            RoleRow.isActiveProperty = 'IsActive';
             RoleRow.nameProperty = 'RoleName';
             RoleRow.localTextPrefix = 'Administration.Role';
             RoleRow.lookupKey = 'Administration.Role';
@@ -437,7 +434,7 @@ var PatientManagement;
             var Fields;
             (function (Fields) {
             })(Fields = RoleRow.Fields || (RoleRow.Fields = {}));
-            ['RoleId', 'RoleName', 'TenantId'].forEach(function (x) { return Fields[x] = x; });
+            ['RoleId', 'RoleName', 'TenantId', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'IsActive', 'TenantName', 'InsertUserName', 'UpdateUserName'].forEach(function (x) { return Fields[x] = x; });
         })(RoleRow = Administration.RoleRow || (Administration.RoleRow = {}));
     })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
 })(PatientManagement || (PatientManagement = {}));
@@ -451,7 +448,7 @@ var PatientManagement;
             var Methods;
             (function (Methods) {
             })(Methods = RoleService.Methods || (RoleService.Methods = {}));
-            ['Create', 'Update', 'Delete', 'Retrieve', 'List'].forEach(function (x) {
+            ['Create', 'Update', 'Delete', 'Undelete', 'Retrieve', 'List'].forEach(function (x) {
                 RoleService[x] = function (r, s, o) { return Q.serviceRequest(RoleService.baseUrl + '/' + x, r, s, o); };
                 Methods[x] = RoleService.baseUrl + '/' + x;
             });
@@ -578,7 +575,7 @@ var PatientManagement;
             var Methods;
             (function (Methods) {
             })(Methods = SubscriptionsService.Methods || (SubscriptionsService.Methods = {}));
-            ['Create', 'Update', 'Delete', 'Retrieve', 'List'].forEach(function (x) {
+            ['Create', 'Update', 'Delete', 'Undelete', 'Retrieve', 'List'].forEach(function (x) {
                 SubscriptionsService[x] = function (r, s, o) { return Q.serviceRequest(SubscriptionsService.baseUrl + '/' + x, r, s, o); };
                 Methods[x] = SubscriptionsService.baseUrl + '/' + x;
             });
@@ -608,6 +605,7 @@ var PatientManagement;
         var TenantRow;
         (function (TenantRow) {
             TenantRow.idProperty = 'TenantId';
+            TenantRow.isActiveProperty = 'IsActive';
             TenantRow.nameProperty = 'TenantName';
             TenantRow.localTextPrefix = 'Administration.Tenant';
             TenantRow.lookupKey = 'Administration.Tenant';
@@ -618,7 +616,7 @@ var PatientManagement;
             var Fields;
             (function (Fields) {
             })(Fields = TenantRow.Fields || (TenantRow.Fields = {}));
-            ['TenantId', 'TenantName', 'CurrencyId', 'CurrencyName', 'SubscriptionRequired', 'SubscriptionId', 'TenantWebSite', 'TenantImage', 'OverrideUsersEmailSignature', 'TenantEmailSignature', 'SubscriptionOfferId', 'SubscriptionTenantId', 'SubscriptionSubscriptionEndDate', 'SubscriptionInsertUserId', 'SubscriptionInsertDate', 'SubscriptionUpdateUserId', 'SubscriptionUpdateDateField', 'SubscriptionName', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'InsertUserName', 'UpdateUserName'].forEach(function (x) { return Fields[x] = x; });
+            ['TenantId', 'TenantName', 'CurrencyId', 'CurrencyName', 'SubscriptionRequired', 'SubscriptionId', 'TenantWebSite', 'TenantImage', 'OverrideUsersEmailSignature', 'TenantEmailSignature', 'SubscriptionOfferId', 'SubscriptionTenantId', 'SubscriptionSubscriptionEndDate', 'SubscriptionInsertUserId', 'SubscriptionInsertDate', 'SubscriptionUpdateUserId', 'SubscriptionUpdateDateField', 'SubscriptionName', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'InsertUserName', 'UpdateUserName', 'IsActive'].forEach(function (x) { return Fields[x] = x; });
         })(TenantRow = Administration.TenantRow || (Administration.TenantRow = {}));
     })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
 })(PatientManagement || (PatientManagement = {}));
@@ -632,7 +630,7 @@ var PatientManagement;
             var Methods;
             (function (Methods) {
             })(Methods = TenantService.Methods || (TenantService.Methods = {}));
-            ['Create', 'Update', 'Delete', 'Retrieve', 'List'].forEach(function (x) {
+            ['Create', 'Update', 'Delete', 'Undelete', 'Retrieve', 'List'].forEach(function (x) {
                 TenantService[x] = function (r, s, o) { return Q.serviceRequest(TenantService.baseUrl + '/' + x, r, s, o); };
                 Methods[x] = TenantService.baseUrl + '/' + x;
             });
@@ -1003,7 +1001,7 @@ var PatientManagement;
         }(Serenity.PrefixedContext));
         CabinetsForm.formKey = 'PatientManagement.Cabinets';
         PatientManagement.CabinetsForm = CabinetsForm;
-        [['Name', function () { return Serenity.StringEditor; }], ['WorkHoursStart', function () { return Serenity.TimeEditor; }], ['WorkHoursEnd', function () { return Serenity.TimeEditor; }], ['Representatives', function () { return Serenity.LookupEditor; }]].forEach(function (x) { return Object.defineProperty(CabinetsForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
+        [['Name', function () { return Serenity.StringEditor; }], ['WorkHoursStart', function () { return Serenity.TimeEditor; }], ['WorkHoursEnd', function () { return Serenity.TimeEditor; }], ['Representatives', function () { return Serenity.LookupEditor; }], ['TenantId', function () { return Serenity.LookupEditor; }]].forEach(function (x) { return Object.defineProperty(CabinetsForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
     })(PatientManagement = PatientManagement_5.PatientManagement || (PatientManagement_5.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
@@ -1711,6 +1709,7 @@ var PatientManagement;
             OffersGrid.prototype.getIdProperty = function () { return Administration.OffersRow.idProperty; };
             OffersGrid.prototype.getLocalTextPrefix = function () { return Administration.OffersRow.localTextPrefix; };
             OffersGrid.prototype.getService = function () { return Administration.OffersService.baseUrl; };
+            OffersGrid.prototype.getIsActiveProperty = function () { return Administration.OffersRow.isActiveProperty; };
             return OffersGrid;
         }(Serenity.EntityGrid));
         OffersGrid = __decorate([
@@ -2007,6 +2006,7 @@ var PatientManagement;
             RoleGrid.prototype.getIdProperty = function () { return Administration.RoleRow.idProperty; };
             RoleGrid.prototype.getLocalTextPrefix = function () { return Administration.RoleRow.localTextPrefix; };
             RoleGrid.prototype.getService = function () { return Administration.RoleService.baseUrl; };
+            RoleGrid.prototype.getIsActiveProperty = function () { return Administration.OffersRow.isActiveProperty; };
             RoleGrid.prototype.getDefaultSortBy = function () {
                 return [Administration.RoleRow.Fields.RoleName];
             };
@@ -2078,7 +2078,7 @@ var PatientManagement;
 (function (PatientManagement) {
     var Administration;
     (function (Administration) {
-        var SentEmailsDialog = (function (_super) {
+        var SentEmailsDialog = SentEmailsDialog_1 = (function (_super) {
             __extends(SentEmailsDialog, _super);
             function SentEmailsDialog() {
                 var _this = _super !== null && _super.apply(this, arguments) || this;
@@ -2103,7 +2103,7 @@ var PatientManagement;
                             }
                             else {
                                 var sentEmail = {};
-                                var dialog = new SentEmailsDialog();
+                                var dialog = new SentEmailsDialog_1();
                                 //TODO We open new dialog with PatientID. Correct?
                                 sentEmail.ToEmail = patient.PatientId.toString();
                                 dialog.form.ToEmail.readOnly = true;
@@ -2130,11 +2130,12 @@ var PatientManagement;
             };
             return SentEmailsDialog;
         }(Serenity.EntityDialog));
-        SentEmailsDialog = __decorate([
+        SentEmailsDialog = SentEmailsDialog_1 = __decorate([
             Serenity.Decorators.registerClass(),
             Serenity.Decorators.responsive()
         ], SentEmailsDialog);
         Administration.SentEmailsDialog = SentEmailsDialog;
+        var SentEmailsDialog_1;
     })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
@@ -2319,6 +2320,7 @@ var PatientManagement;
             SubscriptionsGrid.prototype.getIdProperty = function () { return Administration.SubscriptionsRow.idProperty; };
             SubscriptionsGrid.prototype.getLocalTextPrefix = function () { return Administration.SubscriptionsRow.localTextPrefix; };
             SubscriptionsGrid.prototype.getService = function () { return Administration.SubscriptionsService.baseUrl; };
+            SubscriptionsGrid.prototype.getIsActiveProperty = function () { return Administration.OffersRow.isActiveProperty; };
             SubscriptionsGrid.prototype.getItemCssClass = function (item, index) {
                 var klass = "";
                 if (item.Enabled == 1) {
@@ -2373,6 +2375,7 @@ var PatientManagement;
             TenantGrid.prototype.getIdProperty = function () { return Administration.TenantRow.idProperty; };
             TenantGrid.prototype.getLocalTextPrefix = function () { return Administration.TenantRow.localTextPrefix; };
             TenantGrid.prototype.getService = function () { return Administration.TenantService.baseUrl; };
+            TenantGrid.prototype.getIsActiveProperty = function () { return Administration.OffersRow.isActiveProperty; };
             return TenantGrid;
         }(Serenity.EntityGrid));
         TenantGrid = __decorate([
@@ -2580,6 +2583,22 @@ var PatientManagement;
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
 (function (PatientManagement) {
+    var Authorization;
+    (function (Authorization) {
+        Object.defineProperty(Authorization, 'userDefinition', {
+            get: function () {
+                return Q.getRemoteData('UserData');
+            }
+        });
+        function hasPermission(permissionKey) {
+            var ud = Authorization.userDefinition;
+            return ud.Username === 'admin' || !!ud.Permissions[permissionKey];
+        }
+        Authorization.hasPermission = hasPermission;
+    })(Authorization = PatientManagement.Authorization || (PatientManagement.Authorization = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
     var Administration;
     (function (Administration) {
         var UserDialog = (function (_super) {
@@ -2682,22 +2701,6 @@ var PatientManagement;
         ], UserGrid);
         Administration.UserGrid = UserGrid;
     })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
-})(PatientManagement || (PatientManagement = {}));
-var PatientManagement;
-(function (PatientManagement) {
-    var Authorization;
-    (function (Authorization) {
-        Object.defineProperty(Authorization, 'userDefinition', {
-            get: function () {
-                return Q.getRemoteData('UserData');
-            }
-        });
-        function hasPermission(permissionKey) {
-            var ud = Authorization.userDefinition;
-            return ud.Username === 'admin' || !!ud.Permissions[permissionKey];
-        }
-        Authorization.hasPermission = hasPermission;
-    })(Authorization = PatientManagement.Authorization || (PatientManagement.Authorization = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
 (function (PatientManagement) {
@@ -3121,33 +3124,6 @@ var PatientManagement;
         ], UserRoleDialog);
         Administration.UserRoleDialog = UserRoleDialog;
     })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
-})(PatientManagement || (PatientManagement = {}));
-var PatientManagement;
-(function (PatientManagement) {
-    var LanguageList;
-    (function (LanguageList) {
-        function getValue() {
-            var result = [];
-            for (var _i = 0, _a = PatientManagement.Administration.LanguageRow.getLookup().items; _i < _a.length; _i++) {
-                var k = _a[_i];
-                if (k.LanguageId !== 'en') {
-                    result.push([k.Id.toString(), k.LanguageName]);
-                }
-            }
-            return result;
-        }
-        LanguageList.getValue = getValue;
-    })(LanguageList = PatientManagement.LanguageList || (PatientManagement.LanguageList = {}));
-})(PatientManagement || (PatientManagement = {}));
-/// <reference path="../Common/Helpers/LanguageList.ts" />
-var PatientManagement;
-(function (PatientManagement) {
-    var ScriptInitialization;
-    (function (ScriptInitialization) {
-        Q.Config.responsiveDialogs = true;
-        Q.Config.rootNamespaces.push('PatientManagement');
-        Serenity.EntityDialog.defaultLanguageList = PatientManagement.LanguageList.getValue;
-    })(ScriptInitialization = PatientManagement.ScriptInitialization || (PatientManagement.ScriptInitialization = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
 (function (PatientManagement) {
@@ -3688,6 +3664,23 @@ var PatientManagement;
         ], GridEditorDialog);
         Common.GridEditorDialog = GridEditorDialog;
     })(Common = PatientManagement.Common || (PatientManagement.Common = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var LanguageList;
+    (function (LanguageList) {
+        function getValue() {
+            var result = [];
+            for (var _i = 0, _a = PatientManagement.Administration.LanguageRow.getLookup().items; _i < _a.length; _i++) {
+                var k = _a[_i];
+                if (k.LanguageId !== 'en') {
+                    result.push([k.Id.toString(), k.LanguageName]);
+                }
+            }
+            return result;
+        }
+        LanguageList.getValue = getValue;
+    })(LanguageList = PatientManagement.LanguageList || (PatientManagement.LanguageList = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
 (function (PatientManagement) {
@@ -4352,6 +4345,16 @@ var PatientManagement;
         Common.ReportPage = ReportPage;
     })(Common = PatientManagement.Common || (PatientManagement.Common = {}));
 })(PatientManagement || (PatientManagement = {}));
+/// <reference path="../Common/Helpers/LanguageList.ts" />
+var PatientManagement;
+(function (PatientManagement) {
+    var ScriptInitialization;
+    (function (ScriptInitialization) {
+        Q.Config.responsiveDialogs = true;
+        Q.Config.rootNamespaces.push('PatientManagement');
+        Serenity.EntityDialog.defaultLanguageList = PatientManagement.LanguageList.getValue;
+    })(ScriptInitialization = PatientManagement.ScriptInitialization || (PatientManagement.ScriptInitialization = {}));
+})(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
 (function (PatientManagement) {
     var Common;
@@ -4380,60 +4383,6 @@ var PatientManagement;
         }());
         Common.UserPreferenceStorage = UserPreferenceStorage;
     })(Common = PatientManagement.Common || (PatientManagement.Common = {}));
-})(PatientManagement || (PatientManagement = {}));
-var PatientManagement;
-(function (PatientManagement) {
-    var Membership;
-    (function (Membership) {
-        var LoginPanel = (function (_super) {
-            __extends(LoginPanel, _super);
-            function LoginPanel(container) {
-                var _this = _super.call(this, container) || this;
-                $(function () {
-                    $('body').vegas({
-                        delay: 10000,
-                        cover: true,
-                        overlay: Q.resolveUrl("~/Scripts/vegas/overlays/01.png"),
-                        slides: [
-                            { src: Q.resolveUrl('~/Content/site/slides/slide1.jpg'), transition: 'fade' },
-                            { src: Q.resolveUrl('~/Content/site/slides/slide2.jpg'), transition: 'fade' },
-                            { src: Q.resolveUrl('~/Content/site/slides/slide3.jpg'), transition: 'zoomOut' },
-                            { src: Q.resolveUrl('~/Content/site/slides/slide4.jpg'), transition: 'blur' }
-                        ]
-                    });
-                });
-                _this.form = new Membership.LoginForm(_this.idPrefix);
-                _this.byId('LoginButton').click(function (e) {
-                    e.preventDefault();
-                    if (!_this.validateForm()) {
-                        return;
-                    }
-                    var request = _this.getSaveEntity();
-                    Q.serviceCall({
-                        url: Q.resolveUrl('~/Account/Login'),
-                        request: request,
-                        onSuccess: function (response) {
-                            var q = Q.parseQueryString();
-                            var returnUrl = q['returnUrl'] || q['ReturnUrl'];
-                            if (returnUrl) {
-                                window.location.href = returnUrl;
-                            }
-                            else {
-                                window.location.href = Q.resolveUrl('~/');
-                            }
-                        }
-                    });
-                });
-                return _this;
-            }
-            LoginPanel.prototype.getFormKey = function () { return Membership.LoginForm.formKey; };
-            return LoginPanel;
-        }(Serenity.PropertyPanel));
-        LoginPanel = __decorate([
-            Serenity.Decorators.registerClass()
-        ], LoginPanel);
-        Membership.LoginPanel = LoginPanel;
-    })(Membership = PatientManagement.Membership || (PatientManagement.Membership = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
 (function (PatientManagement) {
@@ -4515,6 +4464,60 @@ var PatientManagement;
             Serenity.Decorators.registerClass()
         ], ForgotPasswordPanel);
         Membership.ForgotPasswordPanel = ForgotPasswordPanel;
+    })(Membership = PatientManagement.Membership || (PatientManagement.Membership = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var Membership;
+    (function (Membership) {
+        var LoginPanel = (function (_super) {
+            __extends(LoginPanel, _super);
+            function LoginPanel(container) {
+                var _this = _super.call(this, container) || this;
+                $(function () {
+                    $('body').vegas({
+                        delay: 10000,
+                        cover: true,
+                        overlay: Q.resolveUrl("~/Scripts/vegas/overlays/01.png"),
+                        slides: [
+                            { src: Q.resolveUrl('~/Content/site/slides/slide1.jpg'), transition: 'fade' },
+                            { src: Q.resolveUrl('~/Content/site/slides/slide2.jpg'), transition: 'fade' },
+                            { src: Q.resolveUrl('~/Content/site/slides/slide3.jpg'), transition: 'zoomOut' },
+                            { src: Q.resolveUrl('~/Content/site/slides/slide4.jpg'), transition: 'blur' }
+                        ]
+                    });
+                });
+                _this.form = new Membership.LoginForm(_this.idPrefix);
+                _this.byId('LoginButton').click(function (e) {
+                    e.preventDefault();
+                    if (!_this.validateForm()) {
+                        return;
+                    }
+                    var request = _this.getSaveEntity();
+                    Q.serviceCall({
+                        url: Q.resolveUrl('~/Account/Login'),
+                        request: request,
+                        onSuccess: function (response) {
+                            var q = Q.parseQueryString();
+                            var returnUrl = q['returnUrl'] || q['ReturnUrl'];
+                            if (returnUrl) {
+                                window.location.href = returnUrl;
+                            }
+                            else {
+                                window.location.href = Q.resolveUrl('~/');
+                            }
+                        }
+                    });
+                });
+                return _this;
+            }
+            LoginPanel.prototype.getFormKey = function () { return Membership.LoginForm.formKey; };
+            return LoginPanel;
+        }(Serenity.PropertyPanel));
+        LoginPanel = __decorate([
+            Serenity.Decorators.registerClass()
+        ], LoginPanel);
+        Membership.LoginPanel = LoginPanel;
     })(Membership = PatientManagement.Membership || (PatientManagement.Membership = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
@@ -4911,6 +4914,7 @@ var PatientManagement;
             CabinetsGrid.prototype.getDialogType = function () { return PatientManagement.CabinetsDialog; };
             CabinetsGrid.prototype.getIdProperty = function () { return PatientManagement.CabinetsRow.idProperty; };
             CabinetsGrid.prototype.getLocalTextPrefix = function () { return PatientManagement.CabinetsRow.localTextPrefix; };
+            CabinetsGrid.prototype.getIsActiveProperty = function () { return PatientManagement.CabinetsRow.isActiveProperty; };
             CabinetsGrid.prototype.getService = function () { return PatientManagement.CabinetsService.baseUrl; };
             return CabinetsGrid;
         }(Serenity.EntityGrid));
@@ -4961,7 +4965,6 @@ var PatientManagement;
                             text: response.Entities[0].Name,
                         });
                         _this.value = response.Entities[0].CabinetId + "";
-                        //this.readOnly = true;
                     }
                     else {
                         for (var i = 0; i < response.TotalCount; i++) {

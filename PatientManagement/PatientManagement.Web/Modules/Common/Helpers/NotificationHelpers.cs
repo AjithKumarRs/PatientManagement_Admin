@@ -92,7 +92,7 @@ namespace PatientManagement.Web.Modules.Common.Helpers
         #endregion
 
         #region Visits Notification
-        public static void SendVisitNotification(int VisitId, DateTime start, DateTime end, int patientId, EEntityNotificationStatus status)
+        public static void SendVisitNotification(int VisitId, string cabinetName, DateTime start, DateTime end, int patientId, EEntityNotificationStatus status)
         {
             UserDefinition user = (UserDefinition) Authorization.UserDefinition;
             var patientName = string.Empty;
@@ -109,8 +109,11 @@ namespace PatientManagement.Web.Modules.Common.Helpers
                     },
                     new Object[]
                     {
+                        cabinetName,
                         user.DisplayName,
-                        patientName
+                        patientName,
+                        start.ToString("HH:mm dd.MM.yyyy"),
+                        end.ToString("HH:mm dd.MM.yyyy")
                     }
 
             );

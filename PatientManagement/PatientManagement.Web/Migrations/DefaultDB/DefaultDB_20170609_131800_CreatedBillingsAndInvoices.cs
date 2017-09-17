@@ -52,15 +52,15 @@ namespace PatientManagement.Migrations.DefaultDB
 
             Insert.IntoTable("PaymentOptions").Row(new
             {
-                Days = 30,
-                Name = "Montly Payment",
+                Days = 1,
+                Name = "Monthly Payment",
                 UpdateUserId = 1,
                 UpdateDateField = DateTime.Now,
                 InsertUserId = 1,
                 InsertDate = DateTime.Now,
             }).Row(new
             {
-                Days = 365,
+                Days = 12,
                 Name = "Year Payment",
                 UpdateUserId = 1,
                 UpdateDateField = DateTime.Now,

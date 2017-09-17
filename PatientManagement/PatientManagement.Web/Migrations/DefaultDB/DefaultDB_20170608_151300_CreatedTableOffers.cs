@@ -37,7 +37,7 @@ namespace PatientManagement.Migrations.DefaultDB
                     Price = Decimal.Zero,
                     MaximumSubscriptionTime = 30,
                     CurrencyId = 1,
-                    RoleId = 1,
+                    RoleId = 2,
                     UpdateUserId = 1,
                     UpdateDateField = DateTime.Now
                 });

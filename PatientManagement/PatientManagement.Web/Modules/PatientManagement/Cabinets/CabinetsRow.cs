@@ -1,4 +1,5 @@
 ﻿
+using PatientManagement.Administration;
 using PatientManagement.Administration.Entities;
 using PatientManagement.PatientManagement.Scripts;
 
@@ -13,8 +14,9 @@ namespace PatientManagement.PatientManagement.Entities
     using System.IO;
     using System.Collections.Generic;
     [ConnectionKey("PatientManagement"), TableName("[dbo].[Cabinets]"), DisplayName("Cabinets"), InstanceName("Cabinet") ,TwoLevelCached]
-    [ReadPermission("AdministrationTenants:Cabinets:Read")]
-    [ModifyPermission("AdministrationTenants:Cabinets:Modify")]
+    [ReadPermission("PatientManagement:Cabinets:Read")]
+    [ModifyPermission("PatientManagement:Cabinets:Modify")]
+    [DeletePermission("PatientManagement:Cabinets:Delete")]
     [LookupScript("PatientManagement.Cabinets",
         LookupType = typeof(MultiTenantRowLookupScript<>))]
     public sealed class CabinetsRow : Row, IIdRow, INameRow, ILoggingRow, IMultiTenantRow, IIsActiveDeletedRow
@@ -70,7 +72,7 @@ namespace PatientManagement.PatientManagement.Entities
         #region ILoggingRow
 
         [DisplayName("Insert User Id"), NotNull, ForeignKey("Users", "UserId"), LeftJoin("usrI"), TextualField("InsertUserName")]
-        [ReadPermission("Administration:Tenants")]
+        [ReadPermission(PermissionKeys.Tenants)]
         public Int32? InsertUserId
         {
             get { return Fields.InsertUserId[this]; }
@@ -79,7 +81,7 @@ namespace PatientManagement.PatientManagement.Entities
 
 
         [DisplayName("Created by"), Expression("usrI.UserName")]
-        [ReadPermission("Administration:Tenants")]
+        [ReadPermission(PermissionKeys.Tenants)]
         public String InsertUserName
         {
             get { return Fields.InsertUserName[this]; }
@@ -88,7 +90,7 @@ namespace PatientManagement.PatientManagement.Entities
 
 
         [DisplayName("Insert Date"), NotNull, QuickFilter()]
-        [ReadPermission("Administration:Tenants")]
+        [ReadPermission(PermissionKeys.Tenants)]
         public DateTime? InsertDate
         {
             get { return Fields.InsertDate[this]; }
@@ -96,14 +98,14 @@ namespace PatientManagement.PatientManagement.Entities
         }
 
         [DisplayName("Update User Id"), NotNull, ForeignKey("Users", "UserId"), LeftJoin("usrU"), TextualField("UpdateUserName")]
-        [ReadPermission("Administration:Tenants")]
+        [ReadPermission(PermissionKeys.Tenants)]
         public Int32? UpdateUserId
         {
             get { return Fields.UpdateUserId[this]; }
             set { Fields.UpdateUserId[this] = value; }
         }
         [DisplayName("Last updated by"), Expression("usrU.UserName")]
-        [ReadPermission("Administration:Tenants")]
+        [ReadPermission(PermissionKeys.Tenants)]
         public String UpdateUserName
         {
             get { return Fields.UpdateUserName[this]; }
@@ -111,7 +113,7 @@ namespace PatientManagement.PatientManagement.Entities
         }
 
         [DisplayName("Update Date Field"), NotNull]
-        [ReadPermission("Administration:Tenants")]
+        [ReadPermission(PermissionKeys.Tenants)]
         public DateTime? UpdateDateField
         {
             get { return Fields.UpdateDateField[this]; }
@@ -130,14 +132,16 @@ namespace PatientManagement.PatientManagement.Entities
 
         #region Tenant
 
-        [Insertable(false), Updatable(false), ForeignKey("Tenants", "TenantId"), LeftJoin("tnt")]
+        [DisplayName("Tenant"), ForeignKey("Tenants", "TenantId"), LeftJoin("tnt"), QuickFilter]
+        [ReadPermission(PermissionKeys.Tenants)]
+        [LookupEditor(typeof(TenantRow))]
         public Int32? TenantId
         {
             get { return Fields.TenantId[this]; }
             set { Fields.TenantId[this] = value; }
         }
         [DisplayName("Tenant"), Expression("tnt.TenantName")]
-        [ReadPermission("Administration:Tenants")]
+        [ReadPermission(PermissionKeys.Tenants)]
         public String TenantName
         {
             get { return Fields.TenantName[this]; }
@@ -152,7 +156,7 @@ namespace PatientManagement.PatientManagement.Entities
         #region IIsActive
 
         [DisplayName("Is Active"), NotNull]
-        [ReadPermission("Administration:Tenants")]
+        [ReadPermission(PermissionKeys.Tenants)]
         [LookupInclude]
         public Int16? IsActive
         {

@@ -37,7 +37,11 @@ namespace PatientManagement.Administration.Repositories
         {
             return new MyListHandler().Process(connection, request);
         }
-
+        public UndeleteResponse Undelete(IUnitOfWork uow, UndeleteRequest request)
+        {
+            return new MyUndeleteHandler().Process(uow, request);
+        }
+        private class MyUndeleteHandler : UndeleteRequestHandler<MyRow> { }
         private class MySaveHandler : SaveRequestHandler<MyRow>
         {
             protected override void AfterSave()

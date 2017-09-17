@@ -30,6 +30,7 @@ namespace PatientManagement.Administration.Entities
             set { Fields.Username[this] = value; }
         }
 
+        [ReadPermission(PermissionKeys.Tenants)]
         [DisplayName("Source"), Size(4), NotNull, Insertable(false), Updatable(false), DefaultValue("site")]
         public String Source
         {
@@ -133,6 +134,7 @@ namespace PatientManagement.Administration.Entities
             set { Fields.TenantId[this] = value; }
         }
 
+        [ReadPermission(PermissionKeys.Tenants)]
         [DisplayName("Tenant"), Expression("tnt.TenantName")]
         public String TenantName
         {

@@ -13,8 +13,8 @@ namespace PatientManagement.PatientManagement.Entities
     using System.ComponentModel;
 
     [ConnectionKey("PatientManagement"), DisplayName("CabinetRepresentatives"), InstanceName("CabinetRepresentatives")]
-    [ReadPermission("AdministrationTenants:Cabinets:Read")]
-    [ModifyPermission("AdministrationTenants:Cabinets:Modify")]
+    [ReadPermission("PatientManagement:Cabinets:Read")]
+    [ModifyPermission("PatientManagement:Cabinets:Modify")]
     public sealed class CabinetRepresentativesRow : Row, IIdRow
     {
         [DisplayName("Representative Id"), Column("RepresentativeID"), Identity]

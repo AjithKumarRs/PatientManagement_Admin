@@ -194,14 +194,26 @@ namespace PatientManagement.Administration.Entities
         #endregion
 
 
-        [NotNull, Insertable(false), Updatable(true)]
-        [BsSwitchEditor]
+
+        #region IIsActive
+
+        [DisplayName("Is Active"), NotNull]
+        [ReadPermission(PermissionKeys.Tenants)]
         [LookupInclude]
         public Int16? IsActive
         {
             get { return Fields.IsActive[this]; }
             set { Fields.IsActive[this] = value; }
         }
+
+
+        Int16Field IIsActiveRow.IsActiveField
+        {
+            get { return Fields.IsActive; }
+        }
+
+
+        #endregion
 
         [NotNull, DisplayName("Is Active"),  SortOrder(1, true)]
         [BsSwitchEditor]
@@ -253,7 +265,5 @@ namespace PatientManagement.Administration.Entities
                 LocalTextPrefix = "Administration.Subscriptions";
             }
         }
-
-        public Int16Field IsActiveField { get; } = Fields.IsActive;
     }
 }

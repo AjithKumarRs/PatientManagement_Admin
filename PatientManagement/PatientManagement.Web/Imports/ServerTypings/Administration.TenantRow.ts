@@ -24,10 +24,12 @@
         UpdateDateField?: string;
         InsertUserName?: string;
         UpdateUserName?: string;
+        IsActive?: number;
     }
 
     export namespace TenantRow {
         export const idProperty = 'TenantId';
+        export const isActiveProperty = 'IsActive';
         export const nameProperty = 'TenantName';
         export const localTextPrefix = 'Administration.Tenant';
         export const lookupKey = 'Administration.Tenant';
@@ -61,8 +63,9 @@
             export declare const UpdateDateField: string;
             export declare const InsertUserName: string;
             export declare const UpdateUserName: string;
+            export declare const IsActive: string;
         }
 
-        ['TenantId', 'TenantName', 'CurrencyId', 'CurrencyName', 'SubscriptionRequired', 'SubscriptionId', 'TenantWebSite', 'TenantImage', 'OverrideUsersEmailSignature', 'TenantEmailSignature', 'SubscriptionOfferId', 'SubscriptionTenantId', 'SubscriptionSubscriptionEndDate', 'SubscriptionInsertUserId', 'SubscriptionInsertDate', 'SubscriptionUpdateUserId', 'SubscriptionUpdateDateField', 'SubscriptionName', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'InsertUserName', 'UpdateUserName'].forEach(x => (<any>Fields)[x] = x);
+        ['TenantId', 'TenantName', 'CurrencyId', 'CurrencyName', 'SubscriptionRequired', 'SubscriptionId', 'TenantWebSite', 'TenantImage', 'OverrideUsersEmailSignature', 'TenantEmailSignature', 'SubscriptionOfferId', 'SubscriptionTenantId', 'SubscriptionSubscriptionEndDate', 'SubscriptionInsertUserId', 'SubscriptionInsertDate', 'SubscriptionUpdateUserId', 'SubscriptionUpdateDateField', 'SubscriptionName', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'InsertUserName', 'UpdateUserName', 'IsActive'].forEach(x => (<any>Fields)[x] = x);
     }
 }

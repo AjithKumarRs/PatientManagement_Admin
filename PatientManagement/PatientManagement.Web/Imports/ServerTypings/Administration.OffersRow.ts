@@ -13,17 +13,22 @@
         Enabled?: boolean;
         CurrencyId?: number;
         RoleId?: number;
-        UpdateUserId?: number;
-        UserName?: string;
-        UpdateDateField?: string;
         CurrencyCurrencyId?: string;
         CurrencyName?: string;
         CurrencyEnabled?: boolean;
         RoleRoleName?: string;
+        InsertUserId?: number;
+        InsertDate?: string;
+        UpdateUserId?: number;
+        UpdateDateField?: string;
+        IsActive?: number;
+        InsertUserName?: string;
+        UpdateUserName?: string;
     }
 
     export namespace OffersRow {
         export const idProperty = 'OfferId';
+        export const isActiveProperty = 'IsActive';
         export const nameProperty = 'Name';
         export const localTextPrefix = 'Administration.Offers';
         export const lookupKey = 'Administration.Offers';
@@ -46,15 +51,19 @@
             export declare const Enabled: string;
             export declare const CurrencyId: string;
             export declare const RoleId: string;
-            export declare const UpdateUserId: string;
-            export declare const UserName: string;
-            export declare const UpdateDateField: string;
             export declare const CurrencyCurrencyId: string;
             export declare const CurrencyName: string;
             export declare const CurrencyEnabled: string;
             export declare const RoleRoleName: string;
+            export declare const InsertUserId: string;
+            export declare const InsertDate: string;
+            export declare const UpdateUserId: string;
+            export declare const UpdateDateField: string;
+            export declare const IsActive: string;
+            export declare const InsertUserName: string;
+            export declare const UpdateUserName: string;
         }
 
-        ['OfferId', 'Name', 'MaximumSubscriptionTime', 'MaximumUsersPerTenant', 'MaximumVisitsPerTenant', 'MaximumPatientsPerTenant', 'MaximumCabinets', 'ExpirationDate', 'Description', 'Price', 'Enabled', 'CurrencyId', 'RoleId', 'UpdateUserId', 'UserName', 'UpdateDateField', 'CurrencyCurrencyId', 'CurrencyName', 'CurrencyEnabled', 'RoleRoleName'].forEach(x => (<any>Fields)[x] = x);
+        ['OfferId', 'Name', 'MaximumSubscriptionTime', 'MaximumUsersPerTenant', 'MaximumVisitsPerTenant', 'MaximumPatientsPerTenant', 'MaximumCabinets', 'ExpirationDate', 'Description', 'Price', 'Enabled', 'CurrencyId', 'RoleId', 'CurrencyCurrencyId', 'CurrencyName', 'CurrencyEnabled', 'RoleRoleName', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'IsActive', 'InsertUserName', 'UpdateUserName'].forEach(x => (<any>Fields)[x] = x);
     }
 }

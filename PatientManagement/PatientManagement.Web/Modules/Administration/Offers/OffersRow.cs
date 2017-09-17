@@ -14,7 +14,7 @@ namespace PatientManagement.Administration.Entities
     [ModifyPermission("Administration:Offers:Modify")]
     [LookupScript("Administration.Offers")]
     [LocalizationRow(typeof(OfferLangRow))]
-    public sealed class OffersRow : Row, IIdRow, INameRow, IUpdateLogRow
+    public sealed class OffersRow : Row, IIdRow, INameRow, ILoggingRow, IIsActiveDeletedRow
     {
         [DisplayName("OfferId"), Identity]
         public Int32? OfferId
@@ -134,36 +134,87 @@ namespace PatientManagement.Administration.Entities
             get { return Fields.RoleRoleName[this]; }
             set { Fields.RoleRoleName[this] = value; }
         }
-        [DisplayName("Update User Id"), NotNull, ForeignKey("Users", "UserId"), LeftJoin("usr")]
+
+        #region ILoggingRow
+
+        [DisplayName("Insert User Id"), NotNull, ForeignKey("Users", "UserId"), LeftJoin("usrI"), TextualField("InsertUserName")]
+        [ReadPermission(PermissionKeys.Tenants)]
+        public Int32? InsertUserId
+        {
+            get { return Fields.InsertUserId[this]; }
+            set { Fields.InsertUserId[this] = value; }
+        }
+
+
+        [DisplayName("Created by"), Expression("usrI.UserName")]
+        [ReadPermission(PermissionKeys.Tenants)]
+        public String InsertUserName
+        {
+            get { return Fields.InsertUserName[this]; }
+            set { Fields.InsertUserName[this] = value; }
+        }
+
+
+        [DisplayName("Insert Date"), NotNull, QuickFilter()]
+        [ReadPermission(PermissionKeys.Tenants)]
+        public DateTime? InsertDate
+        {
+            get { return Fields.InsertDate[this]; }
+            set { Fields.InsertDate[this] = value; }
+        }
+
+        [DisplayName("Update User Id"), NotNull, ForeignKey("Users", "UserId"), LeftJoin("usrU"), TextualField("UpdateUserName")]
+        [ReadPermission(PermissionKeys.Tenants)]
         public Int32? UpdateUserId
         {
             get { return Fields.UpdateUserId[this]; }
             set { Fields.UpdateUserId[this] = value; }
         }
-
-        [DisplayName("Last updated by"), Expression("usr.UserName")]
-        public String UserName
+        [DisplayName("Last updated by"), Expression("usrU.UserName")]
+        [ReadPermission(PermissionKeys.Tenants)]
+        public String UpdateUserName
         {
-            get { return Fields.UserName[this]; }
-            set { Fields.UserName[this] = value; }
+            get { return Fields.UpdateUserName[this]; }
+            set { Fields.UpdateUserName[this] = value; }
         }
 
-        public IIdField UpdateUserIdField
-        {
-            get { return Fields.UpdateUserId; }
-        }
-
-        DateTimeField IUpdateLogRow.UpdateDateField
-        {
-            get { return Fields.UpdateDateField; }
-        }
-        [DisplayFormat("dd/MM/yyyy HH:mm")]
         [DisplayName("Update Date Field"), NotNull]
+        [ReadPermission(PermissionKeys.Tenants)]
         public DateTime? UpdateDateField
         {
             get { return Fields.UpdateDateField[this]; }
             set { Fields.UpdateDateField[this] = value; }
         }
+        public IIdField InsertUserIdField => Fields.InsertUserId;
+
+        public DateTimeField InsertDateField => Fields.InsertDate;
+
+
+        public IIdField UpdateUserIdField { get; } = Fields.UpdateUserId;
+
+        DateTimeField IUpdateLogRow.UpdateDateField { get; } = Fields.UpdateDateField;
+
+        #endregion
+
+        #region IIsActive
+
+        [DisplayName("Is Active"), NotNull]
+        [ReadPermission(PermissionKeys.Tenants)]
+        [LookupInclude]
+        public Int16? IsActive
+        {
+            get { return Fields.IsActive[this]; }
+            set { Fields.IsActive[this] = value; }
+        }
+
+
+        Int16Field IIsActiveRow.IsActiveField
+        {
+            get { return Fields.IsActive; }
+        }
+
+
+        #endregion
 
         IIdField IIdRow.IdField
         {
@@ -199,9 +250,6 @@ namespace PatientManagement.Administration.Entities
 
             public Int32Field CurrencyId;
             public Int32Field RoleId;
-            public Int32Field UpdateUserId;
-            public StringField UserName;
-            public DateTimeField UpdateDateField;
 
             public StringField CurrencyCurrencyId;
             public StringField CurrencyName;
@@ -209,6 +257,15 @@ namespace PatientManagement.Administration.Entities
 
             public StringField RoleRoleName;
 
+
+            public Int32Field InsertUserId;
+            public DateTimeField InsertDate;
+            public Int32Field UpdateUserId;
+            public DateTimeField UpdateDateField;
+            public Int16Field IsActive;
+            
+            public StringField InsertUserName;
+            public StringField UpdateUserName;
             public RowFields()
                 : base()
             {

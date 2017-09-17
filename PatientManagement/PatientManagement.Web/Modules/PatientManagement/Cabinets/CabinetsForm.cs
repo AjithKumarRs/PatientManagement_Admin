@@ -24,5 +24,7 @@ namespace PatientManagement.PatientManagement.Forms
 
         public List<Int32> Representatives { get; set; }
 
+        public Int32? TenantId { get; set; }
+
     }
 }

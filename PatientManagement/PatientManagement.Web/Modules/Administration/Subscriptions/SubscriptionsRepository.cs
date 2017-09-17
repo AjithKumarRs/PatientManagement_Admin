@@ -42,16 +42,18 @@ namespace PatientManagement.Administration.Repositories
         {
             return new MyListHandler().Process(connection, request);
         }
-
+        public UndeleteResponse Undelete(IUnitOfWork uow, UndeleteRequest request)
+        {
+            return new MyUndeleteHandler().Process(uow, request);
+        }
+        private class MyUndeleteHandler : UndeleteRequestHandler<MyRow> { }
         private class MySaveHandler : SaveRequestHandler<MyRow>
         {
 
             protected override void BeforeSave()
             {
                 base.AfterSave();
-
-                var user = (UserDefinition)Authorization.UserDefinition;
-
+                
                 if (IsCreate)
                 {
                     if (Row.Enabled == 1)
@@ -59,7 +61,7 @@ namespace PatientManagement.Administration.Repositories
                         if (Row.ActivatedOn == null)
                             Row.ActivatedOn = DateTime.Now;
 
-                        var tmp = Connection.List<MyRow>().Where(p => p.Enabled == 1 && p.TenantId == user.TenantId);
+                        var tmp = Connection.List<MyRow>().Where(p => p.Enabled == 1 && p.TenantId == Row.TenantId);
 
                         foreach (var subscriptionsRow in tmp)
                         {
@@ -79,7 +81,7 @@ namespace PatientManagement.Administration.Repositories
                         if (Row.ActivatedOn == null)
                             Row.ActivatedOn = DateTime.Now;
 
-                        var tmp = Connection.List<MyRow>().Where(p => p.Enabled == 1 && p.TenantId == user.TenantId);
+                        var tmp = Connection.List<MyRow>().Where(p => p.Enabled == 1 && p.TenantId == Row.TenantId);
 
                         foreach (var subscriptionsRow in tmp)
                         {

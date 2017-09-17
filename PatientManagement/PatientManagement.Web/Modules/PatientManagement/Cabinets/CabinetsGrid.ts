@@ -7,6 +7,7 @@ namespace PatientManagement.PatientManagement {
         protected getDialogType() { return CabinetsDialog; }
         protected getIdProperty() { return CabinetsRow.idProperty; }
         protected getLocalTextPrefix() { return CabinetsRow.localTextPrefix; }
+        protected getIsActiveProperty() { return CabinetsRow.isActiveProperty; }
         protected getService() { return CabinetsService.baseUrl; }
 
         constructor(container: JQuery) {

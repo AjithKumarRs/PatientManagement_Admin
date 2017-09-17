@@ -1,5 +1,6 @@
 ﻿
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
@@ -8,6 +9,7 @@ using PatientManagement.Administration.Entities;
 using PatientManagement.PatientManagement.Entities;
 using PatientManagement.Dashboard;
 using PatientManagement.PatientManagement.Repositories;
+using PatientManagement.Web.Modules.Common;
 
 namespace PatientManagement.PatientManagement.Pages
 {
@@ -26,8 +28,9 @@ namespace PatientManagement.PatientManagement.Pages
             var cabinetCookie = Request.Cookies["CabinetPreference"];
             if (!string.IsNullOrEmpty(cabinetCookie))
             {
+                var cabFlds = CabinetsRow.Fields;
                 var connection = SqlConnections.NewFor<CabinetsRow>();
-                var connectionCabint = connection.ById<CabinetsRow>(cabinetCookie);
+                var connectionCabint = connection.TryFirst<CabinetsRow>(cabFlds.CabinetId == cabinetCookie);
                 ViewData["CabinetHeaderName"] = connectionCabint?.Name;
 
             }
@@ -37,8 +40,7 @@ namespace PatientManagement.PatientManagement.Pages
             ViewData["WorkHoursEnd"] = TimeSpan.FromMinutes(1200);
             return View(MVC.Views.PatientManagement.Dashboard.DashboardIndex);
         }
-
-
+        
         [PageAuthorize]
         public JsonResult GetVisitsTasks(string start, string end)
         {
@@ -55,7 +57,6 @@ namespace PatientManagement.PatientManagement.Pages
 
             var cabinetFlds = CabinetsRow.Fields;
             var cabinets = new List<CabinetsRow>();
-
 
             if (Authorization.HasPermission(PermissionKeys.Tenants))
                 cabinets = connection.List<CabinetsRow>(cabinetFlds.IsActive == 1);
@@ -178,6 +179,38 @@ namespace PatientManagement.PatientManagement.Pages
                 });
             }
             return Json(model.EventsList);
+        }
+
+
+        [Route("~/Administration/GetTenantSubscriptionEndDate")]
+        public IActionResult GetTenantSubscriptionEndDate()
+        {
+            if (!Authorization.IsLoggedIn)
+                return NotFound();
+
+            var user = Authorization.UserDefinition as UserDefinition;
+            var days = UserSubscriptionHelper.GetTenantPaidDays(user.TenantId);
+
+            if (days <= DateTime.Now.AddDays(7) || Authorization.HasPermission("AdministrationTenants:Payments"))
+                return Json(days);
+            else
+                return Json(DateTime.MinValue);
+        }
+
+        [Route("~/Administration/GetTenantRole")]
+        public IActionResult GetTenantRole()
+        {
+            if (!Authorization.IsLoggedIn)
+                return NotFound();
+
+            var user = Authorization.UserDefinition as UserDefinition;
+            var roles = UserSubscriptionHelper.GetUserRolesIdBasedOnSubscription(user.UserId, user.TenantId);
+            var roleName = "";
+            if (roles.Any())
+                using (var connection = SqlConnections.NewFor<RoleRow>())
+                    roleName = connection.ById<RoleRow>(roles.First()).RoleName;
+
+            return Json(roleName);
         }
     }
 
