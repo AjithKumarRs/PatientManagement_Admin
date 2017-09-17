@@ -45,6 +45,7 @@ namespace PatientManagement.PatientManagement.Entities
 
         [DisplayName("Cabinet"), NotNull, ForeignKey("[dbo].[Cabinets]", "CabinetId"), LeftJoin("jCabinets"), TextualField("CabinetName")]
         [LookupEditor(typeof(CabinetsRow), InplaceAdd = true, FilterField = "IsActive", FilterValue = 1)]
+        [QuickFilter()]
         public Int32? CabinetId
         {
             get => Fields.CabinetId[this];
@@ -52,6 +53,7 @@ namespace PatientManagement.PatientManagement.Entities
         }
 
         [DisplayName("Cabinet Name"), Expression("jCabinets.[Name]"), QuickSearch]
+        [QuickFilter()]
         public String CabinetName
         {
             get { return Fields.CabinetName[this]; }
