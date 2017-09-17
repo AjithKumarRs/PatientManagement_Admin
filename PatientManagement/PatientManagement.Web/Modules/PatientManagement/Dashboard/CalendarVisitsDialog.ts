@@ -59,6 +59,7 @@ namespace PatientManagement.PatientManagement {
 
             var p = <PatientManagement.VisitsRow>{};
 
+
             VisitsService.Retrieve(<any>{
                 EntityId: visitId
             }, resp => {
@@ -66,6 +67,15 @@ namespace PatientManagement.PatientManagement {
                 p = resp.Entity;
                 Q.notifyInfo(Q.text("Site.Dashboard.SuccessChangedVisitDates") + p.PatientName);
 
+                var beforeDateStart = p.StartDate;
+                var beforeDateEnd = p.EndDate;
+
+                if (new Date(start).getDay() === new Date().getDay() ||
+                    new Date(end).getDay() === new Date().getDay() ||
+                    new Date(beforeDateStart).getDay() === new Date().getDay() ||
+                    new Date(beforeDateEnd).getDay() === new Date().getDay()) {
+                    this.refreshVisitForTodayBox();
+                }
             });
 
             p.StartDate = start;
@@ -78,7 +88,6 @@ namespace PatientManagement.PatientManagement {
                 response => {
                     Q.reloadLookup(PatientManagement.VisitsRow.lookupKey);
 
-                    this.refreshVisitForTodayBox();
                     $('#VisitsGridDiv .refresh-button').click();
                 });
 

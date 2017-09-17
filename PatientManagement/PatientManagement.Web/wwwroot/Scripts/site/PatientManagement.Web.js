@@ -5344,6 +5344,14 @@ var PatientManagement;
                     }, function (resp) {
                         p = resp.Entity;
                         Q.notifyInfo(Q.text("Site.Dashboard.SuccessChangedVisitDates") + p.PatientName);
+                        var beforeDateStart = p.StartDate;
+                        var beforeDateEnd = p.EndDate;
+                        if (new Date(start).getDay() === new Date().getDay() ||
+                            new Date(end).getDay() === new Date().getDay() ||
+                            new Date(beforeDateStart).getDay() === new Date().getDay() ||
+                            new Date(beforeDateEnd).getDay() === new Date().getDay()) {
+                            _this.refreshVisitForTodayBox();
+                        }
                     });
                     p.StartDate = start;
                     p.EndDate = end;
@@ -5352,7 +5360,6 @@ var PatientManagement;
                         EntityId: visitId
                     }, function (response) {
                         Q.reloadLookup(PatientManagement.VisitsRow.lookupKey);
-                        _this.refreshVisitForTodayBox();
                         $('#VisitsGridDiv .refresh-button').click();
                     });
                 };
