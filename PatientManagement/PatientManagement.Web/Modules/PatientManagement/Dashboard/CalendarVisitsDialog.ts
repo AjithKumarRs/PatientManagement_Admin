@@ -118,7 +118,7 @@ namespace PatientManagement.PatientManagement {
             $("#calendar").fullCalendar('refetchEvents');
         }
 
-        private refreshVisitForTodayBox() {
+        public refreshVisitForTodayBox() {
             $.get('/Dashboard/GetTodayVisits/', data => {
                 $('#today-visit-counter').text(data.countVisitsForToday);
                 var width = (data.alreadyExpired / data.countVisitsForToday) * 100;
