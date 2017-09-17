@@ -216,9 +216,9 @@ namespace PatientManagement.PatientManagement.Pages
             else
                 countVisitsForToday = connection.Count<VisitsRow>(
                     visitFlds.StartDate >= startDate && visitFlds.EndDate <= endDate && visitFlds.CabinetId == cabinetIdActive && visitFlds.TenantId == user.TenantId);
-
             var alreadyExpired = 0;
-            var endDateBgCulture = DateTime.Now.ToLocalTime();
+            CultureInfo cultureinfo = new CultureInfo("bg-BG");
+            var endDateBgCulture = DateTime.Parse(DateTime.Now.ToString(cultureinfo), cultureinfo);
 
             if (Authorization.HasPermission(PermissionKeys.Tenants))
                 alreadyExpired = connection.Count<VisitsRow>(
