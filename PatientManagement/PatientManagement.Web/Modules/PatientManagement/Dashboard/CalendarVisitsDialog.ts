@@ -78,10 +78,10 @@ namespace PatientManagement.PatientManagement {
                 response => {
                     Q.reloadLookup(PatientManagement.VisitsRow.lookupKey);
 
+                    this.refreshVisitForTodayBox();
                     $('#VisitsGridDiv .refresh-button').click();
                 });
 
-            this.refreshVisitForTodayBox();
 
         }
 
