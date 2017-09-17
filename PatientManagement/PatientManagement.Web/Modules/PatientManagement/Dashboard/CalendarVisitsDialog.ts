@@ -56,10 +56,7 @@ namespace PatientManagement.PatientManagement {
 
         }
         public updateVisit = (visitId, start, end): void => {
-
-            var p = <PatientManagement.VisitsRow>{};
-
-
+        
             VisitsService.Retrieve(<any>{
                 EntityId: visitId
             }, resp => {
@@ -67,30 +64,33 @@ namespace PatientManagement.PatientManagement {
                 p = resp.Entity;
                 Q.notifyInfo(Q.text("Site.Dashboard.SuccessChangedVisitDates") + p.PatientName);
 
-                var beforeDateStart = p.StartDate;
-                var beforeDateEnd = p.EndDate;
+                var beforeDateStart = resp.Entity.StartDate;
+                var beforeDateEnd = resp.Entity.EndDate;
 
-                if (new Date(start).getDay() === new Date().getDay() ||
-                    new Date(end).getDay() === new Date().getDay() ||
-                    new Date(beforeDateStart).getDay() === new Date().getDay() ||
-                    new Date(beforeDateEnd).getDay() === new Date().getDay()) {
-                    this.refreshVisitForTodayBox();
-                }
+                var p = <PatientManagement.VisitsRow>{};
+
+                p.StartDate = start;
+                p.EndDate = end;
+                VisitsService.Update({
+                        Entity: p,
+                        EntityId: visitId
+                    },
+                    response => {
+                        Q.reloadLookup(PatientManagement.VisitsRow.lookupKey);
+
+                        $('#VisitsGridDiv .refresh-button').click();
+
+                        if (new Date(start).getDay() === new Date().getDay() ||
+                            new Date(end).getDay() === new Date().getDay() ||
+                            new Date(beforeDateStart).getDay() === new Date().getDay() ||
+                            new Date(beforeDateEnd).getDay() === new Date().getDay()) {
+
+                            this.refreshVisitForTodayBox();
+                        }
+                    });
+
+
             });
-
-            p.StartDate = start;
-            p.EndDate = end;
-
-            VisitsService.Update({
-                    Entity: p,
-                    EntityId: visitId
-                },
-                response => {
-                    Q.reloadLookup(PatientManagement.VisitsRow.lookupKey);
-
-                    $('#VisitsGridDiv .refresh-button').click();
-                });
-
 
         }
 
