@@ -197,8 +197,8 @@ namespace PatientManagement.PatientManagement.Pages
         {
             var user = (UserDefinition)Authorization.UserDefinition;
 
-            var startDate = DateTime.Now.Date;
-            var endDate = DateTime.Now.Date.AddDays(1).AddTicks(-1);
+            var startDate = DateTime.UtcNow.Date;
+            var endDate = DateTime.UtcNow.Date.AddDays(1).AddTicks(-1);
 
             var connection = SqlConnections.NewFor<VisitsRow>();
             var cabinetIdActive = 0;
@@ -218,12 +218,14 @@ namespace PatientManagement.PatientManagement.Pages
                     visitFlds.StartDate >= startDate && visitFlds.EndDate <= endDate && visitFlds.CabinetId == cabinetIdActive && visitFlds.TenantId == user.TenantId);
 
             var alreadyExpired = 0;
+            var endDateBgCulture = DateTime.Now.ToLocalTime();
+
             if (Authorization.HasPermission(PermissionKeys.Tenants))
                 alreadyExpired = connection.Count<VisitsRow>(
-                    visitFlds.StartDate >= startDate && visitFlds.EndDate <= DateTime.Now && visitFlds.CabinetId == cabinetIdActive);
+                    visitFlds.StartDate >= startDate && visitFlds.EndDate <= endDateBgCulture && visitFlds.CabinetId == cabinetIdActive);
             else
                 alreadyExpired = connection.Count<VisitsRow>(
-                    visitFlds.StartDate >= startDate && visitFlds.EndDate <= DateTime.Now && visitFlds.CabinetId == cabinetIdActive && visitFlds.TenantId == user.TenantId);
+                    visitFlds.StartDate >= startDate && visitFlds.EndDate <= endDateBgCulture && visitFlds.CabinetId == cabinetIdActive && visitFlds.TenantId == user.TenantId);
 
             return Json(new {countVisitsForToday, alreadyExpired});
         }
