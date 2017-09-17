@@ -80,6 +80,9 @@ namespace PatientManagement.PatientManagement {
 
                     $('#VisitsGridDiv .refresh-button').click();
                 });
+
+            this.refreshVisitForTodayBox();
+
         }
 
         public deleteVisit = (visitId): void => {
@@ -108,13 +111,25 @@ namespace PatientManagement.PatientManagement {
             });
 
         }
+
         protected onSaveSuccess(response: Serenity.SaveResponse): void {
-           
+            this.refreshVisitForTodayBox();
+
             $("#calendar").fullCalendar('refetchEvents');
         }
 
-        protected onDeleteSuccess(response: Serenity.DeleteResponse): void {
+        private refreshVisitForTodayBox() {
+            $.get('/Dashboard/GetTodayVisits/', data => {
+                $('#today-visit-counter').text(data.countVisitsForToday);
+                var width = (data.alreadyExpired / data.countVisitsForToday) * 100;
+                $('#today-visits-progress').attr('aria-valuemax', data.countVisitsForToday);
+                $('#today-visits-progress').attr('aria-valuenow', data.alreadyExpired).css('width', width + '%');
 
+            });
+        }
+
+        protected onDeleteSuccess(response: Serenity.DeleteResponse): void {
+            this.refreshVisitForTodayBox();
             $("#calendar").fullCalendar('refetchEvents');
         }
 

@@ -5353,6 +5353,7 @@ var PatientManagement;
                         Q.reloadLookup(PatientManagement.VisitsRow.lookupKey);
                         $('#VisitsGridDiv .refresh-button').click();
                     });
+                    _this.refreshVisitForTodayBox();
                 };
                 _this.deleteVisit = function (visitId) {
                     var p = {};
@@ -5401,9 +5402,19 @@ var PatientManagement;
                 }
             };
             CalendarVisitsDialog.prototype.onSaveSuccess = function (response) {
+                this.refreshVisitForTodayBox();
                 $("#calendar").fullCalendar('refetchEvents');
             };
+            CalendarVisitsDialog.prototype.refreshVisitForTodayBox = function () {
+                $.get('/Dashboard/GetTodayVisits/', function (data) {
+                    $('#today-visit-counter').text(data.countVisitsForToday);
+                    var width = (data.alreadyExpired / data.countVisitsForToday) * 100;
+                    $('#today-visits-progress').attr('aria-valuemax', data.countVisitsForToday);
+                    $('#today-visits-progress').attr('aria-valuenow', data.alreadyExpired).css('width', width + '%');
+                });
+            };
             CalendarVisitsDialog.prototype.onDeleteSuccess = function (response) {
+                this.refreshVisitForTodayBox();
                 $("#calendar").fullCalendar('refetchEvents');
             };
             CalendarVisitsDialog.prototype.formatAlertMessage = function (firstLine, title, startDate, endDate) {

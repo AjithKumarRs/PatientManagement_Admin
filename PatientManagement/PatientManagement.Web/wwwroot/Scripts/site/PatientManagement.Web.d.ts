@@ -2914,6 +2914,7 @@ declare namespace PatientManagement.PatientManagement {
         updateVisit: (visitId: any, start: any, end: any) => void;
         deleteVisit: (visitId: any) => void;
         protected onSaveSuccess(response: Serenity.SaveResponse): void;
+        private refreshVisitForTodayBox();
         protected onDeleteSuccess(response: Serenity.DeleteResponse): void;
         protected formatAlertMessage(firstLine: any, title: any, startDate: Date, endDate: Date): string;
     }

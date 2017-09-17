@@ -161,27 +161,19 @@
 
                             <script type="text/javascript">
                                 $(document).ready(function () {
-                                    $.get('/Dashboard/GetVisitsTasks/',
-                                        {
-                                            start: '@DateTime.Now.ToString("yyyy-MM-dd")',
-                                            end: '@DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")',
-                                        }, function (data) {
-                                            $('#today-visit-counter').text(data.length);
-                                            var expiredVisits = 0;
-                                            for (var i = 0; i < data.length; i++) {
-                                                var endDate = new Date(data[i].end);
-                                                var now = new Date();
-                                                if (now > endDate) {
-                                                    expiredVisits = expiredVisits + 1;
-                                                } 
-                                            }
-                                            var width =  (expiredVisits / data.length) * 100;
-                                            $('#today-visits-progress').attr('aria-valuemax', data.length);
-                                            $('#today-visits-progress').attr('aria-valuenow', expiredVisits).css('width', width + '%');
 
-                                        });
-
+                                    ReFetchVisitsForTodayBox();
                                 });
+
+                                function ReFetchVisitsForTodayBox() {
+                                    $.get('/Dashboard/GetTodayVisits/', function (data) {
+                                        $('#today-visit-counter').text(data.countVisitsForToday);
+                                        var width = (data.alreadyExpired / data.countVisitsForToday) * 100;
+                                        $('#today-visits-progress').attr('aria-valuemax', data.countVisitsForToday);
+                                        $('#today-visits-progress').attr('aria-valuenow', data.alreadyExpired).css('width', width + '%');
+
+                                    });
+                                }
                             </script>
 
                         </div>
@@ -231,7 +223,7 @@
                                         <h4>Subscription Information!</h4>
                                         <p>Loading....</p>
                                     </div>
-                                    
+
                                     <div class="alert alert-warning col-md-3 pull-right" style="padding-top: 0px">
                                         <h5>@Texts.Site.Subscriptions.SubscriptionRightBox </h5>
                                         <button class="btn btn-flat btn-warning btn-sm" onclick="new PatientManagement.Administration.PaymentsDialog().loadNewAndOpenDialog();">
@@ -246,7 +238,7 @@
 
                     </div>
 
-                 
+
                     @RenderBody()
                 </section>
             </div>
@@ -403,8 +395,8 @@
         <script async>
 
             //TODO: Finded major speed issue here! Cache user data or make a cookie if user is closing the subscription box
-            jQuery(document).ready(function() {
-                jQuery(document).ready(function() {
+            jQuery(document).ready(function () {
+                jQuery(document).ready(function () {
                     //var userData = new Q.getRemoteData('UserData');
                     $.get('../Administration/GetTenantSubscriptionEndDate', function (date) {
                         var subscriptionEndDate = date;
@@ -447,7 +439,7 @@
 
                                 $('#subscription-information-box p')
                                     .text(
-                                        Q.text("Site.Subscriptions.WillExpire.SubscriptionInfoBoxBody").format(diff));
+                                    Q.text("Site.Subscriptions.WillExpire.SubscriptionInfoBoxBody").format(diff));
 
                                 $('#subscription-information-box').addClass('callout-warning');
                                 $('#subscription-information-box').parents('.row').show('slide', { direction: 'up' }, 500);
@@ -497,6 +489,8 @@
                     }
                     var number = +($('.counter-label-notifications').text());
                     $('.counter-label-notifications').text(number + 1);
+
+                    ReFetchVisitsForTodayBox();
                 };
 
                 hub.client.patientChangedNotification = function (userDisplayName, userPicture, notification) {

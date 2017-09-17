@@ -1,5 +1,6 @@
 ﻿
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
@@ -36,11 +37,11 @@ namespace PatientManagement.PatientManagement.Pages
             }
             //ViewData["WorkHoursStart"] = TimeSpan.FromMinutes(tenant.WorkHoursStart??420);
             //ViewData["WorkHoursEnd"] = TimeSpan.FromMinutes(tenant.WorkHoursEnd ?? 1200);
-            ViewData["WorkHoursStart"] = TimeSpan.FromMinutes( 420);
+            ViewData["WorkHoursStart"] = TimeSpan.FromMinutes(420);
             ViewData["WorkHoursEnd"] = TimeSpan.FromMinutes(1200);
             return View(MVC.Views.PatientManagement.Dashboard.DashboardIndex);
         }
-        
+
         [PageAuthorize]
         public JsonResult GetVisitsTasks(string start, string end)
         {
@@ -54,6 +55,48 @@ namespace PatientManagement.PatientManagement.Pages
 
             var model = new DashboardPageModel();
             var connection = SqlConnections.NewFor<VisitsRow>();
+            var cabinetIdActive = 0;
+            if (!GetAndSetActiveCabinetIdIfAny(connection, out cabinetIdActive))
+            {
+                return Json(0);
+            }
+
+            List<VisitsRow> entity = new List<VisitsRow>();
+
+            if (Authorization.HasPermission(PermissionKeys.Tenants))
+                entity = connection.List<VisitsRow>()
+                    .Where(e => e.StartDate >= startDate && e.EndDate <= endDate && e.CabinetId == cabinetIdActive)
+                    .ToList();
+            else
+                entity = connection.List<VisitsRow>()
+                    .Where(e => e.StartDate >= startDate && e.EndDate <= endDate && e.CabinetId == cabinetIdActive && e.TenantId == user.TenantId)
+                    .ToList();
+
+
+            foreach (var visit in entity)
+            {
+                var patient = connection.ById<PatientsRow>(visit.PatientId);
+                var visitType = connection.ById<VisitTypesRow>(visit.VisitTypeId);
+                model.EventsList.Add(new Event
+                {
+                    id = visit.VisitId ?? 0,
+                    patientId = visit.PatientId ?? 0,
+                    patientAutoEmailActive = patient.NotifyOnChange ?? false,
+                    title = patient.Name + "\n" + visit.Description,
+                    start = (visit.StartDate ?? DateTime.Now).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
+                    end = (visit.EndDate ?? DateTime.Now).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
+                    allDay = false,
+                    backgroundColor = visitType.BackgroundColor,
+                    borderColor = visitType.BorderColor
+                });
+            }
+            return Json(model.EventsList);
+        }
+
+        private bool GetAndSetActiveCabinetIdIfAny(IDbConnection connection, out int cabinetIdActive)
+        {
+            cabinetIdActive = 0;
+            var user = (UserDefinition)Authorization.UserDefinition;
 
             var cabinetFlds = CabinetsRow.Fields;
             var cabinets = new List<CabinetsRow>();
@@ -64,11 +107,10 @@ namespace PatientManagement.PatientManagement.Pages
                 cabinets = connection.List<CabinetsRow>(cabinetFlds.TenantId == user.TenantId && cabinetFlds.IsActive == 1);
 
             var cabinetCookie = Request.Cookies["CabinetPreference"];
-            var cabinetIdActive = 0;
             if (string.IsNullOrEmpty(cabinetCookie))
             {
                 if (!cabinets.Any())
-                    return Json(model);
+                    return false;
                 else if (cabinets.Count() == 1)
                 {
                     cabinetIdActive = cabinets.FirstOrDefault().CabinetId ?? 0;
@@ -113,7 +155,7 @@ namespace PatientManagement.PatientManagement.Pages
                     options.Expires = DateTime.Now.AddDays(-1);
                     Response.Cookies.Append("CabinetPreference", 0.ToString(),
                         options);
-                    return Json(model);
+                    return false;
                 }
 
                 if (cabinets.FirstOrDefault(a => a.CabinetId == Int32.Parse(cabinetCookie)) == null)
@@ -148,39 +190,43 @@ namespace PatientManagement.PatientManagement.Pages
                 }
 
             }
-
-            List<VisitsRow> entity = new List<VisitsRow>();
-
-            if (Authorization.HasPermission(PermissionKeys.Tenants))
-                entity = connection.List<VisitsRow>()
-                    .Where(e => e.StartDate >= startDate && e.EndDate <= endDate && e.CabinetId == cabinetIdActive)
-                    .ToList();
-            else
-                entity = connection.List<VisitsRow>()
-                    .Where(e => e.StartDate >= startDate && e.EndDate <= endDate && e.CabinetId == cabinetIdActive && e.TenantId == user.TenantId)
-                    .ToList();
-
-
-            foreach (var visit in entity)
-            {
-                var patient = connection.ById<PatientsRow>(visit.PatientId);
-                var visitType = connection.ById<VisitTypesRow>(visit.VisitTypeId);
-                model.EventsList.Add(new Event
-                {
-                    id = visit.VisitId ?? 0,
-                    patientId = visit.PatientId ?? 0,
-                    patientAutoEmailActive = patient.NotifyOnChange??false,
-                    title = patient.Name + "\n" + visit.Description,
-                    start = (visit.StartDate ?? DateTime.Now).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
-                    end = (visit.EndDate ?? DateTime.Now).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
-                    allDay = false,
-                    backgroundColor = visitType.BackgroundColor,
-                    borderColor = visitType.BorderColor
-                });
-            }
-            return Json(model.EventsList);
+            return true;
         }
 
+        public JsonResult GetTodayVisits()
+        {
+            var user = (UserDefinition)Authorization.UserDefinition;
+
+            var startDate = DateTime.Now.Date;
+            var endDate = DateTime.Now.Date.AddDays(1).AddTicks(-1);
+
+            var connection = SqlConnections.NewFor<VisitsRow>();
+            var cabinetIdActive = 0;
+            if (!GetAndSetActiveCabinetIdIfAny(connection, out cabinetIdActive))
+            {
+                return Json(0);
+            }
+
+            var countVisitsForToday = 0;
+
+            var visitFlds = VisitsRow.Fields;
+            if (Authorization.HasPermission(PermissionKeys.Tenants))
+                countVisitsForToday = connection.Count<VisitsRow>(
+                    visitFlds.StartDate >= startDate && visitFlds.EndDate <= endDate && visitFlds.CabinetId == cabinetIdActive);
+            else
+                countVisitsForToday = connection.Count<VisitsRow>(
+                    visitFlds.StartDate >= startDate && visitFlds.EndDate <= endDate && visitFlds.CabinetId == cabinetIdActive && visitFlds.TenantId == user.TenantId);
+
+            var alreadyExpired = 0;
+            if (Authorization.HasPermission(PermissionKeys.Tenants))
+                alreadyExpired = connection.Count<VisitsRow>(
+                    visitFlds.StartDate >= startDate && visitFlds.EndDate <= DateTime.Now && visitFlds.CabinetId == cabinetIdActive);
+            else
+                alreadyExpired = connection.Count<VisitsRow>(
+                    visitFlds.StartDate >= startDate && visitFlds.EndDate <= DateTime.Now && visitFlds.CabinetId == cabinetIdActive && visitFlds.TenantId == user.TenantId);
+
+            return Json(new {countVisitsForToday, alreadyExpired});
+        }
 
         [Route("~/Administration/GetTenantSubscriptionEndDate")]
         public IActionResult GetTenantSubscriptionEndDate()
