@@ -217,9 +217,14 @@ namespace PatientManagement.PatientManagement.Pages
                 countVisitsForToday = connection.Count<VisitsRow>(
                     visitFlds.StartDate >= startDate && visitFlds.EndDate <= endDate && visitFlds.CabinetId == cabinetIdActive && visitFlds.TenantId == user.TenantId);
             var alreadyExpired = 0;
-            CultureInfo cultureinfo = new CultureInfo("bg-BG");
-            var endDateBgCulture = DateTime.Parse(DateTime.Now.ToString(cultureinfo), cultureinfo);
 
+#if DEBUG
+            //TODO: 3 hours added because azure app service is set to UTC <- For simplicity
+            var endDateBgCulture = DateTime.Now;
+#endif
+#if !DEBUG
+            var endDateBgCulture = DateTime.Now.AddHours(3);
+#endif
             if (Authorization.HasPermission(PermissionKeys.Tenants))
                 alreadyExpired = connection.Count<VisitsRow>(
                     visitFlds.StartDate >= startDate && visitFlds.EndDate <= endDateBgCulture && visitFlds.CabinetId == cabinetIdActive);
