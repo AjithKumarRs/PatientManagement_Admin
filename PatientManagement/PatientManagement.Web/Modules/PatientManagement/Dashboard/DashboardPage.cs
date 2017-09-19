@@ -257,13 +257,14 @@ namespace PatientManagement.PatientManagement.Pages
                 return NotFound();
 
             var user = Authorization.UserDefinition as UserDefinition;
-            var roles = UserSubscriptionHelper.GetUserRolesIdBasedOnSubscription(user.UserId, user.TenantId);
-            var roleName = "";
-            if (roles.Any())
-                using (var connection = SqlConnections.NewFor<RoleRow>())
-                    roleName = connection.ById<RoleRow>(roles.First()).RoleName;
+            var connection = SqlConnections.NewFor<UserRoleRow>();
 
-            return Json(roleName);
+            var userRoleFld = UserRoleRow.Fields;
+            var userRoles = connection.List<UserRoleRow>(userRoleFld.UserId == user.UserId).Select(s => s.RoleId);
+            var roleFlds = RoleRow.Fields;
+            var roleNames = connection.List<RoleRow>(roleFlds.RoleId.In(userRoles)).Select(s => s.RoleName);
+
+            return Json(roleNames);
         }
     }
 

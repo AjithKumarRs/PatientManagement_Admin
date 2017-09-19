@@ -450,7 +450,8 @@
                     $.get('../Administration/GetTenantRole', function (role) {
                         // Show user permision
                         if (role) {
-                            $("#role-list").text(role);
+                            
+                            $("#role-list").text(role.join());
                         }
                     });
 
