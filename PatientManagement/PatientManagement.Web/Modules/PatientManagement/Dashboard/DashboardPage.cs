@@ -26,14 +26,19 @@ namespace PatientManagement.PatientManagement.Pages
         [PageAuthorize, HttpGet, Route("~/")]
         public ActionResult Index()
         {
-            var cabinetCookie = Request.Cookies["CabinetPreference"];
-            if (!string.IsNullOrEmpty(cabinetCookie))
-            {
-                var cabFlds = CabinetsRow.Fields;
-                var connection = SqlConnections.NewFor<CabinetsRow>();
-                var connectionCabint = connection.TryFirst<CabinetsRow>(cabFlds.CabinetId == cabinetCookie);
-                ViewData["CabinetHeaderName"] = connectionCabint?.Name;
+            var cabinetIdActive = 0;
 
+            var connection = SqlConnections.NewFor<CabinetsRow>();
+
+            if (!GetAndSetActiveCabinetIdIfAny(connection, out cabinetIdActive))
+            {
+                if (cabinetIdActive != 0)
+                {
+                    var cabFlds = CabinetsRow.Fields;
+                    var connectionCabint = connection.TryFirst<CabinetsRow>(cabFlds.CabinetId == cabinetIdActive);
+                    ViewData["CabinetHeaderName"] = connectionCabint?.Name;
+
+                }
             }
             //ViewData["WorkHoursStart"] = TimeSpan.FromMinutes(tenant.WorkHoursStart??420);
             //ViewData["WorkHoursEnd"] = TimeSpan.FromMinutes(tenant.WorkHoursEnd ?? 1200);
@@ -55,21 +60,18 @@ namespace PatientManagement.PatientManagement.Pages
 
             var model = new DashboardPageModel();
             var connection = SqlConnections.NewFor<VisitsRow>();
-            var cabinetIdActive = 0;
-            if (!GetAndSetActiveCabinetIdIfAny(connection, out cabinetIdActive))
-            {
-                return Json(0);
-            }
+            var cabinetIdActive = Request.Cookies["CabinetPreference"];
+           
 
             List<VisitsRow> entity = new List<VisitsRow>();
 
             if (Authorization.HasPermission(PermissionKeys.Tenants))
                 entity = connection.List<VisitsRow>()
-                    .Where(e => e.StartDate >= startDate && e.EndDate <= endDate && e.CabinetId == cabinetIdActive)
+                    .Where(e => e.StartDate >= startDate && e.EndDate <= endDate && e.CabinetId == int.Parse(cabinetIdActive))
                     .ToList();
             else
                 entity = connection.List<VisitsRow>()
-                    .Where(e => e.StartDate >= startDate && e.EndDate <= endDate && e.CabinetId == cabinetIdActive && e.TenantId == user.TenantId)
+                    .Where(e => e.StartDate >= startDate && e.EndDate <= endDate && e.CabinetId == int.Parse(cabinetIdActive) && e.TenantId == user.TenantId)
                     .ToList();
 
 
@@ -201,12 +203,8 @@ namespace PatientManagement.PatientManagement.Pages
             var endDate = DateTime.UtcNow.Date.AddDays(1).AddTicks(-1);
 
             var connection = SqlConnections.NewFor<VisitsRow>();
-            var cabinetIdActive = 0;
-            if (!GetAndSetActiveCabinetIdIfAny(connection, out cabinetIdActive))
-            {
-                return Json(0);
-            }
-
+            var cabinetIdActive = Request.Cookies["CabinetPreference"];
+            
             var countVisitsForToday = 0;
 
             var visitFlds = VisitsRow.Fields;
