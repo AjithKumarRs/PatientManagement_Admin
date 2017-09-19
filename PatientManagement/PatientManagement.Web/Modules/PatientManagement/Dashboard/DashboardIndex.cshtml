@@ -64,7 +64,7 @@
     var localeCalendar = $"../Scripts/fullcalendar/locale/{System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName}.js";
 }
 <script src="@localeCalendar"></script>
-<div class="row" id="calendar-holder">
+<div class="row" id="calendar-holder" >
     @*<div class="col-md-5">
             <div class="col-md-12">
                 <div class="box box-solid box-primary">
@@ -85,11 +85,14 @@
             </div>
         </div>*@
     <div class="col-md-12">
-        <div class="box box-primary">
+        <div class="box box-primary" style="min-height: 200px ">
             <div class="box-body no-padding">
                 <!-- THE CALENDAR -->
                 <div id="calendar"></div>
             </div><!-- /.box-body -->
+            <div id="loading-calendar" class="overlay">
+                <i class="fa fa-refresh fa-spin"></i>
+            </div>
         </div><!-- /. box -->
     </div><!-- /.col -->
 </div><!-- /.row -->
@@ -216,6 +219,13 @@
                 if (event.url) {
                     return false;
                 }
+            },
+            loading: function (bool) { 
+                if (bool) 
+                    $('#loading-calendar').show(); 
+                else 
+                    $('#loading-calendar').hide(); 
+                //Possibly call you feed loader to add the next feed in line
             },
             eventLimit: true,
             allDaySlot: false,
