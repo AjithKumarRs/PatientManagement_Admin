@@ -30,7 +30,7 @@ namespace PatientManagement.PatientManagement.Pages
 
             var connection = SqlConnections.NewFor<CabinetsRow>();
 
-            if (!GetAndSetActiveCabinetIdIfAny(connection, out cabinetIdActive))
+            if (GetAndSetActiveCabinetIdIfAny(connection, out cabinetIdActive))
             {
                 if (cabinetIdActive != 0)
                 {
