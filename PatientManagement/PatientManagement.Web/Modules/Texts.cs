@@ -115,6 +115,8 @@ namespace PatientManagement
 
                     public static LocalText FormatSubscriptionName = "{0} - First registration";
                     public static LocalText FormatCabinetName = "{0} - First Room";
+
+                    public static LocalText AcceptTermsAndConditionsError = "You must accept terms and conditions";
                 }
             }
         }

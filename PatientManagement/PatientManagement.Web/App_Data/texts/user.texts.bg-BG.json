@@ -345,6 +345,7 @@
   "Forms.Membership.ResetPassword.SubmitButton": "Смени Парола",
   "Forms.Membership.ResetPassword.Success": "Вашата парола беше сменена, моля впишете се с новата ви парола.",
   "Forms.Membership.SignUp.AcceptTerms": "Съгласявам се с правилата за използване",
+  "Forms.Membership.SignUp.AcceptTermsAndConditionsError": "Моля приемете правилата за ползване.",
   "Forms.Membership.SignUp.ActivateEmailSubject": "Активирай Твоя \"CLARIO\" Акаунт",
   "Forms.Membership.SignUp.ActivationCompleteMessage": "Твоя акаунт вече е активиран. Моля използвай твоето потребителско име и парол за да се впишеш.",
   "Forms.Membership.SignUp.BackToLogin": "Вече имам акаунт",
