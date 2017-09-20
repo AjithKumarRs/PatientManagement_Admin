@@ -8,16 +8,18 @@ namespace PatientManagement.PatientManagement {
 
             $.get("/api/offers/bgn", data => {
 
-            for (var offer in data) {
+                for (var offer in data) {
 
-                var off =data[offer];
-                console.log(off);
+                    var off = data[offer];
+                    this.addOption(off.OfferId, off.OfferName);
+                }
+                var offerQ = Q.parseQueryString();
+                var offerId = offerQ['offerId'] || offerQ['OfferId'] || offerQ['offerid'];
+                if (offerId) {
+                    this.value = offerId;
+                }
 
-                this.addOption(off.OfferId, off.OfferName);
-
-            }
             });
-
             
         }
     }
