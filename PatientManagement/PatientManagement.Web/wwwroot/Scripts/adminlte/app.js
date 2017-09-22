@@ -295,9 +295,9 @@ function _init() {
             $(".sidebar-menu").slimScroll({destroy: true}).height("auto");
             //Add slimscroll
             $(".sidebar-menu").slimscroll({
-            height: ($(window).height() - $(".main-header").height() - ($('.sidebar-form').outerHeight(true) || 0)) + "px",
-            color: "rgba(0,0,0,0.2)",
-            size: "3px"
+                height: $(window).height() - $(".main-header").height() - $('.today-visits-box').outerHeight(true) - $('.user-panel').height() - ($('#dropdown-cabinets-dashboard').height() || 0) - ($('.sidebar-form').outerHeight(true) || 0) + "px",
+                color: "rgba(0,0,0,0.2)",
+                size: "3px"
             });
         }
       }
