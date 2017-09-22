@@ -1,5 +1,4 @@
 ﻿
-using Serenity.Data.Mapping;
 
 namespace PatientManagement.Membership
 {
@@ -7,8 +6,9 @@ namespace PatientManagement.Membership
     using Serenity.Services;
     using System;
     using System.ComponentModel;
+    using Serenity.Data.Mapping;
 
-    [FormScript("Membership.EditTenantRequest")]
+    [FormScript("Membership.EditTenant")]
     public class EditTenantRequest : ServiceRequest
     {
         public string Name { get; set; }

@@ -1729,7 +1729,7 @@ declare namespace PatientManagement.PatientManagement {
     }
     namespace PatientsFileUploadsRow {
         const idProperty = "PatientFileUploadId";
-        const nameProperty = "FilePath";
+        const nameProperty = "PatientName";
         const localTextPrefix = "PatientManagement.PatientsFileUploads";
         const lookupKey = "PatientManagement.PatientsFileUploads";
         function getLookup(): Q.Lookup<PatientsFileUploadsRow>;

@@ -1,6 +1,6 @@
 ﻿namespace PatientManagement.Membership {
     export class EditUserProfileForm extends Serenity.PrefixedContext {
-        static formKey = 'Membership.EditUserProfileRequest';
+        static formKey = 'Membership.EditUserProfile';
 
     }
 

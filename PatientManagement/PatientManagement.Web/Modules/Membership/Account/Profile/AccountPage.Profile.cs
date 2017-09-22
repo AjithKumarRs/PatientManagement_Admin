@@ -15,11 +15,12 @@ namespace PatientManagement.Membership.Pages
     using Serenity.Web.Providers;
     using System;
     using Microsoft.AspNetCore.Mvc;
-
-    public partial class AccountController : Controller
+    
+    public class ProfileController : Controller
     {
         [HttpGet, PageAuthorize]
-        public ActionResult Profile()
+        [Route("Account/Profile")]
+        public ActionResult Index()
         {
             var connection = SqlConnections.NewFor<VisitsRow>();
             var user = (UserDefinition)Serenity.Authorization.UserDefinition;
@@ -44,6 +45,7 @@ namespace PatientManagement.Membership.Pages
         }
 
         [HttpPost, JsonFilter, ServiceAuthorize(PermissionKeys.AdministrationTenantsTenantEditing)]
+        [Route("Account/EditTenant")]
         public Result<ServiceResponse> EditTenant(EditTenantRequest request)
         {
 
@@ -97,6 +99,7 @@ namespace PatientManagement.Membership.Pages
         }
 
 
+        [Route("Account/EditUserProfile")]
         [HttpPost, JsonFilter]
         public Result<ServiceResponse> EditUserProfile(EditUserProfileRequest request)
         {

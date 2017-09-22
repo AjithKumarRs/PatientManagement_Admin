@@ -13,7 +13,7 @@ using Membership  = PatientManagement.Membership.Pages;
 
 
 [assembly: NavigationMenu(9000, "Administration", icon: "icon-screen-desktop")]
-[assembly: NavigationLink(9000, "Administration/Profile", "../../Account/Profile", null, icon: "fa-user-md")]
+[assembly: NavigationLink(9000, "Administration/Profile", typeof(Membership.ProfileController), icon: "fa-user-md")]
 
 [assembly: NavigationLink(9000, "Administration/Payment Options", typeof(Administration.PaymentOptionsController), icon: "fa-money")]
 [assembly: NavigationLink(9000, "Administration/Offers", typeof(Administration.OffersController), icon: "fa-file-text")]

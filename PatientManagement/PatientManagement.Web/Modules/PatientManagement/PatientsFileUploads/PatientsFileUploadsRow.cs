@@ -76,7 +76,7 @@ namespace PatientManagement.PatientManagement.Entities
 
         StringField INameRow.NameField
         {
-            get { return Fields.FilePath; }
+            get { return Fields.PatientName; }
         }
 
         public static readonly RowFields Fields = new RowFields().Init();

@@ -834,7 +834,7 @@ var PatientManagement;
             }
             return EditTenantForm;
         }(Serenity.PrefixedContext));
-        EditTenantForm.formKey = 'Membership.EditTenantRequest';
+        EditTenantForm.formKey = 'Membership.EditTenant';
         Membership.EditTenantForm = EditTenantForm;
         [['Name', function () { return Serenity.StringEditor; }], ['TenantWebSite', function () { return Serenity.StringEditor; }], ['TenantImage', function () { return Serenity.ImageUploadEditor; }], ['OverrideUsersEmailSignature', function () { return PatientManagement.BsSwitchEditor; }], ['TenantEmailSignature', function () { return Serenity.HtmlContentEditor; }]].forEach(function (x) { return Object.defineProperty(EditTenantForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
     })(Membership = PatientManagement.Membership || (PatientManagement.Membership = {}));
@@ -850,7 +850,7 @@ var PatientManagement;
             }
             return EditUserProfileForm;
         }(Serenity.PrefixedContext));
-        EditUserProfileForm.formKey = 'Membership.EditUserProfileRequest';
+        EditUserProfileForm.formKey = 'Membership.EditUserProfile';
         Membership.EditUserProfileForm = EditUserProfileForm;
         [['DisplayName', function () { return Serenity.StringEditor; }], ['UserEmail', function () { return Serenity.EmailEditor; }], ['UserPhone', function () { return Serenity.StringEditor; }], ['UserWebSite', function () { return Serenity.StringEditor; }], ['UserImage', function () { return Serenity.ImageUploadEditor; }], ['USerEmailSignature', function () { return Serenity.HtmlContentEditor; }]].forEach(function (x) { return Object.defineProperty(EditUserProfileForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
     })(Membership = PatientManagement.Membership || (PatientManagement.Membership = {}));
@@ -1256,7 +1256,7 @@ var PatientManagement;
         var PatientsFileUploadsRow;
         (function (PatientsFileUploadsRow) {
             PatientsFileUploadsRow.idProperty = 'PatientFileUploadId';
-            PatientsFileUploadsRow.nameProperty = 'FilePath';
+            PatientsFileUploadsRow.nameProperty = 'PatientName';
             PatientsFileUploadsRow.localTextPrefix = 'PatientManagement.PatientsFileUploads';
             PatientsFileUploadsRow.lookupKey = 'PatientManagement.PatientsFileUploads';
             function getLookup() {
