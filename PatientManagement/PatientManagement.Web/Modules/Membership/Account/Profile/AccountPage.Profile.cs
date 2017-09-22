@@ -66,10 +66,10 @@ namespace PatientManagement.Membership.Pages
                     var tenant = new TenantRow();
                     tenant.TenantId = user.TenantId;
 
-                    if (request.Name.IsEmptyOrNull())
+                    if (request.TenantName.IsEmptyOrNull())
                         throw new ArgumentNullException("name");
 
-                    tenant.TenantName = request.Name;
+                    tenant.TenantName = request.TenantName;
                     tenant.TenantWebSite = request.TenantWebSite;
 
                     if (!request.TenantImage.IsNullOrEmpty())
@@ -112,7 +112,7 @@ namespace PatientManagement.Membership.Pages
                 if (request.DisplayName.IsEmptyOrNull())
                     throw new ArgumentNullException("name");
 
-                if (request.UserEmail.IsEmptyOrNull())
+                if (request.Email.IsEmptyOrNull())
                     throw new ArgumentNullException("email");
 
                 var saveRequest = new SaveRequest<UserRow>();
@@ -121,14 +121,14 @@ namespace PatientManagement.Membership.Pages
 
                 saveRequest.Entity.UserId = user.UserId;
                 saveRequest.Entity.DisplayName = request.DisplayName;
-                saveRequest.Entity.Email = request.UserEmail;
+                saveRequest.Entity.Email = request.Email;
 
                 if (!request.UserImage.IsNullOrEmpty())
                     saveRequest.Entity.UserImage = request.UserImage;
 
-                saveRequest.Entity.EmailSignature = request.USerEmailSignature;
-                saveRequest.Entity.WebSite = request.UserWebSite;
-                saveRequest.Entity.PhoneNumber = request.UserPhone;
+                saveRequest.Entity.EmailSignature = request.EmailSignature;
+                saveRequest.Entity.WebSite = request.WebSite;
+                saveRequest.Entity.PhoneNumber = request.PhoneNumber;
 
                 var uow = new UnitOfWork(connection);
                 new UserRepository().Update(uow, saveRequest);

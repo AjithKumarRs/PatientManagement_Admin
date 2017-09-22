@@ -23,10 +23,10 @@
                     if (this.form.UserImage.value != null)
                         this.form.UserImage.value.Filename = user.UserImage;
 
-                    this.form.UserPhone.value = user.PhoneNumber;
-                    this.form.UserEmail.value = user.Email;
-                    this.form.UserWebSite.value = user.WebSite;
-                    this.form.USerEmailSignature.value = user.EmailSignature;
+                    this.form.PhoneNumber.value = user.PhoneNumber;
+                    this.form.Email.value = user.Email;
+                    this.form.WebSite.value = user.WebSite;
+                    this.form.EmailSignature.value = user.EmailSignature;
                 });
 
 

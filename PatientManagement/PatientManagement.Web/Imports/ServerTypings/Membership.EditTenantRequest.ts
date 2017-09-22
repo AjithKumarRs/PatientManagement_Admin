@@ -1,6 +1,6 @@
 ﻿namespace PatientManagement.Membership {
     export interface EditTenantRequest extends Serenity.ServiceRequest {
-        Name?: string;
+        TenantName?: string;
         TenantWebSite?: string;
         TenantImage?: string;
         OverrideUsersEmailSignature?: boolean;

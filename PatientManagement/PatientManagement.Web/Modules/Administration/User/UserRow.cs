@@ -59,6 +59,7 @@ namespace PatientManagement.Administration.Entities
             set { Fields.DisplayName[this] = value; }
         }
 
+        [EmailEditor, Required(true)]
         [DisplayName("Email"), Size(100)]
         public String Email
         {
@@ -87,6 +88,8 @@ namespace PatientManagement.Administration.Entities
             get { return Fields.UserImage[this]; }
             set { Fields.UserImage[this] = value; }
         }
+
+        [Size(-1), HtmlContentEditor, CssClass("email-signature")]
         [DisplayName("Email Signature")]
         public String EmailSignature
         {

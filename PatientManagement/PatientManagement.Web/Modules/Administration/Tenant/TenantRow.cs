@@ -47,13 +47,14 @@ namespace PatientManagement.Administration.Entities
 
 
         [DisplayName("Override Users Email Signature")]
+        [BsSwitchEditor]
         public Boolean? OverrideUsersEmailSignature
         {
             get { return Fields.OverrideUsersEmailSignature[this]; }
             set { Fields.OverrideUsersEmailSignature[this] = value; }
         }
 
-        [DisplayName("Tenant Email Signature")]
+        [DisplayName("Tenant Email Signature"), Size(-1), HtmlContentEditor, CssClass("email-signature")]
         public String TenantEmailSignature
         {
             get { return Fields.TenantEmailSignature[this]; }

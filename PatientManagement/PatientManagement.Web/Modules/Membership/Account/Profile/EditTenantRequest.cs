@@ -1,5 +1,7 @@
 ﻿
 
+using PatientManagement.Administration.Entities;
+
 namespace PatientManagement.Membership
 {
     using Serenity.ComponentModel;
@@ -9,22 +11,17 @@ namespace PatientManagement.Membership
     using Serenity.Data.Mapping;
 
     [FormScript("Membership.EditTenant")]
+    [BasedOnRow(typeof(TenantRow))]
     public class EditTenantRequest : ServiceRequest
     {
-        public string Name { get; set; }
+        public string TenantName { get; set; }
          
-        [DisplayName("Tenant Web Site")]
         public String TenantWebSite { get; set; }
-
-        [DisplayName("Tenant Image"), Size(100)]
-        [ImageUploadEditor(FilenameFormat = "TenantImage/~", CopyToHistory = true)]
+        
         public String TenantImage { get; set; }
         
-        [DisplayName("Override users email signature")]
-        [BsSwitchEditor]
         public Boolean? OverrideUsersEmailSignature { get; set; }
 
-        [DisplayName("Tenant Email Signature"), Size(-1), NotNull, HtmlContentEditor, CssClass("email-signature")]
         public String TenantEmailSignature { get; set; }
     }
 }

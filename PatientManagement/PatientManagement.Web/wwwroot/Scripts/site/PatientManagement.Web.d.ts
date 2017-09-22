@@ -815,6 +815,8 @@ declare namespace PatientManagement.Administration {
         TenantName: Serenity.StringEditor;
         TenantImage: Serenity.ImageUploadEditor;
         TenantWebSite: Serenity.StringEditor;
+        OverrideUsersEmailSignature: BsSwitchEditor;
+        TenantEmailSignature: Serenity.HtmlContentEditor;
         CurrencyId: Serenity.LookupEditor;
         SubscriptionId: Serenity.LookupEditor;
         SubscriptionRequired: BsSwitchEditor;
@@ -952,6 +954,7 @@ declare namespace PatientManagement.Administration {
         Password: Serenity.PasswordEditor;
         PasswordConfirm: Serenity.PasswordEditor;
         IsActive: BsSwitchEditor;
+        EmailSignature: Serenity.HtmlContentEditor;
         Source: Serenity.StringEditor;
         TenantId: Serenity.LookupEditor;
     }
@@ -1237,7 +1240,7 @@ declare namespace PatientManagement.Membership {
         static formKey: string;
     }
     interface EditTenantForm {
-        Name: Serenity.StringEditor;
+        TenantName: Serenity.StringEditor;
         TenantWebSite: Serenity.StringEditor;
         TenantImage: Serenity.ImageUploadEditor;
         OverrideUsersEmailSignature: BsSwitchEditor;
@@ -1246,7 +1249,7 @@ declare namespace PatientManagement.Membership {
 }
 declare namespace PatientManagement.Membership {
     interface EditTenantRequest extends Serenity.ServiceRequest {
-        Name?: string;
+        TenantName?: string;
         TenantWebSite?: string;
         TenantImage?: string;
         OverrideUsersEmailSignature?: boolean;
@@ -1259,21 +1262,21 @@ declare namespace PatientManagement.Membership {
     }
     interface EditUserProfileForm {
         DisplayName: Serenity.StringEditor;
-        UserEmail: Serenity.EmailEditor;
-        UserPhone: Serenity.StringEditor;
-        UserWebSite: Serenity.StringEditor;
+        Email: Serenity.EmailEditor;
+        PhoneNumber: Serenity.StringEditor;
+        WebSite: Serenity.StringEditor;
         UserImage: Serenity.ImageUploadEditor;
-        USerEmailSignature: Serenity.HtmlContentEditor;
+        EmailSignature: Serenity.HtmlContentEditor;
     }
 }
 declare namespace PatientManagement.Membership {
     interface EditUserProfileRequest extends Serenity.ServiceRequest {
         DisplayName?: string;
-        UserEmail?: string;
-        UserPhone?: string;
-        UserWebSite?: string;
+        Email?: string;
+        PhoneNumber?: string;
+        WebSite?: string;
         UserImage?: string;
-        USerEmailSignature?: string;
+        EmailSignature?: string;
     }
 }
 declare namespace PatientManagement.Membership {

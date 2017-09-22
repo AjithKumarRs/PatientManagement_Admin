@@ -1,4 +1,6 @@
-﻿namespace PatientManagement.Administration.Forms
+﻿using Serenity.Data.Mapping;
+
+namespace PatientManagement.Administration.Forms
 {
     using Serenity.ComponentModel;
     using System;
@@ -9,7 +11,6 @@
     {
         public String Username { get; set; }
         public String DisplayName { get; set; }
-        [EmailEditor, Required(true)]
         public String Email { get; set; }
 
 
@@ -24,6 +25,8 @@
         public String PasswordConfirm { get; set; }
 
         public int IsActive { get; set; }
+
+        public String EmailSignature { get; set; }
 
         [OneWay]
         public string Source { get; set; }

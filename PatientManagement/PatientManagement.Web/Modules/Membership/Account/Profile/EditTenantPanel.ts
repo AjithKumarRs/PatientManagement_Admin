@@ -20,7 +20,7 @@
                 },
                 resp => {
                     tenant = resp.Entity;
-                    this.form.Name.value = tenant.TenantName;
+                    this.form.TenantName.value = tenant.TenantName;
                     this.form.TenantWebSite.value = tenant.TenantWebSite;
 
                     if (this.form.TenantImage.value != null)
