@@ -4547,6 +4547,18 @@ var PatientManagement;
                 }));
                 return buttons;
             };
+            VisitsGrid.prototype.getQuickFilters = function () {
+                // get quick filter list from base class
+                var filters = _super.prototype.getQuickFilters.call(this);
+                var cookie = $.cookie("CabinetPreference");
+                if (cookie) {
+                    var fields_1 = PatientManagement.VisitsRow.Fields;
+                    Q.first(filters, function (x) { return x.field == fields_1.CabinetId; }).init = function (w) {
+                        w.value = cookie;
+                    };
+                }
+                return filters;
+            };
             return VisitsGrid;
         }(Serenity.EntityGrid));
         VisitsGrid = __decorate([

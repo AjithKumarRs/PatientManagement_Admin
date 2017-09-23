@@ -2771,6 +2771,7 @@ declare namespace PatientManagement.PatientManagement {
         protected getService(): string;
         constructor(container: JQuery);
         protected getButtons(): Serenity.ToolButton[];
+        protected getQuickFilters(): Serenity.QuickFilter<Serenity.Widget<any>, any>[];
     }
 }
 declare namespace PatientManagement.Membership {

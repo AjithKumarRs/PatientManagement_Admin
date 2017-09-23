@@ -28,5 +28,21 @@ namespace PatientManagement.PatientManagement {
             return buttons;
         }
 
+        protected getQuickFilters(): Serenity.QuickFilter<Serenity.Widget<any>, any>[] {
+
+            // get quick filter list from base class
+            let filters = super.getQuickFilters();
+            var cookie = $.cookie("CabinetPreference");
+            if (cookie) {
+                let fields = VisitsRow.Fields;
+
+                Q.first(filters, x => x.field == fields.CabinetId).init = w => {
+                    (w as Serenity.IntegerEditor).value = cookie;
+                    
+                };
+            }
+
+            return filters;
+        }
     }
 }
