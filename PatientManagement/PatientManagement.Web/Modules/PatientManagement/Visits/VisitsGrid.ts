@@ -38,7 +38,9 @@ namespace PatientManagement.PatientManagement {
 
                 Q.first(filters, x => x.field == fields.CabinetId).init = w => {
                     (w as Serenity.IntegerEditor).value = cookie;
-                    
+
+                    //TODO: When permission for all cabinets is added uncoment 
+                    // (w as Serenity.IntegerEditor).element.prop('readonly', true);
                 };
             }
 
