@@ -33,8 +33,8 @@ namespace PatientManagement.PatientManagement {
             // get quick filter list from base class
             let filters = super.getQuickFilters();
             var cookie = $.cookie("CabinetPreference");
+            let fields = VisitsRow.Fields;
             if (cookie) {
-                let fields = VisitsRow.Fields;
 
                 Q.first(filters, x => x.field == fields.CabinetId).init = w => {
                     (w as Serenity.IntegerEditor).value = cookie;
@@ -44,6 +44,13 @@ namespace PatientManagement.PatientManagement {
                 };
             }
 
+            var q = Q.parseQueryString();
+            if (q["visittype"]) {
+                var category = Q.tryFirst(filters, x => x.field == fields.VisitTypeId);
+                category.init = e => {
+                    e.element.getWidget(Serenity.LookupEditor).value = q["visittype"];
+                };
+            }
             return filters;
         }
     }

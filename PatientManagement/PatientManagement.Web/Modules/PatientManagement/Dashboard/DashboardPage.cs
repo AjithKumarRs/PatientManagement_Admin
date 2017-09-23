@@ -38,10 +38,13 @@ namespace PatientManagement.PatientManagement.Pages
                     var connectionCabint = connection.TryFirst<CabinetsRow>(cabFlds.CabinetId == cabinetIdActive);
                     ViewData["CabinetHeaderName"] = connectionCabint?.Name;
 
+                    
+                    ViewData["WorkHoursStart"] = TimeSpan.FromMinutes(connectionCabint?.WorkHoursStart ?? 420);
+                    ViewData["WorkHoursEnd"] = TimeSpan.FromMinutes(connectionCabint?.WorkHoursEnd ?? 1200);
+                    return View(MVC.Views.PatientManagement.Dashboard.DashboardIndex);
                 }
             }
-            //ViewData["WorkHoursStart"] = TimeSpan.FromMinutes(tenant.WorkHoursStart??420);
-            //ViewData["WorkHoursEnd"] = TimeSpan.FromMinutes(tenant.WorkHoursEnd ?? 1200);
+
             ViewData["WorkHoursStart"] = TimeSpan.FromMinutes(420);
             ViewData["WorkHoursEnd"] = TimeSpan.FromMinutes(1200);
             return View(MVC.Views.PatientManagement.Dashboard.DashboardIndex);

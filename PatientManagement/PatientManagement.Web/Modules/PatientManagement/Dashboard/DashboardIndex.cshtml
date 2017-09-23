@@ -27,7 +27,9 @@
     </div>
 }
 
-@section BottoMenuLeftNavigation
+@*
+    TODO: Clean this if we use dynamic navigation
+    @section BottoMenuLeftNavigation
     {
     <li id="Left-bottom-menu-visit-types" class="treeview">
         <a href="javascript:;">
@@ -44,7 +46,7 @@
 
         });
     </script>
-}
+}*@
 
 @section Head {
     <link rel="stylesheet" href="~/Scripts/fullcalendar/fullcalendar.min.css">
@@ -186,6 +188,10 @@
     }
 
     $(document).ready(function () {
+        //TODO: Add drag and drop functonalities here 
+        //$('.fc-event-droppable').each(function (i, element) {
+
+        //});
 
         $(window).resize(function() {
             $('#calendar').fullCalendar('option', 'height', get_calendar_height());

@@ -314,6 +314,15 @@
         </div>
 
         <script type="text/javascript">
+            
+            $('.fc-event-droppable').each(function(i, element) {
+                var classList = element.className.split(/\s+/);
+
+                var backgroundColor = classList[classList.length - 1];
+                $(element).css("color", backgroundColor);
+            });
+
+
             $(document).on('keydown', null, 'alt+v', function() {
                 new PatientManagement.PatientManagement.CalendarVisitsDialog().loadNewAndOpenDialog();
             });
@@ -397,6 +406,7 @@
             //TODO: Finded major speed issue here! Cache user data or make a cookie if user is closing the subscription box
             jQuery(document).ready(function () {
                 jQuery(document).ready(function () {
+
                     //var userData = new Q.getRemoteData('UserData');
                     $.get('../Administration/GetTenantSubscriptionEndDate', function (date) {
                         var subscriptionEndDate = date;
@@ -439,7 +449,7 @@
 
                                 $('#subscription-information-box p')
                                     .text(
-                                    Q.text("Site.Subscriptions.WillExpire.SubscriptionInfoBoxBody").format(diff));
+                                        Q.text("Site.Subscriptions.WillExpire.SubscriptionInfoBoxBody").format(diff));
 
                                 $('#subscription-information-box').addClass('callout-warning');
                                 $('#subscription-information-box').parents('.row').show('slide', { direction: 'up' }, 500);

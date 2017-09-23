@@ -60,6 +60,7 @@ namespace PatientManagement.PatientManagement.Entities
             set { Fields.WorkHoursEnd[this] = value; }
         }
 
+        [DisplayName("Representatives")]
         [LookupEditor(typeof(UserRow), Multiple = true), NotMapped]
         [LinkingSetRelation(typeof(CabinetRepresentativesRow), "CabinetId", "UserId")]
         [MinSelectLevel(SelectLevel.Details), QuickFilter]
