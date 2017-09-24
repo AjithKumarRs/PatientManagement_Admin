@@ -13,6 +13,7 @@
         WebSite?: string;
         PhoneNumber?: string;
         EmailSignature?: string;
+        Cabinets?: number[];
         Password?: string;
         PasswordConfirm?: string;
         TenantId?: number;
@@ -49,6 +50,7 @@
             export declare const WebSite: string;
             export declare const PhoneNumber: string;
             export declare const EmailSignature: string;
+            export declare const Cabinets: string;
             export declare const Password: string;
             export declare const PasswordConfirm: string;
             export declare const TenantId: string;
@@ -60,6 +62,6 @@
             export declare const UpdateDate: string;
         }
 
-        ['UserId', 'Username', 'Source', 'PasswordHash', 'PasswordSalt', 'DisplayName', 'Email', 'UserImage', 'LastDirectoryUpdate', 'IsActive', 'WebSite', 'PhoneNumber', 'EmailSignature', 'Password', 'PasswordConfirm', 'TenantId', 'TenantName', 'TenantCurrencyId', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDate'].forEach(x => (<any>Fields)[x] = x);
+        ['UserId', 'Username', 'Source', 'PasswordHash', 'PasswordSalt', 'DisplayName', 'Email', 'UserImage', 'LastDirectoryUpdate', 'IsActive', 'WebSite', 'PhoneNumber', 'EmailSignature', 'Cabinets', 'Password', 'PasswordConfirm', 'TenantId', 'TenantName', 'TenantCurrencyId', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDate'].forEach(x => (<any>Fields)[x] = x);
     }
 }

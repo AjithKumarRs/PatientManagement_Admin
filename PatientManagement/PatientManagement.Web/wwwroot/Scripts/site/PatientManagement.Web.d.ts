@@ -948,6 +948,7 @@ declare namespace PatientManagement.Administration {
         Username: Serenity.StringEditor;
         DisplayName: Serenity.StringEditor;
         Email: Serenity.EmailEditor;
+        Cabinets: Serenity.LookupEditor;
         PhoneNumber: Serenity.StringEditor;
         WebSite: Serenity.StringEditor;
         UserImage: Serenity.ImageUploadEditor;
@@ -1073,6 +1074,7 @@ declare namespace PatientManagement.Administration {
         WebSite?: string;
         PhoneNumber?: string;
         EmailSignature?: string;
+        Cabinets?: number[];
         Password?: string;
         PasswordConfirm?: string;
         TenantId?: number;
@@ -1104,6 +1106,7 @@ declare namespace PatientManagement.Administration {
             const WebSite: string;
             const PhoneNumber: string;
             const EmailSignature: string;
+            const Cabinets: string;
             const Password: string;
             const PasswordConfirm: string;
             const TenantId: string;
@@ -2850,6 +2853,11 @@ declare namespace PatientManagement.PatientManagement {
         protected getIsActiveProperty(): string;
         protected getService(): string;
         constructor(container: JQuery);
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class CabinetsListFormatter implements Slick.Formatter {
+        format(ctx: Slick.FormatterContext): string;
     }
 }
 declare namespace PatientManagement.PatientManagement {

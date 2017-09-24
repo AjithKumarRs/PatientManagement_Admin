@@ -1,4 +1,5 @@
-﻿using Serenity.Data.Mapping;
+﻿using System.Collections.Generic;
+using Serenity.Data.Mapping;
 
 namespace PatientManagement.Administration.Forms
 {
@@ -12,6 +13,8 @@ namespace PatientManagement.Administration.Forms
         public String Username { get; set; }
         public String DisplayName { get; set; }
         public String Email { get; set; }
+
+        public List<Int32> Cabinets { get; set; }
 
 
         public string PhoneNumber { get; set; }

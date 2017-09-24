@@ -7723,6 +7723,7 @@ section.content > .s-DataGrid {
 }
 .s-Administration-UserDialog > .size {
   width: 650px;
+  height: 700px;
 }
 .s-Administration-UserDialog .caption {
   width: 150px;

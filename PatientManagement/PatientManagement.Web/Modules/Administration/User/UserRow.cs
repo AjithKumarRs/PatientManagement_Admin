@@ -1,4 +1,6 @@
 ﻿
+using System.Collections.Generic;
+using PatientManagement.PatientManagement.Entities;
 using PatientManagement.PatientManagement.Scripts;
 
 namespace PatientManagement.Administration.Entities
@@ -29,6 +31,17 @@ namespace PatientManagement.Administration.Entities
             get { return Fields.Username[this]; }
             set { Fields.Username[this] = value; }
         }
+
+        [DisplayName("Cabinets")]
+        [LookupEditor(typeof(CabinetsRow), Multiple = true), NotMapped]
+        [LinkingSetRelation(typeof(CabinetRepresentativesRow), "UserId", "CabinetId")]
+        [MinSelectLevel(SelectLevel.Details), QuickFilter]
+        public List<Int32> Cabinets
+        {
+            get { return Fields.Cabinets[this]; }
+            set { Fields.Cabinets[this] = value; }
+        }
+
 
         [ReadPermission(PermissionKeys.Tenants)]
         [DisplayName("Source"), Size(4), NotNull, Insertable(false), Updatable(false), DefaultValue("site")]
@@ -192,6 +205,8 @@ namespace PatientManagement.Administration.Entities
             public StringField WebSite;
             public StringField PhoneNumber;
             public StringField EmailSignature;
+
+            public ListField<Int32> Cabinets;
 
             public StringField Password;
             public StringField PasswordConfirm;
