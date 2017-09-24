@@ -40,6 +40,29 @@ namespace PatientManagement.PatientManagement.Endpoints
             return new MyRepository().Delete(uow, request);
         }
 
+        public RetrieveResponse<WorkHours> RetrieveWorkHours(IDbConnection connection, RetrieveRequest request)
+        {
+             var entity = new MyRepository().Retrieve(connection, request);
+
+            var model = new WorkHours
+            {
+                start = TimeSpan.FromMinutes(entity.Entity.WorkHoursStart ?? 420).ToString(),
+                end = TimeSpan.FromMinutes(entity.Entity.WorkHoursEnd ?? 1200).ToString(),
+            };
+
+            var response=  new RetrieveResponse<WorkHours>();
+            response.Entity = model;
+
+            return response;
+        }
+
+        public class WorkHours
+        {
+            public string start { get; set; }
+
+            public string end { get; set; }
+        }
+
         public RetrieveResponse<MyRow> Retrieve(IDbConnection connection, RetrieveRequest request)
         {
             return new MyRepository().Retrieve(connection, request);

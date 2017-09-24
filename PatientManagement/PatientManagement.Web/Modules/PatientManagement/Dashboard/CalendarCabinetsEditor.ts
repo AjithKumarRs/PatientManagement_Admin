@@ -28,7 +28,7 @@ namespace PatientManagement.PatientManagement {
                             this.addItem({
                                 id: response.Entities[i].CabinetId + "",
                                 text: response.Entities[i].Name,
-
+                                
                             });
                         }
                     }
@@ -45,6 +45,18 @@ namespace PatientManagement.PatientManagement {
                         path: Q.Config.applicationPath,
                         expires: 365
                     });
+                    PatientManagement.CabinetsService.RetrieveWorkHours({
+                            EntityId: this.value
+                        },
+                        response => {
+                            var entity = response.Entity;
+                            console.log(entity);
+                            $('#calendar').fullCalendar('option', {
+                                
+                                'minTime': entity.start,
+                                'maxTime': entity.end
+                            });
+                        });
 
                     $("#calendar").fullCalendar('refetchEvents');
 
