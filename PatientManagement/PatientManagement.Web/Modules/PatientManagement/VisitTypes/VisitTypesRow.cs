@@ -1,4 +1,5 @@
 ﻿
+using PatientManagement.Administration;
 using PatientManagement.PatientManagement.Scripts;
 
 namespace PatientManagement.PatientManagement.Entities
@@ -16,7 +17,7 @@ namespace PatientManagement.PatientManagement.Entities
     [ModifyPermission("PatientManagement:VisitTypes:Modify")]
     [LookupScript("PatientManagement.VisitTypes",
         LookupType = typeof(MultiTenantRowLookupScript<>))]
-    public sealed class VisitTypesRow : Row, IIdRow, INameRow, IInsertLogRow, IMultiTenantRow
+    public sealed class VisitTypesRow : Row, IIdRow, INameRow, IInsertLogRow, IMultiTenantRow, IIsActiveDeletedRow
     {
         [DisplayName("Visit Type Id"), Identity]
         public Int32? VisitTypeId
@@ -70,6 +71,26 @@ namespace PatientManagement.PatientManagement.Entities
             get { return Fields.Name; }
         }
 
+        #region IIsActive
+
+        [DisplayName("Is Active"), NotNull]
+        [ReadPermission(PermissionKeys.Tenants)]
+        [LookupInclude]
+        public Int16? IsActive
+        {
+            get { return Fields.IsActive[this]; }
+            set { Fields.IsActive[this] = value; }
+        }
+
+
+        Int16Field IIsActiveRow.IsActiveField
+        {
+            get { return Fields.IsActive; }
+        }
+
+
+        #endregion
+
         public static readonly RowFields Fields = new RowFields().Init();
 
         public VisitTypesRow()
@@ -86,6 +107,7 @@ namespace PatientManagement.PatientManagement.Entities
 
             public Int32Field InsertUserId;
             public DateTimeField InsertDate;
+            public Int16Field IsActive;
 
             public readonly Int32Field TenantId;
 

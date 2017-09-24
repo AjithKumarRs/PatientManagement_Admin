@@ -1,4 +1,6 @@
 ﻿
+using PatientManagement.Administration.Entities;
+
 namespace PatientManagement.Administration.Repositories
 {
     using Serenity;
@@ -238,6 +240,38 @@ namespace PatientManagement.Administration.Repositories
                 base.AfterSave();
 
                 BatchGenerationUpdater.OnCommit(this.UnitOfWork, fld.GenerationKey);
+
+
+                if (!Authorization.HasPermission(PermissionKeys.Tenants))
+                {
+                    var permFlds = UserPermissionRow.Fields;
+
+                    if (!Connection.Exists<UserPermissionRow>(permFlds.UserId == Row.UserId.Value && permFlds.PermissionKey == "Administration:User:Modify"))
+                        Connection.InsertAndGetID(new UserPermissionRow
+                        {
+                            UserId = Row.UserId,
+                            PermissionKey = "Administration:User:Modify",
+                            Granted = true
+                        });
+
+                    if (!Connection.Exists<UserPermissionRow>(permFlds.UserId == Row.UserId.Value && permFlds.PermissionKey == "AdministrationTenants:User:Read"))
+                        Connection.InsertAndGetID(new UserPermissionRow
+                        {
+                            UserId = Row.UserId,
+                            PermissionKey = "AdministrationTenants:User:Read",
+                            Granted = true
+
+                        });
+
+                    if (!Connection.Exists<UserPermissionRow>(permFlds.UserId == Row.UserId.Value && permFlds.PermissionKey == "Administration:Tenants:Read"))
+                        Connection.InsertAndGetID(new UserPermissionRow
+                        {
+                            UserId = Row.UserId,
+                            PermissionKey = "Administration:Tenants:Read",
+                            Granted = true
+
+                        });
+                }
             }
         }
 

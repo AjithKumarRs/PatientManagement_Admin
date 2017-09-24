@@ -26,9 +26,8 @@ namespace PatientManagement.PatientManagement.Entities
             get => Fields.VisitId[this];
             set => Fields.VisitId[this] = value;
         }
-        [Category("Properties")]
         [DisplayName("Patient"), NotNull, ForeignKey("[dbo].[Patients]", "PatientId"), LeftJoin("jPatient"), TextualField("PatientName")]
-        [LookupEditor(typeof(PatientsRow), InplaceAdd = true)]
+        [LookupEditor(typeof(PatientsRow), InplaceAdd = true, FilterField = "IsActive", FilterValue = 1)]
         public Int32? PatientId
         {
             get => Fields.PatientId[this];
@@ -37,13 +36,36 @@ namespace PatientManagement.PatientManagement.Entities
         
 
         [DisplayName("Visit Type"), NotNull, ForeignKey("[dbo].[VisitTypes]", "VisitTypeId"), LeftJoin("jVisitType"), TextualField("VisitTypeName")]
-        [LookupEditor(typeof(VisitTypesRow), InplaceAdd = true)]
+        [LookupEditor(typeof(VisitTypesRow), InplaceAdd = true, FilterField = "IsActive", FilterValue = 1)]
         public Int32? VisitTypeId
         {
             get => Fields.VisitTypeId[this];
             set => Fields.VisitTypeId[this] = value;
         }
 
+        [DisplayName("Cabinet"), NotNull, ForeignKey("[dbo].[Cabinets]", "CabinetId"), LeftJoin("jCabinets"), TextualField("CabinetName")]
+        [LookupEditor(typeof(CabinetsRow), InplaceAdd = true, FilterField = "IsActive", FilterValue = 1)]
+        [QuickFilter()]
+        public Int32? CabinetId
+        {
+            get => Fields.CabinetId[this];
+            set => Fields.CabinetId[this] = value;
+        }
+
+        [DisplayName("Cabinet Name"), Expression("jCabinets.[Name]"), QuickSearch]
+        [QuickFilter()]
+        public String CabinetName
+        {
+            get { return Fields.CabinetName[this]; }
+            set { Fields.CabinetName[this] = value; }
+        }
+
+        [DisplayName("Cabinet IsActive"), Expression("jCabinets.[IsActive]")]
+        public Int16? CabinetIsActive
+        {
+            get { return Fields.CabinetIsActive[this]; }
+            set { Fields.CabinetIsActive[this] = value; }
+        }
 
         [Expression("jVisitType.[BackgroundColor]")]
         public String VisitTypeBackgroundColor
@@ -102,8 +124,7 @@ namespace PatientManagement.PatientManagement.Entities
             get { return Fields.InsertDate[this]; }
             set { Fields.InsertDate[this] = value; }
         }
-
-        [Category("Extra Info")]
+        
         [DisplayName("Description"), Width(150)]
         [TextAreaEditor(Rows = 8)]
         public String Description
@@ -156,6 +177,11 @@ namespace PatientManagement.PatientManagement.Entities
             public Int32Field VisitId;
             public Int32Field PatientId;
             public Int32Field VisitTypeId;
+
+            public Int32Field CabinetId;
+            public StringField CabinetName;
+            public Int16Field CabinetIsActive;
+
             public StringField Description;
             public DateTimeField StartDate;
             public DateTimeField EndDate;

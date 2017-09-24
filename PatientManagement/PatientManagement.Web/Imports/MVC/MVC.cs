@@ -77,6 +77,19 @@ namespace MVC
 
         public static class Common
         {
+            public static class EmailTemplates
+            {
+                public static class ChangedVisitAutomaticEmail
+                {
+                    public const string EmailTemplates_ChangedVisitAutomaticEmail = "~/Modules/Common/EmailTemplates/ChangedVisitAutomaticEmail/EmailTemplates.ChangedVisitAutomaticEmail.cshtml";
+                }
+
+                public static class UserToPatientEmail
+                {
+                    public const string EmailTemplates_UserToPatientEmail = "~/Modules/Common/EmailTemplates/UserToPatientEmail/EmailTemplates.UserToPatientEmail.cshtml";
+                }
+            }
+
             public static class Reporting
             {
                 public const string ReportPage = "~/Modules/Common/Reporting/ReportPage.cshtml";
@@ -132,6 +145,11 @@ namespace MVC
             public static class Activity
             {
                 public const string ActivityIndex = "~/Modules/PatientManagement/Activity/ActivityIndex.cshtml";
+            }
+
+            public static class Cabinets
+            {
+                public const string CabinetsIndex = "~/Modules/PatientManagement/Cabinets/CabinetsIndex.cshtml";
             }
 
             public static class Dashboard

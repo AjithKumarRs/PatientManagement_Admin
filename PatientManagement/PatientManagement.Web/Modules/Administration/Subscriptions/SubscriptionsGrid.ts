@@ -8,6 +8,7 @@ namespace PatientManagement.Administration {
         protected getIdProperty() { return SubscriptionsRow.idProperty; }
         protected getLocalTextPrefix() { return SubscriptionsRow.localTextPrefix; }
         protected getService() { return SubscriptionsService.baseUrl; }
+        protected getIsActiveProperty() { return OffersRow.isActiveProperty; }
 
         constructor(container: JQuery) {
             super(container);
@@ -16,7 +17,7 @@ namespace PatientManagement.Administration {
         protected getItemCssClass(item: SubscriptionsRow, index: number): string {
             let klass: string = "";
 
-            if (item.IsActive == 1) {
+            if (item.Enabled == 1) {
                 klass += " active";
             }
 

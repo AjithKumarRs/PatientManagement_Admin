@@ -28,7 +28,7 @@ namespace PatientManagement.PatientManagement.Columns
 
         public Int64 EntityId { get; set; }
         
-        [Width(500)]
+        [Width(850)]
         public String Text { get; set; }
 
         [Width(150)]

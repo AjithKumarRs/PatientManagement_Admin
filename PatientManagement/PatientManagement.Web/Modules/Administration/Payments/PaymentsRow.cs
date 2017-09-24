@@ -27,7 +27,7 @@ namespace PatientManagement.Administration.Entities
         }
 
         [DisplayName("Subscription"), NotNull, ForeignKey("[dbo].[Subscriptions]", "SubscriptionId"), LeftJoin("jSubscription"), TextualField("SubscriptionName")]
-        [LookupEditor(typeof(SubscriptionsRow), InplaceAdd = false, FilterField = "IsActive", FilterValue = 1)]
+        [LookupEditor(typeof(SubscriptionsRow), InplaceAdd = false, FilterField = "Enabled", FilterValue = 1)]
         [Updatable(false)]
         public Int64? SubscriptionId
         {
@@ -227,7 +227,7 @@ namespace PatientManagement.Administration.Entities
             set { Fields.TenantId[this] = value; }
         }
         [DisplayName("Tenant"), Expression("tnt.TenantName")]
-        [ReadPermission("Administration:Tenants")]
+        [ReadPermission(PermissionKeys.Tenants)]
         public String TenantName
         {
             get { return Fields.TenantName[this]; }

@@ -1,5 +1,8 @@
 ﻿
 
+using PatientManagement.Administration.Entities;
+using Serenity;
+
 namespace PatientManagement.Administration.Repositories
 {
     using Serenity.Data;
@@ -35,8 +38,20 @@ namespace PatientManagement.Administration.Repositories
         {
             return new MyListHandler().Process(connection, request);
         }
+        public UndeleteResponse Undelete(IUnitOfWork uow, UndeleteRequest request)
+        {
+            return new MyUndeleteHandler().Process(uow, request);
+        }
+        private class MyUndeleteHandler : UndeleteRequestHandler<MyRow> { }
 
-        private class MySaveHandler : SaveRequestHandler<MyRow> { }
+        private class MySaveHandler : SaveRequestHandler<MyRow>
+        {
+            protected override void AfterSave()
+            {
+                base.AfterSave();
+
+            }
+        }
         private class MyDeleteHandler : DeleteRequestHandler<MyRow> { }
         private class MyRetrieveHandler : RetrieveRequestHandler<MyRow> { }
         private class MyListHandler : ListRequestHandler<MyRow> { }

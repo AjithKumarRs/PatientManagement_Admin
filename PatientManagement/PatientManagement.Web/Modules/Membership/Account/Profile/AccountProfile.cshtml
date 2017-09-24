@@ -32,7 +32,7 @@
                         <a class="pull-right">@ViewData["PatientsCount"]</a>
                     </li>
                     <li class="list-group-item">
-                        <b>@Texts.Forms.Membership.Profile.AddedVisits</b> 
+                        <b>@Texts.Forms.Membership.Profile.AddedVisits</b>
                         <a class="pull-right">@ViewData["VisitsCount"]</a>
                     </li>
                     <li class="list-group-item">
@@ -41,9 +41,11 @@
                     </li>
                 </ul>
 
-                <a href="~/Account/ChangePassword" class="btn btn-primary btn-block"><b>
-                    @Texts.Forms.Membership.ChangePassword.SubmitButton
-                </b></a>
+                <a href="~/Account/ChangePassword" class="btn btn-primary btn-block">
+                    <b>
+                        @Texts.Forms.Membership.ChangePassword.SubmitButton
+                    </b>
+                </a>
             </div>
             <!-- /.box-body -->
         </div>
@@ -57,7 +59,8 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-                <strong><i class="fa fa-book margin-r-5"></i>
+                <strong>
+                    <i class="fa fa-book margin-r-5"></i>
                     @Texts.Forms.Membership.Profile.BoxAdditionalInfoEmail
                 </strong>
 
@@ -67,7 +70,8 @@
 
                 <hr>
 
-                <strong><i class="fa fa-map-marker margin-r-5"></i>
+                <strong>
+                    <i class="fa fa-map-marker margin-r-5"></i>
                     @Texts.Forms.Membership.Profile.BoxAdditionalInfoPhoneNumber
                 </strong>
 
@@ -77,7 +81,8 @@
 
 
 
-                <strong><i class="fa fa-file-text-o margin-r-5"></i>
+                <strong>
+                    <i class="fa fa-file-text-o margin-r-5"></i>
                     @Texts.Forms.Membership.Profile.BoxAdditionalInfoRegistaredDate
                 </strong>
 
@@ -87,7 +92,7 @@
             </div>
             <!-- /.box-body -->
         </div>
-        
+
         <!-- About The Clinic Box -->
         <div class="box box-primary">
             <div class="box-header with-border">
@@ -97,7 +102,8 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-                <strong><i class="fa fa-book margin-r-5"></i>
+                <strong>
+                    <i class="fa fa-book margin-r-5"></i>
                     @Texts.Forms.Membership.Profile.BoxTenantInfoTenantName
                 </strong>
 
@@ -107,7 +113,8 @@
 
                 <hr>
 
-                <strong><i class="fa fa-map-marker margin-r-5"></i>
+                <strong>
+                    <i class="fa fa-map-marker margin-r-5"></i>
                     @Texts.Forms.Membership.Profile.BoxTenantInfoTenantWebSite
                 </strong>
 
@@ -117,11 +124,13 @@
 
 
 
-                <strong><i class="fa fa-file-text-o margin-r-5"></i>
-                    @Texts.Forms.Membership.Profile.BoxTenantInfoTenantWorkHours
-                </strong>
+                @* TODO: Get work hours from cabinet
 
-                <p>@ViewData["TenantWorkHours"]</p>
+                        <strong><i class="fa fa-file-text-o margin-r-5"></i>
+                        @Texts.Forms.Membership.Profile.BoxTenantInfoTenantWorkHours
+                    </strong>
+
+                    <p>@ViewData["TenantWorkHours"]</p>*@
 
                 <hr>
             </div>
@@ -148,75 +157,77 @@
 
                 @if (Authorization.HasPermission(PermissionKeys.AdministrationTenantsTenantEditing))
                 {
-                    <li><a href="#tenant-editing" data-toggle="tab">
-                        @Texts.Forms.Membership.Profile.TabTenantEditingTitle
+                    <li>
+                        <a href="#tenant-editing" data-toggle="tab">
+                            @Texts.Forms.Membership.Profile.TabTenantEditingTitle
 
-                    </a></li>
+                        </a>
+                    </li>
                 }
                 @*<li><a href="#timeline" data-toggle="tab">Timeline</a></li>
                     <li><a href="#settings" data-toggle="tab">Settings</a></li>*@
             </ul>
             <div class="tab-content">
-                <div class="active tab-pane" id="visits-for-user"  style="height: 60em">
+                <div class="active tab-pane" id="visits-for-user" style="height: 60em">
                     <div id="VisitsGrid">
                     </div>
                 </div>
                 <script>
-                    
+
                 </script>
                 <div class="tab-pane" id="settings">
                     <div class=" tab-pane" id="user-profile-editing">
 
                         <script id="Template_Membership_EditUserProfilePanel" type="text/template">
 
-                        <form id="~_Form" action="">
-                            <div class="s-Form">
-                                <div class="fieldset ui-widget ui-widget-content ui-corner-all">
-                                    <div id="~_PropertyGrid"></div>
-                                    <div class="clear"></div>
-                                </div>
-                                <div class="buttons">
-                                    <button id="~_EditUserProfileSubmitButton" type="submit" class="btn btn-primary">
-                                        @Texts.Forms.Membership.Profile.ButtonSaveProfile
+                            <form id="~_Form" action="">
+                                <div class="s-Form">
+                                    <div class="fieldset ui-widget ui-widget-content ui-corner-all">
+                                        <div id="~_PropertyGrid"></div>
+                                        <div class="clear"></div>
+                                    </div>
+                                    <div class="buttons">
+                                        <button id="~_EditUserProfileSubmitButton" type="submit" class="btn btn-primary">
+                                            @Texts.Forms.Membership.Profile.ButtonSaveProfile
 
- 
-                                    </button>
+
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
-                    </script>
+                            </form>
+                        </script>
                         <div id="EditUserProfilePanel">
                         </div>
                     </div>
                 </div>
-                
+
 
                 @if (Authorization.HasPermission(PermissionKeys.AdministrationTenantsTenantEditing))
             {
-                <div class=" tab-pane" id="tenant-editing">
+                    <div class=" tab-pane" id="tenant-editing">
 
-                    <script id="Template_Membership_EditTenantPanel" type="text/template">
+                        <script id="Template_Membership_EditTenantPanel" type="text/template">
 
-                        <form id="~_Form" action="">
-                            <div class="s-Form">
-                                <div class="fieldset ui-widget ui-widget-content ui-corner-all">
-                                    <div id="~_PropertyGrid"></div>
-                                    <div class="clear"></div>
+                            <form id="~_Form" action="">
+                                <div class="s-Form">
+                                    <div class="fieldset ui-widget ui-widget-content ui-corner-all">
+                                        <div id="~_PropertyGrid"></div>
+                                        <div class="clear"></div>
+                                    </div>
+                                    <div class="buttons">
+                                        <button id="~_EditTenantSubmitButton" type="submit" class="btn btn-primary">
+                                            @Texts.Forms.Membership.Profile.ButtonSaveTenant
+
+
+                                        </button>
+                                    </div>
                                 </div>
-                                <div class="buttons">
-                                    <button id="~_EditTenantSubmitButton" type="submit" class="btn btn-primary">
-                                        @Texts.Forms.Membership.Profile.ButtonSaveTenant
-
- 
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </script>
-                    <div id="EditTenantPanel">
+                            </form>
+                        </script>
+                        <div id="EditTenantPanel">
+                        </div>
                     </div>
-                </div>
-            }
+                }
 
                 <!-- /.tab-pane -->
             </div>
@@ -229,7 +240,7 @@
 <!-- /.row -->
 <script type="text/javascript">
     $(function () {
-        new PatientManagement.Membership.EditTenantPanel($('#EditTenantPanel')).init();
+      
         new PatientManagement.Membership.EditUserProfilePanel($('#EditUserProfilePanel')).init();
 
         new PatientManagement.Membership.AddedVisitsFromUserPanel($('#VisitsGrid'), @user.UserId).init();
@@ -237,3 +248,12 @@
         Q.initFullHeightGridPage($('#VisitsGrid'));
     });
 </script>
+
+@if (Authorization.HasPermission(PermissionKeys.AdministrationTenantsTenantEditing))
+{
+    <script type="text/javascript">
+        $(function () {
+            new PatientManagement.Membership.EditTenantPanel($('#EditTenantPanel')).init();
+        });
+    </script>
+}

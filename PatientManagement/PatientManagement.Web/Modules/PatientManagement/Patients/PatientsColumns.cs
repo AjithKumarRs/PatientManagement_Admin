@@ -13,6 +13,7 @@ namespace PatientManagement.PatientManagement.Columns
     [BasedOnRow(typeof(Entities.PatientsRow))]
     public class PatientsColumns
     {
+
         [EditLink, DisplayName("Db.Shared.RecordId"), AlignRight]
         public Int32 PatientId { get; set; }
 

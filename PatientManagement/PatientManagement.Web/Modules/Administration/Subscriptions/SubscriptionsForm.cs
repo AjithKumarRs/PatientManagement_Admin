@@ -17,6 +17,10 @@ namespace PatientManagement.Administration.Forms
         public Int32 OfferId { get; set; }
         public DateTime SubscriptionEndDate { get; set; }
 
-        public int IsActive { get; set; }
+        [DefaultValue(false)]
+        public int Enabled { get; set; }
+
+        public Int32? TenantId { get; set; }
+
     }
 }

@@ -1,11 +1,16 @@
 ﻿
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
+using Microsoft.AspNetCore.Http;
+using PatientManagement.Administration;
 using PatientManagement.Administration.Entities;
 using PatientManagement.PatientManagement.Entities;
 using PatientManagement.Dashboard;
 using PatientManagement.PatientManagement.Repositories;
+using PatientManagement.Web.Modules.Common;
 
 namespace PatientManagement.PatientManagement.Pages
 {
@@ -21,23 +26,35 @@ namespace PatientManagement.PatientManagement.Pages
         [PageAuthorize, HttpGet, Route("~/")]
         public ActionResult Index()
         {
-            var user = (UserDefinition)Serenity.Authorization.UserDefinition;
-            var connection = SqlConnections.NewFor<TenantRow>();
-            var tenant = connection.ById<TenantRow>(user.TenantId);
-            
-            ViewData["WorkHoursStart"] = TimeSpan.FromMinutes(tenant.WorkHoursStart??420);
-            ViewData["WorkHoursEnd"] = TimeSpan.FromMinutes(tenant.WorkHoursEnd ?? 1200);
+            var cabinetIdActive = 0;
 
+            var connection = SqlConnections.NewFor<CabinetsRow>();
+
+            if (GetAndSetActiveCabinetIdIfAny(connection, out cabinetIdActive))
+            {
+                if (cabinetIdActive != 0)
+                {
+                    var cabFlds = CabinetsRow.Fields;
+                    var connectionCabint = connection.TryFirst<CabinetsRow>(cabFlds.CabinetId == cabinetIdActive);
+                    ViewData["CabinetHeaderName"] = connectionCabint?.Name;
+
+                    
+                    ViewData["WorkHoursStart"] = TimeSpan.FromMinutes(connectionCabint?.WorkHoursStart ?? 420).ToString(@"hh\:mm");
+                    ViewData["WorkHoursEnd"] = TimeSpan.FromMinutes(connectionCabint?.WorkHoursEnd ?? 1200).ToString(@"hh\:mm");
+                    return View(MVC.Views.PatientManagement.Dashboard.DashboardIndex);
+                }
+            }
+
+            ViewData["WorkHoursStart"] = TimeSpan.FromMinutes(420);
+            ViewData["WorkHoursEnd"] = TimeSpan.FromMinutes(1200);
             return View(MVC.Views.PatientManagement.Dashboard.DashboardIndex);
         }
-
 
         [PageAuthorize]
         public JsonResult GetVisitsTasks(string start, string end)
         {
-            var user = (UserDefinition)Authorization.UserDefinition; 
+            var user = (UserDefinition)Authorization.UserDefinition;
 
-            var connection = SqlConnections.NewFor<VisitsRow>();
             var startDate = DateTime.ParseExact(start, "yyyy-MM-dd", new CultureInfo("en-US"),
                 DateTimeStyles.None);
 
@@ -45,25 +62,210 @@ namespace PatientManagement.PatientManagement.Pages
                 DateTimeStyles.None);
 
             var model = new DashboardPageModel();
-            List<VisitsRow> entity = connection.List<VisitsRow>()
-                .Where(e => e.StartDate >= startDate && e.EndDate <= endDate && e.TenantId == user.TenantId)
-                .ToList();
+            var connection = SqlConnections.NewFor<VisitsRow>();
+            var cabinetIdActive = Request.Cookies["CabinetPreference"];
+           
+
+            List<VisitsRow> entity = new List<VisitsRow>();
+
+            if (Authorization.HasPermission(PermissionKeys.Tenants))
+                entity = connection.List<VisitsRow>()
+                    .Where(e => e.StartDate >= startDate && e.EndDate <= endDate && e.CabinetId == int.Parse(cabinetIdActive))
+                    .ToList();
+            else
+                entity = connection.List<VisitsRow>()
+                    .Where(e => e.StartDate >= startDate && e.EndDate <= endDate && e.CabinetId == int.Parse(cabinetIdActive) && e.TenantId == user.TenantId)
+                    .ToList();
+
 
             foreach (var visit in entity)
             {
+                var patient = connection.ById<PatientsRow>(visit.PatientId);
+                var visitType = connection.ById<VisitTypesRow>(visit.VisitTypeId);
                 model.EventsList.Add(new Event
                 {
                     id = visit.VisitId ?? 0,
                     patientId = visit.PatientId ?? 0,
-                    title = connection.ById<PatientsRow>(visit.PatientId).Name + "\n" + visit.Description,
+                    patientAutoEmailActive = patient.NotifyOnChange ?? false,
+                    title = patient.Name + "\n" + visit.Description,
                     start = (visit.StartDate ?? DateTime.Now).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
                     end = (visit.EndDate ?? DateTime.Now).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
                     allDay = false,
-                    backgroundColor = connection.ById<VisitTypesRow>(visit.VisitTypeId).BackgroundColor,
-                    borderColor = connection.ById<VisitTypesRow>(visit.VisitTypeId).BorderColor
+                    backgroundColor = visitType.BackgroundColor,
+                    borderColor = visitType.BorderColor
                 });
             }
             return Json(model.EventsList);
+        }
+
+        private bool GetAndSetActiveCabinetIdIfAny(IDbConnection connection, out int cabinetIdActive)
+        {
+            cabinetIdActive = 0;
+            var user = (UserDefinition)Authorization.UserDefinition;
+
+            var cabinetFlds = CabinetsRow.Fields;
+            var cabinets = new List<CabinetsRow>();
+
+            if (Authorization.HasPermission(PermissionKeys.Tenants))
+                cabinets = connection.List<CabinetsRow>(cabinetFlds.IsActive == 1);
+            else
+                cabinets = connection.List<CabinetsRow>(cabinetFlds.TenantId == user.TenantId && cabinetFlds.IsActive == 1);
+
+            var cabinetCookie = Request.Cookies["CabinetPreference"];
+            if (string.IsNullOrEmpty(cabinetCookie))
+            {
+                if (!cabinets.Any())
+                    return false;
+                else if (cabinets.Count() == 1)
+                {
+                    cabinetIdActive = cabinets.FirstOrDefault().CabinetId ?? 0;
+
+                    CookieOptions options = new CookieOptions();
+                    options.Expires = DateTime.Now.AddDays(365);
+                    Response.Cookies.Append("CabinetPreference", cabinets.FirstOrDefault().CabinetId.ToString(),
+                        options);
+                }
+                else
+                {
+
+                    var reprFlds = CabinetRepresentativesRow.Fields;
+                    var cabinetRepr =
+                        connection.List<CabinetRepresentativesRow>(
+                            reprFlds.CabinetId.In(cabinets.Select(c => c.CabinetId)) && reprFlds.UserId == user.UserId);
+                    if (cabinetRepr.Any())
+                    {
+                        cabinetIdActive = cabinetRepr.FirstOrDefault().CabinetId ?? 0;
+
+                        CookieOptions options = new CookieOptions();
+                        options.Expires = DateTime.Now.AddDays(365);
+                        Response.Cookies.Append("CabinetPreference", cabinetRepr.FirstOrDefault().CabinetId.ToString(),
+                            options);
+                    }
+                    else
+                    {
+                        cabinetIdActive = cabinets.FirstOrDefault().CabinetId ?? 0;
+
+                        CookieOptions options = new CookieOptions();
+                        options.Expires = DateTime.Now.AddDays(365);
+                        Response.Cookies.Append("CabinetPreference", cabinets.FirstOrDefault().CabinetId.ToString(),
+                            options);
+                    }
+                }
+            }
+            else
+            {
+                if (!cabinets.Any())
+                {
+                    CookieOptions options = new CookieOptions();
+                    options.Expires = DateTime.Now.AddDays(-1);
+                    Response.Cookies.Append("CabinetPreference", 0.ToString(),
+                        options);
+                    return false;
+                }
+
+                if (cabinets.FirstOrDefault(a => a.CabinetId == Int32.Parse(cabinetCookie)) == null)
+                {
+                    var reprFlds = CabinetRepresentativesRow.Fields;
+                    var cabinetRepr =
+                        connection.List<CabinetRepresentativesRow>(
+                            reprFlds.CabinetId.In(cabinets.Select(c => c.CabinetId)) && reprFlds.UserId == user.UserId);
+
+                    if (cabinetRepr.Any())
+                    {
+                        cabinetIdActive = cabinetRepr.FirstOrDefault().CabinetId ?? 0;
+
+                        CookieOptions options = new CookieOptions();
+                        options.Expires = DateTime.Now.AddDays(365);
+                        Response.Cookies.Append("CabinetPreference", cabinetRepr.FirstOrDefault().CabinetId.ToString(),
+                            options);
+                    }
+                    else
+                    {
+                        cabinetIdActive = cabinets.FirstOrDefault().CabinetId ?? 0;
+
+                        CookieOptions options = new CookieOptions();
+                        options.Expires = DateTime.Now.AddDays(365);
+                        Response.Cookies.Append("CabinetPreference", cabinets.FirstOrDefault().CabinetId.ToString(),
+                            options);
+                    }
+                }
+                else
+                {
+                    cabinetIdActive = Int32.Parse(cabinetCookie);
+                }
+
+            }
+            return true;
+        }
+
+        public JsonResult GetTodayVisits()
+        {
+            var user = (UserDefinition)Authorization.UserDefinition;
+
+            var startDate = DateTime.UtcNow.Date;
+            var endDate = DateTime.UtcNow.Date.AddDays(1).AddTicks(-1);
+
+            var connection = SqlConnections.NewFor<VisitsRow>();
+            var cabinetIdActive = Request.Cookies["CabinetPreference"];
+            
+            var countVisitsForToday = 0;
+
+            var visitFlds = VisitsRow.Fields;
+            if (Authorization.HasPermission(PermissionKeys.Tenants))
+                countVisitsForToday = connection.Count<VisitsRow>(
+                    visitFlds.StartDate >= startDate && visitFlds.EndDate <= endDate && visitFlds.CabinetId == cabinetIdActive);
+            else
+                countVisitsForToday = connection.Count<VisitsRow>(
+                    visitFlds.StartDate >= startDate && visitFlds.EndDate <= endDate && visitFlds.CabinetId == cabinetIdActive && visitFlds.TenantId == user.TenantId);
+            var alreadyExpired = 0;
+
+#if DEBUG
+            //TODO: 3 hours added because azure app service is set to UTC <- For simplicity
+            var endDateBgCulture = DateTime.Now;
+#endif
+#if !DEBUG
+            var endDateBgCulture = DateTime.Now.AddHours(3);
+#endif
+            if (Authorization.HasPermission(PermissionKeys.Tenants))
+                alreadyExpired = connection.Count<VisitsRow>(
+                    visitFlds.StartDate >= startDate && visitFlds.EndDate <= endDateBgCulture && visitFlds.CabinetId == cabinetIdActive);
+            else
+                alreadyExpired = connection.Count<VisitsRow>(
+                    visitFlds.StartDate >= startDate && visitFlds.EndDate <= endDateBgCulture && visitFlds.CabinetId == cabinetIdActive && visitFlds.TenantId == user.TenantId);
+
+            return Json(new {countVisitsForToday, alreadyExpired});
+        }
+
+        [Route("~/Administration/GetTenantSubscriptionEndDate")]
+        public IActionResult GetTenantSubscriptionEndDate()
+        {
+            if (!Authorization.IsLoggedIn)
+                return NotFound();
+
+            var user = Authorization.UserDefinition as UserDefinition;
+            var days = UserSubscriptionHelper.GetTenantPaidDays(user.TenantId);
+
+            if (days <= DateTime.Now.AddDays(7) || Authorization.HasPermission("AdministrationTenants:Payments"))
+                return Json(days);
+            else
+                return Json(DateTime.MinValue);
+        }
+
+        [Route("~/Administration/GetTenantRole")]
+        public IActionResult GetTenantRole()
+        {
+            if (!Authorization.IsLoggedIn)
+                return NotFound();
+
+            var user = Authorization.UserDefinition as UserDefinition;
+            var connection = SqlConnections.NewFor<UserRoleRow>();
+
+            var userRoleFld = UserRoleRow.Fields;
+            var userRoles = connection.List<UserRoleRow>(userRoleFld.UserId == user.UserId).Select(s => s.RoleId);
+            var roleFlds = RoleRow.Fields;
+            var roleNames = connection.List<RoleRow>(roleFlds.RoleId.In(userRoles)).Select(s => s.RoleName);
+
+            return Json(roleNames);
         }
     }
 

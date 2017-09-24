@@ -1,4 +1,7 @@
 ﻿
+using System.Collections.Generic;
+using PatientManagement.PatientManagement;
+
 namespace PatientManagement.Administration.Columns
 {
     using Serenity.ComponentModel;
@@ -17,9 +20,13 @@ namespace PatientManagement.Administration.Columns
         [Width(250)]
         public String Email { get; set; }
         
-        public string UserPhone { get; set; }
+        public string PhoneNumber { get; set; }
         [Width(150)]
         public String WebSite { get; set; }
+
+        [Width(250), CabinetsListFormatter]
+        public string Cabinets { get; set; }
+
         [Width(100)]
         public String Source { get; set; }
 

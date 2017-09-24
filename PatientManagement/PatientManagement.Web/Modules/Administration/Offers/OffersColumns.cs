@@ -24,6 +24,10 @@ namespace PatientManagement.Administration.Columns
         [Width(120)]
         public Int32 MaximumVisitsPerTenant { get; set; }
         [Width(120)]
+        public Int32 MaximumPatientsPerTenant { get; set; }
+        [Width(120)]
+        public Int32 MaximumCabinets { get; set; }
+        [Width(120)]
         public DateTimeField ExpirationDate { get; set; }
         [Width(180)]
         public String Description { get; set; }
@@ -36,8 +40,14 @@ namespace PatientManagement.Administration.Columns
         [Width(120)]
         public Boolean CurrencyEnabled { get; set; }
         public String RoleRoleName { get; set; }
+        [Width(80)]
+        public String InsertUserName { get; set; }
+        [DisplayFormat("dd/MM/yyyy HH:mm")]
         [Width(120)]
-        public String UserName { get; set; }
+        public DateTime InsertDate { get; set; }
+        [Width(80)]
+        public String UpdateUserName { get; set; }
+        [DisplayFormat("dd/MM/yyyy HH:mm")]
         [Width(120)]
         public DateTime UpdateDateField { get; set; }
     }

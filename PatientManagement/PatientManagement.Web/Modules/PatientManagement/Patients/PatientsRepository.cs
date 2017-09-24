@@ -31,6 +31,11 @@ namespace PatientManagement.PatientManagement.Repositories
         {
             return new MyDeleteHandler().Process(uow, request);
         }
+        public UndeleteResponse Undelete(IUnitOfWork uow, UndeleteRequest request)
+        {
+            return new MyUndeleteHandler().Process(uow, request);
+        }
+        private class MyUndeleteHandler : UndeleteRequestHandler<MyRow> { }
 
         public RetrieveResponse<MyRow> Retrieve(IDbConnection connection, RetrieveRequest request)
         {
@@ -56,28 +61,29 @@ namespace PatientManagement.PatientManagement.Repositories
                 // TODO #48
                 if (IsCreate)
                 {
+                    var user = ((UserDefinition) Authorization.UserDefinition);
                     var entHealth = new PatientHealthRow
                     {
                         PatientId = Row.PatientId,
-                        InsertUserId = Authorization.UserId.TryParseID32(),
+                        InsertUserId = user.UserId,
                         InsertDate = DateTime.Now,
-                        TenantId = ((UserDefinition)Authorization.UserDefinition).TenantId
+                        TenantId = user.TenantId
                     };
                     this.Connection.Insert(entHealth);
 
                     var entLife = new LifeStylesRow
                     {
                         PatientId = Row.PatientId,
-                        InsertUserId = Authorization.UserId.TryParseID32(),
+                        InsertUserId = user.UserId,
                         InsertDate = DateTime.Now,
-                        TenantId = ((UserDefinition)Authorization.UserDefinition).TenantId
+                        TenantId = user.TenantId
                     };
                     this.Connection.Insert(entLife);
 
                     var entAct = new ActivityRow
                     {
                         PatientId = Row.PatientId,
-                        InsertUserId = Authorization.UserId.TryParseID32(),
+                        InsertUserId = user.UserId,
                         InsertDate = DateTime.Now
                     };
                     this.Connection.Insert(entAct);
@@ -91,24 +97,7 @@ namespace PatientManagement.PatientManagement.Repositories
             protected override void OnBeforeDelete()
             {
                 base.OnBeforeDelete();
-
-                Connection.DeleteById<LifeStylesRow>(Row.PatientId);
-
-                Connection.DeleteById<PatientHealthRow>(Row.PatientId);
-
-                Connection.DeleteById<ActivityRow>(Row.PatientId);
-
-                var ls = Connection.List<VisitsRow>().Where(p => p.PatientId == Row.PatientId);
-                foreach (var item in ls)
-                {
-
-                    Connection.DeleteById<VisitsRow>(item.VisitId);
-                }
-                var fU = Connection.List<PatientsFileUploadsRow>().Where(p => p.PatientId == Row.PatientId);
-                foreach (var item in fU)
-                {
-                    Connection.DeleteById<PatientsFileUploadsRow>(item.PatientFileUploadId);
-                }
+                
 
             }
         }

@@ -15,7 +15,9 @@
         MaximumSubscriptionTime: Serenity.IntegerEditor;
         MaximumUsersPerTenant: Serenity.IntegerEditor;
         MaximumVisitsPerTenant: Serenity.IntegerEditor;
+        MaximumPatientsPerTenant: Serenity.IntegerEditor;
+        MaximumCabinets: Serenity.IntegerEditor;
     }
 
-    [['Name', () => Serenity.StringEditor], ['Description', () => Serenity.TextAreaEditor], ['Price', () => Serenity.DecimalEditor], ['Enabled', () => BsSwitchEditor], ['CurrencyId', () => Serenity.LookupEditor], ['RoleId', () => Serenity.LookupEditor], ['ExpirationDate', () => Serenity.DateTimeEditor], ['MaximumSubscriptionTime', () => Serenity.IntegerEditor], ['MaximumUsersPerTenant', () => Serenity.IntegerEditor], ['MaximumVisitsPerTenant', () => Serenity.IntegerEditor]].forEach(x => Object.defineProperty(OffersForm.prototype, <string>x[0], { get: function () { return this.w(x[0], (x[1] as any)()); }, enumerable: true, configurable: true }));
+    [['Name', () => Serenity.StringEditor], ['Description', () => Serenity.TextAreaEditor], ['Price', () => Serenity.DecimalEditor], ['Enabled', () => BsSwitchEditor], ['CurrencyId', () => Serenity.LookupEditor], ['RoleId', () => Serenity.LookupEditor], ['ExpirationDate', () => Serenity.DateTimeEditor], ['MaximumSubscriptionTime', () => Serenity.IntegerEditor], ['MaximumUsersPerTenant', () => Serenity.IntegerEditor], ['MaximumVisitsPerTenant', () => Serenity.IntegerEditor], ['MaximumPatientsPerTenant', () => Serenity.IntegerEditor], ['MaximumCabinets', () => Serenity.IntegerEditor]].forEach(x => Object.defineProperty(OffersForm.prototype, <string>x[0], { get: function () { return this.w(x[0], (x[1] as any)()); }, enumerable: true, configurable: true }));
 }

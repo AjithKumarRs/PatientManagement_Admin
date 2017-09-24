@@ -1,5 +1,6 @@
 ﻿
 using System;
+using PatientManagement.Web.Modules.Common;
 using Serenity.Reporting;
 using Serenity.Web;
 
@@ -20,6 +21,12 @@ namespace PatientManagement.PatientManagement.Endpoints
         [HttpPost, AuthorizeCreate(typeof(MyRow))]
         public SaveResponse Create(IUnitOfWork uow, SaveRequest<MyRow> request)
         {
+            var maximumInserts = UserSubscriptionHelper.GetTenantMaximumPatients();
+            if (this.List(uow.Connection, new ListRequest()).TotalCount >= maximumInserts)
+            {
+                throw new ValidationError(string.Format(Texts.Site.Subscriptions.MaximumPatientsError, maximumInserts));
+            }
+
             return new MyRepository().Create(uow, request);
         }
 
@@ -34,7 +41,11 @@ namespace PatientManagement.PatientManagement.Endpoints
         {
             return new MyRepository().Delete(uow, request);
         }
-
+        [HttpPost, AuthorizeDelete(typeof(MyRow))]
+        public UndeleteResponse Undelete(IUnitOfWork uow, UndeleteRequest request)
+        {
+            return new MyRepository().Undelete(uow, request);
+        }
         public RetrieveResponse<MyRow> Retrieve(IDbConnection connection, RetrieveRequest request)
         {
             return new MyRepository().Retrieve(connection, request);
@@ -50,7 +61,7 @@ namespace PatientManagement.PatientManagement.Endpoints
             var data = List(connection, request).Entities;
             var report = new DynamicDataReport(data, request.IncludeColumns, typeof(Columns.PatientsColumns));
             var bytes = new ReportRepository().Render(report);
-            return ExcelContentResult.Create(bytes, "PatinetsList_" +
+            return ExcelContentResult.Create(bytes, "PatientsList_" +
                                                     DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".xlsx");
         }
     }

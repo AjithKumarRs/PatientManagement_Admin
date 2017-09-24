@@ -10,7 +10,9 @@ namespace PatientManagement.PatientManagement
     {
         [Description("Bank Transfer")]
         BankTransfer,
-        [Description("Credit Card")]
-        CreditCard
+
+        //TODO: Restrict for now 
+        //[Description("Credit Card")]
+        //CreditCard
     }
 }

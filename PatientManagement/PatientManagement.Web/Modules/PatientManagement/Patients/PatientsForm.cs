@@ -15,6 +15,8 @@ namespace PatientManagement.PatientManagement.Forms
     [BasedOnRow(typeof(Entities.PatientsRow))]
     public class PatientsForm
     {
+        [Category("Required Fields")]
+
         [Hidden]
         public Int32? PatientId { get; set; }
 
@@ -27,6 +29,7 @@ namespace PatientManagement.PatientManagement.Forms
         [EmailEditor]
 
         public string Email { get; set; }
+        [Category("Additional Information")]
 
         [DefaultValue("now")]
         public DateTime FirstRegistrationDate { get; set; }

@@ -15,11 +15,12 @@ namespace PatientManagement.Membership.Pages
     using Serenity.Web.Providers;
     using System;
     using Microsoft.AspNetCore.Mvc;
-
-    public partial class AccountController : Controller
+    
+    public class ProfileController : Controller
     {
         [HttpGet, PageAuthorize]
-        public ActionResult Profile()
+        [Route("Account/Profile")]
+        public ActionResult Index()
         {
             var connection = SqlConnections.NewFor<VisitsRow>();
             var user = (UserDefinition)Serenity.Authorization.UserDefinition;
@@ -39,12 +40,12 @@ namespace PatientManagement.Membership.Pages
             var tenant = connection.ById<TenantRow>(user.TenantId);
             ViewData["TenantName"] = tenant.TenantName;
             ViewData["TenantWebSite"] = tenant.TenantWebSite;
-            ViewData["TenantWorkHours"] = $"{TimeSpan.FromMinutes(tenant.WorkHoursStart?? 420)} -- {TimeSpan.FromMinutes(tenant.WorkHoursEnd ?? 1200)}";
 
             return View(MVC.Views.Membership.Account.Profile.AccountProfile);
         }
 
         [HttpPost, JsonFilter, ServiceAuthorize(PermissionKeys.AdministrationTenantsTenantEditing)]
+        [Route("Account/EditTenant")]
         public Result<ServiceResponse> EditTenant(EditTenantRequest request)
         {
 
@@ -65,20 +66,15 @@ namespace PatientManagement.Membership.Pages
                     var tenant = new TenantRow();
                     tenant.TenantId = user.TenantId;
 
-                    if (request.Name.IsEmptyOrNull())
+                    if (request.TenantName.IsEmptyOrNull())
                         throw new ArgumentNullException("name");
 
-                    tenant.TenantName = request.Name;
+                    tenant.TenantName = request.TenantName;
                     tenant.TenantWebSite = request.TenantWebSite;
 
                     if (!request.TenantImage.IsNullOrEmpty())
                         tenant.TenantImage = request.TenantImage;
-
-                    if (request.WorkHoursEnd > 0)
-                        tenant.WorkHoursStart = (Int16)request.WorkHoursStart;
-                    if (request.WorkHoursStart > 0)
-                        tenant.WorkHoursEnd = (Int16)request.WorkHoursEnd;
-
+                    
                     tenant.OverrideUsersEmailSignature = request.OverrideUsersEmailSignature;
                     tenant.TenantEmailSignature = request.TenantEmailSignature;
 
@@ -103,6 +99,7 @@ namespace PatientManagement.Membership.Pages
         }
 
 
+        [Route("Account/EditUserProfile")]
         [HttpPost, JsonFilter]
         public Result<ServiceResponse> EditUserProfile(EditUserProfileRequest request)
         {
@@ -115,7 +112,7 @@ namespace PatientManagement.Membership.Pages
                 if (request.DisplayName.IsEmptyOrNull())
                     throw new ArgumentNullException("name");
 
-                if (request.UserEmail.IsEmptyOrNull())
+                if (request.Email.IsEmptyOrNull())
                     throw new ArgumentNullException("email");
 
                 var saveRequest = new SaveRequest<UserRow>();
@@ -124,14 +121,14 @@ namespace PatientManagement.Membership.Pages
 
                 saveRequest.Entity.UserId = user.UserId;
                 saveRequest.Entity.DisplayName = request.DisplayName;
-                saveRequest.Entity.Email = request.UserEmail;
+                saveRequest.Entity.Email = request.Email;
 
                 if (!request.UserImage.IsNullOrEmpty())
                     saveRequest.Entity.UserImage = request.UserImage;
 
-                saveRequest.Entity.EmailSignature = request.USerEmailSignature;
-                saveRequest.Entity.WebSite = request.UserWebSite;
-                saveRequest.Entity.PhoneNumber = request.UserPhone;
+                saveRequest.Entity.EmailSignature = request.EmailSignature;
+                saveRequest.Entity.WebSite = request.WebSite;
+                saveRequest.Entity.PhoneNumber = request.PhoneNumber;
 
                 var uow = new UnitOfWork(connection);
                 new UserRepository().Update(uow, saveRequest);

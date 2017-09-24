@@ -33,26 +33,42 @@ namespace PatientManagement.PatientManagement {
                 return false;
             if (/[^0-9]/.test(egn))
                 return false;
-          
+
             return true;
 
         }
-        protected isValidDate = (y, m, d):boolean => {
+        private checkPhone = (phone) => {
+            if (phone.length > 30)
+                return false;
+            if (/[^0-9]/.test(phone))
+                return false;
+
+            return true;
+
+        }
+        protected isValidDate = (y, m, d): boolean => {
             var date = new Date(y, m - 1, d);
             return date && (date.getMonth() + 1) == m && date.getDate() == Number(d);
-        } 
+        }
 
         constructor() {
             super();
 
             this.form.PersonalNumber.addValidationRule(this.uniqueName, e => {
                 if (!this.checkEgn(this.form.PersonalNumber.value)) {
-                    return Q.text("Site.ValidationError.ValidateEgnNotCorrect");
+                    return Q.text("Controls.EntityDialog.SaveSuccessMessage");
                 }
 
                 return null;
             });
+            this.form.PhoneNumber.addValidationRule(this.uniqueName, s => {
+                if (!this.checkPhone(this.form.PhoneNumber.value)) {
+                    return Q.text("Controls.EntityDialog.SaveSuccessMessage");
 
+                }
+
+                return null;
+            });
 
             //Initialize new instance of visits grid
             this.visitsGrid = new PatientVisitsGrid(this.byId("VisitsGrid"));
@@ -96,7 +112,7 @@ namespace PatientManagement.PatientManagement {
 
             this.patientValidator = this.byId("ActivityForm").validate(Q.validateOptions({}));
 
-            
+
             this.byId('NoteList').closest('.field').hide().end().appendTo(this.byId('TabNotes'));
             DialogUtils.pendingChangesConfirmation(this.element, () => this.getSaveState() != this.loadedState);
 
@@ -202,7 +218,7 @@ namespace PatientManagement.PatientManagement {
         }
 
 
-        
+
         getSaveState() {
             try {
                 return $.toJSON(this.getSaveEntity());
@@ -211,7 +227,7 @@ namespace PatientManagement.PatientManagement {
                 return null;
             }
         }
-        
+
 
 
         loadResponse(data) {
@@ -244,16 +260,16 @@ namespace PatientManagement.PatientManagement {
                 });
 
                 LifeStylesService.Retrieve({
-                        EntityId: entity.PatientId
-                    },
+                    EntityId: entity.PatientId
+                },
                     response => {
                         this.lifeStyleGrid.load(response.Entity);
                     });
 
 
                 ActivityService.Retrieve({
-                        EntityId: entity.PatientId
-                    },
+                    EntityId: entity.PatientId
+                },
                     response => {
                         this.patientActivityGrid.load(response.Entity);
                     });

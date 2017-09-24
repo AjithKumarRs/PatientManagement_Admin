@@ -189,13 +189,14 @@
 }
 
 .s-Administration-TenantDialog {
-    > .size { width: 650px; }
-    .caption { width: 150px; }
-}
+    > .size {
+        width: 650px;
+        min-height: 800px
+    }
 
-.s-Administration-TenantDialog {
-    > .size { width: 650px; }
-    .caption { width: 150px; }
+    .caption {
+        width: 150px;
+    }
 }
 
 .s-Administration-SubscriptionsDialog {
@@ -217,4 +218,45 @@
 .s-Administration-SentEmailsDialog {
     > .size { width: 700px; min-height: 500px; }
     .caption { width: 150px; }
+}
+
+.s-PatientManagement-CabinetsDialog {
+    > .size { width: 650px; }
+    .caption { width: 150px; }
+}
+
+.s-CalendarCabinetsEditor{
+    width: 100%;
+}
+
+.s-PaymentsGrid {
+    .not-success-payment {
+        .print-invoice {
+            display: none;
+        }
+    }
+
+    .payment-pending {
+        background-color: rgba(255, 216, 0, 0.42);
+    }
+
+    .payment-success {
+        background-color: rgba(0, 255, 33, 0.33);
+    }
+}
+.s-CalendarPatientDialog {
+    > .size {
+        min-height: 550px;
+    }
+
+}
+
+.s-NewVisitTypeDialog {
+    > .size {
+        width: 450px;
+    }
+
+    .caption {
+        width: 150px;
+    }
 }

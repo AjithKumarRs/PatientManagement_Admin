@@ -21,9 +21,9 @@ namespace PatientManagement.Administration.Forms
 
         public String TenantWebSite { get; set; }
 
-        public Int16 WorkHoursStart { get; set; }
+        public Boolean? OverrideUsersEmailSignature { get; set; }
 
-        public Int16 WorkHoursEnd { get; set; }
+        public String TenantEmailSignature { get; set; }
 
         public Int32 CurrencyId { get; set; }
         public Int64 SubscriptionId { get; set; }

@@ -20,7 +20,7 @@ namespace PatientManagement.Administration.Columns
         [EditLink]
         public String Name { get; set; }
         
-        public SubscriptionState IsActive { get; set; }
+        public SubscriptionState Enabled { get; set; }
 
         public Int32 OfferName { get; set; }
 

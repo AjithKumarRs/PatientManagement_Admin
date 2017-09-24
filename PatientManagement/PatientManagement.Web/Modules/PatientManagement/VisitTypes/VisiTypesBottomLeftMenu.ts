@@ -11,9 +11,11 @@ namespace PatientManagement {
                 resp => {
                     if (resp.Entities.length > 0) {
 
+                        var ul = $('<ul/>');
+                        ul.addClass('treeview-menu');
+
                         for (var type in resp.Entities) {
-                            console.log(resp.Entities[type]);
-                            var item = resp.Entities[type]; 
+                            var item = resp.Entities[type];
 
                             var li = $('<li/>');
                             var a = $('<a/>');
@@ -28,8 +30,11 @@ namespace PatientManagement {
 
 
                             li.append(a);
-                            elem.after(li);
+
+                            ul.append(li);
                         }
+
+                        elem.append(ul);
                 }
                 });
         }

@@ -31,7 +31,10 @@
                 if (!this.validateForm()) {
                     return;
                 }
-
+                if (!$('#accept-terms').parent(".icheckbox_square-blue").hasClass("checked")) {
+                    Q.notifyError(Q.text('Forms.Membership.SignUp.AcceptTermsAndConditionsError'));
+                    return;
+                }
                 Q.serviceCall({
                     url: Q.resolveUrl('~/Account/SignUp'),
                     request: {

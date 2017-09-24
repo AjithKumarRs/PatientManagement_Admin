@@ -42,38 +42,59 @@ namespace PatientManagement.Administration.Repositories
         {
             return new MyListHandler().Process(connection, request);
         }
-
+        public UndeleteResponse Undelete(IUnitOfWork uow, UndeleteRequest request)
+        {
+            return new MyUndeleteHandler().Process(uow, request);
+        }
+        private class MyUndeleteHandler : UndeleteRequestHandler<MyRow> { }
         private class MySaveHandler : SaveRequestHandler<MyRow>
         {
 
             protected override void BeforeSave()
             {
                 base.AfterSave();
-
-                var user = (UserDefinition)Authorization.UserDefinition;
-
-                if (Row.IsActive == 1)
+                
+                if (IsCreate)
                 {
-                    if (Row.ActivatedOn == null)
-                        Row.ActivatedOn = DateTime.Now;
-                    
-                    var tmp = Connection.List<MyRow>().Where(p => p.IsActive == 1 && p.TenantId == user.TenantId);
-
-                    foreach (var subscriptionsRow in tmp)
+                    if (Row.Enabled == 1)
                     {
-                        subscriptionsRow.IsActive = 0;
-                        subscriptionsRow.DeactivatedOn = DateTime.Now;
-                        Connection.UpdateById(subscriptionsRow);
+                        if (Row.ActivatedOn == null)
+                            Row.ActivatedOn = DateTime.Now;
+
+                        var tmp = Connection.List<MyRow>().Where(p => p.Enabled == 1 && p.TenantId == Row.TenantId);
+
+                        foreach (var subscriptionsRow in tmp)
+                        {
+                            subscriptionsRow.Enabled = 0;
+
+                            if (subscriptionsRow.DeactivatedOn == null)
+                                subscriptionsRow.DeactivatedOn = DateTime.Now;
+
+                            Connection.UpdateById(subscriptionsRow);
+                        }
                     }
                 }
-
-                if (IsUpdate)
+                else 
                 {
-                    if (Row.IsActive == 0)
+                    if (Row.Enabled == 1)
                     {
-                        Row.DeactivatedOn = DateTime.Now;
+                        if (Row.ActivatedOn == null)
+                            Row.ActivatedOn = DateTime.Now;
+
+                        var tmp = Connection.List<MyRow>().Where(p => p.Enabled == 1 && p.TenantId == Row.TenantId);
+
+                        foreach (var subscriptionsRow in tmp)
+                        {
+                            subscriptionsRow.Enabled = 0;
+
+                            if (subscriptionsRow.DeactivatedOn == null)
+                                subscriptionsRow.DeactivatedOn = DateTime.Now;
+
+                            Connection.UpdateById(subscriptionsRow);
+                        }
                     }
                 }
+                
             }
 
             protected override void AfterSave()
@@ -82,9 +103,12 @@ namespace PatientManagement.Administration.Repositories
 
                 if (IsCreate || IsUpdate)
                 {
+                    if (Authorization.HasPermission(PermissionKeys.Tenants))
+                        return;
+
                     var user = (UserDefinition)Authorization.UserDefinition;
 
-                    if (Row.IsActive == 1)
+                    if (Row.Enabled == 1)
                     {
                         var tenantFld = TenantRow.Fields;
                         var tenant = Connection.First<TenantRow>(tenantFld.TenantId == user.TenantId);
@@ -98,11 +122,25 @@ namespace PatientManagement.Administration.Repositories
                         userRoles.RoleId = offerRole;
                         Connection.UpdateById(userRoles);
 
+                        UserRetrieveService.RemoveCachedUser(user.UserId, user.Username);
+
                     }
                 }
             }
         }
-        private class MyDeleteHandler : DeleteRequestHandler<MyRow> { }
+
+        private class MyDeleteHandler : DeleteRequestHandler<MyRow>
+        {
+            protected override void OnBeforeDelete()
+            {
+                base.OnBeforeDelete();
+
+                if (Row.Enabled == 1)
+                {
+                    throw new ArgumentException(Texts.Site.Subscriptions.DeleteActiveSubscriptionError);
+                }
+            }
+        }
 
         private class MyRetrieveHandler : RetrieveRequestHandler<MyRow>
         {

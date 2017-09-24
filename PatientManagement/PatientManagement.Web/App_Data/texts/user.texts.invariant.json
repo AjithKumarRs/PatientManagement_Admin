@@ -1,1 +1,5 @@
-{}
+{
+  "Db.CabinetRepresentatives.EntityPlural": "Представител",
+  "Db.CabinetRepresentatives.EntitySingular": "Представители",
+  "Db.CabinetRepresentatives.RepresentativeId": "Представител"
+}

@@ -1,5 +1,6 @@
 ﻿
-using Serenity.Data.Mapping;
+
+using PatientManagement.Administration.Entities;
 
 namespace PatientManagement.Membership
 {
@@ -7,28 +8,25 @@ namespace PatientManagement.Membership
     using Serenity.Services;
     using System;
     using System.ComponentModel;
+    using Serenity.Data.Mapping;
 
-    [FormScript("Membership.EditUserProfileRequest")]
+    [FormScript("Membership.EditUserProfile")]
+    [BasedOnRow(typeof(UserRow))]
     public class EditUserProfileRequest : ServiceRequest
     {
-        [DisplayName("Display Name"), Required]
+        [Required]
         public string DisplayName { get; set; }
 
-        [DisplayName("Your Email"), Required]
-        [EmailEditor]
-        public string UserEmail { get; set; }
-        [DisplayName("Your phone")]
-        public string UserPhone { get; set; }
+        [Required]
+        public string Email { get; set; }
 
-        [DisplayName("User Web Site")]
-        public String UserWebSite { get; set; }
-
-        [DisplayName("User Image"), Size(100)]
-        [ImageUploadEditor(FilenameFormat = "UserImage/~", CopyToHistory = true)]
+        public string PhoneNumber { get; set; }
+        
+        public String WebSite { get; set; }
+        
         public String UserImage { get; set; }
         
 
-        [DisplayName("User Email Signature"), Size(-1), NotNull, HtmlContentEditor, CssClass("email-signature")]
-        public String USerEmailSignature { get; set; }
+        public String EmailSignature { get; set; }
     }
 }

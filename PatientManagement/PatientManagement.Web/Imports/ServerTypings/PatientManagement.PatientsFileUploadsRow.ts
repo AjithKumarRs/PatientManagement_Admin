@@ -12,7 +12,7 @@
 
     export namespace PatientsFileUploadsRow {
         export const idProperty = 'PatientFileUploadId';
-        export const nameProperty = 'FilePath';
+        export const nameProperty = 'PatientName';
         export const localTextPrefix = 'PatientManagement.PatientsFileUploads';
         export const lookupKey = 'PatientManagement.PatientsFileUploads';
 

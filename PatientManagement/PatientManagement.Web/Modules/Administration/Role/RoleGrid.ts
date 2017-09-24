@@ -7,6 +7,7 @@
         protected getIdProperty() { return RoleRow.idProperty; }
         protected getLocalTextPrefix() { return RoleRow.localTextPrefix; }
         protected getService() { return RoleService.baseUrl; }
+        protected getIsActiveProperty() { return OffersRow.isActiveProperty; }
 
         constructor(container: JQuery) {
             super(container);

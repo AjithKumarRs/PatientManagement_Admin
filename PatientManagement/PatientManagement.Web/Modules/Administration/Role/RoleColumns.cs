@@ -13,5 +13,18 @@ namespace PatientManagement.Administration.Forms
         public Int32 RoleId { get; set; }
         [EditLink, Width(300)]
         public String RoleName { get; set; }
+        [Width(80)]
+        public String TenantName { get; set; }
+
+        [Width(80)]
+        public String InsertUserName { get; set; }
+        [DisplayFormat("dd/MM/yyyy HH:mm")]
+        [Width(120)]
+        public DateTime InsertDate { get; set; }
+        [Width(80)]
+        public String UpdateUserName { get; set; }
+        [DisplayFormat("dd/MM/yyyy HH:mm")]
+        [Width(120)]
+        public DateTime UpdateDateField { get; set; }
     }
 }

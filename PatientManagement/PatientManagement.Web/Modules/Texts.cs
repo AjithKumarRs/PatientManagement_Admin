@@ -114,6 +114,9 @@ namespace PatientManagement
                     public static LocalText BackToLogin = "I already have a membership";
 
                     public static LocalText FormatSubscriptionName = "{0} - First registration";
+                    public static LocalText FormatCabinetName = "{0} - First Room";
+
+                    public static LocalText AcceptTermsAndConditionsError = "You must accept terms and conditions";
                 }
             }
         }
@@ -127,11 +130,27 @@ namespace PatientManagement
         public static class LeftNavigation
         {
             public static LocalText LeftNavigationHeader = "MAIN MENU";
+            public static LocalText AddNewVisitType = "Add new visit type";
         }
         public static class Site
         {
+            public static class Payments
+            {
+                public static LocalText PaymentEmptyValueError = "You can't make empty payment!";
+            }
             public static class Subscriptions
             {
+                public static LocalText SubscriptionTitle = "Subscription Information";
+                public static LocalText SubscriptionRightBox = "You can make direct payment from here!";
+                public static LocalText SubscriptionRightBoxButton = "Add Payment";
+                public static LocalText DeleteActiveSubscriptionError = "You cant delete active subscription";
+
+                public static LocalText MaximumVisitsError = "Based on you current subscription, you can create maximum {0} visits.";
+                public static LocalText MaximumUsersError = "Based on you current subscription, you can create maximum {0} users.";
+                public static LocalText MaximumCabinetsError = "Based on you current subscription, you can create maximum {0} cabinets.";
+                public static LocalText MaximumPatientsError = "Based on you current subscription, you can create maximum {0} patients.";
+
+
                 public static class Expired
                 {
                     public static LocalText SubscriptionInfoBoxHeader = "Subscription expired!";
@@ -148,9 +167,9 @@ namespace PatientManagement
 
             public static class Notifications
             {
-                public static LocalText VisitChangedNotification = "{0} just change a visit for patient {1}";
-                public static LocalText VisitAddedNotification = "{0} just add a visit for patient {1}";
-                public static LocalText VisitDeletedNotification = "{0} just delete a visit for patient {1}";
+                public static LocalText VisitChangedNotification = "{0} - {1} just change a visit for patient {2}. Start date: {3} End date: {4}";
+                public static LocalText VisitAddedNotification = "{0} - {1} just add a visit for patient {2}. Start date: {3} End date: {4}";
+                public static LocalText VisitDeletedNotification = "{0} - {1} just delete a visit for patient {2}. Start date: {3} End date: {4}";
 
                 public static LocalText PatientAddedNotification = "{0} just add a patient {1}";
                 public static LocalText PatientChangedNotification = "{0} just change a patient {1}";
@@ -160,7 +179,7 @@ namespace PatientManagement
             public static class Dashboard
             {
                 public static LocalText AlertOnPatientNoEmail = "The patient dosn't have an email address, add now?";
-
+                public static LocalText AlertMessagePatientWithNotificationActiveVisitDialog = "Automatic email will be sent to patient when the visit is created or changed. You can change this behavior in patient profile.";
 
                 public static LocalText ViewPatinet = "View Patient";
                 public static LocalText ViewVisit = "View Visit";
@@ -185,6 +204,8 @@ namespace PatientManagement
 
                 public static LocalText ContentDescription =
                     "all saved meetings for period.";
+
+                public static LocalText WorkHoursDescription = "Work hours:";
             }
 
             public static class BasicProgressDialog

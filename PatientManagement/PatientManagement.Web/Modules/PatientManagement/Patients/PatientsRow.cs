@@ -1,5 +1,6 @@
 ﻿
 using System.Collections.Generic;
+using PatientManagement.Administration;
 using PatientManagement.PatientManagement.Scripts;
 
 namespace PatientManagement.PatientManagement.Entities
@@ -18,9 +19,8 @@ namespace PatientManagement.PatientManagement.Entities
     [LookupScript("PatientManagement.Patients",
         LookupType = typeof(MultiTenantRowLookupScript<>))]
     [LeftJoin("cd", "PatientHealth", "cd.[PatientId] = t0.[PatientId]", RowType = typeof(PatientHealthRow), TitlePrefix = "")]
-    public sealed class PatientsRow : Row, IIdRow, INameRow, IInsertLogRow, IMultiTenantRow
+    public sealed class PatientsRow : Row, IIdRow, INameRow, IInsertLogRow, IMultiTenantRow, IIsActiveDeletedRow
     {
-        [Category("Required Fields")]
         [DisplayName("Patient Id"), Identity]
         public Int32? PatientId
         {
@@ -57,7 +57,6 @@ namespace PatientManagement.PatientManagement.Entities
             set { Fields.Gender[this] = (Int32?)value; }
         }
 
-        [Category("Additional Information")]
         [DisplayName("First Registration Date"), Size(200)]
         [DateTimeKind(DateTimeKind.Utc), DateTimeEditor]
 
@@ -143,6 +142,26 @@ namespace PatientManagement.PatientManagement.Entities
             set { Fields.NoteList[this] = value; }
         }
 
+        #region IIsActive
+
+        [DisplayName("Is Active"), NotNull]
+        [ReadPermission(PermissionKeys.Tenants)]
+        [LookupInclude]
+        public Int16? IsActive
+        {
+            get { return Fields.IsActive[this]; }
+            set { Fields.IsActive[this] = value; }
+        }
+
+
+        Int16Field IIsActiveRow.IsActiveField
+        {
+            get { return Fields.IsActive; }
+        }
+
+
+        #endregion
+
         IIdField IIdRow.IdField
         {
             get { return Fields.PatientId; }
@@ -179,6 +198,7 @@ namespace PatientManagement.PatientManagement.Entities
 
             public Int32Field InsertUserId;
             public DateTimeField InsertDate;
+            public Int16Field IsActive;
 
             public StringField TenantName;
             public StringField InsertUserName;

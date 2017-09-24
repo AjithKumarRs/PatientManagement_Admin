@@ -28,5 +28,30 @@ namespace PatientManagement.PatientManagement {
             return buttons;
         }
 
+        protected getQuickFilters(): Serenity.QuickFilter<Serenity.Widget<any>, any>[] {
+
+            // get quick filter list from base class
+            let filters = super.getQuickFilters();
+            var cookie = $.cookie("CabinetPreference");
+            let fields = VisitsRow.Fields;
+            if (cookie) {
+
+                Q.first(filters, x => x.field == fields.CabinetId).init = w => {
+                    (w as Serenity.IntegerEditor).value = cookie;
+
+                    //TODO: When permission for all cabinets is added uncoment 
+                    // (w as Serenity.IntegerEditor).element.prop('readonly', true);
+                };
+            }
+
+            var q = Q.parseQueryString();
+            if (q["visittype"]) {
+                var category = Q.tryFirst(filters, x => x.field == fields.VisitTypeId);
+                category.init = e => {
+                    e.element.getWidget(Serenity.LookupEditor).value = q["visittype"];
+                };
+            }
+            return filters;
+        }
     }
 }

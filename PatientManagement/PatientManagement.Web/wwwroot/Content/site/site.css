@@ -7723,6 +7723,7 @@ section.content > .s-DataGrid {
 }
 .s-Administration-UserDialog > .size {
   width: 650px;
+  height: 700px;
 }
 .s-Administration-UserDialog .caption {
   width: 150px;
@@ -8927,12 +8928,7 @@ section.content > .s-DataGrid {
 }
 .s-Administration-TenantDialog > .size {
   width: 650px;
-}
-.s-Administration-TenantDialog .caption {
-  width: 150px;
-}
-.s-Administration-TenantDialog > .size {
-  width: 650px;
+  min-height: 800px;
 }
 .s-Administration-TenantDialog .caption {
   width: 150px;
@@ -8954,5 +8950,32 @@ section.content > .s-DataGrid {
   min-height: 500px;
 }
 .s-Administration-SentEmailsDialog .caption {
+  width: 150px;
+}
+.s-PatientManagement-CabinetsDialog > .size {
+  width: 650px;
+}
+.s-PatientManagement-CabinetsDialog .caption {
+  width: 150px;
+}
+.s-CalendarCabinetsEditor {
+  width: 100%;
+}
+.s-PaymentsGrid .not-success-payment .print-invoice {
+  display: none;
+}
+.s-PaymentsGrid .payment-pending {
+  background-color: rgba(255, 216, 0, 0.42);
+}
+.s-PaymentsGrid .payment-success {
+  background-color: rgba(0, 255, 33, 0.33);
+}
+.s-CalendarPatientDialog > .size {
+  min-height: 550px;
+}
+.s-NewVisitTypeDialog > .size {
+  width: 450px;
+}
+.s-NewVisitTypeDialog .caption {
   width: 150px;
 }

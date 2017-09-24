@@ -1,4 +1,5 @@
-﻿using PatientManagement.Web.Modules.Common.Helpers;
+﻿using PatientManagement.PatientManagement.Entities;
+using PatientManagement.Web.Modules.Common.Helpers;
 
 namespace PatientManagement.PatientManagement.Repositories
 {
@@ -49,32 +50,35 @@ namespace PatientManagement.PatientManagement.Repositories
             protected override void AfterSave()
             {
                 base.AfterSave();
-                
+                var cabinetName = Connection.ById<CabinetsRow>(Row.CabinetId).Name;
                 if (IsUpdate)
                 {
+
                     NotificationHelpers.SendVisitNotification(
-                        Row.VisitId ?? 0,
-                        Row.StartDate ?? DateTime.Now,
-                        Row.EndDate ?? DateTime.Now.AddMonths(1),
-                        Row.PatientId ?? 0,
-                        EEntityNotificationStatus.Updated);
+                    Row.VisitId ?? 0,
+                    cabinetName,
+                    Row.StartDate ?? DateTime.Now,
+                    Row.EndDate ?? DateTime.Now.AddMonths(1),
+                    Row.PatientId ?? 0,
+                    EEntityNotificationStatus.Updated);
                 }
                 else
                 {
                     NotificationHelpers.SendVisitNotification(
                         Row.VisitId ?? 0,
+                        cabinetName,
                         Row.StartDate ?? DateTime.Now,
                         Row.EndDate ?? DateTime.Now.AddMonths(1),
                         Row.PatientId ?? 0,
                         EEntityNotificationStatus.Created);
                 }
-                
+
             }
         }
 
         private class MyDeleteHandler : DeleteRequestHandler<MyRow>
         {
-         
+
             protected override void ExecuteDelete()
             {
                 try
@@ -92,9 +96,10 @@ namespace PatientManagement.PatientManagement.Repositories
             {
 
                 base.OnAfterDelete();
+                var cabinetName = Connection.ById<CabinetsRow>(Row.CabinetId).Name;
 
                 NotificationHelpers.SendVisitNotification(
-                    Row.VisitId??0,
+                    Row.VisitId ?? 0, cabinetName,
                     Row.StartDate ?? DateTime.Now,
                     Row.EndDate ?? DateTime.Now.AddMonths(1),
                     Row.PatientId ?? 0,

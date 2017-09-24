@@ -13,6 +13,8 @@ namespace PatientManagement.PatientManagement.Forms
     [BasedOnRow(typeof(Entities.LifeStylesRow))]
     public class LifeStylesForm
     {
+        [Category("Additional Information")]
+
         public Int32? PatientId { get; set; }
         
         public String Regime { get; set; }

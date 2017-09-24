@@ -29,7 +29,11 @@ namespace PatientManagement.Administration.Endpoints
         {
             return new MyRepository().Delete(uow, request);
         }
-
+        [HttpPost, AuthorizeDelete(typeof(MyRow))]
+        public UndeleteResponse Undelete(IUnitOfWork uow, UndeleteRequest request)
+        {
+            return new MyRepository().Undelete(uow, request);
+        }
         public RetrieveResponse<MyRow> Retrieve(IDbConnection connection, RetrieveRequest request)
         {
             return new MyRepository().Retrieve(connection, request);

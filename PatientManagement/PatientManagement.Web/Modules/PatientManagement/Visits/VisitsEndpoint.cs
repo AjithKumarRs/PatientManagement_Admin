@@ -1,4 +1,10 @@
 ﻿using System;
+using PatientManagement.Administration.Entities;
+using PatientManagement.Administration.Repositories;
+using PatientManagement.Common.EmailTemplates;
+using PatientManagement.PatientManagement.Entities;
+using PatientManagement.Web.Modules.Common;
+using Serenity;
 using Serenity.Reporting;
 using Serenity.Web;
 
@@ -19,15 +25,53 @@ namespace PatientManagement.PatientManagement.Endpoints
         [HttpPost, AuthorizeCreate(typeof(MyRow))]
         public SaveResponse Create(IUnitOfWork uow, SaveRequest<MyRow> request)
         {
+            var maximumInserts = UserSubscriptionHelper.GetTenantMaximumVisits();
+            if (this.List(uow.Connection, new ListRequest()).TotalCount >= maximumInserts)
+            {
+                throw new ValidationError(string.Format(Texts.Site.Subscriptions.MaximumVisitsError, maximumInserts));
+            }
+            var patient = uow.Connection.ById<PatientsRow>(request.Entity.PatientId);
+
+            SendAutomaticEmailToPatient(uow, patient, request.Entity.StartDate??DateTime.MinValue, true);
+
             return new MyRepository().Create(uow, request);
         }
 
         [HttpPost, AuthorizeUpdate(typeof(MyRow))]
         public SaveResponse Update(IUnitOfWork uow, SaveRequest<MyRow> request)
         {
+            var visit = uow.Connection.ById<VisitsRow>(request.EntityId);
+            var patient = uow.Connection.ById<PatientsRow>(visit.PatientId);
+
+            SendAutomaticEmailToPatient(uow, patient, request.Entity.StartDate ?? DateTime.MinValue, false);
+
             return new MyRepository().Update(uow, request);
         }
- 
+
+        private void SendAutomaticEmailToPatient(IUnitOfWork uow, PatientsRow patient, DateTime startDate, bool IsCreated)
+        {
+            if (patient.NotifyOnChange == true && !patient.Email.IsEmptyOrNull())
+            {
+                var emailModel = new ChangedVisitAutomaticEmailModel();
+                emailModel.PatientName = patient.Name;
+                emailModel.VisitDate = startDate;
+
+                var emailBody = TemplateHelper.RenderViewToString(HttpContext.RequestServices,
+                    MVC.Views.Common.EmailTemplates.ChangedVisitAutomaticEmail.EmailTemplates_ChangedVisitAutomaticEmail, emailModel);
+
+                var saveRequest = new SaveRequest<SentEmailsRow>();
+                saveRequest.Entity = new SentEmailsRow();
+                saveRequest.Entity.ToEmail = patient.PatientId.ToString();
+                saveRequest.Entity.Body = emailBody;
+
+                if (IsCreated)
+                    saveRequest.Entity.Subject = "Насрочена визита";
+                else
+                    saveRequest.Entity.Subject = "Промяна на визита";
+
+                new SentEmailsRepository().Create(uow, saveRequest);
+            }
+        }
         [HttpPost, AuthorizeDelete(typeof(MyRow))]
         public DeleteResponse Delete(IUnitOfWork uow, DeleteRequest request)
         {

@@ -20,7 +20,7 @@
                 },
                 resp => {
                     tenant = resp.Entity;
-                    this.form.Name.value = tenant.TenantName;
+                    this.form.TenantName.value = tenant.TenantName;
                     this.form.TenantWebSite.value = tenant.TenantWebSite;
 
                     if (this.form.TenantImage.value != null)
@@ -28,8 +28,8 @@
 
                     this.form.TenantEmailSignature.value = tenant.TenantEmailSignature;
                    // this.form.OverrideUsersEmailSignature = tenant.OverrideUsersEmailSignature;
-                    this.form.WorkHoursEnd.value = tenant.WorkHoursEnd;
-                    this.form.WorkHoursStart.value = tenant.WorkHoursStart;
+                    //this.form.WorkHoursEnd.value = tenant.WorkHoursEnd;
+                    //this.form.WorkHoursStart.value = tenant.WorkHoursStart;
                 });
 
 

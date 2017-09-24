@@ -17,8 +17,6 @@ namespace PatientManagement.PatientManagement.Entities
         LookupType = typeof(MultiTenantRowLookupScript<>))]
     public sealed class LifeStylesRow : Row, IIdRow, INameRow, IInsertLogRow, IMultiTenantRow
     {
-        [Category("General")]
-
         [DisplayName("Patient"), PrimaryKey, ForeignKey("[dbo].[Patients]", "PatientId"), LeftJoin("jPatient"), TextualField("PatientName"), Required(true)]
         [LookupEditor(typeof(PatientsRow), InplaceAdd = true)]
 

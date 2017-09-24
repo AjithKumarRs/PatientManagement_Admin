@@ -1,4 +1,8 @@
 ﻿
+using System.Collections.Generic;
+using PatientManagement.PatientManagement.Entities;
+using PatientManagement.PatientManagement.Scripts;
+
 namespace PatientManagement.Administration.Entities
 {
     using Serenity.ComponentModel;
@@ -8,10 +12,11 @@ namespace PatientManagement.Administration.Entities
     using System.ComponentModel;
 
     [ConnectionKey("Default"), DisplayName("Users"), InstanceName("User"), TwoLevelCached]
-    [ReadPermission("Administration:User:Read")]
+    [ReadPermission("AdministrationTenants:User:Read")]
     [ModifyPermission("Administration:User:Modify")]
-    [LookupScript("Administration.User", Permission = "Administration:User:Read")]
-    public sealed class UserRow : LoggingRow, IIdRow, INameRow, IIsActiveDeletedRow
+    [LookupScript("Administration.User",
+        LookupType = typeof(MultiTenantRowLookupScript<>))]
+    public sealed class UserRow : LoggingRow, IIdRow, INameRow, IIsActiveDeletedRow, IMultiTenantRow
     {
         [DisplayName("User Id"), Identity]
         public Int32? UserId
@@ -27,6 +32,18 @@ namespace PatientManagement.Administration.Entities
             set { Fields.Username[this] = value; }
         }
 
+        [DisplayName("Cabinets")]
+        [LookupEditor(typeof(CabinetsRow), Multiple = true), NotMapped]
+        [LinkingSetRelation(typeof(CabinetRepresentativesRow), "UserId", "CabinetId")]
+        [MinSelectLevel(SelectLevel.Details), QuickFilter]
+        public List<Int32> Cabinets
+        {
+            get { return Fields.Cabinets[this]; }
+            set { Fields.Cabinets[this] = value; }
+        }
+
+
+        [ReadPermission(PermissionKeys.Tenants)]
         [DisplayName("Source"), Size(4), NotNull, Insertable(false), Updatable(false), DefaultValue("site")]
         public String Source
         {
@@ -55,6 +72,7 @@ namespace PatientManagement.Administration.Entities
             set { Fields.DisplayName[this] = value; }
         }
 
+        [EmailEditor, Required(true)]
         [DisplayName("Email"), Size(100)]
         public String Email
         {
@@ -83,6 +101,8 @@ namespace PatientManagement.Administration.Entities
             get { return Fields.UserImage[this]; }
             set { Fields.UserImage[this] = value; }
         }
+
+        [Size(-1), HtmlContentEditor, CssClass("email-signature")]
         [DisplayName("Email Signature")]
         public String EmailSignature
         {
@@ -98,6 +118,9 @@ namespace PatientManagement.Administration.Entities
         }
 
         [NotNull, Insertable(false), Updatable(true)]
+        [ModifyPermission("Administration:User:IsActiveRead")]
+        [ReadPermission("Administration:User:IsActiveRead")]
+        [BsSwitchEditor]
         public Int16? IsActive
         {
             get { return Fields.IsActive[this]; }
@@ -127,6 +150,7 @@ namespace PatientManagement.Administration.Entities
             set { Fields.TenantId[this] = value; }
         }
 
+        [ReadPermission(PermissionKeys.Tenants)]
         [DisplayName("Tenant"), Expression("tnt.TenantName")]
         public String TenantName
         {
@@ -140,7 +164,10 @@ namespace PatientManagement.Administration.Entities
             get { return Fields.TenantCurrencyId[this]; }
             set { Fields.TenantCurrencyId[this] = value; }
         }
-
+        public Int32Field TenantIdField
+        {
+            get { return Fields.TenantId; }
+        }
         IIdField IIdRow.IdField
         {
             get { return Fields.UserId; }
@@ -178,6 +205,8 @@ namespace PatientManagement.Administration.Entities
             public StringField WebSite;
             public StringField PhoneNumber;
             public StringField EmailSignature;
+
+            public ListField<Int32> Cabinets;
 
             public StringField Password;
             public StringField PasswordConfirm;

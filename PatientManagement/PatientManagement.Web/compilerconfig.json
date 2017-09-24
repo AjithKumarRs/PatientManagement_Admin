@@ -14,5 +14,9 @@
   {
     "outputFile": "wwwroot/Content/site/site.theme.css",
     "inputFile": "wwwroot/Content/site/site.theme.less"
+  },
+  {
+    "outputFile": "wwwroot/Scripts/adminlte/app.min.js",
+    "inputFile": "wwwroot/Scripts/adminlte/app.js"
   }
 ]

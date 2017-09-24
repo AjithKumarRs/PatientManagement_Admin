@@ -15,8 +15,6 @@ namespace PatientManagement.PatientManagement.Entities
     [LookupScript("PatientManagement.LifeStyles")]
     public sealed class ActivityRow : Row, IIdRow, INameRow, IInsertLogRow
     {
-        [Category("General")]
-
         [DisplayName("Patient"), PrimaryKey, ForeignKey("[dbo].[Patients]", "PatientId"), LeftJoin("jPatient"), TextualField("PatientName")]
         [LookupEditor(typeof(PatientsRow), InplaceAdd = true)]
         public Int32? PatientId

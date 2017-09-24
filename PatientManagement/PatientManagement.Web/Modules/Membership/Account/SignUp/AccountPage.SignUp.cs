@@ -1,4 +1,6 @@
 ﻿
+using PatientManagement.PatientManagement.Entities;
+
 namespace PatientManagement.Membership.Pages
 {
     using Administration;
@@ -88,21 +90,23 @@ namespace PatientManagement.Membership.Pages
 
                     var offer = connection.ById<OffersRow>(request.OfferId);
 
+                    //Insert First subscription directly after you know the TenantId
                     var subscriptionId = (int)connection.InsertAndGetID(new SubscriptionsRow
                     {
                         // TODO Get local string 
                         Name = string.Format(Texts.Forms.Membership.SignUp.FormatSubscriptionName, offer.Name),
                         OfferId = offer.OfferId,
                         TenantId = Int32.Parse(tenant.TenantId.ToString()),
-                        SubscriptionEndDate = DateTime.Now.AddMonths(1),
+                        SubscriptionEndDate = DateTime.Now.AddMonths(12),
+                        Enabled = 1,
                         IsActive = 1,
                         InsertUserId =  userId,
                         InsertDate = DateTime.Now,
                         ActivatedOn = DateTime.Now
                     });
-
                     tenant.SubscriptionId = subscriptionId;
-
+                    
+                    //Update Tenant SubscriptionId .. Is it Needet?
                     connection.UpdateById(tenant, ExpectedRows.One);
 
                     var userRoleId = (int)connection.InsertAndGetID(new UserRoleRow
@@ -111,10 +115,11 @@ namespace PatientManagement.Membership.Pages
                         RoleId = offer.RoleId
                     });
 
+
                     userModel.TenantId = tenant.TenantId??2;
                     
                     connection.UpdateById(userModel, ExpectedRows.One);
-
+                    
                     byte[] bytes;
                     using (var ms = new MemoryStream())
                     using (var bw = new BinaryWriter(ms))

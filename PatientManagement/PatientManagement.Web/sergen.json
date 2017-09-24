@@ -75,6 +75,12 @@
           "PermissionKey": "PatientManagement:Activity"
         },
         {
+          "Tablename": "dbo.Cabinets",
+          "Identifier": "Cabinets",
+          "Module": "PatientManagement",
+          "PermissionKey": "AdministrationTenants:Cabinets"
+        },
+        {
           "Tablename": "dbo.LifeStyles",
           "Identifier": "LifeStyles",
           "Module": "PatientManagement",

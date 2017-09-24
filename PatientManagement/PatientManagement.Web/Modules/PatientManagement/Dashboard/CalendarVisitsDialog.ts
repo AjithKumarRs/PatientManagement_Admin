@@ -14,7 +14,29 @@ namespace PatientManagement.PatientManagement {
 
 
                 Serenity.EditorUtils.setReadOnly(this.form.PatientId, true);
+                Serenity.EditorUtils.setReadOnly(this.form.CabinetId, true);
+                var patientId = this.form.PatientId.value;
 
+                PatientsService.Retrieve({
+                        EntityId: patientId
+                    },
+                    response => {
+                        if (response.Entity.NotifyOnChange) {
+                            var parentCat = this.form.PatientId.element.parents(".categories ");
+                            console.log(parentCat);
+                            var text = Q.text("Site.Dashboard.AlertMessagePatientWithNotificationActiveVisitDialog");
+                            parentCat.append(
+                                "<div class='alert alert-info' style='display: none' id='automatic-notification-email'>" +
+                                text +
+                                "</div>");
+                            $("#automatic-notification-email").show(200);
+
+                        } else {
+                            $("#automatic-notification-email").hide(200);
+                        }
+                    });
+            } else {
+                this.form.CabinetId.value = $.cookie("CabinetPreference");
             }
         }
         public newPredifinedVisit = (start, end): void => {
@@ -24,15 +46,17 @@ namespace PatientManagement.PatientManagement {
 
             p.StartDate = start;
             p.EndDate = end;
+
             dlg.loadEntityAndOpenDialog(<PatientManagement.VisitsRow>{
                 StartDate: start,
-              EndDate: end
+                EndDate: end,
+                CabinetId: $.cookie("CabinetPreference")
             });
+            
+
         }
         public updateVisit = (visitId, start, end): void => {
-
-            var p = <PatientManagement.VisitsRow>{};
-
+        
             VisitsService.Retrieve(<any>{
                 EntityId: visitId
             }, resp => {
@@ -40,20 +64,34 @@ namespace PatientManagement.PatientManagement {
                 p = resp.Entity;
                 Q.notifyInfo(Q.text("Site.Dashboard.SuccessChangedVisitDates") + p.PatientName);
 
+                var beforeDateStart = resp.Entity.StartDate;
+                var beforeDateEnd = resp.Entity.EndDate;
+
+                var p = <PatientManagement.VisitsRow>{};
+
+                p.StartDate = start;
+                p.EndDate = end;
+                VisitsService.Update({
+                        Entity: p,
+                        EntityId: visitId
+                    },
+                    response => {
+                        Q.reloadLookup(PatientManagement.VisitsRow.lookupKey);
+
+                        $('#VisitsGridDiv .refresh-button').click();
+
+                        if (new Date(start).getDay() === new Date().getDay() ||
+                            new Date(end).getDay() === new Date().getDay() ||
+                            new Date(beforeDateStart).getDay() === new Date().getDay() ||
+                            new Date(beforeDateEnd).getDay() === new Date().getDay()) {
+
+                            this.refreshVisitForTodayBox();
+                        }
+                    });
+
+
             });
 
-            p.StartDate = start;
-            p.EndDate = end;
-
-            VisitsService.Update({
-                    Entity: p,
-                    EntityId: visitId
-                },
-                response => {
-                    Q.reloadLookup(PatientManagement.VisitsRow.lookupKey);
-
-                    $('#VisitsGridDiv .refresh-button').click();
-                });
         }
 
         public deleteVisit = (visitId): void => {
@@ -82,17 +120,25 @@ namespace PatientManagement.PatientManagement {
             });
 
         }
-        protected onSaveSuccess(response: Serenity.SaveResponse): void {
-            VisitsService.Retrieve(<any>{
-                EntityId: response.EntityId
-            }, resp => {
-                $("#calendar").fullCalendar('refetchEvents');
-            });
 
+        protected onSaveSuccess(response: Serenity.SaveResponse): void {
+            this.refreshVisitForTodayBox();
+
+            $("#calendar").fullCalendar('refetchEvents');
+        }
+
+        public refreshVisitForTodayBox() {
+            $.get('/Dashboard/GetTodayVisits/', data => {
+                $('#today-visit-counter').text(data.countVisitsForToday);
+                var width = (data.alreadyExpired / data.countVisitsForToday) * 100;
+                $('#today-visits-progress').attr('aria-valuemax', data.countVisitsForToday);
+                $('#today-visits-progress').attr('aria-valuenow', data.alreadyExpired).css('width', width + '%');
+
+            });
         }
 
         protected onDeleteSuccess(response: Serenity.DeleteResponse): void {
-
+            this.refreshVisitForTodayBox();
             $("#calendar").fullCalendar('refetchEvents');
         }
 

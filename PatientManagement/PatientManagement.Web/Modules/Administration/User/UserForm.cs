@@ -1,4 +1,7 @@
-﻿namespace PatientManagement.Administration.Forms
+﻿using System.Collections.Generic;
+using Serenity.Data.Mapping;
+
+namespace PatientManagement.Administration.Forms
 {
     using Serenity.ComponentModel;
     using System;
@@ -9,11 +12,13 @@
     {
         public String Username { get; set; }
         public String DisplayName { get; set; }
-        [EmailEditor, Required(true)]
         public String Email { get; set; }
 
+        public List<Int32> Cabinets { get; set; }
 
-        public string UserPhone { get; set; }
+
+        public string PhoneNumber { get; set; }
+
         public String WebSite { get; set; }
 
         public String UserImage { get; set; }
@@ -21,6 +26,11 @@
         public String Password { get; set; }
         [PasswordEditor, OneWay, Required(true)]
         public String PasswordConfirm { get; set; }
+
+        public int IsActive { get; set; }
+
+        public String EmailSignature { get; set; }
+
         [OneWay]
         public string Source { get; set; }
 
