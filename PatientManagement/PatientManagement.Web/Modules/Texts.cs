@@ -130,6 +130,7 @@ namespace PatientManagement
         public static class LeftNavigation
         {
             public static LocalText LeftNavigationHeader = "MAIN MENU";
+            public static LocalText AddNewVisitType = "Add new visit type";
         }
         public static class Site
         {

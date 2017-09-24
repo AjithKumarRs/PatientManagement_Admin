@@ -340,7 +340,14 @@
                 new PatientManagement.Common.RecieveNotificationToggle($('#NotificationCheck'),{ state:@notificationState});
                 new PatientManagement.Common.SidebarSearch($('#SidebarSearch'), $('#SidebarMenu')).init();
                 new PatientManagement.Common.LanguageSelection($('#LanguageSelect'), '@(System.Globalization.CultureInfo.CurrentUICulture.Name)');
+
                 new PatientManagement.Common.ThemeSelection($('#ThemeSelect'));
+
+                $('.open-new-visit-dialog').parent().click(function (event) {
+                    event.preventDefault();
+                    new PatientManagement.PatientManagement.VisitTypesDialog().loadNewAndOpenDialog();
+                });
+
                 @RenderSection("PageInitScript", false);
 
                 var doLayout = function () {

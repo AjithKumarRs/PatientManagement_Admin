@@ -379,6 +379,7 @@
   "Forms.PatientManagement.PatientsFileUploads.Categories.Required Fields": "Задължителни Полета",
   "Forms.PatientManagement.Visits.Categories.Additional Information": "Допълнителна Информация",
   "Forms.PatientManagement.Visits.Categories.Required Fields": "Задължителни Полета",
+  "LeftNavigation.AddNewVisitType": "Добави нов тип",
   "LeftNavigation.LeftNavigationHeader": "ГЛАВНО МЕНЮ",
   "Navigation.Administration": "Администрация",
   "Navigation.Administration/Currencies": "Валути",
