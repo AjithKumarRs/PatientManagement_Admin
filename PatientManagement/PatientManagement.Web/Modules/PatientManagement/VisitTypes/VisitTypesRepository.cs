@@ -30,7 +30,11 @@ namespace PatientManagement.PatientManagement.Repositories
         {
             return new MyDeleteHandler().Process(uow, request);
         }
-
+        public UndeleteResponse Undelete(IUnitOfWork uow, UndeleteRequest request)
+        {
+            return new MyUndeleteHandler().Process(uow, request);
+        }
+        private class MyUndeleteHandler : UndeleteRequestHandler<MyRow> { }
         public RetrieveResponse<MyRow> Retrieve(IDbConnection connection, RetrieveRequest request)
         {
             return new MyRetrieveHandler().Process(connection, request);
@@ -52,7 +56,7 @@ namespace PatientManagement.PatientManagement.Repositories
                 using (var connection = SqlConnections.NewFor<UserRow>())
                 {
                     var userFlds = UserRow.Fields;
-                    foreach (var x in connection.List<UserRow>(userFlds.TenantId == (user.TenantId)))
+                    foreach (var x in connection.List<UserRow>(userFlds.TenantId == (user.TenantId) && userFlds.IsActive == 1))
                     {
                         TwoLevelCache.Remove("LeftNavigationModel:NavigationItems:" + x.UserId);
                     }
@@ -90,7 +94,7 @@ namespace PatientManagement.PatientManagement.Repositories
                 var user = (UserDefinition)Authorization.UserDefinition;
 
                 // if (!Authorization.HasPermission(PermissionKeys.Tenants))
-                query.Where(fld.TenantId == user.TenantId);
+                query.Where(fld.TenantId == user.TenantId );
             }
         }
     }

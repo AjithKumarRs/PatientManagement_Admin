@@ -27,7 +27,7 @@ namespace PatientManagement.PatientManagement.Entities
             set => Fields.VisitId[this] = value;
         }
         [DisplayName("Patient"), NotNull, ForeignKey("[dbo].[Patients]", "PatientId"), LeftJoin("jPatient"), TextualField("PatientName")]
-        [LookupEditor(typeof(PatientsRow), InplaceAdd = true)]
+        [LookupEditor(typeof(PatientsRow), InplaceAdd = true, FilterField = "IsActive", FilterValue = 1)]
         public Int32? PatientId
         {
             get => Fields.PatientId[this];
@@ -36,7 +36,7 @@ namespace PatientManagement.PatientManagement.Entities
         
 
         [DisplayName("Visit Type"), NotNull, ForeignKey("[dbo].[VisitTypes]", "VisitTypeId"), LeftJoin("jVisitType"), TextualField("VisitTypeName")]
-        [LookupEditor(typeof(VisitTypesRow), InplaceAdd = true)]
+        [LookupEditor(typeof(VisitTypesRow), InplaceAdd = true, FilterField = "IsActive", FilterValue = 1)]
         public Int32? VisitTypeId
         {
             get => Fields.VisitTypeId[this];

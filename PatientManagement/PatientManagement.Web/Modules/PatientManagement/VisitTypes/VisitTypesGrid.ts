@@ -8,6 +8,7 @@ namespace PatientManagement.PatientManagement {
         protected getIdProperty() { return VisitTypesRow.idProperty; }
         protected getLocalTextPrefix() { return VisitTypesRow.localTextPrefix; }
         protected getService() { return VisitTypesService.baseUrl; }
+        protected getIsActiveProperty() { return VisitTypesRow.isActiveProperty; }
 
         constructor(container: JQuery) {
             super(container);

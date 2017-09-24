@@ -48,8 +48,8 @@ public class VisitTypesNavigationHelper : NavigationHelper
 
         var connection = SqlConnections.NewFor<VisitTypesRow>();
         var visitTypesFlds = VisitTypesRow.Fields;
-        //TODO: IsActive Delete Row should be checked here! #119
-        var visitTypes = connection.List<VisitTypesRow>(visitTypesFlds.TenantId == user.TenantId);
+
+        var visitTypes = connection.List<VisitTypesRow>(visitTypesFlds.TenantId == user.TenantId && visitTypesFlds.IsActive == 1);
 
         list.Add(new NavigationMenuAttribute(506, LocalText.Get("Db.PatientManagement.VisitTypes.EntityPlural"), "fa-stethoscope"));
 

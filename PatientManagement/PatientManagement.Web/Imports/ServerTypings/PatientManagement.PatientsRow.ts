@@ -14,6 +14,7 @@
         WantedWeight?: string;
         InsertUserId?: number;
         InsertDate?: string;
+        IsActive?: number;
         TenantName?: string;
         InsertUserName?: string;
         NoteList?: NotesRow[];
@@ -22,6 +23,7 @@
 
     export namespace PatientsRow {
         export const idProperty = 'PatientId';
+        export const isActiveProperty = 'IsActive';
         export const nameProperty = 'Name';
         export const localTextPrefix = 'PatientManagement.Patients';
         export const lookupKey = 'PatientManagement.Patients';
@@ -45,12 +47,13 @@
             export declare const WantedWeight: string;
             export declare const InsertUserId: string;
             export declare const InsertDate: string;
+            export declare const IsActive: string;
             export declare const TenantName: string;
             export declare const InsertUserName: string;
             export declare const NoteList: string;
             export declare const TenantId: string;
         }
 
-        ['PatientId', 'Name', 'PersonalNumber', 'PhoneNumber', 'Gender', 'FirstRegistrationDate', 'Address', 'Height', 'Weight', 'Email', 'NotifyOnChange', 'WantedWeight', 'InsertUserId', 'InsertDate', 'TenantName', 'InsertUserName', 'NoteList', 'TenantId'].forEach(x => (<any>Fields)[x] = x);
+        ['PatientId', 'Name', 'PersonalNumber', 'PhoneNumber', 'Gender', 'FirstRegistrationDate', 'Address', 'Height', 'Weight', 'Email', 'NotifyOnChange', 'WantedWeight', 'InsertUserId', 'InsertDate', 'IsActive', 'TenantName', 'InsertUserName', 'NoteList', 'TenantId'].forEach(x => (<any>Fields)[x] = x);
     }
 }
