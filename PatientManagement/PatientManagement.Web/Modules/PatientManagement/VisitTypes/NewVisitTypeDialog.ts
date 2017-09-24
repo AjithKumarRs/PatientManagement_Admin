@@ -1,7 +1,9 @@
-﻿namespace PatientManagement.PatientManagement {
+﻿/// <reference path="../VisitTypes/VisitTypesDialog.ts" />
+namespace PatientManagement.PatientManagement {
 
     @Serenity.Decorators.registerClass()
     export class NewVisitTypeDialog extends PatientManagement.VisitTypesDialog {
+
         protected onSaveSuccess(response: Serenity.SaveResponse): void {
             location.reload();
         }
