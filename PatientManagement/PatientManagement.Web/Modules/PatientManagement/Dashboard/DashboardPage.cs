@@ -39,8 +39,8 @@ namespace PatientManagement.PatientManagement.Pages
                     ViewData["CabinetHeaderName"] = connectionCabint?.Name;
 
                     
-                    ViewData["WorkHoursStart"] = TimeSpan.FromMinutes(connectionCabint?.WorkHoursStart ?? 420);
-                    ViewData["WorkHoursEnd"] = TimeSpan.FromMinutes(connectionCabint?.WorkHoursEnd ?? 1200);
+                    ViewData["WorkHoursStart"] = TimeSpan.FromMinutes(connectionCabint?.WorkHoursStart ?? 420).ToString(@"hh\:mm");
+                    ViewData["WorkHoursEnd"] = TimeSpan.FromMinutes(connectionCabint?.WorkHoursEnd ?? 1200).ToString(@"hh\:mm");
                     return View(MVC.Views.PatientManagement.Dashboard.DashboardIndex);
                 }
             }

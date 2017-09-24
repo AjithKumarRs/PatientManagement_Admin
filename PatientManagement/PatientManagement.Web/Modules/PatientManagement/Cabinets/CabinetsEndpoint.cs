@@ -46,8 +46,8 @@ namespace PatientManagement.PatientManagement.Endpoints
 
             var model = new WorkHours
             {
-                start = TimeSpan.FromMinutes(entity.Entity.WorkHoursStart ?? 420).ToString(),
-                end = TimeSpan.FromMinutes(entity.Entity.WorkHoursEnd ?? 1200).ToString(),
+                start = TimeSpan.FromMinutes(entity.Entity.WorkHoursStart ?? 420).ToString(@"hh\:mm"),
+                end = TimeSpan.FromMinutes(entity.Entity.WorkHoursEnd ?? 1200).ToString(@"hh\:mm"),
             };
 
             var response=  new RetrieveResponse<WorkHours>();

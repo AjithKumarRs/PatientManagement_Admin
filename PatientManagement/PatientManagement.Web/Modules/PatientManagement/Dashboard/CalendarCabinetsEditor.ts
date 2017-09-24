@@ -56,15 +56,27 @@ namespace PatientManagement.PatientManagement {
                                 'minTime': entity.start,
                                 'maxTime': entity.end
                             });
+
+
+                            if ($('#cabinet-name-right-header').length > 0) {
+                                console.log();
+
+                                $('#cabinet-name-right-header').html(this.get_text()
+                                    + "<small style='display: inline - block'> - "
+                                    + Q.text("Site.Dashboard.WorkHoursDescription")
+                                    + " "
+                                    + entity.start
+                                    + " - "
+                                    + entity.end
+                                    + "</small>"
+                                );
+                            }
+
+
                         });
 
                     $("#calendar").fullCalendar('refetchEvents');
 
-                    if ($('#cabinet-name-right-header').length > 0) {
-                        console.log();
-
-                        $('#cabinet-name-right-header').html(this.get_text());
-                    }
 
                     new CalendarVisitsDialog().refreshVisitForTodayBox();
 

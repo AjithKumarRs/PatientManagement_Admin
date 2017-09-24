@@ -7,8 +7,14 @@
 
 @section ContentHeader {
     <h1>@LocalText.Get("Navigation.Dashboard")<small>@Html.Raw(Texts.Site.Dashboard.ContentDescription)</small> 
-        <i class="pull-right" id="cabinet-name-right-header">
+        <i class="pull-right" id="cabinet-name-right-header" style="text-align: right; ">
+            
             @ViewData["CabinetHeaderName"]
+
+            <small style="display: inline-block"> - @Texts.Site.Dashboard.WorkHoursDescription
+                @ViewData["WorkHoursStart"]
+                - @ViewData["WorkHoursEnd"]
+            </small>
         </i>
         <strong class="clearfix"></strong>
     </h1>

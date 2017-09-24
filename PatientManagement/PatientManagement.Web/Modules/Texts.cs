@@ -204,6 +204,8 @@ namespace PatientManagement
 
                 public static LocalText ContentDescription =
                     "all saved meetings for period.";
+
+                public static LocalText WorkHoursDescription = "Work hours:";
             }
 
             public static class BasicProgressDialog
