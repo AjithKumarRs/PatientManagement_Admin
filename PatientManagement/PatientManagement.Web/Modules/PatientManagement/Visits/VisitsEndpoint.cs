@@ -1,4 +1,9 @@
 ﻿using System;
+using System.IO;
+using System.Text;
+using Ical.Net;
+using Ical.Net.DataTypes;
+using Ical.Net.Serialization.iCalendar.Serializers;
 using PatientManagement.Administration.Entities;
 using PatientManagement.Administration.Repositories;
 using PatientManagement.Common.EmailTemplates;
@@ -95,6 +100,44 @@ namespace PatientManagement.PatientManagement.Endpoints
             var bytes = new ReportRepository().Render(report);
             return ExcelContentResult.Create(bytes, "VisitsList_" +
                                                     DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".xlsx");
+        }
+
+
+        public FileStreamResult ListIcs(IDbConnection connection, ListRequest request)
+        {
+            var data = List(connection, request).Entities;
+            var report = new DynamicDataReport(data, request.IncludeColumns, typeof(Columns.VisitsColumns));
+            var model = new Ical.Net.Calendar();
+
+            foreach (var visit in data)
+            {
+                var cabinet = connection.ById<CabinetsRow>(visit.CabinetId);
+                var visitType = connection.ById<VisitTypesRow>(visit.VisitTypeId);
+                model.Events.Add(new Ical.Net.CalendarEvent
+                {
+                    Uid = visit.VisitId.ToString(),
+                    Location = cabinet.Name,
+                    Summary = visitType.Name,
+                    Status = EventStatus.Confirmed,
+                    Description = visit.Description,
+                    DtStart = new CalDateTime((visit.StartDate ?? DateTime.Now)),
+                    DtEnd = new CalDateTime((visit.EndDate ?? DateTime.Now)),
+                    IsAllDay = false,
+                });
+            }
+
+            var serializer = new CalendarSerializer(model);
+            MemoryStream ms = new MemoryStream();
+
+            serializer.Serialize(model, ms, Encoding.UTF8);
+
+            var ics = serializer.SerializeToString(model);
+            var bytes = System.Text.Encoding.UTF8.GetBytes(ics);
+
+            ms.Write(bytes, 0, bytes.Length);
+            ms.Seek(0, SeekOrigin.Begin);
+
+            return File(ms, "text/calendar", "event.ics");
         }
     }
 }

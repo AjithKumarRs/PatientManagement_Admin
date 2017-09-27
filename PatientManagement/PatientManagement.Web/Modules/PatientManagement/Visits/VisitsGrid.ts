@@ -25,6 +25,16 @@ namespace PatientManagement.PatientManagement {
                 separator: true
             }));
 
+            buttons.push(Common.IcsExportHelper.createToolButton({
+                grid: this,
+                hint: 'Export to Outlook, Google Calendar etc.',
+                title: 'Export to Outlook, Google Calendar etc.',
+                service: VisitsService.baseUrl + '/ListIcs',
+                onViewSubmit: () => this.onViewSubmit(),
+                separator: true,
+                cssClass: "export-docx-button"
+            }));
+
             return buttons;
         }
 
