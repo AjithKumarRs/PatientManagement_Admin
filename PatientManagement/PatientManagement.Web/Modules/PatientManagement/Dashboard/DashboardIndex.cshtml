@@ -1,4 +1,5 @@
-﻿@using PatientManagement.PatientManagement
+﻿@using NUglify.Helpers
+@using PatientManagement.PatientManagement
 
 @{
     ViewData["Title"] = "Dashboard";
@@ -104,7 +105,16 @@
         </div><!-- /. box -->
     </div><!-- /.col -->
 </div><!-- /.row -->
+@if(ViewData["HelloModal"] != null) { 
+<div id="helloModal"></div>
+<script>
+    jQuery(document).ready(function() {
+        //Show hello modal
+        new PatientManagement.PatientManagement.HelloModal($('#helloModal'), {});
+    });
 
+</script>
+}
 <script>
 
 

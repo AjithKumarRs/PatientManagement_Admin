@@ -783,6 +783,70 @@ var PatientManagement;
 (function (PatientManagement) {
     var Common;
     (function (Common) {
+        var HelloModalAddCabinetForm = (function (_super) {
+            __extends(HelloModalAddCabinetForm, _super);
+            function HelloModalAddCabinetForm() {
+                return _super !== null && _super.apply(this, arguments) || this;
+            }
+            return HelloModalAddCabinetForm;
+        }(Serenity.PrefixedContext));
+        HelloModalAddCabinetForm.formKey = 'Common.HelloModalAddCabinet';
+        Common.HelloModalAddCabinetForm = HelloModalAddCabinetForm;
+        [['Name', function () { return Serenity.StringEditor; }], ['WorkHoursStart', function () { return Serenity.TimeEditor; }], ['WorkHoursEnd', function () { return Serenity.TimeEditor; }]].forEach(function (x) { return Object.defineProperty(HelloModalAddCabinetForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
+    })(Common = PatientManagement.Common || (PatientManagement.Common = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var Common;
+    (function (Common) {
+        var HelloModalAddPatientForm = (function (_super) {
+            __extends(HelloModalAddPatientForm, _super);
+            function HelloModalAddPatientForm() {
+                return _super !== null && _super.apply(this, arguments) || this;
+            }
+            return HelloModalAddPatientForm;
+        }(Serenity.PrefixedContext));
+        HelloModalAddPatientForm.formKey = 'Common.HelloModalAddPatient';
+        Common.HelloModalAddPatientForm = HelloModalAddPatientForm;
+        [['Name', function () { return Serenity.StringEditor; }], ['Gender', function () { return Serenity.EnumEditor; }], ['PhoneNumber', function () { return Serenity.StringEditor; }], ['Email', function () { return Serenity.EmailEditor; }], ['NotifyOnChange', function () { return PatientManagement.BsSwitchEditor; }]].forEach(function (x) { return Object.defineProperty(HelloModalAddPatientForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
+    })(Common = PatientManagement.Common || (PatientManagement.Common = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var Common;
+    (function (Common) {
+        var HelloModalAddVisitForm = (function (_super) {
+            __extends(HelloModalAddVisitForm, _super);
+            function HelloModalAddVisitForm() {
+                return _super !== null && _super.apply(this, arguments) || this;
+            }
+            return HelloModalAddVisitForm;
+        }(Serenity.PrefixedContext));
+        HelloModalAddVisitForm.formKey = 'Common.HelloModalAddVisit';
+        Common.HelloModalAddVisitForm = HelloModalAddVisitForm;
+        [['PatientId', function () { return Serenity.LookupEditor; }], ['VisitTypeId', function () { return Serenity.LookupEditor; }], ['CabinetId', function () { return Serenity.LookupEditor; }], ['StartDate', function () { return Serenity.DateTimeEditor; }], ['EndDate', function () { return Serenity.DateTimeEditor; }], ['Description', function () { return Serenity.TextAreaEditor; }]].forEach(function (x) { return Object.defineProperty(HelloModalAddVisitForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
+    })(Common = PatientManagement.Common || (PatientManagement.Common = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var Common;
+    (function (Common) {
+        var HelloModalAddVisitTypeForm = (function (_super) {
+            __extends(HelloModalAddVisitTypeForm, _super);
+            function HelloModalAddVisitTypeForm() {
+                return _super !== null && _super.apply(this, arguments) || this;
+            }
+            return HelloModalAddVisitTypeForm;
+        }(Serenity.PrefixedContext));
+        HelloModalAddVisitTypeForm.formKey = 'Common.HelloModalAddVisitType';
+        Common.HelloModalAddVisitTypeForm = HelloModalAddVisitTypeForm;
+        [['Name', function () { return Serenity.StringEditor; }], ['BorderColor', function () { return Serenity.StringEditor; }], ['BackgroundColor', function () { return Serenity.StringEditor; }]].forEach(function (x) { return Object.defineProperty(HelloModalAddVisitTypeForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
+    })(Common = PatientManagement.Common || (PatientManagement.Common = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var Common;
+    (function (Common) {
         var UserPreferenceRow;
         (function (UserPreferenceRow) {
             UserPreferenceRow.idProperty = 'UserPreferenceId';
@@ -842,6 +906,22 @@ var PatientManagement;
         EditTenantForm.formKey = 'Membership.EditTenant';
         Membership.EditTenantForm = EditTenantForm;
         [['TenantName', function () { return Serenity.StringEditor; }], ['TenantWebSite', function () { return Serenity.StringEditor; }], ['TenantImage', function () { return Serenity.ImageUploadEditor; }], ['OverrideUsersEmailSignature', function () { return PatientManagement.BsSwitchEditor; }], ['TenantEmailSignature', function () { return Serenity.HtmlContentEditor; }]].forEach(function (x) { return Object.defineProperty(EditTenantForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
+    })(Membership = PatientManagement.Membership || (PatientManagement.Membership = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var Membership;
+    (function (Membership) {
+        var EditUserProfileForm = (function (_super) {
+            __extends(EditUserProfileForm, _super);
+            function EditUserProfileForm() {
+                return _super !== null && _super.apply(this, arguments) || this;
+            }
+            return EditUserProfileForm;
+        }(Serenity.PrefixedContext));
+        EditUserProfileForm.formKey = 'Membership.EditUserProfile';
+        Membership.EditUserProfileForm = EditUserProfileForm;
+        [['DisplayName', function () { return Serenity.StringEditor; }], ['Email', function () { return Serenity.EmailEditor; }], ['PhoneNumber', function () { return Serenity.StringEditor; }], ['WebSite', function () { return Serenity.StringEditor; }], ['UserImage', function () { return Serenity.ImageUploadEditor; }], ['EmailSignature', function () { return Serenity.HtmlContentEditor; }]].forEach(function (x) { return Object.defineProperty(EditUserProfileForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
     })(Membership = PatientManagement.Membership || (PatientManagement.Membership = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
@@ -2069,7 +2149,7 @@ var PatientManagement;
 (function (PatientManagement) {
     var Administration;
     (function (Administration) {
-        var SentEmailsDialog = SentEmailsDialog_1 = (function (_super) {
+        var SentEmailsDialog = (function (_super) {
             __extends(SentEmailsDialog, _super);
             function SentEmailsDialog() {
                 var _this = _super !== null && _super.apply(this, arguments) || this;
@@ -2094,7 +2174,7 @@ var PatientManagement;
                             }
                             else {
                                 var sentEmail = {};
-                                var dialog = new SentEmailsDialog_1();
+                                var dialog = new SentEmailsDialog();
                                 //TODO We open new dialog with PatientID. Correct?
                                 sentEmail.ToEmail = patient.PatientId.toString();
                                 dialog.form.ToEmail.readOnly = true;
@@ -2121,12 +2201,11 @@ var PatientManagement;
             };
             return SentEmailsDialog;
         }(Serenity.EntityDialog));
-        SentEmailsDialog = SentEmailsDialog_1 = __decorate([
+        SentEmailsDialog = __decorate([
             Serenity.Decorators.registerClass(),
             Serenity.Decorators.responsive()
         ], SentEmailsDialog);
         Administration.SentEmailsDialog = SentEmailsDialog;
-        var SentEmailsDialog_1;
     })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
@@ -3143,6 +3222,310 @@ var PatientManagement;
         Serenity.EntityDialog.defaultLanguageList = PatientManagement.LanguageList.getValue;
     })(ScriptInitialization = PatientManagement.ScriptInitialization || (PatientManagement.ScriptInitialization = {}));
 })(PatientManagement || (PatientManagement = {}));
+/// <reference types="jqueryui" />
+/// <reference types="bootstrap"/>
+var PatientManagement;
+(function (PatientManagement_37) {
+    var PatientManagement;
+    (function (PatientManagement) {
+        var HelloModal = (function (_super) {
+            __extends(HelloModal, _super);
+            function HelloModal(elem, opt) {
+                var _this = _super.call(this, elem, opt) || this;
+                _this.formCabinet = new PatientManagement_37.Common.HelloModalAddCabinetPanel(_this.byId("ModalBodyCabinet"));
+                _this.formPatient = new PatientManagement_37.Common.HelloModalAddPatientPanel(_this.byId("ModalBodyPatient"));
+                _this.formVisitType = new PatientManagement_37.Common.HelloModalAddVisitTypePanel(_this.byId("ModalBodyVisitType"));
+                _this.formVisit = new PatientManagement_37.Common.HelloModalAddVisitPanel(_this.byId("ModalBodyVisit"));
+                _this.formPatient.init();
+                _this.formCabinet.init();
+                _this.formVisitType.init();
+                _this.formVisit.init();
+                _this.byId('ModalBodyInformation').attr("data-step", 1);
+                $('#helloModal .modal').modal('show');
+                var steps = 1;
+                PatientManagement.CabinetsService.List({ Take: 1 }, function (response) {
+                    if (response.TotalCount > 0) {
+                        elem.find("#cabinets-box-modal").addClass("bg-green-gradient");
+                    }
+                    else {
+                        elem.find("#cabinets-box-modal").addClass("bg-blue-gradient");
+                        steps += 1;
+                        _this.byId('btn-continue-modal').attr("data-steps", steps);
+                        $("#cabinet-step").attr("data-step", steps);
+                    }
+                    PatientManagement.VisitTypesService.List({ Take: 1 }, function (response) {
+                        if (response.TotalCount > 0) {
+                            elem.find("#visitTypes-box-modal").addClass("bg-green-gradient");
+                        }
+                        else {
+                            elem.find("#visitTypes-box-modal").addClass("bg-blue-gradient");
+                            steps += 1;
+                            _this.byId('btn-continue-modal').attr("data-steps", steps);
+                            $("#visit-type-step").attr("data-step", steps);
+                        }
+                        PatientManagement.PatientsService.List({ Take: 1 }, function (response) {
+                            if (response.TotalCount > 0) {
+                                elem.find("#patients-box-modal").addClass("bg-green-gradient");
+                            }
+                            else {
+                                elem.find("#patients-box-modal").addClass("bg-blue-gradient");
+                                steps += 1;
+                                _this.byId('btn-continue-modal').attr("data-steps", steps);
+                                $("#patient-step").attr("data-step", steps);
+                            }
+                            PatientManagement.VisitsService.List({ Take: 1 }, function (response) {
+                                if (response.TotalCount > 0) {
+                                    elem.find("#visits-box-modal").addClass("bg-green-gradient");
+                                }
+                                else {
+                                    elem.find("#visits-box-modal").addClass("bg-blue-gradient");
+                                    steps += 1;
+                                    _this.byId('btn-continue-modal').attr("data-steps", steps);
+                                    $("#visit-step").attr("data-step", steps);
+                                }
+                                $('#last-step').attr("data-step", steps + 1);
+                            });
+                        });
+                    });
+                });
+                _this.byId('btn-continue-modal').attr("data-current-step", 1);
+                $('#btn-close-hellomodal').mousedown(function (e) {
+                    var dataCurrentStep = Q.parseInteger($('#btn-close-hellomodal').attr("data-reaload-page"));
+                    if (dataCurrentStep === 1) {
+                        window.location.reload();
+                    }
+                });
+                $('.btn-continiue-hellomodal').click(function (e) {
+                    e.preventDefault();
+                    var dataCurrentStep = Q.parseInteger($('.btn-continiue-hellomodal').attr("data-current-step"));
+                    var dataSteps = Q.parseInteger($('.btn-continiue-hellomodal').attr("data-steps"));
+                    var dataNextStep = dataCurrentStep + 1;
+                    var thisElem = $('#helloModal').find("[data-step='" + dataCurrentStep + "']");
+                    var nextElem = $('#helloModal').find("[data-step='" + dataNextStep + "']");
+                    var thisElemId = thisElem.attr("id");
+                    if (!_this.validateFormById(thisElemId))
+                        return;
+                    if (dataCurrentStep < dataSteps) {
+                        $('.btn-continiue-hellomodal').attr("data-current-step", dataNextStep);
+                        if (dataCurrentStep === 1) {
+                            $('.btn-continiue-hellomodal').text(Q.text("Site.HelloModal.ButtonContinue"));
+                        }
+                        if (dataCurrentStep === dataSteps - 1) {
+                            $('.btn-continiue-hellomodal').text(Q.text("Site.HelloModal.ButtonFinnish"));
+                            $('.btn-continiue-hellomodal').removeClass("btn-default");
+                            $('.btn-continiue-hellomodal').addClass("btn-success");
+                            $('#hellomodal-fast-continue').hide(200);
+                        }
+                    }
+                    else {
+                        $('.btn-continiue-hellomodal').hide(400);
+                        $('#btn-close-hellomodal').removeClass("btn-default");
+                        $('#btn-close-hellomodal').addClass("btn-success").text(Q.text("Site.HelloModal.ButtonCloseAndFinnish"));
+                        $('#btn-close-hellomodal').attr("data-reaload-page", 1);
+                    }
+                    thisElem.toggle("slide", function () {
+                        nextElem.toggle("slide");
+                    });
+                });
+                return _this;
+            }
+            HelloModal.prototype.validateFormById = function (thisElemId) {
+                if (thisElemId === "cabinet-step") {
+                    if (!this.formCabinet.ValidateForm()) {
+                        return false;
+                    }
+                    this.formCabinet.SaveEntity();
+                }
+                if (thisElemId === "patient-step") {
+                    if (!this.formPatient.ValidateForm()) {
+                        return false;
+                    }
+                    this.formPatient.SaveEntity();
+                }
+                if (thisElemId === "visit-type-step") {
+                    if (!this.formVisitType.ValidateForm()) {
+                        return false;
+                    }
+                    this.formVisitType.SaveEntity();
+                }
+                if (thisElemId === "visit-step") {
+                    if (!this.formVisit.ValidateForm()) {
+                        return false;
+                    }
+                    this.formVisit.SaveEntity();
+                }
+                return true;
+            };
+            return HelloModal;
+        }(Serenity.TemplatedWidget));
+        PatientManagement.HelloModal = HelloModal;
+    })(PatientManagement = PatientManagement_37.PatientManagement || (PatientManagement_37.PatientManagement = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var Common;
+    (function (Common) {
+        var HelloModalAddCabinetPanel = (function (_super) {
+            __extends(HelloModalAddCabinetPanel, _super);
+            function HelloModalAddCabinetPanel(container) {
+                var _this = _super.call(this, container) || this;
+                _this.form = new Common.HelloModalAddCabinetForm(_this.idPrefix);
+                _this.toolbar.element.text(Q.text("Site.HelloModal.StepCabinetTitle"));
+                return _this;
+            }
+            HelloModalAddCabinetPanel.prototype.getFormKey = function () { return Common.HelloModalAddCabinetForm.formKey; };
+            HelloModalAddCabinetPanel.prototype.getTemplate = function () {
+                // you could also put this in a ChartInDialog.Template.html file. it's here for simplicity.
+                return Q.getTemplate("EntityDialogBoxSolid");
+            };
+            HelloModalAddCabinetPanel.prototype.ValidateForm = function () {
+                return this.validateForm();
+            };
+            HelloModalAddCabinetPanel.prototype.SaveEntity = function () {
+                var cabinet = {};
+                var entity = this.getSaveEntity();
+                cabinet.Name = entity.Name;
+                cabinet.WorkHoursEnd = entity.WorkHoursEnd;
+                cabinet.WorkHoursStart = entity.WorkHoursStart;
+                PatientManagement.PatientManagement.CabinetsService.Create({
+                    Entity: cabinet
+                }, function (response) {
+                    Q.notifySuccess(Q.text("Controls.EntityDialog.SaveSuccessMessage"));
+                    Q.reloadLookup(PatientManagement.PatientManagement.CabinetsRow.lookupKey);
+                    $('#btn-close-hellomodal').attr("data-reaload-page", 1);
+                });
+                return true;
+            };
+            return HelloModalAddCabinetPanel;
+        }(Serenity.PropertyPanel));
+        Common.HelloModalAddCabinetPanel = HelloModalAddCabinetPanel;
+    })(Common = PatientManagement.Common || (PatientManagement.Common = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var Common;
+    (function (Common) {
+        var HelloModalAddPatientPanel = (function (_super) {
+            __extends(HelloModalAddPatientPanel, _super);
+            function HelloModalAddPatientPanel(container) {
+                var _this = _super.call(this, container) || this;
+                _this.form = new Common.HelloModalAddPatientForm(_this.idPrefix);
+                _this.toolbar.element.text(Q.text("Site.HelloModal.StepPatientTitle"));
+                return _this;
+            }
+            HelloModalAddPatientPanel.prototype.getFormKey = function () { return Common.HelloModalAddPatientForm.formKey; };
+            HelloModalAddPatientPanel.prototype.getTemplate = function () {
+                // you could also put this in a ChartInDialog.Template.html file. it's here for simplicity.
+                return Q.getTemplate("EntityDialogBoxSolid");
+            };
+            HelloModalAddPatientPanel.prototype.ValidateForm = function () {
+                return this.validateForm();
+            };
+            HelloModalAddPatientPanel.prototype.SaveEntity = function () {
+                var entity = {};
+                var formEntity = this.getSaveEntity();
+                entity.Name = formEntity.Name;
+                entity.PhoneNumber = formEntity.PhoneNumber;
+                entity.Gender = formEntity.Gender;
+                entity.Email = formEntity.Email;
+                entity.NotifyOnChange = formEntity.NotifyOnChange;
+                PatientManagement.PatientManagement.PatientsService.Create({
+                    Entity: entity
+                }, function (response) {
+                    Q.notifySuccess(Q.text("Controls.EntityDialog.SaveSuccessMessage"));
+                    Q.reloadLookup(PatientManagement.PatientManagement.PatientsRow.lookupKey);
+                });
+                return true;
+            };
+            return HelloModalAddPatientPanel;
+        }(Serenity.PropertyPanel));
+        Common.HelloModalAddPatientPanel = HelloModalAddPatientPanel;
+    })(Common = PatientManagement.Common || (PatientManagement.Common = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var Common;
+    (function (Common) {
+        var HelloModalAddVisitPanel = (function (_super) {
+            __extends(HelloModalAddVisitPanel, _super);
+            function HelloModalAddVisitPanel(container) {
+                var _this = _super.call(this, container) || this;
+                _this.form = new Common.HelloModalAddVisitForm(_this.idPrefix);
+                _this.toolbar.element.text(Q.text("Site.HelloModal.StepVisitTitle"));
+                return _this;
+            }
+            HelloModalAddVisitPanel.prototype.getFormKey = function () { return Common.HelloModalAddVisitForm.formKey; };
+            HelloModalAddVisitPanel.prototype.getTemplate = function () {
+                // you could also put this in a ChartInDialog.Template.html file. it's here for simplicity.
+                return Q.getTemplate("EntityDialogBoxSolid");
+            };
+            HelloModalAddVisitPanel.prototype.ValidateForm = function () {
+                return this.validateForm();
+            };
+            HelloModalAddVisitPanel.prototype.SaveEntity = function () {
+                var entity = {};
+                var formEntity = this.getSaveEntity();
+                entity.PatientId = formEntity.PatientId;
+                entity.VisitTypeId = formEntity.VisitTypeId;
+                entity.CabinetId = formEntity.CabinetId;
+                entity.StartDate = formEntity.StartDate;
+                entity.EndDate = formEntity.EndDate;
+                entity.Description = formEntity.Description;
+                PatientManagement.PatientManagement.VisitsService.Create({
+                    Entity: entity
+                }, function (response) {
+                    Q.notifySuccess(Q.text("Controls.EntityDialog.SaveSuccessMessage"));
+                });
+                return true;
+            };
+            return HelloModalAddVisitPanel;
+        }(Serenity.PropertyPanel));
+        Common.HelloModalAddVisitPanel = HelloModalAddVisitPanel;
+    })(Common = PatientManagement.Common || (PatientManagement.Common = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var Common;
+    (function (Common) {
+        var HelloModalAddVisitTypePanel = (function (_super) {
+            __extends(HelloModalAddVisitTypePanel, _super);
+            function HelloModalAddVisitTypePanel(container) {
+                var _this = _super.call(this, container) || this;
+                _this.form = new Common.HelloModalAddVisitTypeForm(_this.idPrefix);
+                $(".BorderColor input").colorpicker();
+                $(".BackgroundColor input").colorpicker();
+                Serenity.EditorUtils.setReadOnly(_this.form.BorderColor, true);
+                Serenity.EditorUtils.setReadOnly(_this.form.BackgroundColor, true);
+                _this.toolbar.element.text(Q.text("Site.HelloModal.StepVisitTypeTitle"));
+                return _this;
+            }
+            HelloModalAddVisitTypePanel.prototype.getFormKey = function () { return Common.HelloModalAddVisitTypeForm.formKey; };
+            HelloModalAddVisitTypePanel.prototype.getTemplate = function () {
+                // you could also put this in a ChartInDialog.Template.html file. it's here for simplicity.
+                return Q.getTemplate("EntityDialogBoxSolid");
+            };
+            HelloModalAddVisitTypePanel.prototype.ValidateForm = function () {
+                return this.validateForm();
+            };
+            HelloModalAddVisitTypePanel.prototype.SaveEntity = function () {
+                var entity = {};
+                var formEntity = this.getSaveEntity();
+                entity.Name = formEntity.Name;
+                entity.BackgroundColor = formEntity.BackgroundColor;
+                entity.BorderColor = formEntity.BorderColor;
+                PatientManagement.PatientManagement.VisitTypesService.Create({
+                    Entity: entity
+                }, function (response) {
+                    Q.notifySuccess(Q.text("Controls.EntityDialog.SaveSuccessMessage"));
+                    Q.reloadLookup(PatientManagement.PatientManagement.VisitTypesRow.lookupKey);
+                });
+                return true;
+            };
+            return HelloModalAddVisitTypePanel;
+        }(Serenity.PropertyPanel));
+        Common.HelloModalAddVisitTypePanel = HelloModalAddVisitTypePanel;
+    })(Common = PatientManagement.Common || (PatientManagement.Common = {}));
+})(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
 (function (PatientManagement) {
     var BasicProgressDialog = (function (_super) {
@@ -3770,7 +4153,7 @@ var PatientManagement;
 })(PatientManagement || (PatientManagement = {}));
 /// <reference types="jqueryui" />
 var PatientManagement;
-(function (PatientManagement_37) {
+(function (PatientManagement_38) {
     var PatientManagement;
     (function (PatientManagement) {
         var NotificationDropdownMenu = (function (_super) {
@@ -3778,7 +4161,7 @@ var PatientManagement;
             function NotificationDropdownMenu(elem, opt) {
                 var _this = _super.call(this, elem, opt) || this;
                 _this.updateNotifications = function () {
-                    PatientManagement.NotificationsService.ListForDropdown({}, function (resp) {
+                    PatientManagement.NotificationsService.ListForDropdown({ Take: 50 }, function (resp) {
                         _this.byId('NotificationCounterLabel').text(resp.Entities.length);
                         var notifactionList = _this.byId('NotificationDropdownMenuMessages');
                         notifactionList.children().remove();
@@ -3814,8 +4197,11 @@ var PatientManagement;
                 _this.byId('NotificationDropdownMenuFooter').text(Q.text("Site.Layout.NotificationMenuFooter"));
                 var toggleMenuButton = _this.byId('NotificationDropdownMenuToggle');
                 toggleMenuButton.click(function (e) { return _this.openClick(e); });
-                PatientManagement.NotificationsService.CountNotifications({}, function (resp) {
-                    _this.byId('NotificationCounterLabel').text(resp.Count);
+                PatientManagement.NotificationsService.CountNotifications({ Take: 50 }, function (resp) {
+                    var text = resp.Count + "";
+                    if (resp.Count >= 50)
+                        text = text + "+";
+                    _this.byId('NotificationCounterLabel').text(text);
                 });
                 return _this;
             }
@@ -3846,7 +4232,7 @@ var PatientManagement;
             return NotificationDropdownMenu;
         }(Serenity.TemplatedWidget));
         PatientManagement.NotificationDropdownMenu = NotificationDropdownMenu;
-    })(PatientManagement = PatientManagement_37.PatientManagement || (PatientManagement_37.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_38.PatientManagement || (PatientManagement_38.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
 (function (PatientManagement) {
@@ -4512,7 +4898,7 @@ var PatientManagement;
     })(Membership = PatientManagement.Membership || (PatientManagement.Membership = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
-(function (PatientManagement_38) {
+(function (PatientManagement_39) {
     var PatientManagement;
     (function (PatientManagement) {
         var VisitsGrid = (function (_super) {
@@ -4528,7 +4914,7 @@ var PatientManagement;
             VisitsGrid.prototype.getButtons = function () {
                 var _this = this;
                 var buttons = _super.prototype.getButtons.call(this);
-                buttons.push(PatientManagement_38.Common.ExcelExportHelper.createToolButton({
+                buttons.push(PatientManagement_39.Common.ExcelExportHelper.createToolButton({
                     grid: this,
                     hint: 'Export to Excel',
                     title: 'Export to Excel',
@@ -4565,7 +4951,7 @@ var PatientManagement;
             Serenity.Decorators.registerClass()
         ], VisitsGrid);
         PatientManagement.VisitsGrid = VisitsGrid;
-    })(PatientManagement = PatientManagement_38.PatientManagement || (PatientManagement_38.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_39.PatientManagement || (PatientManagement_39.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 /// <reference path="../../../PatientManagement/Visits/VisitsGrid.ts" />
 var PatientManagement;
@@ -4760,7 +5146,7 @@ var PatientManagement;
 })(PatientManagement || (PatientManagement = {}));
 /// <reference types="jqueryui" />
 var PatientManagement;
-(function (PatientManagement_39) {
+(function (PatientManagement_40) {
     var PatientManagement;
     (function (PatientManagement) {
         var OfferDropDownEditor = (function (_super) {
@@ -4786,7 +5172,7 @@ var PatientManagement;
             Serenity.Decorators.registerEditor()
         ], OfferDropDownEditor);
         PatientManagement.OfferDropDownEditor = OfferDropDownEditor;
-    })(PatientManagement = PatientManagement_39.PatientManagement || (PatientManagement_39.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_40.PatientManagement || (PatientManagement_40.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
 (function (PatientManagement) {
@@ -4844,7 +5230,7 @@ var PatientManagement;
     })(Membership = PatientManagement.Membership || (PatientManagement.Membership = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
-(function (PatientManagement_40) {
+(function (PatientManagement_41) {
     var PatientManagement;
     (function (PatientManagement) {
         var ActivityDialog = (function (_super) {
@@ -4866,12 +5252,12 @@ var PatientManagement;
             Serenity.Decorators.responsive()
         ], ActivityDialog);
         PatientManagement.ActivityDialog = ActivityDialog;
-    })(PatientManagement = PatientManagement_40.PatientManagement || (PatientManagement_40.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_41.PatientManagement || (PatientManagement_41.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 /// <reference types="jqueryui" />
 /// <reference types="fullcalendar" />
 var PatientManagement;
-(function (PatientManagement_41) {
+(function (PatientManagement_42) {
     var PatientManagement;
     (function (PatientManagement) {
         var CabinetsDialog = (function (_super) {
@@ -4919,10 +5305,10 @@ var PatientManagement;
             Serenity.Decorators.responsive()
         ], CabinetsDialog);
         PatientManagement.CabinetsDialog = CabinetsDialog;
-    })(PatientManagement = PatientManagement_41.PatientManagement || (PatientManagement_41.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_42.PatientManagement || (PatientManagement_42.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
-(function (PatientManagement_42) {
+(function (PatientManagement_43) {
     var PatientManagement;
     (function (PatientManagement) {
         var CabinetsGrid = (function (_super) {
@@ -4942,10 +5328,33 @@ var PatientManagement;
             Serenity.Decorators.registerClass()
         ], CabinetsGrid);
         PatientManagement.CabinetsGrid = CabinetsGrid;
-    })(PatientManagement = PatientManagement_42.PatientManagement || (PatientManagement_42.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_43.PatientManagement || (PatientManagement_43.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
-(function (PatientManagement_43) {
+(function (PatientManagement_44) {
+    var PatientManagement;
+    (function (PatientManagement) {
+        var CabinetsListFormatter = (function () {
+            function CabinetsListFormatter() {
+            }
+            CabinetsListFormatter.prototype.format = function (ctx) {
+                var idList = ctx.value;
+                if (!idList || !idList.length)
+                    return "";
+                var byId = PatientManagement.CabinetsRow.getLookup().itemById;
+                var z;
+                return idList.map(function (x) { return ((z = byId[x]) ? z.Name : x); }).join(", ");
+            };
+            return CabinetsListFormatter;
+        }());
+        CabinetsListFormatter = __decorate([
+            Serenity.Decorators.registerFormatter()
+        ], CabinetsListFormatter);
+        PatientManagement.CabinetsListFormatter = CabinetsListFormatter;
+    })(PatientManagement = PatientManagement_44.PatientManagement || (PatientManagement_44.PatientManagement = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement_45) {
     var PatientManagement;
     (function (PatientManagement) {
         var UserListFormatter = (function () {
@@ -4955,7 +5364,7 @@ var PatientManagement;
                 var idList = ctx.value;
                 if (!idList || !idList.length)
                     return "";
-                var byId = PatientManagement_43.Administration.UserRow.getLookup().itemById;
+                var byId = PatientManagement_45.Administration.UserRow.getLookup().itemById;
                 var z;
                 return idList.map(function (x) { return ((z = byId[x]) ? z.DisplayName : x); }).join(", ");
             };
@@ -4965,10 +5374,10 @@ var PatientManagement;
             Serenity.Decorators.registerFormatter()
         ], UserListFormatter);
         PatientManagement.UserListFormatter = UserListFormatter;
-    })(PatientManagement = PatientManagement_43.PatientManagement || (PatientManagement_43.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_45.PatientManagement || (PatientManagement_45.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
-(function (PatientManagement_44) {
+(function (PatientManagement_46) {
     var PatientManagement;
     (function (PatientManagement) {
         var CalendarCabinetsEditor = (function (_super) {
@@ -4999,6 +5408,9 @@ var PatientManagement;
                     _this.value = cookie + "";
                 });
                 _this.changeSelect2(function (e) {
+                    if (!_this.value) {
+                        return;
+                    }
                     $.cookie('CabinetPreference', _this.value, {
                         path: Q.Config.applicationPath,
                         expires: 365
@@ -5036,10 +5448,10 @@ var PatientManagement;
             Serenity.Decorators.registerEditor()
         ], CalendarCabinetsEditor);
         PatientManagement.CalendarCabinetsEditor = CalendarCabinetsEditor;
-    })(PatientManagement = PatientManagement_44.PatientManagement || (PatientManagement_44.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_46.PatientManagement || (PatientManagement_46.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
-(function (PatientManagement_45) {
+(function (PatientManagement_47) {
     var PatientManagement;
     (function (PatientManagement) {
         var PatientsDialog = (function (_super) {
@@ -5106,7 +5518,7 @@ var PatientManagement;
                 _this.patientValidator = _this.byId("LifeStyleForm").validate(Q.validateOptions({}));
                 _this.patientValidator = _this.byId("ActivityForm").validate(Q.validateOptions({}));
                 _this.byId('NoteList').closest('.field').hide().end().appendTo(_this.byId('TabNotes'));
-                PatientManagement_45.DialogUtils.pendingChangesConfirmation(_this.element, function () { return _this.getSaveState() != _this.loadedState; });
+                PatientManagement_47.DialogUtils.pendingChangesConfirmation(_this.element, function () { return _this.getSaveState() != _this.loadedState; });
                 //Add button for saving patient health form
                 // ReSharper disable once WrongExpressionStatement
                 new Serenity.Toolbar(_this.byId("PatientHealthToolbar"), {
@@ -5255,11 +5667,11 @@ var PatientManagement;
             Serenity.Decorators.responsive()
         ], PatientsDialog);
         PatientManagement.PatientsDialog = PatientsDialog;
-    })(PatientManagement = PatientManagement_45.PatientManagement || (PatientManagement_45.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_47.PatientManagement || (PatientManagement_47.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 /// <reference path="../Patients/PatientsDialog.ts" />
 var PatientManagement;
-(function (PatientManagement_46) {
+(function (PatientManagement_48) {
     var PatientManagement;
     (function (PatientManagement) {
         var CalendarPatientDialog = (function (_super) {
@@ -5280,11 +5692,11 @@ var PatientManagement;
             Serenity.Decorators.registerClass()
         ], CalendarPatientDialog);
         PatientManagement.CalendarPatientDialog = CalendarPatientDialog;
-    })(PatientManagement = PatientManagement_46.PatientManagement || (PatientManagement_46.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_48.PatientManagement || (PatientManagement_48.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 /// <reference types="jquery" />
 var PatientManagement;
-(function (PatientManagement_47) {
+(function (PatientManagement_49) {
     var PatientManagement;
     (function (PatientManagement) {
         var VisitsDialog = (function (_super) {
@@ -5351,13 +5763,13 @@ var PatientManagement;
             Serenity.Decorators.responsive()
         ], VisitsDialog);
         PatientManagement.VisitsDialog = VisitsDialog;
-    })(PatientManagement = PatientManagement_47.PatientManagement || (PatientManagement_47.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_49.PatientManagement || (PatientManagement_49.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 /// <reference path="../Visits/VisitsDialog.ts" />
 /// <reference types="jqueryui" />
 /// <reference types="fullcalendar" />
 var PatientManagement;
-(function (PatientManagement_48) {
+(function (PatientManagement_50) {
     var PatientManagement;
     (function (PatientManagement) {
         var CalendarVisitsDialog = (function (_super) {
@@ -5485,11 +5897,11 @@ var PatientManagement;
             Serenity.Decorators.registerClass()
         ], CalendarVisitsDialog);
         PatientManagement.CalendarVisitsDialog = CalendarVisitsDialog;
-    })(PatientManagement = PatientManagement_48.PatientManagement || (PatientManagement_48.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_50.PatientManagement || (PatientManagement_50.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 /// <reference path="../Visits/VisitsGrid.ts" />
 var PatientManagement;
-(function (PatientManagement_49) {
+(function (PatientManagement_51) {
     var PatientManagement;
     (function (PatientManagement) {
         var CalendarVisitsGrid = (function (_super) {
@@ -5507,10 +5919,10 @@ var PatientManagement;
             Serenity.Decorators.registerClass()
         ], CalendarVisitsGrid);
         PatientManagement.CalendarVisitsGrid = CalendarVisitsGrid;
-    })(PatientManagement = PatientManagement_49.PatientManagement || (PatientManagement_49.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_51.PatientManagement || (PatientManagement_51.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
-(function (PatientManagement_50) {
+(function (PatientManagement_52) {
     var PatientManagement;
     (function (PatientManagement) {
         var LifeStylesDialog = (function (_super) {
@@ -5532,10 +5944,10 @@ var PatientManagement;
             Serenity.Decorators.responsive()
         ], LifeStylesDialog);
         PatientManagement.LifeStylesDialog = LifeStylesDialog;
-    })(PatientManagement = PatientManagement_50.PatientManagement || (PatientManagement_50.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_52.PatientManagement || (PatientManagement_52.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
-(function (PatientManagement_51) {
+(function (PatientManagement_53) {
     var PatientManagement;
     (function (PatientManagement) {
         var LifeStylesGrid = (function (_super) {
@@ -5554,10 +5966,10 @@ var PatientManagement;
             Serenity.Decorators.registerClass()
         ], LifeStylesGrid);
         PatientManagement.LifeStylesGrid = LifeStylesGrid;
-    })(PatientManagement = PatientManagement_51.PatientManagement || (PatientManagement_51.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_53.PatientManagement || (PatientManagement_53.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
-(function (PatientManagement_52) {
+(function (PatientManagement_54) {
     var PatientManagement;
     (function (PatientManagement) {
         var NotesDialog = (function (_super) {
@@ -5606,10 +6018,10 @@ var PatientManagement;
             Serenity.Decorators.registerClass()
         ], NotesDialog);
         PatientManagement.NotesDialog = NotesDialog;
-    })(PatientManagement = PatientManagement_52.PatientManagement || (PatientManagement_52.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_54.PatientManagement || (PatientManagement_54.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
-(function (PatientManagement_53) {
+(function (PatientManagement_55) {
     var PatientManagement;
     (function (PatientManagement) {
         var NotesEditor = (function (_super) {
@@ -5665,7 +6077,7 @@ var PatientManagement;
                     _this.items = _this.items || [];
                     Q.insert(_this.items, 0, {
                         Text: text,
-                        InsertUserDisplayName: PatientManagement_53.Authorization.userDefinition.DisplayName,
+                        InsertUserDisplayName: PatientManagement_55.Authorization.userDefinition.DisplayName,
                         InsertDate: Q.formatISODateTimeUTC(new Date())
                     });
                     _this.updateContent();
@@ -5738,10 +6150,10 @@ var PatientManagement;
             Serenity.Decorators.element("<div/>")
         ], NotesEditor);
         PatientManagement.NotesEditor = NotesEditor;
-    })(PatientManagement = PatientManagement_53.PatientManagement || (PatientManagement_53.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_55.PatientManagement || (PatientManagement_55.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
-(function (PatientManagement_54) {
+(function (PatientManagement_56) {
     var PatientManagement;
     (function (PatientManagement) {
         var NotificationsUserImageFormatter = (function () {
@@ -5778,10 +6190,10 @@ var PatientManagement;
             Serenity.Decorators.registerFormatter()
         ], NotificationsUserImageFormatter);
         PatientManagement.NotificationsUserImageFormatter = NotificationsUserImageFormatter;
-    })(PatientManagement = PatientManagement_54.PatientManagement || (PatientManagement_54.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_56.PatientManagement || (PatientManagement_56.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
-(function (PatientManagement_55) {
+(function (PatientManagement_57) {
     var PatientManagement;
     (function (PatientManagement) {
         var NotificationsDialog = (function (_super) {
@@ -5803,10 +6215,10 @@ var PatientManagement;
             Serenity.Decorators.responsive()
         ], NotificationsDialog);
         PatientManagement.NotificationsDialog = NotificationsDialog;
-    })(PatientManagement = PatientManagement_55.PatientManagement || (PatientManagement_55.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_57.PatientManagement || (PatientManagement_57.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
-(function (PatientManagement_56) {
+(function (PatientManagement_58) {
     var PatientManagement;
     (function (PatientManagement) {
         var NotificationsGrid = (function (_super) {
@@ -5823,7 +6235,7 @@ var PatientManagement;
                 var _this = this;
                 var buttons = _super.prototype.getButtons.call(this);
                 buttons.splice(Q.indexOf(buttons, function (x) { return x.cssClass == "add-button"; }), 1);
-                buttons.push(PatientManagement_56.Common.ExcelExportHelper.createToolButton({
+                buttons.push(PatientManagement_58.Common.ExcelExportHelper.createToolButton({
                     grid: this,
                     hint: 'Export to Excel',
                     title: 'Export to Excel',
@@ -5844,10 +6256,10 @@ var PatientManagement;
             Serenity.Decorators.registerClass()
         ], NotificationsGrid);
         PatientManagement.NotificationsGrid = NotificationsGrid;
-    })(PatientManagement = PatientManagement_56.PatientManagement || (PatientManagement_56.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_58.PatientManagement || (PatientManagement_58.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
-(function (PatientManagement_57) {
+(function (PatientManagement_59) {
     var PatientManagement;
     (function (PatientManagement) {
         var PatientHealthDialog = (function (_super) {
@@ -5869,10 +6281,10 @@ var PatientManagement;
             Serenity.Decorators.responsive()
         ], PatientHealthDialog);
         PatientManagement.PatientHealthDialog = PatientHealthDialog;
-    })(PatientManagement = PatientManagement_57.PatientManagement || (PatientManagement_57.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_59.PatientManagement || (PatientManagement_59.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
-(function (PatientManagement_58) {
+(function (PatientManagement_60) {
     var PatientManagement;
     (function (PatientManagement) {
         var PatientHealthGrid = (function (_super) {
@@ -5891,10 +6303,10 @@ var PatientManagement;
             Serenity.Decorators.registerClass()
         ], PatientHealthGrid);
         PatientManagement.PatientHealthGrid = PatientHealthGrid;
-    })(PatientManagement = PatientManagement_58.PatientManagement || (PatientManagement_58.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_60.PatientManagement || (PatientManagement_60.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
-(function (PatientManagement_59) {
+(function (PatientManagement_61) {
     var PatientManagement;
     (function (PatientManagement) {
         var PatientsFileUploadsDialog = (function (_super) {
@@ -5916,11 +6328,11 @@ var PatientManagement;
             Serenity.Decorators.responsive()
         ], PatientsFileUploadsDialog);
         PatientManagement.PatientsFileUploadsDialog = PatientsFileUploadsDialog;
-    })(PatientManagement = PatientManagement_59.PatientManagement || (PatientManagement_59.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_61.PatientManagement || (PatientManagement_61.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 /// <reference path="../PatientsFileUploads/PatientsFileUploadsDialog.ts" />
 var PatientManagement;
-(function (PatientManagement_60) {
+(function (PatientManagement_62) {
     var PatientManagement;
     (function (PatientManagement) {
         var FIleUploadsForPatientDialog = (function (_super) {
@@ -5938,10 +6350,10 @@ var PatientManagement;
             Serenity.Decorators.registerClass()
         ], FIleUploadsForPatientDialog);
         PatientManagement.FIleUploadsForPatientDialog = FIleUploadsForPatientDialog;
-    })(PatientManagement = PatientManagement_60.PatientManagement || (PatientManagement_60.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_62.PatientManagement || (PatientManagement_62.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
-(function (PatientManagement_61) {
+(function (PatientManagement_63) {
     var PatientManagement;
     (function (PatientManagement) {
         var PatientsFileUploadsGrid = (function (_super) {
@@ -5960,11 +6372,11 @@ var PatientManagement;
             Serenity.Decorators.registerClass()
         ], PatientsFileUploadsGrid);
         PatientManagement.PatientsFileUploadsGrid = PatientsFileUploadsGrid;
-    })(PatientManagement = PatientManagement_61.PatientManagement || (PatientManagement_61.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_63.PatientManagement || (PatientManagement_63.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 /// <reference path="../PatientsFileUploads/PatientsFileUploadsGrid.ts"/>
 var PatientManagement;
-(function (PatientManagement_62) {
+(function (PatientManagement_64) {
     var PatientManagement;
     (function (PatientManagement) {
         var FIleUploadsForPatientGrid = (function (_super) {
@@ -6011,10 +6423,10 @@ var PatientManagement;
             Serenity.Decorators.registerClass()
         ], FIleUploadsForPatientGrid);
         PatientManagement.FIleUploadsForPatientGrid = FIleUploadsForPatientGrid;
-    })(PatientManagement = PatientManagement_62.PatientManagement || (PatientManagement_62.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_64.PatientManagement || (PatientManagement_64.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
-(function (PatientManagement_63) {
+(function (PatientManagement_65) {
     var PatientManagement;
     (function (PatientManagement) {
         var PatientsFormatter = (function () {
@@ -6056,10 +6468,10 @@ var PatientManagement;
             Serenity.Decorators.registerFormatter()
         ], PatientsPhoneFormatter);
         PatientManagement.PatientsPhoneFormatter = PatientsPhoneFormatter;
-    })(PatientManagement = PatientManagement_63.PatientManagement || (PatientManagement_63.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_65.PatientManagement || (PatientManagement_65.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
-(function (PatientManagement_64) {
+(function (PatientManagement_66) {
     var PatientManagement;
     (function (PatientManagement) {
         var PatientsGrid = (function (_super) {
@@ -6076,7 +6488,7 @@ var PatientManagement;
             PatientsGrid.prototype.getButtons = function () {
                 var _this = this;
                 var buttons = _super.prototype.getButtons.call(this);
-                buttons.push(PatientManagement_64.Common.ExcelExportHelper.createToolButton({
+                buttons.push(PatientManagement_66.Common.ExcelExportHelper.createToolButton({
                     grid: this,
                     hint: 'Export to Excel',
                     title: 'Export to Excel',
@@ -6092,11 +6504,11 @@ var PatientManagement;
             Serenity.Decorators.registerClass()
         ], PatientsGrid);
         PatientManagement.PatientsGrid = PatientsGrid;
-    })(PatientManagement = PatientManagement_64.PatientManagement || (PatientManagement_64.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_66.PatientManagement || (PatientManagement_66.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 /// <reference path="../Visits/VisitsDialog.ts" />
 var PatientManagement;
-(function (PatientManagement_65) {
+(function (PatientManagement_67) {
     var PatientManagement;
     (function (PatientManagement) {
         var PatientVisitsDialog = (function (_super) {
@@ -6114,11 +6526,11 @@ var PatientManagement;
             Serenity.Decorators.registerClass()
         ], PatientVisitsDialog);
         PatientManagement.PatientVisitsDialog = PatientVisitsDialog;
-    })(PatientManagement = PatientManagement_65.PatientManagement || (PatientManagement_65.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_67.PatientManagement || (PatientManagement_67.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 /// <reference path="../Visits/VisitsGrid.ts" />
 var PatientManagement;
-(function (PatientManagement_66) {
+(function (PatientManagement_68) {
     var PatientManagement;
     (function (PatientManagement) {
         var PatientVisitsGrid = (function (_super) {
@@ -6165,10 +6577,10 @@ var PatientManagement;
             Serenity.Decorators.registerClass()
         ], PatientVisitsGrid);
         PatientManagement.PatientVisitsGrid = PatientVisitsGrid;
-    })(PatientManagement = PatientManagement_66.PatientManagement || (PatientManagement_66.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_68.PatientManagement || (PatientManagement_68.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
-(function (PatientManagement_67) {
+(function (PatientManagement_69) {
     var PatientManagement;
     (function (PatientManagement) {
         var UserNotificationsDialog = (function (_super) {
@@ -6189,10 +6601,10 @@ var PatientManagement;
             Serenity.Decorators.responsive()
         ], UserNotificationsDialog);
         PatientManagement.UserNotificationsDialog = UserNotificationsDialog;
-    })(PatientManagement = PatientManagement_67.PatientManagement || (PatientManagement_67.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_69.PatientManagement || (PatientManagement_69.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
-(function (PatientManagement_68) {
+(function (PatientManagement_70) {
     var PatientManagement;
     (function (PatientManagement) {
         var UserNotificationsGrid = (function (_super) {
@@ -6216,10 +6628,68 @@ var PatientManagement;
             Serenity.Decorators.registerClass()
         ], UserNotificationsGrid);
         PatientManagement.UserNotificationsGrid = UserNotificationsGrid;
-    })(PatientManagement = PatientManagement_68.PatientManagement || (PatientManagement_68.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_70.PatientManagement || (PatientManagement_70.PatientManagement = {}));
+})(PatientManagement || (PatientManagement = {}));
+/// <reference types="jqueryui" />
+/// <returns type="jquery.colorpicker"></returns>
+var PatientManagement;
+(function (PatientManagement_71) {
+    var PatientManagement;
+    (function (PatientManagement) {
+        var VisitTypesDialog = (function (_super) {
+            __extends(VisitTypesDialog, _super);
+            function VisitTypesDialog() {
+                var _this = _super !== null && _super.apply(this, arguments) || this;
+                _this.form = new PatientManagement.VisitTypesForm(_this.idPrefix);
+                return _this;
+            }
+            VisitTypesDialog.prototype.getFormKey = function () { return PatientManagement.VisitTypesForm.formKey; };
+            VisitTypesDialog.prototype.getIdProperty = function () { return PatientManagement.VisitTypesRow.idProperty; };
+            VisitTypesDialog.prototype.getLocalTextPrefix = function () { return PatientManagement.VisitTypesRow.localTextPrefix; };
+            VisitTypesDialog.prototype.getNameProperty = function () { return PatientManagement.VisitTypesRow.nameProperty; };
+            VisitTypesDialog.prototype.getService = function () { return PatientManagement.VisitTypesService.baseUrl; };
+            VisitTypesDialog.prototype.loadEntity = function (entity) {
+                _super.prototype.loadEntity.call(this, entity);
+                $(".BorderColor input").colorpicker();
+                $(".BackgroundColor input").colorpicker();
+                Serenity.EditorUtils.setReadOnly(this.form.BorderColor, true);
+                Serenity.EditorUtils.setReadOnly(this.form.BackgroundColor, true);
+            };
+            return VisitTypesDialog;
+        }(Serenity.EntityDialog));
+        VisitTypesDialog = __decorate([
+            Serenity.Decorators.registerClass(),
+            Serenity.Decorators.responsive()
+        ], VisitTypesDialog);
+        PatientManagement.VisitTypesDialog = VisitTypesDialog;
+    })(PatientManagement = PatientManagement_71.PatientManagement || (PatientManagement_71.PatientManagement = {}));
+})(PatientManagement || (PatientManagement = {}));
+/// <reference path="../VisitTypes/VisitTypesDialog.ts" />
+var PatientManagement;
+(function (PatientManagement_72) {
+    var PatientManagement;
+    (function (PatientManagement) {
+        var NewVisitTypeDialog = (function (_super) {
+            __extends(NewVisitTypeDialog, _super);
+            function NewVisitTypeDialog() {
+                return _super !== null && _super.apply(this, arguments) || this;
+            }
+            NewVisitTypeDialog.prototype.onSaveSuccess = function (response) {
+                location.reload();
+            };
+            NewVisitTypeDialog.prototype.onDeleteSuccess = function (response) {
+                location.reload();
+            };
+            return NewVisitTypeDialog;
+        }(PatientManagement.VisitTypesDialog));
+        NewVisitTypeDialog = __decorate([
+            Serenity.Decorators.registerClass()
+        ], NewVisitTypeDialog);
+        PatientManagement.NewVisitTypeDialog = NewVisitTypeDialog;
+    })(PatientManagement = PatientManagement_72.PatientManagement || (PatientManagement_72.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
-(function (PatientManagement_69) {
+(function (PatientManagement_73) {
     var PatientManagement;
     (function (PatientManagement) {
         var VisitsTypesFormatter = (function () {
@@ -6254,45 +6724,10 @@ var PatientManagement;
             Serenity.Decorators.registerFormatter([Serenity.ISlickFormatter, Serenity.IInitializeColumn])
         ], VisitsTypesFormatter);
         PatientManagement.VisitsTypesFormatter = VisitsTypesFormatter;
-    })(PatientManagement = PatientManagement_69.PatientManagement || (PatientManagement_69.PatientManagement = {}));
-})(PatientManagement || (PatientManagement = {}));
-/// <reference types="jqueryui" />
-/// <returns type="jquery.colorpicker"></returns>
-var PatientManagement;
-(function (PatientManagement_70) {
-    var PatientManagement;
-    (function (PatientManagement) {
-        var VisitTypesDialog = (function (_super) {
-            __extends(VisitTypesDialog, _super);
-            function VisitTypesDialog() {
-                var _this = _super !== null && _super.apply(this, arguments) || this;
-                _this.form = new PatientManagement.VisitTypesForm(_this.idPrefix);
-                return _this;
-            }
-            VisitTypesDialog.prototype.getFormKey = function () { return PatientManagement.VisitTypesForm.formKey; };
-            VisitTypesDialog.prototype.getIdProperty = function () { return PatientManagement.VisitTypesRow.idProperty; };
-            VisitTypesDialog.prototype.getLocalTextPrefix = function () { return PatientManagement.VisitTypesRow.localTextPrefix; };
-            VisitTypesDialog.prototype.getNameProperty = function () { return PatientManagement.VisitTypesRow.nameProperty; };
-            VisitTypesDialog.prototype.getService = function () { return PatientManagement.VisitTypesService.baseUrl; };
-            VisitTypesDialog.prototype.loadEntity = function (entity) {
-                _super.prototype.loadEntity.call(this, entity);
-                console.log("entity loadded");
-                $(".BorderColor input").colorpicker();
-                $(".BackgroundColor input").colorpicker();
-                Serenity.EditorUtils.setReadOnly(this.form.BorderColor, true);
-                Serenity.EditorUtils.setReadOnly(this.form.BackgroundColor, true);
-            };
-            return VisitTypesDialog;
-        }(Serenity.EntityDialog));
-        VisitTypesDialog = __decorate([
-            Serenity.Decorators.registerClass(),
-            Serenity.Decorators.responsive()
-        ], VisitTypesDialog);
-        PatientManagement.VisitTypesDialog = VisitTypesDialog;
-    })(PatientManagement = PatientManagement_70.PatientManagement || (PatientManagement_70.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_73.PatientManagement || (PatientManagement_73.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
-(function (PatientManagement_71) {
+(function (PatientManagement_74) {
     var PatientManagement;
     (function (PatientManagement) {
         var VisitTypesGrid = (function (_super) {
@@ -6312,7 +6747,7 @@ var PatientManagement;
             Serenity.Decorators.registerClass()
         ], VisitTypesGrid);
         PatientManagement.VisitTypesGrid = VisitTypesGrid;
-    })(PatientManagement = PatientManagement_71.PatientManagement || (PatientManagement_71.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_74.PatientManagement || (PatientManagement_74.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 /// <reference types="jqueryui" />
 var PatientManagement;
@@ -6350,68 +6785,5 @@ var PatientManagement;
         Serenity.Decorators.registerClass()
     ], VisiTypesBottomLeftMenu);
     PatientManagement.VisiTypesBottomLeftMenu = VisiTypesBottomLeftMenu;
-})(PatientManagement || (PatientManagement = {}));
-var PatientManagement;
-(function (PatientManagement) {
-    var Membership;
-    (function (Membership) {
-        var EditUserProfileForm = (function (_super) {
-            __extends(EditUserProfileForm, _super);
-            function EditUserProfileForm() {
-                return _super !== null && _super.apply(this, arguments) || this;
-            }
-            return EditUserProfileForm;
-        }(Serenity.PrefixedContext));
-        EditUserProfileForm.formKey = 'Membership.EditUserProfile';
-        Membership.EditUserProfileForm = EditUserProfileForm;
-        [['DisplayName', function () { return Serenity.StringEditor; }], ['Email', function () { return Serenity.EmailEditor; }], ['PhoneNumber', function () { return Serenity.StringEditor; }], ['WebSite', function () { return Serenity.StringEditor; }], ['UserImage', function () { return Serenity.ImageUploadEditor; }], ['EmailSignature', function () { return Serenity.HtmlContentEditor; }]].forEach(function (x) { return Object.defineProperty(EditUserProfileForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
-    })(Membership = PatientManagement.Membership || (PatientManagement.Membership = {}));
-})(PatientManagement || (PatientManagement = {}));
-/// <reference path="../VisitTypes/VisitTypesDialog.ts" />
-var PatientManagement;
-(function (PatientManagement_72) {
-    var PatientManagement;
-    (function (PatientManagement) {
-        var NewVisitTypeDialog = (function (_super) {
-            __extends(NewVisitTypeDialog, _super);
-            function NewVisitTypeDialog() {
-                return _super !== null && _super.apply(this, arguments) || this;
-            }
-            NewVisitTypeDialog.prototype.onSaveSuccess = function (response) {
-                location.reload();
-            };
-            NewVisitTypeDialog.prototype.onDeleteSuccess = function (response) {
-                location.reload();
-            };
-            return NewVisitTypeDialog;
-        }(PatientManagement.VisitTypesDialog));
-        NewVisitTypeDialog = __decorate([
-            Serenity.Decorators.registerClass()
-        ], NewVisitTypeDialog);
-        PatientManagement.NewVisitTypeDialog = NewVisitTypeDialog;
-    })(PatientManagement = PatientManagement_72.PatientManagement || (PatientManagement_72.PatientManagement = {}));
-})(PatientManagement || (PatientManagement = {}));
-var PatientManagement;
-(function (PatientManagement_73) {
-    var PatientManagement;
-    (function (PatientManagement) {
-        var CabinetsListFormatter = (function () {
-            function CabinetsListFormatter() {
-            }
-            CabinetsListFormatter.prototype.format = function (ctx) {
-                var idList = ctx.value;
-                if (!idList || !idList.length)
-                    return "";
-                var byId = PatientManagement.CabinetsRow.getLookup().itemById;
-                var z;
-                return idList.map(function (x) { return ((z = byId[x]) ? z.Name : x); }).join(", ");
-            };
-            return CabinetsListFormatter;
-        }());
-        CabinetsListFormatter = __decorate([
-            Serenity.Decorators.registerFormatter()
-        ], CabinetsListFormatter);
-        PatientManagement.CabinetsListFormatter = CabinetsListFormatter;
-    })(PatientManagement = PatientManagement_73.PatientManagement || (PatientManagement_73.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 //# sourceMappingURL=PatientManagement.Web.js.map

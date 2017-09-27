@@ -1138,6 +1138,84 @@ declare namespace PatientManagement.Administration {
         }
     }
 }
+declare namespace PatientManagement.Common {
+    class HelloModalAddCabinetForm extends Serenity.PrefixedContext {
+        static formKey: string;
+    }
+    interface HelloModalAddCabinetForm {
+        Name: Serenity.StringEditor;
+        WorkHoursStart: Serenity.TimeEditor;
+        WorkHoursEnd: Serenity.TimeEditor;
+    }
+}
+declare namespace PatientManagement.Common {
+    interface HelloModalAddCabinetRequest extends Serenity.ServiceRequest {
+        Name?: string;
+        WorkHoursStart?: number;
+        WorkHoursEnd?: number;
+    }
+}
+declare namespace PatientManagement.Common {
+    class HelloModalAddPatientForm extends Serenity.PrefixedContext {
+        static formKey: string;
+    }
+    interface HelloModalAddPatientForm {
+        Name: Serenity.StringEditor;
+        Gender: Serenity.EnumEditor;
+        PhoneNumber: Serenity.StringEditor;
+        Email: Serenity.EmailEditor;
+        NotifyOnChange: BsSwitchEditor;
+    }
+}
+declare namespace PatientManagement.Common {
+    interface HelloModalAddPatientRequest extends Serenity.ServiceRequest {
+        Name?: string;
+        Gender?: number;
+        PhoneNumber?: string;
+        Email?: string;
+        NotifyOnChange?: boolean;
+    }
+}
+declare namespace PatientManagement.Common {
+    class HelloModalAddVisitForm extends Serenity.PrefixedContext {
+        static formKey: string;
+    }
+    interface HelloModalAddVisitForm {
+        PatientId: Serenity.LookupEditor;
+        VisitTypeId: Serenity.LookupEditor;
+        CabinetId: Serenity.LookupEditor;
+        StartDate: Serenity.DateTimeEditor;
+        EndDate: Serenity.DateTimeEditor;
+        Description: Serenity.TextAreaEditor;
+    }
+}
+declare namespace PatientManagement.Common {
+    interface HelloModalAddVisitRequest extends Serenity.ServiceRequest {
+        PatientId?: number;
+        VisitTypeId?: number;
+        CabinetId?: number;
+        StartDate?: string;
+        EndDate?: string;
+        Description?: string;
+    }
+}
+declare namespace PatientManagement.Common {
+    class HelloModalAddVisitTypeForm extends Serenity.PrefixedContext {
+        static formKey: string;
+    }
+    interface HelloModalAddVisitTypeForm {
+        Name: Serenity.StringEditor;
+        BorderColor: Serenity.StringEditor;
+        BackgroundColor: Serenity.StringEditor;
+    }
+}
+declare namespace PatientManagement.Common {
+    interface HelloModalAddVisitTypeRequest extends Serenity.ServiceRequest {
+        Name?: string;
+        BorderColor?: string;
+        BackgroundColor?: string;
+    }
+}
 declare namespace PatientManagement.Common.Pages {
     interface UploadResponse extends Serenity.ServiceResponse {
         TemporaryFile?: string;
@@ -1257,6 +1335,19 @@ declare namespace PatientManagement.Membership {
         TenantImage?: string;
         OverrideUsersEmailSignature?: boolean;
         TenantEmailSignature?: string;
+    }
+}
+declare namespace PatientManagement.Membership {
+    class EditUserProfileForm extends Serenity.PrefixedContext {
+        static formKey: string;
+    }
+    interface EditUserProfileForm {
+        DisplayName: Serenity.StringEditor;
+        Email: Serenity.EmailEditor;
+        PhoneNumber: Serenity.StringEditor;
+        WebSite: Serenity.StringEditor;
+        UserImage: Serenity.ImageUploadEditor;
+        EmailSignature: Serenity.HtmlContentEditor;
     }
 }
 declare namespace PatientManagement.Membership {
@@ -2078,6 +2169,12 @@ declare namespace PatientManagement.PatientManagement {
         }
     }
 }
+declare namespace PatientManagement.PatientManagement {
+    interface WorkHours {
+        start?: string;
+        end?: string;
+    }
+}
 declare namespace PatientManagement {
     interface ScriptUserDefinition {
         UserId?: number;
@@ -2472,6 +2569,56 @@ declare namespace PatientManagement.LanguageList {
 }
 declare namespace PatientManagement.ScriptInitialization {
 }
+declare namespace PatientManagement.PatientManagement {
+    class HelloModal extends Serenity.TemplatedWidget<any> {
+        private formCabinet;
+        private formPatient;
+        private formVisitType;
+        private formVisit;
+        constructor(elem: JQuery, opt: {});
+        protected validateFormById(thisElemId: any): boolean;
+    }
+}
+declare namespace PatientManagement.Common {
+    class HelloModalAddCabinetPanel extends Serenity.PropertyPanel<HelloModalAddCabinetRequest, any> {
+        protected getFormKey(): string;
+        private form;
+        constructor(container: JQuery);
+        protected getTemplate(): any;
+        ValidateForm(): boolean;
+        SaveEntity(): boolean;
+    }
+}
+declare namespace PatientManagement.Common {
+    class HelloModalAddPatientPanel extends Serenity.PropertyPanel<HelloModalAddPatientRequest, any> {
+        protected getFormKey(): string;
+        private form;
+        constructor(container: JQuery);
+        protected getTemplate(): any;
+        ValidateForm(): boolean;
+        SaveEntity(): boolean;
+    }
+}
+declare namespace PatientManagement.Common {
+    class HelloModalAddVisitPanel extends Serenity.PropertyPanel<HelloModalAddVisitRequest, any> {
+        protected getFormKey(): string;
+        private form;
+        constructor(container: JQuery);
+        protected getTemplate(): any;
+        ValidateForm(): boolean;
+        SaveEntity(): boolean;
+    }
+}
+declare namespace PatientManagement.Common {
+    class HelloModalAddVisitTypePanel extends Serenity.PropertyPanel<HelloModalAddVisitTypeRequest, any> {
+        protected getFormKey(): string;
+        private form;
+        constructor(container: JQuery);
+        protected getTemplate(): any;
+        ValidateForm(): boolean;
+        SaveEntity(): boolean;
+    }
+}
 declare namespace PatientManagement {
     class BasicProgressDialog extends Serenity.TemplatedDialog<any> {
         constructor();
@@ -2855,6 +3002,11 @@ declare namespace PatientManagement.PatientManagement {
     }
 }
 declare namespace PatientManagement.PatientManagement {
+    class CabinetsListFormatter implements Slick.Formatter {
+        format(ctx: Slick.FormatterContext): string;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
     class UserListFormatter implements Slick.Formatter {
         format(ctx: Slick.FormatterContext): string;
     }
@@ -3131,14 +3283,6 @@ declare namespace PatientManagement.PatientManagement {
     }
 }
 declare namespace PatientManagement.PatientManagement {
-    class VisitsTypesFormatter implements Slick.Formatter {
-        format(ctx: Slick.FormatterContext): string;
-        backgroundProperty: string;
-        borderProperty: string;
-        initializeColumn(column: Slick.Column): void;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
     class VisitTypesDialog extends Serenity.EntityDialog<VisitTypesRow, any> {
         protected getFormKey(): string;
         protected getIdProperty(): string;
@@ -3147,6 +3291,20 @@ declare namespace PatientManagement.PatientManagement {
         protected getService(): string;
         protected form: VisitTypesForm;
         loadEntity(entity: VisitTypesRow): void;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class NewVisitTypeDialog extends PatientManagement.VisitTypesDialog {
+        protected onSaveSuccess(response: Serenity.SaveResponse): void;
+        protected onDeleteSuccess(response: Serenity.DeleteResponse): void;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class VisitsTypesFormatter implements Slick.Formatter {
+        format(ctx: Slick.FormatterContext): string;
+        backgroundProperty: string;
+        borderProperty: string;
+        initializeColumn(column: Slick.Column): void;
     }
 }
 declare namespace PatientManagement.PatientManagement {
@@ -3163,35 +3321,5 @@ declare namespace PatientManagement.PatientManagement {
 declare namespace PatientManagement {
     class VisiTypesBottomLeftMenu extends Serenity.Widget<any> {
         constructor(elem: JQuery, opt: {});
-    }
-}
-declare namespace PatientManagement.Membership {
-    class EditUserProfileForm extends Serenity.PrefixedContext {
-        static formKey: string;
-    }
-    interface EditUserProfileForm {
-        DisplayName: Serenity.StringEditor;
-        Email: Serenity.EmailEditor;
-        PhoneNumber: Serenity.StringEditor;
-        WebSite: Serenity.StringEditor;
-        UserImage: Serenity.ImageUploadEditor;
-        EmailSignature: Serenity.HtmlContentEditor;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class NewVisitTypeDialog extends PatientManagement.VisitTypesDialog {
-        protected onSaveSuccess(response: Serenity.SaveResponse): void;
-        protected onDeleteSuccess(response: Serenity.DeleteResponse): void;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class CabinetsListFormatter implements Slick.Formatter {
-        format(ctx: Slick.FormatterContext): string;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    interface WorkHours {
-        start?: string;
-        end?: string;
     }
 }

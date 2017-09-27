@@ -16,7 +16,6 @@ namespace PatientManagement.PatientManagement {
 
         loadEntity(entity: VisitTypesRow) {
             super.loadEntity(entity);
-            console.log("entity loadded");
 
             $(".BorderColor input").colorpicker();
             $(".BackgroundColor input").colorpicker();

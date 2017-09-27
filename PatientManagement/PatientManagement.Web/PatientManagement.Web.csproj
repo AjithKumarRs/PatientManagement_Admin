@@ -52,8 +52,10 @@
     <Content Include="wwwroot\Scripts\serenity\Serenity.Script.UI.es5.js" />
     <Content Include="wwwroot\Scripts\site\FullCalendarExtensions.js" />
     <EmbeddedResource Include="Views\Templates\PropertyDialog.Template.html" CopyToPublishDirectory="PreserveNewest" />
+    <EmbeddedResource Include="Views\Templates\HelloModal.Template.html" CopyToPublishDirectory="PreserveNewest" />
+    <EmbeddedResource Include="Views\Templates\EntityDialogBoxSolid.Template.html" CopyToPublishDirectory="PreserveNewest" />
   </ItemGroup>
-  <ItemGroup> 
+  <ItemGroup>
     <None Update="wwwroot\**\*">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>

@@ -123,6 +123,7 @@ namespace PatientManagement.PatientManagement.Repositories
 
                 if (seenNotifications.Any())
                     query.Where(!fld.NotificationId.In(seenNotifications));
+                
             }
 
             protected override void OnReturn()

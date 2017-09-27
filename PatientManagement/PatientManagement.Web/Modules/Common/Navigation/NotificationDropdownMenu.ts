@@ -14,9 +14,13 @@ namespace PatientManagement.PatientManagement {
 
             var toggleMenuButton = this.byId('NotificationDropdownMenuToggle');
             toggleMenuButton.click((e) => this.openClick(e));
-            PatientManagement.NotificationsService.CountNotifications({},
+            PatientManagement.NotificationsService.CountNotifications({ Take: 50 },
                 resp => {
-                    this.byId('NotificationCounterLabel').text(resp.Count);
+                    var text = resp.Count + "";
+                    if (resp.Count >= 50)
+                        text = text + "+";
+                        
+                    this.byId('NotificationCounterLabel').text(text);
 
                 });
 
@@ -24,7 +28,7 @@ namespace PatientManagement.PatientManagement {
 
         public updateNotifications = (): void => {
 
-            PatientManagement.NotificationsService.ListForDropdown({},
+            PatientManagement.NotificationsService.ListForDropdown({ Take: 50 },
                 resp => {
 
                     this.byId('NotificationCounterLabel').text(resp.Entities.length);
@@ -64,7 +68,7 @@ namespace PatientManagement.PatientManagement {
                         var h4 = $('<h4/>');
 
                         h4.text(Q.text("Site.Layout.NoNotificationMenu"));
-                        a.append(h4)
+                        a.append(h4);
                         notifactionList.append(a);
                     }
 
@@ -74,17 +78,16 @@ namespace PatientManagement.PatientManagement {
                 });
         };
 
-        protected openClick(e)
-        {
+        protected openClick(e) {
             e.preventDefault();
             if ($('#NotificationDropdownMenu').hasClass("open"))
                 return;
 
             //if (this.byId('Preloader').length) {
-                this.updateNotifications();
+            this.updateNotifications();
 
 
-         
+
 
         }
 
@@ -109,6 +112,6 @@ namespace PatientManagement.PatientManagement {
 
             });
         }
-}
+    }
 
 }

@@ -40,7 +40,11 @@ namespace PatientManagement.PatientManagement {
                 });
 
 
-                this.changeSelect2(e => {
+            this.changeSelect2(e => {
+                    if (!this.value) {
+                        return;
+                    }
+
                     $.cookie('CabinetPreference', this.value, {
                         path: Q.Config.applicationPath,
                         expires: 365

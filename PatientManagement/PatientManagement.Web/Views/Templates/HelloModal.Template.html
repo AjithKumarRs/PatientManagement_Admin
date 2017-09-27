@@ -1,0 +1,107 @@
+﻿<div class="modal fade" data-backdrop="static" id="~_HelloModal">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    {{text:"Site.HelloModal.Title"}}
+                </h4>
+            </div>
+            <div class="modal-body">
+
+                <img src="../content/images/clario/clario-logo-large.png" style="padding:2% 10% 2% 10%" class="img img-responsive" alt="Clario logo" />
+
+                <h3 style="text-align: center">
+                    
+                    {{text:"Site.HelloModal.SubTitle"}}
+                </h3>
+                <div id="~_ModalBodyInformation">
+                    <div class="small-box" id="cabinets-box-modal" style="margin-top: 20px">
+                        <div class="inner">
+                            <p style="margin: 0">
+                                {{text:"Site.HelloModal.StepCabinet"}}
+                            </p>
+
+                        </div>
+                        <div class="icon" style="font-size: 25px; top: 0">
+                            <i class="fa fa-hospital-o"></i>
+                        </div>
+                    </div>
+
+                    <div class="small-box" style="margin-top: 20px" id="visitTypes-box-modal">
+                        <div class="inner">
+                            <p style="margin: 0">
+                                {{text:"Site.HelloModal.StepVisitType"}}
+
+                            </p>
+
+                        </div>
+                        <div class="icon" style="font-size: 25px; top: 0">
+                            <i class="fa fa-stethoscope"></i>
+                        </div>
+                    </div>
+
+                    <div class="small-box" style="margin-top: 20px" id="patients-box-modal">
+                        <div class="inner">
+                            <p style="margin: 0">
+                                {{text:"Site.HelloModal.StepPatient"}}
+                            </p>
+
+                        </div>
+                        <div class="icon" style="font-size: 25px; top: 0">
+                            <i class="fa fa-group"></i>
+                        </div>
+                    </div>
+
+                    <div class="small-box" style="margin-top: 20px" id="visits-box-modal">
+                        <div class="inner">
+                            <p style="margin: 0">
+                                {{text:"Site.HelloModal.StepVisit"}}
+                            </p>
+
+                        </div>
+                        <div class="icon" style="font-size: 25px; top: 0">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="cabinet-step" style="display: none">
+                    <div id="~_ModalBodyCabinet"></div>
+                </div>
+
+                <div id="visit-type-step" style="display: none" class="callout">
+                    <div id="~_ModalBodyVisitType"></div>
+                </div>
+
+                <div id="patient-step" style="display: none">
+                    <div id="~_ModalBodyPatient"></div>
+                </div>
+
+                <div id="visit-step" style="display: none">
+                    <div id="~_ModalBodyVisit"></div>
+                </div>
+                
+                <div id="last-step" style="display: none">
+                    <div class="alert alert-success">
+                        <h3>
+                            {{text:"Site.HelloModal.StepSuccess"}} 
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btn-close-hellomodal" class="btn btn-default pull-left" data-dismiss="modal">
+                    
+                    {{text:"Site.HelloModal.ButtonSkip"}} 
+                </button>
+                <button type="button" class="btn btn-primary btn-continiue-hellomodal" id="~_btn-continue-modal">
+                    {{text:"Site.HelloModal.ButtonStart"}} 
+
+                </button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

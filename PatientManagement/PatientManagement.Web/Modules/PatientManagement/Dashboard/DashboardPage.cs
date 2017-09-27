@@ -30,6 +30,12 @@ namespace PatientManagement.PatientManagement.Pages
 
             var connection = SqlConnections.NewFor<CabinetsRow>();
 
+            var visitFlds = VisitsRow.Fields;
+            var user = (UserDefinition)Authorization.UserDefinition;
+
+            if (connection.Count<VisitsRow>(visitFlds.TenantId == user.TenantId) < 1)
+                ViewData["HelloModal"] = true;
+
             if (GetAndSetActiveCabinetIdIfAny(connection, out cabinetIdActive))
             {
                 if (cabinetIdActive != 0)
@@ -44,6 +50,7 @@ namespace PatientManagement.PatientManagement.Pages
                     return View(MVC.Views.PatientManagement.Dashboard.DashboardIndex);
                 }
             }
+         
 
             ViewData["WorkHoursStart"] = TimeSpan.FromMinutes(420);
             ViewData["WorkHoursEnd"] = TimeSpan.FromMinutes(1200);

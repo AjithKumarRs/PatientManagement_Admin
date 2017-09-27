@@ -55,7 +55,7 @@ namespace PatientManagement.PatientManagement.Endpoints
             return new CountNotificationsResponse
            {
 
-               Count = some.TotalCount
+               Count = some.Entities.Count
            };
         }
 

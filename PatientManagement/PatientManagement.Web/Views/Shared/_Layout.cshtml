@@ -215,7 +215,7 @@
                                     <h3 class="box-title">@Texts.Site.Subscriptions.SubscriptionTitle</h3>
                                     <div class="box-tools pull-right">
                                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                        <button class="btn btn-box-tool" id="btn-close-subscription-box"><i class="fa fa-times"></i></button>
                                     </div>
                                 </div><!-- /.box-header -->
                                 <div class="box-body">
@@ -314,7 +314,7 @@
         </div>
 
         <script type="text/javascript">
-            
+
             $('.fc-event-droppable').each(function(i, element) {
                 var classList = element.className.split(/\s+/);
 
@@ -407,14 +407,25 @@
 
         </script>
 
-
+        
         <script async>
+            $('#btn-close-subscription-box').click(function (e) {
+                Q.confirm("Информация за абонамента няма да се показва в следващите 24 часа?",() => {
+                    $('#subscription-information-box').parents('.row').hide('slide', { direction: 'up' }, 500);
 
+                    $.cookie('SubcriptionInfoBox', 1, {
+                        path: Q.Config.applicationPath,
+                        expires: 1
+                    });
+                });
+
+            });
             //TODO: Finded major speed issue here! Cache user data or make a cookie if user is closing the subscription box
             jQuery(document).ready(function () {
                 jQuery(document).ready(function () {
-
+                 
                     //var userData = new Q.getRemoteData('UserData');
+                    if ($.cookie('SubcriptionInfoBox') != 1)
                     $.get('../Administration/GetTenantSubscriptionEndDate', function (date) {
                         var subscriptionEndDate = date;
 
@@ -459,15 +470,23 @@
                                         Q.text("Site.Subscriptions.WillExpire.SubscriptionInfoBoxBody").format(diff));
 
                                 $('#subscription-information-box').addClass('callout-warning');
-                                $('#subscription-information-box').parents('.row').show('slide', { direction: 'up' }, 500);
+                                $('#subscription-information-box').parents('.row')
+                                    .show('slide', { direction: 'up' }, 500);
+                            } else {
+                                $.cookie('SubcriptionInfoBox', 1, {
+                                    path: Q.Config.applicationPath,
+                                    expires: 1
+                                });
                             }
 
                         }
                     });
+
+
                     $.get('../Administration/GetTenantRole', function (role) {
                         // Show user permision
                         if (role) {
-                            
+
                             $("#role-list").text(role.join());
                         }
                     });
@@ -506,6 +525,7 @@
                         $('.s-NotificationsGrid .refresh-button').click();
                     }
                     var number = +($('.counter-label-notifications').text());
+                    if ($('.counter-label-notifications').text() !== "50+")
                     $('.counter-label-notifications').text(number + 1);
 
                     ReFetchVisitsForTodayBox();
@@ -528,6 +548,7 @@
                     }
 
                     var number = +($('.counter-label-notifications').text());
+                    if ($('.counter-label-notifications').text() !== "50+")
                     $('.counter-label-notifications').text(number + 1);
 
                 };

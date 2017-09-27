@@ -134,6 +134,33 @@ namespace PatientManagement
         }
         public static class Site
         {
+            public static class HelloModal
+            {
+                public static LocalText Title = "Welcome";
+                public static LocalText SubTitle = "Take a first steps in Clario management system";
+
+                public static LocalText ButtonContinue = "Continue";
+                public static LocalText ButtonStart = "Begin";
+                public static LocalText ButtonSkip = "Skip";
+                public static LocalText ButtonFinnish = "Finnish";
+                public static LocalText ButtonCloseAndFinnish = "Close and continue work";
+
+                public static LocalText StepCabinet = "Add your first cabinet";
+                public static LocalText StepCabinetTitle = "Add your first cabinet. Every cabinet has its own calendar and you can fast switch the calendars in the left dropdown";
+
+                public static LocalText StepVisitType = "Create new visit type";
+                public static LocalText StepVisitTypeTitle = "Choose name and colors for your visit type. This will be the look that will be shown in the calendar for every visit in this type";
+
+                public static LocalText StepPatient = "Register a patient";
+                public static LocalText StepPatientTitle= "When you registering new patient, you can choose to receive automatic emails  when visit is added or changed";
+
+                public static LocalText StepVisit = "Assign a visit to patient";
+                public static LocalText StepVisitTitle = "You can choose from dropdowns or you can use the functional buttons in right to create a new records";
+
+                public static LocalText StepSuccess = "Congratulations! You now have all the needet skills to work with Clario management system. We from Clario team wish you good work, and happy hours using the system!";
+
+
+            }
             public static class Payments
             {
                 public static LocalText PaymentEmptyValueError = "You can't make empty payment!";
@@ -144,6 +171,7 @@ namespace PatientManagement
                 public static LocalText SubscriptionRightBox = "You can make direct payment from here!";
                 public static LocalText SubscriptionRightBoxButton = "Add Payment";
                 public static LocalText DeleteActiveSubscriptionError = "You cant delete active subscription";
+                public static LocalText SubscriptionInfoNotification = "Subscription information will not be showed for next 24 hours?";
 
                 public static LocalText MaximumVisitsError = "Based on you current subscription, you can create maximum {0} visits.";
                 public static LocalText MaximumUsersError = "Based on you current subscription, you can create maximum {0} users.";
