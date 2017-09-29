@@ -15,7 +15,7 @@ namespace PatientManagement.PatientManagement.Columns
     {
         [EditLink, DisplayName("Db.Shared.RecordId"), AlignRight]
         public Int32 CabinetId { get; set; }
-        [EditLink]
+        [EditLink, CabinetsFormatter]
         public String Name { get; set; }
 
         [Width(250), UserListFormatter]

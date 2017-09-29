@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Ical.Net;
@@ -37,7 +38,7 @@ namespace PatientManagement.PatientManagement.Endpoints
             }
             var patient = uow.Connection.ById<PatientsRow>(request.Entity.PatientId);
 
-            SendAutomaticEmailToPatient(uow, patient, request.Entity.StartDate??DateTime.MinValue, true);
+            SendAutomaticEmailToPatient(uow, patient, request.Entity.StartDate ?? DateTime.MinValue, true);
 
             return new MyRepository().Create(uow, request);
         }
@@ -106,24 +107,39 @@ namespace PatientManagement.PatientManagement.Endpoints
         public FileStreamResult ListIcs(IDbConnection connection, ListRequest request)
         {
             var data = List(connection, request).Entities;
-            var report = new DynamicDataReport(data, request.IncludeColumns, typeof(Columns.VisitsColumns));
+            // var report = new DynamicDataReport(data, request.IncludeColumns, typeof(Columns.VisitsColumns));
             var model = new Ical.Net.Calendar();
+
 
             foreach (var visit in data)
             {
+                var patient = connection.ById<PatientsRow>(visit.PatientId);
                 var cabinet = connection.ById<CabinetsRow>(visit.CabinetId);
                 var visitType = connection.ById<VisitTypesRow>(visit.VisitTypeId);
-                model.Events.Add(new Ical.Net.CalendarEvent
+
+                var eventCalendar = new Ical.Net.CalendarEvent();
+                eventCalendar.Location = cabinet.Name;
+                eventCalendar.Summary = $"{patient.Name} - {visitType.Name}";
+                eventCalendar.Status = EventStatus.Confirmed;
+                eventCalendar.Created = new CalDateTime((visit.InsertDate ?? DateTime.Now));
+                eventCalendar.Description = visit.Description;
+                eventCalendar.DtStart = new CalDateTime((visit.StartDate ?? DateTime.Now));
+                eventCalendar.DtEnd = new CalDateTime((visit.EndDate ?? DateTime.Now));
+                eventCalendar.IsAllDay = false;
+
+                if (!patient.Email.IsEmptyOrNull())
                 {
-                    Uid = visit.VisitId.ToString(),
-                    Location = cabinet.Name,
-                    Summary = visitType.Name,
-                    Status = EventStatus.Confirmed,
-                    Description = visit.Description,
-                    DtStart = new CalDateTime((visit.StartDate ?? DateTime.Now)),
-                    DtEnd = new CalDateTime((visit.EndDate ?? DateTime.Now)),
-                    IsAllDay = false,
-                });
+                    var attendee = new Attendee($"MAILTO:{patient.Email}");
+                    attendee.CommonName = patient.Name;
+                    attendee.Rsvp = true;
+                    attendee.Role = "REQ-PARTICIPANT";
+                    attendee.ParticipationStatus = "NEEDS-ACTION";
+                    attendee.Type = "INDIVIDUAL";
+                    
+                    eventCalendar.Attendees = new List<Attendee> { attendee };
+                }
+                model.Events.Add(eventCalendar);
+
             }
 
             var serializer = new CalendarSerializer(model);

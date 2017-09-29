@@ -32,4 +32,11 @@
         }
     }
 
+    @Serenity.Decorators.registerFormatter()
+    export class PatientsEmailFormatter implements Slick.Formatter {
+        format(ctx: Slick.FormatterContext) {
+            return "<span class='mail-symbol'>" + Q.htmlEncode(ctx.value) + '</span>'
+
+        }
+    }
 }

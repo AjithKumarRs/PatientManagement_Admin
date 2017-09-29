@@ -25,6 +25,7 @@ namespace PatientManagement.PatientManagement.Columns
         [Width(150), PatientsPhoneFormatter]
         public Int64 PhoneNumber { get; set; }
 
+        [Width(200), PatientsEmailFormatter]
         public string Email { get; set; }
 
         public DateTime FirstRegistrationDate { get; set; }

@@ -2055,6 +2055,7 @@ declare namespace PatientManagement.PatientManagement {
         TenantName?: string;
         InsertUserName?: string;
         PatientGender?: Gender;
+        PatientEmail?: string;
         PhoneNumber?: string;
         PatientName?: string;
         VisitTypeName?: string;
@@ -2082,6 +2083,7 @@ declare namespace PatientManagement.PatientManagement {
             const TenantName: string;
             const InsertUserName: string;
             const PatientGender: string;
+            const PatientEmail: string;
             const PhoneNumber: string;
             const PatientName: string;
             const VisitTypeName: string;
@@ -3004,6 +3006,11 @@ declare namespace PatientManagement.PatientManagement {
     }
 }
 declare namespace PatientManagement.PatientManagement {
+    class CabinetsFormatter implements Slick.Formatter {
+        format(ctx: Slick.FormatterContext): string;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
     class CabinetsGrid extends Serenity.EntityGrid<CabinetsRow, any> {
         protected getColumnsKey(): string;
         protected getDialogType(): typeof CabinetsDialog;
@@ -3241,6 +3248,9 @@ declare namespace PatientManagement.PatientManagement {
         initializeColumn(column: Slick.Column): void;
     }
     class PatientsPhoneFormatter implements Slick.Formatter {
+        format(ctx: Slick.FormatterContext): string;
+    }
+    class PatientsEmailFormatter implements Slick.Formatter {
         format(ctx: Slick.FormatterContext): string;
     }
 }
