@@ -1573,6 +1573,24 @@ declare namespace PatientManagement.PatientManagement {
     }
 }
 declare namespace PatientManagement.PatientManagement {
+    interface CabinetWorkDaysRow {
+        WorkDayId?: number;
+        WeekDayId?: WeekDays;
+        CabinetId?: number;
+    }
+    namespace CabinetWorkDaysRow {
+        const idProperty = "WorkDayId";
+        const localTextPrefix = "CabinetWorkDays";
+        const lookupKey = "PatientManagement.CabinetWorkDays";
+        function getLookup(): Q.Lookup<CabinetWorkDaysRow>;
+        namespace Fields {
+            const WorkDayId: string;
+            const WeekDayId: string;
+            const CabinetId: string;
+        }
+    }
+}
+declare namespace PatientManagement.PatientManagement {
     interface CountNotificationsRequest extends Serenity.ServiceRequest {
         Count?: number;
     }
@@ -2175,6 +2193,17 @@ declare namespace PatientManagement.PatientManagement {
     }
 }
 declare namespace PatientManagement.PatientManagement {
+    enum WeekDays {
+        Monday = 1,
+        Tuesday = 2,
+        Wednesday = 3,
+        Thursday = 4,
+        Friday = 5,
+        Saturday = 6,
+        Sunday = 7,
+    }
+}
+declare namespace PatientManagement.PatientManagement {
     interface WorkHours {
         workDays?: string;
         start?: string;
@@ -2468,6 +2497,10 @@ declare namespace PatientManagement.Administration {
         protected usePager(): boolean;
     }
 }
+declare namespace PatientManagement.Authorization {
+    let userDefinition: ScriptUserDefinition;
+    function hasPermission(permissionKey: string): boolean;
+}
 declare namespace PatientManagement.Administration {
     class UserDialog extends Serenity.EntityDialog<UserRow, any> {
         protected getFormKey(): string;
@@ -2495,10 +2528,6 @@ declare namespace PatientManagement.Administration {
         constructor(container: JQuery);
         protected getDefaultSortBy(): string[];
     }
-}
-declare namespace PatientManagement.Authorization {
-    let userDefinition: ScriptUserDefinition;
-    function hasPermission(permissionKey: string): boolean;
 }
 declare namespace PatientManagement.Administration {
     class PermissionCheckEditor extends Serenity.DataGrid<PermissionCheckItem, PermissionCheckEditorOptions> {
@@ -2569,11 +2598,6 @@ declare namespace PatientManagement.Administration {
         userID: number;
         username: string;
     }
-}
-declare namespace PatientManagement.LanguageList {
-    function getValue(): string[][];
-}
-declare namespace PatientManagement.ScriptInitialization {
 }
 declare namespace PatientManagement.PatientManagement {
     class HelloModal extends Serenity.TemplatedWidget<any> {
@@ -2777,6 +2801,9 @@ declare namespace PatientManagement.Common {
         function createToolButton(options: IcsExportOptions): Serenity.ToolButton;
     }
 }
+declare namespace PatientManagement.LanguageList {
+    function getValue(): string[][];
+}
 declare namespace PatientManagement {
     interface LKCodeDescOptions extends Serenity.LookupEditorOptions {
         codeFieldName: string;
@@ -2903,17 +2930,12 @@ declare namespace PatientManagement.Common {
         protected reportLinkClick(e: any): void;
     }
 }
+declare namespace PatientManagement.ScriptInitialization {
+}
 declare namespace PatientManagement.Common {
     class UserPreferenceStorage implements Serenity.SettingStorage {
         getItem(key: string): string;
         setItem(key: string, data: string): void;
-    }
-}
-declare namespace PatientManagement.Membership {
-    class LoginPanel extends Serenity.PropertyPanel<LoginRequest, any> {
-        protected getFormKey(): string;
-        private form;
-        constructor(container: JQuery);
     }
 }
 declare namespace PatientManagement.Membership {
@@ -2925,6 +2947,13 @@ declare namespace PatientManagement.Membership {
 }
 declare namespace PatientManagement.Membership {
     class ForgotPasswordPanel extends Serenity.PropertyPanel<ForgotPasswordRequest, any> {
+        protected getFormKey(): string;
+        private form;
+        constructor(container: JQuery);
+    }
+}
+declare namespace PatientManagement.Membership {
+    class LoginPanel extends Serenity.PropertyPanel<LoginRequest, any> {
         protected getFormKey(): string;
         private form;
         constructor(container: JQuery);
@@ -3032,6 +3061,11 @@ declare namespace PatientManagement.PatientManagement {
 }
 declare namespace PatientManagement.PatientManagement {
     class UserListFormatter implements Slick.Formatter {
+        format(ctx: Slick.FormatterContext): string;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class WorkDaysListFormatter implements Slick.Formatter {
         format(ctx: Slick.FormatterContext): string;
     }
 }
@@ -3348,39 +3382,5 @@ declare namespace PatientManagement.PatientManagement {
 declare namespace PatientManagement {
     class VisiTypesBottomLeftMenu extends Serenity.Widget<any> {
         constructor(elem: JQuery, opt: {});
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    enum WeekDays {
-        Monday = 1,
-        Tuesday = 2,
-        Wednesday = 3,
-        Thursday = 4,
-        Friday = 5,
-        Saturday = 6,
-        Sunday = 7,
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    interface CabinetWorkDaysRow {
-        WorkDayId?: number;
-        WeekDayId?: WeekDays;
-        CabinetId?: number;
-    }
-    namespace CabinetWorkDaysRow {
-        const idProperty = "WorkDayId";
-        const localTextPrefix = "CabinetWorkDays";
-        const lookupKey = "PatientManagement.CabinetWorkDays";
-        function getLookup(): Q.Lookup<CabinetWorkDaysRow>;
-        namespace Fields {
-            const WorkDayId: string;
-            const WeekDayId: string;
-            const CabinetId: string;
-        }
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class WorkDaysListFormatter implements Slick.Formatter {
-        format(ctx: Slick.FormatterContext): string;
     }
 }

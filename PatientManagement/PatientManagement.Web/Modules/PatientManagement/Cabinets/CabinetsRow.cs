@@ -55,7 +55,7 @@ namespace PatientManagement.PatientManagement.Entities
         [DisplayName("Work Days")]
         [LookupEditor(typeof(CabinetWorkDaysRow), Multiple = true), NotMapped]
         [LinkingSetRelation(typeof(CabinetWorkDaysRow), "CabinetId", "WeekDayId")]
-        [MinSelectLevel(SelectLevel.Details), QuickFilter]
+        [MinSelectLevel(SelectLevel.Details)]
         public List<Int32> WorkDays
         {
             get { return Fields.WorkDays[this]; }
