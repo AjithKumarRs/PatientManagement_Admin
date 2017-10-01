@@ -54,16 +54,15 @@ namespace PatientManagement.PatientManagement {
                         },
                         response => {
                             var entity = response.Entity;
-                            console.log(entity);
                             $('#calendar').fullCalendar('option', {
-                                
-                                'minTime': entity.start,
-                                'maxTime': entity.end
-                            });
+                                businessHours: [{
+                                    dow: entity.workDays,
+                                    start: entity.start,
+                                    end: entity.end
+                                });
 
 
                             if ($('#cabinet-name-right-header').length > 0) {
-                                console.log();
 
                                 $('#cabinet-name-right-header').html(this.get_text()
                                     + "<small style='display: inline - block'> - "

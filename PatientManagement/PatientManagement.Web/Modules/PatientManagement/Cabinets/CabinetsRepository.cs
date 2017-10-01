@@ -1,5 +1,7 @@
 ﻿
 
+using System.Linq;
+
 namespace PatientManagement.PatientManagement.Repositories
 {
     using Serenity;
@@ -15,7 +17,7 @@ namespace PatientManagement.PatientManagement.Repositories
 
         public SaveResponse Create(IUnitOfWork uow, SaveRequest<MyRow> request)
         {
-            
+
             return new MySaveHandler().Process(uow, request, SaveRequestType.Create);
         }
 
@@ -41,7 +43,13 @@ namespace PatientManagement.PatientManagement.Repositories
 
         private class MySaveHandler : SaveRequestHandler<MyRow> { }
         private class MyDeleteHandler : DeleteRequestHandler<MyRow> { }
-        private class MyRetrieveHandler : RetrieveRequestHandler<MyRow> { }
-        private class MyListHandler : ListRequestHandler<MyRow> { }
+
+        private class MyRetrieveHandler : RetrieveRequestHandler<MyRow>
+        {
+        }
+
+        private class MyListHandler : ListRequestHandler<MyRow>
+        {
+        }
     }
 }

@@ -29,6 +29,7 @@ namespace PatientManagement.PatientManagement.Pages
             var cabinetIdActive = 0;
 
             var connection = SqlConnections.NewFor<CabinetsRow>();
+            ViewData["WorkDays"] = new List<Int32>{1, 2, 3, 4, 5}.ToJson();
 
             var visitFlds = VisitsRow.Fields;
             var user = (UserDefinition)Authorization.UserDefinition;
@@ -42,6 +43,18 @@ namespace PatientManagement.PatientManagement.Pages
                 {
                     var cabFlds = CabinetsRow.Fields;
                     var connectionCabint = connection.TryFirst<CabinetsRow>(cabFlds.CabinetId == cabinetIdActive);
+                    var workDaysFlds = CabinetWorkDaysRow.Fields;
+
+                    if (connectionCabint.CabinetId != null)
+                    {
+                        var cabinetWorkDays =
+                            connection.List<CabinetWorkDaysRow>(workDaysFlds.CabinetId ==
+                                                                connectionCabint.CabinetId.Value).Select(x => x.WeekDayId);
+                        if (cabinetWorkDays.Any())
+                        ViewData["WorkDays"] = cabinetWorkDays.OrderBy(s => s).ToJson();
+
+
+                    }
                     ViewData["CabinetHeaderName"] = connectionCabint?.Name;
 
                     

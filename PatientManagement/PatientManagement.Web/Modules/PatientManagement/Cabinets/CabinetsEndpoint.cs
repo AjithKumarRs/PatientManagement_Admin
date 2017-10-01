@@ -1,5 +1,8 @@
 ﻿
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using PatientManagement.PatientManagement.Entities;
 using PatientManagement.Web.Modules.Common;
 
 namespace PatientManagement.PatientManagement.Endpoints
@@ -44,11 +47,23 @@ namespace PatientManagement.PatientManagement.Endpoints
         {
              var entity = new MyRepository().Retrieve(connection, request);
 
+            var workDaysFlds = CabinetWorkDaysRow.Fields;
+
+            var cabinetWorkDays =
+                connection.List<CabinetWorkDaysRow>(workDaysFlds.CabinetId ==
+                                                    entity.Entity.CabinetId.Value).Select(x => x.WeekDayId);
+
+
             var model = new WorkHours
             {
                 start = TimeSpan.FromMinutes(entity.Entity.WorkHoursStart ?? 420).ToString(@"hh\:mm"),
                 end = TimeSpan.FromMinutes(entity.Entity.WorkHoursEnd ?? 1200).ToString(@"hh\:mm"),
             };
+
+            model.workDays = new List<Int32> { 1, 2, 3, 4, 5 }.ToJson();
+
+            if (cabinetWorkDays.Any())
+                model.workDays = cabinetWorkDays.OrderBy(s => s).ToJson();
 
             var response=  new RetrieveResponse<WorkHours>();
             response.Entity = model;
@@ -58,6 +73,8 @@ namespace PatientManagement.PatientManagement.Endpoints
 
         public class WorkHours
         {
+            public string workDays { get; set; }
+
             public string start { get; set; }
 
             public string end { get; set; }

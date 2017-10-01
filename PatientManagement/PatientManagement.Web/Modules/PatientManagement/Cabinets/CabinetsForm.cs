@@ -22,6 +22,8 @@ namespace PatientManagement.PatientManagement.Forms
 
         public Int16 WorkHoursEnd { get; set; }
 
+        public List<Int32> WorkDays { get; set; }
+
         public List<Int32> Representatives { get; set; }
 
         public Int32? TenantId { get; set; }

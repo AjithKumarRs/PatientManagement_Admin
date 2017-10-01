@@ -21,6 +21,9 @@ namespace PatientManagement.PatientManagement.Columns
         [Width(250), UserListFormatter]
         public String Representatives { get; set; }
 
+        [Width(250), WorkDaysListFormatter]
+        public List<Int32> WorkDays { get; set; }
+
         [MinuteFormatter]
         public Int16 WorkHoursStart { get; set; }
         [MinuteFormatter]

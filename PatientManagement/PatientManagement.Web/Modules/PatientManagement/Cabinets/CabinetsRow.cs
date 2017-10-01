@@ -51,6 +51,16 @@ namespace PatientManagement.PatientManagement.Entities
             get { return Fields.WorkHoursStart[this]; }
             set { Fields.WorkHoursStart[this] = value; }
         }
+        
+        [DisplayName("Work Days")]
+        [LookupEditor(typeof(CabinetWorkDaysRow), Multiple = true), NotMapped]
+        [LinkingSetRelation(typeof(CabinetWorkDaysRow), "CabinetId", "WeekDayId")]
+        [MinSelectLevel(SelectLevel.Details), QuickFilter]
+        public List<Int32> WorkDays
+        {
+            get { return Fields.WorkDays[this]; }
+            set { Fields.WorkDays[this] = value; }
+        }
 
         [DisplayName("Work Hours End")]
         [TimeEditor]
@@ -184,6 +194,8 @@ namespace PatientManagement.PatientManagement.Entities
         public class RowFields : RowFieldsBase
         {
             public Int32Field CabinetId;
+            public ListField<Int32> WorkDays;
+
             public StringField Name;
             public ListField<Int32> Representatives;
             public Int16Field WorkHoursStart;
@@ -200,6 +212,8 @@ namespace PatientManagement.PatientManagement.Entities
             public StringField TenantName;
             public StringField InsertUserName;
             public StringField UpdateUserName;
+            
+
             public RowFields()
                 : base()
             {

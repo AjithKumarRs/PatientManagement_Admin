@@ -8671,6 +8671,10 @@ section.content > .s-DataGrid {
   padding: 2px 0px 2px 25px;
   background: url(../serenity/images/mail.png) no-repeat center left;
 }
+.calendar-day-symbol {
+  padding: 2px 0px 2px 25px;
+  background: url(../serenity/images/calendar-day.png) no-repeat center left;
+}
 .visit-type-icon {
   padding: 0 0 0 15px;
   margin-right: 5px;
