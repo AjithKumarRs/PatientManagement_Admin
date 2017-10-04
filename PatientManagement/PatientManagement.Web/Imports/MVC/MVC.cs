@@ -11,6 +11,11 @@ namespace MVC
                 public const string CurrenciesIndex = "~/Modules/Administration/Currencies/CurrenciesIndex.cshtml";
             }
 
+            public static class ExternalAccess
+            {
+                public const string ExternalAccessIndex = "~/Modules/Administration/ExternalAccess/ExternalAccessIndex.cshtml";
+            }
+
             public static class Language
             {
                 public const string LanguageIndex = "~/Modules/Administration/Language/LanguageIndex.cshtml";

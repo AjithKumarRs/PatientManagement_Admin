@@ -15,6 +15,7 @@ using Membership  = PatientManagement.Membership.Pages;
 [assembly: NavigationMenu(9000, "Administration", icon: "icon-screen-desktop")]
 [assembly: NavigationLink(9000, "Administration/Profile", typeof(Membership.ProfileController), icon: "fa-user-md")]
 
+
 [assembly: NavigationLink(9000, "Administration/Payment Options", typeof(Administration.PaymentOptionsController), icon: "fa-money")]
 [assembly: NavigationLink(9000, "Administration/Offers", typeof(Administration.OffersController), icon: "fa-file-text")]
 [assembly: NavigationLink(9000, "Administration/Currencies", typeof(Administration.CurrenciesController), icon: "fa-eur")]
@@ -26,5 +27,6 @@ using Membership  = PatientManagement.Membership.Pages;
 
 
 //[assembly: NavigationLink(9000, "Administration/SentEmails", typeof(Administration.SentEmailsController), icon: "fa-envelope-open")]
+[assembly: NavigationLink(9000, "Administration/External Access", typeof(Administration.ExternalAccessController), icon: "fa-link")]
 
 [assembly: NavigationLink(9000, "Administration/Sergen", typeof(Administration.SergenController), icon: "icon-magic-wand")]

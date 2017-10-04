@@ -9,6 +9,7 @@ using PatientManagement.Administration.Entities;
 using PatientManagement.Administration.Repositories;
 using PatientManagement.Common.EmailTemplates;
 using PatientManagement.PatientManagement.Entities;
+using PatientManagement.PatientManagement.Visits;
 using PatientManagement.Web.Modules.Common;
 using Serenity;
 using Serenity.Reporting;
@@ -107,53 +108,8 @@ namespace PatientManagement.PatientManagement.Endpoints
         public FileStreamResult ListIcs(IDbConnection connection, ListRequest request)
         {
             var data = List(connection, request).Entities;
-            // var report = new DynamicDataReport(data, request.IncludeColumns, typeof(Columns.VisitsColumns));
-            var model = new Ical.Net.Calendar();
-
-
-            foreach (var visit in data)
-            {
-                var patient = connection.ById<PatientsRow>(visit.PatientId);
-                var cabinet = connection.ById<CabinetsRow>(visit.CabinetId);
-                var visitType = connection.ById<VisitTypesRow>(visit.VisitTypeId);
-
-                var eventCalendar = new Ical.Net.CalendarEvent();
-                eventCalendar.Location = cabinet.Name;
-                eventCalendar.Summary = $"{patient.Name} - {visitType.Name}";
-                eventCalendar.Status = EventStatus.Confirmed;
-                eventCalendar.Created = new CalDateTime((visit.InsertDate ?? DateTime.Now));
-                eventCalendar.Description = visit.Description;
-                eventCalendar.DtStart = new CalDateTime((visit.StartDate ?? DateTime.Now));
-                eventCalendar.DtEnd = new CalDateTime((visit.EndDate ?? DateTime.Now));
-                eventCalendar.IsAllDay = false;
-
-                if (!patient.Email.IsEmptyOrNull())
-                {
-                    var attendee = new Attendee($"MAILTO:{patient.Email}");
-                    attendee.CommonName = patient.Name;
-                    attendee.Rsvp = true;
-                    attendee.Role = "REQ-PARTICIPANT";
-                    attendee.ParticipationStatus = "NEEDS-ACTION";
-                    attendee.Type = "INDIVIDUAL";
-                    
-                    eventCalendar.Attendees = new List<Attendee> { attendee };
-                }
-                model.Events.Add(eventCalendar);
-
-            }
-
-            var serializer = new CalendarSerializer(model);
-            MemoryStream ms = new MemoryStream();
-
-            serializer.Serialize(model, ms, Encoding.UTF8);
-
-            var ics = serializer.SerializeToString(model);
-            var bytes = System.Text.Encoding.UTF8.GetBytes(ics);
-
-            ms.Write(bytes, 0, bytes.Length);
-            ms.Seek(0, SeekOrigin.Begin);
-
-            return File(ms, "text/calendar", "event.ics");
+            
+            return File(VisitsExportHelper.ExportToIcs(data, AccessType.Private), "text/calendar", "event.ics");
         }
     }
 }

@@ -32,7 +32,6 @@ namespace PatientManagement.PatientManagement {
                 service: VisitsService.baseUrl + '/ListIcs',
                 onViewSubmit: () => this.onViewSubmit(),
                 separator: true,
-                cssClass: "export-docx-button"
             }));
 
             return buttons;

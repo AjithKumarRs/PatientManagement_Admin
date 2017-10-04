@@ -16,6 +16,12 @@
           "PermissionKey": "Administration:Currencies"
         },
         {
+          "Tablename": "dbo.ExternalAccess",
+          "Identifier": "ExternalAccess",
+          "Module": "Administration",
+          "PermissionKey": "Administration:ExternalAccess"
+        },
+        {
           "Tablename": "dbo.OfferLang",
           "Identifier": "OfferLang",
           "Module": "Administration",

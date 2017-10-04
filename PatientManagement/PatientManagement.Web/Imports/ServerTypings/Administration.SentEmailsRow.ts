@@ -23,10 +23,10 @@
         export const isActiveProperty = 'IsActive';
         export const nameProperty = 'FromEmail';
         export const localTextPrefix = 'Administration.SentEmails';
-        export const lookupKey = 'AdministrationTenants.Payment';
+        export const lookupKey = 'AdministrationTenants.SentEmails';
 
         export function getLookup(): Q.Lookup<SentEmailsRow> {
-            return Q.getLookup<SentEmailsRow>('AdministrationTenants.Payment');
+            return Q.getLookup<SentEmailsRow>('AdministrationTenants.SentEmails');
         }
 
         export namespace Fields {

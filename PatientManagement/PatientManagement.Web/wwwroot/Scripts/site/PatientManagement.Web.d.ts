@@ -69,6 +69,82 @@ declare namespace PatientManagement.Administration {
 declare namespace PatientManagement.Administration {
 }
 declare namespace PatientManagement.Administration {
+    class ExternalAccessForm extends Serenity.PrefixedContext {
+        static formKey: string;
+    }
+    interface ExternalAccessForm {
+        Name: Serenity.StringEditor;
+        ExternalAccessCabinets: Serenity.LookupEditor;
+        AccessType: Serenity.EnumEditor;
+        OutputFormat: Serenity.EnumEditor;
+    }
+}
+declare namespace PatientManagement.Administration {
+    interface ExternalAccessRow {
+        ExternalAccessCabinets?: number[];
+        ExternalAccessId?: number;
+        Name?: string;
+        Url?: string;
+        VisitedCount?: number;
+        AccessType?: PatientManagement.AccessType;
+        OutputFormat?: PatientManagement.OutputFormat;
+        TenantId?: number;
+        InsertUserId?: number;
+        InsertDate?: string;
+        UpdateUserId?: number;
+        UpdateDateField?: string;
+        IsActive?: number;
+        TenantName?: string;
+        InsertUserName?: string;
+        UpdateUserName?: string;
+    }
+    namespace ExternalAccessRow {
+        const idProperty = "ExternalAccessId";
+        const isActiveProperty = "IsActive";
+        const nameProperty = "Name";
+        const localTextPrefix = "Administration.ExternalAccess";
+        const lookupKey = "AdministrationTenants.ExternalAccess";
+        function getLookup(): Q.Lookup<ExternalAccessRow>;
+        namespace Fields {
+            const ExternalAccessCabinets: string;
+            const ExternalAccessId: string;
+            const Name: string;
+            const Url: string;
+            const VisitedCount: string;
+            const AccessType: string;
+            const OutputFormat: string;
+            const TenantId: string;
+            const InsertUserId: string;
+            const InsertDate: string;
+            const UpdateUserId: string;
+            const UpdateDateField: string;
+            const IsActive: string;
+            const TenantName: string;
+            const InsertUserName: string;
+            const UpdateUserName: string;
+        }
+    }
+}
+declare namespace PatientManagement.Administration {
+    namespace ExternalAccessService {
+        const baseUrl = "Administration/ExternalAccess";
+        function Create(request: Serenity.SaveRequest<ExternalAccessRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Update(request: Serenity.SaveRequest<ExternalAccessRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<ExternalAccessRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<ExternalAccessRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        namespace Methods {
+            const Create: string;
+            const Update: string;
+            const Delete: string;
+            const Retrieve: string;
+            const List: string;
+        }
+    }
+}
+declare namespace PatientManagement.Administration {
+}
+declare namespace PatientManagement.Administration {
     class LanguageForm extends Serenity.PrefixedContext {
         static formKey: string;
     }
@@ -632,7 +708,7 @@ declare namespace PatientManagement.Administration {
         const isActiveProperty = "IsActive";
         const nameProperty = "FromEmail";
         const localTextPrefix = "Administration.SentEmails";
-        const lookupKey = "AdministrationTenants.Payment";
+        const lookupKey = "AdministrationTenants.SentEmails";
         function getLookup(): Q.Lookup<SentEmailsRow>;
         namespace Fields {
             const SentEmailId: string;
@@ -1428,6 +1504,12 @@ declare namespace PatientManagement.Membership {
     }
 }
 declare namespace PatientManagement.PatientManagement {
+    enum AccessType {
+        Public = 0,
+        Private = 1,
+    }
+}
+declare namespace PatientManagement.PatientManagement {
 }
 declare namespace PatientManagement.PatientManagement {
     class ActivityForm extends Serenity.PrefixedContext {
@@ -1601,6 +1683,24 @@ declare namespace PatientManagement.PatientManagement {
     }
 }
 declare namespace PatientManagement.PatientManagement {
+    interface ExternalAccessCabinetsRow {
+        ExternalAccessCabinetId?: number;
+        ExternalAccessId?: number;
+        CabinetId?: number;
+    }
+    namespace ExternalAccessCabinetsRow {
+        const idProperty = "ExternalAccessCabinetId";
+        const localTextPrefix = "ExternalAccessCabinets";
+        const lookupKey = "PatientManagement.ExternalAccessCabinets";
+        function getLookup(): Q.Lookup<ExternalAccessCabinetsRow>;
+        namespace Fields {
+            const ExternalAccessCabinetId: string;
+            const ExternalAccessId: string;
+            const CabinetId: string;
+        }
+    }
+}
+declare namespace PatientManagement.PatientManagement {
     enum Gender {
         Male = 1,
         Female = 2,
@@ -1751,6 +1851,12 @@ declare namespace PatientManagement.PatientManagement {
             const ListForDropdown: string;
             const CountNotifications: string;
         }
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    enum OutputFormat {
+        Ics = 0,
+        Json = 1,
     }
 }
 declare namespace PatientManagement.PatientManagement {
@@ -2243,6 +2349,31 @@ declare namespace PatientManagement.Administration {
         protected getService(): string;
         constructor(container: JQuery);
         protected getButtons(): Serenity.ToolButton[];
+    }
+}
+declare namespace PatientManagement.Administration {
+    class ExternalAccessDialog extends Serenity.EntityDialog<ExternalAccessRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getService(): string;
+        protected form: ExternalAccessForm;
+    }
+}
+declare namespace PatientManagement.Administration {
+    class ExternalAccessGrid extends Serenity.EntityGrid<ExternalAccessRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof ExternalAccessDialog;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        constructor(container: JQuery);
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class ExternalAccessUrlFormatter implements Slick.Formatter {
+        format(ctx: Slick.FormatterContext): string;
     }
 }
 declare namespace PatientManagement.Administration {

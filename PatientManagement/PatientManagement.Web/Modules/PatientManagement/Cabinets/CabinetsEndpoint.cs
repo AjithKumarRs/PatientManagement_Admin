@@ -52,8 +52,7 @@ namespace PatientManagement.PatientManagement.Endpoints
             var cabinetWorkDays =
                 connection.List<CabinetWorkDaysRow>(workDaysFlds.CabinetId ==
                                                     entity.Entity.CabinetId.Value).Select(x => x.WeekDayId);
-
-
+            
             var model = new WorkHours
             {
                 start = TimeSpan.FromMinutes(entity.Entity.WorkHoursStart ?? 420).ToString(@"hh\:mm"),

@@ -8671,6 +8671,10 @@ section.content > .s-DataGrid {
   padding: 2px 0px 2px 25px;
   background: url(../serenity/images/mail.png) no-repeat center left;
 }
+.key-symbol {
+  padding: 2px 0px 2px 25px;
+  background: url(../serenity/images/key.png) no-repeat center left;
+}
 .calendar-day-symbol {
   padding: 2px 0px 2px 25px;
   background: url(../serenity/images/calendar-day.png) no-repeat center left;
@@ -8993,5 +8997,11 @@ section.content > .s-DataGrid {
   width: 450px;
 }
 .s-NewVisitTypeDialog .caption {
+  width: 150px;
+}
+.s-Administration-ExternalAccessDialog > .size {
+  width: 650px;
+}
+.s-Administration-ExternalAccessDialog .caption {
   width: 150px;
 }

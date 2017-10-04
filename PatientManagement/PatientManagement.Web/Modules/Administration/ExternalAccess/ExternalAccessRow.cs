@@ -1,4 +1,5 @@
 ﻿
+using PatientManagement.PatientManagement.Entities;
 using PatientManagement.PatientManagement.Scripts;
 
 namespace PatientManagement.Administration.Entities
@@ -10,77 +11,76 @@ namespace PatientManagement.Administration.Entities
     using System;
     using System.ComponentModel;
     using System.IO;
+    using System.Collections.Generic;
 
-    [ConnectionKey("Default"), TableName("[dbo].[SentEmails]"), DisplayName("Sent Emails"), InstanceName("Sent Emails"), TwoLevelCached]
-   
-    [ReadPermission("PatientManagement:SentEmails:Read")]
-    [InsertPermission("PatientManagement:SentEmails:Insert")]
-    [DeletePermission("Administration:SentEmails:Delete")]
-    [UpdatePermission("Administration:SentEmails:Update")]
-    [LookupScript("AdministrationTenants.SentEmails",
+    [ConnectionKey("Default"), TableName("[dbo].[ExternalAccess]"), DisplayName("External Access"), InstanceName("External Access"), TwoLevelCached]
+    [ReadPermission("Administration:ExternalAccess:Read")]
+    [ModifyPermission("Administration:ExternalAccess:Modify")]
+    [LookupScript("AdministrationTenants.ExternalAccess",
         LookupType = typeof(MultiTenantRowLookupScript<>))]
-    public sealed class SentEmailsRow : Row, IIdRow, INameRow, ILoggingRow, IMultiTenantRow, IIsActiveRow
+    public sealed class ExternalAccessRow : Row, IIdRow, INameRow, ILoggingRow, IMultiTenantRow, IIsActiveRow
     {
-        [DisplayName("Sent Email Id"), Identity]
-        public Int64? SentEmailId
+        [DisplayName("External Access Id"), Identity]
+        public Int32? ExternalAccessId
         {
-            get { return Fields.SentEmailId[this]; }
-            set { Fields.SentEmailId[this] = value; }
+            get { return Fields.ExternalAccessId[this]; }
+            set { Fields.ExternalAccessId[this] = value; }
         }
 
-        [DisplayName("From Email"), Size(200), NotNull, QuickSearch, Updatable(false)]
-        public String FromEmail
+        [DisplayName("Name"), Size(200), NotNull, QuickSearch]
+        public String Name
         {
-            get { return Fields.FromEmail[this]; }
-            set { Fields.FromEmail[this] = value; }
+            get { return Fields.Name[this]; }
+            set { Fields.Name[this] = value; }
         }
 
-      
-
-        [DisplayName("User Display Name"), NotMapped]
-        public string UserDisplayName
+        [DisplayName("Cabinets")]
+        [LookupEditor(typeof(CabinetsRow), Multiple = true), NotMapped]
+        [LinkingSetRelation(typeof(ExternalAccessCabinetsRow), "ExternalAccessId", "CabinetId")]
+        [MinSelectLevel(SelectLevel.Details), QuickFilter]
+        public List<Int32> ExternalAccessCabinets
         {
-            get
-            {
-                var user = (UserDefinition)Serenity.Authorization.UserDefinition;
-
-                return user.DisplayName;
-            }
+            get { return Fields.ExternalAccessCabinets[this]; }
+            set { Fields.ExternalAccessCabinets[this] = value; }
         }
 
-        [DisplayName("From Name"), Size(200), NotNull, Updatable(false)]
-        public String FromName
+        [DisplayName("Url"), Size(-1), NotNull]
+        [Unique]
+        public String Url
         {
-            get { return Fields.FromName[this]; }
-            set { Fields.FromName[this] = value; }
+            get { return Fields.Url[this]; }
+            set { Fields.Url[this] = value; }
         }
 
-        [DisplayName("Subject"), Size(200), NotNull, QuickFilter, Updatable(false)]
-        public String Subject
+        [DisplayName("Visited Count"), NotNull]
+        public Int32? VisitedCount
         {
-            get { return Fields.Subject[this]; }
-            set { Fields.Subject[this] = value; }
+            get { return Fields.VisitedCount[this]; }
+            set { Fields.VisitedCount[this] = value; }
         }
 
-        [DisplayName("Body"), Size(-1), NotNull, HtmlContentEditor, Updatable(false)]
-        public String Body
+        [DisplayName("Access Type"), NotNull]
+        public AccessType? AccessType
         {
-            get { return Fields.Body[this]; }
-            set { Fields.Body[this] = value; }
+            get { return (AccessType?)Fields.AccessType[this]; }
+            set { Fields.AccessType[this] = (Int32?)value; }
         }
 
-        [DisplayName("To Email"), Size(200), NotNull, QuickFilter(), Updatable(false)]
-        public String ToEmail
+        [DisplayName("Output Format"), NotNull]
+        public OutputFormat? OutputFormat
         {
-            get { return Fields.ToEmail[this]; }
-            set { Fields.ToEmail[this] = value; }
+            get { return (OutputFormat?)Fields.OutputFormat[this]; }
+            set { Fields.OutputFormat[this] = (Int32?)value; }
+        }
+        
+        IIdField IIdRow.IdField
+        {
+            get { return Fields.ExternalAccessId; }
         }
 
-        [DisplayName("To Name"), Size(200), NotNull, QuickFilter(), Updatable(false)]
-        public String ToName
+        StringField INameRow.NameField
         {
-            get { return Fields.ToName[this]; }
-            set { Fields.ToName[this] = value; }
+            get { return Fields.Name; }
         }
 
 
@@ -184,32 +184,24 @@ namespace PatientManagement.Administration.Entities
 
         #endregion
 
-        IIdField IIdRow.IdField
-        {
-            get { return Fields.SentEmailId; }
-        }
-
-        StringField INameRow.NameField
-        {
-            get { return Fields.FromEmail; }
-        }
 
         public static readonly RowFields Fields = new RowFields().Init();
 
-        public SentEmailsRow()
+        public ExternalAccessRow()
             : base(Fields)
         {
         }
 
         public class RowFields : RowFieldsBase
         {
-            public Int64Field SentEmailId;
-            public StringField FromEmail;
-            public StringField FromName;
-            public StringField Subject;
-            public StringField Body;
-            public StringField ToEmail;
-            public StringField ToName;
+            public ListField<Int32> ExternalAccessCabinets;
+
+            public Int32Field ExternalAccessId;
+            public StringField Name;
+            public StringField Url;
+            public Int32Field VisitedCount;
+            public Int32Field AccessType;
+            public Int32Field OutputFormat;
             public Int32Field TenantId;
             public Int32Field InsertUserId;
             public DateTimeField InsertDate;
@@ -217,17 +209,14 @@ namespace PatientManagement.Administration.Entities
             public DateTimeField UpdateDateField;
             public Int16Field IsActive;
 
-
             public StringField TenantName;
             public StringField InsertUserName;
             public StringField UpdateUserName;
             public RowFields()
                 : base()
             {
-                LocalTextPrefix = "Administration.SentEmails";
+                LocalTextPrefix = "Administration.ExternalAccess";
             }
         }
-
-
     }
 }
