@@ -122,6 +122,9 @@
     </None>
     <None Update="Modules\Administration\Currencies\CurrenciesIndex.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\Administration\ExternalAccess\ExternalAccessIndex.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None> 
     <None Update="Modules\Administration\Language\LanguageIndex.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

@@ -44,6 +44,10 @@ namespace PatientManagement.Administration.Pages
                     var externalCabinetsFlds = ExternalAccessCabinetsRow.Fields;
                     var externalAccessRow = connection.First<ExternalAccessRow>(externalaccessFlds.Url == key);
 
+                    externalAccessRow.VisitedCount += 1;
+
+                    connection.UpdateById(externalAccessRow, ExpectedRows.One);
+
                     accessType = externalAccessRow.AccessType ?? AccessType.Private;
                     outputFormat = externalAccessRow.OutputFormat ?? OutputFormat.Json;
 
