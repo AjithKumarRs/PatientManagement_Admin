@@ -27,6 +27,7 @@ namespace PatientManagement.PatientManagement.Visits
                 var visitType = connection.ById<VisitTypesRow>(visit.VisitTypeId);
 
                 var eventCalendar = new Ical.Net.CalendarEvent();
+                eventCalendar.Uid = $"{cabinet.CabinetId}_{visit.VisitId}";
                 eventCalendar.Location = cabinet.Name;
                 eventCalendar.Status = EventStatus.Confirmed;
                 eventCalendar.DtStart = new CalDateTime((visit.StartDate ?? DateTime.Now));

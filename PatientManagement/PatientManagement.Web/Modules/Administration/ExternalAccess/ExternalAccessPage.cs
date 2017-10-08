@@ -29,7 +29,7 @@ namespace PatientManagement.Administration.Pages
     public class ExternalController : Controller
     {
         [Route("External/{key}")]
-        public IActionResult Index(string key)
+        public ActionResult Index(string key)
         {
             var cabinetsIDs = new List<int>();
             AccessType accessType;
@@ -69,7 +69,7 @@ namespace PatientManagement.Administration.Pages
             }
 
             if (outputFormat == OutputFormat.Ics)
-                return File(VisitsExportHelper.ExportToIcs(visits, accessType), "text/iCal", "event.ics");
+                return File(VisitsExportHelper.ExportToIcs(visits, accessType), "text/calendar", "event.ics");
             else
                 return Json(VisitsExportHelper.ExportToJson(visits, accessType));
         }
