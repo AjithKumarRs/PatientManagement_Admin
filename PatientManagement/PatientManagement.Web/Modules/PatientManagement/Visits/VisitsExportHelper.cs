@@ -27,9 +27,9 @@ namespace PatientManagement.PatientManagement.Visits
                 var visitType = connection.ById<VisitTypesRow>(visit.VisitTypeId);
 
                 var eventCalendar = new Ical.Net.CalendarEvent();
-                eventCalendar.Uid = $"{cabinet.CabinetId}_{visit.VisitId}";
+                eventCalendar.Uid = $"{cabinet.CabinetId}_{visit.VisitId}@admin.myclario.com";
                 eventCalendar.Location = cabinet.Name;
-                eventCalendar.Status = EventStatus.Confirmed;
+
                 eventCalendar.DtStart = new CalDateTime((visit.StartDate ?? DateTime.Now));
                 eventCalendar.DtEnd = new CalDateTime((visit.EndDate ?? DateTime.Now));
                 eventCalendar.IsAllDay = false;
@@ -38,7 +38,6 @@ namespace PatientManagement.PatientManagement.Visits
                 {
                     eventCalendar.Summary = $"{patient.Name} - {visitType.Name}";
                     eventCalendar.Description = visit.Description;
-                    eventCalendar.Created = new CalDateTime((visit.InsertDate ?? DateTime.Now));
 
                     if (!patient.Email.IsEmptyOrNull())
                     {
