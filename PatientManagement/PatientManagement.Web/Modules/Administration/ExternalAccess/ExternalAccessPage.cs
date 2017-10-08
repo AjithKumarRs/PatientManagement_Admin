@@ -69,7 +69,7 @@ namespace PatientManagement.Administration.Pages
             }
 
             if (outputFormat == OutputFormat.Ics)
-                return File(VisitsExportHelper.ExportToIcs(visits, accessType), "text/calendar", "event.ics");
+                return File(VisitsExportHelper.ExportToIcs(visits, accessType), "text/iCal", "event.ics");
             else
                 return Json(VisitsExportHelper.ExportToJson(visits, accessType));
         }
