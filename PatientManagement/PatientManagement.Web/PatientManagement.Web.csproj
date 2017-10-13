@@ -97,7 +97,7 @@
     <Warning Condition="'@(Filtered)'!=''" Code="CSHTML" File="%(Filtered.Identity)" Text="View is not set to [BuildAction:Content]" />
   </Target>-->
   <ItemGroup>
-    <DotNetCliToolReference Include="Serenity.CodeGenerator" Version="3.0.5" />
+    <DotNetCliToolReference Include="Serenity.CodeGenerator" Version="3.0.8" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Reporting\" />

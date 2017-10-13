@@ -565,6 +565,7 @@ declare namespace PatientManagement.Administration {
     }
     interface RoleForm {
         RoleName: Serenity.StringEditor;
+        UsersInRole: Serenity.LookupEditor;
         TenantId: Serenity.LookupEditor;
     }
 }
@@ -627,6 +628,7 @@ declare namespace PatientManagement.Administration {
         UpdateUserId?: number;
         UpdateDateField?: string;
         IsActive?: number;
+        UsersInRole?: number[];
         TenantName?: string;
         InsertUserName?: string;
         UpdateUserName?: string;
@@ -647,6 +649,7 @@ declare namespace PatientManagement.Administration {
             const UpdateUserId: string;
             const UpdateDateField: string;
             const IsActive: string;
+            const UsersInRole: string;
             const TenantName: string;
             const InsertUserName: string;
             const UpdateUserName: string;
@@ -1024,15 +1027,17 @@ declare namespace PatientManagement.Administration {
         Username: Serenity.StringEditor;
         DisplayName: Serenity.StringEditor;
         Email: Serenity.EmailEditor;
+        Password: Serenity.PasswordEditor;
+        PasswordConfirm: Serenity.PasswordEditor;
         Cabinets: Serenity.LookupEditor;
+        RestrictedToCabinets: BsSwitchEditor;
         PhoneNumber: Serenity.StringEditor;
         WebSite: Serenity.StringEditor;
         UserImage: Serenity.ImageUploadEditor;
-        Password: Serenity.PasswordEditor;
-        PasswordConfirm: Serenity.PasswordEditor;
-        IsActive: BsSwitchEditor;
+        Info: Serenity.TextAreaEditor;
         EmailSignature: Serenity.HtmlContentEditor;
         Source: Serenity.StringEditor;
+        IsActive: BsSwitchEditor;
         TenantId: Serenity.LookupEditor;
     }
 }
@@ -1144,12 +1149,15 @@ declare namespace PatientManagement.Administration {
         PasswordSalt?: string;
         DisplayName?: string;
         Email?: string;
+        RestrictedToCabinets?: number;
+        Info?: string;
         UserImage?: string;
         LastDirectoryUpdate?: string;
         IsActive?: number;
         WebSite?: string;
         PhoneNumber?: string;
         EmailSignature?: string;
+        UsersInRole?: number[];
         Cabinets?: number[];
         Password?: string;
         PasswordConfirm?: string;
@@ -1176,12 +1184,15 @@ declare namespace PatientManagement.Administration {
             const PasswordSalt: string;
             const DisplayName: string;
             const Email: string;
+            const RestrictedToCabinets: string;
+            const Info: string;
             const UserImage: string;
             const LastDirectoryUpdate: string;
             const IsActive: string;
             const WebSite: string;
             const PhoneNumber: string;
             const EmailSignature: string;
+            const UsersInRole: string;
             const Cabinets: string;
             const Password: string;
             const PasswordConfirm: string;
@@ -1423,6 +1434,7 @@ declare namespace PatientManagement.Membership {
         PhoneNumber: Serenity.StringEditor;
         WebSite: Serenity.StringEditor;
         UserImage: Serenity.ImageUploadEditor;
+        Info: Serenity.TextAreaEditor;
         EmailSignature: Serenity.HtmlContentEditor;
     }
 }
@@ -1433,6 +1445,7 @@ declare namespace PatientManagement.Membership {
         PhoneNumber?: string;
         WebSite?: string;
         UserImage?: string;
+        Info?: string;
         EmailSignature?: string;
     }
 }
@@ -2508,6 +2521,11 @@ declare namespace PatientManagement.Administration {
         protected getIsActiveProperty(): string;
         constructor(container: JQuery);
         protected getDefaultSortBy(): string[];
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class RoleListFormatter implements Slick.Formatter {
+        format(ctx: Slick.FormatterContext): string;
     }
 }
 declare namespace PatientManagement.Administration {

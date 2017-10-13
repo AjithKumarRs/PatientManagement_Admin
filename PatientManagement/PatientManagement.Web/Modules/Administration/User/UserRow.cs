@@ -38,7 +38,7 @@ namespace PatientManagement.Administration.Entities
         [MinSelectLevel(SelectLevel.Details), QuickFilter]
         public List<Int32> Cabinets
         {
-            get { return Fields.Cabinets[this]; }
+            get { return (List<Int32>)Fields.Cabinets[this]; }
             set { Fields.Cabinets[this] = value; }
         }
 
@@ -72,6 +72,15 @@ namespace PatientManagement.Administration.Entities
             set { Fields.DisplayName[this] = value; }
         }
 
+        [DisplayName("Assigned roles"), QuickFilter()]
+        [LookupEditor(typeof(RoleRow), Multiple = true), NotMapped]
+        [LinkingSetRelation(typeof(UserRoleRow), "UserId", "RoleId")]
+        [MinSelectLevel(SelectLevel.Details)]
+        public List<Int32> UsersInRole
+        {
+            get { return (List<Int32>)Fields.UsersInRole[this]; }
+            set { Fields.UsersInRole[this] = value; }
+        }
         [EmailEditor, Required(true)]
         [DisplayName("Email"), Size(100)]
         public String Email
@@ -79,6 +88,26 @@ namespace PatientManagement.Administration.Entities
             get { return Fields.Email[this]; }
             set { Fields.Email[this] = value; }
         }
+
+        [DisplayName("Info")]
+        [TextAreaEditor]
+        public String Info
+        {
+            get { return Fields.Info[this]; }
+            set { Fields.Info[this] = value; }
+        }
+
+
+        [DisplayName("Restricted To Cabinets"), NotNull]
+        [ModifyPermission("AdministrationTenants:User:RestrictedToCabinets")]
+        [ReadPermission("AdministrationTenants:User:RestrictedToCabinets")]
+        [BsSwitchEditor]
+        public Int16? RestrictedToCabinets
+        {
+            get { return Fields.RestrictedToCabinets[this]; }
+            set { Fields.RestrictedToCabinets[this] = value; }
+        }
+
 
         [DisplayName("Web Site"), Size(200), QuickSearch]
         public String WebSite
@@ -140,6 +169,7 @@ namespace PatientManagement.Administration.Entities
             get { return Fields.LastDirectoryUpdate[this]; }
             set { Fields.LastDirectoryUpdate[this] = value; }
         }
+        #region Tenant
 
         [DisplayName("Tenant"), ForeignKey("Tenants", "TenantId"), LeftJoin("tnt"), QuickFilter]
         [LookupEditor(typeof(TenantRow))]
@@ -168,6 +198,9 @@ namespace PatientManagement.Administration.Entities
         {
             get { return Fields.TenantId; }
         }
+
+#endregion
+
         IIdField IIdRow.IdField
         {
             get { return Fields.UserId; }
@@ -199,12 +232,16 @@ namespace PatientManagement.Administration.Entities
             public StringField PasswordSalt;
             public StringField DisplayName;
             public StringField Email;
+            public Int16Field RestrictedToCabinets;
+            public StringField Info;
             public StringField UserImage;
             public DateTimeField LastDirectoryUpdate;
             public Int16Field IsActive;
             public StringField WebSite;
             public StringField PhoneNumber;
             public StringField EmailSignature;
+
+            public ListField<Int32> UsersInRole;
 
             public ListField<Int32> Cabinets;
 

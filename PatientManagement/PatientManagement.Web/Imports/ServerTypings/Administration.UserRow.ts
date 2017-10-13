@@ -7,12 +7,15 @@
         PasswordSalt?: string;
         DisplayName?: string;
         Email?: string;
+        RestrictedToCabinets?: number;
+        Info?: string;
         UserImage?: string;
         LastDirectoryUpdate?: string;
         IsActive?: number;
         WebSite?: string;
         PhoneNumber?: string;
         EmailSignature?: string;
+        UsersInRole?: number[];
         Cabinets?: number[];
         Password?: string;
         PasswordConfirm?: string;
@@ -44,12 +47,15 @@
             export declare const PasswordSalt: string;
             export declare const DisplayName: string;
             export declare const Email: string;
+            export declare const RestrictedToCabinets: string;
+            export declare const Info: string;
             export declare const UserImage: string;
             export declare const LastDirectoryUpdate: string;
             export declare const IsActive: string;
             export declare const WebSite: string;
             export declare const PhoneNumber: string;
             export declare const EmailSignature: string;
+            export declare const UsersInRole: string;
             export declare const Cabinets: string;
             export declare const Password: string;
             export declare const PasswordConfirm: string;
@@ -62,6 +68,6 @@
             export declare const UpdateDate: string;
         }
 
-        ['UserId', 'Username', 'Source', 'PasswordHash', 'PasswordSalt', 'DisplayName', 'Email', 'UserImage', 'LastDirectoryUpdate', 'IsActive', 'WebSite', 'PhoneNumber', 'EmailSignature', 'Cabinets', 'Password', 'PasswordConfirm', 'TenantId', 'TenantName', 'TenantCurrencyId', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDate'].forEach(x => (<any>Fields)[x] = x);
+        ['UserId', 'Username', 'Source', 'PasswordHash', 'PasswordSalt', 'DisplayName', 'Email', 'RestrictedToCabinets', 'Info', 'UserImage', 'LastDirectoryUpdate', 'IsActive', 'WebSite', 'PhoneNumber', 'EmailSignature', 'UsersInRole', 'Cabinets', 'Password', 'PasswordConfirm', 'TenantId', 'TenantName', 'TenantCurrencyId', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDate'].forEach(x => (<any>Fields)[x] = x);
     }
 }

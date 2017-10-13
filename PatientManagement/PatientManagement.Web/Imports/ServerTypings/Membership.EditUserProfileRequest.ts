@@ -5,6 +5,7 @@
         PhoneNumber?: string;
         WebSite?: string;
         UserImage?: string;
+        Info?: string;
         EmailSignature?: string;
     }
 }
