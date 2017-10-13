@@ -1429,7 +1429,7 @@
 			}
 		}
 		if (!ss.keyExists($Serenity_EnumTypeRegistry.$knownTypes, key)) {
-			throw new ss.Exception(ss.formatString("Can't find {0} enum type!", key));
+			throw new ss.Exception(ss.formatString("Can't find {0} enum type! If you have recently defined this enum type in server side code, make sure your project builds successfully and transform T4 templates. Also make sure that enum is under your project root namespace, and your namespace parts starts with capital letters, e.g. MyProject.Pascal.Cased namespace", key));
 		}
 		return $Serenity_EnumTypeRegistry.$knownTypes[key];
 	};
@@ -2383,7 +2383,7 @@
 				self.updateItems();
 			});
 		}
-		if (this.options.inplaceAdd && (ss.isNullOrUndefined(this.options.inplaceAddPermission) || Q.Authorization.hasPermission(this.options.inplaceAddPermission))) {
+		if (!this.options.autoComplete && this.options.inplaceAdd && (ss.isNullOrUndefined(this.options.inplaceAddPermission) || Q.Authorization.hasPermission(this.options.inplaceAddPermission))) {
 			this.addInplaceCreate(Q.text('Controls.SelectEditor.InplaceAdd'), null);
 		}
 	};
@@ -2910,50 +2910,44 @@
 		if (!ss.isValue(opt.mode)) {
 			opt.mode = 0;
 		}
-		this.$items = this.options.items || [];
 		div.addClass('s-PropertyGrid');
 		this.$editors = [];
-		var categoryIndexes = {};
-		var categoriesDiv = div;
-		var useCategories = this.options.useCategories && Q.any(this.$items, function(x) {
-			return !ss.isNullOrEmptyString(x.category);
+		this.$items = this.options.items || [];
+		var useTabs = Q.any(this.$items, function(x) {
+			return !ss.isNullOrEmptyString(x.tab);
 		});
-		if (this.options.useCategories) {
-			var linkContainer = $('<div/>').addClass('category-links');
-			categoryIndexes = this.$createCategoryLinks(linkContainer, this.$items);
-			if (ss.getKeyCount(categoryIndexes) > 1) {
-				linkContainer.appendTo(div);
+		if (useTabs) {
+			var ul = $("<ul class='nav nav-tabs property-tabs' role='tablist'></ul>").appendTo(this.element);
+			var tc = $("<div class='tab-content property-panes'></div>").appendTo(this.element);
+			var tabIndex = 0;
+			var i = 0;
+			while (i < this.$items.length) {
+				var tab = { $: Q.trimToEmpty(this.$items[i].tab) };
+				var tabItems = [];
+				var j = i;
+				do {
+					tabItems.push(this.$items[j]);
+				} while (++j < this.$items.length && ss.referenceEquals(Q.trimToEmpty(this.$items[j].tab), tab.$));
+				i = j;
+				var li = $("<li><a data-toggle='tab' role='tab'></a></li>").appendTo(ul);
+				if (tabIndex === 0) {
+					li.addClass('active');
+				}
+				var tabID = this.uniqueName + '_Tab' + tabIndex;
+				li.children('a').attr('href', '#' + tabID).text(this.$determineText(tab.$, ss.mkdel({ tab: tab }, function(prefix) {
+					return prefix + 'Tabs.' + this.tab.$;
+				})));
+				var pane = $("<div class='tab-pane fade' role='tabpanel'>").appendTo(tc);
+				if (tabIndex === 0) {
+					pane.addClass('in active');
+				}
+				pane.attr('id', tabID);
+				this.$createItems(pane, tabItems);
+				tabIndex++;
 			}
-			else {
-				linkContainer.find('a.category-link').unbind('click', $Serenity_PropertyGrid.$categoryLinkClick).remove();
-			}
-		}
-		categoriesDiv = $('<div/>').addClass('categories').appendTo(div);
-		var fieldContainer;
-		if (useCategories) {
-			fieldContainer = categoriesDiv;
 		}
 		else {
-			fieldContainer = $('<div/>').addClass('category').appendTo(categoriesDiv);
-		}
-		var priorCategory = null;
-		for (var i = 0; i < this.$items.length; i++) {
-			var item = this.$items[i];
-			var $t1 = item.category;
-			if (ss.isNullOrUndefined($t1)) {
-				$t1 = ss.coalesce(this.options.defaultCategory, '');
-			}
-			var category = $t1;
-			if (useCategories && !ss.referenceEquals(priorCategory, category)) {
-				var categoryDiv = this.$createCategoryDiv(categoriesDiv, categoryIndexes, category, ((item.collapsible !== true) ? null : ss.coalesce(item.collapsed, false)));
-				if (ss.isNullOrUndefined(priorCategory)) {
-					categoryDiv.addClass('first-category');
-				}
-				priorCategory = category;
-				fieldContainer = categoryDiv;
-			}
-			var editor = this.$createField(fieldContainer, item);
-			this.$editors[i] = editor;
+			this.$createItems(this.element, this.$items);
 		}
 		this.$updateInterface();
 	};
@@ -4501,7 +4495,7 @@
 		},
 		inplaceCreateClick: function(e) {
 		},
-		getCreateSearchChoice: function(getName) {
+		getCreateSearchChoice: function(getName, autoComplete) {
 			return ss.mkdel(this, function(s) {
 				this.lastCreateTerm = s;
 				s = ss.coalesce(Select2.util.stripDiacritics(s), '').toLowerCase();
@@ -4517,7 +4511,13 @@
 				if (!Q.any(this.get_items(), function(x1) {
 					return ss.coalesce(Select2.util.stripDiacritics(x1.text), '').toLowerCase().indexOf(s) !== -1;
 				})) {
+					if (autoComplete) {
+						return { id: this.lastCreateTerm, text: this.lastCreateTerm };
+					}
 					return { id: (-2147483648).toString(), text: Q.text('Controls.SelectEditor.NoResultsClickToDefine') };
+				}
+				if (autoComplete) {
+					return { id: this.lastCreateTerm, text: this.lastCreateTerm };
 				}
 				return { id: (-2147483648).toString(), text: Q.text('Controls.SelectEditor.ClickToDefine') };
 			});
@@ -4814,8 +4814,11 @@
 			if (ss.isValue(this.options.minimumResultsForSearch)) {
 				opt.minimumResultsForSearch = ss.unbox(this.options.minimumResultsForSearch);
 			}
-			if (this.options.inplaceAdd && (ss.isNullOrUndefined(this.options.inplaceAddPermission) || Q.Authorization.hasPermission(this.options.inplaceAddPermission))) {
-				opt.createSearchChoice = this.getCreateSearchChoice(null);
+			if (this.options.autoComplete) {
+				opt.createSearchChoice = this.getCreateSearchChoice(null, true);
+			}
+			else if (this.options.inplaceAdd && (ss.isNullOrUndefined(this.options.inplaceAddPermission) || Q.Authorization.hasPermission(this.options.inplaceAddPermission))) {
+				opt.createSearchChoice = this.getCreateSearchChoice(null, false);
 			}
 			if (this.options.multiple) {
 				opt.multiple = true;
@@ -5212,6 +5215,7 @@
 			}
 			if (ss.isValue(this.slickGrid)) {
 				this.slickGrid.resizeCanvas();
+				this.slickGrid.invalidate();
 			}
 		},
 		getInitialTitle: function() {
@@ -9013,6 +9017,7 @@
 			this.element.addClass('select2-offscreen').css('display', 'block');
 			// validasyonun çalışması için
 			x.editor.setData(this.element.val());
+			x.editor.setReadOnly(this.get_readOnly());
 		},
 		getLanguage: function() {
 			var lang = ss.coalesce(Q.trimToNull($('html').attr('lang')), 'en');
@@ -9636,6 +9641,50 @@
 	ss.initClass($Serenity_PropertyItemHelper, $asm, {});
 	ss.initClass($Serenity_PropertyEditorHelper, $asm, {}, $Serenity_PropertyItemHelper);
 	ss.initClass($Serenity_PropertyGrid, $asm, {
+		$createItems: function(container, items) {
+			var categoryIndexes = {};
+			var categoriesDiv = container;
+			var useCategories = this.options.useCategories && Q.any(items, function(x) {
+				return !ss.isNullOrEmptyString(x.category);
+			});
+			if (this.options.useCategories) {
+				var linkContainer = $('<div/>').addClass('category-links');
+				categoryIndexes = this.$createCategoryLinks(linkContainer, items);
+				if (ss.getKeyCount(categoryIndexes) > 1) {
+					linkContainer.appendTo(container);
+				}
+				else {
+					linkContainer.find('a.category-link').unbind('click', $Serenity_PropertyGrid.$categoryLinkClick).remove();
+				}
+			}
+			categoriesDiv = $('<div/>').addClass('categories').appendTo(container);
+			var fieldContainer;
+			if (useCategories) {
+				fieldContainer = categoriesDiv;
+			}
+			else {
+				fieldContainer = $('<div/>').addClass('category').appendTo(categoriesDiv);
+			}
+			var priorCategory = null;
+			for (var i = 0; i < items.length; i++) {
+				var item = items[i];
+				var $t1 = item.category;
+				if (ss.isNullOrUndefined($t1)) {
+					$t1 = ss.coalesce(this.options.defaultCategory, '');
+				}
+				var category = $t1;
+				if (useCategories && !ss.referenceEquals(priorCategory, category)) {
+					var categoryDiv = this.$createCategoryDiv(categoriesDiv, categoryIndexes, category, ((item.collapsible !== true) ? null : ss.coalesce(item.collapsed, false)));
+					if (ss.isNullOrUndefined(priorCategory)) {
+						categoryDiv.addClass('first-category');
+					}
+					priorCategory = category;
+					fieldContainer = categoryDiv;
+				}
+				var editor = this.$createField(fieldContainer, item);
+				this.$editors.push(editor);
+			}
+		},
 		destroy: function() {
 			if (ss.isValue(this.$editors)) {
 				for (var i = 0; i < this.$editors.length; i++) {
@@ -9684,6 +9733,9 @@
 			if (!ss.isNullOrEmptyString(item.cssClass)) {
 				fieldDiv.addClass(item.cssClass);
 			}
+			if (!ss.isNullOrEmptyString(item.formCssClass)) {
+				fieldDiv.addClass(item.formCssClass);
+			}
 			var editorId = this.options.idPrefix + item.name;
 			var title = this.$determineText(item.title, function(prefix) {
 				return prefix + item.name;
@@ -9700,6 +9752,14 @@
 				$t1 = ss.coalesce(title, '');
 			}
 			var label = $t2.attr('title', $t1).html(ss.coalesce(title, '')).appendTo(fieldDiv);
+			if (!ss.isNullOrEmptyString(item.labelWidth)) {
+				if (item.labelWidth === '0') {
+					label.hide();
+				}
+				else {
+					label.css('width', item.labelWidth);
+				}
+			}
 			if (item.required === true) {
 				$('<sup>*</sup>').attr('title', Q.text('Controls.PropertyGrid.RequiredHint')).prependTo(label);
 			}
