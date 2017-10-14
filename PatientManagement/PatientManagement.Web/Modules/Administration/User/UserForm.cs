@@ -29,7 +29,7 @@ namespace PatientManagement.Administration.Forms
 
         public List<Int32> Cabinets { get; set; }
 
-        public int RestrictedToCabinets { get; set; }
+        public short RestrictedToCabinets { get; set; }
         [Category("Extra fields")]
 
 

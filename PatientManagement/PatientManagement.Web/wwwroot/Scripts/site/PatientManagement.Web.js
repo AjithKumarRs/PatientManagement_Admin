@@ -5202,8 +5202,8 @@ var PatientManagement;
                 if (cookie) {
                     Q.first(filters, function (x) { return x.field == fields.CabinetId; }).init = function (w) {
                         w.value = cookie;
-                        //TODO: When permission for all cabinets is added uncoment 
-                        // (w as Serenity.IntegerEditor).element.prop('readonly', true);
+                        if (PatientManagement_46.Authorization.userDefinition.RestrictedToCabinets == 1)
+                            w.element.prop('readonly', true);
                     };
                 }
                 var q = Q.parseQueryString();
@@ -5717,6 +5717,7 @@ var PatientManagement;
                             text: response.Entities[0].Name,
                         });
                         _this.value = response.Entities[0].CabinetId + "";
+                        _this.readOnly = true;
                     }
                     else {
                         for (var i = 0; i < response.TotalCount; i++) {
@@ -5725,9 +5726,9 @@ var PatientManagement;
                                 text: response.Entities[i].Name,
                             });
                         }
+                        var cookie = $.cookie("CabinetPreference");
+                        _this.value = cookie + "";
                     }
-                    var cookie = $.cookie("CabinetPreference");
-                    _this.value = cookie + "";
                 });
                 _this.changeSelect2(function (e) {
                     if (!_this.value) {
@@ -5735,7 +5736,7 @@ var PatientManagement;
                     }
                     $.cookie('CabinetPreference', _this.value, {
                         path: Q.Config.applicationPath,
-                        expires: 365
+                        expires: 1
                     });
                     PatientManagement.CabinetsService.RetrieveWorkHours({
                         EntityId: _this.value

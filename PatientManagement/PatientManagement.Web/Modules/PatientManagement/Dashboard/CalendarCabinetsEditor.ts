@@ -21,7 +21,7 @@ namespace PatientManagement.PatientManagement {
 
                         });
                         this.value = response.Entities[0].CabinetId + "";
-                        //this.readOnly = true;
+                        this.readOnly = true;
                     } else {
 
                         for (var i = 0; i < response.TotalCount; i++) {
@@ -31,10 +31,11 @@ namespace PatientManagement.PatientManagement {
                                 
                             });
                         }
+
+                        var cookie = $.cookie("CabinetPreference");
+                        this.value = cookie + "";
                     }
 
-                    var cookie = $.cookie("CabinetPreference");
-                        this.value = cookie + "";
 
                     
                 });
@@ -47,7 +48,7 @@ namespace PatientManagement.PatientManagement {
 
                     $.cookie('CabinetPreference', this.value, {
                         path: Q.Config.applicationPath,
-                        expires: 365
+                        expires: 1
                     });
                     PatientManagement.CabinetsService.RetrieveWorkHours({
                             EntityId: this.value

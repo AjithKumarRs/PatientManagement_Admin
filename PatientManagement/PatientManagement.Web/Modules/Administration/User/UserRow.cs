@@ -99,8 +99,8 @@ namespace PatientManagement.Administration.Entities
 
 
         [DisplayName("Restricted To Cabinets"), NotNull]
-        [ModifyPermission("AdministrationTenants:User:RestrictedToCabinets")]
-        [ReadPermission("AdministrationTenants:User:RestrictedToCabinets")]
+        //[ModifyPermission("AdministrationTenants:User:RestrictedToCabinets")]
+        //[ReadPermission("AdministrationTenants:User:RestrictedToCabinets")]
         [BsSwitchEditor]
         public Int16? RestrictedToCabinets
         {
