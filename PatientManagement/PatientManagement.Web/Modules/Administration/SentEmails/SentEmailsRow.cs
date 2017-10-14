@@ -96,7 +96,6 @@ namespace PatientManagement.Administration.Entities
 
 
         [DisplayName("Created by"), Expression("usrI.UserName")]
-        [ReadPermission("Administration:Tenants")]
         public String InsertUserName
         {
             get { return Fields.InsertUserName[this]; }
@@ -104,8 +103,7 @@ namespace PatientManagement.Administration.Entities
         }
 
 
-        [DisplayName("Insert Date"), NotNull, QuickFilter()]
-        [ReadPermission("Administration:Tenants")]
+        [DisplayName("Insert Date"), NotNull, QuickFilter(), SortOrder(1, true)]
         public DateTime? InsertDate
         {
             get { return Fields.InsertDate[this]; }

@@ -2553,6 +2553,14 @@ declare namespace PatientManagement.Administration {
         sendPredefinedEmail: (visitId: any) => void;
     }
 }
+declare namespace PatientManagement.PatientManagement {
+    class SentEmailsToEmailFormatter implements Slick.Formatter {
+        format(ctx: Slick.FormatterContext): string;
+    }
+    class SentEmailsFromEmailFormatter implements Slick.Formatter {
+        format(ctx: Slick.FormatterContext): string;
+    }
+}
 declare namespace PatientManagement.Administration {
     class SentEmailsGrid extends Serenity.EntityGrid<SentEmailsRow, any> {
         protected getColumnsKey(): string;

@@ -1,4 +1,6 @@
 ﻿
+using PatientManagement.PatientManagement;
+
 namespace PatientManagement.Administration.Columns
 {
     using Serenity;
@@ -13,13 +15,21 @@ namespace PatientManagement.Administration.Columns
     [BasedOnRow(typeof(Entities.SentEmailsRow))]
     public class SentEmailsColumns
     {
-        [DisplayName("Db.Shared.RecordId"), AlignRight]
+        [DisplayName("Db.Shared.RecordId")]
         public Int64 SentEmailId { get; set; }
 
+        [Width(250)]
+        [SentEmailsFromEmailFormatter]
         public String FromEmail { get; set; }
+        [Width(250)]
         public String FromName { get; set; }
+        [Width(250)]
         public String Subject { get; set; }
+
+        [Width(250)]
+        [SentEmailsToEmailFormatter]
         public String ToEmail { get; set; }
+        [Width(250)]
         public String ToName { get; set; }
 
         [Width(80)]

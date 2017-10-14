@@ -8671,6 +8671,10 @@ section.content > .s-DataGrid {
   padding: 2px 0px 2px 25px;
   background: url(../serenity/images/mail.png) no-repeat center left;
 }
+.mail-open-symbol {
+  padding: 2px 0px 2px 25px;
+  background: url(../serenity/images/mail-open.png) no-repeat center left;
+}
 .key-symbol {
   padding: 2px 0px 2px 25px;
   background: url(../serenity/images/key.png) no-repeat center left;

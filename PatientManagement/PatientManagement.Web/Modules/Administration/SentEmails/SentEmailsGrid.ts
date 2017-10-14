@@ -16,13 +16,21 @@ namespace PatientManagement.Administration {
         protected getColumns(): Slick.Column[] {
             var columns = super.getColumns();
             var fld = SentEmailsRow.Fields;
-
-            Q.first(columns, x => x.field == fld.FromEmail).format =
-                ctx => '<a href="javascript:;" class="view-email-link">'+ Q.htmlEncode(ctx.value) + '</a>';
+            columns.splice(1,
+                0,
+                {
+                    field: 'Print Invoice',
+                    name: '',
+                    format: ctx => '<a class="inline-action open-email" title="Open Email">' +
+                        '<i class="fa fa-file-code-o text-blue"></i> OPEN</a>',
+                    width: 76,
+                    minWidth: 54,
+                    maxWidth: 76
+                });
 
             return columns;
         }
-
+        
         protected onClick(e: JQueryEventObject, row: number, cell: number): void {
 
             // let base grid handle clicks for its edit links
@@ -44,6 +52,13 @@ namespace PatientManagement.Administration {
 
                 new ViewEmailDialog(item.SentEmailId, item.ToName, item.InsertDate).dialogOpen();
                 
+            }
+
+            if (target.hasClass("open-email")) {
+                e.preventDefault();
+
+                new ViewEmailDialog(item.SentEmailId, item.ToName, item.InsertDate).dialogOpen();
+
             }
         }
     }
