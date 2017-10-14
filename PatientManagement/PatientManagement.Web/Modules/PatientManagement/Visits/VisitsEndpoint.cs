@@ -63,6 +63,11 @@ namespace PatientManagement.PatientManagement.Endpoints
                 emailModel.PatientName = patient.Name;
                 emailModel.VisitDate = startDate;
 
+                var externalUrl = Config.Get<EnvironmentSettings>().SiteExternalUrl ??
+                                  Request.GetBaseUri().ToString();
+
+                emailModel.SetTenantSetings(externalUrl, emailModel);
+
                 var emailBody = TemplateHelper.RenderViewToString(HttpContext.RequestServices,
                     MVC.Views.Common.EmailTemplates.ChangedVisitAutomaticEmail.EmailTemplates_ChangedVisitAutomaticEmail, emailModel);
 

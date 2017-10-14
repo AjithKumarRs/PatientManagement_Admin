@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PatientManagement.Common.EmailTemplates
 {
-    public class ChangedVisitAutomaticEmailModel
+    public class ChangedVisitAutomaticEmailModel: BasicEmailModel<ChangedVisitAutomaticEmailModel>
     {
         public DateTime VisitDate { get; set; }
 
