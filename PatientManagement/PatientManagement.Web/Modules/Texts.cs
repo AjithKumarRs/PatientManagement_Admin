@@ -317,6 +317,14 @@ namespace PatientManagement
                 public static LocalText ThemeRedLight = "Red Light";
                 public static LocalText ThemeYellow = "Yellow";
                 public static LocalText ThemeYellowLight = "Yellow Light";
+
+                public static LocalText RightBoxLayoutTechnicalDocumentation = "Technical Documentation";
+                public static LocalText RightBoxLayoutTechnicalDocumentationLink = "https://help.myclario.com/";
+                public static LocalText RightBoxLayoutFaqLink = "https://faq.myclario.com/";
+                public static LocalText RightBoxLayoutFaq = "FAQ";
+                public static LocalText RightBoxLayoutButton = "check it out";
+                public static LocalText RightBoxHeader = "Do you need some help?";
+
             }
 
             public static class ValidationError
