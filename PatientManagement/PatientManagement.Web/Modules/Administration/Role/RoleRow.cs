@@ -1,4 +1,5 @@
-﻿using PatientManagement.PatientManagement.Scripts;
+﻿using System.Collections.Generic;
+using PatientManagement.PatientManagement.Scripts;
 
 namespace PatientManagement.Administration.Entities
 {
@@ -29,6 +30,15 @@ namespace PatientManagement.Administration.Entities
             set { Fields.RoleName[this] = value; }
         }
 
+        [DisplayName("Users in role"), QuickFilter()]
+        [LookupEditor(typeof(UserRow), Multiple = true), NotMapped]
+        [LinkingSetRelation(typeof(UserRoleRow), "RoleId", "UserId")]
+        [MinSelectLevel(SelectLevel.Details)]
+        public List<Int32> UsersInRole
+        {
+            get { return (List<Int32>)Fields.UsersInRole[this]; }
+            set { Fields.UsersInRole[this] = value; }
+        }
         #region ILoggingRow
 
         [DisplayName("Insert User Id"), NotNull, ForeignKey("Users", "UserId"), LeftJoin("usrI"), TextualField("InsertUserName")]
@@ -162,7 +172,7 @@ namespace PatientManagement.Administration.Entities
             public DateTimeField UpdateDateField;
             public Int16Field IsActive;
 
-
+            public ListField<Int32> UsersInRole;
             public StringField TenantName;
             public StringField InsertUserName;
             public StringField UpdateUserName;

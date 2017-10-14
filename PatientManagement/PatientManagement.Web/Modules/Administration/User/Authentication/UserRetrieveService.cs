@@ -17,7 +17,6 @@
             if (user != null)
             {
                 var tenantName = connection.ById<Entities.TenantRow>(user.TenantId).TenantName;
-
                 return new UserDefinition
                 {
                     UserId = user.UserId.Value,
@@ -34,7 +33,8 @@
                     LastDirectoryUpdate = user.LastDirectoryUpdate,
                     TenantId = user.TenantId.Value,
                     TenantName = tenantName,
-                    InsertDate = user.InsertDate
+                    InsertDate = user.InsertDate,
+                    RestrictedToCabinets = user.RestrictedToCabinets??1
                 };
             }
             return null;

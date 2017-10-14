@@ -1,6 +1,7 @@
 ﻿
 
 using System.Linq;
+using PatientManagement.PatientManagement.Entities;
 
 namespace PatientManagement.PatientManagement.Repositories
 {
@@ -50,6 +51,21 @@ namespace PatientManagement.PatientManagement.Repositories
 
         private class MyListHandler : ListRequestHandler<MyRow>
         {
+            protected override void OnBeforeExecuteQuery()
+            {
+                base.OnBeforeExecuteQuery();
+                var user = ((UserDefinition)Authorization.UserDefinition);
+
+                if (user.RestrictedToCabinets == 1)
+                {
+                    var reprFlds = CabinetRepresentativesRow.Fields;
+                    var cabinetRepres = this.Connection.List<CabinetRepresentativesRow>(reprFlds.UserId == user.UserId).Select(s => s.CabinetId);
+                    var flds = MyRow.Fields;
+
+                    if (cabinetRepres.Any())
+                        this.Query.Where(flds.TenantId == user.TenantId && flds.CabinetId.In(cabinetRepres));
+                }
+            }
         }
     }
 }

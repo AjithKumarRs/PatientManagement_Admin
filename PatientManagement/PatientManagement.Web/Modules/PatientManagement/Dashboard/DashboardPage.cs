@@ -141,7 +141,7 @@ namespace PatientManagement.PatientManagement.Pages
                     cabinetIdActive = cabinets.FirstOrDefault().CabinetId ?? 0;
 
                     CookieOptions options = new CookieOptions();
-                    options.Expires = DateTime.Now.AddDays(365);
+                    options.Expires = DateTime.Now.AddDays(1);
                     Response.Cookies.Append("CabinetPreference", cabinets.FirstOrDefault().CabinetId.ToString(),
                         options);
                 }
@@ -157,7 +157,7 @@ namespace PatientManagement.PatientManagement.Pages
                         cabinetIdActive = cabinetRepr.FirstOrDefault().CabinetId ?? 0;
 
                         CookieOptions options = new CookieOptions();
-                        options.Expires = DateTime.Now.AddDays(365);
+                        options.Expires = DateTime.Now.AddDays(1);
                         Response.Cookies.Append("CabinetPreference", cabinetRepr.FirstOrDefault().CabinetId.ToString(),
                             options);
                     }
@@ -166,7 +166,7 @@ namespace PatientManagement.PatientManagement.Pages
                         cabinetIdActive = cabinets.FirstOrDefault().CabinetId ?? 0;
 
                         CookieOptions options = new CookieOptions();
-                        options.Expires = DateTime.Now.AddDays(365);
+                        options.Expires = DateTime.Now.AddDays(1);
                         Response.Cookies.Append("CabinetPreference", cabinets.FirstOrDefault().CabinetId.ToString(),
                             options);
                     }

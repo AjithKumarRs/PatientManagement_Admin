@@ -1,4 +1,7 @@
 ﻿
+using System.Collections.Generic;
+using PatientManagement.PatientManagement;
+
 namespace PatientManagement.Administration.Forms
 {
     using Serenity.ComponentModel;
@@ -13,9 +16,12 @@ namespace PatientManagement.Administration.Forms
         public Int32 RoleId { get; set; }
         [EditLink, Width(300)]
         public String RoleName { get; set; }
+
+        [Width(450), UserListFormatter]
+        public List<Int32> UsersInRole { get; set; }
+
         [Width(80)]
         public String TenantName { get; set; }
-
         [Width(80)]
         public String InsertUserName { get; set; }
         [DisplayFormat("dd/MM/yyyy HH:mm")]
