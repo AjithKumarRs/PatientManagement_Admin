@@ -471,7 +471,7 @@ var PatientManagement;
             var Fields;
             (function (Fields) {
             })(Fields = PaymentsRow.Fields || (PaymentsRow.Fields = {}));
-            ['PaymentId', 'SubscriptionId', 'TenantId', 'PaymentDetailsId', 'PaymentOptionId', 'CurrencyId', 'Value', 'CustomerName', 'CustomerIban', 'ReasonForPayment', 'Description', 'Receiver', 'IBANReceiver', 'BICReceiver', 'BankNameReceiver', 'PaymentStatus', 'SubscriptionOfferId', 'SubscriptionSubscriptionEndDate', 'SubscriptionName', 'PaymentDetailName', 'PaymentDetailsBankName', 'PaymentDetailsIbanBeneficient', 'PaymentOptionMonths', 'PaymentOptionName', 'CouponId', 'CouponKey', 'CurrencyCurrencyId', 'CurrencyName', 'CurrencyRate', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'TenantName', 'InsertUserName', 'UpdateUserName'].forEach(function (x) { return Fields[x] = x; });
+            ['PaymentId', 'SubscriptionId', 'TenantId', 'PaymentDetailsId', 'PaymentOptionId', 'CurrencyId', 'Value', 'SubTotal', 'CustomerName', 'CustomerIban', 'ReasonForPayment', 'Description', 'Receiver', 'IBANReceiver', 'BICReceiver', 'BankNameReceiver', 'PaymentStatus', 'SubscriptionOfferId', 'SubscriptionSubscriptionEndDate', 'SubscriptionName', 'PaymentDetailName', 'PaymentDetailsBankName', 'PaymentDetailsIbanBeneficient', 'PaymentOptionMonths', 'PaymentOptionName', 'CouponId', 'CouponKey', 'CouponDiscount', 'CurrencyCurrencyId', 'CurrencyName', 'CurrencyRate', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'TenantName', 'InsertUserName', 'UpdateUserName'].forEach(function (x) { return Fields[x] = x; });
         })(PaymentsRow = Administration.PaymentsRow || (Administration.PaymentsRow = {}));
     })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
 })(PatientManagement || (PatientManagement = {}));
@@ -2177,6 +2177,9 @@ var PatientManagement;
                     _this.CheckIfFieldsAreEmpty();
                 });
                 _this.form.PaymentDetailsId.changeSelect2(function (e) {
+                    if (!_this.form.PaymentDetailsId.value) {
+                        return;
+                    }
                     Administration.PaymentsDetailsService.Retrieve({
                         EntityId: _this.form.PaymentDetailsId.value
                     }, function (response) {
@@ -2219,25 +2222,23 @@ var PatientManagement;
                 Serenity.EditorUtils.setReadOnly(this.form.IBANReceiver, true);
                 Serenity.EditorUtils.setReadOnly(this.form.BICReceiver, true);
                 Serenity.EditorUtils.setReadOnly(this.form.BankNameReceiver, true);
+                Serenity.EditorUtils.setReadOnly(this.form.ReasonForPayment, true);
                 Serenity.EditorUtils.setReadOnly(this.form.PaymentStatus, true);
                 var subsId = this.form.SubscriptionId.getSelect2Options().data[0].id;
                 this.form.SubscriptionId.value = subsId;
-                var detailsId = this.form.PaymentDetailsId.getSelect2Options().data[0].id;
-                this.form.PaymentDetailsId.value = detailsId;
-                Administration.PaymentsDetailsService.Retrieve({
-                    EntityId: detailsId
-                }, function (response) {
-                    _this.setPaymentDetails(response.Entity);
-                });
+                if (this.form.PaymentDetailsId.getSelect2Options().data[0]) {
+                    var detailsId = this.form.PaymentDetailsId.getSelect2Options().data[0].id;
+                    this.form.PaymentDetailsId.value = detailsId;
+                    Administration.PaymentsDetailsService.Retrieve({
+                        EntityId: detailsId
+                    }, function (response) {
+                        _this.setPaymentDetails(response.Entity);
+                    });
+                }
                 Administration.SubscriptionsService.Retrieve({
                     EntityId: subsId
                 }, function (response) {
                     _this.setSubscriptionDetails(response.Entity);
-                });
-                Administration.PaymentsDetailsService.Retrieve({
-                    EntityId: this.form.PaymentDetailsId.value
-                }, function (response) {
-                    _this.setPaymentDetails(response.Entity);
                 });
                 Serenity.EditorUtils.setReadOnly(this.form.SubscriptionId, true);
             };
@@ -2369,6 +2370,11 @@ var PatientManagement;
             PaymentsDetailsDialog.prototype.getLocalTextPrefix = function () { return Administration.PaymentsDetailsRow.localTextPrefix; };
             PaymentsDetailsDialog.prototype.getNameProperty = function () { return Administration.PaymentsDetailsRow.nameProperty; };
             PaymentsDetailsDialog.prototype.getService = function () { return Administration.PaymentsDetailsService.baseUrl; };
+            PaymentsDetailsDialog.prototype.onSaveSuccess = function (response) {
+                console.log('save');
+                $('input[name=CustomerName]').val(this.form.BeneficiaryName.value);
+                $('input[name=CustomerIban]').val(this.form.IbanBeneficient.value);
+            };
             return PaymentsDetailsDialog;
         }(Serenity.EntityDialog));
         PaymentsDetailsDialog = __decorate([

@@ -33,6 +33,9 @@ namespace PatientManagement.Administration {
             });
             this.form.PaymentDetailsId.changeSelect2(e => {
 
+                if (!this.form.PaymentDetailsId.value) {
+                    return;
+                }
                 PaymentsDetailsService.Retrieve({
                     EntityId: this.form.PaymentDetailsId.value
                 }, response => {
@@ -82,29 +85,30 @@ namespace PatientManagement.Administration {
             Serenity.EditorUtils.setReadOnly(this.form.IBANReceiver, true);
             Serenity.EditorUtils.setReadOnly(this.form.BICReceiver, true);
             Serenity.EditorUtils.setReadOnly(this.form.BankNameReceiver, true);
+            Serenity.EditorUtils.setReadOnly(this.form.ReasonForPayment, true);
 
             Serenity.EditorUtils.setReadOnly(this.form.PaymentStatus, true);
+
             var subsId = this.form.SubscriptionId.getSelect2Options().data[0].id;
             this.form.SubscriptionId.value = subsId;
 
-            var detailsId = this.form.PaymentDetailsId.getSelect2Options().data[0].id;
-            this.form.PaymentDetailsId.value = detailsId;
-            PaymentsDetailsService.Retrieve({
-                EntityId: detailsId
-            }, response => {
-                this.setPaymentDetails(response.Entity);
-            });
+            if (this.form.PaymentDetailsId.getSelect2Options().data[0]) {
+                var detailsId = this.form.PaymentDetailsId.getSelect2Options().data[0].id;
+
+                this.form.PaymentDetailsId.value = detailsId;
+                PaymentsDetailsService.Retrieve({
+                        EntityId: detailsId
+                    },
+                    response => {
+                        this.setPaymentDetails(response.Entity);
+                    });
+            }
             SubscriptionsService.Retrieve({
                 EntityId: subsId
             }, response => {
                 this.setSubscriptionDetails(response.Entity);
                 });
 
-            PaymentsDetailsService.Retrieve({
-                EntityId: this.form.PaymentDetailsId.value
-            }, response => {
-                this.setPaymentDetails(response.Entity);
-            });
 
             Serenity.EditorUtils.setReadOnly(this.form.SubscriptionId, true);
         }

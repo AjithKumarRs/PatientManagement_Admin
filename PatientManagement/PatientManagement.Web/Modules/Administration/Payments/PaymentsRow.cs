@@ -28,7 +28,7 @@ namespace PatientManagement.Administration.Entities
         }
 
         [Updatable(false)]
-        [DisplayName("Customer Name"), NotNull]
+        [DisplayName("Customer Name"), NotNull, CssClass("linked-customer-name")]
         public string CustomerName
         {
             get { return Fields.CustomerName[this]; }
@@ -36,7 +36,7 @@ namespace PatientManagement.Administration.Entities
         }
 
         [Updatable(false)]
-        [DisplayName("Customer IBAN"), NotNull]
+        [DisplayName("Customer IBAN"), NotNull, CssClass("linked-customer-CustomerIban")]
         public string CustomerIban
         {
             get { return Fields.CustomerIban[this]; }
@@ -96,6 +96,14 @@ namespace PatientManagement.Administration.Entities
             set { Fields.Value[this] = value; }
         }
 
+        [Updatable(false)]
+        [DisplayName("SubTotal"), NotNull]
+        public Decimal? SubTotal
+        {
+            get { return Fields.SubTotal[this]; }
+            set { Fields.SubTotal[this] = value; }
+        }
+
         [DisplayName("Payment Status"), UpdatePermission("Administration:PaymentStatus")]
         public PaymentStatus? PaymentStatus
         {
@@ -109,6 +117,12 @@ namespace PatientManagement.Administration.Entities
             set { Fields.CouponKey[this] = value; }
         }
 
+        [DisplayName("Coupon Discount")]
+        public Int16? CouponDiscount
+        {
+            get { return Fields.CouponDiscount[this]; }
+            set { Fields.CouponDiscount[this] = value; }
+        }
         #region Coupons
 
         [DisplayName("Coupon")]
@@ -374,6 +388,8 @@ namespace PatientManagement.Administration.Entities
             public Int32Field CurrencyId;
 
             public DecimalField Value;
+            public DecimalField SubTotal;
+
             public StringField CustomerName;
             public StringField CustomerIban;
             public StringField ReasonForPayment;
@@ -397,6 +413,7 @@ namespace PatientManagement.Administration.Entities
 
             public ListField<Int32> CouponId;
             public StringField CouponKey;
+            public Int16Field CouponDiscount;
 
             public StringField CurrencyCurrencyId;
             public StringField CurrencyName;

@@ -29,10 +29,13 @@ namespace PatientManagement.Administration.Repositories
                 if (coupon.MaxTimeUsing.HasValue && coupon.IsUsed >= coupon.MaxTimeUsing.Value)
                     throw new ValidationError(Texts.Site.Payments.CouponExpiredError);
 
+                request.Entity.SubTotal = request.Entity.Value;
                 var price = (request.Entity.Value * coupon.Discount) / 100;
                 request.Entity.Value = request.Entity.Value - price;
+                request.Entity.CouponDiscount = coupon.Discount;
 
                 coupon.IsUsed = coupon.IsUsed + 1;
+
                 uow.Connection.UpdateById(coupon);
 
 

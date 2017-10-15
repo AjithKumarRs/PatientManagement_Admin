@@ -590,6 +590,7 @@ declare namespace PatientManagement.Administration {
         PaymentOptionId?: number;
         CurrencyId?: number;
         Value?: number;
+        SubTotal?: number;
         CustomerName?: string;
         CustomerIban?: string;
         ReasonForPayment?: string;
@@ -609,6 +610,7 @@ declare namespace PatientManagement.Administration {
         PaymentOptionName?: string;
         CouponId?: number[];
         CouponKey?: string;
+        CouponDiscount?: number;
         CurrencyCurrencyId?: string;
         CurrencyName?: string;
         CurrencyRate?: number;
@@ -634,6 +636,7 @@ declare namespace PatientManagement.Administration {
             const PaymentOptionId: string;
             const CurrencyId: string;
             const Value: string;
+            const SubTotal: string;
             const CustomerName: string;
             const CustomerIban: string;
             const ReasonForPayment: string;
@@ -653,6 +656,7 @@ declare namespace PatientManagement.Administration {
             const PaymentOptionName: string;
             const CouponId: string;
             const CouponKey: string;
+            const CouponDiscount: string;
             const CurrencyCurrencyId: string;
             const CurrencyName: string;
             const CurrencyRate: string;
@@ -2637,6 +2641,7 @@ declare namespace PatientManagement.Administration {
         protected getNameProperty(): string;
         protected getService(): string;
         protected form: PaymentsDetailsForm;
+        onSaveSuccess(response: Serenity.SaveResponse): void;
     }
 }
 declare namespace PatientManagement.Administration {

@@ -20,6 +20,7 @@ namespace PatientManagement.Administration.Repositories
         public SaveResponse Create(IUnitOfWork uow, SaveRequest<MyRow> request)
         {
             var key = RandomURLHelper.GetUrl(15);
+            
             request.Entity.Key = key;
 
             return new MySaveHandler().Process(uow, request, SaveRequestType.Create);

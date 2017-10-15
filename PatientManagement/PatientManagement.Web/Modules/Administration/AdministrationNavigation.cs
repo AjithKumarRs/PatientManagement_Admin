@@ -20,7 +20,7 @@ using Membership  = PatientManagement.Membership.Pages;
 [assembly: NavigationMenu(9000, "System Settings", icon: "fa-tasks ")]
 [assembly: NavigationLink(9000, "System Settings/Payment Options", typeof(Administration.PaymentOptionsController), icon: "fa-money")]
 [assembly: NavigationLink(9000, "System Settings/Offers", typeof(Administration.OffersController), icon: "fa-file-text")]
-[assembly: NavigationLink(9000, "System Settings/Coupons", typeof(Administration.CouponsController), icon: "fa-file-text")]
+[assembly: NavigationLink(9000, "System Settings/Coupons", typeof(Administration.CouponsController), icon: "fa-percent")]
 [assembly: NavigationLink(9000, "System Settings/Languages", typeof(Administration.LanguageController), icon: "icon-bubbles")]
 [assembly: NavigationLink(9000, "System Settings/Tenant", typeof(Administration.TenantController), icon: "fa-user-secret")]
 [assembly: NavigationLink(9000, "System Settings/Translations", typeof(Administration.TranslationController), icon: "icon-speech")]

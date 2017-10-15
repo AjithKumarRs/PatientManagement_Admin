@@ -30,6 +30,8 @@ namespace PatientManagement.Migrations.DefaultDB
                 .AddColumn("ReasonForPayment").AsString(2000).Nullable()
                 .AddColumn("CouponKey").AsString(500).Nullable()
                 .AddColumn("Description").AsString(2000).Nullable()
+                .AddColumn("CouponDiscount").AsInt16().Nullable()
+                .AddColumn("SubTotal").AsDecimal(8, 4).Nullable()
                 .AddColumn("Receiver").AsString(2000).Nullable()
                 .AddColumn("IBANReceiver").AsString(2000).Nullable()
                 .AddColumn("BICReceiver").AsString(2000).Nullable()

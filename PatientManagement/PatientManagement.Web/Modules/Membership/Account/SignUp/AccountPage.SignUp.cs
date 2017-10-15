@@ -94,7 +94,7 @@ namespace PatientManagement.Membership.Pages
                     var subscriptionId = (int)connection.InsertAndGetID(new SubscriptionsRow
                     {
                         // TODO Get local string 
-                        Name = string.Format(Texts.Forms.Membership.SignUp.FormatSubscriptionName, offer.Name),
+                        Name = string.Format("{0} - {1}", offer.Name, request.TenantName),
                         OfferId = offer.OfferId,
                         TenantId = Int32.Parse(tenant.TenantId.ToString()),
                         SubscriptionEndDate = DateTime.Now.AddMonths(12),

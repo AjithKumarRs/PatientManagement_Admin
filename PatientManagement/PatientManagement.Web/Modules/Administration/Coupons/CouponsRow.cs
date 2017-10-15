@@ -24,6 +24,7 @@ namespace PatientManagement.Administration.Entities
 
         [DisplayName("Key"), Size(2000), QuickSearch]
         [LookupInclude]
+        [Unique]
         public String Key
         {
             get { return Fields.Key[this]; }
