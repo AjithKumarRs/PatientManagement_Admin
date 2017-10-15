@@ -15,7 +15,7 @@
         <div class="col-xs-12">
             <h2 class="page-header">
                 <i class="fa fa-globe"></i> My Clario
-                <small class="pull-right">Date: 2/10/2014</small>
+                <small class="pull-right">Дата: @Model.CreatedDate.ToString("dd/MM/yyyy")</small>
             </h2>
         </div>
         <!-- /.col -->
@@ -105,16 +105,14 @@
     <div class="row">
         <!-- accepted payments column -->
        <div class="col-xs-6">
-            @*<p class="lead">Payment Methods:</p>
-            <img src="../../dist/img/credit/visa.png" alt="Visa">
-            <img src="../../dist/img/credit/mastercard.png" alt="Mastercard">
-            <img src="../../dist/img/credit/american-express.png" alt="American Express">
-            <img src="../../dist/img/credit/paypal2.png" alt="Paypal">
+            <p class="lead">Забележки към банков превод</p>
+            @*<img src="Content/serenity/images/credit-card.png" alt="Visa">*@
+       
 
             <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
-                Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem plugg
-                dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
-            </p>*@
+                Ако сте направили няколко плащания към абонамента ви и искате да обозначите,
+                че правите превод точно по това плащане, моля включете номенра на платежното "#@Texts.Site.Payments.SerialNumPrefix@Model.PaymentId" в допълнително поясниение към превода!
+            </p>
         </div>
         <!-- /.col -->
         <div class="col-xs-6">
@@ -153,7 +151,7 @@
                 <i class="fa fa-credit-card"></i> Submit Payment
             </button>*@
             <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
-                <i class="fa fa-download"></i> Generate PDF
+                <i class="fa fa-download"></i> Генерирай PDF
             </button>
         </div>
     </div>

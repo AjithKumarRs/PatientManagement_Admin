@@ -49,7 +49,7 @@ namespace PatientManagement.Payments
                 data.Description = payment.Description;
                 data.MonthsPayed = payment.MonthsPayed ?? 0;
                 data.ReasonForPayment = payment.ReasonForPayment;
-       
+                data.CreatedDate = payment.InsertDate??DateTime.MinValue;
             }
             return data;
         }
@@ -96,6 +96,8 @@ namespace PatientManagement.Payments
 
         public int CouponId { get; set; }
 
+        public int CouponDiscount { get; set; }
+
         public string CouponName { get; set; }
 
         public string CouponKey { get; set; }
@@ -105,12 +107,12 @@ namespace PatientManagement.Payments
         public Int64 SubscriptionId { get; set; }
 
 
-
         public string Currency { get; set; }
 
-        public int CouponDiscount { get; set; }
 
         public int MonthsPayed { get; set; }
+
+        public DateTime CreatedDate { get; set; }
 
         public string PaymentType { get; set; }
 
