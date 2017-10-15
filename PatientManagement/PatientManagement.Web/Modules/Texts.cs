@@ -162,6 +162,8 @@ namespace PatientManagement
             }
             public static class Payments
             {
+                public static LocalText SerialNumPrefix = "PEYMID";
+
                 public static LocalText PaymentEmptyValueError = "You can't make empty payment!";
                 public static LocalText PaymentBlank = "File";
                 public static LocalText Reciever = "АЙ ПИ ООД";
@@ -172,10 +174,20 @@ namespace PatientManagement
                 public static LocalText CouponExpiredError = "The coupon that you entered is expired!";
                 public static LocalText CouponNotExist = "The coupon that you entered not exist!";
 
+                public static LocalText InvoiceFrom = "From";
 
             }
+
+            public static class Coupons
+            {
+                public static LocalText SerialNumPrefix = "COUPID";
+
+            }
+
             public static class Subscriptions
             {
+                public static LocalText SerialNumPrefix = "SUBSID";
+
                 public static LocalText SubscriptionTitle = "Subscription Information";
                 public static LocalText SubscriptionRightBox = "You can make direct payment from here!";
                 public static LocalText SubscriptionRightBoxButton = "Add Payment";

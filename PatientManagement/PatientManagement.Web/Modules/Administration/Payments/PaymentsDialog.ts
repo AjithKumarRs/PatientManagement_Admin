@@ -135,7 +135,8 @@ namespace PatientManagement.Administration {
         }
 
         private setSubscriptionDetails(details: SubscriptionsRow) {
-            this.form.ReasonForPayment.value = details.Name + ' - SUBSID' + details.SubscriptionId;
+         
+            this.form.ReasonForPayment.value = details.Name + ' - ' + Q.text('Site.Subscriptions.SerialNumPrefix') + details.SubscriptionId;
         }
 
     }

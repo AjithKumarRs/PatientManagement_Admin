@@ -9,6 +9,7 @@
         Value?: number;
         SubTotal?: number;
         CustomerName?: string;
+        CustomerBankName?: string;
         CustomerIban?: string;
         ReasonForPayment?: string;
         Description?: string;
@@ -17,6 +18,9 @@
         BICReceiver?: string;
         BankNameReceiver?: string;
         PaymentStatus?: PatientManagement.PaymentStatus;
+        MonthsPayed?: number;
+        PaymentCurrency?: string;
+        PaymentType?: string;
         SubscriptionOfferId?: number;
         SubscriptionSubscriptionEndDate?: string;
         SubscriptionName?: string;
@@ -60,6 +64,7 @@
             export declare const Value: string;
             export declare const SubTotal: string;
             export declare const CustomerName: string;
+            export declare const CustomerBankName: string;
             export declare const CustomerIban: string;
             export declare const ReasonForPayment: string;
             export declare const Description: string;
@@ -68,6 +73,9 @@
             export declare const BICReceiver: string;
             export declare const BankNameReceiver: string;
             export declare const PaymentStatus: string;
+            export declare const MonthsPayed: string;
+            export declare const PaymentCurrency: string;
+            export declare const PaymentType: string;
             export declare const SubscriptionOfferId: string;
             export declare const SubscriptionSubscriptionEndDate: string;
             export declare const SubscriptionName: string;
@@ -91,6 +99,6 @@
             export declare const UpdateUserName: string;
         }
 
-        ['PaymentId', 'SubscriptionId', 'TenantId', 'PaymentDetailsId', 'PaymentOptionId', 'CurrencyId', 'Value', 'SubTotal', 'CustomerName', 'CustomerIban', 'ReasonForPayment', 'Description', 'Receiver', 'IBANReceiver', 'BICReceiver', 'BankNameReceiver', 'PaymentStatus', 'SubscriptionOfferId', 'SubscriptionSubscriptionEndDate', 'SubscriptionName', 'PaymentDetailName', 'PaymentDetailsBankName', 'PaymentDetailsIbanBeneficient', 'PaymentOptionMonths', 'PaymentOptionName', 'CouponId', 'CouponKey', 'CouponDiscount', 'CurrencyCurrencyId', 'CurrencyName', 'CurrencyRate', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'TenantName', 'InsertUserName', 'UpdateUserName'].forEach(x => (<any>Fields)[x] = x);
+        ['PaymentId', 'SubscriptionId', 'TenantId', 'PaymentDetailsId', 'PaymentOptionId', 'CurrencyId', 'Value', 'SubTotal', 'CustomerName', 'CustomerBankName', 'CustomerIban', 'ReasonForPayment', 'Description', 'Receiver', 'IBANReceiver', 'BICReceiver', 'BankNameReceiver', 'PaymentStatus', 'MonthsPayed', 'PaymentCurrency', 'PaymentType', 'SubscriptionOfferId', 'SubscriptionSubscriptionEndDate', 'SubscriptionName', 'PaymentDetailName', 'PaymentDetailsBankName', 'PaymentDetailsIbanBeneficient', 'PaymentOptionMonths', 'PaymentOptionName', 'CouponId', 'CouponKey', 'CouponDiscount', 'CurrencyCurrencyId', 'CurrencyName', 'CurrencyRate', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'TenantName', 'InsertUserName', 'UpdateUserName'].forEach(x => (<any>Fields)[x] = x);
     }
 }

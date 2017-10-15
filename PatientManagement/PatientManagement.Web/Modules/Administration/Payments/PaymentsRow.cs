@@ -44,6 +44,14 @@ namespace PatientManagement.Administration.Entities
         }
 
         [Updatable(false)]
+        [DisplayName("Customer Bank Name"), NotNull, CssClass("linked-customer-customerbank")]
+        public string CustomerBankName
+        {
+            get { return Fields.CustomerBankName[this]; }
+            set { Fields.CustomerBankName[this] = value; }
+        }
+
+        [Updatable(false)]
         [DisplayName("Reason For Payment"), NotNull]
         public string ReasonForPayment
         {
@@ -57,6 +65,31 @@ namespace PatientManagement.Administration.Entities
             get { return Fields.Description[this]; }
             set { Fields.Description[this] = value; }
         }
+
+        [Updatable(false)]
+        [DisplayName("Payment Type"), Size(500)]
+        public string PaymentType
+        {
+            get { return Fields.PaymentType[this]; }
+            set { Fields.PaymentType[this] = value; }
+        }
+
+        [Updatable(false)]
+        [DisplayName("Payment Currency"), Size(50)]
+        public string PaymentCurrency
+        {
+            get { return Fields.PaymentCurrency[this]; }
+            set { Fields.PaymentCurrency[this] = value; }
+        }
+
+        [Updatable(false)]
+        [DisplayName("Months Payed")]
+        public Int16? MonthsPayed
+        {
+            get { return Fields.MonthsPayed[this]; }
+            set { Fields.MonthsPayed[this] = value; }
+        }
+
         [Updatable(false)]
         [DisplayName("Receiver"), NotNull]
         public string Receiver
@@ -391,6 +424,7 @@ namespace PatientManagement.Administration.Entities
             public DecimalField SubTotal;
 
             public StringField CustomerName;
+            public StringField CustomerBankName;
             public StringField CustomerIban;
             public StringField ReasonForPayment;
             public StringField Description;
@@ -399,6 +433,9 @@ namespace PatientManagement.Administration.Entities
             public StringField BICReceiver;
             public StringField BankNameReceiver;
             public Int32Field PaymentStatus;
+            public Int16Field MonthsPayed;
+            public StringField PaymentCurrency;
+            public StringField PaymentType;
 
             public Int32Field SubscriptionOfferId;
             public DateTimeField SubscriptionSubscriptionEndDate;
