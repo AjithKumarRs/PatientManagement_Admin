@@ -39,9 +39,9 @@ namespace PatientManagement.Administration {
                 0,
                 {
                     field: 'Print Invoice',
-                    name: 'Invoice',
+                    name: Q.text('Site.Payments.PaymentBlank'),
                     format: ctx => '<a class="inline-action print-invoice" title="Invoice">' +
-                        '<i class="fa fa-file-pdf-o text-red"></i> PDF</a>',
+                        '<i class="fa fa-file-text-o  text-blue"></i> PDF</a>',
                     width: 76,
                     minWidth: 54,
                     maxWidth: 76
@@ -84,6 +84,7 @@ namespace PatientManagement.Administration {
                 if (target.hasClass('print-invoice')) {
                     Common.ReportHelper.execute({
                         reportKey: 'Administration.PaymentInvoice',
+                        extension: 'html',
                         params: {
                             PaymentId: item.PaymentId
                         }

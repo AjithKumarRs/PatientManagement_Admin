@@ -1,5 +1,9 @@
 ﻿
 
+using System.Linq;
+using Microsoft.Rest;
+using PatientManagement.Administration.Entities;
+
 namespace PatientManagement.Administration.Repositories
 {
     using Serenity;
@@ -15,6 +19,27 @@ namespace PatientManagement.Administration.Repositories
 
         public SaveResponse Create(IUnitOfWork uow, SaveRequest<MyRow> request)
         {
+            if (!String.IsNullOrEmpty(request.Entity.CouponKey) && request.Entity.CouponId.Any())
+            {
+                var coupon = uow.Connection.ById<CouponsRow>(request.Entity.CouponId.FirstOrDefault());
+
+                if (coupon.EndDate.HasValue && coupon.EndDate < DateTime.Now)
+                    throw new ValidationError(Texts.Site.Payments.CouponExpiredError);
+
+                if (coupon.MaxTimeUsing.HasValue && coupon.IsUsed >= coupon.MaxTimeUsing.Value)
+                    throw new ValidationError(Texts.Site.Payments.CouponExpiredError);
+
+                var price = (request.Entity.Value * coupon.Discount) / 100;
+                request.Entity.Value = request.Entity.Value - price;
+
+                coupon.IsUsed = coupon.IsUsed + 1;
+                uow.Connection.UpdateById(coupon);
+
+
+            }
+            else if (!String.IsNullOrEmpty(request.Entity.CouponKey))
+                throw new ValidationError(Texts.Site.Payments.CouponNotExist);
+
             return new MySaveHandler().Process(uow, request, SaveRequestType.Create);
         }
 
@@ -38,7 +63,29 @@ namespace PatientManagement.Administration.Repositories
             return new MyListHandler().Process(connection, request);
         }
 
-        private class MySaveHandler : SaveRequestHandler<MyRow> { }
+        private class MySaveHandler : SaveRequestHandler<MyRow>
+        {
+            protected override void BeforeSave()
+            {
+                base.BeforeSave();
+                if (Row.CouponId.Any())
+                {
+                    var coupon = Connection.ById<CouponsRow>(Row.CouponId);
+
+                }
+            }
+
+            protected override void AfterSave()
+            {
+                base.AfterSave();
+
+                if (Row.CouponId.Any())
+                {
+                    var coupon = Connection.ById<CouponsRow>(Row.CouponId);
+
+                }
+            }
+        }
         private class MyDeleteHandler : DeleteRequestHandler<MyRow> { }
         private class MyRetrieveHandler : RetrieveRequestHandler<MyRow> { }
         private class MyListHandler : ListRequestHandler<MyRow> { }

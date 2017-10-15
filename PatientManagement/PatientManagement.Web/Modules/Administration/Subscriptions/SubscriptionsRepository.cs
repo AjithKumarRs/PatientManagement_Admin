@@ -148,7 +148,7 @@ namespace PatientManagement.Administration.Repositories
             {
                 base.OnReturn();
 
-                Response.Entity.PaidPeriod = UserSubscriptionHelper.GetTenantPaidDaysForSubscription((int)Row.SubscriptionId);
+              //  Response.Entity.PaidPeriod = UserSubscriptionHelper.GetTenantPaidDaysForSubscription((int)Row.SubscriptionId);
 
             }
         }

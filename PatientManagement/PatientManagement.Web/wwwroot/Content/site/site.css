@@ -8915,13 +8915,7 @@ section.content > .s-DataGrid {
   width: 150px;
 }
 .s-Administration-PaymentsDialog > .size {
-  width: 650px;
-}
-.s-Administration-PaymentsDialog .caption {
-  width: 150px;
-}
-.s-Administration-PaymentsDialog > .size {
-  width: 650px;
+  width: 900px;
 }
 .s-Administration-PaymentsDialog .caption {
   width: 150px;
@@ -8930,12 +8924,6 @@ section.content > .s-DataGrid {
   width: 650px;
 }
 .s-Administration-SubscriptionsDialog .caption {
-  width: 150px;
-}
-.s-Administration-PaymentsDialog > .size {
-  width: 650px;
-}
-.s-Administration-PaymentsDialog .caption {
   width: 150px;
 }
 .s-Administration-PaymentOptionsDialog > .size {
@@ -8985,9 +8973,6 @@ section.content > .s-DataGrid {
 .s-CalendarCabinetsEditor {
   width: 100%;
 }
-.s-PaymentsGrid .not-success-payment .print-invoice {
-  display: none;
-}
 .s-PaymentsGrid .payment-pending {
   background-color: rgba(255, 216, 0, 0.42);
 }
@@ -9015,4 +9000,16 @@ section.content > .s-DataGrid {
   background: -webkit-linear-gradient(top, #cedce7 0%, #596a72 100%);
   background: linear-gradient(to bottom, #cedce7 0%, #596a72 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#cedce7', endColorstr='#596a72', GradientType=0);
+}
+.s-Administration-CouponsDialog > .size {
+  width: 650px;
+}
+.s-Administration-CouponsDialog .caption {
+  width: 150px;
+}
+.s-Administration-CouponsDialog > .size {
+  width: 650px;
+}
+.s-Administration-CouponsDialog .caption {
+  width: 150px;
 }

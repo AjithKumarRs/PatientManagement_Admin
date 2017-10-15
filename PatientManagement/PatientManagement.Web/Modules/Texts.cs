@@ -164,6 +164,16 @@ namespace PatientManagement
             public static class Payments
             {
                 public static LocalText PaymentEmptyValueError = "You can't make empty payment!";
+                public static LocalText PaymentBlank = "File";
+                public static LocalText Reciever = "АЙ ПИ ООД";
+                public static LocalText IBANReciever = "BG56UNCR70001520323712";
+                public static LocalText BICreciever = "UNCRBGSF";
+                public static LocalText BankNameReciever = "УНИКРЕДИТ ЦЕНТРАЛИЗИРИНА С-МА";
+
+                public static LocalText CouponExpiredError = "The coupon that you entered is expired!";
+                public static LocalText CouponNotExist = "The coupon that you entered not exist!";
+
+
             }
             public static class Subscriptions
             {
