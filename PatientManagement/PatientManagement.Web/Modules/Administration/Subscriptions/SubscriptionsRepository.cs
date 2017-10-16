@@ -162,7 +162,10 @@ namespace PatientManagement.Administration.Repositories
 
                 foreach (var subscriptionsRow in Response.Entities)
                 {
-                    subscriptionsRow.PaidPeriod = UserSubscriptionHelper.GetTenantPaidDaysForSubscription((int)subscriptionsRow.SubscriptionId);
+                    if (subscriptionsRow.SubscriptionId != null)
+                        subscriptionsRow.PaidPeriod =
+                            UserSubscriptionHelper.GetTenantPaidDaysForSubscription((int) subscriptionsRow
+                                .SubscriptionId);
                 }
             }
         }

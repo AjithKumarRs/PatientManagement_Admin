@@ -24,6 +24,7 @@ namespace PatientManagement.Administration.Entities
 
         [DisplayName("Tenant Name"), Size(100), NotNull, QuickSearch]
         [LookupInclude]
+        [Unique]
         public String TenantName
         {
             get { return Fields.TenantName[this]; }
