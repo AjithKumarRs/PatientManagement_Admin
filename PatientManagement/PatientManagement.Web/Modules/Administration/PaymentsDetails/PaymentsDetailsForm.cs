@@ -13,7 +13,7 @@ namespace PatientManagement.Administration.Forms
     [BasedOnRow(typeof(Entities.PaymentsDetailsRow))]
     public class PaymentsDetailsForm
     {
-        [Placeholder("Bank transfer, VISA, Mastercard")]
+        [Placeholder("Моята сметка, VISA, Mastercard")]
         public String Name { get; set; }
 
         public Int32 PaymentType { get; set; }

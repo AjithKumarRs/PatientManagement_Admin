@@ -13,6 +13,61 @@ var PatientManagement;
 (function (PatientManagement) {
     var Administration;
     (function (Administration) {
+        var CouponsForm = (function (_super) {
+            __extends(CouponsForm, _super);
+            function CouponsForm() {
+                return _super !== null && _super.apply(this, arguments) || this;
+            }
+            return CouponsForm;
+        }(Serenity.PrefixedContext));
+        CouponsForm.formKey = 'Administration.Coupons';
+        Administration.CouponsForm = CouponsForm;
+        [['Key', function () { return Serenity.StringEditor; }], ['Name', function () { return Serenity.StringEditor; }], ['Discount', function () { return Serenity.IntegerEditor; }], ['Description', function () { return Serenity.StringEditor; }], ['EndDate', function () { return Serenity.DateEditor; }], ['MaxTimeUsing', function () { return Serenity.IntegerEditor; }], ['IsUsed', function () { return Serenity.IntegerEditor; }], ['IsActive', function () { return PatientManagement.BsSwitchEditor; }]].forEach(function (x) { return Object.defineProperty(CouponsForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
+    })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var Administration;
+    (function (Administration) {
+        var CouponsRow;
+        (function (CouponsRow) {
+            CouponsRow.idProperty = 'CouponId';
+            CouponsRow.isActiveProperty = 'IsActive';
+            CouponsRow.nameProperty = 'Key';
+            CouponsRow.localTextPrefix = 'Administration.Coupons';
+            CouponsRow.lookupKey = 'Administration.Coupons';
+            function getLookup() {
+                return Q.getLookup('Administration.Coupons');
+            }
+            CouponsRow.getLookup = getLookup;
+            var Fields;
+            (function (Fields) {
+            })(Fields = CouponsRow.Fields || (CouponsRow.Fields = {}));
+            ['CouponId', 'Key', 'Name', 'Discount', 'Description', 'EndDate', 'IsUsed', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'IsActive', 'MaxTimeUsing', 'InsertUserName', 'UpdateUserName'].forEach(function (x) { return Fields[x] = x; });
+        })(CouponsRow = Administration.CouponsRow || (Administration.CouponsRow = {}));
+    })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var Administration;
+    (function (Administration) {
+        var CouponsService;
+        (function (CouponsService) {
+            CouponsService.baseUrl = 'Administration/Coupons';
+            var Methods;
+            (function (Methods) {
+            })(Methods = CouponsService.Methods || (CouponsService.Methods = {}));
+            ['Create', 'Update', 'Delete', 'Undelete', 'Retrieve', 'List'].forEach(function (x) {
+                CouponsService[x] = function (r, s, o) { return Q.serviceRequest(CouponsService.baseUrl + '/' + x, r, s, o); };
+                Methods[x] = CouponsService.baseUrl + '/' + x;
+            });
+        })(CouponsService = Administration.CouponsService || (Administration.CouponsService = {}));
+    })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var Administration;
+    (function (Administration) {
         var CurrenciesForm = (function (_super) {
             __extends(CurrenciesForm, _super);
             function CurrenciesForm() {
@@ -264,6 +319,21 @@ var PatientManagement;
 (function (PatientManagement) {
     var Administration;
     (function (Administration) {
+        var PaymentCouponsRow;
+        (function (PaymentCouponsRow) {
+            PaymentCouponsRow.idProperty = 'PaymentCouponId';
+            PaymentCouponsRow.localTextPrefix = 'PaymentCoupons';
+            var Fields;
+            (function (Fields) {
+            })(Fields = PaymentCouponsRow.Fields || (PaymentCouponsRow.Fields = {}));
+            ['PaymentCouponId', 'CouponId', 'PaymentId'].forEach(function (x) { return Fields[x] = x; });
+        })(PaymentCouponsRow = Administration.PaymentCouponsRow || (Administration.PaymentCouponsRow = {}));
+    })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var Administration;
+    (function (Administration) {
         var PaymentOptionsForm = (function (_super) {
             __extends(PaymentOptionsForm, _super);
             function PaymentOptionsForm() {
@@ -381,7 +451,7 @@ var PatientManagement;
         }(Serenity.PrefixedContext));
         PaymentsForm.formKey = 'Administration.Payments';
         Administration.PaymentsForm = PaymentsForm;
-        [['SubscriptionId', function () { return Serenity.LookupEditor; }], ['PaymentDetailsId', function () { return Serenity.LookupEditor; }], ['PaymentOptionId', function () { return Serenity.LookupEditor; }], ['CurrencyId', function () { return Serenity.LookupEditor; }], ['Value', function () { return Serenity.StringEditor; }], ['PaymentStatus', function () { return Serenity.EnumEditor; }]].forEach(function (x) { return Object.defineProperty(PaymentsForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
+        [['PaymentDetailsId', function () { return Serenity.LookupEditor; }], ['CustomerName', function () { return Serenity.StringEditor; }], ['CustomerIban', function () { return Serenity.StringEditor; }], ['SubscriptionId', function () { return Serenity.LookupEditor; }], ['ReasonForPayment', function () { return Serenity.StringEditor; }], ['Description', function () { return Serenity.TextAreaEditor; }], ['Receiver', function () { return Serenity.StringEditor; }], ['IBANReceiver', function () { return Serenity.StringEditor; }], ['BICReceiver', function () { return Serenity.StringEditor; }], ['BankNameReceiver', function () { return Serenity.StringEditor; }], ['CouponId', function () { return Serenity.LookupEditor; }], ['PaymentOptionId', function () { return Serenity.LookupEditor; }], ['CouponKey', function () { return Serenity.StringEditor; }], ['CurrencyId', function () { return Serenity.LookupEditor; }], ['Value', function () { return Serenity.StringEditor; }], ['PaymentStatus', function () { return Serenity.EnumEditor; }]].forEach(function (x) { return Object.defineProperty(PaymentsForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
     })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
@@ -401,7 +471,7 @@ var PatientManagement;
             var Fields;
             (function (Fields) {
             })(Fields = PaymentsRow.Fields || (PaymentsRow.Fields = {}));
-            ['PaymentId', 'SubscriptionId', 'TenantId', 'PaymentDetailsId', 'PaymentOptionId', 'CurrencyId', 'Value', 'PaymentStatus', 'SubscriptionOfferId', 'SubscriptionSubscriptionEndDate', 'SubscriptionName', 'PaymentDetailName', 'PaymentDetailsBankName', 'PaymentDetailsIbanBeneficient', 'PaymentOptionMonths', 'PaymentOptionName', 'CurrencyCurrencyId', 'CurrencyName', 'CurrencyRate', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'TenantName', 'InsertUserName', 'UpdateUserName'].forEach(function (x) { return Fields[x] = x; });
+            ['PaymentId', 'SubscriptionId', 'TenantId', 'PaymentDetailsId', 'PaymentOptionId', 'CurrencyId', 'Value', 'SubTotal', 'CustomerName', 'CustomerBankName', 'CustomerIban', 'ReasonForPayment', 'Description', 'Receiver', 'IBANReceiver', 'BICReceiver', 'BankNameReceiver', 'PaymentStatus', 'MonthsPayed', 'PaymentCurrency', 'PaymentType', 'SubscriptionOfferId', 'SubscriptionSubscriptionEndDate', 'SubscriptionName', 'PaymentDetailName', 'PaymentDetailsBankName', 'PaymentDetailsIbanBeneficient', 'PaymentOptionMonths', 'PaymentOptionName', 'CouponId', 'CouponKey', 'CouponDiscount', 'CurrencyCurrencyId', 'CurrencyName', 'CurrencyRate', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'TenantName', 'InsertUserName', 'UpdateUserName'].forEach(function (x) { return Fields[x] = x; });
         })(PaymentsRow = Administration.PaymentsRow || (Administration.PaymentsRow = {}));
     })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
 })(PatientManagement || (PatientManagement = {}));
@@ -1745,6 +1815,54 @@ var PatientManagement;
 (function (PatientManagement) {
     var Administration;
     (function (Administration) {
+        var CouponsDialog = (function (_super) {
+            __extends(CouponsDialog, _super);
+            function CouponsDialog() {
+                var _this = _super !== null && _super.apply(this, arguments) || this;
+                _this.form = new Administration.CouponsForm(_this.idPrefix);
+                return _this;
+            }
+            CouponsDialog.prototype.getFormKey = function () { return Administration.CouponsForm.formKey; };
+            CouponsDialog.prototype.getIdProperty = function () { return Administration.CouponsRow.idProperty; };
+            CouponsDialog.prototype.getLocalTextPrefix = function () { return Administration.CouponsRow.localTextPrefix; };
+            CouponsDialog.prototype.getNameProperty = function () { return Administration.CouponsRow.nameProperty; };
+            CouponsDialog.prototype.getService = function () { return Administration.CouponsService.baseUrl; };
+            return CouponsDialog;
+        }(Serenity.EntityDialog));
+        CouponsDialog = __decorate([
+            Serenity.Decorators.registerClass(),
+            Serenity.Decorators.responsive()
+        ], CouponsDialog);
+        Administration.CouponsDialog = CouponsDialog;
+    })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var Administration;
+    (function (Administration) {
+        var CouponsGrid = (function (_super) {
+            __extends(CouponsGrid, _super);
+            function CouponsGrid(container) {
+                return _super.call(this, container) || this;
+            }
+            CouponsGrid.prototype.getColumnsKey = function () { return 'Administration.Coupons'; };
+            CouponsGrid.prototype.getDialogType = function () { return Administration.CouponsDialog; };
+            CouponsGrid.prototype.getIdProperty = function () { return Administration.CouponsRow.idProperty; };
+            CouponsGrid.prototype.getLocalTextPrefix = function () { return Administration.CouponsRow.localTextPrefix; };
+            CouponsGrid.prototype.getService = function () { return Administration.CouponsService.baseUrl; };
+            CouponsGrid.prototype.getIsActiveProperty = function () { return Administration.CouponsRow.isActiveProperty; };
+            return CouponsGrid;
+        }(Serenity.EntityGrid));
+        CouponsGrid = __decorate([
+            Serenity.Decorators.registerClass()
+        ], CouponsGrid);
+        Administration.CouponsGrid = CouponsGrid;
+    })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var Administration;
+    (function (Administration) {
         var CurrenciesDialog = (function (_super) {
             __extends(CurrenciesDialog, _super);
             function CurrenciesDialog() {
@@ -2046,11 +2164,35 @@ var PatientManagement;
             function PaymentsDialog() {
                 var _this = _super.call(this) || this;
                 _this.form = new Administration.PaymentsForm(_this.idPrefix);
+                _this.form.CouponKey.element.on("keyup", function () {
+                    var value = _this.form.CouponKey.value;
+                    var options = _this.form.CouponId.getSelect2Options().data;
+                    for (var i = 0; i < options.length; i++) {
+                        if (options[i].text === value) {
+                            _this.form.CouponId.value = options[i].id;
+                        }
+                    }
+                });
                 _this.form.PaymentOptionId.changeSelect2(function (e) {
                     _this.CheckIfFieldsAreEmpty();
                 });
+                _this.form.PaymentDetailsId.changeSelect2(function (e) {
+                    if (!_this.form.PaymentDetailsId.value) {
+                        return;
+                    }
+                    Administration.PaymentsDetailsService.Retrieve({
+                        EntityId: _this.form.PaymentDetailsId.value
+                    }, function (response) {
+                        _this.setPaymentDetails(response.Entity);
+                    });
+                });
                 _this.form.SubscriptionId.changeSelect2(function (e) {
                     _this.CheckIfFieldsAreEmpty();
+                    Administration.SubscriptionsService.Retrieve({
+                        EntityId: _this.form.SubscriptionId.value
+                    }, function (response) {
+                        _this.setSubscriptionDetails(response.Entity);
+                    });
                 });
                 _this.form.CurrencyId.changeSelect2(function (e) {
                     _this.CheckIfFieldsAreEmpty();
@@ -2065,8 +2207,40 @@ var PatientManagement;
             PaymentsDialog.prototype.loadEntity = function (entity) {
                 _super.prototype.loadEntity.call(this, entity);
                 if (this.isNew()) {
-                    Serenity.EditorUtils.setReadOnly(this.form.PaymentStatus, true);
+                    this.SetInnerFields();
                 }
+                this.form.Receiver.value = Q.text('Site.Payments.Reciever');
+                this.form.IBANReceiver.value = Q.text('Site.Payments.IBANReciever');
+                this.form.BICReceiver.value = Q.text('Site.Payments.BICreciever');
+                this.form.BankNameReceiver.value = Q.text('Site.Payments.BankNameReciever');
+            };
+            PaymentsDialog.prototype.SetInnerFields = function () {
+                var _this = this;
+                Serenity.EditorUtils.setReadOnly(this.form.CustomerIban, true);
+                Serenity.EditorUtils.setReadOnly(this.form.CustomerName, true);
+                Serenity.EditorUtils.setReadOnly(this.form.Receiver, true);
+                Serenity.EditorUtils.setReadOnly(this.form.IBANReceiver, true);
+                Serenity.EditorUtils.setReadOnly(this.form.BICReceiver, true);
+                Serenity.EditorUtils.setReadOnly(this.form.BankNameReceiver, true);
+                Serenity.EditorUtils.setReadOnly(this.form.ReasonForPayment, true);
+                Serenity.EditorUtils.setReadOnly(this.form.PaymentStatus, true);
+                var subsId = this.form.SubscriptionId.getSelect2Options().data[0].id;
+                this.form.SubscriptionId.value = subsId;
+                if (this.form.PaymentDetailsId.getSelect2Options().data[0]) {
+                    var detailsId = this.form.PaymentDetailsId.getSelect2Options().data[0].id;
+                    this.form.PaymentDetailsId.value = detailsId;
+                    Administration.PaymentsDetailsService.Retrieve({
+                        EntityId: detailsId
+                    }, function (response) {
+                        _this.setPaymentDetails(response.Entity);
+                    });
+                }
+                Administration.SubscriptionsService.Retrieve({
+                    EntityId: subsId
+                }, function (response) {
+                    _this.setSubscriptionDetails(response.Entity);
+                });
+                Serenity.EditorUtils.setReadOnly(this.form.SubscriptionId, true);
             };
             PaymentsDialog.prototype.CheckIfFieldsAreEmpty = function () {
                 if (this.form.SubscriptionId.value && this.form.PaymentOptionId.value && this.form.CurrencyId.value) {
@@ -2078,8 +2252,15 @@ var PatientManagement;
                         $("input[name='Value']").val(price);
                     });
                 }
+                if (this.form.CouponKey.value) {
+                }
             };
-            PaymentsDialog.prototype.setCustomerDetails = function (details) {
+            PaymentsDialog.prototype.setPaymentDetails = function (details) {
+                this.form.CustomerName.value = details.BeneficiaryName;
+                this.form.CustomerIban.value = details.IbanBeneficient;
+            };
+            PaymentsDialog.prototype.setSubscriptionDetails = function (details) {
+                this.form.ReasonForPayment.value = details.Name + ' - ' + Q.text('Site.Subscriptions.SerialNumPrefix') + details.SubscriptionId;
             };
             return PaymentsDialog;
         }(Serenity.EntityDialog));
@@ -2121,12 +2302,12 @@ var PatientManagement;
                 var columns = _super.prototype.getColumns.call(this);
                 columns.splice(1, 0, {
                     field: 'Print Invoice',
-                    name: 'Invoice',
+                    name: Q.text('Site.Payments.PaymentBlank'),
                     format: function (ctx) { return '<a class="inline-action print-invoice" title="Invoice">' +
-                        '<i class="fa fa-file-pdf-o text-red"></i> PDF</a>'; },
+                        '<i class="fa fa-file-text-o  text-blue"></i> OPEN</a>'; },
                     width: 76,
                     minWidth: 54,
-                    maxWidth: 76
+                    maxWidth: 76,
                 });
                 return columns;
             };
@@ -2156,7 +2337,9 @@ var PatientManagement;
                     e.preventDefault();
                     if (target.hasClass('print-invoice')) {
                         PatientManagement.Common.ReportHelper.execute({
+                            target: "_self",
                             reportKey: 'Administration.PaymentInvoice',
+                            extension: 'html',
                             params: {
                                 PaymentId: item.PaymentId
                             }
@@ -2188,6 +2371,11 @@ var PatientManagement;
             PaymentsDetailsDialog.prototype.getLocalTextPrefix = function () { return Administration.PaymentsDetailsRow.localTextPrefix; };
             PaymentsDetailsDialog.prototype.getNameProperty = function () { return Administration.PaymentsDetailsRow.nameProperty; };
             PaymentsDetailsDialog.prototype.getService = function () { return Administration.PaymentsDetailsService.baseUrl; };
+            PaymentsDetailsDialog.prototype.onSaveSuccess = function (response) {
+                console.log('save');
+                $('input[name=CustomerName]').val(this.form.BeneficiaryName.value);
+                $('input[name=CustomerIban]').val(this.form.IbanBeneficient.value);
+            };
             return PaymentsDetailsDialog;
         }(Serenity.EntityDialog));
         PaymentsDetailsDialog = __decorate([

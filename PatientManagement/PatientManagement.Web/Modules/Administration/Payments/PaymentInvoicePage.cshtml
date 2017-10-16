@@ -1,6 +1,13 @@
 ﻿@model PatientManagement.Payments.PaymentInvoiceData
+@{
 
-@if ((bool?)ViewData["Printing"] == true)
+    ViewData["Title"] = Serenity.LocalText.Get("Db.Administration.Payments.EntityPlural");
+
+    string paymentSerial = Texts.Site.Payments.SerialNumPrefix + Model.PaymentId;
+    string subsSerial = Texts.Site.Subscriptions.SerialNumPrefix + Model.SubscriptionId;
+    string couponSerial = Texts.Site.Coupons.SerialNumPrefix + Model.CouponId;
+}
+@if ((bool?) ViewData["Printing"] == true)
 {
     Layout = MVC.Views.Shared._LayoutNoNavigation;
 }
@@ -11,8 +18,8 @@
     <div class="row">
         <div class="col-xs-12">
             <h2 class="page-header">
-                <i class="fa fa-globe"></i> My Clario 
-                <small class="pull-right">Date: 2/10/2014</small>
+                <i class="fa fa-globe"></i>@Texts.Navigation.SiteTitle
+                <small class="pull-right">@Texts.Site.Payments.Invoice.Date @Model.CreatedDate.ToString("dd/MM/yyyy")</small>
             </h2>
         </div>
         <!-- /.col -->
@@ -20,140 +27,168 @@
     <!-- info row -->
     <div class="row invoice-info">
         <div class="col-sm-4 invoice-col">
-            From
+            @Texts.Site.Payments.Invoice.From
             <address>
-                <strong>My Clario </strong><br>
-                795 Folsom Ave, Suite 600<br>
-                San Francisco, CA 94107<br>
-                Phone: (804) 123-5432<br>
-                Email: info@almasaeedstudio.com
-            </address>
-        </div>
-        <!-- /.col -->
-        <div class="col-sm-4 invoice-col">
-            To
-            <address>
-                <strong>John Doe</strong><br>
-                795 Folsom Ave, Suite 600<br>
-                San Francisco, CA 94107<br>
-                Phone: (555) 539-1037<br>
-                Email: john.doe@example.com
-            </address>
-        </div>
-        <!-- /.col -->
-        <div class="col-sm-4 invoice-col">
-            <b>Invoice #007612</b><br>
-            <br>
-            <b>Order ID:</b> 4F3S8J<br>
-            <b>Payment Due:</b> 2/22/2014<br>
-            <b>Account:</b> 968-34567
-        </div>
-        <!-- /.col -->
+                <strong>
+                    @Model.FromName
+            </strong><br>
+            @Model.FromAddress<br>
+            @Model.FromPhone<br>
+            @Model.FromBankName<br>
+            @Model.FromIBAN<br>
+            @Model.FromEmail
+        </address>
     </div>
-    <!-- /.row -->
+    <!-- /.col -->
+    <div class="col-sm-4 invoice-col">
+        @Texts.Site.Payments.Invoice.To
+        <address>
+            <strong>
+                @Model.RecieverName
+            </strong><br>
+            @Model.RecieverAddress<br>
+            @Model.RecieverPhone<br>
+            @Model.RecieverBankName<br>
+            @Model.RecieverIban<br>
+            @Model.RecieverBic<br />
+            @Model.RecieverEmail
+        </address>
+    </div>
+    <!-- /.col -->
+    <div class="col-sm-4 invoice-col">
+        <b>@Texts.Site.Payments.Invoice.Payment #@paymentSerial</b><br>
+        <br>
+        @*<b>Order ID:</b> 4F3S8J<br>
+            <b>Payment Due:</b> 2/22/2014<br>
+            <b>Account:</b> 968-34567*@
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->
+<!-- Table row -->
+<div class="row">
+    <div class="col-xs-12 table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                    @Texts.Site.Payments.Invoice.QtyColumn
+                    </th>
+                    <th>
+                        @Texts.Site.Payments.Invoice.ProductColumn
+                    </th>
+                    <th>
+                        @Texts.Site.Payments.Invoice.SerialNumColumn
+                    </th>
+                    <th>
+                        @Texts.Site.Payments.Invoice.DescriptionColumn
+                    </th>
+                    <th>
+                        @Texts.Site.Payments.Invoice.PriceColumn
+                    </th>
+                    <th>
+                        @Texts.Site.Payments.Invoice.CurrencyColumn
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>@Model.ReasonForPayment</td>
+                    <td>@subsSerial </td>
+                    <td>@Model.Description</td>
+                    <td>@Model.SubTotal.ToString("#")</td>
+                    <td>@Model.Currency</td>
+                </tr>
+                @if (!string.IsNullOrEmpty(Model.CouponKey))
+                {
+                    <tr>
+                        <td>1</td>
+                        <td>Coupon ID - @Model.CouponKey</td>
+                        <td>@couponSerial </td>
+                        <td>@Model.CouponName</td>
+                        <td>-@Model.CouponDiscount%</td>
+                        <td></td>
+                    </tr>
+                }
 
-    <!-- Table row -->
-    <div class="row">
-        <div class="col-xs-12 table-responsive">
-            <table class="table table-striped">
-                <thead>
+            </tbody>
+        </table>
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->
+
+<div class="row">
+    <!-- accepted payments column -->
+    <div class="col-xs-6">
+        <p class="lead">@Texts.Site.Payments.Invoice.PaymentDescriptionTitle</p>
+        @*<img src="Content/serenity/images/credit-card.png" alt="Visa">*@
+
+
+        <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
+        @string.Format(Texts.Site.Payments.Invoice.PaymentDescriptionText, paymentSerial)
+        </p>
+    </div>
+    <!-- /.col -->
+    <div class="col-xs-6">
+        <p class="lead">
+            @Texts.Site.Payments.Invoice.TotalForPayment
+        </p>
+
+        <div class="table-responsive">
+            <table class="table">
                 <tr>
-                    <th>Qty</th>
-                    <th>Product</th>
-                    <th>Serial #</th>
-                    <th>Description</th>
-                    <th>Subtotal</th>
+                    <th style="width:50%">@Texts.Site.Payments.Invoice.SubTotal</th>
+                    <td>@Model.SubTotal.ToString("#") @Model.Currency</td>
                 </tr>
-                </thead>
-                <tbody>
+
+                @if (!string.IsNullOrEmpty(Model.CouponKey))
+                {
+                    var discountPrice = (Model.SubTotal * Model.CouponDiscount) / 100;
+                    <tr>
+                        <th>@Texts.Site.Payments.Invoice.Discount
+                        @Model.CouponDiscount%</th>
+                        <td>@discountPrice.ToString("#") @Model.Currency</td>
+                    </tr>
+                }
                 <tr>
-                    <td>1</td>
-                    <td>Call of Duty</td>
-                    <td>455-981-221</td>
-                    <td>El snort testosterone trophy driving gloves handsome</td>
-                    <td>$64.50</td>
+                    <th>@Texts.Site.Payments.Invoice.Total</th>
+                    <td>@Model.Total.ToString("#") @Model.Currency</td>
                 </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Need for Speed IV</td>
-                    <td>247-925-726</td>
-                    <td>Wes Anderson umami biodiesel</td>
-                    <td>$50.00</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Monsters DVD</td>
-                    <td>735-845-642</td>
-                    <td>Terry Richardson helvetica tousled street art master</td>
-                    <td>$10.70</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Grown Ups Blue Ray</td>
-                    <td>422-568-642</td>
-                    <td>Tousled lomo letterpress</td>
-                    <td>$25.99</td>
-                </tr>
-                </tbody>
             </table>
         </div>
-        <!-- /.col -->
     </div>
-    <!-- /.row -->
-
-    <div class="row">
-        <!-- accepted payments column -->
-        <div class="col-xs-6">
-            <p class="lead">Payment Methods:</p>
-            <img src="../../dist/img/credit/visa.png" alt="Visa">
-            <img src="../../dist/img/credit/mastercard.png" alt="Mastercard">
-            <img src="../../dist/img/credit/american-express.png" alt="American Express">
-            <img src="../../dist/img/credit/paypal2.png" alt="Paypal">
-
-            <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
-                Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem plugg
-                dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
-            </p>
-        </div>
-        <!-- /.col -->
-        <div class="col-xs-6">
-            <p class="lead">Amount Due 2/22/2014</p>
-
-            <div class="table-responsive">
-                <table class="table">
-                    <tr>
-                        <th style="width:50%">Subtotal:</th>
-                        <td>$250.30</td>
-                    </tr>
-                    <tr>
-                        <th>Tax (9.3%)</th>
-                        <td>$10.34</td>
-                    </tr>
-                    <tr>
-                        <th>Shipping:</th>
-                        <td>$5.80</td>
-                    </tr>
-                    <tr>
-                        <th>Total:</th>
-                        <td>$265.24</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <!-- /.col -->
-    </div>
-    <!-- /.row -->
-
+    <!-- /.col -->
+</div>
+<!-- /.row -->
     <!-- this row will not appear when printing -->
+@if ((bool?) ViewData["Printing"] == false)
+{
     <div class="row no-print">
         <div class="col-xs-12">
-            <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
-            <button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment
+            @*<a href="#" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>*@
+            @*<button type="button" class="btn btn-success pull-right">
+                <i class="fa fa-credit-card"></i> Submit Payment
+            </button>*@
+            <button type="button" id="generate-pdf" class="btn btn-primary pull-right" style="margin-right: 5px;">
+                <i class="fa fa-download"></i> @Texts.Site.Payments.Invoice.GeneratePdf
             </button>
-            <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
-                <i class="fa fa-download"></i> Generate PDF
-            </button>
+            
+            <script>
+                $('#generate-pdf').click(function() {
+                    new PatientManagement.Common.ReportHelper.execute({
+                        target: "_blank",
+                        reportKey: 'Administration.PaymentInvoice',
+                        extension: 'pdf',
+                        params: {
+                            PaymentId: @Model.PaymentId
+                        }
+                    });
+                });
+            </script>
         </div>
     </div>
+}
 </section>
 <!-- /.content -->

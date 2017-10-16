@@ -120,6 +120,9 @@
     <None Update="App_Data\texts\user.texts.en.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Modules\Administration\Coupons\CouponsIndex.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Modules\Administration\Currencies\CurrenciesIndex.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

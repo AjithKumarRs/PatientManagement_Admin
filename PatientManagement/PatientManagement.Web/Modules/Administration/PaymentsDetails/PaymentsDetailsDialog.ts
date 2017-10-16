@@ -12,5 +12,10 @@ namespace PatientManagement.Administration {
 
         protected form = new PaymentsDetailsForm(this.idPrefix);
 
+        onSaveSuccess(response: Serenity.SaveResponse): void {
+        console.log('save');
+        $('input[name=CustomerName]').val(this.form.BeneficiaryName.value);
+        $('input[name=CustomerIban]').val(this.form.IbanBeneficient.value);
+        }
     }
 }

@@ -3,6 +3,86 @@
 declare namespace PatientManagement.Administration {
 }
 declare namespace PatientManagement.Administration {
+    class CouponsForm extends Serenity.PrefixedContext {
+        static formKey: string;
+    }
+    interface CouponsForm {
+        Key: Serenity.StringEditor;
+        Name: Serenity.StringEditor;
+        Discount: Serenity.IntegerEditor;
+        Description: Serenity.StringEditor;
+        EndDate: Serenity.DateEditor;
+        MaxTimeUsing: Serenity.IntegerEditor;
+        IsUsed: Serenity.IntegerEditor;
+        IsActive: BsSwitchEditor;
+    }
+}
+declare namespace PatientManagement.Administration {
+    interface CouponsRow {
+        CouponId?: number;
+        Key?: string;
+        Name?: string;
+        Discount?: number;
+        Description?: string;
+        EndDate?: string;
+        IsUsed?: number;
+        InsertUserId?: number;
+        InsertDate?: string;
+        UpdateUserId?: number;
+        UpdateDateField?: string;
+        IsActive?: number;
+        MaxTimeUsing?: number;
+        InsertUserName?: string;
+        UpdateUserName?: string;
+    }
+    namespace CouponsRow {
+        const idProperty = "CouponId";
+        const isActiveProperty = "IsActive";
+        const nameProperty = "Key";
+        const localTextPrefix = "Administration.Coupons";
+        const lookupKey = "Administration.Coupons";
+        function getLookup(): Q.Lookup<CouponsRow>;
+        namespace Fields {
+            const CouponId: string;
+            const Key: string;
+            const Name: string;
+            const Discount: string;
+            const Description: string;
+            const EndDate: string;
+            const IsUsed: string;
+            const InsertUserId: string;
+            const InsertDate: string;
+            const UpdateUserId: string;
+            const UpdateDateField: string;
+            const IsActive: string;
+            const MaxTimeUsing: string;
+            const InsertUserName: string;
+            const UpdateUserName: string;
+        }
+    }
+}
+declare namespace PatientManagement.Administration {
+    namespace CouponsService {
+        const baseUrl = "Administration/Coupons";
+        function Create(request: Serenity.SaveRequest<CouponsRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Update(request: Serenity.SaveRequest<CouponsRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Undelete(request: Serenity.UndeleteRequest, onSuccess?: (response: Serenity.UndeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<CouponsRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<CouponsRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        namespace Methods {
+            const Create: string;
+            const Update: string;
+            const Delete: string;
+            const Undelete: string;
+            const Retrieve: string;
+            const List: string;
+        }
+    }
+}
+declare namespace PatientManagement.Administration {
+}
+declare namespace PatientManagement.Administration {
     class CurrenciesForm extends Serenity.PrefixedContext {
         static formKey: string;
     }
@@ -330,6 +410,22 @@ declare namespace PatientManagement.Administration {
     }
 }
 declare namespace PatientManagement.Administration {
+    interface PaymentCouponsRow {
+        PaymentCouponId?: number;
+        CouponId?: number;
+        PaymentId?: number;
+    }
+    namespace PaymentCouponsRow {
+        const idProperty = "PaymentCouponId";
+        const localTextPrefix = "PaymentCoupons";
+        namespace Fields {
+            const PaymentCouponId: string;
+            const CouponId: string;
+            const PaymentId: string;
+        }
+    }
+}
+declare namespace PatientManagement.Administration {
 }
 declare namespace PatientManagement.Administration {
     class PaymentOptionsForm extends Serenity.PrefixedContext {
@@ -467,9 +563,19 @@ declare namespace PatientManagement.Administration {
         static formKey: string;
     }
     interface PaymentsForm {
-        SubscriptionId: Serenity.LookupEditor;
         PaymentDetailsId: Serenity.LookupEditor;
+        CustomerName: Serenity.StringEditor;
+        CustomerIban: Serenity.StringEditor;
+        SubscriptionId: Serenity.LookupEditor;
+        ReasonForPayment: Serenity.StringEditor;
+        Description: Serenity.TextAreaEditor;
+        Receiver: Serenity.StringEditor;
+        IBANReceiver: Serenity.StringEditor;
+        BICReceiver: Serenity.StringEditor;
+        BankNameReceiver: Serenity.StringEditor;
+        CouponId: Serenity.LookupEditor;
         PaymentOptionId: Serenity.LookupEditor;
+        CouponKey: Serenity.StringEditor;
         CurrencyId: Serenity.LookupEditor;
         Value: Serenity.StringEditor;
         PaymentStatus: Serenity.EnumEditor;
@@ -484,7 +590,20 @@ declare namespace PatientManagement.Administration {
         PaymentOptionId?: number;
         CurrencyId?: number;
         Value?: number;
+        SubTotal?: number;
+        CustomerName?: string;
+        CustomerBankName?: string;
+        CustomerIban?: string;
+        ReasonForPayment?: string;
+        Description?: string;
+        Receiver?: string;
+        IBANReceiver?: string;
+        BICReceiver?: string;
+        BankNameReceiver?: string;
         PaymentStatus?: PatientManagement.PaymentStatus;
+        MonthsPayed?: number;
+        PaymentCurrency?: string;
+        PaymentType?: string;
         SubscriptionOfferId?: number;
         SubscriptionSubscriptionEndDate?: string;
         SubscriptionName?: string;
@@ -493,6 +612,9 @@ declare namespace PatientManagement.Administration {
         PaymentDetailsIbanBeneficient?: string;
         PaymentOptionMonths?: number;
         PaymentOptionName?: string;
+        CouponId?: number[];
+        CouponKey?: string;
+        CouponDiscount?: number;
         CurrencyCurrencyId?: string;
         CurrencyName?: string;
         CurrencyRate?: number;
@@ -518,7 +640,20 @@ declare namespace PatientManagement.Administration {
             const PaymentOptionId: string;
             const CurrencyId: string;
             const Value: string;
+            const SubTotal: string;
+            const CustomerName: string;
+            const CustomerBankName: string;
+            const CustomerIban: string;
+            const ReasonForPayment: string;
+            const Description: string;
+            const Receiver: string;
+            const IBANReceiver: string;
+            const BICReceiver: string;
+            const BankNameReceiver: string;
             const PaymentStatus: string;
+            const MonthsPayed: string;
+            const PaymentCurrency: string;
+            const PaymentType: string;
             const SubscriptionOfferId: string;
             const SubscriptionSubscriptionEndDate: string;
             const SubscriptionName: string;
@@ -527,6 +662,9 @@ declare namespace PatientManagement.Administration {
             const PaymentDetailsIbanBeneficient: string;
             const PaymentOptionMonths: string;
             const PaymentOptionName: string;
+            const CouponId: string;
+            const CouponKey: string;
+            const CouponDiscount: string;
             const CurrencyCurrencyId: string;
             const CurrencyName: string;
             const CurrencyRate: string;
@@ -2345,6 +2483,27 @@ declare namespace PatientManagement {
     }
 }
 declare namespace PatientManagement.Administration {
+    class CouponsDialog extends Serenity.EntityDialog<CouponsRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getService(): string;
+        protected form: CouponsForm;
+    }
+}
+declare namespace PatientManagement.Administration {
+    class CouponsGrid extends Serenity.EntityGrid<CouponsRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof CouponsDialog;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        protected getIsActiveProperty(): string;
+        constructor(container: JQuery);
+    }
+}
+declare namespace PatientManagement.Administration {
     class CurrenciesDialog extends Serenity.EntityDialog<CurrenciesRow, any> {
         protected getFormKey(): string;
         protected getIdProperty(): string;
@@ -2461,9 +2620,11 @@ declare namespace PatientManagement.Administration {
         protected getService(): string;
         protected form: PaymentsForm;
         constructor();
-        loadEntity(entity: SentEmailsRow): void;
+        loadEntity(entity: PaymentsRow): void;
+        protected SetInnerFields(): void;
         protected CheckIfFieldsAreEmpty(): void;
-        private setCustomerDetails(details);
+        private setPaymentDetails(details);
+        private setSubscriptionDetails(details);
     }
 }
 declare namespace PatientManagement.Administration {
@@ -2488,6 +2649,7 @@ declare namespace PatientManagement.Administration {
         protected getNameProperty(): string;
         protected getService(): string;
         protected form: PaymentsDetailsForm;
+        onSaveSuccess(response: Serenity.SaveResponse): void;
     }
 }
 declare namespace PatientManagement.Administration {
