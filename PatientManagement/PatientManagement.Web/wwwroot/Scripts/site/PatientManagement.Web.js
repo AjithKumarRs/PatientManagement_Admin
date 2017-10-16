@@ -2337,7 +2337,7 @@ var PatientManagement;
                     e.preventDefault();
                     if (target.hasClass('print-invoice')) {
                         PatientManagement.Common.ReportHelper.execute({
-                            target: "_same",
+                            target: "_self",
                             reportKey: 'Administration.PaymentInvoice',
                             extension: 'html',
                             params: {

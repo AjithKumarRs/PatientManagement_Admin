@@ -64,7 +64,7 @@ namespace PatientManagement.Administration {
 
             return buttons;
         }
-
+        
         protected onClick(e: JQueryEventObject, row: number, cell: number) {
             super.onClick(e, row, cell);
 
@@ -83,7 +83,7 @@ namespace PatientManagement.Administration {
 
                 if (target.hasClass('print-invoice')) {
                     Common.ReportHelper.execute({
-                        target:"_same",
+                        target:"_self",
                         reportKey: 'Administration.PaymentInvoice',
                         extension: 'html',
                         params: {

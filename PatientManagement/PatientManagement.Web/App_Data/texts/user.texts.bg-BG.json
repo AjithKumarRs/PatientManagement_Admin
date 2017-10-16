@@ -609,7 +609,7 @@
   "Site.Payments.Invoice.QtyColumn": "Количество",
   "Site.Payments.Invoice.SerialNumColumn": "Сериален #",
   "Site.Payments.Invoice.SubTotal": "Междина цена",
-  "Site.Payments.Invoice.To": "От",
+  "Site.Payments.Invoice.To": "До",
   "Site.Payments.Invoice.Total": "Тотал:",
   "Site.Payments.Invoice.TotalForPayment": "Тотал за плащане",
   "Site.Payments.PaymentBlank": "Платежно",
