@@ -52,7 +52,8 @@ namespace PatientManagement.Administration.Forms
         public string Source { get; set; }
 
         public int IsActive { get; set; }
-        public Int32? TenantId { get; set; }
+        [Required]
+        public Int32 TenantId { get; set; }
 
 
     }
