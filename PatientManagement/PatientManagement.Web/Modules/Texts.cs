@@ -174,8 +174,28 @@ namespace PatientManagement
                 public static LocalText CouponExpiredError = "The coupon that you entered is expired!";
                 public static LocalText CouponNotExist = "The coupon that you entered not exist!";
 
-                public static LocalText InvoiceFrom = "From";
+                public static class Invoice
+                {
+                    public static LocalText Date = "Date: ";
+                    public static LocalText From = "From";
+                    public static LocalText To = "To";
+                    public static LocalText Payment = "Payment: ";
+                    public static LocalText QtyColumn = "Qty";
+                    public static LocalText ProductColumn = "Product";
+                    public static LocalText SerialNumColumn = "Serial #";
+                    public static LocalText DescriptionColumn = "Description";
+                    public static LocalText CurrencyColumn = "Currency";
+                    public static LocalText PriceColumn = "Price";
 
+                    public static LocalText PaymentDescriptionTitle = "Notes for payment";
+                    public static LocalText PaymentDescriptionText = "If you make another payment and its still in process, please include {0} to description when you pay in your bank.";
+                    public static LocalText TotalForPayment = "Total for payment";
+                    public static LocalText SubTotal = "Subtotal: ";
+                    public static LocalText Discount = "Discount: ";
+                    public static LocalText Total = "Total: ";
+                    public static LocalText GeneratePdf = "Generate PDF";
+
+                }
             }
 
             public static class Coupons

@@ -2,6 +2,10 @@
 @{
 
     ViewData["Title"] = Serenity.LocalText.Get("Db.Administration.Payments.EntityPlural");
+
+    string paymentSerial = Texts.Site.Payments.SerialNumPrefix + Model.PaymentId;
+    string subsSerial = Texts.Site.Subscriptions.SerialNumPrefix + Model.SubscriptionId;
+    string couponSerial = Texts.Site.Coupons.SerialNumPrefix + Model.CouponId;
 }
 @if ((bool?)ViewData["Printing"] == true)
 {
@@ -14,8 +18,8 @@
     <div class="row">
         <div class="col-xs-12">
             <h2 class="page-header">
-                <i class="fa fa-globe"></i> My Clario
-                <small class="pull-right">Дата: @Model.CreatedDate.ToString("dd/MM/yyyy")</small>
+                <i class="fa fa-globe"></i>@Texts.Navigation.SiteTitle
+                <small class="pull-right">@Texts.Site.Payments.Invoice.Date @Model.CreatedDate.ToString("dd/MM/yyyy")</small>
             </h2>
         </div>
         <!-- /.col -->
@@ -23,137 +27,152 @@
     <!-- info row -->
     <div class="row invoice-info">
         <div class="col-sm-4 invoice-col">
-            @Texts.Site.Payments.InvoiceFrom
-            <address>
-                <strong>@Model.FromName
-                    </strong><br>
-                @Model.FromAddress<br>
-                @Model.FromPhone<br>
-                @Model.FromBankName<br>
-                @Model.FromIBAN<br>
-                @Model.FromEmail
-            </address>
-        </div>
-        <!-- /.col -->
-        <div class="col-sm-4 invoice-col">
-            To
+            @Texts.Site.Payments.Invoice.From
             <address>
                 <strong>
+                    @Model.FromName
+            </strong><br>
+            @Model.FromAddress<br>
+            @Model.FromPhone<br>
+            @Model.FromBankName<br>
+            @Model.FromIBAN<br>
+            @Model.FromEmail
+        </address>
+    </div>
+    <!-- /.col -->
+    <div class="col-sm-4 invoice-col">
+        @Texts.Site.Payments.Invoice.To
+        <address>
+            <strong>
                 @Model.RecieverName
-                    </strong><br>
-                @Model.RecieverAddress<br>
-                @Model.RecieverPhone<br>
-                @Model.RecieverBankName<br>
-                @Model.RecieverIban<br>
-                @Model.RecieverBic<br/>
-                @Model.RecieverEmail
-            </address>
-        </div>
-        <!-- /.col -->
-        <div class="col-sm-4 invoice-col">
-            <b>Платежно #@Texts.Site.Payments.SerialNumPrefix@Model.PaymentId</b><br>
-            <br>
-            @*<b>Order ID:</b> 4F3S8J<br>
+            </strong><br>
+            @Model.RecieverAddress<br>
+            @Model.RecieverPhone<br>
+            @Model.RecieverBankName<br>
+            @Model.RecieverIban<br>
+            @Model.RecieverBic<br />
+            @Model.RecieverEmail
+        </address>
+    </div>
+    <!-- /.col -->
+    <div class="col-sm-4 invoice-col">
+        <b>@Texts.Site.Payments.Invoice.Payment #@paymentSerial</b><br>
+        <br>
+        @*<b>Order ID:</b> 4F3S8J<br>
             <b>Payment Due:</b> 2/22/2014<br>
             <b>Account:</b> 968-34567*@
-        </div>
-        <!-- /.col -->
     </div>
-    <!-- /.row -->
-    <!-- Table row -->
-    <div class="row">
-        <div class="col-xs-12 table-responsive">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Количество</th>
-                        <th>Продукт</th>
-                        <th>Сериален #</th>
-                        <th>Допълнителна информация</th>
-                        <th>Цема</th>
-                        <th>Валута</th>
-                    </tr>
-                </thead>
-                <tbody>
+    <!-- /.col -->
+</div>
+<!-- /.row -->
+<!-- Table row -->
+<div class="row">
+    <div class="col-xs-12 table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                    @Texts.Site.Payments.Invoice.QtyColumn
+                    </th>
+                    <th>
+                        @Texts.Site.Payments.Invoice.ProductColumn
+                    </th>
+                    <th>
+                        @Texts.Site.Payments.Invoice.SerialNumColumn
+                    </th>
+                    <th>
+                        @Texts.Site.Payments.Invoice.DescriptionColumn
+                    </th>
+                    <th>
+                        @Texts.Site.Payments.Invoice.PriceColumn
+                    </th>
+                    <th>
+                        @Texts.Site.Payments.Invoice.CurrencyColumn
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
                 <tr>
                     <td>1</td>
                     <td>@Model.ReasonForPayment</td>
-                    <td>@Texts.Site.Subscriptions.SerialNumPrefix@Model.SubscriptionId </td>
+                    <td>@subsSerial </td>
                     <td>@Model.Description</td>
                     <td>@Model.SubTotal.ToString("#")</td>
                     <td>@Model.Currency</td>
                 </tr>
-                    @if (!string.IsNullOrEmpty(Model.CouponKey))
-                    {
-                        <tr>
-                            <td>1</td>
-                            <td>Coupon ID - @Model.CouponKey</td>
-                            <td>@Texts.Site.Coupons.SerialNumPrefix@Model.CouponId </td>
-                            <td>@Model.CouponName</td>
-                            <td>-@Model.CouponDiscount%</td>
-                            <td></td>
-                        </tr>
-                    }
-
-                </tbody>
-            </table>
-        </div>
-        <!-- /.col -->
-    </div>
-    <!-- /.row -->
-
-    <div class="row">
-        <!-- accepted payments column -->
-       <div class="col-xs-6">
-            <p class="lead">Забележки към банков превод</p>
-            @*<img src="Content/serenity/images/credit-card.png" alt="Visa">*@
-       
-
-            <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
-                Ако сте направили няколко плащания към абонамента ви и искате да обозначите,
-                че правите превод точно по това плащане, моля включете номенра на платежното "#@Texts.Site.Payments.SerialNumPrefix@Model.PaymentId" в допълнително поясниение към превода!
-            </p>
-        </div>
-        <!-- /.col -->
-        <div class="col-xs-6">
-            <p class="lead">Тотал за плащане
-            </p>
-
-            <div class="table-responsive">
-                <table class="table">
+                @if (!string.IsNullOrEmpty(Model.CouponKey))
+                {
                     <tr>
-                        <th style="width:50%">Subtotal:</th>
-                        <td>@Model.SubTotal.ToString("#") @Model.Currency</td>
+                        <td>1</td>
+                        <td>Coupon ID - @Model.CouponKey</td>
+                        <td>@couponSerial </td>
+                        <td>@Model.CouponName</td>
+                        <td>-@Model.CouponDiscount%</td>
+                        <td></td>
                     </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->
+
+<div class="row">
+    <!-- accepted payments column -->
+    <div class="col-xs-6">
+        <p class="lead">@Texts.Site.Payments.Invoice.PaymentDescriptionTitle</p>
+        @*<img src="Content/serenity/images/credit-card.png" alt="Visa">*@
+
+
+        <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
+        @string.Format(Texts.Site.Payments.Invoice.PaymentDescriptionText, paymentSerial)
+        </p>
+    </div>
+    <!-- /.col -->
+    <div class="col-xs-6">
+        <p class="lead">
+            @Texts.Site.Payments.Invoice.TotalForPayment
+        </p>
+
+        <div class="table-responsive">
+            <table class="table">
+                <tr>
+                    <th style="width:50%">@Texts.Site.Payments.Invoice.SubTotal</th>
+                    <td>@Model.SubTotal.ToString("#") @Model.Currency</td>
+                </tr>
+
                 @if (!string.IsNullOrEmpty(Model.CouponKey))
                 {
                     var discountPrice = (Model.SubTotal * Model.CouponDiscount) / 100;
                     <tr>
-                        <th>Discount @Model.CouponDiscount%</th>
+                        <th>@Texts.Site.Payments.Invoice.Discount
+                        @Model.CouponDiscount%</th>
                         <td>@discountPrice.ToString("#") @Model.Currency</td>
                     </tr>
                 }
-                    <tr>
-                        <th>Total:</th>
-                        <td>@Model.Total.ToString("#") @Model.Currency</td>
-                    </tr>
-                </table>
-            </div>
+                <tr>
+                    <th>@Texts.Site.Payments.Invoice.Total</th>
+                    <td>@Model.Total.ToString("#") @Model.Currency</td>
+                </tr>
+            </table>
         </div>
-        <!-- /.col -->
     </div>
-    <!-- /.row -->
-    <!-- this row will not appear when printing -->
-    <div class="row no-print">
-        <div class="col-xs-12">
-            @*<a href="#" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>*@
-            @*<button type="button" class="btn btn-success pull-right">
+    <!-- /.col -->
+</div>
+<!-- /.row -->
+<!-- this row will not appear when printing -->
+<div class="row no-print">
+    <div class="col-xs-12">
+        @*<a href="#" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>*@
+        @*<button type="button" class="btn btn-success pull-right">
                 <i class="fa fa-credit-card"></i> Submit Payment
             </button>*@
-            <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
-                <i class="fa fa-download"></i> Генерирай PDF
-            </button>
-        </div>
+        <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
+            <i class="fa fa-download"></i> @Texts.Site.Payments.Invoice.GeneratePdf
+        </button>
     </div>
+</div>
 </section>
 <!-- /.content -->
