@@ -10,7 +10,7 @@ namespace PatientManagement.PatientManagement {
 
             var byId = Administration.UserRow.getLookup().itemById;
             let z: Administration.UserRow;
-            return idList.map(x => ((z = byId[x]) ? z.DisplayName : x)).join(", ");
+            return "<span class='briefcase-symbol'>" + Q.htmlEncode(idList.map(x => ((z = byId[x]) ? z.DisplayName : x)).join(", ")) + '</span>';
         }
     }
 

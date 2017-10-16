@@ -25,6 +25,15 @@ namespace PatientManagement.PatientManagement {
                 separator: true
             }));
 
+            buttons.push(Common.IcsExportHelper.createToolButton({
+                grid: this,
+                hint: 'Export to Outlook, Google Calendar etc.',
+                title: 'Export to Outlook, Google Calendar etc.',
+                service: VisitsService.baseUrl + '/ListIcs',
+                onViewSubmit: () => this.onViewSubmit(),
+                separator: true,
+            }));
+
             return buttons;
         }
 
@@ -39,8 +48,8 @@ namespace PatientManagement.PatientManagement {
                 Q.first(filters, x => x.field == fields.CabinetId).init = w => {
                     (w as Serenity.IntegerEditor).value = cookie;
 
-                    //TODO: When permission for all cabinets is added uncoment 
-                    // (w as Serenity.IntegerEditor).element.prop('readonly', true);
+                    if(Authorization.userDefinition.RestrictedToCabinets == 1)
+                        (w as Serenity.IntegerEditor).element.prop('readonly', true);
                 };
             }
 

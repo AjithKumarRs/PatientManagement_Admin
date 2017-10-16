@@ -17,14 +17,18 @@ namespace PatientManagement.PatientManagement.Columns
         public Int32 VisitId { get; set; }
 
         [PatientsFormatter(GenderProperty = "PatientGender")]
+        [Width(200)]
         public Int32 PatientName { get; set; }
 
         [EditLink, Width(130), PatientsPhoneFormatter]
         public string PhoneNumber { get; set; }
 
-        [VisitsTypesFormatter(BackgroundProperty = "VisitTypeBackgroundColor", BorderProperty = "VisitTypeBorderColor")]
+        [EditLink, Width(200), PatientsEmailFormatter]
+        public String PatientEmail { get; set; }
+
+       [VisitsTypesFormatter(BackgroundProperty = "VisitTypeBackgroundColor", BorderProperty = "VisitTypeBorderColor")]
         public Int32 VisitTypeName { get; set; }
-        [Width(200)]
+        [Width(200), CabinetsFormatter]
         public string CabinetName { get; set; }
         [Width(300)]
         public String Description { get; set; }

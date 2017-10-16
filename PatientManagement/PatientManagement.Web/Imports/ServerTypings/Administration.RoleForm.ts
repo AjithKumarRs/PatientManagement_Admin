@@ -6,8 +6,9 @@
 
     export interface RoleForm {
         RoleName: Serenity.StringEditor;
+        UsersInRole: Serenity.LookupEditor;
         TenantId: Serenity.LookupEditor;
     }
 
-    [['RoleName', () => Serenity.StringEditor], ['TenantId', () => Serenity.LookupEditor]].forEach(x => Object.defineProperty(RoleForm.prototype, <string>x[0], { get: function () { return this.w(x[0], (x[1] as any)()); }, enumerable: true, configurable: true }));
+    [['RoleName', () => Serenity.StringEditor], ['UsersInRole', () => Serenity.LookupEditor], ['TenantId', () => Serenity.LookupEditor]].forEach(x => Object.defineProperty(RoleForm.prototype, <string>x[0], { get: function () { return this.w(x[0], (x[1] as any)()); }, enumerable: true, configurable: true }));
 }

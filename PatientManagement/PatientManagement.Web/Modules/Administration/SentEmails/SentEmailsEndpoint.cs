@@ -1,4 +1,5 @@
 ﻿
+using PatientManagement.Administration.Entities;
 using PatientManagement.Common.EmailTemplates;
 using Serenity.Web;
 
@@ -23,8 +24,13 @@ namespace PatientManagement.Administration.Endpoints
 
             emailModel.Text = request.Entity.Body;
 
+            var externalUrl = Config.Get<EnvironmentSettings>().SiteExternalUrl ??
+                              Request.GetBaseUri().ToString();
+
+            emailModel.SetTenantSetings(externalUrl, emailModel);
+
             var emailBody = TemplateHelper.RenderViewToString(HttpContext.RequestServices,
-                MVC.Views.Common.EmailTemplates.UserToPatientEmail.EmailTemplates_UserToPatientEmail, emailModel);
+                    MVC.Views.Common.EmailTemplates.UserToPatientEmail.EmailTemplates_UserToPatientEmail, emailModel);
 
             request.Entity.Body = emailBody;
 

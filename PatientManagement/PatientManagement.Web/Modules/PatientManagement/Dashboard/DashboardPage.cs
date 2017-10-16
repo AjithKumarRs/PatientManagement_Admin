@@ -29,6 +29,13 @@ namespace PatientManagement.PatientManagement.Pages
             var cabinetIdActive = 0;
 
             var connection = SqlConnections.NewFor<CabinetsRow>();
+            ViewData["WorkDays"] = new List<Int32>{1, 2, 3, 4, 5}.ToJson();
+
+            var visitFlds = VisitsRow.Fields;
+            var user = (UserDefinition)Authorization.UserDefinition;
+
+            if (connection.Count<VisitsRow>(visitFlds.TenantId == user.TenantId) < 1)
+                ViewData["HelloModal"] = true;
 
             if (GetAndSetActiveCabinetIdIfAny(connection, out cabinetIdActive))
             {
@@ -36,6 +43,18 @@ namespace PatientManagement.PatientManagement.Pages
                 {
                     var cabFlds = CabinetsRow.Fields;
                     var connectionCabint = connection.TryFirst<CabinetsRow>(cabFlds.CabinetId == cabinetIdActive);
+                    var workDaysFlds = CabinetWorkDaysRow.Fields;
+
+                    if (connectionCabint.CabinetId != null)
+                    {
+                        var cabinetWorkDays =
+                            connection.List<CabinetWorkDaysRow>(workDaysFlds.CabinetId ==
+                                                                connectionCabint.CabinetId.Value).Select(x => x.WeekDayId);
+                        if (cabinetWorkDays.Any())
+                        ViewData["WorkDays"] = cabinetWorkDays.OrderBy(s => s).ToJson();
+
+
+                    }
                     ViewData["CabinetHeaderName"] = connectionCabint?.Name;
 
                     
@@ -44,6 +63,7 @@ namespace PatientManagement.PatientManagement.Pages
                     return View(MVC.Views.PatientManagement.Dashboard.DashboardIndex);
                 }
             }
+         
 
             ViewData["WorkHoursStart"] = TimeSpan.FromMinutes(420);
             ViewData["WorkHoursEnd"] = TimeSpan.FromMinutes(1200);
@@ -121,7 +141,7 @@ namespace PatientManagement.PatientManagement.Pages
                     cabinetIdActive = cabinets.FirstOrDefault().CabinetId ?? 0;
 
                     CookieOptions options = new CookieOptions();
-                    options.Expires = DateTime.Now.AddDays(365);
+                    options.Expires = DateTime.Now.AddDays(1);
                     Response.Cookies.Append("CabinetPreference", cabinets.FirstOrDefault().CabinetId.ToString(),
                         options);
                 }
@@ -137,7 +157,7 @@ namespace PatientManagement.PatientManagement.Pages
                         cabinetIdActive = cabinetRepr.FirstOrDefault().CabinetId ?? 0;
 
                         CookieOptions options = new CookieOptions();
-                        options.Expires = DateTime.Now.AddDays(365);
+                        options.Expires = DateTime.Now.AddDays(1);
                         Response.Cookies.Append("CabinetPreference", cabinetRepr.FirstOrDefault().CabinetId.ToString(),
                             options);
                     }
@@ -146,7 +166,7 @@ namespace PatientManagement.PatientManagement.Pages
                         cabinetIdActive = cabinets.FirstOrDefault().CabinetId ?? 0;
 
                         CookieOptions options = new CookieOptions();
-                        options.Expires = DateTime.Now.AddDays(365);
+                        options.Expires = DateTime.Now.AddDays(1);
                         Response.Cookies.Append("CabinetPreference", cabinets.FirstOrDefault().CabinetId.ToString(),
                             options);
                     }

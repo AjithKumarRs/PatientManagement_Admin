@@ -1,8 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using Ical.Net;
+using Ical.Net.DataTypes;
+using Ical.Net.Serialization.iCalendar.Serializers;
 using PatientManagement.Administration.Entities;
 using PatientManagement.Administration.Repositories;
 using PatientManagement.Common.EmailTemplates;
 using PatientManagement.PatientManagement.Entities;
+using PatientManagement.PatientManagement.Visits;
 using PatientManagement.Web.Modules.Common;
 using Serenity;
 using Serenity.Reporting;
@@ -32,7 +39,7 @@ namespace PatientManagement.PatientManagement.Endpoints
             }
             var patient = uow.Connection.ById<PatientsRow>(request.Entity.PatientId);
 
-            SendAutomaticEmailToPatient(uow, patient, request.Entity.StartDate??DateTime.MinValue, true);
+            SendAutomaticEmailToPatient(uow, patient, request.Entity.StartDate ?? DateTime.MinValue, true);
 
             return new MyRepository().Create(uow, request);
         }
@@ -55,6 +62,11 @@ namespace PatientManagement.PatientManagement.Endpoints
                 var emailModel = new ChangedVisitAutomaticEmailModel();
                 emailModel.PatientName = patient.Name;
                 emailModel.VisitDate = startDate;
+
+                var externalUrl = Config.Get<EnvironmentSettings>().SiteExternalUrl ??
+                                  Request.GetBaseUri().ToString();
+
+                emailModel.SetTenantSetings(externalUrl, emailModel);
 
                 var emailBody = TemplateHelper.RenderViewToString(HttpContext.RequestServices,
                     MVC.Views.Common.EmailTemplates.ChangedVisitAutomaticEmail.EmailTemplates_ChangedVisitAutomaticEmail, emailModel);
@@ -95,6 +107,14 @@ namespace PatientManagement.PatientManagement.Endpoints
             var bytes = new ReportRepository().Render(report);
             return ExcelContentResult.Create(bytes, "VisitsList_" +
                                                     DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".xlsx");
+        }
+
+
+        public FileStreamResult ListIcs(IDbConnection connection, ListRequest request)
+        {
+            var data = List(connection, request).Entities;
+            
+            return File(VisitsExportHelper.ExportToIcs(data, AccessType.Private), "text/calendar", "event.ics");
         }
     }
 }

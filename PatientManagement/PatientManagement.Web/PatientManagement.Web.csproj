@@ -52,8 +52,10 @@
     <Content Include="wwwroot\Scripts\serenity\Serenity.Script.UI.es5.js" />
     <Content Include="wwwroot\Scripts\site\FullCalendarExtensions.js" />
     <EmbeddedResource Include="Views\Templates\PropertyDialog.Template.html" CopyToPublishDirectory="PreserveNewest" />
+    <EmbeddedResource Include="Views\Templates\HelloModal.Template.html" CopyToPublishDirectory="PreserveNewest" />
+    <EmbeddedResource Include="Views\Templates\EntityDialogBoxSolid.Template.html" CopyToPublishDirectory="PreserveNewest" />
   </ItemGroup>
-  <ItemGroup> 
+  <ItemGroup>
     <None Update="wwwroot\**\*">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>
@@ -61,13 +63,14 @@
   <ItemGroup>
     <PackageReference Include="EPPlus.Core" Version="1.5.1" />
     <PackageReference Include="FastMember" Version="1.1.0" />
+    <PackageReference Include="Ical.Net" Version="3.0.12" />
     <PackageReference Include="MailKit" Version="1.16.2" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.1.1" />
     <PackageReference Include="Microsoft.Data.Sqlite" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
     <PackageReference Include="Microsoft.Win32.Registry" Version="4.4.0" />
     <PackageReference Include="Serenity.FluentMigrator.Runner" Version="1.6.904" />
-    <PackageReference Include="Serenity.Web" Version="3.0.5" />
+    <PackageReference Include="Serenity.Web" Version="3.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Server" Version="0.2.0-preview2-22683" />
     <PackageReference Include="NodaMoney" Version="1.0.0" />
     <PackageReference Include="Sendgrid" Version="9.4.1" />
@@ -94,7 +97,7 @@
     <Warning Condition="'@(Filtered)'!=''" Code="CSHTML" File="%(Filtered.Identity)" Text="View is not set to [BuildAction:Content]" />
   </Target>-->
   <ItemGroup>
-    <DotNetCliToolReference Include="Serenity.CodeGenerator" Version="3.0.5" />
+    <DotNetCliToolReference Include="Serenity.CodeGenerator" Version="3.0.8" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Reporting\" />
@@ -117,7 +120,13 @@
     <None Update="App_Data\texts\user.texts.en.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Modules\Administration\Coupons\CouponsIndex.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Modules\Administration\Currencies\CurrenciesIndex.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\Administration\ExternalAccess\ExternalAccessIndex.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None> 
     <None Update="Modules\Administration\Language\LanguageIndex.cshtml">

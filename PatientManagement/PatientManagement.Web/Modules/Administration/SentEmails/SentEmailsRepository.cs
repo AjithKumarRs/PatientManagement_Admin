@@ -35,6 +35,7 @@ namespace PatientManagement.Administration.Repositories
             request.Entity.ToEmail = patient.Email;
             request.Entity.ToName = patient.Name;
 
+
             return new MySaveHandler().Process(uow, request, SaveRequestType.Create);
         }
 

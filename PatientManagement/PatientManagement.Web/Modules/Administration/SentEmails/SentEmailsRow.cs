@@ -17,7 +17,7 @@ namespace PatientManagement.Administration.Entities
     [InsertPermission("PatientManagement:SentEmails:Insert")]
     [DeletePermission("Administration:SentEmails:Delete")]
     [UpdatePermission("Administration:SentEmails:Update")]
-    [LookupScript("AdministrationTenants.Payment",
+    [LookupScript("AdministrationTenants.SentEmails",
         LookupType = typeof(MultiTenantRowLookupScript<>))]
     public sealed class SentEmailsRow : Row, IIdRow, INameRow, ILoggingRow, IMultiTenantRow, IIsActiveRow
     {
@@ -83,13 +83,6 @@ namespace PatientManagement.Administration.Entities
             set { Fields.ToName[this] = value; }
         }
 
-        [DisplayName("Is Active"), NotNull]
-        [ReadPermission("Administration:Tenants")]
-        public Int16? IsActive
-        {
-            get { return Fields.IsActive[this]; }
-            set { Fields.IsActive[this] = value; }
-        }
 
         #region ILoggingRow
 
@@ -103,7 +96,6 @@ namespace PatientManagement.Administration.Entities
 
 
         [DisplayName("Created by"), Expression("usrI.UserName")]
-        [ReadPermission("Administration:Tenants")]
         public String InsertUserName
         {
             get { return Fields.InsertUserName[this]; }
@@ -111,8 +103,7 @@ namespace PatientManagement.Administration.Entities
         }
 
 
-        [DisplayName("Insert Date"), NotNull, QuickFilter()]
-        [ReadPermission("Administration:Tenants")]
+        [DisplayName("Insert Date"), NotNull, QuickFilter(), SortOrder(1, true)]
         public DateTime? InsertDate
         {
             get { return Fields.InsertDate[this]; }
@@ -174,6 +165,15 @@ namespace PatientManagement.Administration.Entities
         #endregion
 
         #region IIsActive
+
+        [DisplayName("Is Active"), NotNull]
+        [ReadPermission("Administration:Tenants")]
+        public Int16? IsActive
+        {
+            get { return Fields.IsActive[this]; }
+            set { Fields.IsActive[this] = value; }
+        }
+
         Int16Field IIsActiveRow.IsActiveField
         {
             get { return Fields.IsActive; }

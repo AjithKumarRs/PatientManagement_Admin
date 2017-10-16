@@ -11,6 +11,7 @@
         public string Email { get; set; }
         public string UserPhone { get; set; }
         public string UserImage { get; set; }
+        public short RestrictedToCabinets { get; set; }
         public short IsActive { get; set; }
         public int UserId { get; set; }
         public string Username { get; set; }

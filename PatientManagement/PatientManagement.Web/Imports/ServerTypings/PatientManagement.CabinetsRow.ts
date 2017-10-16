@@ -1,6 +1,7 @@
 ﻿namespace PatientManagement.PatientManagement {
     export interface CabinetsRow {
         CabinetId?: number;
+        WorkDays?: number[];
         Name?: string;
         Representatives?: number[];
         WorkHoursStart?: number;
@@ -29,6 +30,7 @@
 
         export namespace Fields {
             export declare const CabinetId: string;
+            export declare const WorkDays: string;
             export declare const Name: string;
             export declare const Representatives: string;
             export declare const WorkHoursStart: string;
@@ -44,6 +46,6 @@
             export declare const UpdateUserName: string;
         }
 
-        ['CabinetId', 'Name', 'Representatives', 'WorkHoursStart', 'WorkHoursEnd', 'TenantId', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'IsActive', 'TenantName', 'InsertUserName', 'UpdateUserName'].forEach(x => (<any>Fields)[x] = x);
+        ['CabinetId', 'WorkDays', 'Name', 'Representatives', 'WorkHoursStart', 'WorkHoursEnd', 'TenantId', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'IsActive', 'TenantName', 'InsertUserName', 'UpdateUserName'].forEach(x => (<any>Fields)[x] = x);
     }
 }

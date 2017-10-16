@@ -1,5 +1,8 @@
 ﻿
 
+using System.Linq;
+using PatientManagement.PatientManagement.Entities;
+
 namespace PatientManagement.PatientManagement.Repositories
 {
     using Serenity;
@@ -15,7 +18,7 @@ namespace PatientManagement.PatientManagement.Repositories
 
         public SaveResponse Create(IUnitOfWork uow, SaveRequest<MyRow> request)
         {
-            
+
             return new MySaveHandler().Process(uow, request, SaveRequestType.Create);
         }
 
@@ -41,7 +44,28 @@ namespace PatientManagement.PatientManagement.Repositories
 
         private class MySaveHandler : SaveRequestHandler<MyRow> { }
         private class MyDeleteHandler : DeleteRequestHandler<MyRow> { }
-        private class MyRetrieveHandler : RetrieveRequestHandler<MyRow> { }
-        private class MyListHandler : ListRequestHandler<MyRow> { }
+
+        private class MyRetrieveHandler : RetrieveRequestHandler<MyRow>
+        {
+        }
+
+        private class MyListHandler : ListRequestHandler<MyRow>
+        {
+            protected override void OnBeforeExecuteQuery()
+            {
+                base.OnBeforeExecuteQuery();
+                var user = ((UserDefinition)Authorization.UserDefinition);
+
+                if (user.RestrictedToCabinets == 1)
+                {
+                    var reprFlds = CabinetRepresentativesRow.Fields;
+                    var cabinetRepres = this.Connection.List<CabinetRepresentativesRow>(reprFlds.UserId == user.UserId).Select(s => s.CabinetId);
+                    var flds = MyRow.Fields;
+
+                    if (cabinetRepres.Any())
+                        this.Query.Where(flds.TenantId == user.TenantId && flds.CabinetId.In(cabinetRepres));
+                }
+            }
+        }
     }
 }

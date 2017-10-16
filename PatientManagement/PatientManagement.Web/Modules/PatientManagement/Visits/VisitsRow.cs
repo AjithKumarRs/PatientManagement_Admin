@@ -153,6 +153,13 @@ namespace PatientManagement.PatientManagement.Entities
             get { return (Gender?)Fields.PatientGender[this]; }
             set { Fields.PatientGender[this] = (Int32?)value; }
         }
+
+        [DisplayName("Email"), Expression("jPatient.[Email]"), Size(100), QuickSearch]
+        public String PatientEmail
+        {
+            get { return Fields.PatientEmail[this]; }
+            set { Fields.PatientEmail[this] = value; }
+        }
         #endregion
 
 
@@ -192,6 +199,7 @@ namespace PatientManagement.PatientManagement.Entities
             public StringField InsertUserName;
 
             public Int32Field PatientGender;
+            public StringField PatientEmail;
 
             public StringField PhoneNumber;
             public StringField PatientName;

@@ -1,4 +1,5 @@
-﻿@using PatientManagement.PatientManagement
+﻿@using NUglify.Helpers
+@using PatientManagement.PatientManagement
 
 @{
     ViewData["Title"] = "Dashboard";
@@ -104,7 +105,16 @@
         </div><!-- /. box -->
     </div><!-- /.col -->
 </div><!-- /.row -->
+@if(ViewData["HelloModal"] != null) { 
+<div id="helloModal"></div>
+<script>
+    jQuery(document).ready(function() {
+        //Show hello modal
+        new PatientManagement.PatientManagement.HelloModal($('#helloModal'), {});
+    });
 
+</script>
+}
 <script>
 
 
@@ -194,10 +204,11 @@
     }
 
     $(document).ready(function () {
-        //TODO: Add drag and drop functonalities here 
+        //TODO: Add drag and drop functonalities here
         //$('.fc-event-droppable').each(function (i, element) {
 
         //});
+        console.log(@ViewData["WorkDays"]);
 
         $(window).resize(function() {
             $('#calendar').fullCalendar('option', 'height', get_calendar_height());
@@ -217,15 +228,15 @@
             height: get_calendar_height,
             lazyFetching: false,
             defaultView: 'agendaWeek',
-            //businessHours: {
-            //    dow: [ 1, 2, 3, 4, 5 ], // Monday - Friday
+            businessHours: {
+                dow: @ViewData["WorkDays"], // Monday - Friday
 
-            //    start: '8:00',
-            //    end: '20:00'
-            //},
+                start: "@ViewData["WorkHoursStart"]",
+                end: "@ViewData["WorkHoursEnd"]"
+            },
             slotDuration: '00:15:00',
-            minTime: "@ViewData["WorkHoursStart"]",
-            maxTime: "@ViewData["WorkHoursEnd"]",
+            //minTime: "@ViewData["WorkHoursStart"]",
+            //maxTime: "@ViewData["WorkHoursEnd"]",
             eventClick: function(event) {
 
                 new PatientManagement.PatientManagement.CalendarPatientDialog().loadByIdAndOpenDialog(event.patientId);
@@ -233,11 +244,11 @@
                     return false;
                 }
             },
-            loading: function (bool) { 
-                if (bool) 
-                    $('#loading-calendar').show(); 
-                else 
-                    $('#loading-calendar').hide(); 
+            loading: function (bool) {
+                if (bool)
+                    $('#loading-calendar').show();
+                else
+                    $('#loading-calendar').hide();
                 //Possibly call you feed loader to add the next feed in line
             },
             eventLimit: true,

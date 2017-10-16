@@ -112,8 +112,7 @@ namespace PatientManagement
 
                     public static LocalText AcceptTerms = "I agree to the terms";
                     public static LocalText BackToLogin = "I already have a membership";
-
-                    public static LocalText FormatSubscriptionName = "{0} - First registration";
+                    
                     public static LocalText FormatCabinetName = "{0} - First Room";
 
                     public static LocalText AcceptTermsAndConditionsError = "You must accept terms and conditions";
@@ -134,16 +133,86 @@ namespace PatientManagement
         }
         public static class Site
         {
+            public static class HelloModal
+            {
+                public static LocalText Title = "Welcome";
+                public static LocalText SubTitle = "Take a first steps in Clario management system";
+
+                public static LocalText ButtonContinue = "Continue";
+                public static LocalText ButtonStart = "Begin";
+                public static LocalText ButtonSkip = "Skip";
+                public static LocalText ButtonFinnish = "Finnish";
+                public static LocalText ButtonCloseAndFinnish = "Close and continue work";
+
+                public static LocalText StepCabinet = "Add your first cabinet";
+                public static LocalText StepCabinetTitle = "Add your first cabinet. Every cabinet has its own calendar and you can fast switch the calendars in the left dropdown";
+
+                public static LocalText StepVisitType = "Create new visit type";
+                public static LocalText StepVisitTypeTitle = "Choose name and colors for your visit type. This will be the look that will be shown in the calendar for every visit in this type";
+
+                public static LocalText StepPatient = "Register a patient";
+                public static LocalText StepPatientTitle= "When you registering new patient, you can choose to receive automatic emails  when visit is added or changed";
+
+                public static LocalText StepVisit = "Assign a visit to patient";
+                public static LocalText StepVisitTitle = "You can choose from dropdowns or you can use the functional buttons in right to create a new records";
+
+                public static LocalText StepSuccess = "Congratulations! You now have all the needet skills to work with Clario management system. We from Clario team wish you good work, and happy hours using the system!";
+
+
+            }
             public static class Payments
             {
+                public static LocalText SerialNumPrefix = "PEYMID";
+
                 public static LocalText PaymentEmptyValueError = "You can't make empty payment!";
+                public static LocalText PaymentBlank = "File";
+                public static LocalText Reciever = "АЙ ПИ ООД";
+                public static LocalText IBANReciever = "BG56UNCR70001520323712";
+                public static LocalText BICreciever = "UNCRBGSF";
+                public static LocalText BankNameReciever = "УНИКРЕДИТ ЦЕНТРАЛИЗИРИНА С-МА";
+
+                public static LocalText CouponExpiredError = "The coupon that you entered is expired!";
+                public static LocalText CouponNotExist = "The coupon that you entered not exist!";
+
+                public static class Invoice
+                {
+                    public static LocalText Date = "Date: ";
+                    public static LocalText From = "From";
+                    public static LocalText To = "To";
+                    public static LocalText Payment = "Payment: ";
+                    public static LocalText QtyColumn = "Qty";
+                    public static LocalText ProductColumn = "Product";
+                    public static LocalText SerialNumColumn = "Serial #";
+                    public static LocalText DescriptionColumn = "Description";
+                    public static LocalText CurrencyColumn = "Currency";
+                    public static LocalText PriceColumn = "Price";
+
+                    public static LocalText PaymentDescriptionTitle = "Notes for payment";
+                    public static LocalText PaymentDescriptionText = "If you make another payment and its still in process, please include {0} to description when you pay in your bank.";
+                    public static LocalText TotalForPayment = "Total for payment";
+                    public static LocalText SubTotal = "Subtotal: ";
+                    public static LocalText Discount = "Discount: ";
+                    public static LocalText Total = "Total: ";
+                    public static LocalText GeneratePdf = "Generate PDF";
+
+                }
             }
+
+            public static class Coupons
+            {
+                public static LocalText SerialNumPrefix = "COUPID";
+
+            }
+
             public static class Subscriptions
             {
+                public static LocalText SerialNumPrefix = "SUBSID";
+
                 public static LocalText SubscriptionTitle = "Subscription Information";
                 public static LocalText SubscriptionRightBox = "You can make direct payment from here!";
                 public static LocalText SubscriptionRightBoxButton = "Add Payment";
                 public static LocalText DeleteActiveSubscriptionError = "You cant delete active subscription";
+                public static LocalText SubscriptionInfoNotification = "Subscription information will not be showed for next 24 hours?";
 
                 public static LocalText MaximumVisitsError = "Based on you current subscription, you can create maximum {0} visits.";
                 public static LocalText MaximumUsersError = "Based on you current subscription, you can create maximum {0} users.";
@@ -289,6 +358,14 @@ namespace PatientManagement
                 public static LocalText ThemeRedLight = "Red Light";
                 public static LocalText ThemeYellow = "Yellow";
                 public static LocalText ThemeYellowLight = "Yellow Light";
+
+                public static LocalText RightBoxLayoutTechnicalDocumentation = "Technical Documentation";
+                public static LocalText RightBoxLayoutTechnicalDocumentationLink = "https://help.myclario.com/";
+                public static LocalText RightBoxLayoutFaqLink = "https://faq.myclario.com/";
+                public static LocalText RightBoxLayoutFaq = "FAQ";
+                public static LocalText RightBoxLayoutButton = "check it out";
+                public static LocalText RightBoxHeader = "Do you need some help?";
+
             }
 
             public static class ValidationError

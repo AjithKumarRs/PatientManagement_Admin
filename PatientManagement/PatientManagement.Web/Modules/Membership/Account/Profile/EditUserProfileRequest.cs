@@ -19,13 +19,14 @@ namespace PatientManagement.Membership
 
         [Required]
         public string Email { get; set; }
-
+        
         public string PhoneNumber { get; set; }
         
         public String WebSite { get; set; }
         
         public String UserImage { get; set; }
-        
+
+        public string Info { get; set; }
 
         public String EmailSignature { get; set; }
     }

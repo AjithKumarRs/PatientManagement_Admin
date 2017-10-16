@@ -1,6 +1,8 @@
 ﻿
 
 using PatientManagement.Web.Modules.Common;
+using Serenity.Abstractions;
+using Serenity.Web;
 
 namespace PatientManagement.Administration.Endpoints
 {
@@ -55,7 +57,24 @@ namespace PatientManagement.Administration.Endpoints
 
         public RetrieveResponse<MyRow> Retrieve(IDbConnection connection, RetrieveRequest request)
         {
+            if (request.EntityId.ToString() == Authorization.UserId)
+            {
+                var perminsion = Dependency.Resolve<IPermissionService>();
+
+                var grantor = new TransientGrantingPermissionService(perminsion);
+                grantor.GrantAll();
+                try
+                {
+                    return new MyRepository().Retrieve(connection, request);
+                }
+                finally
+                {
+                    grantor.UndoGrant();
+                }
+
+            }
             return new MyRepository().Retrieve(connection, request);
+
         }
 
         public ListResponse<MyRow> List(IDbConnection connection, ListRequest request)
@@ -86,6 +105,7 @@ namespace PatientManagement.Administration.Endpoints
             result.DisplayName = user.DisplayName;
             result.IsAdmin = user.Username == "admin";
             result.TenantId = user.TenantId;
+            result.RestrictedToCabinets = user.RestrictedToCabinets;
             //TODO: Major speed issue when using in the Frond End
             //result.PaidPeriod = UserSubscriptionHelper.GetTenantPaidDays(user.TenantId);
 

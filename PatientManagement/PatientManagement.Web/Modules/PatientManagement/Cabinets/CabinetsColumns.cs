@@ -15,11 +15,14 @@ namespace PatientManagement.PatientManagement.Columns
     {
         [EditLink, DisplayName("Db.Shared.RecordId"), AlignRight]
         public Int32 CabinetId { get; set; }
-        [EditLink]
+        [EditLink, CabinetsFormatter]
         public String Name { get; set; }
 
         [Width(250), UserListFormatter]
         public String Representatives { get; set; }
+
+        [Width(250), WorkDaysListFormatter]
+        public List<Int32> WorkDays { get; set; }
 
         [MinuteFormatter]
         public Int16 WorkHoursStart { get; set; }

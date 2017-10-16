@@ -7722,7 +7722,7 @@ section.content > .s-DataGrid {
   width: 120px;
 }
 .s-Administration-UserDialog > .size {
-  width: 650px;
+  width: 850px;
   height: 700px;
 }
 .s-Administration-UserDialog .caption {
@@ -8659,6 +8659,30 @@ section.content > .s-DataGrid {
   padding: 2px 0px 2px 20px;
   background: url(../serenity/images/pda.png) no-repeat center left;
 }
+.home-symbol {
+  padding: 2px 0px 2px 23px;
+  background: url(../serenity/images/home.png) no-repeat center left;
+}
+.briefcase-symbol {
+  padding: 2px 0px 2px 23px;
+  background: url(../serenity/images/briefcase.png) no-repeat center left;
+}
+.mail-symbol {
+  padding: 2px 0px 2px 25px;
+  background: url(../serenity/images/mail.png) no-repeat center left;
+}
+.mail-open-symbol {
+  padding: 2px 0px 2px 25px;
+  background: url(../serenity/images/mail-open.png) no-repeat center left;
+}
+.key-symbol {
+  padding: 2px 0px 2px 25px;
+  background: url(../serenity/images/key.png) no-repeat center left;
+}
+.calendar-day-symbol {
+  padding: 2px 0px 2px 25px;
+  background: url(../serenity/images/calendar-day.png) no-repeat center left;
+}
 .visit-type-icon {
   padding: 0 0 0 15px;
   margin-right: 5px;
@@ -8891,13 +8915,7 @@ section.content > .s-DataGrid {
   width: 150px;
 }
 .s-Administration-PaymentsDialog > .size {
-  width: 650px;
-}
-.s-Administration-PaymentsDialog .caption {
-  width: 150px;
-}
-.s-Administration-PaymentsDialog > .size {
-  width: 650px;
+  width: 900px;
 }
 .s-Administration-PaymentsDialog .caption {
   width: 150px;
@@ -8906,12 +8924,6 @@ section.content > .s-DataGrid {
   width: 650px;
 }
 .s-Administration-SubscriptionsDialog .caption {
-  width: 150px;
-}
-.s-Administration-PaymentsDialog > .size {
-  width: 650px;
-}
-.s-Administration-PaymentsDialog .caption {
   width: 150px;
 }
 .s-Administration-PaymentOptionsDialog > .size {
@@ -8961,9 +8973,6 @@ section.content > .s-DataGrid {
 .s-CalendarCabinetsEditor {
   width: 100%;
 }
-.s-PaymentsGrid .not-success-payment .print-invoice {
-  display: none;
-}
 .s-PaymentsGrid .payment-pending {
   background-color: rgba(255, 216, 0, 0.42);
 }
@@ -8977,5 +8986,30 @@ section.content > .s-DataGrid {
   width: 450px;
 }
 .s-NewVisitTypeDialog .caption {
+  width: 150px;
+}
+.s-Administration-ExternalAccessDialog > .size {
+  width: 650px;
+}
+.s-Administration-ExternalAccessDialog .caption {
+  width: 150px;
+}
+#calendar .fc-nonbusiness {
+  background: #cedce7;
+  background: -moz-linear-gradient(top, #cedce7 0%, #596a72 100%);
+  background: -webkit-linear-gradient(top, #cedce7 0%, #596a72 100%);
+  background: linear-gradient(to bottom, #cedce7 0%, #596a72 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#cedce7', endColorstr='#596a72', GradientType=0);
+}
+.s-Administration-CouponsDialog > .size {
+  width: 650px;
+}
+.s-Administration-CouponsDialog .caption {
+  width: 150px;
+}
+.s-Administration-CouponsDialog > .size {
+  width: 650px;
+}
+.s-Administration-CouponsDialog .caption {
   width: 150px;
 }

@@ -37,7 +37,7 @@ namespace PatientManagement.Administration {
         }
         protected getTemplate() {
             // you could also put this in a Email.Template.html file. it's here for simplicity.
-            return "<div id='~_Email'><iframe style='width: 100%; min-height: 500px' id='email-body'> </iframe></div>";
+            return "<div id='~_Email'><iframe style='width: 100%; min-height: 620px; height: 100%' id='email-body'> </iframe></div>";
         }
 
         //protected getDialogOptions() {

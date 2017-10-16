@@ -21,7 +21,7 @@ namespace PatientManagement.PatientManagement {
 
                         });
                         this.value = response.Entities[0].CabinetId + "";
-                        //this.readOnly = true;
+                        this.readOnly = true;
                     } else {
 
                         for (var i = 0; i < response.TotalCount; i++) {
@@ -31,35 +31,43 @@ namespace PatientManagement.PatientManagement {
                                 
                             });
                         }
+
+                        var cookie = $.cookie("CabinetPreference");
+                        this.value = cookie + "";
                     }
 
-                    var cookie = $.cookie("CabinetPreference");
-                        this.value = cookie + "";
 
                     
                 });
 
 
-                this.changeSelect2(e => {
+            this.changeSelect2(e => {
+                    if (!this.value) {
+                        return;
+                    }
+
                     $.cookie('CabinetPreference', this.value, {
                         path: Q.Config.applicationPath,
-                        expires: 365
+                        expires: 1
                     });
                     PatientManagement.CabinetsService.RetrieveWorkHours({
                             EntityId: this.value
                         },
                         response => {
                             var entity = response.Entity;
-                            console.log(entity);
-                            $('#calendar').fullCalendar('option', {
-                                
-                                'minTime': entity.start,
-                                'maxTime': entity.end
-                            });
+                            $('#calendar').fullCalendar('option',
+                                {
+                                    businessHours: [
+                                        {
+                                            dow: entity.workDays,
+                                            start: entity.start,
+                                            end: entity.end
+                                        }
+                                    ]
+                                });
 
 
                             if ($('#cabinet-name-right-header').length > 0) {
-                                console.log();
 
                                 $('#cabinet-name-right-header').html(this.get_text()
                                     + "<small style='display: inline - block'> - "

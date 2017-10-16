@@ -6,9 +6,19 @@ namespace MVC
     {
         public static class Administration
         {
+            public static class Coupons
+            {
+                public const string CouponsIndex = "~/Modules/Administration/Coupons/CouponsIndex.cshtml";
+            }
+
             public static class Currencies
             {
                 public const string CurrenciesIndex = "~/Modules/Administration/Currencies/CurrenciesIndex.cshtml";
+            }
+
+            public static class ExternalAccess
+            {
+                public const string ExternalAccessIndex = "~/Modules/Administration/ExternalAccess/ExternalAccessIndex.cshtml";
             }
 
             public static class Language

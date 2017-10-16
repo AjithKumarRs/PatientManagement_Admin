@@ -35,6 +35,7 @@ namespace PatientManagement
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddMvc(options =>
             {
                 options.ModelBinderProviders.Insert(0, new ServiceEndpointModelBinderProvider());
@@ -123,6 +124,12 @@ namespace PatientManagement
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            app.UseCors(builder => builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
 
             app.UseStaticFiles();
             app.UseAuthentication();

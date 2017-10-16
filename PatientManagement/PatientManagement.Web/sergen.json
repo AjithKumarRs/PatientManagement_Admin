@@ -10,10 +10,22 @@
       "Key": "Default",
       "Tables": [
         {
+          "Tablename": "dbo.Coupons",
+          "Identifier": "Coupons",
+          "Module": "Administration",
+          "PermissionKey": "Administration:Coupons"
+        },
+        {
           "Tablename": "dbo.Currencies",
           "Identifier": "Currencies",
           "Module": "Administration",
           "PermissionKey": "Administration:Currencies"
+        },
+        {
+          "Tablename": "dbo.ExternalAccess",
+          "Identifier": "ExternalAccess",
+          "Module": "Administration",
+          "PermissionKey": "Administration:ExternalAccess"
         },
         {
           "Tablename": "dbo.OfferLang",

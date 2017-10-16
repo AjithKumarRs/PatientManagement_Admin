@@ -8,6 +8,7 @@
         UpdateUserId?: number;
         UpdateDateField?: string;
         IsActive?: number;
+        UsersInRole?: number[];
         TenantName?: string;
         InsertUserName?: string;
         UpdateUserName?: string;
@@ -33,11 +34,12 @@
             export declare const UpdateUserId: string;
             export declare const UpdateDateField: string;
             export declare const IsActive: string;
+            export declare const UsersInRole: string;
             export declare const TenantName: string;
             export declare const InsertUserName: string;
             export declare const UpdateUserName: string;
         }
 
-        ['RoleId', 'RoleName', 'TenantId', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'IsActive', 'TenantName', 'InsertUserName', 'UpdateUserName'].forEach(x => (<any>Fields)[x] = x);
+        ['RoleId', 'RoleName', 'TenantId', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'IsActive', 'UsersInRole', 'TenantName', 'InsertUserName', 'UpdateUserName'].forEach(x => (<any>Fields)[x] = x);
     }
 }
