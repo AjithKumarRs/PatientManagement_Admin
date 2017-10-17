@@ -27,6 +27,9 @@
     @Serenity.Decorators.registerFormatter()
     export class PatientsPhoneFormatter implements Slick.Formatter {
         format(ctx: Slick.FormatterContext) {
+            var idList = ctx.value as string[];
+            if (!idList || !idList.length)
+                return "";
             return "<span class='phone-symbol'>" + Q.htmlEncode(ctx.value) + '</span>'
 
         }
@@ -35,6 +38,9 @@
     @Serenity.Decorators.registerFormatter()
     export class PatientsEmailFormatter implements Slick.Formatter {
         format(ctx: Slick.FormatterContext) {
+            var idList = ctx.value as string[];
+            if (!idList || !idList.length)
+                return "";
             return "<span class='mail-symbol'>" + Q.htmlEncode(ctx.value) + '</span>'
 
         }
