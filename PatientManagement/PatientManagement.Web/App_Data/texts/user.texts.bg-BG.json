@@ -639,6 +639,7 @@
   "Site.UserRoleDialog.DialogTitle": "Редактирай роли на потребител. ({0})",
   "Site.UserRoleDialog.SaveSuccess": "Обновени роли за потребител.",
   "Site.ValidationError.Title": "ГРЕШКА",
+  "Site.ValidationError.ValidateNotifyOnChangeWithNoEmail": "Не можем да изпращаме автоматични имейли, ако няма добавен  имейл на пациента!",
   "Validation.AuthenticationError": "Невалидно потребителско име или парола!",
   "Validation.CantFindUserWithEmail": "Невалиден имейл адрес!",
   "Validation.Email": "Моля въведете валиден имейл адрес.",

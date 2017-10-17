@@ -6820,8 +6820,9 @@ var PatientManagement;
         var PatientHealthDialog = (function (_super) {
             __extends(PatientHealthDialog, _super);
             function PatientHealthDialog() {
-                var _this = _super !== null && _super.apply(this, arguments) || this;
+                var _this = _super.call(this) || this;
                 _this.form = new PatientManagement.PatientHealthForm(_this.idPrefix);
+                PatientManagement_69.DialogUtils.pendingChangesConfirmation(_this.element, function () { return _this.getSaveState() != _this.loadedState; });
                 return _this;
             }
             PatientHealthDialog.prototype.getFormKey = function () { return PatientManagement.PatientHealthForm.formKey; };
@@ -6829,6 +6830,18 @@ var PatientManagement;
             PatientHealthDialog.prototype.getLocalTextPrefix = function () { return PatientManagement.PatientHealthRow.localTextPrefix; };
             PatientHealthDialog.prototype.getNameProperty = function () { return PatientManagement.PatientHealthRow.nameProperty; };
             PatientHealthDialog.prototype.getService = function () { return PatientManagement.PatientHealthService.baseUrl; };
+            PatientHealthDialog.prototype.getSaveState = function () {
+                try {
+                    return $.toJSON(this.getSaveEntity());
+                }
+                catch (e) {
+                    return null;
+                }
+            };
+            PatientHealthDialog.prototype.loadResponse = function (data) {
+                _super.prototype.loadResponse.call(this, data);
+                this.loadedState = this.getSaveState();
+            };
             return PatientHealthDialog;
         }(Serenity.EntityDialog));
         PatientHealthDialog = __decorate([

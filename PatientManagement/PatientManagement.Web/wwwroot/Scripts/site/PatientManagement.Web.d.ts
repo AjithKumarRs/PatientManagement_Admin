@@ -3407,6 +3407,7 @@ declare namespace PatientManagement.PatientManagement {
         protected form: PatientsForm;
         private visitsGrid;
         private loadedState;
+        private loadedStatePatientHealth;
         private patientHealthForm;
         private patientHealthGrid;
         private patientValidator;
@@ -3550,6 +3551,10 @@ declare namespace PatientManagement.PatientManagement {
         protected getNameProperty(): string;
         protected getService(): string;
         protected form: PatientHealthForm;
+        private loadedState;
+        constructor();
+        getSaveState(): string;
+        loadResponse(data: any): void;
     }
 }
 declare namespace PatientManagement.PatientManagement {

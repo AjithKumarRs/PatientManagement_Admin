@@ -372,6 +372,7 @@ namespace PatientManagement
             {
                 public static LocalText Title = "ERROR";
                 public static LocalText ValidateEgnNotCorrect = "Entered personal number is not correct!";
+                public static LocalText ValidateNotifyOnChangeWithNoEmail = "We cant send automatic emails if there is no patient email!";
             }
         }
 

@@ -27,15 +27,26 @@ namespace PatientManagement.PatientManagement.Endpoints
                 throw new ValidationError(string.Format(Texts.Site.Subscriptions.MaximumPatientsError, maximumInserts));
             }
 
+            if (request.Entity.NotifyOnChange ?? true)
+            {
+                if (string.IsNullOrWhiteSpace(request.Entity.Email))
+                    throw new ValidationError(Texts.Site.ValidationError.ValidateNotifyOnChangeWithNoEmail);
+            }
+
             return new MyRepository().Create(uow, request);
         }
 
         [HttpPost, AuthorizeUpdate(typeof(MyRow))]
         public SaveResponse Update(IUnitOfWork uow, SaveRequest<MyRow> request)
         {
+            if (request.Entity.NotifyOnChange ?? true)
+            {
+                if (string.IsNullOrWhiteSpace(request.Entity.Email))
+                    throw new ValidationError(Texts.Site.ValidationError.ValidateNotifyOnChangeWithNoEmail);
+            }
             return new MyRepository().Update(uow, request);
         }
- 
+
         [HttpPost, AuthorizeDelete(typeof(MyRow))]
         public DeleteResponse Delete(IUnitOfWork uow, DeleteRequest request)
         {
