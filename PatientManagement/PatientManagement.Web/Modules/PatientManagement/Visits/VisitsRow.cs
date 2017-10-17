@@ -141,6 +141,14 @@ namespace PatientManagement.PatientManagement.Entities
             set => Fields.PatientName[this] = value;
         }
 
+        [DisplayName("Notify On Change"), Expression("jPatient.[NotifyOnChange]")]
+        [BsSwitchEditor]
+        public Boolean? PatientNotifyOnChange
+        {
+            get { return Fields.PatientNotifyOnChange[this]; }
+            set { Fields.PatientNotifyOnChange[this] = value; }
+        }
+
         [DisplayName("Phone Number"), Expression("jPatient.[PhoneNumber]"), QuickSearch]
         public string PhoneNumber
         {
@@ -200,7 +208,7 @@ namespace PatientManagement.PatientManagement.Entities
 
             public Int32Field PatientGender;
             public StringField PatientEmail;
-
+            public BooleanField PatientNotifyOnChange;
             public StringField PhoneNumber;
             public StringField PatientName;
 

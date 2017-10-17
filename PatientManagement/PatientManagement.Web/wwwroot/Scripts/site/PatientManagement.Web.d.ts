@@ -2334,6 +2334,7 @@ declare namespace PatientManagement.PatientManagement {
         InsertUserName?: string;
         PatientGender?: Gender;
         PatientEmail?: string;
+        PatientNotifyOnChange?: boolean;
         PhoneNumber?: string;
         PatientName?: string;
         VisitTypeName?: string;
@@ -2362,6 +2363,7 @@ declare namespace PatientManagement.PatientManagement {
             const InsertUserName: string;
             const PatientGender: string;
             const PatientEmail: string;
+            const PatientNotifyOnChange: string;
             const PhoneNumber: string;
             const PatientName: string;
             const VisitTypeName: string;
