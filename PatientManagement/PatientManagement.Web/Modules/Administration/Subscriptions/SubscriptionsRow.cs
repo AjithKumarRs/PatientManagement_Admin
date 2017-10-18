@@ -60,13 +60,6 @@ namespace PatientManagement.Administration.Entities
             set { Fields.Name[this] = value; }
         }
 
-        [DisplayName("Paid Period"), NotMapped, Insertable(false), Updatable(false)]
-        public DateTime? PaidPeriod
-        {
-            get { return Fields.PaidPeriod[this]; }
-            set { Fields.PaidPeriod[this] = value; }
-        }
-
         [DisplayName("Offer Name"), Expression("jOffer.[Name]")]
         public String OfferName
         {
@@ -238,7 +231,6 @@ namespace PatientManagement.Administration.Entities
             public Int32Field OfferId;
             public Int32Field TenantId;
             public DateTimeField SubscriptionEndDate;
-            public DateTimeField PaidPeriod;
             public Int16Field Enabled;
 
             public Int16Field IsActive;

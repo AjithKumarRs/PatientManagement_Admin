@@ -144,30 +144,12 @@ namespace PatientManagement.Administration.Repositories
 
         private class MyRetrieveHandler : RetrieveRequestHandler<MyRow>
         {
-            protected override void OnReturn()
-            {
-                base.OnReturn();
-
-              //  Response.Entity.PaidPeriod = UserSubscriptionHelper.GetTenantPaidDaysForSubscription((int)Row.SubscriptionId);
-
-            }
+            
         }
 
 
         private class MyListHandler : ListRequestHandler<MyRow>
         {
-            protected override void OnReturn()
-            {
-                base.OnReturn();
-
-                foreach (var subscriptionsRow in Response.Entities)
-                {
-                    if (subscriptionsRow.SubscriptionId != null)
-                        subscriptionsRow.PaidPeriod =
-                            UserSubscriptionHelper.GetTenantPaidDaysForSubscription((int) subscriptionsRow
-                                .SubscriptionId);
-                }
-            }
         }
     }
 }
