@@ -19,6 +19,7 @@ namespace PatientManagement.Administration.Forms
 
         public String Description { get; set; }
         public Decimal Price { get; set; }
+        public Boolean IsPublic { get; set; }
         public Boolean Enabled { get; set; }
 
         public Int32 CurrencyId { get; set; }

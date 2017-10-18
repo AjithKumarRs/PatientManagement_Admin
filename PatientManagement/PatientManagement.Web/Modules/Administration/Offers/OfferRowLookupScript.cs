@@ -1,4 +1,7 @@
 ﻿
+
+using PatientManagement.Web.Modules.Administration.Offers;
+
 namespace PatientManagement.PatientManagement.Scripts
 {
     using Administration;
@@ -6,34 +9,28 @@ namespace PatientManagement.PatientManagement.Scripts
     using Serenity.Data;
     using Serenity.Web;
     using System;
-
-    public class MultiTenantRowLookupScript<TRow> :
+    public class OfferRowLookupScript<TRow> :
         RowLookupScript<TRow>
-        where TRow : Row, IMultiTenantRow, new()
+        where TRow : Row, IOfferRow, new()
     {
-        public MultiTenantRowLookupScript()
+        public OfferRowLookupScript()
         {
             Expiration = TimeSpan.FromTicks(1);
         }
-
         protected override void PrepareQuery(SqlQuery query)
         {
             base.PrepareQuery(query);
-            AddTenantFilter(query);
-        }
-
-        protected void AddTenantFilter(SqlQuery query)
-        {
             var r = new TRow();
 
+            query.Where( r.Enabled == 1);
             if (!Authorization.HasPermission(PermissionKeys.Tenants))
-                query.Where(r.TenantIdField ==
-                        ((UserDefinition)Authorization.UserDefinition).TenantId);
+                query.Where(r.IsPublic == 1);
+
         }
 
         public override string GetScript()
         {
-            return TwoLevelCache.GetLocalStoreOnly("MultiTenantLookup:" +
+            return TwoLevelCache.GetLocalStoreOnly("OfferRowLookup:" +
                                                    this.ScriptName + ":" +
                                                    ((UserDefinition)Authorization.UserDefinition).TenantId,
                 TimeSpan.FromMinutes(15),

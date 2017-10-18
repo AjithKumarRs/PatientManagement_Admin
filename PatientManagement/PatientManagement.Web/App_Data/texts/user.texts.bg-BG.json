@@ -97,6 +97,7 @@
   "Db.Administration.Offers.ExpirationDate": "Дата на изтичане",
   "Db.Administration.Offers.InsertUserId": "Създадено от",
   "Db.Administration.Offers.InsertUserName": "Създадено от",
+  "Db.Administration.Offers.IsPublic": "Публична",
   "Db.Administration.Offers.MaximumCabinets": "Максимум кабинети за Клиника",
   "Db.Administration.Offers.MaximumPatientsPerTenant": "Максимум пациенти за Клиника",
   "Db.Administration.Offers.MaximumSubscriptionTime": "Максимално време за използване",

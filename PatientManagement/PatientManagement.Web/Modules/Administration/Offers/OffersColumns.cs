@@ -34,6 +34,8 @@ namespace PatientManagement.Administration.Columns
         public Decimal Price { get; set; }
         [Width(90)]
         public Boolean Enabled { get; set; }
+        [Width(90)]
+        public Boolean IsPublic { get; set; }
 
         [Width(50)]
         public String CurrencyCurrencyId { get; set; }

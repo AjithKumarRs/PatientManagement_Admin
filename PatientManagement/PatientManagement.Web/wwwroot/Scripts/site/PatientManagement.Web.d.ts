@@ -3,6 +3,86 @@
 declare namespace PatientManagement.Administration {
 }
 declare namespace PatientManagement.Administration {
+    class CouponsForm extends Serenity.PrefixedContext {
+        static formKey: string;
+    }
+    interface CouponsForm {
+        Key: Serenity.StringEditor;
+        Name: Serenity.StringEditor;
+        Discount: Serenity.IntegerEditor;
+        Description: Serenity.StringEditor;
+        EndDate: Serenity.DateEditor;
+        MaxTimeUsing: Serenity.IntegerEditor;
+        IsUsed: Serenity.IntegerEditor;
+        IsActive: BsSwitchEditor;
+    }
+}
+declare namespace PatientManagement.Administration {
+    interface CouponsRow {
+        CouponId?: number;
+        Key?: string;
+        Name?: string;
+        Discount?: number;
+        Description?: string;
+        EndDate?: string;
+        IsUsed?: number;
+        InsertUserId?: number;
+        InsertDate?: string;
+        UpdateUserId?: number;
+        UpdateDateField?: string;
+        IsActive?: number;
+        MaxTimeUsing?: number;
+        InsertUserName?: string;
+        UpdateUserName?: string;
+    }
+    namespace CouponsRow {
+        const idProperty = "CouponId";
+        const isActiveProperty = "IsActive";
+        const nameProperty = "Key";
+        const localTextPrefix = "Administration.Coupons";
+        const lookupKey = "Administration.Coupons";
+        function getLookup(): Q.Lookup<CouponsRow>;
+        namespace Fields {
+            const CouponId: string;
+            const Key: string;
+            const Name: string;
+            const Discount: string;
+            const Description: string;
+            const EndDate: string;
+            const IsUsed: string;
+            const InsertUserId: string;
+            const InsertDate: string;
+            const UpdateUserId: string;
+            const UpdateDateField: string;
+            const IsActive: string;
+            const MaxTimeUsing: string;
+            const InsertUserName: string;
+            const UpdateUserName: string;
+        }
+    }
+}
+declare namespace PatientManagement.Administration {
+    namespace CouponsService {
+        const baseUrl = "Administration/Coupons";
+        function Create(request: Serenity.SaveRequest<CouponsRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Update(request: Serenity.SaveRequest<CouponsRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Undelete(request: Serenity.UndeleteRequest, onSuccess?: (response: Serenity.UndeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<CouponsRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<CouponsRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        namespace Methods {
+            const Create: string;
+            const Update: string;
+            const Delete: string;
+            const Undelete: string;
+            const Retrieve: string;
+            const List: string;
+        }
+    }
+}
+declare namespace PatientManagement.Administration {
+}
+declare namespace PatientManagement.Administration {
     class CurrenciesForm extends Serenity.PrefixedContext {
         static formKey: string;
     }
@@ -237,6 +317,7 @@ declare namespace PatientManagement.Administration {
         Name: Serenity.StringEditor;
         Description: Serenity.TextAreaEditor;
         Price: Serenity.DecimalEditor;
+        IsPublic: BsSwitchEditor;
         Enabled: BsSwitchEditor;
         CurrencyId: Serenity.LookupEditor;
         RoleId: Serenity.LookupEditor;
@@ -260,13 +341,14 @@ declare namespace PatientManagement.Administration {
         ExpirationDate?: string;
         Description?: string;
         Price?: number;
-        Enabled?: boolean;
+        Enabled?: number;
         CurrencyId?: number;
         RoleId?: number;
         CurrencyCurrencyId?: string;
         CurrencyName?: string;
         CurrencyEnabled?: boolean;
         RoleRoleName?: string;
+        IsPublic?: number;
         InsertUserId?: number;
         InsertDate?: string;
         UpdateUserId?: number;
@@ -300,6 +382,7 @@ declare namespace PatientManagement.Administration {
             const CurrencyName: string;
             const CurrencyEnabled: string;
             const RoleRoleName: string;
+            const IsPublic: string;
             const InsertUserId: string;
             const InsertDate: string;
             const UpdateUserId: string;
@@ -326,6 +409,22 @@ declare namespace PatientManagement.Administration {
             const Undelete: string;
             const Retrieve: string;
             const List: string;
+        }
+    }
+}
+declare namespace PatientManagement.Administration {
+    interface PaymentCouponsRow {
+        PaymentCouponId?: number;
+        CouponId?: number;
+        PaymentId?: number;
+    }
+    namespace PaymentCouponsRow {
+        const idProperty = "PaymentCouponId";
+        const localTextPrefix = "PaymentCoupons";
+        namespace Fields {
+            const PaymentCouponId: string;
+            const CouponId: string;
+            const PaymentId: string;
         }
     }
 }
@@ -477,8 +576,8 @@ declare namespace PatientManagement.Administration {
         IBANReceiver: Serenity.StringEditor;
         BICReceiver: Serenity.StringEditor;
         BankNameReceiver: Serenity.StringEditor;
-        PaymentOptionId: Serenity.LookupEditor;
         CouponId: Serenity.LookupEditor;
+        PaymentOptionId: Serenity.LookupEditor;
         CouponKey: Serenity.StringEditor;
         CurrencyId: Serenity.LookupEditor;
         Value: Serenity.StringEditor;
@@ -494,7 +593,9 @@ declare namespace PatientManagement.Administration {
         PaymentOptionId?: number;
         CurrencyId?: number;
         Value?: number;
+        SubTotal?: number;
         CustomerName?: string;
+        CustomerBankName?: string;
         CustomerIban?: string;
         ReasonForPayment?: string;
         Description?: string;
@@ -503,6 +604,9 @@ declare namespace PatientManagement.Administration {
         BICReceiver?: string;
         BankNameReceiver?: string;
         PaymentStatus?: PatientManagement.PaymentStatus;
+        MonthsPayed?: number;
+        PaymentCurrency?: string;
+        PaymentType?: string;
         SubscriptionOfferId?: number;
         SubscriptionSubscriptionEndDate?: string;
         SubscriptionName?: string;
@@ -511,8 +615,9 @@ declare namespace PatientManagement.Administration {
         PaymentDetailsIbanBeneficient?: string;
         PaymentOptionMonths?: number;
         PaymentOptionName?: string;
-        CouponId?: number;
-        CouponsCouponKey?: string;
+        CouponId?: number[];
+        CouponKey?: string;
+        CouponDiscount?: number;
         CurrencyCurrencyId?: string;
         CurrencyName?: string;
         CurrencyRate?: number;
@@ -538,7 +643,9 @@ declare namespace PatientManagement.Administration {
             const PaymentOptionId: string;
             const CurrencyId: string;
             const Value: string;
+            const SubTotal: string;
             const CustomerName: string;
+            const CustomerBankName: string;
             const CustomerIban: string;
             const ReasonForPayment: string;
             const Description: string;
@@ -547,6 +654,9 @@ declare namespace PatientManagement.Administration {
             const BICReceiver: string;
             const BankNameReceiver: string;
             const PaymentStatus: string;
+            const MonthsPayed: string;
+            const PaymentCurrency: string;
+            const PaymentType: string;
             const SubscriptionOfferId: string;
             const SubscriptionSubscriptionEndDate: string;
             const SubscriptionName: string;
@@ -556,7 +666,8 @@ declare namespace PatientManagement.Administration {
             const PaymentOptionMonths: string;
             const PaymentOptionName: string;
             const CouponId: string;
-            const CouponsCouponKey: string;
+            const CouponKey: string;
+            const CouponDiscount: string;
             const CurrencyCurrencyId: string;
             const CurrencyName: string;
             const CurrencyRate: string;
@@ -846,7 +957,6 @@ declare namespace PatientManagement.Administration {
         OfferId?: number;
         TenantId?: number;
         SubscriptionEndDate?: string;
-        PaidPeriod?: string;
         Enabled?: number;
         IsActive?: number;
         DeactivatedOn?: string;
@@ -876,7 +986,6 @@ declare namespace PatientManagement.Administration {
             const OfferId: string;
             const TenantId: string;
             const SubscriptionEndDate: string;
-            const PaidPeriod: string;
             const Enabled: string;
             const IsActive: string;
             const DeactivatedOn: string;
@@ -1570,9 +1679,17 @@ declare namespace PatientManagement.PatientManagement {
         Profession?: string;
         InsertUserId?: number;
         InsertDate?: string;
+        UpdateUserId?: number;
+        UpdateDateField?: string;
+        IsActive?: number;
+        TenantId?: number;
+        TenantName?: string;
+        InsertUserName?: string;
+        UpdateUserName?: string;
     }
     namespace ActivityRow {
         const idProperty = "PatientId";
+        const isActiveProperty = "IsActive";
         const nameProperty = "MovementAndTraining";
         const localTextPrefix = "PatientManagement.Activity";
         const lookupKey = "PatientManagement.LifeStyles";
@@ -1583,6 +1700,13 @@ declare namespace PatientManagement.PatientManagement {
             const Profession: string;
             const InsertUserId: string;
             const InsertDate: string;
+            const UpdateUserId: string;
+            const UpdateDateField: string;
+            const IsActive: string;
+            const TenantId: string;
+            const TenantName: string;
+            const InsertUserName: string;
+            const UpdateUserName: string;
         }
     }
 }
@@ -1768,11 +1892,18 @@ declare namespace PatientManagement.PatientManagement {
         DailyMeals?: string;
         InsertUserId?: number;
         InsertDate?: string;
+        UpdateUserId?: number;
+        UpdateDateField?: string;
+        IsActive?: number;
+        TenantName?: string;
+        InsertUserName?: string;
+        UpdateUserName?: string;
         PatientName?: string;
         TenantId?: number;
     }
     namespace LifeStylesRow {
         const idProperty = "PatientId";
+        const isActiveProperty = "IsActive";
         const nameProperty = "Regime";
         const localTextPrefix = "PatientManagement.LifeStyles";
         const lookupKey = "PatientManagement.LifeStyles";
@@ -1783,6 +1914,12 @@ declare namespace PatientManagement.PatientManagement {
             const DailyMeals: string;
             const InsertUserId: string;
             const InsertDate: string;
+            const UpdateUserId: string;
+            const UpdateDateField: string;
+            const IsActive: string;
+            const TenantName: string;
+            const InsertUserName: string;
+            const UpdateUserName: string;
             const PatientName: string;
             const TenantId: string;
         }
@@ -1916,28 +2053,43 @@ declare namespace PatientManagement.PatientManagement {
 }
 declare namespace PatientManagement.PatientManagement {
     interface PatientHealthRow {
+        PatientHealthId?: number;
         PatientId?: number;
         Diseases?: string;
         MedicinesIntake?: string;
         InsertUserId?: number;
         InsertDate?: string;
         PatientName?: string;
+        UpdateUserId?: number;
+        UpdateDateField?: string;
         TenantId?: number;
+        IsActive?: number;
+        TenantName?: string;
+        InsertUserName?: string;
+        UpdateUserName?: string;
     }
     namespace PatientHealthRow {
-        const idProperty = "PatientId";
+        const idProperty = "PatientHealthId";
+        const isActiveProperty = "IsActive";
         const nameProperty = "Diseases";
         const localTextPrefix = "PatientManagement.PatientHealth";
         const lookupKey = "PatientManagement.PatientHealth";
         function getLookup(): Q.Lookup<PatientHealthRow>;
         namespace Fields {
+            const PatientHealthId: string;
             const PatientId: string;
             const Diseases: string;
             const MedicinesIntake: string;
             const InsertUserId: string;
             const InsertDate: string;
             const PatientName: string;
+            const UpdateUserId: string;
+            const UpdateDateField: string;
             const TenantId: string;
+            const IsActive: string;
+            const TenantName: string;
+            const InsertUserName: string;
+            const UpdateUserName: string;
         }
     }
 }
@@ -2226,6 +2378,7 @@ declare namespace PatientManagement.PatientManagement {
         InsertUserName?: string;
         PatientGender?: Gender;
         PatientEmail?: string;
+        PatientNotifyOnChange?: boolean;
         PhoneNumber?: string;
         PatientName?: string;
         VisitTypeName?: string;
@@ -2254,6 +2407,7 @@ declare namespace PatientManagement.PatientManagement {
             const InsertUserName: string;
             const PatientGender: string;
             const PatientEmail: string;
+            const PatientNotifyOnChange: string;
             const PhoneNumber: string;
             const PatientName: string;
             const VisitTypeName: string;
@@ -2372,6 +2526,27 @@ declare namespace PatientManagement {
         TenantId?: number;
         RolesList?: string[];
         PaidPeriod?: string;
+    }
+}
+declare namespace PatientManagement.Administration {
+    class CouponsDialog extends Serenity.EntityDialog<CouponsRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getService(): string;
+        protected form: CouponsForm;
+    }
+}
+declare namespace PatientManagement.Administration {
+    class CouponsGrid extends Serenity.EntityGrid<CouponsRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof CouponsDialog;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        protected getIsActiveProperty(): string;
+        constructor(container: JQuery);
     }
 }
 declare namespace PatientManagement.Administration {
@@ -2690,6 +2865,10 @@ declare namespace PatientManagement.Administration {
         protected usePager(): boolean;
     }
 }
+declare namespace PatientManagement.Authorization {
+    let userDefinition: ScriptUserDefinition;
+    function hasPermission(permissionKey: string): boolean;
+}
 declare namespace PatientManagement.Administration {
     class UserDialog extends Serenity.EntityDialog<UserRow, any> {
         protected getFormKey(): string;
@@ -2717,10 +2896,6 @@ declare namespace PatientManagement.Administration {
         constructor(container: JQuery);
         protected getDefaultSortBy(): string[];
     }
-}
-declare namespace PatientManagement.Authorization {
-    let userDefinition: ScriptUserDefinition;
-    function hasPermission(permissionKey: string): boolean;
 }
 declare namespace PatientManagement.Administration {
     class PermissionCheckEditor extends Serenity.DataGrid<PermissionCheckItem, PermissionCheckEditorOptions> {
@@ -2791,11 +2966,6 @@ declare namespace PatientManagement.Administration {
         userID: number;
         username: string;
     }
-}
-declare namespace PatientManagement.LanguageList {
-    function getValue(): string[][];
-}
-declare namespace PatientManagement.ScriptInitialization {
 }
 declare namespace PatientManagement.PatientManagement {
     class HelloModal extends Serenity.TemplatedWidget<any> {
@@ -2999,6 +3169,9 @@ declare namespace PatientManagement.Common {
         function createToolButton(options: IcsExportOptions): Serenity.ToolButton;
     }
 }
+declare namespace PatientManagement.LanguageList {
+    function getValue(): string[][];
+}
 declare namespace PatientManagement {
     interface LKCodeDescOptions extends Serenity.LookupEditorOptions {
         codeFieldName: string;
@@ -3125,17 +3298,12 @@ declare namespace PatientManagement.Common {
         protected reportLinkClick(e: any): void;
     }
 }
+declare namespace PatientManagement.ScriptInitialization {
+}
 declare namespace PatientManagement.Common {
     class UserPreferenceStorage implements Serenity.SettingStorage {
         getItem(key: string): string;
         setItem(key: string, data: string): void;
-    }
-}
-declare namespace PatientManagement.Membership {
-    class LoginPanel extends Serenity.PropertyPanel<LoginRequest, any> {
-        protected getFormKey(): string;
-        private form;
-        constructor(container: JQuery);
     }
 }
 declare namespace PatientManagement.Membership {
@@ -3147,6 +3315,13 @@ declare namespace PatientManagement.Membership {
 }
 declare namespace PatientManagement.Membership {
     class ForgotPasswordPanel extends Serenity.PropertyPanel<ForgotPasswordRequest, any> {
+        protected getFormKey(): string;
+        private form;
+        constructor(container: JQuery);
+    }
+}
+declare namespace PatientManagement.Membership {
+    class LoginPanel extends Serenity.PropertyPanel<LoginRequest, any> {
         protected getFormKey(): string;
         private form;
         constructor(container: JQuery);
@@ -3477,6 +3652,25 @@ declare namespace PatientManagement.PatientManagement {
     }
 }
 declare namespace PatientManagement.PatientManagement {
+    class PatientHealthCheckDialog extends PatientHealthDialog {
+        constructor();
+        updateInterface(): void;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class PatientHealthCheckGrid extends PatientHealthGrid {
+        protected getDialogType(): typeof PatientHealthCheckDialog;
+        constructor(container: JQuery);
+        protected getColumns(): Slick.Column[];
+        protected initEntityDialog(itemType: any, dialog: any): void;
+        protected addButtonClick(): void;
+        protected getInitialTitle(): any;
+        protected getGridCanLoad(): boolean;
+        private _patientId;
+        patientId: number;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
     class PatientsFormatter implements Slick.Formatter {
         format(ctx: Slick.FormatterContext): string;
         genderProperty: string;
@@ -3579,135 +3773,5 @@ declare namespace PatientManagement.PatientManagement {
 declare namespace PatientManagement {
     class VisiTypesBottomLeftMenu extends Serenity.Widget<any> {
         constructor(elem: JQuery, opt: {});
-    }
-}
-declare namespace PatientManagement.Administration {
-}
-declare namespace PatientManagement.Administration {
-    class CouponsForm extends Serenity.PrefixedContext {
-        static formKey: string;
-    }
-    interface CouponsForm {
-        Key: Serenity.StringEditor;
-        Name: Serenity.StringEditor;
-        Description: Serenity.StringEditor;
-        InsertUserId: Serenity.IntegerEditor;
-        InsertDate: Serenity.DateEditor;
-        UpdateUserId: Serenity.IntegerEditor;
-        UpdateDateField: Serenity.DateEditor;
-        IsActive: Serenity.IntegerEditor;
-    }
-}
-declare namespace PatientManagement.Administration {
-    interface CouponsRow {
-        CouponId?: number;
-        Key?: string;
-        Name?: string;
-        Description?: string;
-        UsedOnDate?: string;
-        IsUsed?: number;
-        InsertUserId?: number;
-        InsertDate?: string;
-        UpdateUserId?: number;
-        UpdateDateField?: string;
-        IsActive?: number;
-        InsertUserName?: string;
-        UpdateUserName?: string;
-    }
-    namespace CouponsRow {
-        const idProperty = "CouponId";
-        const isActiveProperty = "IsActive";
-        const nameProperty = "Key";
-        const localTextPrefix = "Administration.Coupons";
-        const lookupKey = "Administration.Coupons";
-        function getLookup(): Q.Lookup<CouponsRow>;
-        namespace Fields {
-            const CouponId: string;
-            const Key: string;
-            const Name: string;
-            const Description: string;
-            const UsedOnDate: string;
-            const IsUsed: string;
-            const InsertUserId: string;
-            const InsertDate: string;
-            const UpdateUserId: string;
-            const UpdateDateField: string;
-            const IsActive: string;
-            const InsertUserName: string;
-            const UpdateUserName: string;
-        }
-    }
-}
-declare namespace PatientManagement.Administration {
-    namespace CouponsService {
-        const baseUrl = "Administration/Coupons";
-        function Create(request: Serenity.SaveRequest<CouponsRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        function Update(request: Serenity.SaveRequest<CouponsRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<CouponsRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<CouponsRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        namespace Methods {
-            const Create: string;
-            const Update: string;
-            const Delete: string;
-            const Retrieve: string;
-            const List: string;
-        }
-    }
-}
-declare namespace PatientManagement.Administration {
-    interface PaymentCouponsRow {
-        PaymentCouponId?: number;
-        CouponId?: number;
-        PaymentId?: number;
-    }
-    namespace PaymentCouponsRow {
-        const idProperty = "PaymentCouponId";
-        const localTextPrefix = "PaymentCoupons";
-        namespace Fields {
-            const PaymentCouponId: string;
-            const CouponId: string;
-            const PaymentId: string;
-        }
-    }
-}
-declare namespace PatientManagement.Administration {
-    class CouponsDialog extends Serenity.EntityDialog<CouponsRow, any> {
-        protected getFormKey(): string;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getNameProperty(): string;
-        protected getService(): string;
-        protected form: CouponsForm;
-    }
-}
-declare namespace PatientManagement.Administration {
-    class CouponsGrid extends Serenity.EntityGrid<CouponsRow, any> {
-        protected getColumnsKey(): string;
-        protected getDialogType(): typeof CouponsDialog;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getService(): string;
-        protected getIsActiveProperty(): string;
-        constructor(container: JQuery);
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class PatientHealthCheckGrid extends PatientHealthGrid {
-        protected getDialogType(): typeof PatientHealthCheckDialog;
-        constructor(container: JQuery);
-        protected getColumns(): Slick.Column[];
-        protected initEntityDialog(itemType: any, dialog: any): void;
-        protected addButtonClick(): void;
-        protected getInitialTitle(): any;
-        protected getGridCanLoad(): boolean;
-        private _patientId;
-        patientId: number;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class PatientHealthCheckDialog extends PatientHealthDialog {
-        constructor();
-        updateInterface(): void;
     }
 }

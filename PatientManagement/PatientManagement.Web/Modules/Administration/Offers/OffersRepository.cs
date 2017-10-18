@@ -60,6 +60,10 @@ namespace PatientManagement.Administration.Repositories
 
         private class MyListHandler : ListRequestHandler<MyRow>
         {
+            protected override void PrepareQuery(SqlQuery query)
+            {
+                base.PrepareQuery(query);
+            }
         }
     }
 }
