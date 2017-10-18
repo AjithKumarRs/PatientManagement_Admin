@@ -75,6 +75,7 @@ namespace PatientManagement.PatientManagement.Repositories
 
                     var entAct = new ActivityRow
                     {
+                        TenantId = user.TenantId,
                         PatientId = Row.PatientId,
                         InsertUserId = user.UserId,
                         InsertDate = DateTime.Now

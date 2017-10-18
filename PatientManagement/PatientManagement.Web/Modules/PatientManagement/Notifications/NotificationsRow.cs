@@ -1,4 +1,6 @@
 ﻿
+using PatientManagement.Administration;
+using PatientManagement.Administration.Entities;
 using PatientManagement.PatientManagement.Scripts;
 
 namespace PatientManagement.PatientManagement.Entities
@@ -120,6 +122,7 @@ namespace PatientManagement.PatientManagement.Entities
             public StringField InsertUserPicture;
             public readonly Int32Field TenantId;
 
+            public StringField TenantName;
             public RowFields()
                 : base()
             {
@@ -127,15 +130,29 @@ namespace PatientManagement.PatientManagement.Entities
             }
         }
 
-        [Insertable(false), Updatable(false)]
+
+        #region Tenant
+
+        [DisplayName("Tenant"), ForeignKey("Tenants", "TenantId"), LeftJoin("tnt")]
+        [LookupEditor(typeof(TenantRow))]
+        [ReadPermission(PermissionKeys.Tenants)]
+        [ModifyPermission(PermissionKeys.Tenants)]
         public Int32? TenantId
         {
             get { return Fields.TenantId[this]; }
             set { Fields.TenantId[this] = value; }
         }
+        [DisplayName("Tenant"), Expression("tnt.TenantName")]
+        [ReadPermission("Administration:Tenants")]
+        public String TenantName
+        {
+            get { return Fields.TenantName[this]; }
+            set { Fields.TenantName[this] = value; }
+        }
         public Int32Field TenantIdField
         {
             get { return Fields.TenantId; }
         }
+        #endregion
     }
 }

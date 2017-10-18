@@ -1992,6 +1992,7 @@ declare namespace PatientManagement.PatientManagement {
         InsertUserDisplayName?: string;
         InsertUserPicture?: string;
         TenantId?: number;
+        TenantName?: string;
     }
     namespace NotificationsRow {
         const idProperty = "NotificationId";
@@ -2009,6 +2010,7 @@ declare namespace PatientManagement.PatientManagement {
             const InsertUserDisplayName: string;
             const InsertUserPicture: string;
             const TenantId: string;
+            const TenantName: string;
         }
     }
 }
@@ -2187,6 +2189,7 @@ declare namespace PatientManagement.PatientManagement {
         Weight: Serenity.IntegerEditor;
         NotifyOnChange: BsSwitchEditor;
         NoteList: NotesEditor;
+        TenantId: Serenity.LookupEditor;
     }
 }
 declare namespace PatientManagement.PatientManagement {
@@ -2359,6 +2362,7 @@ declare namespace PatientManagement.PatientManagement {
         StartDate: Serenity.DateTimeEditor;
         EndDate: Serenity.DateTimeEditor;
         Description: Serenity.TextAreaEditor;
+        TenantId: Serenity.LookupEditor;
     }
 }
 declare namespace PatientManagement.PatientManagement {

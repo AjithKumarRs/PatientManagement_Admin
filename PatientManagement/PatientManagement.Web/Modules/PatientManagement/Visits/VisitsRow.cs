@@ -1,4 +1,6 @@
 ﻿
+using PatientManagement.Administration;
+using PatientManagement.Administration.Entities;
 using PatientManagement.PatientManagement.Scripts;
 
 namespace PatientManagement.PatientManagement.Entities
@@ -227,9 +229,14 @@ namespace PatientManagement.PatientManagement.Entities
         public IIdField InsertUserIdField => Fields.InsertUserId;
 
         public DateTimeField InsertDateField => Fields.InsertDate;
+
+
         #region Tenant
 
-        [Insertable(false), Updatable(false), ForeignKey("Tenants", "TenantId"), LeftJoin("tnt")]
+        [DisplayName("Tenant"), ForeignKey("Tenants", "TenantId"), LeftJoin("tnt")]
+        [LookupEditor(typeof(TenantRow))]
+        [ReadPermission(PermissionKeys.Tenants)]
+        [ModifyPermission(PermissionKeys.Tenants)]
         public Int32? TenantId
         {
             get { return Fields.TenantId[this]; }
