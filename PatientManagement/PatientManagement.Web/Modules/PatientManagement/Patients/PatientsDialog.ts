@@ -16,7 +16,7 @@ namespace PatientManagement.PatientManagement {
         private loadedState: string;
 
         private patientHealthForm: PatientHealthForm;
-        private patientHealthGrid: Serenity.PropertyGrid;
+        private patientHealthGrid: PatientHealthCheckGrid;
         private patientValidator: JQueryValidation.Validator;
         private selfChange = 0;
 
@@ -73,15 +73,9 @@ namespace PatientManagement.PatientManagement {
             //Initialize new instance of visits grid
             this.visitsGrid = new PatientVisitsGrid(this.byId("VisitsGrid"));
             this.visitsGrid.element.flexHeightOnly(1);
-
-            //Initialize new instance of patient health grid and form
-            this.patientHealthGrid = new Serenity.PropertyGrid(this.byId("PatientHealthPropertyGrid"),
-                {
-                    items: Q.getForm(PatientHealthForm.formKey).filter(x => x.name != "PatientId"),
-                    useCategories: true
-                });
-
-            this.patientHealthForm = new PatientHealthForm((this.patientHealthGrid as any).idPrefix);
+            
+            this.patientHealthGrid = new PatientHealthCheckGrid(this.byId("HealthChecksGrid"));
+            this.patientHealthGrid.element.flexHeightOnly(1);
 
             //Initialize new instance of LifeStyle grid and form
             this.lifeStyleGrid = new Serenity.PropertyGrid(this.byId("LifeStylePropertyGrid"),
@@ -115,41 +109,7 @@ namespace PatientManagement.PatientManagement {
 
             this.byId('NoteList').closest('.field').hide().end().appendTo(this.byId('TabNotes'));
             DialogUtils.pendingChangesConfirmation(this.element, () => this.getSaveState() != this.loadedState);
-
-            //Add button for saving patient health form
-            // ReSharper disable once WrongExpressionStatement
-            new Serenity.Toolbar(this.byId("PatientHealthToolbar"),
-                {
-                    buttons: [
-                        {
-                            cssClass: "apply-changes-button",
-                            title: Q.text("Controls.EntityDialog.UpdateButton"),
-                            onClick: () => {
-                                var id = this.form.PatientId.value;
-
-                                if (!id)
-                                    return;
-
-                                if (!this.patientValidator.form())
-                                    return;
-
-                                var p = <PatientManagement.PatientHealthRow>{};
-                                this.patientHealthGrid.save(p);
-
-                                PatientManagement.PatientHealthService.Update({
-                                    EntityId: id,
-                                    Entity: p
-                                }, response => {
-                                    // reload customer list just in case
-                                    Q.reloadLookup(PatientManagement.PatientsRow.lookupKey);
-
-                                    Q.notifySuccess(Q.text("Controls.EntityDialog.SaveSuccessMessage"));
-
-                                });
-                            }
-                        }]
-                });
-
+            
             //Add button for saving patient life style form
             // ReSharper disable once WrongExpressionStatement
             new Serenity.Toolbar(this.byId("LifeStyleToolbar"),
@@ -239,7 +199,7 @@ namespace PatientManagement.PatientManagement {
             super.loadEntity(entity);
 
             Serenity.TabsExtensions.setDisabled(this.tabs, 'Visits', this.isNewOrDeleted());
-            Serenity.TabsExtensions.setDisabled(this.tabs, 'PatientHealth', this.isNewOrDeleted());
+            Serenity.TabsExtensions.setDisabled(this.tabs, 'HealthChecks', this.isNewOrDeleted());
             Serenity.TabsExtensions.setDisabled(this.tabs, 'Notes', this.isNewOrDeleted());
             Serenity.TabsExtensions.setDisabled(this.tabs, 'LifeStyle', this.isNewOrDeleted());
             Serenity.TabsExtensions.setDisabled(this.tabs, 'Activity', this.isNewOrDeleted());
@@ -247,18 +207,11 @@ namespace PatientManagement.PatientManagement {
 
             if (this.isNewOrDeleted()) {
                 // no patient is selected, just load an empty entity
-                this.patientHealthGrid.load({});
                 this.patientActivityGrid.load({});
                 this.lifeStyleGrid.load({});
 
                 return;
             } else {
-                PatientHealthService.Retrieve({
-                    EntityId: entity.PatientId
-                }, response => {
-                    this.patientHealthGrid.load(response.Entity);
-                });
-
                 LifeStylesService.Retrieve({
                     EntityId: entity.PatientId
                 },
@@ -277,7 +230,7 @@ namespace PatientManagement.PatientManagement {
 
 
             this.visitsGrid.patientId = entity.PatientId;
-
+            this.patientHealthGrid.patientId = entity.PatientId;
             this.patientsFileUploadsGrid.patientId = entity.PatientId;
         }
 

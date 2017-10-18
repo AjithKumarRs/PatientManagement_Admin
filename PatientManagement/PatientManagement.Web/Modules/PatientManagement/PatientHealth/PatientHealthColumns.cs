@@ -14,17 +14,33 @@ namespace PatientManagement.PatientManagement.Columns
     public class PatientHealthColumns
     {
         [EditLink, DisplayName("Db.Shared.RecordId"), AlignRight]
+        public Int32 PatientHealthId { get; set; }
+
+        [Hidden]
         public Int32 PatientId { get; set; }
 
+        [Hidden]
         [EditLink]
+        [Width(150)]
         public String PatientName { get; set; }
 
-        public String DailyMeals { get; set; }
+        [Width(250)]
         public String Diseases { get; set; }
+        [Width(250)]
         public String MedicinesIntake { get; set; }
 
-        // TODO Add when you figure out how to add permissions here
-        //public Int32 InsertUserId { get; set; }
-        //public DateTime InsertDate { get; set; }
+        [Width(80)]
+        public String TenantName { get; set; }
+
+        [Width(80)]
+        public String InsertUserName { get; set; }
+        [DisplayFormat("dd/MM/yyyy HH:mm")]
+        [Width(120)]
+        public DateTime InsertDate { get; set; }
+        [Width(80)]
+        public String UpdateUserName { get; set; }
+        [DisplayFormat("dd/MM/yyyy HH:mm")]
+        [Width(120)]
+        public DateTime UpdateDateField { get; set; }
     }
 }

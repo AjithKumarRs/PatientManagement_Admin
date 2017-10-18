@@ -17,5 +17,7 @@ namespace PatientManagement.PatientManagement.Forms
 
         public String MovementAndTraining { get; set; }
         public String Profession { get; set; }
+
+
     }
 }

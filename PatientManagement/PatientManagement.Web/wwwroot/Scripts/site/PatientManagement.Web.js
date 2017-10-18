@@ -1,19 +1,69 @@
-﻿var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
+﻿var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var PatientManagement;
+(function (PatientManagement) {
+    var Administration;
+    (function (Administration) {
+        var CouponsForm = (function (_super) {
+            __extends(CouponsForm, _super);
+            function CouponsForm() {
+                return _super !== null && _super.apply(this, arguments) || this;
+            }
+            return CouponsForm;
+        }(Serenity.PrefixedContext));
+        CouponsForm.formKey = 'Administration.Coupons';
+        Administration.CouponsForm = CouponsForm;
+        [['Key', function () { return Serenity.StringEditor; }], ['Name', function () { return Serenity.StringEditor; }], ['Discount', function () { return Serenity.IntegerEditor; }], ['Description', function () { return Serenity.StringEditor; }], ['EndDate', function () { return Serenity.DateEditor; }], ['MaxTimeUsing', function () { return Serenity.IntegerEditor; }], ['IsUsed', function () { return Serenity.IntegerEditor; }], ['IsActive', function () { return PatientManagement.BsSwitchEditor; }]].forEach(function (x) { return Object.defineProperty(CouponsForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
+    })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var Administration;
+    (function (Administration) {
+        var CouponsRow;
+        (function (CouponsRow) {
+            CouponsRow.idProperty = 'CouponId';
+            CouponsRow.isActiveProperty = 'IsActive';
+            CouponsRow.nameProperty = 'Key';
+            CouponsRow.localTextPrefix = 'Administration.Coupons';
+            CouponsRow.lookupKey = 'Administration.Coupons';
+            function getLookup() {
+                return Q.getLookup('Administration.Coupons');
+            }
+            CouponsRow.getLookup = getLookup;
+            var Fields;
+            (function (Fields) {
+            })(Fields = CouponsRow.Fields || (CouponsRow.Fields = {}));
+            ['CouponId', 'Key', 'Name', 'Discount', 'Description', 'EndDate', 'IsUsed', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'IsActive', 'MaxTimeUsing', 'InsertUserName', 'UpdateUserName'].forEach(function (x) { return Fields[x] = x; });
+        })(CouponsRow = Administration.CouponsRow || (Administration.CouponsRow = {}));
+    })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var Administration;
+    (function (Administration) {
+        var CouponsService;
+        (function (CouponsService) {
+            CouponsService.baseUrl = 'Administration/Coupons';
+            var Methods;
+            (function (Methods) {
+            })(Methods = CouponsService.Methods || (CouponsService.Methods = {}));
+            ['Create', 'Update', 'Delete', 'Undelete', 'Retrieve', 'List'].forEach(function (x) {
+                CouponsService[x] = function (r, s, o) { return Q.serviceRequest(CouponsService.baseUrl + '/' + x, r, s, o); };
+                Methods[x] = CouponsService.baseUrl + '/' + x;
+            });
+        })(CouponsService = Administration.CouponsService || (Administration.CouponsService = {}));
+    })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
+})(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
 (function (PatientManagement) {
     var Administration;
@@ -269,6 +319,21 @@ var PatientManagement;
 (function (PatientManagement) {
     var Administration;
     (function (Administration) {
+        var PaymentCouponsRow;
+        (function (PaymentCouponsRow) {
+            PaymentCouponsRow.idProperty = 'PaymentCouponId';
+            PaymentCouponsRow.localTextPrefix = 'PaymentCoupons';
+            var Fields;
+            (function (Fields) {
+            })(Fields = PaymentCouponsRow.Fields || (PaymentCouponsRow.Fields = {}));
+            ['PaymentCouponId', 'CouponId', 'PaymentId'].forEach(function (x) { return Fields[x] = x; });
+        })(PaymentCouponsRow = Administration.PaymentCouponsRow || (Administration.PaymentCouponsRow = {}));
+    })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var Administration;
+    (function (Administration) {
         var PaymentOptionsForm = (function (_super) {
             __extends(PaymentOptionsForm, _super);
             function PaymentOptionsForm() {
@@ -386,7 +451,7 @@ var PatientManagement;
         }(Serenity.PrefixedContext));
         PaymentsForm.formKey = 'Administration.Payments';
         Administration.PaymentsForm = PaymentsForm;
-        [['PaymentDetailsId', function () { return Serenity.LookupEditor; }], ['CustomerName', function () { return Serenity.StringEditor; }], ['CustomerIban', function () { return Serenity.StringEditor; }], ['SubscriptionId', function () { return Serenity.LookupEditor; }], ['ReasonForPayment', function () { return Serenity.StringEditor; }], ['Description', function () { return Serenity.TextAreaEditor; }], ['Receiver', function () { return Serenity.StringEditor; }], ['IBANReceiver', function () { return Serenity.StringEditor; }], ['BICReceiver', function () { return Serenity.StringEditor; }], ['BankNameReceiver', function () { return Serenity.StringEditor; }], ['PaymentOptionId', function () { return Serenity.LookupEditor; }], ['CouponId', function () { return Serenity.LookupEditor; }], ['CouponKey', function () { return Serenity.StringEditor; }], ['CurrencyId', function () { return Serenity.LookupEditor; }], ['Value', function () { return Serenity.StringEditor; }], ['PaymentStatus', function () { return Serenity.EnumEditor; }]].forEach(function (x) { return Object.defineProperty(PaymentsForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
+        [['PaymentDetailsId', function () { return Serenity.LookupEditor; }], ['CustomerName', function () { return Serenity.StringEditor; }], ['CustomerIban', function () { return Serenity.StringEditor; }], ['SubscriptionId', function () { return Serenity.LookupEditor; }], ['ReasonForPayment', function () { return Serenity.StringEditor; }], ['Description', function () { return Serenity.TextAreaEditor; }], ['Receiver', function () { return Serenity.StringEditor; }], ['IBANReceiver', function () { return Serenity.StringEditor; }], ['BICReceiver', function () { return Serenity.StringEditor; }], ['BankNameReceiver', function () { return Serenity.StringEditor; }], ['CouponId', function () { return Serenity.LookupEditor; }], ['PaymentOptionId', function () { return Serenity.LookupEditor; }], ['CouponKey', function () { return Serenity.StringEditor; }], ['CurrencyId', function () { return Serenity.LookupEditor; }], ['Value', function () { return Serenity.StringEditor; }], ['PaymentStatus', function () { return Serenity.EnumEditor; }]].forEach(function (x) { return Object.defineProperty(PaymentsForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
     })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
@@ -406,7 +471,7 @@ var PatientManagement;
             var Fields;
             (function (Fields) {
             })(Fields = PaymentsRow.Fields || (PaymentsRow.Fields = {}));
-            ['PaymentId', 'SubscriptionId', 'TenantId', 'PaymentDetailsId', 'PaymentOptionId', 'CurrencyId', 'Value', 'CustomerName', 'CustomerIban', 'ReasonForPayment', 'Description', 'Receiver', 'IBANReceiver', 'BICReceiver', 'BankNameReceiver', 'PaymentStatus', 'SubscriptionOfferId', 'SubscriptionSubscriptionEndDate', 'SubscriptionName', 'PaymentDetailName', 'PaymentDetailsBankName', 'PaymentDetailsIbanBeneficient', 'PaymentOptionMonths', 'PaymentOptionName', 'CouponId', 'CouponsCouponKey', 'CurrencyCurrencyId', 'CurrencyName', 'CurrencyRate', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'TenantName', 'InsertUserName', 'UpdateUserName'].forEach(function (x) { return Fields[x] = x; });
+            ['PaymentId', 'SubscriptionId', 'TenantId', 'PaymentDetailsId', 'PaymentOptionId', 'CurrencyId', 'Value', 'SubTotal', 'CustomerName', 'CustomerBankName', 'CustomerIban', 'ReasonForPayment', 'Description', 'Receiver', 'IBANReceiver', 'BICReceiver', 'BankNameReceiver', 'PaymentStatus', 'MonthsPayed', 'PaymentCurrency', 'PaymentType', 'SubscriptionOfferId', 'SubscriptionSubscriptionEndDate', 'SubscriptionName', 'PaymentDetailName', 'PaymentDetailsBankName', 'PaymentDetailsIbanBeneficient', 'PaymentOptionMonths', 'PaymentOptionName', 'CouponId', 'CouponKey', 'CouponDiscount', 'CurrencyCurrencyId', 'CurrencyName', 'CurrencyRate', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'TenantName', 'InsertUserName', 'UpdateUserName'].forEach(function (x) { return Fields[x] = x; });
         })(PaymentsRow = Administration.PaymentsRow || (Administration.PaymentsRow = {}));
     })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
 })(PatientManagement || (PatientManagement = {}));
@@ -1254,6 +1319,7 @@ var PatientManagement;
         var LifeStylesRow;
         (function (LifeStylesRow) {
             LifeStylesRow.idProperty = 'PatientId';
+            LifeStylesRow.isActiveProperty = 'IsActive';
             LifeStylesRow.nameProperty = 'Regime';
             LifeStylesRow.localTextPrefix = 'PatientManagement.LifeStyles';
             LifeStylesRow.lookupKey = 'PatientManagement.LifeStyles';
@@ -1264,7 +1330,7 @@ var PatientManagement;
             var Fields;
             (function (Fields) {
             })(Fields = LifeStylesRow.Fields || (LifeStylesRow.Fields = {}));
-            ['PatientId', 'Regime', 'DailyMeals', 'InsertUserId', 'InsertDate', 'PatientName', 'TenantId'].forEach(function (x) { return Fields[x] = x; });
+            ['PatientId', 'Regime', 'DailyMeals', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'IsActive', 'TenantName', 'InsertUserName', 'UpdateUserName', 'PatientName', 'TenantId'].forEach(function (x) { return Fields[x] = x; });
         })(LifeStylesRow = PatientManagement.LifeStylesRow || (PatientManagement.LifeStylesRow = {}));
     })(PatientManagement = PatientManagement_13.PatientManagement || (PatientManagement_13.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
@@ -1389,7 +1455,8 @@ var PatientManagement;
     (function (PatientManagement) {
         var PatientHealthRow;
         (function (PatientHealthRow) {
-            PatientHealthRow.idProperty = 'PatientId';
+            PatientHealthRow.idProperty = 'PatientHealthId';
+            PatientHealthRow.isActiveProperty = 'IsActive';
             PatientHealthRow.nameProperty = 'Diseases';
             PatientHealthRow.localTextPrefix = 'PatientManagement.PatientHealth';
             PatientHealthRow.lookupKey = 'PatientManagement.PatientHealth';
@@ -1400,7 +1467,7 @@ var PatientManagement;
             var Fields;
             (function (Fields) {
             })(Fields = PatientHealthRow.Fields || (PatientHealthRow.Fields = {}));
-            ['PatientId', 'Diseases', 'MedicinesIntake', 'InsertUserId', 'InsertDate', 'PatientName', 'TenantId'].forEach(function (x) { return Fields[x] = x; });
+            ['PatientHealthId', 'PatientId', 'Diseases', 'MedicinesIntake', 'InsertUserId', 'InsertDate', 'PatientName', 'UpdateUserId', 'UpdateDateField', 'TenantId', 'IsActive', 'TenantName', 'InsertUserName', 'UpdateUserName'].forEach(function (x) { return Fields[x] = x; });
         })(PatientHealthRow = PatientManagement.PatientHealthRow || (PatientManagement.PatientHealthRow = {}));
     })(PatientManagement = PatientManagement_21.PatientManagement || (PatientManagement_21.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
@@ -1653,7 +1720,7 @@ var PatientManagement;
             var Fields;
             (function (Fields) {
             })(Fields = VisitsRow.Fields || (VisitsRow.Fields = {}));
-            ['VisitId', 'PatientId', 'VisitTypeId', 'CabinetId', 'CabinetName', 'CabinetIsActive', 'Description', 'StartDate', 'EndDate', 'InsertUserId', 'InsertDate', 'TenantName', 'InsertUserName', 'PatientGender', 'PatientEmail', 'PhoneNumber', 'PatientName', 'VisitTypeName', 'VisitTypeBackgroundColor', 'VisitTypeBorderColor', 'TenantId'].forEach(function (x) { return Fields[x] = x; });
+            ['VisitId', 'PatientId', 'VisitTypeId', 'CabinetId', 'CabinetName', 'CabinetIsActive', 'Description', 'StartDate', 'EndDate', 'InsertUserId', 'InsertDate', 'TenantName', 'InsertUserName', 'PatientGender', 'PatientEmail', 'PatientNotifyOnChange', 'PhoneNumber', 'PatientName', 'VisitTypeName', 'VisitTypeBackgroundColor', 'VisitTypeBorderColor', 'TenantId'].forEach(function (x) { return Fields[x] = x; });
         })(VisitsRow = PatientManagement.VisitsRow || (PatientManagement.VisitsRow = {}));
     })(PatientManagement = PatientManagement_36.PatientManagement || (PatientManagement_36.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
@@ -1745,6 +1812,54 @@ var PatientManagement;
         })(WeekDays = PatientManagement.WeekDays || (PatientManagement.WeekDays = {}));
         Serenity.Decorators.registerEnum(WeekDays, 'PatientManagement.PatientManagement.WeekDays');
     })(PatientManagement = PatientManagement_41.PatientManagement || (PatientManagement_41.PatientManagement = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var Administration;
+    (function (Administration) {
+        var CouponsDialog = (function (_super) {
+            __extends(CouponsDialog, _super);
+            function CouponsDialog() {
+                var _this = _super !== null && _super.apply(this, arguments) || this;
+                _this.form = new Administration.CouponsForm(_this.idPrefix);
+                return _this;
+            }
+            CouponsDialog.prototype.getFormKey = function () { return Administration.CouponsForm.formKey; };
+            CouponsDialog.prototype.getIdProperty = function () { return Administration.CouponsRow.idProperty; };
+            CouponsDialog.prototype.getLocalTextPrefix = function () { return Administration.CouponsRow.localTextPrefix; };
+            CouponsDialog.prototype.getNameProperty = function () { return Administration.CouponsRow.nameProperty; };
+            CouponsDialog.prototype.getService = function () { return Administration.CouponsService.baseUrl; };
+            return CouponsDialog;
+        }(Serenity.EntityDialog));
+        CouponsDialog = __decorate([
+            Serenity.Decorators.registerClass(),
+            Serenity.Decorators.responsive()
+        ], CouponsDialog);
+        Administration.CouponsDialog = CouponsDialog;
+    })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var Administration;
+    (function (Administration) {
+        var CouponsGrid = (function (_super) {
+            __extends(CouponsGrid, _super);
+            function CouponsGrid(container) {
+                return _super.call(this, container) || this;
+            }
+            CouponsGrid.prototype.getColumnsKey = function () { return 'Administration.Coupons'; };
+            CouponsGrid.prototype.getDialogType = function () { return Administration.CouponsDialog; };
+            CouponsGrid.prototype.getIdProperty = function () { return Administration.CouponsRow.idProperty; };
+            CouponsGrid.prototype.getLocalTextPrefix = function () { return Administration.CouponsRow.localTextPrefix; };
+            CouponsGrid.prototype.getService = function () { return Administration.CouponsService.baseUrl; };
+            CouponsGrid.prototype.getIsActiveProperty = function () { return Administration.CouponsRow.isActiveProperty; };
+            return CouponsGrid;
+        }(Serenity.EntityGrid));
+        CouponsGrid = __decorate([
+            Serenity.Decorators.registerClass()
+        ], CouponsGrid);
+        Administration.CouponsGrid = CouponsGrid;
+    })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
 (function (PatientManagement) {
@@ -2993,6 +3108,22 @@ var PatientManagement;
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
 (function (PatientManagement) {
+    var Authorization;
+    (function (Authorization) {
+        Object.defineProperty(Authorization, 'userDefinition', {
+            get: function () {
+                return Q.getRemoteData('UserData');
+            }
+        });
+        function hasPermission(permissionKey) {
+            var ud = Authorization.userDefinition;
+            return ud.Username === 'admin' || !!ud.Permissions[permissionKey];
+        }
+        Authorization.hasPermission = hasPermission;
+    })(Authorization = PatientManagement.Authorization || (PatientManagement.Authorization = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
     var Administration;
     (function (Administration) {
         var UserDialog = (function (_super) {
@@ -3095,22 +3226,6 @@ var PatientManagement;
         ], UserGrid);
         Administration.UserGrid = UserGrid;
     })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
-})(PatientManagement || (PatientManagement = {}));
-var PatientManagement;
-(function (PatientManagement) {
-    var Authorization;
-    (function (Authorization) {
-        Object.defineProperty(Authorization, 'userDefinition', {
-            get: function () {
-                return Q.getRemoteData('UserData');
-            }
-        });
-        function hasPermission(permissionKey) {
-            var ud = Authorization.userDefinition;
-            return ud.Username === 'admin' || !!ud.Permissions[permissionKey];
-        }
-        Authorization.hasPermission = hasPermission;
-    })(Authorization = PatientManagement.Authorization || (PatientManagement.Authorization = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
 (function (PatientManagement) {
@@ -3534,33 +3649,6 @@ var PatientManagement;
         ], UserRoleDialog);
         Administration.UserRoleDialog = UserRoleDialog;
     })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
-})(PatientManagement || (PatientManagement = {}));
-var PatientManagement;
-(function (PatientManagement) {
-    var LanguageList;
-    (function (LanguageList) {
-        function getValue() {
-            var result = [];
-            for (var _i = 0, _a = PatientManagement.Administration.LanguageRow.getLookup().items; _i < _a.length; _i++) {
-                var k = _a[_i];
-                if (k.LanguageId !== 'en') {
-                    result.push([k.Id.toString(), k.LanguageName]);
-                }
-            }
-            return result;
-        }
-        LanguageList.getValue = getValue;
-    })(LanguageList = PatientManagement.LanguageList || (PatientManagement.LanguageList = {}));
-})(PatientManagement || (PatientManagement = {}));
-/// <reference path="../Common/Helpers/LanguageList.ts" />
-var PatientManagement;
-(function (PatientManagement) {
-    var ScriptInitialization;
-    (function (ScriptInitialization) {
-        Q.Config.responsiveDialogs = true;
-        Q.Config.rootNamespaces.push('PatientManagement');
-        Serenity.EntityDialog.defaultLanguageList = PatientManagement.LanguageList.getValue;
-    })(ScriptInitialization = PatientManagement.ScriptInitialization || (PatientManagement.ScriptInitialization = {}));
 })(PatientManagement || (PatientManagement = {}));
 /// <reference types="jqueryui" />
 /// <reference types="bootstrap"/>
@@ -4446,6 +4534,23 @@ var PatientManagement;
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
 (function (PatientManagement) {
+    var LanguageList;
+    (function (LanguageList) {
+        function getValue() {
+            var result = [];
+            for (var _i = 0, _a = PatientManagement.Administration.LanguageRow.getLookup().items; _i < _a.length; _i++) {
+                var k = _a[_i];
+                if (k.LanguageId !== 'en') {
+                    result.push([k.Id.toString(), k.LanguageName]);
+                }
+            }
+            return result;
+        }
+        LanguageList.getValue = getValue;
+    })(LanguageList = PatientManagement.LanguageList || (PatientManagement.LanguageList = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
     var LKCodeDescr = (function (_super) {
         __extends(LKCodeDescr, _super);
         function LKCodeDescr(container, opt) {
@@ -5110,6 +5215,16 @@ var PatientManagement;
         Common.ReportPage = ReportPage;
     })(Common = PatientManagement.Common || (PatientManagement.Common = {}));
 })(PatientManagement || (PatientManagement = {}));
+/// <reference path="../Common/Helpers/LanguageList.ts" />
+var PatientManagement;
+(function (PatientManagement) {
+    var ScriptInitialization;
+    (function (ScriptInitialization) {
+        Q.Config.responsiveDialogs = true;
+        Q.Config.rootNamespaces.push('PatientManagement');
+        Serenity.EntityDialog.defaultLanguageList = PatientManagement.LanguageList.getValue;
+    })(ScriptInitialization = PatientManagement.ScriptInitialization || (PatientManagement.ScriptInitialization = {}));
+})(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
 (function (PatientManagement) {
     var Common;
@@ -5138,60 +5253,6 @@ var PatientManagement;
         }());
         Common.UserPreferenceStorage = UserPreferenceStorage;
     })(Common = PatientManagement.Common || (PatientManagement.Common = {}));
-})(PatientManagement || (PatientManagement = {}));
-var PatientManagement;
-(function (PatientManagement) {
-    var Membership;
-    (function (Membership) {
-        var LoginPanel = (function (_super) {
-            __extends(LoginPanel, _super);
-            function LoginPanel(container) {
-                var _this = _super.call(this, container) || this;
-                $(function () {
-                    $('body').vegas({
-                        delay: 10000,
-                        cover: true,
-                        overlay: Q.resolveUrl("~/Scripts/vegas/overlays/01.png"),
-                        slides: [
-                            { src: Q.resolveUrl('~/Content/site/slides/slide1.jpg'), transition: 'fade' },
-                            { src: Q.resolveUrl('~/Content/site/slides/slide2.jpg'), transition: 'fade' },
-                            { src: Q.resolveUrl('~/Content/site/slides/slide3.jpg'), transition: 'zoomOut' },
-                            { src: Q.resolveUrl('~/Content/site/slides/slide4.jpg'), transition: 'blur' }
-                        ]
-                    });
-                });
-                _this.form = new Membership.LoginForm(_this.idPrefix);
-                _this.byId('LoginButton').click(function (e) {
-                    e.preventDefault();
-                    if (!_this.validateForm()) {
-                        return;
-                    }
-                    var request = _this.getSaveEntity();
-                    Q.serviceCall({
-                        url: Q.resolveUrl('~/Account/Login'),
-                        request: request,
-                        onSuccess: function (response) {
-                            var q = Q.parseQueryString();
-                            var returnUrl = q['returnUrl'] || q['ReturnUrl'];
-                            if (returnUrl) {
-                                window.location.href = returnUrl;
-                            }
-                            else {
-                                window.location.href = Q.resolveUrl('~/');
-                            }
-                        }
-                    });
-                });
-                return _this;
-            }
-            LoginPanel.prototype.getFormKey = function () { return Membership.LoginForm.formKey; };
-            return LoginPanel;
-        }(Serenity.PropertyPanel));
-        LoginPanel = __decorate([
-            Serenity.Decorators.registerClass()
-        ], LoginPanel);
-        Membership.LoginPanel = LoginPanel;
-    })(Membership = PatientManagement.Membership || (PatientManagement.Membership = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
 (function (PatientManagement) {
@@ -5273,6 +5334,60 @@ var PatientManagement;
             Serenity.Decorators.registerClass()
         ], ForgotPasswordPanel);
         Membership.ForgotPasswordPanel = ForgotPasswordPanel;
+    })(Membership = PatientManagement.Membership || (PatientManagement.Membership = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var Membership;
+    (function (Membership) {
+        var LoginPanel = (function (_super) {
+            __extends(LoginPanel, _super);
+            function LoginPanel(container) {
+                var _this = _super.call(this, container) || this;
+                $(function () {
+                    $('body').vegas({
+                        delay: 10000,
+                        cover: true,
+                        overlay: Q.resolveUrl("~/Scripts/vegas/overlays/01.png"),
+                        slides: [
+                            { src: Q.resolveUrl('~/Content/site/slides/slide1.jpg'), transition: 'fade' },
+                            { src: Q.resolveUrl('~/Content/site/slides/slide2.jpg'), transition: 'fade' },
+                            { src: Q.resolveUrl('~/Content/site/slides/slide3.jpg'), transition: 'zoomOut' },
+                            { src: Q.resolveUrl('~/Content/site/slides/slide4.jpg'), transition: 'blur' }
+                        ]
+                    });
+                });
+                _this.form = new Membership.LoginForm(_this.idPrefix);
+                _this.byId('LoginButton').click(function (e) {
+                    e.preventDefault();
+                    if (!_this.validateForm()) {
+                        return;
+                    }
+                    var request = _this.getSaveEntity();
+                    Q.serviceCall({
+                        url: Q.resolveUrl('~/Account/Login'),
+                        request: request,
+                        onSuccess: function (response) {
+                            var q = Q.parseQueryString();
+                            var returnUrl = q['returnUrl'] || q['ReturnUrl'];
+                            if (returnUrl) {
+                                window.location.href = returnUrl;
+                            }
+                            else {
+                                window.location.href = Q.resolveUrl('~/');
+                            }
+                        }
+                    });
+                });
+                return _this;
+            }
+            LoginPanel.prototype.getFormKey = function () { return Membership.LoginForm.formKey; };
+            return LoginPanel;
+        }(Serenity.PropertyPanel));
+        LoginPanel = __decorate([
+            Serenity.Decorators.registerClass()
+        ], LoginPanel);
+        Membership.LoginPanel = LoginPanel;
     })(Membership = PatientManagement.Membership || (PatientManagement.Membership = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
@@ -5935,12 +6050,8 @@ var PatientManagement;
                 //Initialize new instance of visits grid
                 _this.visitsGrid = new PatientManagement.PatientVisitsGrid(_this.byId("VisitsGrid"));
                 _this.visitsGrid.element.flexHeightOnly(1);
-                //Initialize new instance of patient health grid and form
-                _this.patientHealthGrid = new Serenity.PropertyGrid(_this.byId("PatientHealthPropertyGrid"), {
-                    items: Q.getForm(PatientManagement.PatientHealthForm.formKey).filter(function (x) { return x.name != "PatientId"; }),
-                    useCategories: true
-                });
-                _this.patientHealthForm = new PatientManagement.PatientHealthForm(_this.patientHealthGrid.idPrefix);
+                _this.patientHealthGrid = new PatientManagement.PatientHealthCheckGrid(_this.byId("HealthChecksGrid"));
+                _this.patientHealthGrid.element.flexHeightOnly(1);
                 //Initialize new instance of LifeStyle grid and form
                 _this.lifeStyleGrid = new Serenity.PropertyGrid(_this.byId("LifeStylePropertyGrid"), {
                     items: Q.getForm(PatientManagement.LifeStylesForm.formKey).filter(function (x) { return x.name != "PatientId"; }),
@@ -5961,33 +6072,6 @@ var PatientManagement;
                 _this.patientValidator = _this.byId("ActivityForm").validate(Q.validateOptions({}));
                 _this.byId('NoteList').closest('.field').hide().end().appendTo(_this.byId('TabNotes'));
                 PatientManagement_57.DialogUtils.pendingChangesConfirmation(_this.element, function () { return _this.getSaveState() != _this.loadedState; });
-                //Add button for saving patient health form
-                // ReSharper disable once WrongExpressionStatement
-                new Serenity.Toolbar(_this.byId("PatientHealthToolbar"), {
-                    buttons: [
-                        {
-                            cssClass: "apply-changes-button",
-                            title: Q.text("Controls.EntityDialog.UpdateButton"),
-                            onClick: function () {
-                                var id = _this.form.PatientId.value;
-                                if (!id)
-                                    return;
-                                if (!_this.patientValidator.form())
-                                    return;
-                                var p = {};
-                                _this.patientHealthGrid.save(p);
-                                PatientManagement.PatientHealthService.Update({
-                                    EntityId: id,
-                                    Entity: p
-                                }, function (response) {
-                                    // reload customer list just in case
-                                    Q.reloadLookup(PatientManagement.PatientsRow.lookupKey);
-                                    Q.notifySuccess(Q.text("Controls.EntityDialog.SaveSuccessMessage"));
-                                });
-                            }
-                        }
-                    ]
-                });
                 //Add button for saving patient life style form
                 // ReSharper disable once WrongExpressionStatement
                 new Serenity.Toolbar(_this.byId("LifeStyleToolbar"), {
@@ -6065,24 +6149,18 @@ var PatientManagement;
                 var _this = this;
                 _super.prototype.loadEntity.call(this, entity);
                 Serenity.TabsExtensions.setDisabled(this.tabs, 'Visits', this.isNewOrDeleted());
-                Serenity.TabsExtensions.setDisabled(this.tabs, 'PatientHealth', this.isNewOrDeleted());
+                Serenity.TabsExtensions.setDisabled(this.tabs, 'HealthChecks', this.isNewOrDeleted());
                 Serenity.TabsExtensions.setDisabled(this.tabs, 'Notes', this.isNewOrDeleted());
                 Serenity.TabsExtensions.setDisabled(this.tabs, 'LifeStyle', this.isNewOrDeleted());
                 Serenity.TabsExtensions.setDisabled(this.tabs, 'Activity', this.isNewOrDeleted());
                 Serenity.TabsExtensions.setDisabled(this.tabs, 'FileUploads', this.isNewOrDeleted());
                 if (this.isNewOrDeleted()) {
                     // no patient is selected, just load an empty entity
-                    this.patientHealthGrid.load({});
                     this.patientActivityGrid.load({});
                     this.lifeStyleGrid.load({});
                     return;
                 }
                 else {
-                    PatientManagement.PatientHealthService.Retrieve({
-                        EntityId: entity.PatientId
-                    }, function (response) {
-                        _this.patientHealthGrid.load(response.Entity);
-                    });
                     PatientManagement.LifeStylesService.Retrieve({
                         EntityId: entity.PatientId
                     }, function (response) {
@@ -6095,6 +6173,7 @@ var PatientManagement;
                     });
                 }
                 this.visitsGrid.patientId = entity.PatientId;
+                this.patientHealthGrid.patientId = entity.PatientId;
                 this.patientsFileUploadsGrid.patientId = entity.PatientId;
             };
             PatientsDialog.prototype.onSaveSuccess = function (response) {
@@ -6880,8 +6959,81 @@ var PatientManagement;
         PatientManagement.FIleUploadsForPatientGrid = FIleUploadsForPatientGrid;
     })(PatientManagement = PatientManagement_74.PatientManagement || (PatientManagement_74.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
+/// <reference path="../PatientsFileUploads/PatientsFileUploadsDialog.ts" />
 var PatientManagement;
 (function (PatientManagement_75) {
+    var PatientManagement;
+    (function (PatientManagement) {
+        var PatientHealthCheckDialog = (function (_super) {
+            __extends(PatientHealthCheckDialog, _super);
+            function PatientHealthCheckDialog() {
+                return _super.call(this) || this;
+            }
+            PatientHealthCheckDialog.prototype.updateInterface = function () {
+                _super.prototype.updateInterface.call(this);
+                Serenity.EditorUtils.setReadOnly(this.form.PatientId, true);
+            };
+            return PatientHealthCheckDialog;
+        }(PatientManagement.PatientHealthDialog));
+        PatientHealthCheckDialog = __decorate([
+            Serenity.Decorators.registerClass()
+        ], PatientHealthCheckDialog);
+        PatientManagement.PatientHealthCheckDialog = PatientHealthCheckDialog;
+    })(PatientManagement = PatientManagement_75.PatientManagement || (PatientManagement_75.PatientManagement = {}));
+})(PatientManagement || (PatientManagement = {}));
+/// <reference path="../PatientHealth/PatientHealthGrid.ts"/>
+var PatientManagement;
+(function (PatientManagement_76) {
+    var PatientManagement;
+    (function (PatientManagement) {
+        var PatientHealthCheckGrid = (function (_super) {
+            __extends(PatientHealthCheckGrid, _super);
+            function PatientHealthCheckGrid(container) {
+                return _super.call(this, container) || this;
+            }
+            PatientHealthCheckGrid.prototype.getDialogType = function () { return PatientManagement.PatientHealthCheckDialog; };
+            PatientHealthCheckGrid.prototype.getColumns = function () {
+                var fld = PatientManagement.PatientHealthRow.Fields;
+                return _super.prototype.getColumns.call(this);
+            };
+            PatientHealthCheckGrid.prototype.initEntityDialog = function (itemType, dialog) {
+                _super.prototype.initEntityDialog.call(this, itemType, dialog);
+                Serenity.SubDialogHelper.cascade(dialog, this.element.closest('.ui-dialog'));
+            };
+            PatientHealthCheckGrid.prototype.addButtonClick = function () {
+                console.log(this.patientId);
+                this.editItem({ PatientId: this.patientId });
+            };
+            PatientHealthCheckGrid.prototype.getInitialTitle = function () {
+                return null;
+            };
+            PatientHealthCheckGrid.prototype.getGridCanLoad = function () {
+                return _super.prototype.getGridCanLoad.call(this) && !!this.patientId;
+            };
+            Object.defineProperty(PatientHealthCheckGrid.prototype, "patientId", {
+                get: function () {
+                    return this._patientId;
+                },
+                set: function (value) {
+                    if (this._patientId !== value) {
+                        this._patientId = value;
+                        this.setEquality('PatientId', value);
+                        this.refresh();
+                    }
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return PatientHealthCheckGrid;
+        }(PatientManagement.PatientHealthGrid));
+        PatientHealthCheckGrid = __decorate([
+            Serenity.Decorators.registerClass()
+        ], PatientHealthCheckGrid);
+        PatientManagement.PatientHealthCheckGrid = PatientHealthCheckGrid;
+    })(PatientManagement = PatientManagement_76.PatientManagement || (PatientManagement_76.PatientManagement = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement_77) {
     var PatientManagement;
     (function (PatientManagement) {
         var PatientsFormatter = (function () {
@@ -6941,10 +7093,10 @@ var PatientManagement;
             Serenity.Decorators.registerFormatter()
         ], PatientsEmailFormatter);
         PatientManagement.PatientsEmailFormatter = PatientsEmailFormatter;
-    })(PatientManagement = PatientManagement_75.PatientManagement || (PatientManagement_75.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_77.PatientManagement || (PatientManagement_77.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
-(function (PatientManagement_76) {
+(function (PatientManagement_78) {
     var PatientManagement;
     (function (PatientManagement) {
         var PatientsGrid = (function (_super) {
@@ -6961,7 +7113,7 @@ var PatientManagement;
             PatientsGrid.prototype.getButtons = function () {
                 var _this = this;
                 var buttons = _super.prototype.getButtons.call(this);
-                buttons.push(PatientManagement_76.Common.ExcelExportHelper.createToolButton({
+                buttons.push(PatientManagement_78.Common.ExcelExportHelper.createToolButton({
                     grid: this,
                     hint: 'Export to Excel',
                     title: 'Export to Excel',
@@ -6977,11 +7129,11 @@ var PatientManagement;
             Serenity.Decorators.registerClass()
         ], PatientsGrid);
         PatientManagement.PatientsGrid = PatientsGrid;
-    })(PatientManagement = PatientManagement_76.PatientManagement || (PatientManagement_76.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_78.PatientManagement || (PatientManagement_78.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 /// <reference path="../Visits/VisitsDialog.ts" />
 var PatientManagement;
-(function (PatientManagement_77) {
+(function (PatientManagement_79) {
     var PatientManagement;
     (function (PatientManagement) {
         var PatientVisitsDialog = (function (_super) {
@@ -6999,11 +7151,11 @@ var PatientManagement;
             Serenity.Decorators.registerClass()
         ], PatientVisitsDialog);
         PatientManagement.PatientVisitsDialog = PatientVisitsDialog;
-    })(PatientManagement = PatientManagement_77.PatientManagement || (PatientManagement_77.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_79.PatientManagement || (PatientManagement_79.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 /// <reference path="../Visits/VisitsGrid.ts" />
 var PatientManagement;
-(function (PatientManagement_78) {
+(function (PatientManagement_80) {
     var PatientManagement;
     (function (PatientManagement) {
         var PatientVisitsGrid = (function (_super) {
@@ -7050,10 +7202,10 @@ var PatientManagement;
             Serenity.Decorators.registerClass()
         ], PatientVisitsGrid);
         PatientManagement.PatientVisitsGrid = PatientVisitsGrid;
-    })(PatientManagement = PatientManagement_78.PatientManagement || (PatientManagement_78.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_80.PatientManagement || (PatientManagement_80.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
-(function (PatientManagement_79) {
+(function (PatientManagement_81) {
     var PatientManagement;
     (function (PatientManagement) {
         var UserNotificationsDialog = (function (_super) {
@@ -7074,10 +7226,10 @@ var PatientManagement;
             Serenity.Decorators.responsive()
         ], UserNotificationsDialog);
         PatientManagement.UserNotificationsDialog = UserNotificationsDialog;
-    })(PatientManagement = PatientManagement_79.PatientManagement || (PatientManagement_79.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_81.PatientManagement || (PatientManagement_81.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
-(function (PatientManagement_80) {
+(function (PatientManagement_82) {
     var PatientManagement;
     (function (PatientManagement) {
         var UserNotificationsGrid = (function (_super) {
@@ -7101,12 +7253,12 @@ var PatientManagement;
             Serenity.Decorators.registerClass()
         ], UserNotificationsGrid);
         PatientManagement.UserNotificationsGrid = UserNotificationsGrid;
-    })(PatientManagement = PatientManagement_80.PatientManagement || (PatientManagement_80.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_82.PatientManagement || (PatientManagement_82.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 /// <reference types="jqueryui" />
 /// <returns type="jquery.colorpicker"></returns>
 var PatientManagement;
-(function (PatientManagement_81) {
+(function (PatientManagement_83) {
     var PatientManagement;
     (function (PatientManagement) {
         var VisitTypesDialog = (function (_super) {
@@ -7135,11 +7287,11 @@ var PatientManagement;
             Serenity.Decorators.responsive()
         ], VisitTypesDialog);
         PatientManagement.VisitTypesDialog = VisitTypesDialog;
-    })(PatientManagement = PatientManagement_81.PatientManagement || (PatientManagement_81.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_83.PatientManagement || (PatientManagement_83.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 /// <reference path="../VisitTypes/VisitTypesDialog.ts" />
 var PatientManagement;
-(function (PatientManagement_82) {
+(function (PatientManagement_84) {
     var PatientManagement;
     (function (PatientManagement) {
         var NewVisitTypeDialog = (function (_super) {
@@ -7159,10 +7311,10 @@ var PatientManagement;
             Serenity.Decorators.registerClass()
         ], NewVisitTypeDialog);
         PatientManagement.NewVisitTypeDialog = NewVisitTypeDialog;
-    })(PatientManagement = PatientManagement_82.PatientManagement || (PatientManagement_82.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_84.PatientManagement || (PatientManagement_84.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
-(function (PatientManagement_83) {
+(function (PatientManagement_85) {
     var PatientManagement;
     (function (PatientManagement) {
         var VisitsTypesFormatter = (function () {
@@ -7197,10 +7349,10 @@ var PatientManagement;
             Serenity.Decorators.registerFormatter([Serenity.ISlickFormatter, Serenity.IInitializeColumn])
         ], VisitsTypesFormatter);
         PatientManagement.VisitsTypesFormatter = VisitsTypesFormatter;
-    })(PatientManagement = PatientManagement_83.PatientManagement || (PatientManagement_83.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_85.PatientManagement || (PatientManagement_85.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
-(function (PatientManagement_84) {
+(function (PatientManagement_86) {
     var PatientManagement;
     (function (PatientManagement) {
         var VisitTypesGrid = (function (_super) {
@@ -7220,7 +7372,7 @@ var PatientManagement;
             Serenity.Decorators.registerClass()
         ], VisitTypesGrid);
         PatientManagement.VisitTypesGrid = VisitTypesGrid;
-    })(PatientManagement = PatientManagement_84.PatientManagement || (PatientManagement_84.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_86.PatientManagement || (PatientManagement_86.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 /// <reference types="jqueryui" />
 var PatientManagement;
@@ -7258,123 +7410,5 @@ var PatientManagement;
         Serenity.Decorators.registerClass()
     ], VisiTypesBottomLeftMenu);
     PatientManagement.VisiTypesBottomLeftMenu = VisiTypesBottomLeftMenu;
-})(PatientManagement || (PatientManagement = {}));
-var PatientManagement;
-(function (PatientManagement) {
-    var Administration;
-    (function (Administration) {
-        var CouponsForm = (function (_super) {
-            __extends(CouponsForm, _super);
-            function CouponsForm() {
-                return _super !== null && _super.apply(this, arguments) || this;
-            }
-            return CouponsForm;
-        }(Serenity.PrefixedContext));
-        CouponsForm.formKey = 'Administration.Coupons';
-        Administration.CouponsForm = CouponsForm;
-        [['Key', function () { return Serenity.StringEditor; }], ['Name', function () { return Serenity.StringEditor; }], ['Description', function () { return Serenity.StringEditor; }], ['InsertUserId', function () { return Serenity.IntegerEditor; }], ['InsertDate', function () { return Serenity.DateEditor; }], ['UpdateUserId', function () { return Serenity.IntegerEditor; }], ['UpdateDateField', function () { return Serenity.DateEditor; }], ['IsActive', function () { return Serenity.IntegerEditor; }]].forEach(function (x) { return Object.defineProperty(CouponsForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
-    })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
-})(PatientManagement || (PatientManagement = {}));
-var PatientManagement;
-(function (PatientManagement) {
-    var Administration;
-    (function (Administration) {
-        var CouponsRow;
-        (function (CouponsRow) {
-            CouponsRow.idProperty = 'CouponId';
-            CouponsRow.isActiveProperty = 'IsActive';
-            CouponsRow.nameProperty = 'Key';
-            CouponsRow.localTextPrefix = 'Administration.Coupons';
-            CouponsRow.lookupKey = 'Administration.Coupons';
-            function getLookup() {
-                return Q.getLookup('Administration.Coupons');
-            }
-            CouponsRow.getLookup = getLookup;
-            var Fields;
-            (function (Fields) {
-            })(Fields = CouponsRow.Fields || (CouponsRow.Fields = {}));
-            ['CouponId', 'Key', 'Name', 'Description', 'UsedOnDate', 'IsUsed', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'IsActive', 'InsertUserName', 'UpdateUserName'].forEach(function (x) { return Fields[x] = x; });
-        })(CouponsRow = Administration.CouponsRow || (Administration.CouponsRow = {}));
-    })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
-})(PatientManagement || (PatientManagement = {}));
-var PatientManagement;
-(function (PatientManagement) {
-    var Administration;
-    (function (Administration) {
-        var CouponsService;
-        (function (CouponsService) {
-            CouponsService.baseUrl = 'Administration/Coupons';
-            var Methods;
-            (function (Methods) {
-            })(Methods = CouponsService.Methods || (CouponsService.Methods = {}));
-            ['Create', 'Update', 'Delete', 'Retrieve', 'List'].forEach(function (x) {
-                CouponsService[x] = function (r, s, o) { return Q.serviceRequest(CouponsService.baseUrl + '/' + x, r, s, o); };
-                Methods[x] = CouponsService.baseUrl + '/' + x;
-            });
-        })(CouponsService = Administration.CouponsService || (Administration.CouponsService = {}));
-    })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
-})(PatientManagement || (PatientManagement = {}));
-var PatientManagement;
-(function (PatientManagement) {
-    var Administration;
-    (function (Administration) {
-        var PaymentCouponsRow;
-        (function (PaymentCouponsRow) {
-            PaymentCouponsRow.idProperty = 'PaymentCouponId';
-            PaymentCouponsRow.localTextPrefix = 'PaymentCoupons';
-            var Fields;
-            (function (Fields) {
-            })(Fields = PaymentCouponsRow.Fields || (PaymentCouponsRow.Fields = {}));
-            ['PaymentCouponId', 'CouponId', 'PaymentId'].forEach(function (x) { return Fields[x] = x; });
-        })(PaymentCouponsRow = Administration.PaymentCouponsRow || (Administration.PaymentCouponsRow = {}));
-    })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
-})(PatientManagement || (PatientManagement = {}));
-var PatientManagement;
-(function (PatientManagement) {
-    var Administration;
-    (function (Administration) {
-        var CouponsDialog = (function (_super) {
-            __extends(CouponsDialog, _super);
-            function CouponsDialog() {
-                var _this = _super !== null && _super.apply(this, arguments) || this;
-                _this.form = new Administration.CouponsForm(_this.idPrefix);
-                return _this;
-            }
-            CouponsDialog.prototype.getFormKey = function () { return Administration.CouponsForm.formKey; };
-            CouponsDialog.prototype.getIdProperty = function () { return Administration.CouponsRow.idProperty; };
-            CouponsDialog.prototype.getLocalTextPrefix = function () { return Administration.CouponsRow.localTextPrefix; };
-            CouponsDialog.prototype.getNameProperty = function () { return Administration.CouponsRow.nameProperty; };
-            CouponsDialog.prototype.getService = function () { return Administration.CouponsService.baseUrl; };
-            return CouponsDialog;
-        }(Serenity.EntityDialog));
-        CouponsDialog = __decorate([
-            Serenity.Decorators.registerClass(),
-            Serenity.Decorators.responsive()
-        ], CouponsDialog);
-        Administration.CouponsDialog = CouponsDialog;
-    })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
-})(PatientManagement || (PatientManagement = {}));
-var PatientManagement;
-(function (PatientManagement) {
-    var Administration;
-    (function (Administration) {
-        var CouponsGrid = (function (_super) {
-            __extends(CouponsGrid, _super);
-            function CouponsGrid(container) {
-                return _super.call(this, container) || this;
-            }
-            CouponsGrid.prototype.getColumnsKey = function () { return 'Administration.Coupons'; };
-            CouponsGrid.prototype.getDialogType = function () { return Administration.CouponsDialog; };
-            CouponsGrid.prototype.getIdProperty = function () { return Administration.CouponsRow.idProperty; };
-            CouponsGrid.prototype.getLocalTextPrefix = function () { return Administration.CouponsRow.localTextPrefix; };
-            CouponsGrid.prototype.getService = function () { return Administration.CouponsService.baseUrl; };
-            CouponsGrid.prototype.getIsActiveProperty = function () { return Administration.CouponsRow.isActiveProperty; };
-            return CouponsGrid;
-        }(Serenity.EntityGrid));
-        CouponsGrid = __decorate([
-            Serenity.Decorators.registerClass()
-        ], CouponsGrid);
-        Administration.CouponsGrid = CouponsGrid;
-    })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
 })(PatientManagement || (PatientManagement = {}));
 //# sourceMappingURL=PatientManagement.Web.js.map

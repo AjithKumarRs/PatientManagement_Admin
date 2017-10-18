@@ -1,4 +1,6 @@
 ﻿
+using PatientManagement.PatientManagement.Scripts;
+
 namespace PatientManagement.PatientManagement.Entities
 {
     using Serenity;
@@ -12,8 +14,9 @@ namespace PatientManagement.PatientManagement.Entities
     [ConnectionKey("PatientManagement"), TableName("[dbo].[Activity]"), DisplayName("Activity"), InstanceName("Activity"), TwoLevelCached]
     [ReadPermission("PatientManagement:Activity")]
     [ModifyPermission("PatientManagement:Activity")]
-    [LookupScript("PatientManagement.LifeStyles")]
-    public sealed class ActivityRow : Row, IIdRow, INameRow, IInsertLogRow
+    [LookupScript("PatientManagement.LifeStyles",
+        LookupType = typeof(MultiTenantRowLookupScript<>))]
+    public sealed class ActivityRow : Row, IIdRow, INameRow, ILoggingRow, IMultiTenantRow, IIsActiveRow
     {
         [DisplayName("Patient"), PrimaryKey, ForeignKey("[dbo].[Patients]", "PatientId"), LeftJoin("jPatient"), TextualField("PatientName")]
         [LookupEditor(typeof(PatientsRow), InplaceAdd = true)]
@@ -39,20 +42,104 @@ namespace PatientManagement.PatientManagement.Entities
             set { Fields.Profession[this] = value; }
         }
 
-        [DisplayName("Insert User Id"), NotNull, Insertable(false), Updatable(false)]
+
+        #region ILoggingRow
+
+        [DisplayName("Insert User Id"), NotNull, ForeignKey("Users", "UserId"), LeftJoin("usrI"), TextualField("InsertUserName")]
+        [ReadPermission("Administration:Tenants")]
         public Int32? InsertUserId
         {
             get { return Fields.InsertUserId[this]; }
             set { Fields.InsertUserId[this] = value; }
         }
 
-        [DisplayName("Insert Date"), NotNull, Insertable(false), Updatable(false)]
 
+        [DisplayName("Created by"), Expression("usrI.UserName")]
+        public String InsertUserName
+        {
+            get { return Fields.InsertUserName[this]; }
+            set { Fields.InsertUserName[this] = value; }
+        }
+
+
+        [DisplayName("Insert Date"), NotNull, QuickFilter(), SortOrder(1, true)]
         public DateTime? InsertDate
         {
             get { return Fields.InsertDate[this]; }
             set { Fields.InsertDate[this] = value; }
         }
+
+        [DisplayName("Update User Id"), NotNull, ForeignKey("Users", "UserId"), LeftJoin("usrU"), TextualField("UpdateUserName")]
+        [ReadPermission("Administration:Tenants")]
+        public Int32? UpdateUserId
+        {
+            get { return Fields.UpdateUserId[this]; }
+            set { Fields.UpdateUserId[this] = value; }
+        }
+        [DisplayName("Last updated by"), Expression("usrU.UserName")]
+        [ReadPermission("Administration:Tenants")]
+        public String UpdateUserName
+        {
+            get { return Fields.UpdateUserName[this]; }
+            set { Fields.UpdateUserName[this] = value; }
+        }
+
+        [DisplayName("Update Date Field"), NotNull]
+        [ReadPermission("Administration:Tenants")]
+        public DateTime? UpdateDateField
+        {
+            get { return Fields.UpdateDateField[this]; }
+            set { Fields.UpdateDateField[this] = value; }
+        }
+        public IIdField InsertUserIdField => Fields.InsertUserId;
+
+        public DateTimeField InsertDateField => Fields.InsertDate;
+
+
+        public IIdField UpdateUserIdField { get; } = Fields.UpdateUserId;
+
+        DateTimeField IUpdateLogRow.UpdateDateField { get; } = Fields.UpdateDateField;
+
+        #endregion
+
+        #region Tenant
+
+        [Insertable(false), Updatable(false), ForeignKey("Tenants", "TenantId"), LeftJoin("tnt")]
+        public Int32? TenantId
+        {
+            get { return Fields.TenantId[this]; }
+            set { Fields.TenantId[this] = value; }
+        }
+        [DisplayName("Tenant"), Expression("tnt.TenantName")]
+        [ReadPermission("Administration:Tenants")]
+        public String TenantName
+        {
+            get { return Fields.TenantName[this]; }
+            set { Fields.TenantName[this] = value; }
+        }
+        public Int32Field TenantIdField
+        {
+            get { return Fields.TenantId; }
+        }
+        #endregion
+
+        #region IIsActive
+
+        [DisplayName("Is Active"), NotNull]
+        [ReadPermission("Administration:Tenants")]
+        public Int16? IsActive
+        {
+            get { return Fields.IsActive[this]; }
+            set { Fields.IsActive[this] = value; }
+        }
+
+        Int16Field IIsActiveRow.IsActiveField
+        {
+            get { return Fields.IsActive; }
+        }
+
+
+        #endregion
         IIdField IIdRow.IdField
         {
             get { return Fields.PatientId; }
@@ -77,6 +164,15 @@ namespace PatientManagement.PatientManagement.Entities
             public StringField Profession;
             public Int32Field InsertUserId;
             public DateTimeField InsertDate;
+            public Int32Field UpdateUserId;
+            public DateTimeField UpdateDateField;
+            public Int16Field IsActive;
+            public Int32Field TenantId;
+
+
+            public StringField TenantName;
+            public StringField InsertUserName;
+            public StringField UpdateUserName;
 
             public RowFields()
                 : base()
@@ -84,9 +180,6 @@ namespace PatientManagement.PatientManagement.Entities
                 LocalTextPrefix = "PatientManagement.Activity";
             }
         }
-
-        public IIdField InsertUserIdField => Fields.InsertUserId;
-
-        public DateTimeField InsertDateField => Fields.InsertDate;
+        
     }
 }

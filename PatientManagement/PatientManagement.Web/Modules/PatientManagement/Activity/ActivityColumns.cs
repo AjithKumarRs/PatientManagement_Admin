@@ -18,5 +18,19 @@ namespace PatientManagement.PatientManagement.Columns
         [EditLink]
         public String MovementAndTraining { get; set; }
         public String Profession { get; set; }
+
+        [Width(80)]
+        public String TenantName { get; set; }
+
+        [Width(80)]
+        public String InsertUserName { get; set; }
+        [DisplayFormat("dd/MM/yyyy HH:mm")]
+        [Width(120)]
+        public DateTime InsertDate { get; set; }
+        [Width(80)]
+        public String UpdateUserName { get; set; }
+        [DisplayFormat("dd/MM/yyyy HH:mm")]
+        [Width(120)]
+        public DateTime UpdateDateField { get; set; }
     }
 }

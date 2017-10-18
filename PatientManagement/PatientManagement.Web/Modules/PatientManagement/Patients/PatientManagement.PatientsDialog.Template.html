@@ -1,7 +1,7 @@
 ﻿<div id="~_Tabs" class="s-DialogContent">
     <ul>
         <li><a href="#~_TabInfo"><span>{{text:"Db.PatientManagement.Patients.EntitySingular"}}</span></a></li>
-        <li><a href="#~_TabPatientHealth"><span>{{text:"Db.PatientManagement.PatientHealth.EntitySingular"}}</span></a></li>
+        <li><a href="#~_TabHealthChecks"><span>{{text:"Db.PatientManagement.PatientHealth.EntitySingular"}}</span></a></li>
         <li><a href="#~_TabLifeStyle"><span>{{text:"Db.PatientManagement.LifeStyles.EntitySingular"}}</span></a></li>
 
         <li><a href="#~_TabActivity"><span>{{text:"Db.PatientManagement.Activity.EntitySingular"}}</span></a></li>
@@ -22,19 +22,7 @@
             </form>
         </div>
     </div>
-    <div id="~_TabPatientHealth" class="tab-pane s-TabPatientHealth">
-
-        <div id="~_PatientHealthToolbar" class="s-PatientHealthToolbar s-DialogToolbar s-Toolbar clearfix">
-        </div>
-        <div class="s-Form">
-            <form id="~_PatientHealthForm" action="">
-                <div class="fieldset">
-                    <div id="~_PatientHealthPropertyGrid"></div>
-                    <div class="clear"></div>
-                </div>
-            </form>
-        </div>
-    </div>
+ 
     <div id="~_TabLifeStyle" class="tab-pane s-TabOrders">
 
         <div id="~_LifeStyleToolbar" class="s-LifeStyleToolbar s-DialogToolbar s-Toolbar clearfix">
@@ -63,6 +51,10 @@
         </div>
     </div>
 
+    <div id="~_TabHealthChecks" class="tab-pane s-TabOrders">
+        <div id="~_HealthChecksGrid">
+        </div>
+    </div>
     <div id="~_TabVisits" class="tab-pane s-TabOrders">
         <div id="~_VisitsGrid">
         </div>

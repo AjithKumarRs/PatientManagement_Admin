@@ -62,14 +62,7 @@ namespace PatientManagement.PatientManagement.Repositories
                 if (IsCreate)
                 {
                     var user = ((UserDefinition) Authorization.UserDefinition);
-                    var entHealth = new PatientHealthRow
-                    {
-                        PatientId = Row.PatientId,
-                        InsertUserId = user.UserId,
-                        InsertDate = DateTime.Now,
-                        TenantId = user.TenantId
-                    };
-                    this.Connection.Insert(entHealth);
+            
 
                     var entLife = new LifeStylesRow
                     {
