@@ -33,7 +33,6 @@ namespace PatientManagement.Migrations.PatientManagementDB
                 .AddColumn("IsActive").AsInt16().NotNullable().WithDefaultValue(1);
 
             Alter.Table("PatientHealth")
-                .AddColumn("TenantId").AsInt32().NotNullable().WithDefaultValue(1)
                 .AddColumn("PatientHealthId").AsInt32().Identity().PrimaryKey().NotNullable()
                 .AddColumn("UpdateUserId").AsInt32().Nullable()
                 .AddColumn("UpdateDateField").AsDateTime().Nullable()
