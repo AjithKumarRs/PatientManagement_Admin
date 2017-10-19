@@ -21,21 +21,21 @@ namespace PatientManagement.Web.Modules.Common
             {
                 var result = new HashSet<int>();
 
-                //TODO Restrict access when subscription is required 
-                var tenantFld = TenantRow.Fields;
-                var tenant = connection.First<TenantRow>(tenantFld.TenantId == tenantId);
-                if (tenant?.SubscriptionRequired != null && tenant.SubscriptionRequired.Value && GetTenantPaidDays(tenantId) < DateTime.Now)
-                {
-                    result.Add(3);
-                }
-                else
-                {
+                ////TODO Restrict access when subscription is required 
+                //var tenantFld = TenantRow.Fields;
+                //var tenant = connection.First<TenantRow>(tenantFld.TenantId == tenantId);
+                //if (tenant?.SubscriptionRequired != null && tenant.SubscriptionRequired.Value && GetTenantPaidDays(tenantId) < DateTime.Now)
+                //{
+                //    result.Add(3);
+                //}
+                //else
+                //{
                     // All looks fine, get current user roles 
                     connection.List<UserRoleRow>(q => q
                             .Select(fld.RoleId)
                             .Where(new Criteria(fld.UserId) == userId))
                         .ForEach(x => result.Add(x.RoleId.Value));
-                }
+               // }
 
 
 
