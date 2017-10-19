@@ -290,7 +290,7 @@
   "Db.PatientManagement.LifeStyles.BadHabits": "Лоши навици",
   "Db.PatientManagement.LifeStyles.DailyMeals": "Дневни хранения",
   "Db.PatientManagement.LifeStyles.EntityPlural": "Начини на живот",
-  "Db.PatientManagement.LifeStyles.EntitySingular": "Начин на жвот",
+  "Db.PatientManagement.LifeStyles.EntitySingular": "Начин на живот",
   "Db.PatientManagement.LifeStyles.FavoriteFood": "Любима храна",
   "Db.PatientManagement.LifeStyles.InsertDate": "Дата на добавяне",
   "Db.PatientManagement.LifeStyles.InsertUserId": "Създадено от",
