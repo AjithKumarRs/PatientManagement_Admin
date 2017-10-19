@@ -83,7 +83,17 @@ namespace PatientManagement.Administration
 
             return TwoLevelCache.GetLocalStoreOnly("UserRoles:" + userId, TimeSpan.Zero, fld.GenerationKey, () =>
             {
-                return UserSubscriptionHelper.GetUserRolesIdBasedOnSubscription(userId, tenantId);
+                using (var connection = SqlConnections.NewByKey("Default"))
+                {
+                    var result = new HashSet<int>();
+
+                    connection.List<UserRoleRow>(q => q
+                            .Select(fld.RoleId)
+                            .Where(new Criteria(fld.UserId) == userId))
+                        .ForEach(x => result.Add(x.RoleId.Value));
+
+                    return result;
+                }
 
             });
         }
