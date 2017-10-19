@@ -468,8 +468,13 @@
                                 $('#subscription-information-box h4')
                                     .text(Q.text("Site.Subscriptions.Expired.SubscriptionInfoBoxHeader"));
 
+
+                                var diff2 = Math.floor((Date.parse(new Date()) - Date.parse(expireDate)) / 86400000);
+                                var formatFooter =
+                                    Q.format(Q.text("Site.Subscriptions.Expired.SubscriptionInfoBoxFooter"), diff2);
+
                                 $('#subscription-information-box p')
-                                    .text(Q.text("Site.Subscriptions.Expired.SubscriptionInfoBoxBody"));
+                                    .html(Q.text("Site.Subscriptions.Expired.SubscriptionInfoBoxBody") + '<br />' + formatFooter);
 
                                 $('#subscription-information-box').addClass('callout-danger');
                                 $('#subscription-information-box').parents('.row').show('slide', { direction: 'up' }, 500);

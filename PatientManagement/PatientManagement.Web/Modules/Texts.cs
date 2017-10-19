@@ -224,6 +224,8 @@ namespace PatientManagement
                 {
                     public static LocalText SubscriptionInfoBoxHeader = "Subscription expired!";
                     public static LocalText SubscriptionInfoBoxBody = "Your subscription is expired! Please make a payment to gain access to the site.";
+                    public static LocalText SubscriptionInfoBoxFooter = "Expired before: {0} days";
+
                 }
 
                 public static class WillExpire
@@ -372,11 +374,13 @@ namespace PatientManagement
             {
                 public static LocalText Title = "ERROR";
                 public static LocalText ValidateEgnNotCorrect = "Entered personal number is not correct!";
+                public static LocalText ValidateNotifyOnChangeWithNoEmail = "We cant send automatic emails if there is no patient email!";
             }
         }
 
         public static partial class Validation
         {
+            public static LocalText PendingChangesConfirmation = "You have pending changes. Save them?";
             public static LocalText AuthenticationError = "Invalid username or password!";
             public static LocalText CurrentPasswordMismatch = "Your current password is not valid!";
             public static LocalText MinRequiredPasswordLength = "Entered password doesn't have enough characters (min {0})!";

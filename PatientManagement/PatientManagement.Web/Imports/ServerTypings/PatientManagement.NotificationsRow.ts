@@ -9,6 +9,7 @@
         InsertUserDisplayName?: string;
         InsertUserPicture?: string;
         TenantId?: number;
+        TenantName?: string;
     }
 
     export namespace NotificationsRow {
@@ -31,8 +32,9 @@
             export declare const InsertUserDisplayName: string;
             export declare const InsertUserPicture: string;
             export declare const TenantId: string;
+            export declare const TenantName: string;
         }
 
-        ['NotificationId', 'EntityType', 'EntityId', 'Text', 'InsertUserId', 'InsertDate', 'InsertUserDisplayName', 'InsertUserPicture', 'TenantId'].forEach(x => (<any>Fields)[x] = x);
+        ['NotificationId', 'EntityType', 'EntityId', 'Text', 'InsertUserId', 'InsertDate', 'InsertUserDisplayName', 'InsertUserPicture', 'TenantId', 'TenantName'].forEach(x => (<any>Fields)[x] = x);
     }
 }

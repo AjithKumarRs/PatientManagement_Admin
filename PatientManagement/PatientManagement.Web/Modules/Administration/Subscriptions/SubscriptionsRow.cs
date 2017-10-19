@@ -60,11 +60,15 @@ namespace PatientManagement.Administration.Entities
             set { Fields.Name[this] = value; }
         }
 
-        [DisplayName("Paid Period"), NotMapped, Insertable(false), Updatable(false)]
-        public DateTime? PaidPeriod
+
+
+        [DisplayName("Free Days From Offer")]
+        [ReadPermission(PermissionKeys.Tenants)]
+        [ModifyPermission(PermissionKeys.Tenants)]
+        public Int32? FreeDaysFromOffer
         {
-            get { return Fields.PaidPeriod[this]; }
-            set { Fields.PaidPeriod[this] = value; }
+            get { return Fields.FreeDaysFromOffer[this]; }
+            set { Fields.FreeDaysFromOffer[this] = value; }
         }
 
         [DisplayName("Offer Name"), Expression("jOffer.[Name]")]
@@ -73,7 +77,9 @@ namespace PatientManagement.Administration.Entities
             get { return Fields.OfferName[this]; }
             set { Fields.OfferName[this] = value; }
         }
+
         
+
         [DisplayName("Offer Description"), Expression("jOffer.[Description]")]
         public String OfferDescription
         {
@@ -88,7 +94,7 @@ namespace PatientManagement.Administration.Entities
             set { Fields.OfferPrice[this] = value; }
         }
 
-       
+
         [DisplayName("Offer Role Id"), Expression("jOffer.[RoleId]")]
         public Int32? OfferRoleId
         {
@@ -238,8 +244,8 @@ namespace PatientManagement.Administration.Entities
             public Int32Field OfferId;
             public Int32Field TenantId;
             public DateTimeField SubscriptionEndDate;
-            public DateTimeField PaidPeriod;
             public Int16Field Enabled;
+            public Int32Field FreeDaysFromOffer;
 
             public Int16Field IsActive;
             public DateTimeField DeactivatedOn;

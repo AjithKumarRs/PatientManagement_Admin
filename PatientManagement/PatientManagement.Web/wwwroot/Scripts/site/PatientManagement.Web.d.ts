@@ -317,6 +317,7 @@ declare namespace PatientManagement.Administration {
         Name: Serenity.StringEditor;
         Description: Serenity.TextAreaEditor;
         Price: Serenity.DecimalEditor;
+        IsPublic: BsSwitchEditor;
         Enabled: BsSwitchEditor;
         CurrencyId: Serenity.LookupEditor;
         RoleId: Serenity.LookupEditor;
@@ -340,13 +341,14 @@ declare namespace PatientManagement.Administration {
         ExpirationDate?: string;
         Description?: string;
         Price?: number;
-        Enabled?: boolean;
+        Enabled?: number;
         CurrencyId?: number;
         RoleId?: number;
         CurrencyCurrencyId?: string;
         CurrencyName?: string;
         CurrencyEnabled?: boolean;
         RoleRoleName?: string;
+        IsPublic?: number;
         InsertUserId?: number;
         InsertDate?: string;
         UpdateUserId?: number;
@@ -380,6 +382,7 @@ declare namespace PatientManagement.Administration {
             const CurrencyName: string;
             const CurrencyEnabled: string;
             const RoleRoleName: string;
+            const IsPublic: string;
             const InsertUserId: string;
             const InsertDate: string;
             const UpdateUserId: string;
@@ -944,6 +947,7 @@ declare namespace PatientManagement.Administration {
         OfferId: Serenity.LookupEditor;
         SubscriptionEndDate: Serenity.DateEditor;
         Enabled: BsSwitchEditor;
+        FreeDaysFromOffer: Serenity.IntegerEditor;
         TenantId: Serenity.LookupEditor;
     }
 }
@@ -954,8 +958,8 @@ declare namespace PatientManagement.Administration {
         OfferId?: number;
         TenantId?: number;
         SubscriptionEndDate?: string;
-        PaidPeriod?: string;
         Enabled?: number;
+        FreeDaysFromOffer?: number;
         IsActive?: number;
         DeactivatedOn?: string;
         ActivatedOn?: string;
@@ -984,8 +988,8 @@ declare namespace PatientManagement.Administration {
             const OfferId: string;
             const TenantId: string;
             const SubscriptionEndDate: string;
-            const PaidPeriod: string;
             const Enabled: string;
+            const FreeDaysFromOffer: string;
             const IsActive: string;
             const DeactivatedOn: string;
             const ActivatedOn: string;
@@ -1667,30 +1671,48 @@ declare namespace PatientManagement.PatientManagement {
         static formKey: string;
     }
     interface ActivityForm {
+        PatientId: Serenity.LookupEditor;
         MovementAndTraining: Serenity.TextAreaEditor;
         Profession: Serenity.TextAreaEditor;
     }
 }
 declare namespace PatientManagement.PatientManagement {
     interface ActivityRow {
+        ActivityId?: number;
         PatientId?: number;
         MovementAndTraining?: string;
         Profession?: string;
         InsertUserId?: number;
         InsertDate?: string;
+        UpdateUserId?: number;
+        UpdateDateField?: string;
+        IsActive?: number;
+        TenantId?: number;
+        TenantName?: string;
+        InsertUserName?: string;
+        UpdateUserName?: string;
     }
     namespace ActivityRow {
-        const idProperty = "PatientId";
-        const nameProperty = "MovementAndTraining";
+        const idProperty = "ActivityId";
+        const isActiveProperty = "IsActive";
+        const nameProperty = "Profession";
         const localTextPrefix = "PatientManagement.Activity";
         const lookupKey = "PatientManagement.LifeStyles";
         function getLookup(): Q.Lookup<ActivityRow>;
         namespace Fields {
+            const ActivityId: string;
             const PatientId: string;
             const MovementAndTraining: string;
             const Profession: string;
             const InsertUserId: string;
             const InsertDate: string;
+            const UpdateUserId: string;
+            const UpdateDateField: string;
+            const IsActive: string;
+            const TenantId: string;
+            const TenantName: string;
+            const InsertUserName: string;
+            const UpdateUserName: string;
         }
     }
 }
@@ -1871,26 +1893,41 @@ declare namespace PatientManagement.PatientManagement {
 }
 declare namespace PatientManagement.PatientManagement {
     interface LifeStylesRow {
+        LifeStyleId?: number;
         PatientId?: number;
         Regime?: string;
         DailyMeals?: string;
         InsertUserId?: number;
         InsertDate?: string;
+        UpdateUserId?: number;
+        UpdateDateField?: string;
+        IsActive?: number;
+        TenantName?: string;
+        InsertUserName?: string;
+        UpdateUserName?: string;
         PatientName?: string;
         TenantId?: number;
     }
     namespace LifeStylesRow {
-        const idProperty = "PatientId";
+        const idProperty = "LifeStyleId";
+        const isActiveProperty = "IsActive";
         const nameProperty = "Regime";
         const localTextPrefix = "PatientManagement.LifeStyles";
         const lookupKey = "PatientManagement.LifeStyles";
         function getLookup(): Q.Lookup<LifeStylesRow>;
         namespace Fields {
+            const LifeStyleId: string;
             const PatientId: string;
             const Regime: string;
             const DailyMeals: string;
             const InsertUserId: string;
             const InsertDate: string;
+            const UpdateUserId: string;
+            const UpdateDateField: string;
+            const IsActive: string;
+            const TenantName: string;
+            const InsertUserName: string;
+            const UpdateUserName: string;
             const PatientName: string;
             const TenantId: string;
         }
@@ -1963,6 +2000,7 @@ declare namespace PatientManagement.PatientManagement {
         InsertUserDisplayName?: string;
         InsertUserPicture?: string;
         TenantId?: number;
+        TenantName?: string;
     }
     namespace NotificationsRow {
         const idProperty = "NotificationId";
@@ -1980,6 +2018,7 @@ declare namespace PatientManagement.PatientManagement {
             const InsertUserDisplayName: string;
             const InsertUserPicture: string;
             const TenantId: string;
+            const TenantName: string;
         }
     }
 }
@@ -2024,28 +2063,43 @@ declare namespace PatientManagement.PatientManagement {
 }
 declare namespace PatientManagement.PatientManagement {
     interface PatientHealthRow {
+        PatientHealthId?: number;
         PatientId?: number;
         Diseases?: string;
         MedicinesIntake?: string;
         InsertUserId?: number;
         InsertDate?: string;
         PatientName?: string;
+        UpdateUserId?: number;
+        UpdateDateField?: string;
         TenantId?: number;
+        IsActive?: number;
+        TenantName?: string;
+        InsertUserName?: string;
+        UpdateUserName?: string;
     }
     namespace PatientHealthRow {
-        const idProperty = "PatientId";
+        const idProperty = "PatientHealthId";
+        const isActiveProperty = "IsActive";
         const nameProperty = "Diseases";
         const localTextPrefix = "PatientManagement.PatientHealth";
         const lookupKey = "PatientManagement.PatientHealth";
         function getLookup(): Q.Lookup<PatientHealthRow>;
         namespace Fields {
+            const PatientHealthId: string;
             const PatientId: string;
             const Diseases: string;
             const MedicinesIntake: string;
             const InsertUserId: string;
             const InsertDate: string;
             const PatientName: string;
+            const UpdateUserId: string;
+            const UpdateDateField: string;
             const TenantId: string;
+            const IsActive: string;
+            const TenantName: string;
+            const InsertUserName: string;
+            const UpdateUserName: string;
         }
     }
 }
@@ -2143,6 +2197,7 @@ declare namespace PatientManagement.PatientManagement {
         Weight: Serenity.IntegerEditor;
         NotifyOnChange: BsSwitchEditor;
         NoteList: NotesEditor;
+        TenantId: Serenity.LookupEditor;
     }
 }
 declare namespace PatientManagement.PatientManagement {
@@ -2315,6 +2370,7 @@ declare namespace PatientManagement.PatientManagement {
         StartDate: Serenity.DateTimeEditor;
         EndDate: Serenity.DateTimeEditor;
         Description: Serenity.TextAreaEditor;
+        TenantId: Serenity.LookupEditor;
     }
 }
 declare namespace PatientManagement.PatientManagement {
@@ -2334,6 +2390,7 @@ declare namespace PatientManagement.PatientManagement {
         InsertUserName?: string;
         PatientGender?: Gender;
         PatientEmail?: string;
+        PatientNotifyOnChange?: boolean;
         PhoneNumber?: string;
         PatientName?: string;
         VisitTypeName?: string;
@@ -2362,6 +2419,7 @@ declare namespace PatientManagement.PatientManagement {
             const InsertUserName: string;
             const PatientGender: string;
             const PatientEmail: string;
+            const PatientNotifyOnChange: string;
             const PhoneNumber: string;
             const PatientName: string;
             const VisitTypeName: string;
@@ -2760,6 +2818,7 @@ declare namespace PatientManagement.Administration {
         protected getNameProperty(): string;
         protected getService(): string;
         protected form: SubscriptionsForm;
+        constructor();
     }
 }
 declare namespace PatientManagement.Administration {
@@ -2771,7 +2830,9 @@ declare namespace PatientManagement.Administration {
         protected getService(): string;
         protected getIsActiveProperty(): string;
         constructor(container: JQuery);
+        protected getColumns(): Slick.Column[];
         protected getItemCssClass(item: SubscriptionsRow, index: number): string;
+        protected onClick(e: JQueryEventObject, row: number, cell: number): void;
     }
 }
 declare namespace PatientManagement.Administration {
@@ -3344,6 +3405,20 @@ declare namespace PatientManagement.PatientManagement {
         protected getNameProperty(): string;
         protected getService(): string;
         protected form: ActivityForm;
+        private loadedState;
+        constructor();
+        getSaveState(): string;
+        loadResponse(data: any): void;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class ActivityGrid extends Serenity.EntityGrid<ActivityRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof ActivityDialog;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        constructor(container: JQuery);
     }
 }
 declare namespace PatientManagement.PatientManagement {
@@ -3405,15 +3480,12 @@ declare namespace PatientManagement.PatientManagement {
         protected form: PatientsForm;
         private visitsGrid;
         private loadedState;
-        private patientHealthForm;
-        private patientHealthGrid;
-        private patientValidator;
-        private selfChange;
-        private lifeStyleForm;
-        private lifeStyleGrid;
-        private patientActivityForm;
         private patientActivityGrid;
         private patientsFileUploadsGrid;
+        private patientHealthGrid;
+        private patientlifeStyleGrid;
+        private patientValidator;
+        private selfChange;
         private checkEgn;
         private checkPhone;
         protected isValidDate: (y: any, m: any, d: any) => boolean;
@@ -3470,6 +3542,10 @@ declare namespace PatientManagement.PatientManagement {
         protected getNameProperty(): string;
         protected getService(): string;
         protected form: LifeStylesForm;
+        private loadedState;
+        constructor();
+        getSaveState(): string;
+        loadResponse(data: any): void;
     }
 }
 declare namespace PatientManagement.PatientManagement {
@@ -3548,6 +3624,10 @@ declare namespace PatientManagement.PatientManagement {
         protected getNameProperty(): string;
         protected getService(): string;
         protected form: PatientHealthForm;
+        private loadedState;
+        constructor();
+        getSaveState(): string;
+        loadResponse(data: any): void;
     }
 }
 declare namespace PatientManagement.PatientManagement {
@@ -3589,6 +3669,63 @@ declare namespace PatientManagement.PatientManagement {
 declare namespace PatientManagement.PatientManagement {
     class FIleUploadsForPatientGrid extends PatientsFileUploadsGrid {
         protected getDialogType(): typeof FIleUploadsForPatientDialog;
+        constructor(container: JQuery);
+        protected getColumns(): Slick.Column[];
+        protected initEntityDialog(itemType: any, dialog: any): void;
+        protected addButtonClick(): void;
+        protected getInitialTitle(): any;
+        protected getGridCanLoad(): boolean;
+        private _patientId;
+        patientId: number;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class PatienActivityDialog extends ActivityDialog {
+        constructor();
+        updateInterface(): void;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class PatientActivityGrid extends ActivityGrid {
+        protected getDialogType(): typeof PatienActivityDialog;
+        constructor(container: JQuery);
+        protected getColumns(): Slick.Column[];
+        protected initEntityDialog(itemType: any, dialog: any): void;
+        protected addButtonClick(): void;
+        protected getInitialTitle(): any;
+        protected getGridCanLoad(): boolean;
+        private _patientId;
+        patientId: number;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class PatientHealthCheckDialog extends PatientHealthDialog {
+        constructor();
+        updateInterface(): void;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class PatientHealthCheckGrid extends PatientHealthGrid {
+        protected getDialogType(): typeof PatientHealthCheckDialog;
+        constructor(container: JQuery);
+        protected getColumns(): Slick.Column[];
+        protected initEntityDialog(itemType: any, dialog: any): void;
+        protected addButtonClick(): void;
+        protected getInitialTitle(): any;
+        protected getGridCanLoad(): boolean;
+        private _patientId;
+        patientId: number;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class PatientLifeStyleDialog extends LifeStylesDialog {
+        constructor();
+        updateInterface(): void;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class PatientLifeStylesGrid extends LifeStylesGrid {
+        protected getDialogType(): typeof PatientLifeStyleDialog;
         constructor(container: JQuery);
         protected getColumns(): Slick.Column[];
         protected initEntityDialog(itemType: any, dialog: any): void;

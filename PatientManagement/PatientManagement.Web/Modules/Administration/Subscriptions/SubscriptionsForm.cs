@@ -19,6 +19,9 @@ namespace PatientManagement.Administration.Forms
 
         [DefaultValue(false)]
         public int Enabled { get; set; }
+        
+        [ReadOnly(true)]
+        public int FreeDaysFromOffer { get; set; }
 
         public Int32? TenantId { get; set; }
 

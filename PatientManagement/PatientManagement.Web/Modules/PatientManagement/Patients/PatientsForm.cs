@@ -42,6 +42,7 @@ namespace PatientManagement.PatientManagement.Forms
 
 
         public List<object> NoteList { get; set; }
+        public Int32? TenantId { get; set; }
 
         // TODO Add when you figure out how to add permissions here
         //public Int32 InsertUserId { get; set; }

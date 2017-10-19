@@ -13,37 +13,7 @@ namespace PatientManagement.Web.Modules.Common
 {
     public class UserSubscriptionHelper
     {
-        public static HashSet<int> GetUserRolesIdBasedOnSubscription(int userId, int tenantId)
-        {
-            var fld = UserRoleRow.Fields;
-
-            using (var connection = SqlConnections.NewByKey("Default"))
-            {
-                var result = new HashSet<int>();
-
-                //TODO Restrict access when subscription is required 
-                var tenantFld = TenantRow.Fields;
-                var tenant = connection.First<TenantRow>(tenantFld.TenantId == tenantId);
-                if (tenant?.SubscriptionRequired != null && tenant.SubscriptionRequired.Value && GetTenantPaidDays(tenantId) < DateTime.Now)
-                {
-                    result.Add(3);
-                }
-                else
-                {
-                    // All looks fine, get current user roles 
-                    connection.List<UserRoleRow>(q => q
-                            .Select(fld.RoleId)
-                            .Where(new Criteria(fld.UserId) == userId))
-                        .ForEach(x => result.Add(x.RoleId.Value));
-                }
-
-
-
-                return result;
-            }
-        }
-
-
+      
         public static DateTime GetTenantPaidDays(int tenantId)
         {
             var connection = SqlConnections.NewFor<SubscriptionsRow>();
@@ -55,7 +25,7 @@ namespace PatientManagement.Web.Modules.Common
             }
 
             var subsFlds = SubscriptionsRow.Fields;
-            var subscriptionId = connection.First<SubscriptionsRow>(subsFlds.TenantId == tenantId && subsFlds.Enabled == 1);
+            var subscriptionId = connection.TryFirst<SubscriptionsRow>(subsFlds.TenantId == tenantId && subsFlds.Enabled == 1);
             if (subscriptionId != null)
                 return GetTenantPaidDaysForSubscription((int)subscriptionId.SubscriptionId);
             else
@@ -63,32 +33,35 @@ namespace PatientManagement.Web.Modules.Common
         }
 
 
+
         public static DateTime GetTenantPaidDaysForSubscription(int subscriptionId)
         {
-            var connection = SqlConnections.NewFor<PaymentsRow>();
-
-            var subscriptions = connection.ById<SubscriptionsRow>(subscriptionId);
-
-            var offerMaximumSubscriptionTime = connection.ById<OffersRow>(subscriptions.OfferId).MaximumSubscriptionTime;
-            var activatedDate = subscriptions.ActivatedOn ?? DateTime.MinValue;
-
-            var paymentsFields = PaymentsRow.Fields;
-            if (connection.Count<PaymentsRow>(paymentsFields.SubscriptionId == subscriptionId && paymentsFields.PaymentStatus == (int)PaymentStatus.Success) == 0 && offerMaximumSubscriptionTime != null)
+            using (var connection = SqlConnections.NewFor<PaymentsRow>())
             {
-                return activatedDate.AddDays(offerMaximumSubscriptionTime.Value);
-            }
-            else
-            {
-                var payDays = 0;
-                var paymentsFlds = PaymentsRow.Fields;
-                var payments = connection.List<PaymentsRow>(paymentsFlds.SubscriptionId == subscriptionId && paymentsFlds.PaymentStatus == 0);
+                var subscriptions = connection.ById<SubscriptionsRow>(subscriptionId);
+                var activatedDate = subscriptions.ActivatedOn ?? DateTime.MinValue;
 
-                foreach (var payment in payments)
+                var pf = PaymentsRow.Fields.As("payments");
+                var payments = connection.Query<short>(new SqlQuery()
+                    .From(pf)
+                    .Select(pf.MonthsPayed)
+                    .Where(~(
+                    new Criteria(pf.MonthsPayed).IsNotNull()
+                        & new Criteria(pf.SubscriptionId) == subscriptionId
+                           & new Criteria(pf.PaymentStatus) == (int)PaymentStatus.Success)));
+
+
+                if (!payments.Any())
+                    return activatedDate.AddDays(subscriptions.FreeDaysFromOffer ?? 0);
+                else
                 {
-                    payDays += connection.ById<PaymentOptionsRow>(payment.PaymentOptionId).Months ?? 0;
-                }
-                return activatedDate.AddMonths(payDays);
+                    var payedMoths = 0;
+                    payments.ToList().ForEach(p => payedMoths += p);
 
+                    activatedDate = activatedDate.AddDays(subscriptions.FreeDaysFromOffer ?? 0);
+
+                    return activatedDate.AddMonths(payedMoths);
+                }
             }
         }
 
@@ -105,7 +78,7 @@ namespace PatientManagement.Web.Modules.Common
 
                 var subscriptions = uow.Connection.ById<SubscriptionsRow>(tenant.SubscriptionId);
 
-                return uow.Connection.ById<OffersRow>(subscriptions.OfferId).MaximumVisitsPerTenant?? Int32.MaxValue;
+                return uow.Connection.ById<OffersRow>(subscriptions.OfferId).MaximumVisitsPerTenant ?? Int32.MaxValue;
             }
         }
 
@@ -158,9 +131,9 @@ namespace PatientManagement.Web.Modules.Common
 
                 var subscriptions = uow.Connection.ById<SubscriptionsRow>(tenant.SubscriptionId);
 
-                return uow.Connection.ById<OffersRow>(subscriptions.OfferId).MaximumCabinets?? Int32.MaxValue;
+                return uow.Connection.ById<OffersRow>(subscriptions.OfferId).MaximumCabinets ?? Int32.MaxValue;
             }
         }
-        
+
     }
 }

@@ -11,6 +11,8 @@ using PatientManagement.PatientManagement.Entities;
 using PatientManagement.Dashboard;
 using PatientManagement.PatientManagement.Repositories;
 using PatientManagement.Web.Modules.Common;
+using Remotion.Linq.Clauses;
+using Serenity.Services;
 
 namespace PatientManagement.PatientManagement.Pages
 {
@@ -29,7 +31,7 @@ namespace PatientManagement.PatientManagement.Pages
             var cabinetIdActive = 0;
 
             var connection = SqlConnections.NewFor<CabinetsRow>();
-            ViewData["WorkDays"] = new List<Int32>{1, 2, 3, 4, 5}.ToJson();
+            ViewData["WorkDays"] = new List<Int32> { 1, 2, 3, 4, 5 }.ToJson();
 
             var visitFlds = VisitsRow.Fields;
             var user = (UserDefinition)Authorization.UserDefinition;
@@ -51,24 +53,73 @@ namespace PatientManagement.PatientManagement.Pages
                             connection.List<CabinetWorkDaysRow>(workDaysFlds.CabinetId ==
                                                                 connectionCabint.CabinetId.Value).Select(x => x.WeekDayId);
                         if (cabinetWorkDays.Any())
-                        ViewData["WorkDays"] = cabinetWorkDays.OrderBy(s => s).ToJson();
+                            ViewData["WorkDays"] = cabinetWorkDays.OrderBy(s => s).ToJson();
 
 
                     }
                     ViewData["CabinetHeaderName"] = connectionCabint?.Name;
 
-                    
+
                     ViewData["WorkHoursStart"] = TimeSpan.FromMinutes(connectionCabint?.WorkHoursStart ?? 420).ToString(@"hh\:mm");
                     ViewData["WorkHoursEnd"] = TimeSpan.FromMinutes(connectionCabint?.WorkHoursEnd ?? 1200).ToString(@"hh\:mm");
                     return View(MVC.Views.PatientManagement.Dashboard.DashboardIndex);
                 }
             }
-         
+
 
             ViewData["WorkHoursStart"] = TimeSpan.FromMinutes(420);
             ViewData["WorkHoursEnd"] = TimeSpan.FromMinutes(1200);
             return View(MVC.Views.PatientManagement.Dashboard.DashboardIndex);
         }
+
+        //[PageAuthorize]
+        //public JsonResult GetVisitsTasks(string start, string end)
+        //{
+        //    var user = (UserDefinition)Authorization.UserDefinition;
+
+        //    var startDate = DateTime.ParseExact(start, "yyyy-MM-dd", new CultureInfo("en-US"),
+        //        DateTimeStyles.None);
+
+        //    var endDate = DateTime.ParseExact(end, "yyyy-MM-dd", new CultureInfo("en-US"),
+        //        DateTimeStyles.None);
+
+        //    var model = new DashboardPageModel();
+        //    var connection = SqlConnections.NewFor<VisitsRow>();
+        //    var cabinetIdActive = Request.Cookies["CabinetPreference"];
+
+
+        //    List<VisitsRow> entity = new List<VisitsRow>();
+
+        //    if (Authorization.HasPermission(PermissionKeys.Tenants))
+        //        entity = connection.List<VisitsRow>()
+        //            .Where(e => e.StartDate >= startDate && e.EndDate <= endDate && e.CabinetId == int.Parse(cabinetIdActive))
+        //            .ToList();
+        //    else
+        //        entity = connection.List<VisitsRow>()
+        //            .Where(e => e.StartDate >= startDate && e.EndDate <= endDate && e.CabinetId == int.Parse(cabinetIdActive) && e.TenantId == user.TenantId)
+        //            .ToList();
+
+
+        //    foreach (var visit in entity)
+        //    {
+        //        var patient = connection.ById<PatientsRow>(visit.PatientId);
+        //        var visitType = connection.ById<VisitTypesRow>(visit.VisitTypeId);
+        //        model.EventsList.Add(new Event
+        //        {
+        //            id = visit.VisitId ?? 0,
+        //            patientId = visit.PatientId ?? 0,
+        //            patientAutoEmailActive = patient.NotifyOnChange ?? false,
+        //            title = patient.Name + "\n" + visit.Description,
+        //            start = (visit.StartDate ?? DateTime.Now).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
+        //            end = (visit.EndDate ?? DateTime.Now).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
+        //            allDay = false,
+        //            backgroundColor = visitType.BackgroundColor,
+        //            borderColor = visitType.BorderColor
+        //        });
+        //    }
+        //    return Json(model.EventsList);
+        //}
+
 
         [PageAuthorize]
         public JsonResult GetVisitsTasks(string start, string end)
@@ -80,41 +131,53 @@ namespace PatientManagement.PatientManagement.Pages
 
             var endDate = DateTime.ParseExact(end, "yyyy-MM-dd", new CultureInfo("en-US"),
                 DateTimeStyles.None);
+            var cabinetIdActive = Request.Cookies["CabinetPreference"];
 
             var model = new DashboardPageModel();
-            var connection = SqlConnections.NewFor<VisitsRow>();
-            var cabinetIdActive = Request.Cookies["CabinetPreference"];
-           
-
-            List<VisitsRow> entity = new List<VisitsRow>();
-
-            if (Authorization.HasPermission(PermissionKeys.Tenants))
-                entity = connection.List<VisitsRow>()
-                    .Where(e => e.StartDate >= startDate && e.EndDate <= endDate && e.CabinetId == int.Parse(cabinetIdActive))
-                    .ToList();
-            else
-                entity = connection.List<VisitsRow>()
-                    .Where(e => e.StartDate >= startDate && e.EndDate <= endDate && e.CabinetId == int.Parse(cabinetIdActive) && e.TenantId == user.TenantId)
-                    .ToList();
-
-
-            foreach (var visit in entity)
+            
+            using (var connection = SqlConnections.NewFor<VisitsRow>())
             {
-                var patient = connection.ById<PatientsRow>(visit.PatientId);
-                var visitType = connection.ById<VisitTypesRow>(visit.VisitTypeId);
-                model.EventsList.Add(new Event
+                var visitFlds = VisitsRow.Fields.As("vis");
+                var patient = PatientsRow.Fields.As("ptn");
+                var visitType = VisitTypesRow.Fields.As("vstt");
+                var query = new SqlQuery()
+                    .From(visitFlds)
+                    .Select("*")
+                    .Where(~(
+                    new Criteria(visitFlds.StartDate) >= startDate
+                    & new Criteria(visitFlds.EndDate) <= endDate
+                    & new Criteria(visitFlds.CabinetId) == int.Parse(cabinetIdActive)
+                        ))
+                        .LeftJoin(patient, visitFlds.PatientId == patient.PatientId)
+                            .Select(patient.Name = visitFlds.PatientName, patient.NotifyOnChange = visitFlds.PatientNotifyOnChange)
+                        .LeftJoin(visitType, visitFlds.VisitTypeId == visitType.VisitTypeId)
+                            .Select(visitType.BackgroundColor = visitFlds.VisitTypeBackgroundColor, visitType.BorderColor = visitFlds.VisitTypeBorderColor)
+                        ;
+                
+
+
+                if (!Authorization.HasPermission(PermissionKeys.Tenants))
+                    query.Where(visitFlds.TenantId == user.TenantId);
+
+                var result = connection.Query<VisitsRow>(query);
+
+                foreach (VisitsRow visit in result)
                 {
-                    id = visit.VisitId ?? 0,
-                    patientId = visit.PatientId ?? 0,
-                    patientAutoEmailActive = patient.NotifyOnChange ?? false,
-                    title = patient.Name + "\n" + visit.Description,
-                    start = (visit.StartDate ?? DateTime.Now).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
-                    end = (visit.EndDate ?? DateTime.Now).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
-                    allDay = false,
-                    backgroundColor = visitType.BackgroundColor,
-                    borderColor = visitType.BorderColor
-                });
+                    model.EventsList.Add(new Event
+                    {
+                        id = visit.VisitId ?? 0,
+                        patientId = visit.PatientId ?? 0,
+                        patientAutoEmailActive = visit.PatientNotifyOnChange ?? false,
+                        title = visit.PatientName + "\n" + visit.Description,
+                        start = (visit.StartDate ?? DateTime.Now).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
+                        end = (visit.EndDate ?? DateTime.Now).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
+                        allDay = false,
+                        backgroundColor = visit.VisitTypeBackgroundColor,
+                        borderColor = visit.VisitTypeBorderColor
+                    });
+                }
             }
+            
             return Json(model.EventsList);
         }
 
@@ -227,16 +290,8 @@ namespace PatientManagement.PatientManagement.Pages
 
             var connection = SqlConnections.NewFor<VisitsRow>();
             var cabinetIdActive = Request.Cookies["CabinetPreference"];
-            
-            var countVisitsForToday = 0;
 
-            var visitFlds = VisitsRow.Fields;
-            if (Authorization.HasPermission(PermissionKeys.Tenants))
-                countVisitsForToday = connection.Count<VisitsRow>(
-                    visitFlds.StartDate >= startDate && visitFlds.EndDate <= endDate && visitFlds.CabinetId == cabinetIdActive);
-            else
-                countVisitsForToday = connection.Count<VisitsRow>(
-                    visitFlds.StartDate >= startDate && visitFlds.EndDate <= endDate && visitFlds.CabinetId == cabinetIdActive && visitFlds.TenantId == user.TenantId);
+            var countVisitsForToday = 0;
             var alreadyExpired = 0;
 
 #if DEBUG
@@ -246,14 +301,26 @@ namespace PatientManagement.PatientManagement.Pages
 #if !DEBUG
             var endDateBgCulture = DateTime.Now.AddHours(3);
 #endif
-            if (Authorization.HasPermission(PermissionKeys.Tenants))
-                alreadyExpired = connection.Count<VisitsRow>(
-                    visitFlds.StartDate >= startDate && visitFlds.EndDate <= endDateBgCulture && visitFlds.CabinetId == cabinetIdActive);
-            else
-                alreadyExpired = connection.Count<VisitsRow>(
-                    visitFlds.StartDate >= startDate && visitFlds.EndDate <= endDateBgCulture && visitFlds.CabinetId == cabinetIdActive && visitFlds.TenantId == user.TenantId);
+            var visitFlds = VisitsRow.Fields.As("vs");
 
-            return Json(new {countVisitsForToday, alreadyExpired});
+            using (var conection = SqlConnections.NewFor<VisitsRow>())
+            {
+                SqlQuery query = new SqlQuery()
+                    .From(visitFlds)
+                    .Select(visitFlds.VisitId)
+                    .Where(~(
+                    new Criteria(visitFlds.StartDate) >= startDate
+                    & new Criteria(visitFlds.CabinetId) == cabinetIdActive)
+                    );
+
+                if (!Authorization.HasPermission(PermissionKeys.Tenants))
+                    query.Where(visitFlds.TenantId == user.TenantId);
+
+                countVisitsForToday = connection.Query(query.Where(visitFlds.EndDate <= endDate)).Count();
+                alreadyExpired = connection.Query(query.Where(visitFlds.EndDate <= endDateBgCulture)).Count();
+            }
+
+            return Json(new { countVisitsForToday, alreadyExpired });
         }
 
         [Route("~/Administration/GetTenantSubscriptionEndDate")]

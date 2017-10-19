@@ -52,12 +52,14 @@ namespace PatientManagement.Administration.Repositories
 
             protected override void BeforeSave()
             {
-                base.AfterSave();
+                base.BeforeSave();
                 
                 if (IsCreate)
                 {
                     if (Row.Enabled == 1)
                     {
+                        Row.FreeDaysFromOffer = Connection.ById<OffersRow>(Row.OfferId ?? 0).MaximumSubscriptionTime??0;
+
                         if (Row.ActivatedOn == null)
                             Row.ActivatedOn = DateTime.Now;
 
@@ -144,27 +146,12 @@ namespace PatientManagement.Administration.Repositories
 
         private class MyRetrieveHandler : RetrieveRequestHandler<MyRow>
         {
-            protected override void OnReturn()
-            {
-                base.OnReturn();
-
-              //  Response.Entity.PaidPeriod = UserSubscriptionHelper.GetTenantPaidDaysForSubscription((int)Row.SubscriptionId);
-
-            }
+            
         }
 
 
         private class MyListHandler : ListRequestHandler<MyRow>
         {
-            protected override void OnReturn()
-            {
-                base.OnReturn();
-
-                foreach (var subscriptionsRow in Response.Entities)
-                {
-                    subscriptionsRow.PaidPeriod = UserSubscriptionHelper.GetTenantPaidDaysForSubscription((int)subscriptionsRow.SubscriptionId);
-                }
-            }
         }
     }
 }

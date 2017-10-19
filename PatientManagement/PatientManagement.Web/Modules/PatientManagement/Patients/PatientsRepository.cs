@@ -57,38 +57,7 @@ namespace PatientManagement.PatientManagement.Repositories
 
                 NotificationHelpers.SendPatientNotification(Row.PatientId ?? 0, Row.Name,
                     IsCreate ? EEntityNotificationStatus.Created : EEntityNotificationStatus.Updated);
-
-                // TODO #48
-                if (IsCreate)
-                {
-                    var user = ((UserDefinition) Authorization.UserDefinition);
-                    var entHealth = new PatientHealthRow
-                    {
-                        PatientId = Row.PatientId,
-                        InsertUserId = user.UserId,
-                        InsertDate = DateTime.Now,
-                        TenantId = user.TenantId
-                    };
-                    this.Connection.Insert(entHealth);
-
-                    var entLife = new LifeStylesRow
-                    {
-                        PatientId = Row.PatientId,
-                        InsertUserId = user.UserId,
-                        InsertDate = DateTime.Now,
-                        TenantId = user.TenantId
-                    };
-                    this.Connection.Insert(entLife);
-
-                    var entAct = new ActivityRow
-                    {
-                        PatientId = Row.PatientId,
-                        InsertUserId = user.UserId,
-                        InsertDate = DateTime.Now
-                    };
-                    this.Connection.Insert(entAct);
-
-                }
+                
             }
         }
 

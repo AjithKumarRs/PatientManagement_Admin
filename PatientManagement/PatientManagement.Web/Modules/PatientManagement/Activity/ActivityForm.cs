@@ -15,7 +15,10 @@ namespace PatientManagement.PatientManagement.Forms
     {
         [Category("Additional Information")]
 
+        public Int32? PatientId { get; set; }
         public String MovementAndTraining { get; set; }
         public String Profession { get; set; }
+
+
     }
 }
