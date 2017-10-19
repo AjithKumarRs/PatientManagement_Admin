@@ -224,6 +224,8 @@ namespace PatientManagement
                 {
                     public static LocalText SubscriptionInfoBoxHeader = "Subscription expired!";
                     public static LocalText SubscriptionInfoBoxBody = "Your subscription is expired! Please make a payment to gain access to the site.";
+                    public static LocalText SubscriptionInfoBoxFooter = "Expired before: {0} days";
+
                 }
 
                 public static class WillExpire

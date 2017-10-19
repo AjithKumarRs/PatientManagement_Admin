@@ -52,12 +52,14 @@ namespace PatientManagement.Administration.Repositories
 
             protected override void BeforeSave()
             {
-                base.AfterSave();
+                base.BeforeSave();
                 
                 if (IsCreate)
                 {
                     if (Row.Enabled == 1)
                     {
+                        Row.FreeDaysFromOffer = Connection.ById<OffersRow>(Row.OfferId ?? 0).MaximumSubscriptionTime??0;
+
                         if (Row.ActivatedOn == null)
                             Row.ActivatedOn = DateTime.Now;
 

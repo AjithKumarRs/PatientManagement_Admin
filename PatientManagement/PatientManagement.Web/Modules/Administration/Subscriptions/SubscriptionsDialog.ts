@@ -11,5 +11,18 @@ namespace PatientManagement.Administration {
         protected getService() { return SubscriptionsService.baseUrl; }
 
         protected form = new SubscriptionsForm(this.idPrefix);
+
+        constructor() {
+            super();
+
+            this.form.OfferId.changeSelect2(e => {
+                var OfferId = Q.toId(this.form.OfferId.value);
+                if (OfferId != null) {
+                    this.form.FreeDaysFromOffer.value = OffersRow.getLookup().itemById[OfferId].MaximumSubscriptionTime;
+                }
+            });
+        }
+
+   
     }
 }

@@ -55,6 +55,7 @@ namespace PatientManagement.Administration.Entities
 
         
         [DisplayName("Maximum Using Days"), IntegerEditor]
+        [LookupInclude]
         public Int32? MaximumSubscriptionTime
         {
             get { return Fields.MaximumSubscriptionTime[this]; }

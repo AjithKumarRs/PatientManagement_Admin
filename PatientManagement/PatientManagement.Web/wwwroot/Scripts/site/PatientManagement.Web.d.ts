@@ -947,6 +947,7 @@ declare namespace PatientManagement.Administration {
         OfferId: Serenity.LookupEditor;
         SubscriptionEndDate: Serenity.DateEditor;
         Enabled: BsSwitchEditor;
+        FreeDaysFromOffer: Serenity.IntegerEditor;
         TenantId: Serenity.LookupEditor;
     }
 }
@@ -958,6 +959,7 @@ declare namespace PatientManagement.Administration {
         TenantId?: number;
         SubscriptionEndDate?: string;
         Enabled?: number;
+        FreeDaysFromOffer?: number;
         IsActive?: number;
         DeactivatedOn?: string;
         ActivatedOn?: string;
@@ -987,6 +989,7 @@ declare namespace PatientManagement.Administration {
             const TenantId: string;
             const SubscriptionEndDate: string;
             const Enabled: string;
+            const FreeDaysFromOffer: string;
             const IsActive: string;
             const DeactivatedOn: string;
             const ActivatedOn: string;
@@ -2810,6 +2813,7 @@ declare namespace PatientManagement.Administration {
         protected getNameProperty(): string;
         protected getService(): string;
         protected form: SubscriptionsForm;
+        constructor();
     }
 }
 declare namespace PatientManagement.Administration {

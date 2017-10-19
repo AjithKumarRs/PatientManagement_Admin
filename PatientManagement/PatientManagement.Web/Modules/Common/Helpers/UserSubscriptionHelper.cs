@@ -62,7 +62,7 @@ namespace PatientManagement.Web.Modules.Common
                 return DateTime.MinValue;
         }
 
-        
+
 
         public static DateTime GetTenantPaidDaysForSubscription(int subscriptionId)
         {
@@ -70,24 +70,26 @@ namespace PatientManagement.Web.Modules.Common
             {
                 var subscriptions = connection.ById<SubscriptionsRow>(subscriptionId);
                 var activatedDate = subscriptions.ActivatedOn ?? DateTime.MinValue;
-                
+
                 var pf = PaymentsRow.Fields.As("payments");
-                var payments =  connection.Query<short>(new SqlQuery()
+                var payments = connection.Query<short>(new SqlQuery()
                     .From(pf)
                     .Select(pf.MonthsPayed)
                     .Where(~(
-                    new Criteria(pf.MonthsPayed).IsNotNull() 
+                    new Criteria(pf.MonthsPayed).IsNotNull()
                         & new Criteria(pf.SubscriptionId) == subscriptionId
                            & new Criteria(pf.PaymentStatus) == (int)PaymentStatus.Success)));
 
-                var offer = connection.ById<OffersRow>(subscriptions.OfferId);
 
-                if (!payments.Any() && offer != null && offer.MaximumSubscriptionTime.HasValue)
-                    return activatedDate.AddDays(offer.MaximumSubscriptionTime ?? 0);
+                if (!payments.Any())
+                    return activatedDate.AddDays(subscriptions.FreeDaysFromOffer ?? 0);
                 else
                 {
                     var payedMoths = 0;
                     payments.ToList().ForEach(p => payedMoths += p);
+
+                    activatedDate = activatedDate.AddDays(subscriptions.FreeDaysFromOffer ?? 0);
+
                     return activatedDate.AddMonths(payedMoths);
                 }
             }

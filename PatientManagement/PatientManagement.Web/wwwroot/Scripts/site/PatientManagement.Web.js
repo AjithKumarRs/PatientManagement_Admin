@@ -665,7 +665,7 @@ var PatientManagement;
         }(Serenity.PrefixedContext));
         SubscriptionsForm.formKey = 'Administration.Subscriptions';
         Administration.SubscriptionsForm = SubscriptionsForm;
-        [['Name', function () { return Serenity.StringEditor; }], ['OfferId', function () { return Serenity.LookupEditor; }], ['SubscriptionEndDate', function () { return Serenity.DateEditor; }], ['Enabled', function () { return PatientManagement.BsSwitchEditor; }], ['TenantId', function () { return Serenity.LookupEditor; }]].forEach(function (x) { return Object.defineProperty(SubscriptionsForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
+        [['Name', function () { return Serenity.StringEditor; }], ['OfferId', function () { return Serenity.LookupEditor; }], ['SubscriptionEndDate', function () { return Serenity.DateEditor; }], ['Enabled', function () { return PatientManagement.BsSwitchEditor; }], ['FreeDaysFromOffer', function () { return Serenity.IntegerEditor; }], ['TenantId', function () { return Serenity.LookupEditor; }]].forEach(function (x) { return Object.defineProperty(SubscriptionsForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
     })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
@@ -686,7 +686,7 @@ var PatientManagement;
             var Fields;
             (function (Fields) {
             })(Fields = SubscriptionsRow.Fields || (SubscriptionsRow.Fields = {}));
-            ['SubscriptionId', 'Name', 'OfferId', 'TenantId', 'SubscriptionEndDate', 'Enabled', 'IsActive', 'DeactivatedOn', 'ActivatedOn', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'OfferName', 'OfferDescription', 'OfferPrice', 'OfferRoleId', 'TenantName', 'InsertUserName', 'UpdateUserName'].forEach(function (x) { return Fields[x] = x; });
+            ['SubscriptionId', 'Name', 'OfferId', 'TenantId', 'SubscriptionEndDate', 'Enabled', 'FreeDaysFromOffer', 'IsActive', 'DeactivatedOn', 'ActivatedOn', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'OfferName', 'OfferDescription', 'OfferPrice', 'OfferRoleId', 'TenantName', 'InsertUserName', 'UpdateUserName'].forEach(function (x) { return Fields[x] = x; });
         })(SubscriptionsRow = Administration.SubscriptionsRow || (Administration.SubscriptionsRow = {}));
     })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
 })(PatientManagement || (PatientManagement = {}));
@@ -2814,8 +2814,14 @@ var PatientManagement;
         var SubscriptionsDialog = (function (_super) {
             __extends(SubscriptionsDialog, _super);
             function SubscriptionsDialog() {
-                var _this = _super !== null && _super.apply(this, arguments) || this;
+                var _this = _super.call(this) || this;
                 _this.form = new Administration.SubscriptionsForm(_this.idPrefix);
+                _this.form.OfferId.changeSelect2(function (e) {
+                    var OfferId = Q.toId(_this.form.OfferId.value);
+                    if (OfferId != null) {
+                        _this.form.FreeDaysFromOffer.value = Administration.OffersRow.getLookup().itemById[OfferId].MaximumSubscriptionTime;
+                    }
+                });
                 return _this;
             }
             SubscriptionsDialog.prototype.getFormKey = function () { return Administration.SubscriptionsForm.formKey; };
