@@ -17,15 +17,21 @@ namespace PatientManagement.PatientManagement.Entities
         LookupType = typeof(MultiTenantRowLookupScript<>))]
     public sealed class LifeStylesRow : Row, IIdRow, INameRow, ILoggingRow, IMultiTenantRow, IIsActiveRow
     {
-        [DisplayName("Patient"), PrimaryKey, ForeignKey("[dbo].[Patients]", "PatientId"), LeftJoin("jPatient"), TextualField("PatientName"), Required(true)]
-        [LookupEditor(typeof(PatientsRow), InplaceAdd = true)]
+        [DisplayName("Life Style Id"), Identity]
+        public Int32? LifeStyleId
+        {
+            get { return Fields.LifeStyleId[this]; }
+            set { Fields.LifeStyleId[this] = value; }
+        }
 
+        [DisplayName("Patient"), ForeignKey("[dbo].[Patients]", "PatientId"), LeftJoin("jPatient"), TextualField("PatientName")]
+        [LookupEditor(typeof(PatientsRow), InplaceAdd = true)]
         public Int32? PatientId
         {
             get { return Fields.PatientId[this]; }
             set { Fields.PatientId[this] = value; }
         }
-        
+
         [DisplayName("Regime"), Size(500)]
         [TextAreaEditor(Rows = 6)]
         public String Regime
@@ -52,7 +58,7 @@ namespace PatientManagement.PatientManagement.Entities
 
         IIdField IIdRow.IdField
         {
-            get { return Fields.PatientId; }
+            get { return Fields.LifeStyleId; }
         }
 
         StringField INameRow.NameField
@@ -79,7 +85,7 @@ namespace PatientManagement.PatientManagement.Entities
         }
 
 
-        [DisplayName("Insert Date"), NotNull, QuickFilter(), SortOrder(1, true)]
+        [DisplayName("Insert Date"), NotNull, SortOrder(1, true)]
         public DateTime? InsertDate
         {
             get { return Fields.InsertDate[this]; }
@@ -167,6 +173,7 @@ namespace PatientManagement.PatientManagement.Entities
 
         public class RowFields : RowFieldsBase
         {
+            public Int32Field LifeStyleId;
             public Int32Field PatientId;
             
             public StringField Regime;

@@ -14,11 +14,13 @@ namespace PatientManagement.PatientManagement.Columns
     public class ActivityColumns
     {
         [EditLink, DisplayName("Db.Shared.RecordId"), AlignRight]
-        public Int32 PatientId { get; set; }
+        public Int32 ActivityId { get; set; }
         [EditLink]
+        [Width(250)]
         public String MovementAndTraining { get; set; }
+        [Width(250)]
+        [EditLink]
         public String Profession { get; set; }
-
         [Width(80)]
         public String TenantName { get; set; }
 

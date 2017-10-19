@@ -25,7 +25,9 @@ namespace PatientManagement.PatientManagement.Columns
         public String PatientName { get; set; }
 
         [Width(250)]
+        [EditLink]
         public String Diseases { get; set; }
+        [EditLink]
         [Width(250)]
         public String MedicinesIntake { get; set; }
 

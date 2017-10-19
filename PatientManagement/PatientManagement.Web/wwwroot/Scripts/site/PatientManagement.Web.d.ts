@@ -1671,12 +1671,14 @@ declare namespace PatientManagement.PatientManagement {
         static formKey: string;
     }
     interface ActivityForm {
+        PatientId: Serenity.LookupEditor;
         MovementAndTraining: Serenity.TextAreaEditor;
         Profession: Serenity.TextAreaEditor;
     }
 }
 declare namespace PatientManagement.PatientManagement {
     interface ActivityRow {
+        ActivityId?: number;
         PatientId?: number;
         MovementAndTraining?: string;
         Profession?: string;
@@ -1691,13 +1693,14 @@ declare namespace PatientManagement.PatientManagement {
         UpdateUserName?: string;
     }
     namespace ActivityRow {
-        const idProperty = "PatientId";
+        const idProperty = "ActivityId";
         const isActiveProperty = "IsActive";
-        const nameProperty = "MovementAndTraining";
+        const nameProperty = "Profession";
         const localTextPrefix = "PatientManagement.Activity";
         const lookupKey = "PatientManagement.LifeStyles";
         function getLookup(): Q.Lookup<ActivityRow>;
         namespace Fields {
+            const ActivityId: string;
             const PatientId: string;
             const MovementAndTraining: string;
             const Profession: string;
@@ -1890,6 +1893,7 @@ declare namespace PatientManagement.PatientManagement {
 }
 declare namespace PatientManagement.PatientManagement {
     interface LifeStylesRow {
+        LifeStyleId?: number;
         PatientId?: number;
         Regime?: string;
         DailyMeals?: string;
@@ -1905,13 +1909,14 @@ declare namespace PatientManagement.PatientManagement {
         TenantId?: number;
     }
     namespace LifeStylesRow {
-        const idProperty = "PatientId";
+        const idProperty = "LifeStyleId";
         const isActiveProperty = "IsActive";
         const nameProperty = "Regime";
         const localTextPrefix = "PatientManagement.LifeStyles";
         const lookupKey = "PatientManagement.LifeStyles";
         function getLookup(): Q.Lookup<LifeStylesRow>;
         namespace Fields {
+            const LifeStyleId: string;
             const PatientId: string;
             const Regime: string;
             const DailyMeals: string;
@@ -3400,6 +3405,20 @@ declare namespace PatientManagement.PatientManagement {
         protected getNameProperty(): string;
         protected getService(): string;
         protected form: ActivityForm;
+        private loadedState;
+        constructor();
+        getSaveState(): string;
+        loadResponse(data: any): void;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class ActivityGrid extends Serenity.EntityGrid<ActivityRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof ActivityDialog;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        constructor(container: JQuery);
     }
 }
 declare namespace PatientManagement.PatientManagement {
@@ -3461,15 +3480,12 @@ declare namespace PatientManagement.PatientManagement {
         protected form: PatientsForm;
         private visitsGrid;
         private loadedState;
-        private patientHealthForm;
-        private patientHealthGrid;
-        private patientValidator;
-        private selfChange;
-        private lifeStyleForm;
-        private lifeStyleGrid;
-        private patientActivityForm;
         private patientActivityGrid;
         private patientsFileUploadsGrid;
+        private patientHealthGrid;
+        private patientlifeStyleGrid;
+        private patientValidator;
+        private selfChange;
         private checkEgn;
         private checkPhone;
         protected isValidDate: (y: any, m: any, d: any) => boolean;
@@ -3526,6 +3542,10 @@ declare namespace PatientManagement.PatientManagement {
         protected getNameProperty(): string;
         protected getService(): string;
         protected form: LifeStylesForm;
+        private loadedState;
+        constructor();
+        getSaveState(): string;
+        loadResponse(data: any): void;
     }
 }
 declare namespace PatientManagement.PatientManagement {
@@ -3660,6 +3680,25 @@ declare namespace PatientManagement.PatientManagement {
     }
 }
 declare namespace PatientManagement.PatientManagement {
+    class PatienActivityDialog extends ActivityDialog {
+        constructor();
+        updateInterface(): void;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class PatientActivityGrid extends ActivityGrid {
+        protected getDialogType(): typeof PatienActivityDialog;
+        constructor(container: JQuery);
+        protected getColumns(): Slick.Column[];
+        protected initEntityDialog(itemType: any, dialog: any): void;
+        protected addButtonClick(): void;
+        protected getInitialTitle(): any;
+        protected getGridCanLoad(): boolean;
+        private _patientId;
+        patientId: number;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
     class PatientHealthCheckDialog extends PatientHealthDialog {
         constructor();
         updateInterface(): void;
@@ -3668,6 +3707,25 @@ declare namespace PatientManagement.PatientManagement {
 declare namespace PatientManagement.PatientManagement {
     class PatientHealthCheckGrid extends PatientHealthGrid {
         protected getDialogType(): typeof PatientHealthCheckDialog;
+        constructor(container: JQuery);
+        protected getColumns(): Slick.Column[];
+        protected initEntityDialog(itemType: any, dialog: any): void;
+        protected addButtonClick(): void;
+        protected getInitialTitle(): any;
+        protected getGridCanLoad(): boolean;
+        private _patientId;
+        patientId: number;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class PatientLifeStyleDialog extends LifeStylesDialog {
+        constructor();
+        updateInterface(): void;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class PatientLifeStylesGrid extends LifeStylesGrid {
+        protected getDialogType(): typeof PatientLifeStyleDialog;
         constructor(container: JQuery);
         protected getColumns(): Slick.Column[];
         protected initEntityDialog(itemType: any, dialog: any): void;

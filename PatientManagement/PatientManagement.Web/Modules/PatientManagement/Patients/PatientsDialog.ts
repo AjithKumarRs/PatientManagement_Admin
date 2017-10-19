@@ -15,18 +15,14 @@ namespace PatientManagement.PatientManagement {
         private visitsGrid: PatientVisitsGrid;
         private loadedState: string;
 
-        private patientHealthForm: PatientHealthForm;
+
+        private patientActivityGrid: PatientActivityGrid;
+        private patientsFileUploadsGrid: FIleUploadsForPatientGrid;
         private patientHealthGrid: PatientHealthCheckGrid;
+        private patientlifeStyleGrid: PatientLifeStylesGrid;
+
         private patientValidator: JQueryValidation.Validator;
         private selfChange = 0;
-
-        private lifeStyleForm: LifeStylesForm;
-        private lifeStyleGrid: Serenity.PropertyGrid;
-
-        private patientActivityForm: ActivityForm;
-        private patientActivityGrid: Serenity.PropertyGrid;
-
-        private patientsFileUploadsGrid: FIleUploadsForPatientGrid;
 
         private checkEgn = (egn) => {
             if (egn.length != 10)
@@ -69,112 +65,26 @@ namespace PatientManagement.PatientManagement {
 
                 return null;
             });
-
-            //Initialize new instance of visits grid
+            
             this.visitsGrid = new PatientVisitsGrid(this.byId("VisitsGrid"));
             this.visitsGrid.element.flexHeightOnly(1);
             
             this.patientHealthGrid = new PatientHealthCheckGrid(this.byId("HealthChecksGrid"));
             this.patientHealthGrid.element.flexHeightOnly(1);
 
-            //Initialize new instance of LifeStyle grid and form
-            this.lifeStyleGrid = new Serenity.PropertyGrid(this.byId("LifeStylePropertyGrid"),
-                {
-                    items: Q.getForm(LifeStylesForm.formKey).filter(x => x.name != "PatientId"),
-                    useCategories: true
-                });
+            this.patientlifeStyleGrid = new PatientLifeStylesGrid(this.byId("LifeStyleGrid"));
+            this.patientlifeStyleGrid.element.flexHeightOnly(1);
 
-            this.lifeStyleForm = new LifeStylesForm((this.lifeStyleGrid as any).idPrefix);
-
-            //Initialize new instance of LifeStyle grid and form
-            this.patientActivityGrid = new Serenity.PropertyGrid(this.byId("ActivityPropertyGrid"),
-                {
-                    items: Q.getForm(ActivityForm.formKey).filter(x => x.name != "PatientId"),
-                    useCategories: true
-                });
-
-            this.patientActivityForm = new ActivityForm((this.patientActivityGrid as any).idPrefix);
-
-
-            //Initialize new instance of FileUploads grid and form
+            this.patientActivityGrid = new PatientActivityGrid(this.byId("ActivityGrid"));
+            this.patientActivityGrid.element.flexHeightOnly(1);
+            
             this.patientsFileUploadsGrid = new FIleUploadsForPatientGrid(this.byId("FileUploadsPropertyGrid"));
             this.patientsFileUploadsGrid.element.flexHeightOnly(1);
-
-            this.patientValidator = this.byId("PatientHealthForm").validate(Q.validateOptions({}));
-
-            this.patientValidator = this.byId("LifeStyleForm").validate(Q.validateOptions({}));
-
-            this.patientValidator = this.byId("ActivityForm").validate(Q.validateOptions({}));
 
 
             this.byId('NoteList').closest('.field').hide().end().appendTo(this.byId('TabNotes'));
             DialogUtils.pendingChangesConfirmation(this.element, () => this.getSaveState() != this.loadedState);
             
-            //Add button for saving patient life style form
-            // ReSharper disable once WrongExpressionStatement
-            new Serenity.Toolbar(this.byId("LifeStyleToolbar"),
-                {
-                    buttons: [
-                        {
-                            cssClass: "apply-changes-button",
-                            title: Q.text("Controls.EntityDialog.UpdateButton"),
-                            onClick: () => {
-                                var id = this.form.PatientId.value;
-
-                                if (!id)
-                                    return;
-
-                                if (!this.patientValidator.form())
-                                    return;
-
-                                var p = <PatientManagement.LifeStylesRow>{};
-                                this.lifeStyleGrid.save(p);
-
-                                PatientManagement.LifeStylesService.Update({
-                                    EntityId: id,
-                                    Entity: p
-                                }, response => {
-                                    // reload customer list just in case
-                                    Q.reloadLookup(PatientManagement.PatientsRow.lookupKey);
-
-                                    Q.notifySuccess(Q.text("Controls.EntityDialog.SaveSuccessMessage"));
-                                });
-                            }
-                        }]
-                });
-
-            //Add button for saving patient activity a form
-            // ReSharper disable once WrongExpressionStatement
-            new Serenity.Toolbar(this.byId("ActivityToolbar"),
-                {
-                    buttons: [
-                        {
-                            cssClass: "apply-changes-button",
-                            title: Q.text("Controls.EntityDialog.UpdateButton"),
-                            onClick: () => {
-                                var id = this.form.PatientId.value;
-
-                                if (!id)
-                                    return;
-
-                                if (!this.patientValidator.form())
-                                    return;
-
-                                var p = <PatientManagement.ActivityRow>{};
-                                this.patientActivityGrid.save(p);
-
-                                PatientManagement.ActivityService.Update({
-                                    EntityId: id,
-                                    Entity: p
-                                }, response => {
-                                    // reload customer list just in case
-                                    Q.reloadLookup(PatientManagement.PatientsRow.lookupKey);
-
-                                    Q.notifySuccess(Q.text("Controls.EntityDialog.SaveSuccessMessage"));
-                                });
-                            }
-                        }]
-                });
         }
 
 
@@ -205,33 +115,12 @@ namespace PatientManagement.PatientManagement {
             Serenity.TabsExtensions.setDisabled(this.tabs, 'Activity', this.isNewOrDeleted());
             Serenity.TabsExtensions.setDisabled(this.tabs, 'FileUploads', this.isNewOrDeleted());
 
-            if (this.isNewOrDeleted()) {
-                // no patient is selected, just load an empty entity
-                this.patientActivityGrid.load({});
-                this.lifeStyleGrid.load({});
-
-                return;
-            } else {
-                LifeStylesService.Retrieve({
-                    EntityId: entity.PatientId
-                },
-                    response => {
-                        this.lifeStyleGrid.load(response.Entity);
-                    });
-
-
-                ActivityService.Retrieve({
-                    EntityId: entity.PatientId
-                },
-                    response => {
-                        this.patientActivityGrid.load(response.Entity);
-                    });
-            }
-
 
             this.visitsGrid.patientId = entity.PatientId;
             this.patientHealthGrid.patientId = entity.PatientId;
             this.patientsFileUploadsGrid.patientId = entity.PatientId;
+            this.patientActivityGrid.patientId = entity.PatientId;
+            this.patientlifeStyleGrid.patientId = entity.PatientId;
         }
 
         onSaveSuccess(response) {

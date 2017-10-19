@@ -14,8 +14,14 @@ namespace PatientManagement.PatientManagement.Columns
     public class LifeStylesColumns
     {
         [EditLink, DisplayName("Db.Shared.RecordId"), AlignRight]
-        public Int32 PatientId { get; set; }
-        public String BadHabits { get; set; }
+        public Int32 LifeStyleId { get; set; }
+
+        [Width(250)]
+        [EditLink]
+        public String Regime { get; set; }
+        [EditLink]
+        [Width(250)]
+        public String DailyMeals { get; set; }
 
         [Width(80)]
         public String TenantName { get; set; }

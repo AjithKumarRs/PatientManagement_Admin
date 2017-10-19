@@ -12,13 +12,20 @@ namespace PatientManagement.PatientManagement.Entities
     using System.IO;
 
     [ConnectionKey("PatientManagement"), TableName("[dbo].[Activity]"), DisplayName("Activity"), InstanceName("Activity"), TwoLevelCached]
-    [ReadPermission("PatientManagement:Activity")]
-    [ModifyPermission("PatientManagement:Activity")]
+    [ReadPermission("PatientManagement:Activity:Read")]
+    [ModifyPermission("PatientManagement:Activity:Modify")]
     [LookupScript("PatientManagement.LifeStyles",
         LookupType = typeof(MultiTenantRowLookupScript<>))]
     public sealed class ActivityRow : Row, IIdRow, INameRow, ILoggingRow, IMultiTenantRow, IIsActiveRow
     {
-        [DisplayName("Patient"), PrimaryKey, ForeignKey("[dbo].[Patients]", "PatientId"), LeftJoin("jPatient"), TextualField("PatientName")]
+        [DisplayName("Activity Id"), Identity]
+        public Int32?ActivityId
+        {
+            get { return Fields.ActivityId[this]; }
+            set { Fields.ActivityId[this] = value; }
+        }
+
+        [DisplayName("Patient"), ForeignKey("[dbo].[Patients]", "PatientId"), LeftJoin("jPatient"), TextualField("PatientName")]
         [LookupEditor(typeof(PatientsRow), InplaceAdd = true)]
         public Int32? PatientId
         {
@@ -62,7 +69,7 @@ namespace PatientManagement.PatientManagement.Entities
         }
 
 
-        [DisplayName("Insert Date"), NotNull, QuickFilter(), SortOrder(1, true)]
+        [DisplayName("Insert Date"), NotNull, SortOrder(1, true)]
         public DateTime? InsertDate
         {
             get { return Fields.InsertDate[this]; }
@@ -142,12 +149,12 @@ namespace PatientManagement.PatientManagement.Entities
         #endregion
         IIdField IIdRow.IdField
         {
-            get { return Fields.PatientId; }
+            get { return Fields.ActivityId; }
         }
 
         StringField INameRow.NameField
         {
-            get { return Fields.MovementAndTraining; }
+            get { return Fields.Profession; }
         }
 
         public static readonly RowFields Fields = new RowFields().Init();
@@ -159,6 +166,7 @@ namespace PatientManagement.PatientManagement.Entities
 
         public class RowFields : RowFieldsBase
         {
+            public Int32Field ActivityId;
             public Int32Field PatientId;
             public StringField MovementAndTraining;
             public StringField Profession;
