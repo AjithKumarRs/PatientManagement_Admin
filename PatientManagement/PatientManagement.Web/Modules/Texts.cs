@@ -380,6 +380,7 @@ namespace PatientManagement
 
         public static partial class Validation
         {
+            public static LocalText PendingChangesConfirmation = "You have pending changes. Save them?";
             public static LocalText AuthenticationError = "Invalid username or password!";
             public static LocalText CurrentPasswordMismatch = "Your current password is not valid!";
             public static LocalText MinRequiredPasswordLength = "Entered password doesn't have enough characters (min {0})!";

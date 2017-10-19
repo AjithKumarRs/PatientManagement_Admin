@@ -677,6 +677,7 @@
   "Validation.EmailInUse": "Друг потребител с този имейл вече съществува!",
   "Validation.EntityNotFound": "Записат не е открит. Може да е изтрит или да нямате нужните права!",
   "Validation.InvalidFormMessage": "Моля проверете празните или грешни полета(маркирани с червено) преди да  запазите формата.",
+  "Validation.PendingChangesConfirmation": "Имате незаписани промени. Запишете ги сега?",
   "Validation.SavePrimaryKeyError": "Грешка при добавяне, друг запис  {1} със същата стойност вече съществува!",
   "Validation.UniqueConstraint": "Друг запис със  '{0}' стойност вече съществува!",
   "Validation.UsernameExists": "Потребителското име вече се използва. Моля изберете друго"

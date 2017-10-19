@@ -4268,7 +4268,7 @@ var PatientManagement;
                     return;
                 }
                 e.preventDefault();
-                Q.confirm('You have pending changes. Save them?', function () { return element.find('div.save-and-close-button').click(); }, {
+                Q.confirm(Q.text('Validation.PendingChangesConfirmation'), function () { return element.find('div.save-and-close-button').click(); }, {
                     onNo: function () {
                         element.dialog().dialog('close');
                     }

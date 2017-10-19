@@ -13,7 +13,7 @@ namespace PatientManagement.PatientManagement.Columns
     [BasedOnRow(typeof(Entities.ActivityRow))]
     public class ActivityColumns
     {
-        [EditLink, DisplayName("Db.Shared.RecordId"), AlignRight]
+        [EditLink, DisplayName("Db.Shared.RecordId")]
         public Int32 ActivityId { get; set; }
         [EditLink]
         [Width(250)]

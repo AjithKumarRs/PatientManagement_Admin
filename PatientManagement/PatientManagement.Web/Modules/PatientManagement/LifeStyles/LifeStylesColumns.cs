@@ -13,7 +13,7 @@ namespace PatientManagement.PatientManagement.Columns
     [BasedOnRow(typeof(Entities.LifeStylesRow))]
     public class LifeStylesColumns
     {
-        [EditLink, DisplayName("Db.Shared.RecordId"), AlignRight]
+        [EditLink, DisplayName("Db.Shared.RecordId")]
         public Int32 LifeStyleId { get; set; }
 
         [Width(250)]
