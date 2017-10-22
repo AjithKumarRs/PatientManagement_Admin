@@ -102,7 +102,8 @@ namespace PatientManagement.Membership.Pages
                         IsActive = 1,
                         InsertUserId =  userId,
                         InsertDate = DateTime.Now,
-                        ActivatedOn = DateTime.Now
+                        ActivatedOn = DateTime.Now,
+                        FreeDaysFromOffer = offer.MaximumSubscriptionTime??0
                     });
                     tenant.SubscriptionId = subscriptionId;
                     
