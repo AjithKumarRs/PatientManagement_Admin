@@ -66,6 +66,32 @@
             export declare const IsActive: string;
         }
 
-        ['TenantId', 'TenantName', 'CurrencyId', 'CurrencyName', 'SubscriptionRequired', 'SubscriptionId', 'TenantWebSite', 'TenantImage', 'OverrideUsersEmailSignature', 'TenantEmailSignature', 'SubscriptionOfferId', 'SubscriptionTenantId', 'SubscriptionSubscriptionEndDate', 'SubscriptionInsertUserId', 'SubscriptionInsertDate', 'SubscriptionUpdateUserId', 'SubscriptionUpdateDateField', 'SubscriptionName', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'InsertUserName', 'UpdateUserName', 'IsActive'].forEach(x => (<any>Fields)[x] = x);
+        [
+            'TenantId', 
+            'TenantName', 
+            'CurrencyId', 
+            'CurrencyName', 
+            'SubscriptionRequired', 
+            'SubscriptionId', 
+            'TenantWebSite', 
+            'TenantImage', 
+            'OverrideUsersEmailSignature', 
+            'TenantEmailSignature', 
+            'SubscriptionOfferId', 
+            'SubscriptionTenantId', 
+            'SubscriptionSubscriptionEndDate', 
+            'SubscriptionInsertUserId', 
+            'SubscriptionInsertDate', 
+            'SubscriptionUpdateUserId', 
+            'SubscriptionUpdateDateField', 
+            'SubscriptionName', 
+            'InsertUserId', 
+            'InsertDate', 
+            'UpdateUserId', 
+            'UpdateDateField', 
+            'InsertUserName', 
+            'UpdateUserName', 
+            'IsActive'
+        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

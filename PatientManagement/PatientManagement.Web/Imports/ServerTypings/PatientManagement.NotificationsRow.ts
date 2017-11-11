@@ -35,6 +35,17 @@
             export declare const TenantName: string;
         }
 
-        ['NotificationId', 'EntityType', 'EntityId', 'Text', 'InsertUserId', 'InsertDate', 'InsertUserDisplayName', 'InsertUserPicture', 'TenantId', 'TenantName'].forEach(x => (<any>Fields)[x] = x);
+        [
+            'NotificationId', 
+            'EntityType', 
+            'EntityId', 
+            'Text', 
+            'InsertUserId', 
+            'InsertDate', 
+            'InsertUserDisplayName', 
+            'InsertUserPicture', 
+            'TenantId', 
+            'TenantName'
+        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

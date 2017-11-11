@@ -20,8 +20,18 @@
             export declare const CountNotifications: string;
         }
 
-        ['Create', 'Update', 'Delete', 'Retrieve', 'List', 'ListForDropdown', 'CountNotifications'].forEach(x => {
-            (<any>NotificationsService)[x] = function (r, s, o) { return Q.serviceRequest(baseUrl + '/' + x, r, s, o); };
+        [
+            'Create', 
+            'Update', 
+            'Delete', 
+            'Retrieve', 
+            'List', 
+            'ListForDropdown', 
+            'CountNotifications'
+        ].forEach(x => {
+            (<any>NotificationsService)[x] = function (r, s, o) {
+                return Q.serviceRequest(baseUrl + '/' + x, r, s, o);
+            };
             (<any>Methods)[x] = baseUrl + '/' + x;
         });
     }

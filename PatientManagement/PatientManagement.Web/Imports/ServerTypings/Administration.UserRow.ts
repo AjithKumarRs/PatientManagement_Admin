@@ -68,6 +68,33 @@
             export declare const UpdateDate: string;
         }
 
-        ['UserId', 'Username', 'Source', 'PasswordHash', 'PasswordSalt', 'DisplayName', 'Email', 'RestrictedToCabinets', 'Info', 'UserImage', 'LastDirectoryUpdate', 'IsActive', 'WebSite', 'PhoneNumber', 'EmailSignature', 'UsersInRole', 'Cabinets', 'Password', 'PasswordConfirm', 'TenantId', 'TenantName', 'TenantCurrencyId', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDate'].forEach(x => (<any>Fields)[x] = x);
+        [
+            'UserId', 
+            'Username', 
+            'Source', 
+            'PasswordHash', 
+            'PasswordSalt', 
+            'DisplayName', 
+            'Email', 
+            'RestrictedToCabinets', 
+            'Info', 
+            'UserImage', 
+            'LastDirectoryUpdate', 
+            'IsActive', 
+            'WebSite', 
+            'PhoneNumber', 
+            'EmailSignature', 
+            'UsersInRole', 
+            'Cabinets', 
+            'Password', 
+            'PasswordConfirm', 
+            'TenantId', 
+            'TenantName', 
+            'TenantCurrencyId', 
+            'InsertUserId', 
+            'InsertDate', 
+            'UpdateUserId', 
+            'UpdateDate'
+        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

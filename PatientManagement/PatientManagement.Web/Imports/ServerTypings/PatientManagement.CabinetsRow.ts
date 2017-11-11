@@ -46,6 +46,22 @@
             export declare const UpdateUserName: string;
         }
 
-        ['CabinetId', 'WorkDays', 'Name', 'Representatives', 'WorkHoursStart', 'WorkHoursEnd', 'TenantId', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'IsActive', 'TenantName', 'InsertUserName', 'UpdateUserName'].forEach(x => (<any>Fields)[x] = x);
+        [
+            'CabinetId', 
+            'WorkDays', 
+            'Name', 
+            'Representatives', 
+            'WorkHoursStart', 
+            'WorkHoursEnd', 
+            'TenantId', 
+            'InsertUserId', 
+            'InsertDate', 
+            'UpdateUserId', 
+            'UpdateDateField', 
+            'IsActive', 
+            'TenantName', 
+            'InsertUserName', 
+            'UpdateUserName'
+        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

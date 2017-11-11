@@ -58,6 +58,29 @@
             export declare const TenantId: string;
         }
 
-        ['VisitId', 'PatientId', 'VisitTypeId', 'CabinetId', 'CabinetName', 'CabinetIsActive', 'Description', 'StartDate', 'EndDate', 'InsertUserId', 'InsertDate', 'TenantName', 'InsertUserName', 'PatientGender', 'PatientEmail', 'PatientNotifyOnChange', 'PhoneNumber', 'PatientName', 'VisitTypeName', 'VisitTypeBackgroundColor', 'VisitTypeBorderColor', 'TenantId'].forEach(x => (<any>Fields)[x] = x);
+        [
+            'VisitId', 
+            'PatientId', 
+            'VisitTypeId', 
+            'CabinetId', 
+            'CabinetName', 
+            'CabinetIsActive', 
+            'Description', 
+            'StartDate', 
+            'EndDate', 
+            'InsertUserId', 
+            'InsertDate', 
+            'TenantName', 
+            'InsertUserName', 
+            'PatientGender', 
+            'PatientEmail', 
+            'PatientNotifyOnChange', 
+            'PhoneNumber', 
+            'PatientName', 
+            'VisitTypeName', 
+            'VisitTypeBackgroundColor', 
+            'VisitTypeBorderColor', 
+            'TenantId'
+        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

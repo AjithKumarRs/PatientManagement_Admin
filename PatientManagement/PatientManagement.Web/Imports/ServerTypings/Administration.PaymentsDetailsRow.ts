@@ -43,6 +43,21 @@
             export declare const UpdateUserName: string;
         }
 
-        ['PaymentDetailsId', 'BeneficiaryName', 'BankName', 'Name', 'PaymentType', 'IbanBeneficient', 'TenantId', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'TenantName', 'InsertUserName', 'UpdateUserName'].forEach(x => (<any>Fields)[x] = x);
+        [
+            'PaymentDetailsId', 
+            'BeneficiaryName', 
+            'BankName', 
+            'Name', 
+            'PaymentType', 
+            'IbanBeneficient', 
+            'TenantId', 
+            'InsertUserId', 
+            'InsertDate', 
+            'UpdateUserId', 
+            'UpdateDateField', 
+            'TenantName', 
+            'InsertUserName', 
+            'UpdateUserName'
+        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

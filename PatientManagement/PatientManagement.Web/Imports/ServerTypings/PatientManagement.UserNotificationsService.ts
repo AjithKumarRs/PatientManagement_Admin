@@ -18,8 +18,17 @@
             export declare const List: string;
         }
 
-        ['Create', 'CreateList', 'Update', 'Delete', 'Retrieve', 'List'].forEach(x => {
-            (<any>UserNotificationsService)[x] = function (r, s, o) { return Q.serviceRequest(baseUrl + '/' + x, r, s, o); };
+        [
+            'Create', 
+            'CreateList', 
+            'Update', 
+            'Delete', 
+            'Retrieve', 
+            'List'
+        ].forEach(x => {
+            (<any>UserNotificationsService)[x] = function (r, s, o) {
+                return Q.serviceRequest(baseUrl + '/' + x, r, s, o);
+            };
             (<any>Methods)[x] = baseUrl + '/' + x;
         });
     }

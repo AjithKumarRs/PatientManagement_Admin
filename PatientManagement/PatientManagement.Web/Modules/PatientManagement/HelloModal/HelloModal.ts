@@ -96,7 +96,7 @@ namespace PatientManagement.PatientManagement {
 
             $('.btn-continiue-hellomodal').click(e => {
                 e.preventDefault();
-
+                e.stopPropagation();
                 var dataCurrentStep = Q.parseInteger($('.btn-continiue-hellomodal').attr("data-current-step"));
                 var dataSteps = Q.parseInteger($('.btn-continiue-hellomodal').attr("data-steps"));
                 var dataNextStep = dataCurrentStep + 1;
@@ -105,7 +105,6 @@ namespace PatientManagement.PatientManagement {
                 var nextElem = $('#helloModal').find(`[data-step='${dataNextStep}']`);
 
                 var thisElemId = thisElem.attr("id");
-
                 if (!this.validateFormById(thisElemId))
                     return;
                 
@@ -132,16 +131,18 @@ namespace PatientManagement.PatientManagement {
 
                     $('#btn-close-hellomodal').attr("data-reaload-page", 1);
                 }
-
-                thisElem.toggle("slide", () => {
-                    nextElem.toggle("slide");
-                });
+                $(thisElem).hide();
+               // $(thisElem).toggle("slide", () => {
+                  //  $(nextElem).toggle("slide");
+                    $(nextElem).show();
+                //});
 
             });
-
+             
 
         }
 
+        
         protected validateFormById(thisElemId) {
 
             if (thisElemId === "cabinet-step") {

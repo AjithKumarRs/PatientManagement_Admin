@@ -44,6 +44,21 @@
             export declare const UpdateUserName: string;
         }
 
-        ['PatientHealthId', 'PatientId', 'Diseases', 'MedicinesIntake', 'InsertUserId', 'InsertDate', 'PatientName', 'UpdateUserId', 'UpdateDateField', 'TenantId', 'IsActive', 'TenantName', 'InsertUserName', 'UpdateUserName'].forEach(x => (<any>Fields)[x] = x);
+        [
+            'PatientHealthId', 
+            'PatientId', 
+            'Diseases', 
+            'MedicinesIntake', 
+            'InsertUserId', 
+            'InsertDate', 
+            'PatientName', 
+            'UpdateUserId', 
+            'UpdateDateField', 
+            'TenantId', 
+            'IsActive', 
+            'TenantName', 
+            'InsertUserName', 
+            'UpdateUserName'
+        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

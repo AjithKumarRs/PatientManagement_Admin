@@ -99,6 +99,49 @@
             export declare const UpdateUserName: string;
         }
 
-        ['PaymentId', 'SubscriptionId', 'TenantId', 'PaymentDetailsId', 'PaymentOptionId', 'CurrencyId', 'Value', 'SubTotal', 'CustomerName', 'CustomerBankName', 'CustomerIban', 'ReasonForPayment', 'Description', 'Receiver', 'IBANReceiver', 'BICReceiver', 'BankNameReceiver', 'PaymentStatus', 'MonthsPayed', 'PaymentCurrency', 'PaymentType', 'SubscriptionOfferId', 'SubscriptionSubscriptionEndDate', 'SubscriptionName', 'PaymentDetailName', 'PaymentDetailsBankName', 'PaymentDetailsIbanBeneficient', 'PaymentOptionMonths', 'PaymentOptionName', 'CouponId', 'CouponKey', 'CouponDiscount', 'CurrencyCurrencyId', 'CurrencyName', 'CurrencyRate', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'TenantName', 'InsertUserName', 'UpdateUserName'].forEach(x => (<any>Fields)[x] = x);
+        [
+            'PaymentId', 
+            'SubscriptionId', 
+            'TenantId', 
+            'PaymentDetailsId', 
+            'PaymentOptionId', 
+            'CurrencyId', 
+            'Value', 
+            'SubTotal', 
+            'CustomerName', 
+            'CustomerBankName', 
+            'CustomerIban', 
+            'ReasonForPayment', 
+            'Description', 
+            'Receiver', 
+            'IBANReceiver', 
+            'BICReceiver', 
+            'BankNameReceiver', 
+            'PaymentStatus', 
+            'MonthsPayed', 
+            'PaymentCurrency', 
+            'PaymentType', 
+            'SubscriptionOfferId', 
+            'SubscriptionSubscriptionEndDate', 
+            'SubscriptionName', 
+            'PaymentDetailName', 
+            'PaymentDetailsBankName', 
+            'PaymentDetailsIbanBeneficient', 
+            'PaymentOptionMonths', 
+            'PaymentOptionName', 
+            'CouponId', 
+            'CouponKey', 
+            'CouponDiscount', 
+            'CurrencyCurrencyId', 
+            'CurrencyName', 
+            'CurrencyRate', 
+            'InsertUserId', 
+            'InsertDate', 
+            'UpdateUserId', 
+            'UpdateDateField', 
+            'TenantName', 
+            'InsertUserName', 
+            'UpdateUserName'
+        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

@@ -29,6 +29,17 @@
             export declare const NotificationTenantId: string;
         }
 
-        ['UserNotificationId', 'NotificationId', 'SeenAt', 'UserId', 'NotificationEntityType', 'NotificationEntityId', 'NotificationText', 'NotificationInsertUserId', 'NotificationInsertDate', 'NotificationTenantId'].forEach(x => (<any>Fields)[x] = x);
+        [
+            'UserNotificationId', 
+            'NotificationId', 
+            'SeenAt', 
+            'UserId', 
+            'NotificationEntityType', 
+            'NotificationEntityId', 
+            'NotificationText', 
+            'NotificationInsertUserId', 
+            'NotificationInsertDate', 
+            'NotificationTenantId'
+        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

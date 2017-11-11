@@ -2980,56 +2980,6 @@ declare namespace PatientManagement.Administration {
         username: string;
     }
 }
-declare namespace PatientManagement.PatientManagement {
-    class HelloModal extends Serenity.TemplatedWidget<any> {
-        private formCabinet;
-        private formPatient;
-        private formVisitType;
-        private formVisit;
-        constructor(elem: JQuery, opt: {});
-        protected validateFormById(thisElemId: any): boolean;
-    }
-}
-declare namespace PatientManagement.Common {
-    class HelloModalAddCabinetPanel extends Serenity.PropertyPanel<HelloModalAddCabinetRequest, any> {
-        protected getFormKey(): string;
-        private form;
-        constructor(container: JQuery);
-        protected getTemplate(): any;
-        ValidateForm(): boolean;
-        SaveEntity(): boolean;
-    }
-}
-declare namespace PatientManagement.Common {
-    class HelloModalAddPatientPanel extends Serenity.PropertyPanel<HelloModalAddPatientRequest, any> {
-        protected getFormKey(): string;
-        private form;
-        constructor(container: JQuery);
-        protected getTemplate(): any;
-        ValidateForm(): boolean;
-        SaveEntity(): boolean;
-    }
-}
-declare namespace PatientManagement.Common {
-    class HelloModalAddVisitPanel extends Serenity.PropertyPanel<HelloModalAddVisitRequest, any> {
-        protected getFormKey(): string;
-        private form;
-        constructor(container: JQuery);
-        protected getTemplate(): any;
-        ValidateForm(): boolean;
-        SaveEntity(): boolean;
-    }
-}
-declare namespace PatientManagement.Common {
-    class HelloModalAddVisitTypePanel extends Serenity.PropertyPanel<HelloModalAddVisitTypeRequest, any> {
-        protected getFormKey(): string;
-        private form;
-        constructor(container: JQuery);
-        protected getTemplate(): any;
-        ValidateForm(): boolean;
-        SaveEntity(): boolean;
-    }
-}
 declare namespace PatientManagement {
     class BasicProgressDialog extends Serenity.TemplatedDialog<any> {
         constructor();
@@ -3202,16 +3152,6 @@ declare namespace PatientManagement {
 declare namespace PatientManagement.Common {
     class LanguageSelection extends Serenity.Widget<any> {
         constructor(select: JQuery, currentLanguage: string);
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class NotificationDropdownMenu extends Serenity.TemplatedWidget<any> {
-        protected getService(): string;
-        private notificationIds;
-        constructor(elem: JQuery, opt: {});
-        updateNotifications: () => void;
-        protected openClick(e: any): void;
-        protected markAsSeen(): void;
     }
 }
 declare namespace PatientManagement.Common {
@@ -3535,6 +3475,56 @@ declare namespace PatientManagement.PatientManagement {
     }
 }
 declare namespace PatientManagement.PatientManagement {
+    class HelloModal extends Serenity.TemplatedWidget<any> {
+        private formCabinet;
+        private formPatient;
+        private formVisitType;
+        private formVisit;
+        constructor(elem: JQuery, opt: {});
+        protected validateFormById(thisElemId: any): boolean;
+    }
+}
+declare namespace PatientManagement.Common {
+    class HelloModalAddCabinetPanel extends Serenity.PropertyPanel<HelloModalAddCabinetRequest, any> {
+        protected getFormKey(): string;
+        private form;
+        constructor(container: JQuery);
+        protected getTemplate(): any;
+        ValidateForm(): boolean;
+        SaveEntity(): boolean;
+    }
+}
+declare namespace PatientManagement.Common {
+    class HelloModalAddPatientPanel extends Serenity.PropertyPanel<HelloModalAddPatientRequest, any> {
+        protected getFormKey(): string;
+        private form;
+        constructor(container: JQuery);
+        protected getTemplate(): any;
+        ValidateForm(): boolean;
+        SaveEntity(): boolean;
+    }
+}
+declare namespace PatientManagement.Common {
+    class HelloModalAddVisitPanel extends Serenity.PropertyPanel<HelloModalAddVisitRequest, any> {
+        protected getFormKey(): string;
+        private form;
+        constructor(container: JQuery);
+        protected getTemplate(): any;
+        ValidateForm(): boolean;
+        SaveEntity(): boolean;
+    }
+}
+declare namespace PatientManagement.Common {
+    class HelloModalAddVisitTypePanel extends Serenity.PropertyPanel<HelloModalAddVisitTypeRequest, any> {
+        protected getFormKey(): string;
+        private form;
+        constructor(container: JQuery);
+        protected getTemplate(): any;
+        ValidateForm(): boolean;
+        SaveEntity(): boolean;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
     class LifeStylesDialog extends Serenity.EntityDialog<LifeStylesRow, any> {
         protected getFormKey(): string;
         protected getIdProperty(): string;
@@ -3592,6 +3582,16 @@ declare namespace PatientManagement.PatientManagement {
         initializeColumn(column: Slick.Column): void;
         fileProperty: string;
         thumb: boolean;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class NotificationDropdownMenu extends Serenity.TemplatedWidget<any> {
+        protected getService(): string;
+        private notificationIds;
+        constructor(elem: JQuery, opt: {});
+        updateNotifications: () => void;
+        protected openClick(e: any): void;
+        protected markAsSeen(): void;
     }
 }
 declare namespace PatientManagement.PatientManagement {

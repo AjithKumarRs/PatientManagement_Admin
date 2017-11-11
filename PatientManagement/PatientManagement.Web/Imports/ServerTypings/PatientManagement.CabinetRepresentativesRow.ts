@@ -15,6 +15,10 @@
             export declare const CabinetId: string;
         }
 
-        ['RepresentativeId', 'UserId', 'CabinetId'].forEach(x => (<any>Fields)[x] = x);
+        [
+            'RepresentativeId', 
+            'UserId', 
+            'CabinetId'
+        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

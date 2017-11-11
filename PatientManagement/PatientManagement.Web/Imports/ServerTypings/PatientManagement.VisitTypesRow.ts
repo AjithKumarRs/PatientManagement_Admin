@@ -32,6 +32,15 @@
             export declare const TenantId: string;
         }
 
-        ['VisitTypeId', 'Name', 'BorderColor', 'BackgroundColor', 'InsertUserId', 'InsertDate', 'IsActive', 'TenantId'].forEach(x => (<any>Fields)[x] = x);
+        [
+            'VisitTypeId', 
+            'Name', 
+            'BorderColor', 
+            'BackgroundColor', 
+            'InsertUserId', 
+            'InsertDate', 
+            'IsActive', 
+            'TenantId'
+        ].forEach(x => (<any>Fields)[x] = x);
     }
 }
