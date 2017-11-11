@@ -35,6 +35,7 @@ namespace PatientManagement
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAntiforgery(options => options.HeaderName = "X-CSRF-TOKEN");
             services.AddCors();
             services.AddMvc(options =>
             {
@@ -92,6 +93,7 @@ namespace PatientManagement
             var textRegistry = app.ApplicationServices.GetRequiredService<ILocalTextRegistry>();
             textRegistry.AddNestedTexts();
             textRegistry.AddEnumTexts();
+            textRegistry.AddNestedPermissions();
             textRegistry.AddRowTexts();
             var contentRoot = env.ContentRootPath;
             textRegistry.AddJsonTexts(System.IO.Path.Combine(env.WebRootPath, "Scripts/serenity/texts".Replace('/', Path.DirectorySeparatorChar)));

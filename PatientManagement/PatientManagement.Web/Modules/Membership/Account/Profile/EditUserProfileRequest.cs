@@ -27,7 +27,7 @@ namespace PatientManagement.Membership
         public String UserImage { get; set; }
 
         public string Info { get; set; }
-
+        
         public String EmailSignature { get; set; }
     }
 }

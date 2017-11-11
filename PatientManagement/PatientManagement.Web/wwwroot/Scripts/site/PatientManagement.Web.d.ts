@@ -2456,6 +2456,7 @@ declare namespace PatientManagement.PatientManagement {
         Name: Serenity.StringEditor;
         BorderColor: Serenity.StringEditor;
         BackgroundColor: Serenity.StringEditor;
+        TenantId: Serenity.LookupEditor;
     }
 }
 declare namespace PatientManagement.PatientManagement {
@@ -2467,6 +2468,8 @@ declare namespace PatientManagement.PatientManagement {
         InsertUserId?: number;
         InsertDate?: string;
         IsActive?: number;
+        TenantName?: string;
+        InsertUserName?: string;
         TenantId?: number;
     }
     namespace VisitTypesRow {
@@ -2484,6 +2487,8 @@ declare namespace PatientManagement.PatientManagement {
             const InsertUserId: string;
             const InsertDate: string;
             const IsActive: string;
+            const TenantName: string;
+            const InsertUserName: string;
             const TenantId: string;
         }
     }

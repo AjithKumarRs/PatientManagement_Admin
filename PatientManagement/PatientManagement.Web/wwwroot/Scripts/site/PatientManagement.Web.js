@@ -2419,7 +2419,7 @@ var PatientManagement;
         }(Serenity.PrefixedContext));
         VisitTypesForm.formKey = 'PatientManagement.VisitTypes';
         PatientManagement.VisitTypesForm = VisitTypesForm;
-        [['Name', function () { return Serenity.StringEditor; }], ['BorderColor', function () { return Serenity.StringEditor; }], ['BackgroundColor', function () { return Serenity.StringEditor; }]].forEach(function (x) { return Object.defineProperty(VisitTypesForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
+        [['Name', function () { return Serenity.StringEditor; }], ['BorderColor', function () { return Serenity.StringEditor; }], ['BackgroundColor', function () { return Serenity.StringEditor; }], ['TenantId', function () { return Serenity.LookupEditor; }]].forEach(function (x) { return Object.defineProperty(VisitTypesForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
     })(PatientManagement = PatientManagement_38.PatientManagement || (PatientManagement_38.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
@@ -2448,6 +2448,8 @@ var PatientManagement;
                 'InsertUserId',
                 'InsertDate',
                 'IsActive',
+                'TenantName',
+                'InsertUserName',
                 'TenantId'
             ].forEach(function (x) { return Fields[x] = x; });
         })(VisitTypesRow = PatientManagement.VisitTypesRow || (PatientManagement.VisitTypesRow = {}));
@@ -5901,9 +5903,9 @@ var PatientManagement;
                 }, function (resp) {
                     user = resp.Entity;
                     _this.form.DisplayName.value = user.DisplayName;
-                    if (_this.form.UserImage.value != null)
-                        _this.form.UserImage.value.Filename = user.UserImage;
-                    _this.form.PhoneNumber.value = user.PhoneNumber;
+                    if (user.UserImage != null)
+                        //TODO how to add image to ImageUploadEditor
+                        _this.form.PhoneNumber.value = user.PhoneNumber;
                     _this.form.Email.value = user.Email;
                     _this.form.WebSite.value = user.WebSite;
                     _this.form.EmailSignature.value = user.EmailSignature;

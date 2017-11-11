@@ -68,7 +68,12 @@ public class VisitTypesNavigationHelper : NavigationHelper
             ));
 
         }
-
+        list.Add(new NavigationLinkAttribute(506,
+            path: LocalText.Get("Db.PatientManagement.VisitTypes.EntityPlural") + "/" + LocalText.Get("LeftNavigation.VisitTypesPage"),
+            url: "/PatientManagement/VisitTypes",
+            icon: "fa-bars",
+            permission: "PatientManagement:VisitTypes:Page"
+        ));
         return NavigationHelper.ByCategory(list);
     }
 }
