@@ -16,7 +16,8 @@ namespace PatientManagement.PatientManagement.Forms
         [Category("Required Fields")]
 
         public String Name { get; set; }
-        [Category("Additional Information")]
+
+        [Category("Work Hours")]
 
         public Int16 WorkHoursStart { get; set; }
 
@@ -24,7 +25,17 @@ namespace PatientManagement.PatientManagement.Forms
 
         public List<Int32> WorkDays { get; set; }
 
+        [Category("Additional Information")]
+
         public List<Int32> Representatives { get; set; }
+
+        public String Description { get; set; }
+
+        public String City { get; set; }
+
+        public String Country { get; set; }
+
+        public Int32 PhoneNumber { get; set; }
 
         public Int32? TenantId { get; set; }
 

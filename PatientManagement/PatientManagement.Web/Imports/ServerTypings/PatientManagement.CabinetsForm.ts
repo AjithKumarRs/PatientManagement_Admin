@@ -10,8 +10,12 @@
         WorkHoursEnd: Serenity.TimeEditor;
         WorkDays: Serenity.LookupEditor;
         Representatives: Serenity.LookupEditor;
+        Description: Serenity.TextAreaEditor;
+        City: Serenity.StringEditor;
+        Country: Serenity.StringEditor;
+        PhoneNumber: Serenity.IntegerEditor;
         TenantId: Serenity.LookupEditor;
     }
 
-    [['Name', () => Serenity.StringEditor], ['WorkHoursStart', () => Serenity.TimeEditor], ['WorkHoursEnd', () => Serenity.TimeEditor], ['WorkDays', () => Serenity.LookupEditor], ['Representatives', () => Serenity.LookupEditor], ['TenantId', () => Serenity.LookupEditor]].forEach(x => Object.defineProperty(CabinetsForm.prototype, <string>x[0], { get: function () { return this.w(x[0], (x[1] as any)()); }, enumerable: true, configurable: true }));
+    [['Name', () => Serenity.StringEditor], ['WorkHoursStart', () => Serenity.TimeEditor], ['WorkHoursEnd', () => Serenity.TimeEditor], ['WorkDays', () => Serenity.LookupEditor], ['Representatives', () => Serenity.LookupEditor], ['Description', () => Serenity.TextAreaEditor], ['City', () => Serenity.StringEditor], ['Country', () => Serenity.StringEditor], ['PhoneNumber', () => Serenity.IntegerEditor], ['TenantId', () => Serenity.LookupEditor]].forEach(x => Object.defineProperty(CabinetsForm.prototype, <string>x[0], { get: function () { return this.w(x[0], (x[1] as any)()); }, enumerable: true, configurable: true }));
 }

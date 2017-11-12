@@ -1761,6 +1761,10 @@ declare namespace PatientManagement.PatientManagement {
         WorkHoursEnd: Serenity.TimeEditor;
         WorkDays: Serenity.LookupEditor;
         Representatives: Serenity.LookupEditor;
+        Description: Serenity.TextAreaEditor;
+        City: Serenity.StringEditor;
+        Country: Serenity.StringEditor;
+        PhoneNumber: Serenity.IntegerEditor;
         TenantId: Serenity.LookupEditor;
     }
 }
@@ -1769,9 +1773,13 @@ declare namespace PatientManagement.PatientManagement {
         CabinetId?: number;
         WorkDays?: number[];
         Name?: string;
+        Description?: string;
+        City?: string;
+        Country?: string;
         Representatives?: number[];
         WorkHoursStart?: number;
         WorkHoursEnd?: number;
+        PhoneNumber?: number;
         TenantId?: number;
         InsertUserId?: number;
         InsertDate?: string;
@@ -1793,9 +1801,13 @@ declare namespace PatientManagement.PatientManagement {
             const CabinetId: string;
             const WorkDays: string;
             const Name: string;
+            const Description: string;
+            const City: string;
+            const Country: string;
             const Representatives: string;
             const WorkHoursStart: string;
             const WorkHoursEnd: string;
+            const PhoneNumber: string;
             const TenantId: string;
             const InsertUserId: string;
             const InsertDate: string;

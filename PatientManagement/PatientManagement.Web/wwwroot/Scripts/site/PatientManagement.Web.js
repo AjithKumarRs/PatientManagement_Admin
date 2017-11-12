@@ -1662,7 +1662,7 @@ var PatientManagement;
         }(Serenity.PrefixedContext));
         CabinetsForm.formKey = 'PatientManagement.Cabinets';
         PatientManagement.CabinetsForm = CabinetsForm;
-        [['Name', function () { return Serenity.StringEditor; }], ['WorkHoursStart', function () { return Serenity.TimeEditor; }], ['WorkHoursEnd', function () { return Serenity.TimeEditor; }], ['WorkDays', function () { return Serenity.LookupEditor; }], ['Representatives', function () { return Serenity.LookupEditor; }], ['TenantId', function () { return Serenity.LookupEditor; }]].forEach(function (x) { return Object.defineProperty(CabinetsForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
+        [['Name', function () { return Serenity.StringEditor; }], ['WorkHoursStart', function () { return Serenity.TimeEditor; }], ['WorkHoursEnd', function () { return Serenity.TimeEditor; }], ['WorkDays', function () { return Serenity.LookupEditor; }], ['Representatives', function () { return Serenity.LookupEditor; }], ['Description', function () { return Serenity.TextAreaEditor; }], ['City', function () { return Serenity.StringEditor; }], ['Country', function () { return Serenity.StringEditor; }], ['PhoneNumber', function () { return Serenity.IntegerEditor; }], ['TenantId', function () { return Serenity.LookupEditor; }]].forEach(function (x) { return Object.defineProperty(CabinetsForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
     })(PatientManagement = PatientManagement_6.PatientManagement || (PatientManagement_6.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
@@ -1687,9 +1687,13 @@ var PatientManagement;
                 'CabinetId',
                 'WorkDays',
                 'Name',
+                'Description',
+                'City',
+                'Country',
                 'Representatives',
                 'WorkHoursStart',
                 'WorkHoursEnd',
+                'PhoneNumber',
                 'TenantId',
                 'InsertUserId',
                 'InsertDate',
@@ -5909,6 +5913,7 @@ var PatientManagement;
                     _this.form.Email.value = user.Email;
                     _this.form.WebSite.value = user.WebSite;
                     _this.form.EmailSignature.value = user.EmailSignature;
+                    _this.form.EmailSignature.element.triggerHandler('shown');
                 });
                 _this.byId('EditUserProfileSubmitButton').click(function (e) {
                     e.preventDefault();
