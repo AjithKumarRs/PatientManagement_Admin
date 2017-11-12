@@ -35,6 +35,9 @@ namespace PatientManagement.PatientManagement.Columns
         [Width(250), WorkDaysListFormatter]
         public List<Int32> WorkDays { get; set; }
 
+        [Width(250), MedicalSpecialtiesFormatter]
+        public List<String> UserSpecialties { get; set; }
+
         [MinuteFormatter]
         public Int16 WorkHoursStart { get; set; }
         [MinuteFormatter]

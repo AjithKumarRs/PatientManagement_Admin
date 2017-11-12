@@ -1692,6 +1692,7 @@ var PatientManagement;
                 'City',
                 'Country',
                 'Representatives',
+                'UserSpecialties',
                 'WorkHoursStart',
                 'WorkHoursEnd',
                 'PhoneNumber',
@@ -7334,6 +7335,7 @@ var PatientManagement;
             MedicalSpecialtyGrid.prototype.getIdProperty = function () { return PatientManagement.MedicalSpecialtyRow.idProperty; };
             MedicalSpecialtyGrid.prototype.getLocalTextPrefix = function () { return PatientManagement.MedicalSpecialtyRow.localTextPrefix; };
             MedicalSpecialtyGrid.prototype.getService = function () { return PatientManagement.MedicalSpecialtyService.baseUrl; };
+            MedicalSpecialtyGrid.prototype.getIsActiveProperty = function () { return PatientManagement.MedicalSpecialtyRow.isActiveProperty; };
             MedicalSpecialtyGrid.prototype.getButtons = function () {
                 var _this = this;
                 var buttons = _super.prototype.getButtons.call(this);

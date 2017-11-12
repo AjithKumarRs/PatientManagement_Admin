@@ -7,6 +7,7 @@
         City?: string;
         Country?: string;
         Representatives?: number[];
+        UserSpecialties?: string[];
         WorkHoursStart?: number;
         WorkHoursEnd?: number;
         PhoneNumber?: number;
@@ -40,6 +41,7 @@
             export declare const City: string;
             export declare const Country: string;
             export declare const Representatives: string;
+            export declare const UserSpecialties: string;
             export declare const WorkHoursStart: string;
             export declare const WorkHoursEnd: string;
             export declare const PhoneNumber: string;
@@ -62,6 +64,7 @@
             'City', 
             'Country', 
             'Representatives', 
+            'UserSpecialties', 
             'WorkHoursStart', 
             'WorkHoursEnd', 
             'PhoneNumber', 

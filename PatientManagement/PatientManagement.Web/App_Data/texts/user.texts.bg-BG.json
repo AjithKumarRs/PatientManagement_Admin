@@ -289,6 +289,7 @@
   "Db.PatientManagement.Cabinets.UpdateDateField": "Последно обновен на",
   "Db.PatientManagement.Cabinets.UpdateUserId": "Последно обновен от",
   "Db.PatientManagement.Cabinets.UpdateUserName": "Последно обновен от",
+  "Db.PatientManagement.Cabinets.UserSpecialties": "Специалности от Представители",
   "Db.PatientManagement.Cabinets.WorkDays": "Работни дни",
   "Db.PatientManagement.Cabinets.WorkHoursEnd": "Край на работен ден",
   "Db.PatientManagement.Cabinets.WorkHoursStart": "Старт на работен ден",

@@ -65,6 +65,7 @@ namespace PatientManagement.PatientManagement.Entities
             get { return Fields.PhoneNumber[this]; }
             set { Fields.PhoneNumber[this] = value; }
         }
+
         IIdField IIdRow.IdField
         {
             get { return Fields.CabinetId; }
@@ -108,6 +109,13 @@ namespace PatientManagement.PatientManagement.Entities
         {
             get { return Fields.Representatives[this]; }
             set { Fields.Representatives[this] = value; }
+        }
+
+        [NotMapped, DisplayName("User Specialties")]
+        public List<String> UserSpecialties
+        {
+            get { return Fields.UserSpecialties[this]; }
+            set { Fields.UserSpecialties[this] = value; }
         }
 
         #region ILoggingRow
@@ -231,6 +239,7 @@ namespace PatientManagement.PatientManagement.Entities
             public StringField City;
             public StringField Country;
             public ListField<Int32> Representatives;
+            public ListField<String> UserSpecialties;
             public Int16Field WorkHoursStart;
             public Int16Field WorkHoursEnd;
             public Int32Field PhoneNumber;

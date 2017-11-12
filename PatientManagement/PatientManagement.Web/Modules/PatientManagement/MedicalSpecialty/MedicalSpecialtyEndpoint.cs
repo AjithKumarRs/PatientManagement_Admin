@@ -43,7 +43,11 @@ namespace PatientManagement.PatientManagement.Endpoints
         {
             return new MyRepository().Retrieve(connection, request);
         }
-
+        [HttpPost, AuthorizeDelete(typeof(MyRow))]
+        public UndeleteResponse Undelete(IUnitOfWork uow, UndeleteRequest request)
+        {
+            return new MyRepository().Undelete(uow, request);
+        }
         [HttpPost, AuthorizeCreate(typeof(MyRow))]
         public ExcelImportResponse ExcelImport(IUnitOfWork uow, ExcelImportRequest request)
         {

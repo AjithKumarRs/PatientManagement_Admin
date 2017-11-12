@@ -1780,6 +1780,7 @@ declare namespace PatientManagement.PatientManagement {
         City?: string;
         Country?: string;
         Representatives?: number[];
+        UserSpecialties?: string[];
         WorkHoursStart?: number;
         WorkHoursEnd?: number;
         PhoneNumber?: number;
@@ -1808,6 +1809,7 @@ declare namespace PatientManagement.PatientManagement {
             const City: string;
             const Country: string;
             const Representatives: string;
+            const UserSpecialties: string;
             const WorkHoursStart: string;
             const WorkHoursEnd: string;
             const PhoneNumber: string;
@@ -3684,6 +3686,7 @@ declare namespace PatientManagement.PatientManagement {
         protected getIdProperty(): string;
         protected getLocalTextPrefix(): string;
         protected getService(): string;
+        protected getIsActiveProperty(): string;
         constructor(container: JQuery);
         protected getButtons(): Serenity.ToolButton[];
     }
