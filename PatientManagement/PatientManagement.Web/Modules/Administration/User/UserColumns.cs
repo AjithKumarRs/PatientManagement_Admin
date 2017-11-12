@@ -18,8 +18,11 @@ namespace PatientManagement.Administration.Columns
         public String Username { get; set; }
         [Width(150)]
         public String DisplayName { get; set; }
-        [Width(250)]
+        [Width(250), SentEmailsFromEmailFormatter]
         public String Email { get; set; }
+
+        [Width(250), MedicalSpecialtiesFormatter]
+        public ListField<Int32> Specialties { get; set; }
 
         [Width(250), CabinetsListFormatter]
         public string Cabinets { get; set; }
