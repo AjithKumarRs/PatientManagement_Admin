@@ -1169,6 +1169,7 @@ declare namespace PatientManagement.Administration {
         Username: Serenity.StringEditor;
         DisplayName: Serenity.StringEditor;
         Email: Serenity.EmailEditor;
+        Specialties: Serenity.LookupEditor;
         Password: Serenity.PasswordEditor;
         PasswordConfirm: Serenity.PasswordEditor;
         Cabinets: Serenity.LookupEditor;
@@ -1301,6 +1302,7 @@ declare namespace PatientManagement.Administration {
         EmailSignature?: string;
         UsersInRole?: number[];
         Cabinets?: number[];
+        Specialties?: number[];
         Password?: string;
         PasswordConfirm?: string;
         TenantId?: number;
@@ -1336,6 +1338,7 @@ declare namespace PatientManagement.Administration {
             const EmailSignature: string;
             const UsersInRole: string;
             const Cabinets: string;
+            const Specialties: string;
             const Password: string;
             const PasswordConfirm: string;
             const TenantId: string;
@@ -1963,6 +1966,75 @@ declare namespace PatientManagement.PatientManagement {
     }
 }
 declare namespace PatientManagement.PatientManagement {
+}
+declare namespace PatientManagement.PatientManagement {
+    class MedicalSpecialtyExcelImportForm extends Serenity.PrefixedContext {
+        static formKey: string;
+    }
+    interface MedicalSpecialtyExcelImportForm {
+        FileName: Serenity.ImageUploadEditor;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class MedicalSpecialtyForm extends Serenity.PrefixedContext {
+        static formKey: string;
+    }
+    interface MedicalSpecialtyForm {
+        Name: Serenity.StringEditor;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    interface MedicalSpecialtyRow {
+        SpecialtyId?: number;
+        Name?: string;
+        InsertUserId?: number;
+        InsertDate?: string;
+        UpdateUserId?: number;
+        UpdateDateField?: string;
+        IsActive?: number;
+        InsertUserName?: string;
+        UpdateUserName?: string;
+    }
+    namespace MedicalSpecialtyRow {
+        const idProperty = "SpecialtyId";
+        const isActiveProperty = "IsActive";
+        const nameProperty = "Name";
+        const localTextPrefix = "PatientManagement.MedicalSpecialty";
+        const lookupKey = "PatientManagement.MedicalSpecialties";
+        function getLookup(): Q.Lookup<MedicalSpecialtyRow>;
+        namespace Fields {
+            const SpecialtyId: string;
+            const Name: string;
+            const InsertUserId: string;
+            const InsertDate: string;
+            const UpdateUserId: string;
+            const UpdateDateField: string;
+            const IsActive: string;
+            const InsertUserName: string;
+            const UpdateUserName: string;
+        }
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    namespace MedicalSpecialtyService {
+        const baseUrl = "PatientManagement/MedicalSpecialty";
+        function Create(request: Serenity.SaveRequest<MedicalSpecialtyRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Update(request: Serenity.SaveRequest<MedicalSpecialtyRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<MedicalSpecialtyRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function ExcelImport(request: ExcelImportRequest, onSuccess?: (response: ExcelImportResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<MedicalSpecialtyRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        namespace Methods {
+            const Create: string;
+            const Update: string;
+            const Delete: string;
+            const Retrieve: string;
+            const ExcelImport: string;
+            const List: string;
+        }
+    }
+}
+declare namespace PatientManagement.PatientManagement {
     interface NotesRow {
         NoteId?: number;
         EntityType?: string;
@@ -2366,6 +2438,22 @@ declare namespace PatientManagement.PatientManagement {
             const Delete: string;
             const Retrieve: string;
             const List: string;
+        }
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    interface UserSpecialtiesRow {
+        UserSpecialtyId?: number;
+        UserId?: number;
+        SpecialtyId?: number;
+    }
+    namespace UserSpecialtiesRow {
+        const idProperty = "UserSpecialtyId";
+        const localTextPrefix = "UserSpecialties";
+        namespace Fields {
+            const UserSpecialtyId: string;
+            const UserId: string;
+            const SpecialtyId: string;
         }
     }
 }
@@ -3563,6 +3651,36 @@ declare namespace PatientManagement.PatientManagement {
         protected getLocalTextPrefix(): string;
         protected getService(): string;
         constructor(container: JQuery);
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class MedicalSpecialtyDialog extends Serenity.EntityDialog<MedicalSpecialtyRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getService(): string;
+        protected form: MedicalSpecialtyForm;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class MedicalSpecialtyExcelImportDialog extends Serenity.PropertyDialog<any, any> {
+        private form;
+        constructor();
+        protected getDialogTitle(): string;
+        protected getImageUploadEditorOptions(): Serenity.ImageUploadEditorOptions;
+        protected getDialogButtons(): Serenity.DialogButton[];
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class MedicalSpecialtyGrid extends Serenity.EntityGrid<MedicalSpecialtyRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof MedicalSpecialtyDialog;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        constructor(container: JQuery);
+        protected getButtons(): Serenity.ToolButton[];
     }
 }
 declare namespace PatientManagement.PatientManagement {
