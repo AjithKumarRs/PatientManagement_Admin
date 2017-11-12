@@ -1952,6 +1952,7 @@ var PatientManagement;
                 'Update',
                 'Delete',
                 'Retrieve',
+                'Undelete',
                 'ExcelImport',
                 'List'
             ].forEach(function (x) {

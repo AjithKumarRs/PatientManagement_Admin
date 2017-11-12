@@ -33,7 +33,7 @@ namespace PatientManagement.Administration.Entities
         }
 
         [DisplayName("Cabinets")]
-        [LookupEditor(typeof(CabinetsRow), Multiple = true), NotMapped]
+        [LookupEditor(typeof(CabinetsRow), Multiple = true, FilterField = "IsActive", FilterValue = 1), NotMapped]
         [LinkingSetRelation(typeof(CabinetRepresentativesRow), "UserId", "CabinetId")]
         [MinSelectLevel(SelectLevel.Details), QuickFilter]
         public List<Int32> Cabinets
@@ -44,7 +44,7 @@ namespace PatientManagement.Administration.Entities
 
 
         [DisplayName("Specialties")]
-        [LookupEditor(typeof(MedicalSpecialtyRow), Multiple = true), NotMapped]
+        [LookupEditor(typeof(MedicalSpecialtyRow), Multiple = true, FilterField = "IsActive", FilterValue = 1), NotMapped]
         [LinkingSetRelation(typeof(UserSpecialtiesRow), "UserId", "SpecialtyId")]
         [MinSelectLevel(SelectLevel.Details), QuickFilter]
         public List<Int32> Specialties

@@ -2024,6 +2024,7 @@ declare namespace PatientManagement.PatientManagement {
         function Update(request: Serenity.SaveRequest<MedicalSpecialtyRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<MedicalSpecialtyRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Undelete(request: Serenity.UndeleteRequest, onSuccess?: (response: Serenity.UndeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function ExcelImport(request: ExcelImportRequest, onSuccess?: (response: ExcelImportResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<MedicalSpecialtyRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         namespace Methods {
@@ -2031,6 +2032,7 @@ declare namespace PatientManagement.PatientManagement {
             const Update: string;
             const Delete: string;
             const Retrieve: string;
+            const Undelete: string;
             const ExcelImport: string;
             const List: string;
         }
