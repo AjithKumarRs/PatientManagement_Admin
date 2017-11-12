@@ -225,6 +225,9 @@
     <None Update="Modules\PatientManagement\Patients\PatientsIndex.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Modules\PatientManagement\MedicalSpecialty\MedicalSpecialtyIndex.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Modules\PatientManagement\UserNotifications\UserNotificationsIndex.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
