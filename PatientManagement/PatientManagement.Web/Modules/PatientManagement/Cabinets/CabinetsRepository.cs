@@ -1,6 +1,7 @@
 ﻿
 
 using System.Linq;
+using PatientManagement.Administration.Entities;
 using PatientManagement.PatientManagement.Entities;
 
 namespace PatientManagement.PatientManagement.Repositories
@@ -65,6 +66,34 @@ namespace PatientManagement.PatientManagement.Repositories
                     if (cabinetRepres.Any())
                         this.Query.Where(flds.TenantId == user.TenantId && flds.CabinetId.In(cabinetRepres));
                 }
+            }
+
+            protected override void OnReturn()
+            {
+                base.OnReturn();
+
+                foreach (var responseEntity in Response.Entities)
+                {
+                    if (responseEntity.Representatives != null && responseEntity.Representatives.Any())
+                    {
+                        var specialtiesFlds = UserSpecialtiesRow.Fields;
+                        var userSpecialties =
+                            Connection.List<UserSpecialtiesRow>(
+                                specialtiesFlds.UserId.In(responseEntity.Representatives));
+
+                        if (userSpecialties != null && userSpecialties.Any())
+                        {
+                            var specialtyFlds = MedicalSpecialtyRow.Fields;
+                            var specialty =
+                                Connection.List<MedicalSpecialtyRow>(
+                                    specialtyFlds.SpecialtyId.In(userSpecialties.Select(s => s.SpecialtyId)));
+
+                            responseEntity.UserSpecialties = specialty.Select(s => s.Name).ToList();
+                        }
+
+
+                    }
+                } 
             }
         }
     }

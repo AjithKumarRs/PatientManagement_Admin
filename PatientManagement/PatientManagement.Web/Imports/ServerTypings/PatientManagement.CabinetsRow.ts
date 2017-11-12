@@ -3,9 +3,14 @@
         CabinetId?: number;
         WorkDays?: number[];
         Name?: string;
+        Description?: string;
+        City?: string;
+        Country?: string;
         Representatives?: number[];
+        UserSpecialties?: string[];
         WorkHoursStart?: number;
         WorkHoursEnd?: number;
+        PhoneNumber?: number;
         TenantId?: number;
         InsertUserId?: number;
         InsertDate?: string;
@@ -32,9 +37,14 @@
             export declare const CabinetId: string;
             export declare const WorkDays: string;
             export declare const Name: string;
+            export declare const Description: string;
+            export declare const City: string;
+            export declare const Country: string;
             export declare const Representatives: string;
+            export declare const UserSpecialties: string;
             export declare const WorkHoursStart: string;
             export declare const WorkHoursEnd: string;
+            export declare const PhoneNumber: string;
             export declare const TenantId: string;
             export declare const InsertUserId: string;
             export declare const InsertDate: string;
@@ -50,9 +60,14 @@
             'CabinetId', 
             'WorkDays', 
             'Name', 
+            'Description', 
+            'City', 
+            'Country', 
             'Representatives', 
+            'UserSpecialties', 
             'WorkHoursStart', 
             'WorkHoursEnd', 
+            'PhoneNumber', 
             'TenantId', 
             'InsertUserId', 
             'InsertDate', 

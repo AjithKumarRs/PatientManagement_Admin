@@ -27,9 +27,10 @@
                     this.form.WebSite.value = user.WebSite;
                     this.form.EmailSignature.value = user.EmailSignature;
 
+                    this.form.EmailSignature.element.triggerHandler('shown');
+
 
                 });
-
 
             this.byId('EditUserProfileSubmitButton').click(e => {
                 e.preventDefault();
@@ -50,5 +51,6 @@
                 });
             });
         }
+        
     }
 }

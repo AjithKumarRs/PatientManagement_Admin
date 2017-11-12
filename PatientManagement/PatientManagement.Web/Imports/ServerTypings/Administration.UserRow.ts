@@ -17,6 +17,7 @@
         EmailSignature?: string;
         UsersInRole?: number[];
         Cabinets?: number[];
+        Specialties?: number[];
         Password?: string;
         PasswordConfirm?: string;
         TenantId?: number;
@@ -57,6 +58,7 @@
             export declare const EmailSignature: string;
             export declare const UsersInRole: string;
             export declare const Cabinets: string;
+            export declare const Specialties: string;
             export declare const Password: string;
             export declare const PasswordConfirm: string;
             export declare const TenantId: string;
@@ -86,6 +88,7 @@
             'EmailSignature', 
             'UsersInRole', 
             'Cabinets', 
+            'Specialties', 
             'Password', 
             'PasswordConfirm', 
             'TenantId', 
