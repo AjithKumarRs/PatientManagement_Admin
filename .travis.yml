@@ -17,8 +17,8 @@ script:
 
 - echo "TRAVIS_EVENT_TYPE is $TRAVIS_EVENT_TYPE"
 - echo "TRAVIS_BRANCH is $TRAVIS_BRANCH"
-- echo "TRAVIS_TAG is $TRAVIS_TAG"
+- echo "TRAVIS_BUILD_NUMBER is $TRAVIS_BUILD_NUMBER"
 
 - docker login -u $TD_DOCKER_USERNAME -p $TD_DOCKER_PASSWORD
-- docker tag clario_admin s2kdesign/clario_admin:$TRAVIS_TAG-release
-- docker push s2kdesign/clario_admin:$TRAVIS_TAG-release
+- docker tag clario_admin s2kdesign/clario_admin:$TRAVIS_BUILD_NUMBER-release
+- docker push s2kdesign/clario_admin:$TRAVIS_BUILD_NUMBER-release
