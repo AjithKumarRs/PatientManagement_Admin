@@ -4,6 +4,8 @@ solution: PatientManagement.sln
 mono: none
 sudo: false
 dotnet: 2.0.0
+services:
+  - docker
 before_install:
 - dotnet add PatientManagement/PatientManagement.Web/PatientManagement.Web.csproj package signalr -s https://dotnet.myget.org/F/aspnetcore-dev/api/v3/index.json
 before_script:
