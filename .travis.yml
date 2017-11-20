@@ -5,10 +5,6 @@ mono: latest
 sudo: false
 dotnet: 2.0.0
 before_install:
-- nuget sources add -Name signalr -Source https://dotnet.myget.org/F/aspnetcore-dev/api/v3/index.json
-- nuget sources enable -Name signalr
-- nuget sources update -Name signalr
-install:
-- dotnet restore
+- dotnet add package signalr -s https://dotnet.myget.org/F/aspnetcore-dev/api/v3/index.json
 script:
 - dotnet build PatientManagement.sln
