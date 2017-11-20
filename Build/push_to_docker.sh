@@ -5,7 +5,7 @@ echo "TRAVIS_EVENT_TYPE is $TRAVIS_EVENT_TYPE"
 echo "TRAVIS_BRANCH is $TRAVIS_BRANCH"
 echo "TRAVIS_BUILD_NUMBER is $TRAVIS_BUILD_NUMBER"
 
-docker build -t clario_admin -f ../PatientManagement/PatientManagement.Web/Dockerfile .
+docker build -t clario_admin -f PatientManagement/PatientManagement.Web/Dockerfile .
 
 DO_PUSH=1
 
