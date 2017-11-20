@@ -1,7 +1,7 @@
 language: csharp
 dist: trusty
 solution: PatientManagement.sln
-mono: latest
+mono: none
 sudo: false
 dotnet: 2.0.0
 before_install:
@@ -9,3 +9,4 @@ before_install:
 script:
 - dotnet build PatientManagement.Public/PatientManagement.Public.csproj
 - dotnet build PatientManagement/PatientManagement.Web/PatientManagement.Web.csproj 
+- docker build -t clario_admin -f PatientManagement/PatientManagement.Web/Dockerfile .
