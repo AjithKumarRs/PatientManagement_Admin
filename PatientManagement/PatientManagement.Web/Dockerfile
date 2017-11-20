@@ -2,5 +2,5 @@ FROM microsoft/aspnetcore:2.0
 ARG source
 WORKDIR /app
 EXPOSE 80
-COPY ${source:-obj/Docker/publish} .
+COPY publish_admin_release /app
 ENTRYPOINT ["dotnet", "PatientManagement.Web.dll"]
