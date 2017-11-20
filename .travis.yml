@@ -5,6 +5,6 @@ mono: latest
 sudo: false
 dotnet: 2.0.0
 before_install:
-- dotnet add package signalr -s https://dotnet.myget.org/F/aspnetcore-dev/api/v3/index.json
+- dotnet add PatientManagement\PatientManagement.Web\PatientManagement.Web.csproj package signalr -s https://dotnet.myget.org/F/aspnetcore-dev/api/v3/index.json
 script:
 - dotnet build PatientManagement.sln
