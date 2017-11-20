@@ -20,6 +20,12 @@
             export declare const Description: string;
         }
 
-        ['Id', 'OfferId', 'LanguageId', 'Name', 'Description'].forEach(x => (<any>Fields)[x] = x);
+        [
+            'Id', 
+            'OfferId', 
+            'LanguageId', 
+            'Name', 
+            'Description'
+        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

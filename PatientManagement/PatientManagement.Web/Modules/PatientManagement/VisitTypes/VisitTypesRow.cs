@@ -1,5 +1,6 @@
 ﻿
 using PatientManagement.Administration;
+using PatientManagement.Administration.Entities;
 using PatientManagement.PatientManagement.Scripts;
 
 namespace PatientManagement.PatientManagement.Entities
@@ -46,21 +47,7 @@ namespace PatientManagement.PatientManagement.Entities
             get { return Fields.BackgroundColor[this]; }
             set { Fields.BackgroundColor[this] = value; }
         }
-
-        [DisplayName("Insert User Id"), NotNull]
-        public Int32? InsertUserId
-        {
-            get { return Fields.InsertUserId[this]; }
-            set { Fields.InsertUserId[this] = value; }
-        }
-
-        [DisplayName("Insert Date"), NotNull]
-        public DateTime? InsertDate
-        {
-            get { return Fields.InsertDate[this]; }
-            set { Fields.InsertDate[this] = value; }
-        }
-
+        
         IIdField IIdRow.IdField
         {
             get { return Fields.VisitTypeId; }
@@ -108,7 +95,9 @@ namespace PatientManagement.PatientManagement.Entities
             public Int32Field InsertUserId;
             public DateTimeField InsertDate;
             public Int16Field IsActive;
+            public StringField TenantName;
 
+            public StringField InsertUserName;
             public readonly Int32Field TenantId;
 
             public RowFields()
@@ -121,17 +110,55 @@ namespace PatientManagement.PatientManagement.Entities
         public IIdField InsertUserIdField => Fields.InsertUserId;
 
         public DateTimeField InsertDateField => Fields.InsertDate;
+        [DisplayName("Insert User Id"), NotNull, ForeignKey("Users", "UserId"), LeftJoin("usrI"), TextualField("InsertUserName")]
+        [ReadPermission(PermissionKeys.Tenants)]
+        public Int32? InsertUserId
+        {
+            get { return Fields.InsertUserId[this]; }
+            set { Fields.InsertUserId[this] = value; }
+        }
 
-        [Insertable(false), Updatable(false)]
+
+        [DisplayName("Created by"), Expression("usrI.UserName")]
+       // [ReadPermission(PermissionKeys.Tenants)]
+        public String InsertUserName
+        {
+            get { return Fields.InsertUserName[this]; }
+            set { Fields.InsertUserName[this] = value; }
+        }
+
+
+        [DisplayName("Insert Date"), NotNull, QuickFilter()]
+     //   [ReadPermission(PermissionKeys.Tenants)]
+        public DateTime? InsertDate
+        {
+            get { return Fields.InsertDate[this]; }
+            set { Fields.InsertDate[this] = value; }
+        }
+
+
+        #region Tenant
+
+        [DisplayName("Tenant"), ForeignKey("Tenants", "TenantId"), LeftJoin("tnt")]
+        [LookupEditor(typeof(TenantRow))]
+        [ReadPermission(PermissionKeys.Tenants)]
+        [ModifyPermission(PermissionKeys.Tenants)]
         public Int32? TenantId
         {
             get { return Fields.TenantId[this]; }
             set { Fields.TenantId[this] = value; }
         }
-
+        [DisplayName("Tenant"), Expression("tnt.TenantName")]
+        [ReadPermission("Administration:Tenants")]
+        public String TenantName
+        {
+            get { return Fields.TenantName[this]; }
+            set { Fields.TenantName[this] = value; }
+        }
         public Int32Field TenantIdField
         {
             get { return Fields.TenantId; }
         }
+        #endregion
     }
 }

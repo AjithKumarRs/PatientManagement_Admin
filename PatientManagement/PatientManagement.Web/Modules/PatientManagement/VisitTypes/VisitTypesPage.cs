@@ -4,7 +4,7 @@
     using Serenity.Web;
     using Microsoft.AspNetCore.Mvc;
 
-    [PageAuthorize(typeof(Entities.VisitTypesRow))]
+    [PageAuthorize("PatientManagement:VisitTypes:Page")]
     public class VisitTypesController : Controller
     {
         [Route("PatientManagement/VisitTypes")]

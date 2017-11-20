@@ -6,7 +6,7 @@
             }
 
             e.preventDefault();
-            Q.confirm('You have pending changes. Save them?',
+            Q.confirm(Q.text('Validation.PendingChangesConfirmation'),
                 () => element.find('div.save-and-close-button').click(),
                 {
                     onNo: function () {

@@ -36,7 +36,7 @@ namespace PatientManagement.PatientManagement.Scripts
             return TwoLevelCache.GetLocalStoreOnly("MultiTenantLookup:" +
                                                    this.ScriptName + ":" +
                                                    ((UserDefinition)Authorization.UserDefinition).TenantId,
-                TimeSpan.FromHours(1),
+                TimeSpan.FromMinutes(15),
                 new TRow().GetFields().GenerationKey, () =>
                 {
                     return base.GetScript();

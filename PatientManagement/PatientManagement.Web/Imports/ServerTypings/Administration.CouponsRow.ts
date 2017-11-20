@@ -46,6 +46,22 @@
             export declare const UpdateUserName: string;
         }
 
-        ['CouponId', 'Key', 'Name', 'Discount', 'Description', 'EndDate', 'IsUsed', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'IsActive', 'MaxTimeUsing', 'InsertUserName', 'UpdateUserName'].forEach(x => (<any>Fields)[x] = x);
+        [
+            'CouponId', 
+            'Key', 
+            'Name', 
+            'Discount', 
+            'Description', 
+            'EndDate', 
+            'IsUsed', 
+            'InsertUserId', 
+            'InsertDate', 
+            'UpdateUserId', 
+            'UpdateDateField', 
+            'IsActive', 
+            'MaxTimeUsing', 
+            'InsertUserName', 
+            'UpdateUserName'
+        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

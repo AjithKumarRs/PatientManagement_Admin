@@ -54,6 +54,26 @@
             export declare const TenantId: string;
         }
 
-        ['PatientId', 'Name', 'PersonalNumber', 'PhoneNumber', 'Gender', 'FirstRegistrationDate', 'Address', 'Height', 'Weight', 'Email', 'NotifyOnChange', 'WantedWeight', 'InsertUserId', 'InsertDate', 'IsActive', 'TenantName', 'InsertUserName', 'NoteList', 'TenantId'].forEach(x => (<any>Fields)[x] = x);
+        [
+            'PatientId', 
+            'Name', 
+            'PersonalNumber', 
+            'PhoneNumber', 
+            'Gender', 
+            'FirstRegistrationDate', 
+            'Address', 
+            'Height', 
+            'Weight', 
+            'Email', 
+            'NotifyOnChange', 
+            'WantedWeight', 
+            'InsertUserId', 
+            'InsertDate', 
+            'IsActive', 
+            'TenantName', 
+            'InsertUserName', 
+            'NoteList', 
+            'TenantId'
+        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

@@ -1,6 +1,7 @@
 ﻿
 
 using System;
+using PatientManagement.Administration;
 using PatientManagement.PatientManagement.Entities;
 using PatientManagement.PatientManagement.Repositories;
 using Serenity.Data;
@@ -12,7 +13,7 @@ namespace PatientManagement.PatientManagement.Pages
     using Serenity.Web;
     using Microsoft.AspNetCore.Mvc;
 
-    [PageAuthorize(typeof(Entities.UserNotificationsRow))]
+    [PageAuthorize(PermissionKeys.Tenants)]
     public class UserNotificationsController : Controller
     {
         [Route("PatientManagement/UserNotifications")]

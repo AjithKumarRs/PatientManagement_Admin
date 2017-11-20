@@ -18,8 +18,17 @@
             export declare const List: string;
         }
 
-        ['Create', 'Update', 'UpdateAllCurrencies', 'Delete', 'Retrieve', 'List'].forEach(x => {
-            (<any>CurrenciesService)[x] = function (r, s, o) { return Q.serviceRequest(baseUrl + '/' + x, r, s, o); };
+        [
+            'Create', 
+            'Update', 
+            'UpdateAllCurrencies', 
+            'Delete', 
+            'Retrieve', 
+            'List'
+        ].forEach(x => {
+            (<any>CurrenciesService)[x] = function (r, s, o) {
+                return Q.serviceRequest(baseUrl + '/' + x, r, s, o);
+            };
             (<any>Methods)[x] = baseUrl + '/' + x;
         });
     }

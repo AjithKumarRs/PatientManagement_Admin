@@ -10,8 +10,7 @@ namespace PatientManagement.PatientManagement.Entities
     using System.IO;
 
     [ConnectionKey("PatientManagement"), TableName("[dbo].[UserNotifications]"), DisplayName("User Notifications"), InstanceName("User Notifications"), TwoLevelCached]
-    [ReadPermission("PatientManagement:UserNotifications")]
-    [ModifyPermission("PatientManagement:UserNotifications")]
+    [ReadPermission("PatientManagement:Notifications:Read")]
     public sealed class UserNotificationsRow : Row, IIdRow
     {
         [DisplayName("User Notification Id"), Identity]

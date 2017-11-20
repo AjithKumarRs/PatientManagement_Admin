@@ -20,6 +20,10 @@
             export declare const CabinetId: string;
         }
 
-        ['ExternalAccessCabinetId', 'ExternalAccessId', 'CabinetId'].forEach(x => (<any>Fields)[x] = x);
+        [
+            'ExternalAccessCabinetId', 
+            'ExternalAccessId', 
+            'CabinetId'
+        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

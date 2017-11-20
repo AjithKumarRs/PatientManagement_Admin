@@ -35,6 +35,17 @@
             export declare const UpdateDateField: string;
         }
 
-        ['Id', 'CurrencyId', 'Name', 'Rate', 'Enabled', 'BaseCurrencyId', 'BaseCurrencyName', 'UpdateUserId', 'UserName', 'UpdateDateField'].forEach(x => (<any>Fields)[x] = x);
+        [
+            'Id', 
+            'CurrencyId', 
+            'Name', 
+            'Rate', 
+            'Enabled', 
+            'BaseCurrencyId', 
+            'BaseCurrencyName', 
+            'UpdateUserId', 
+            'UserName', 
+            'UpdateDateField'
+        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

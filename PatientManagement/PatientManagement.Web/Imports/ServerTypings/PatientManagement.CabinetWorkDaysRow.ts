@@ -20,6 +20,10 @@
             export declare const CabinetId: string;
         }
 
-        ['WorkDayId', 'WeekDayId', 'CabinetId'].forEach(x => (<any>Fields)[x] = x);
+        [
+            'WorkDayId', 
+            'WeekDayId', 
+            'CabinetId'
+        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

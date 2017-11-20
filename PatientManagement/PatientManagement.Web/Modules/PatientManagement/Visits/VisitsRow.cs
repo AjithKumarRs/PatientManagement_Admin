@@ -1,4 +1,6 @@
 ﻿
+using PatientManagement.Administration;
+using PatientManagement.Administration.Entities;
 using PatientManagement.PatientManagement.Scripts;
 
 namespace PatientManagement.PatientManagement.Entities
@@ -141,6 +143,14 @@ namespace PatientManagement.PatientManagement.Entities
             set => Fields.PatientName[this] = value;
         }
 
+        [DisplayName("Notify On Change"), Expression("jPatient.[NotifyOnChange]")]
+        [BsSwitchEditor]
+        public Boolean? PatientNotifyOnChange
+        {
+            get { return Fields.PatientNotifyOnChange[this]; }
+            set { Fields.PatientNotifyOnChange[this] = value; }
+        }
+
         [DisplayName("Phone Number"), Expression("jPatient.[PhoneNumber]"), QuickSearch]
         public string PhoneNumber
         {
@@ -200,7 +210,7 @@ namespace PatientManagement.PatientManagement.Entities
 
             public Int32Field PatientGender;
             public StringField PatientEmail;
-
+            public BooleanField PatientNotifyOnChange;
             public StringField PhoneNumber;
             public StringField PatientName;
 
@@ -219,9 +229,14 @@ namespace PatientManagement.PatientManagement.Entities
         public IIdField InsertUserIdField => Fields.InsertUserId;
 
         public DateTimeField InsertDateField => Fields.InsertDate;
+
+
         #region Tenant
 
-        [Insertable(false), Updatable(false), ForeignKey("Tenants", "TenantId"), LeftJoin("tnt")]
+        [DisplayName("Tenant"), ForeignKey("Tenants", "TenantId"), LeftJoin("tnt")]
+        [LookupEditor(typeof(TenantRow))]
+        [ReadPermission(PermissionKeys.Tenants)]
+        [ModifyPermission(PermissionKeys.Tenants)]
         public Int32? TenantId
         {
             get { return Fields.TenantId[this]; }

@@ -1,4 +1,9 @@
-﻿using PatientManagement.Administration;
+﻿using System;
+using Microsoft.Rest;
+using PatientManagement.Administration;
+using PatientManagement.Administration.Entities;
+using PatientManagement.PatientManagement.Entities;
+using PatientManagement.Web.Modules.Common;
 using Serenity;
 using Serenity.Data;
 using Serenity.Services;
@@ -73,7 +78,30 @@ namespace PatientManagement
         public void OnBeforeDelete(IDeleteRequestHandler handler) { }
         public void OnBeforeExecuteQuery(IRetrieveRequestHandler handler) { }
         public void OnBeforeExecuteQuery(IListRequestHandler handler) { }
-        public void OnBeforeSave(ISaveRequestHandler handler) { }
+
+        public void OnBeforeSave(ISaveRequestHandler handler)
+        {
+            if (Authorization.HasPermission(PermissionKeys.Tenants))
+                return;
+
+            if (handler.Row is PaymentsRow
+                || handler.Row is SubscriptionsRow
+                || handler.Row is  PaymentsDetailsRow)
+                {
+                    return;
+                }
+            var user = (UserDefinition)Authorization.UserDefinition;
+
+            var tenantFld = TenantRow.Fields;
+            var connection = SqlConnections.NewFor<TenantRow>();
+            var tenant = connection.First<TenantRow>(tenantFld.TenantId == user.TenantId);
+
+            if (tenant?.SubscriptionRequired != null && tenant.SubscriptionRequired.Value &&
+                UserSubscriptionHelper.GetTenantPaidDays(user.TenantId) < DateTime.Now)
+            {
+                throw new ValidationException(Texts.Site.Subscriptions.Expired.SubscriptionInfoBoxHeader);
+            }
+        }
         public void OnPrepareQuery(IDeleteRequestHandler handler, SqlQuery query) { }
         public void OnPrepareQuery(ISaveRequestHandler handler, SqlQuery query) { }
         public void OnReturn(IDeleteRequestHandler handler) { }

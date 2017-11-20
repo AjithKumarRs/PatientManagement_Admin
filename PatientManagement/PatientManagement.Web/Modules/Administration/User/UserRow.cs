@@ -33,7 +33,7 @@ namespace PatientManagement.Administration.Entities
         }
 
         [DisplayName("Cabinets")]
-        [LookupEditor(typeof(CabinetsRow), Multiple = true), NotMapped]
+        [LookupEditor(typeof(CabinetsRow), Multiple = true, FilterField = "IsActive", FilterValue = 1), NotMapped]
         [LinkingSetRelation(typeof(CabinetRepresentativesRow), "UserId", "CabinetId")]
         [MinSelectLevel(SelectLevel.Details), QuickFilter]
         public List<Int32> Cabinets
@@ -42,6 +42,16 @@ namespace PatientManagement.Administration.Entities
             set { Fields.Cabinets[this] = value; }
         }
 
+
+        [DisplayName("Specialties")]
+        [LookupEditor(typeof(MedicalSpecialtyRow), Multiple = true, FilterField = "IsActive", FilterValue = 1), NotMapped]
+        [LinkingSetRelation(typeof(UserSpecialtiesRow), "UserId", "SpecialtyId")]
+        [MinSelectLevel(SelectLevel.Details), QuickFilter]
+        public List<Int32> Specialties
+        {
+            get { return (List<Int32>)Fields.Specialties[this]; }
+            set { Fields.Specialties[this] = value; }
+        }
 
         [ReadPermission(PermissionKeys.Tenants)]
         [DisplayName("Source"), Size(4), NotNull, Insertable(false), Updatable(false), DefaultValue("site")]
@@ -244,6 +254,7 @@ namespace PatientManagement.Administration.Entities
             public ListField<Int32> UsersInRole;
 
             public ListField<Int32> Cabinets;
+            public ListField<Int32> Specialties;
 
             public StringField Password;
             public StringField PasswordConfirm;

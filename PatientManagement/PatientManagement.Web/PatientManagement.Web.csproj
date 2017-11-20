@@ -22,38 +22,23 @@
     <TypeScriptToolsVersion>2.5.2</TypeScriptToolsVersion>
     <EnableDefaultContentItems>false</EnableDefaultContentItems>
     <MvcRazorExcludeRefAssembliesFromPublish>false</MvcRazorExcludeRefAssembliesFromPublish>
+    <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
-  <ItemGroup>
-    <Compile Remove="Modules\Administration\OffersLang\**" />
-    <Compile Remove="Modules\Common\Dashboard\**" />
-    <Content Remove="Modules\Administration\OffersLang\**" />
-    <Content Remove="Modules\Common\Dashboard\**" />
-    <EmbeddedResource Remove="Modules\Administration\OffersLang\**" />
-    <EmbeddedResource Remove="Modules\Common\Dashboard\**" />
-    <None Remove="Modules\Administration\OffersLang\**" />
-    <None Remove="Modules\Common\Dashboard\**" />
-  </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot/favicon-16x16.png" />
     <Content Remove="wwwroot/Scripts\moment\jquery.min.js" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="Modules\Administration\Tenant\TenantColumns.cs.20170609_162523.bak" />
-    <None Remove="Modules\PatientManagement\Patients\PatientManagement.PatientsDialog.Template.html" />
-    <None Remove="Views\Templates\EntityDialog.Template.html" />
-    <None Remove="Views\Templates\PropertyDialog.Template.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Modules\PatientManagement\Patients\PatientManagement.PatientsDialog.Template.html" CopyToPublishDirectory="PreserveNewest" />
-    <Content Include="Views\Templates\EntityDialog.Template.html" CopyToPublishDirectory="PreserveNewest" />
-    <Content Include="Views\Templates\NotificationDropdownMenu.Template.html" CopyToPublishDirectory="PreserveNewest" />
     <Content Include="wwwroot\Content\site\site.theme.css" />
     <Content Include="wwwroot\Content\site\site.theme.min.css" />
     <Content Include="wwwroot\Scripts\serenity\Serenity.Script.UI.es5.js" />
     <Content Include="wwwroot\Scripts\site\FullCalendarExtensions.js" />
-    <EmbeddedResource Include="Views\Templates\PropertyDialog.Template.html" CopyToPublishDirectory="PreserveNewest" />
-    <EmbeddedResource Include="Views\Templates\HelloModal.Template.html" CopyToPublishDirectory="PreserveNewest" />
-    <EmbeddedResource Include="Views\Templates\EntityDialogBoxSolid.Template.html" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="Views\Templates\EntityDialog.Template.html" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="Views\Templates\PropertyDialog.Template.html" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="Modules\PatientManagement\HelloModal\HelloModal.Template.html" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="Views\Templates\EntityDialogBoxSolid.Template.html" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="Modules\PatientManagement\Patients\PatientManagement.PatientsDialog.Template.html" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="Modules\PatientManagement\Notifications\NotificationDropdownMenu.Template.html" CopyToPublishDirectory="PreserveNewest" />
   </ItemGroup>
   <ItemGroup>
     <None Update="wwwroot\**\*">
@@ -70,7 +55,7 @@
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
     <PackageReference Include="Microsoft.Win32.Registry" Version="4.4.0" />
     <PackageReference Include="Serenity.FluentMigrator.Runner" Version="1.6.904" />
-    <PackageReference Include="Serenity.Web" Version="3.0.8" />
+    <PackageReference Include="Serenity.Web" Version="3.3.10" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Server" Version="0.2.0-preview2-22683" />
     <PackageReference Include="NodaMoney" Version="1.0.0" />
     <PackageReference Include="Sendgrid" Version="9.4.1" />
@@ -97,15 +82,12 @@
     <Warning Condition="'@(Filtered)'!=''" Code="CSHTML" File="%(Filtered.Identity)" Text="View is not set to [BuildAction:Content]" />
   </Target>-->
   <ItemGroup>
-    <DotNetCliToolReference Include="Serenity.CodeGenerator" Version="3.0.8" />
+    <DotNetCliToolReference Include="Serenity.CodeGenerator" Version="3.3.10" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Reporting\" />
     <Folder Include="wwwroot\Scripts\moment\" />
     <Folder Include="wwwroot\Scripts\contextMenu\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Migrations\DefaultDB\DefaultDB_20170609_131800_CreatedBillingsAndInvoices.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Update="appsettings.json">
@@ -241,6 +223,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Modules\PatientManagement\Patients\PatientsIndex.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\PatientManagement\MedicalSpecialty\MedicalSpecialtyIndex.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Modules\PatientManagement\UserNotifications\UserNotificationsIndex.cshtml">

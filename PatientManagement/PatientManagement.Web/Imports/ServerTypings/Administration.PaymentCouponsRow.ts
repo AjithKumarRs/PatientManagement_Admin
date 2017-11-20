@@ -15,6 +15,10 @@
             export declare const PaymentId: string;
         }
 
-        ['PaymentCouponId', 'CouponId', 'PaymentId'].forEach(x => (<any>Fields)[x] = x);
+        [
+            'PaymentCouponId', 
+            'CouponId', 
+            'PaymentId'
+        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

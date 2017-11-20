@@ -3,6 +3,7 @@ using PatientManagement.Administration;
 using Serenity.Navigation;
 using Administration = PatientManagement.Administration.Pages;
 using Membership  = PatientManagement.Membership.Pages;
+using PatientManagement2 = PatientManagement.PatientManagement.Pages;
 
 [assembly: NavigationLink(8000, "Sent Emails", typeof(Administration.SentEmailsController), icon: "fa-envelope-open-o")]
 
@@ -18,6 +19,7 @@ using Membership  = PatientManagement.Membership.Pages;
 [assembly: NavigationLink(9000, "Administration/External Access", typeof(Administration.ExternalAccessController), icon: "fa-link")]
 
 [assembly: NavigationMenu(9000, "System Settings", icon: "fa-tasks ")]
+[assembly: NavigationLink(9000, "System Settings/Medical Specialties", typeof(PatientManagement2.MedicalSpecialtyController), icon: "fa-medkit")]
 [assembly: NavigationLink(9000, "System Settings/Payment Options", typeof(Administration.PaymentOptionsController), icon: "fa-money")]
 [assembly: NavigationLink(9000, "System Settings/Offers", typeof(Administration.OffersController), icon: "fa-file-text")]
 [assembly: NavigationLink(9000, "System Settings/Coupons", typeof(Administration.CouponsController), icon: "fa-percent")]

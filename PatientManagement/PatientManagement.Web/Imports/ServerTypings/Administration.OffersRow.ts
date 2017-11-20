@@ -10,13 +10,14 @@
         ExpirationDate?: string;
         Description?: string;
         Price?: number;
-        Enabled?: boolean;
+        Enabled?: number;
         CurrencyId?: number;
         RoleId?: number;
         CurrencyCurrencyId?: string;
         CurrencyName?: string;
         CurrencyEnabled?: boolean;
         RoleRoleName?: string;
+        IsPublic?: number;
         InsertUserId?: number;
         InsertDate?: string;
         UpdateUserId?: number;
@@ -55,6 +56,7 @@
             export declare const CurrencyName: string;
             export declare const CurrencyEnabled: string;
             export declare const RoleRoleName: string;
+            export declare const IsPublic: string;
             export declare const InsertUserId: string;
             export declare const InsertDate: string;
             export declare const UpdateUserId: string;
@@ -64,6 +66,32 @@
             export declare const UpdateUserName: string;
         }
 
-        ['OfferId', 'Name', 'MaximumSubscriptionTime', 'MaximumUsersPerTenant', 'MaximumVisitsPerTenant', 'MaximumPatientsPerTenant', 'MaximumCabinets', 'ExpirationDate', 'Description', 'Price', 'Enabled', 'CurrencyId', 'RoleId', 'CurrencyCurrencyId', 'CurrencyName', 'CurrencyEnabled', 'RoleRoleName', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'IsActive', 'InsertUserName', 'UpdateUserName'].forEach(x => (<any>Fields)[x] = x);
+        [
+            'OfferId', 
+            'Name', 
+            'MaximumSubscriptionTime', 
+            'MaximumUsersPerTenant', 
+            'MaximumVisitsPerTenant', 
+            'MaximumPatientsPerTenant', 
+            'MaximumCabinets', 
+            'ExpirationDate', 
+            'Description', 
+            'Price', 
+            'Enabled', 
+            'CurrencyId', 
+            'RoleId', 
+            'CurrencyCurrencyId', 
+            'CurrencyName', 
+            'CurrencyEnabled', 
+            'RoleRoleName', 
+            'IsPublic', 
+            'InsertUserId', 
+            'InsertDate', 
+            'UpdateUserId', 
+            'UpdateDateField', 
+            'IsActive', 
+            'InsertUserName', 
+            'UpdateUserName'
+        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

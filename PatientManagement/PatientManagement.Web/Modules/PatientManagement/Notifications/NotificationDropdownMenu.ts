@@ -90,7 +90,7 @@ namespace PatientManagement.PatientManagement {
 
 
         }
-
+        
         protected markAsSeen() {
 
             var entities = new Array<PatientManagement.UserNotificationsRow>();

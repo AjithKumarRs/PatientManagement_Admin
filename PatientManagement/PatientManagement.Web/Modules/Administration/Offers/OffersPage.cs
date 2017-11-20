@@ -45,8 +45,9 @@ namespace PatientManagement.Administration.Pages
                 }
 
                 var offerFields = OffersRow.Fields;
-                var offers = connection.List<OffersRow>()
-                    .Select(x => new { x.OfferId, x.Name, x.Price, x.CurrencyId });
+                var offers = connection.List<OffersRow>(s => s
+                .Select(offerFields.OfferId, offerFields.Name, offerFields.Price, offerFields.CurrencyId)
+                .Where(offerFields.IsActive == 1 && offerFields.IsPublic == 1 && offerFields.Enabled == 1));
 
                 foreach (var offer in offers)
                 {

@@ -18,5 +18,8 @@ namespace PatientManagement.PatientManagement.Forms
         public String BorderColor { get; set; }
 
         public String BackgroundColor { get; set; }
+
+        public Int32? TenantId { get; set; }
+
     }
 }

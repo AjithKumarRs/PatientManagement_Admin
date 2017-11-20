@@ -7,6 +7,8 @@
         InsertUserId?: number;
         InsertDate?: string;
         IsActive?: number;
+        TenantName?: string;
+        InsertUserName?: string;
         TenantId?: number;
     }
 
@@ -29,9 +31,22 @@
             export declare const InsertUserId: string;
             export declare const InsertDate: string;
             export declare const IsActive: string;
+            export declare const TenantName: string;
+            export declare const InsertUserName: string;
             export declare const TenantId: string;
         }
 
-        ['VisitTypeId', 'Name', 'BorderColor', 'BackgroundColor', 'InsertUserId', 'InsertDate', 'IsActive', 'TenantId'].forEach(x => (<any>Fields)[x] = x);
+        [
+            'VisitTypeId', 
+            'Name', 
+            'BorderColor', 
+            'BackgroundColor', 
+            'InsertUserId', 
+            'InsertDate', 
+            'IsActive', 
+            'TenantName', 
+            'InsertUserName', 
+            'TenantId'
+        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

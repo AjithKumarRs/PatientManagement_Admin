@@ -17,6 +17,8 @@ namespace PatientManagement.Administration.Forms
         public String DisplayName { get; set; }
         public String Email { get; set; }
 
+        public List<Int32> Specialties { get; set; }
+
         [Category("Add or change password")]
 
         [PasswordEditor, Required(true)]
@@ -31,8 +33,7 @@ namespace PatientManagement.Administration.Forms
 
         public short RestrictedToCabinets { get; set; }
         [Category("Extra fields")]
-
-
+        
         public string PhoneNumber { get; set; }
 
         public String WebSite { get; set; }

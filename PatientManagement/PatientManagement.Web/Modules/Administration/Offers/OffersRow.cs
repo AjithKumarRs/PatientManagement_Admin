@@ -1,4 +1,7 @@
 ﻿
+using PatientManagement.PatientManagement.Scripts;
+using PatientManagement.Web.Modules.Administration.Offers;
+
 namespace PatientManagement.Administration.Entities
 {
     using Serenity;
@@ -12,9 +15,9 @@ namespace PatientManagement.Administration.Entities
     [ConnectionKey("Default"), TableName("[dbo].[Offers]"), DisplayName("Offers"), InstanceName("Offers"), TwoLevelCached]
     [ReadPermission("AdministrationTenants:Offers:Read")]
     [ModifyPermission("Administration:Offers:Modify")]
-    [LookupScript("Administration.Offers")]
+    [LookupScript("Administration.Offers", LookupType = typeof(OfferRowLookupScript<>))]
     [LocalizationRow(typeof(OfferLangRow))]
-    public sealed class OffersRow : Row, IIdRow, INameRow, ILoggingRow, IIsActiveDeletedRow
+    public sealed class OffersRow : Row, IIdRow, INameRow, ILoggingRow, IIsActiveDeletedRow, IOfferRow
     {
         [DisplayName("OfferId"), Identity]
         public Int32? OfferId
@@ -44,7 +47,7 @@ namespace PatientManagement.Administration.Entities
         }
 
         [DisplayName("Enabled"), BsSwitchEditor, NotNull]
-        public Boolean? Enabled
+        public Int16? Enabled
         {
             get { return Fields.Enabled[this]; }
             set { Fields.Enabled[this] = value; }
@@ -52,6 +55,7 @@ namespace PatientManagement.Administration.Entities
 
         
         [DisplayName("Maximum Using Days"), IntegerEditor]
+        [LookupInclude]
         public Int32? MaximumSubscriptionTime
         {
             get { return Fields.MaximumSubscriptionTime[this]; }
@@ -134,7 +138,14 @@ namespace PatientManagement.Administration.Entities
             get { return Fields.RoleRoleName[this]; }
             set { Fields.RoleRoleName[this] = value; }
         }
-
+        [DisplayName("Is Public"), NotNull]
+        [LookupInclude]
+        [BsSwitchEditor]
+        public Int16? IsPublic
+        {
+            get { return Fields.IsPublic[this]; }
+            set { Fields.IsPublic[this] = value; }
+        }
         #region ILoggingRow
 
         [DisplayName("Insert User Id"), NotNull, ForeignKey("Users", "UserId"), LeftJoin("usrI"), TextualField("InsertUserName")]
@@ -215,6 +226,8 @@ namespace PatientManagement.Administration.Entities
 
 
         #endregion
+        
+
 
         IIdField IIdRow.IdField
         {
@@ -224,6 +237,11 @@ namespace PatientManagement.Administration.Entities
         StringField INameRow.NameField
         {
             get { return Fields.Name; }
+        }
+
+        Int16Field IOfferRow.Enabled {get { return Fields.Enabled; }}
+
+        Int16Field IOfferRow.IsPublic {get { return Fields.IsPublic; }
         }
 
         public static readonly RowFields Fields = new RowFields().Init();
@@ -246,7 +264,7 @@ namespace PatientManagement.Administration.Entities
             public DateTimeField ExpirationDate;
             public StringField Description;
             public DecimalField Price;
-            public BooleanField Enabled;
+            public Int16Field Enabled;
 
             public Int32Field CurrencyId;
             public Int32Field RoleId;
@@ -256,6 +274,7 @@ namespace PatientManagement.Administration.Entities
             public BooleanField CurrencyEnabled;
 
             public StringField RoleRoleName;
+            public Int16Field IsPublic;
 
 
             public Int32Field InsertUserId;

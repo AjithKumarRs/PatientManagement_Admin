@@ -31,6 +31,15 @@
             export declare const TenantId: string;
         }
 
-        ['PatientFileUploadId', 'PatientId', 'FilePath', 'Description', 'InsertUserId', 'InsertDate', 'PatientName', 'TenantId'].forEach(x => (<any>Fields)[x] = x);
+        [
+            'PatientFileUploadId', 
+            'PatientId', 
+            'FilePath', 
+            'Description', 
+            'InsertUserId', 
+            'InsertDate', 
+            'PatientName', 
+            'TenantId'
+        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

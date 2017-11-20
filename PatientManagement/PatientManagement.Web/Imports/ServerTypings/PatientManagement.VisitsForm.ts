@@ -11,7 +11,8 @@
         StartDate: Serenity.DateTimeEditor;
         EndDate: Serenity.DateTimeEditor;
         Description: Serenity.TextAreaEditor;
+        TenantId: Serenity.LookupEditor;
     }
 
-    [['PatientId', () => Serenity.LookupEditor], ['VisitTypeId', () => Serenity.LookupEditor], ['CabinetId', () => Serenity.LookupEditor], ['StartDate', () => Serenity.DateTimeEditor], ['EndDate', () => Serenity.DateTimeEditor], ['Description', () => Serenity.TextAreaEditor]].forEach(x => Object.defineProperty(VisitsForm.prototype, <string>x[0], { get: function () { return this.w(x[0], (x[1] as any)()); }, enumerable: true, configurable: true }));
+    [['PatientId', () => Serenity.LookupEditor], ['VisitTypeId', () => Serenity.LookupEditor], ['CabinetId', () => Serenity.LookupEditor], ['StartDate', () => Serenity.DateTimeEditor], ['EndDate', () => Serenity.DateTimeEditor], ['Description', () => Serenity.TextAreaEditor], ['TenantId', () => Serenity.LookupEditor]].forEach(x => Object.defineProperty(VisitsForm.prototype, <string>x[0], { get: function () { return this.w(x[0], (x[1] as any)()); }, enumerable: true, configurable: true }));
 }

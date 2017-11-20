@@ -48,6 +48,23 @@
             export declare const UpdateUserName: string;
         }
 
-        ['ExternalAccessCabinets', 'ExternalAccessId', 'Name', 'Url', 'VisitedCount', 'AccessType', 'OutputFormat', 'TenantId', 'InsertUserId', 'InsertDate', 'UpdateUserId', 'UpdateDateField', 'IsActive', 'TenantName', 'InsertUserName', 'UpdateUserName'].forEach(x => (<any>Fields)[x] = x);
+        [
+            'ExternalAccessCabinets', 
+            'ExternalAccessId', 
+            'Name', 
+            'Url', 
+            'VisitedCount', 
+            'AccessType', 
+            'OutputFormat', 
+            'TenantId', 
+            'InsertUserId', 
+            'InsertDate', 
+            'UpdateUserId', 
+            'UpdateDateField', 
+            'IsActive', 
+            'TenantName', 
+            'InsertUserName', 
+            'UpdateUserName'
+        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

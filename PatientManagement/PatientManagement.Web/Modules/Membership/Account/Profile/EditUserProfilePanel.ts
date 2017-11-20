@@ -2,7 +2,6 @@
 
     @Serenity.Decorators.registerClass()
     export class EditUserProfilePanel extends Serenity.PropertyPanel<EditUserProfileRequest, any> {
-
         protected getFormKey() { return EditUserProfileForm.formKey; }
 
         private form: EditUserProfileForm;
@@ -20,15 +19,18 @@
                 resp => {
                     user = resp.Entity;
                     this.form.DisplayName.value = user.DisplayName;
-                    if (this.form.UserImage.value != null)
-                        this.form.UserImage.value.Filename = user.UserImage;
+                    if (user.UserImage != null)
+                       //TODO how to add image to ImageUploadEditor
 
                     this.form.PhoneNumber.value = user.PhoneNumber;
                     this.form.Email.value = user.Email;
                     this.form.WebSite.value = user.WebSite;
                     this.form.EmailSignature.value = user.EmailSignature;
-                });
 
+                    this.form.EmailSignature.element.triggerHandler('shown');
+
+
+                });
 
             this.byId('EditUserProfileSubmitButton').click(e => {
                 e.preventDefault();
@@ -49,5 +51,6 @@
                 });
             });
         }
+        
     }
 }

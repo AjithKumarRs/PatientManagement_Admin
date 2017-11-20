@@ -34,7 +34,38 @@ namespace PatientManagement.PatientManagement.Entities
             get { return Fields.Name[this]; }
             set { Fields.Name[this] = value; }
         }
-        
+
+
+        [DisplayName("Description"), Size(-1),  QuickSearch]
+        [TextAreaEditor(Rows = 10)]
+        public String Description
+        {
+            get { return Fields.Description[this]; }
+            set { Fields.Description[this] = value; }
+        }
+
+
+        [DisplayName("City"), Size(500),  QuickSearch]
+        public String City
+        {
+            get { return Fields.City[this]; }
+            set { Fields.City[this] = value; }
+        }
+
+        [DisplayName("Country"), Size(500),  QuickSearch]
+        public String Country
+        {
+            get { return Fields.Country[this]; }
+            set { Fields.Country[this] = value; }
+        }
+
+        [DisplayName("Phone Number"),  QuickSearch]
+        public Int32? PhoneNumber
+        {
+            get { return Fields.PhoneNumber[this]; }
+            set { Fields.PhoneNumber[this] = value; }
+        }
+
         IIdField IIdRow.IdField
         {
             get { return Fields.CabinetId; }
@@ -78,6 +109,13 @@ namespace PatientManagement.PatientManagement.Entities
         {
             get { return Fields.Representatives[this]; }
             set { Fields.Representatives[this] = value; }
+        }
+
+        [NotMapped, DisplayName("User Specialties")]
+        public List<String> UserSpecialties
+        {
+            get { return Fields.UserSpecialties[this]; }
+            set { Fields.UserSpecialties[this] = value; }
         }
 
         #region ILoggingRow
@@ -197,9 +235,14 @@ namespace PatientManagement.PatientManagement.Entities
             public ListField<Int32> WorkDays;
 
             public StringField Name;
+            public StringField Description;
+            public StringField City;
+            public StringField Country;
             public ListField<Int32> Representatives;
+            public ListField<String> UserSpecialties;
             public Int16Field WorkHoursStart;
             public Int16Field WorkHoursEnd;
+            public Int32Field PhoneNumber;
 
             public Int32Field TenantId;
             public Int32Field InsertUserId;

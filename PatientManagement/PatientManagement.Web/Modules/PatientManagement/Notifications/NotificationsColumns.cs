@@ -36,5 +36,8 @@ namespace PatientManagement.PatientManagement.Columns
 
         [Width(150)]
         public DateTime InsertDate { get; set; }
+
+        public string TenantName { get; set; }
+
     }
 }

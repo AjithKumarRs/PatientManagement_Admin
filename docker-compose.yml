@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  patientmanagement.web:
+    image: patientmanagement.web
+    build:
+      context: ./PatientManagement/PatientManagement.Web
+      dockerfile: Dockerfile
+    depends_on: 
+        - sql.data
+
+  sql.data:
+    image: microsoft/mssql-server-linux
