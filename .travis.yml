@@ -11,6 +11,14 @@ script:
 - dotnet build PatientManagement/PatientManagement.Web/PatientManagement.Web.csproj 
 
 - mkdir -p publish_release
-- dotnet publish PatientManagement/PatientManagement.Web/*.csproj -c Release -f netcoreapp2.0 -o ../../publish_admin_release
+- dotnet publish PatientManagement/PatientManagement.Web/*.csproj -c Release -f netcoreapp2.0 -o ../../publish_clario_admin_release
 
 - docker build -t clario_admin -f PatientManagement/PatientManagement.Web/Dockerfile .
+
+- echo "TRAVIS_EVENT_TYPE is $TRAVIS_EVENT_TYPE"
+- echo "TRAVIS_BRANCH is $TRAVIS_BRANCH"
+- echo "TRAVIS_TAG is $TRAVIS_TAG"
+
+- docker login -u $TD_DOCKER_USERNAME -p $TD_DOCKER_PASSWORD
+- docker tag clario_admin s2kdesign/clario_admin:$TRAVIS_TAG-release
+- docker push s2kdesign/clario_admin:$TRAVIS_TAG-release
