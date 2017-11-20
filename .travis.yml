@@ -1,0 +1,9 @@
+language: csharp
+dist: trusty
+mono: none
+dotnet: 2.0
+install:
+- nuget sources add -Name signalr -Source https://dotnet.myget.org/F/aspnetcore-dev/api/v3/index.json
+- dotnet restore
+script:
+- dotnet build PatientManagement.sln
