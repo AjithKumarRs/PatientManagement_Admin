@@ -8,8 +8,6 @@ before_install:
 - nuget sources add -Name signalr -Source https://dotnet.myget.org/F/aspnetcore-dev/api/v3/index.json
 - nuget sources enable -Name signalr
 - nuget sources update -Name signalr
-- nuget sources list
-- cat /home/travis/.config/NuGet/NuGet.Config
 install:
 - dotnet restore
 script:
