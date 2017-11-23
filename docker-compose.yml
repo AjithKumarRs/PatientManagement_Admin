@@ -2,7 +2,7 @@ version: '3'
 
 services:
   patientmanagement.web:
-    image: patientmanagement.web
+    image: clario_admin
     build:
       context: ./PatientManagement/PatientManagement.Web
       dockerfile: Dockerfile
