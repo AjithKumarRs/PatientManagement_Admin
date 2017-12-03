@@ -1,13 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2002
+VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PatientManagement.Web", "PatientManagement\PatientManagement.Web\PatientManagement.Web.csproj", "{F9DB2820-B885-442D-AAF8-79DE62044147}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PatientManagement.Public", "PatientManagement.Public\PatientManagement.Public.csproj", "{8A48E1EE-9FA3-479A-82EE-19EFEE999C14}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{A4AF014F-E36E-4C2B-AF6D-4E59CBED4C0B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{679D4194-3141-4D03-8479-65B79FA32C67}"
+	ProjectSection(SolutionItems) = preProject
+		Build\build.sh = Build\build.sh
+		Build\push_to_docker.sh = Build\push_to_docker.sh
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
