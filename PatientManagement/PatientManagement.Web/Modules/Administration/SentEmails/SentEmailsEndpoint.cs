@@ -28,7 +28,7 @@ namespace PatientManagement.Administration.Endpoints
                               Request.GetBaseUri().ToString();
 
             emailModel.SetTenantSetings(externalUrl, emailModel);
-
+            
             var emailBody = TemplateHelper.RenderViewToString(HttpContext.RequestServices,
                     MVC.Views.Common.EmailTemplates.UserToPatientEmail.EmailTemplates_UserToPatientEmail, emailModel);
 
@@ -42,7 +42,7 @@ namespace PatientManagement.Administration.Endpoints
         {
             return new MyRepository().Update(uow, request);
         }
- 
+
         [HttpPost, AuthorizeDelete(typeof(MyRow))]
         public DeleteResponse Delete(IUnitOfWork uow, DeleteRequest request)
         {
@@ -52,6 +52,20 @@ namespace PatientManagement.Administration.Endpoints
         public RetrieveResponse<MyRow> Retrieve(IDbConnection connection, RetrieveRequest request)
         {
             return new MyRepository().Retrieve(connection, request);
+        }
+
+
+        public RetrieveResponse<string> RetrieveEmailSignature(IDbConnection connection, RetrieveRequest request)
+        {
+            var user = (UserDefinition)Authorization.UserDefinition;
+            var response = new RetrieveResponse<string>();
+           
+            //Get Email Signature
+            if (connection.ById<TenantRow>(user.TenantId).OverrideUsersEmailSignature ?? false)
+                response.Entity  = connection.ById<TenantRow>(user.TenantId).TenantEmailSignature;
+            else
+                response.Entity = connection.ById<UserRow>(user.UserId).EmailSignature;
+            return response;
         }
 
         public ListResponse<MyRow> List(IDbConnection connection, ListRequest request)

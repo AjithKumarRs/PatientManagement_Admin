@@ -22,7 +22,15 @@ namespace PatientManagement.Administration {
             var items = this.form.ToEmail.get_items();
             items = items.filter(item => typeof item.source["Email"] !== 'undefined');
             this.form.ToEmail.items = items;
-            
+
+            SentEmailsService.RetrieveEmailSignature(<any>{},
+                resp => {
+                    //this.form.EmailSignature.element.html(resp.Entity);
+                   // var elem = "<div class='pull-right' style='width: 80%;'>" + resp.Entity + "</div>";
+                  //  this.element.append(elem);
+
+                    this.form.EmailSignature.value = resp.Entity;
+                });
         }
 
         public sendPredefinedEmail = (visitId): void => {
@@ -35,8 +43,8 @@ namespace PatientManagement.Administration {
 
                 //TODO: Remove this service call! 
                 PatientManagement.PatientsService.Retrieve(<any>{
-                        EntityId: visit.PatientId
-                    },
+                    EntityId: visit.PatientId
+                },
                     resp => {
                         var patient = <PatientManagement.PatientsRow>{};
                         patient = resp.Entity;

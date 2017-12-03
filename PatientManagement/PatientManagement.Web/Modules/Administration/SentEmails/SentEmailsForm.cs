@@ -20,5 +20,7 @@ namespace PatientManagement.Administration.Forms
         // public String ToName { get; set; }
         public String Subject { get; set; }
         public String Body { get; set; }
+
+        public string EmailSignature { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace PatientManagement.Administration.Entities
     using System.IO;
 
     [ConnectionKey("Default"), TableName("[dbo].[SentEmails]"), DisplayName("Sent Emails"), InstanceName("Sent Emails"), TwoLevelCached]
-   
+
     [ReadPermission("PatientManagement:SentEmails:Read")]
     [InsertPermission("PatientManagement:SentEmails:Insert")]
     [DeletePermission("Administration:SentEmails:Delete")]
@@ -34,8 +34,13 @@ namespace PatientManagement.Administration.Entities
             get { return Fields.FromEmail[this]; }
             set { Fields.FromEmail[this] = value; }
         }
+        [DisplayName("Email Signature"), NotMapped, ReadOnly(true), HtmlNoteContentEditor]
+        public string EmailSignature
+        {
+            get { return Fields.EmailSignature[this]; }
+            set { Fields.EmailSignature[this] = value; }
+        }
 
-      
 
         [DisplayName("User Display Name"), NotMapped]
         public string UserDisplayName
@@ -214,7 +219,7 @@ namespace PatientManagement.Administration.Entities
             public Int32Field UpdateUserId;
             public DateTimeField UpdateDateField;
             public Int16Field IsActive;
-
+            public StringField EmailSignature;
 
             public StringField TenantName;
             public StringField InsertUserName;

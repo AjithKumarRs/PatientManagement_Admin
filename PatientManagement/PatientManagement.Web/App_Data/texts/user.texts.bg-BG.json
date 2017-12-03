@@ -179,6 +179,7 @@
   "Db.Administration.Role.UpdateUserName": "Последно променил",
   "Db.Administration.Role.UsersInRole": "Потребители към роля",
   "Db.Administration.SentEmails.Body": "Съдържание",
+  "Db.Administration.SentEmails.EmailSignature": "Подпис на Имейл",
   "Db.Administration.SentEmails.EntityPlural": "Изпратени имейли",
   "Db.Administration.SentEmails.EntitySingular": "Имейл",
   "Db.Administration.SentEmails.FromEmail": "От Имейл",
