@@ -19,14 +19,17 @@ namespace PatientManagement.Common
         {
 #if COREFX
             var apiKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
+            if (apiKey != null)
+            {
+                var client = new SendGridClient(apiKey);
+                var from = new EmailAddress("no-reply@myclario.com", "Registration");
+                var to = new EmailAddress(address, displayName);
+                var plainTextContent = body;
+                var htmlContent = body;
+                var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+                var response = client.SendEmailAsync(msg).Result;
 
-            var client = new SendGridClient(apiKey);
-            var from = new EmailAddress("no-reply@myclario.com", "Registration");
-            var to = new EmailAddress(address, displayName);
-            var plainTextContent = body;
-            var htmlContent = body;
-            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
-            var response =  client.SendEmailAsync(msg).Result;
+            }
 
 
             //var message = new MimeMessage();

@@ -125,7 +125,8 @@ namespace PatientManagement.PatientManagement {
                         $('#hellomodal-fast-continue').hide(200);
                     }
                 } else {
-                    $('.btn-continiue-hellomodal').hide(400);
+                    $('.btn-continiue-hellomodal').hide();
+
                     $('#btn-close-hellomodal').removeClass("btn-default");
                     $('#btn-close-hellomodal').addClass("btn-success").text(Q.text("Site.HelloModal.ButtonCloseAndFinnish"));
 

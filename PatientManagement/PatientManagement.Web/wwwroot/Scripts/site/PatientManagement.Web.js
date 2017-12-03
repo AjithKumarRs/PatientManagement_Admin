@@ -6634,6 +6634,8 @@ var PatientManagement;
                 _this.form = new PatientManagement.VisitsForm(_this.idPrefix);
                 _this.form.PatientId.changeSelect2(function (e) {
                     var patientId = _this.form.PatientId.value;
+                    if (!patientId)
+                        return;
                     PatientManagement.PatientsService.Retrieve({
                         EntityId: patientId
                     }, function (response) {
@@ -6946,7 +6948,7 @@ var PatientManagement;
                         }
                     }
                     else {
-                        $('.btn-continiue-hellomodal').hide(400);
+                        $('.btn-continiue-hellomodal').hide();
                         $('#btn-close-hellomodal').removeClass("btn-default");
                         $('#btn-close-hellomodal').addClass("btn-success").text(Q.text("Site.HelloModal.ButtonCloseAndFinnish"));
                         $('#btn-close-hellomodal').attr("data-reaload-page", 1);
