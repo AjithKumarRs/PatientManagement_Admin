@@ -24,7 +24,7 @@ namespace PatientManagement.Common.EmailTemplates
             using (var connection = SqlConnections.NewFor<UserRow>())
             {
                 //Get Email Signature
-                if (connection.ById<TenantRow>(user.TenantId).OverrideUsersEmailSignature.Value)
+                if (connection.ById<TenantRow>(user.TenantId).OverrideUsersEmailSignature??false)
                     this.EmailSignature = connection.ById<TenantRow>(user.TenantId).TenantEmailSignature;
                 else
                     this.EmailSignature = connection.ById<UserRow>(user.UserId).EmailSignature;
