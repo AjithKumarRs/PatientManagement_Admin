@@ -34,7 +34,7 @@ namespace PatientManagement.Administration.Entities
             get { return Fields.FromEmail[this]; }
             set { Fields.FromEmail[this] = value; }
         }
-        [DisplayName("Email Signature"), NotMapped, ReadOnly(true), HtmlNoteContentEditor]
+        [DisplayName("Email Signature"), NotMapped, ReadOnly(true), HtmlContentEditor, CssClass("email-signature-read")]
         public string EmailSignature
         {
             get { return Fields.EmailSignature[this]; }

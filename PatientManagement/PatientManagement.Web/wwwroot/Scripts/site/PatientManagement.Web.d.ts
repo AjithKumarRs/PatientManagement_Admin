@@ -826,7 +826,7 @@ declare namespace PatientManagement.Administration {
         ToEmail: LKCodeDescr;
         Subject: Serenity.StringEditor;
         Body: Serenity.HtmlContentEditor;
-        EmailSignature: Serenity.HtmlNoteContentEditor;
+        EmailSignature: Serenity.HtmlContentEditor;
     }
 }
 declare namespace PatientManagement.Administration {
@@ -844,6 +844,7 @@ declare namespace PatientManagement.Administration {
         UpdateUserId?: number;
         UpdateDateField?: string;
         IsActive?: number;
+        EmailSignature?: string;
         TenantName?: string;
         InsertUserName?: string;
         UpdateUserName?: string;
@@ -869,6 +870,7 @@ declare namespace PatientManagement.Administration {
             const UpdateUserId: string;
             const UpdateDateField: string;
             const IsActive: string;
+            const EmailSignature: string;
             const TenantName: string;
             const InsertUserName: string;
             const UpdateUserName: string;

@@ -8,8 +8,8 @@
         ToEmail: LKCodeDescr;
         Subject: Serenity.StringEditor;
         Body: Serenity.HtmlContentEditor;
-        EmailSignature: Serenity.HtmlNoteContentEditor;
+        EmailSignature: Serenity.HtmlContentEditor;
     }
 
-    [['ToEmail', () => LKCodeDescr], ['Subject', () => Serenity.StringEditor], ['Body', () => Serenity.HtmlContentEditor], ['EmailSignature', () => Serenity.HtmlNoteContentEditor]].forEach(x => Object.defineProperty(SentEmailsForm.prototype, <string>x[0], { get: function () { return this.w(x[0], (x[1] as any)()); }, enumerable: true, configurable: true }));
+    [['ToEmail', () => LKCodeDescr], ['Subject', () => Serenity.StringEditor], ['Body', () => Serenity.HtmlContentEditor], ['EmailSignature', () => Serenity.HtmlContentEditor]].forEach(x => Object.defineProperty(SentEmailsForm.prototype, <string>x[0], { get: function () { return this.w(x[0], (x[1] as any)()); }, enumerable: true, configurable: true }));
 }

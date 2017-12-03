@@ -852,7 +852,7 @@ var PatientManagement;
         }(Serenity.PrefixedContext));
         SentEmailsForm.formKey = 'Administration.SentEmails';
         Administration.SentEmailsForm = SentEmailsForm;
-        [['ToEmail', function () { return PatientManagement.LKCodeDescr; }], ['Subject', function () { return Serenity.StringEditor; }], ['Body', function () { return Serenity.HtmlContentEditor; }], ['EmailSignature', function () { return Serenity.HtmlNoteContentEditor; }]].forEach(function (x) { return Object.defineProperty(SentEmailsForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
+        [['ToEmail', function () { return PatientManagement.LKCodeDescr; }], ['Subject', function () { return Serenity.StringEditor; }], ['Body', function () { return Serenity.HtmlContentEditor; }], ['EmailSignature', function () { return Serenity.HtmlContentEditor; }]].forEach(function (x) { return Object.defineProperty(SentEmailsForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
     })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
@@ -887,6 +887,7 @@ var PatientManagement;
                 'UpdateUserId',
                 'UpdateDateField',
                 'IsActive',
+                'EmailSignature',
                 'TenantName',
                 'InsertUserName',
                 'UpdateUserName'
@@ -3424,6 +3425,7 @@ var PatientManagement;
             return SentEmailsDialog;
         }(Serenity.EntityDialog));
         SentEmailsDialog = SentEmailsDialog_1 = __decorate([
+            Serenity.Decorators.maximizable(),
             Serenity.Decorators.registerClass(),
             Serenity.Decorators.responsive()
         ], SentEmailsDialog);

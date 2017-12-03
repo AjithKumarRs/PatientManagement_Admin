@@ -1,6 +1,7 @@
 ﻿
 namespace PatientManagement.Administration {
 
+    @Serenity.Decorators.maximizable()
     @Serenity.Decorators.registerClass()
     @Serenity.Decorators.responsive()
     export class SentEmailsDialog extends Serenity.EntityDialog<SentEmailsRow, any> {
@@ -18,7 +19,7 @@ namespace PatientManagement.Administration {
             if (this.isEditMode()) {
                 Serenity.EditorUtils.setReadOnly(this.form.Subject, true);
             }
-
+            
             var items = this.form.ToEmail.get_items();
             items = items.filter(item => typeof item.source["Email"] !== 'undefined');
             this.form.ToEmail.items = items;
@@ -28,7 +29,7 @@ namespace PatientManagement.Administration {
                     //this.form.EmailSignature.element.html(resp.Entity);
                    // var elem = "<div class='pull-right' style='width: 80%;'>" + resp.Entity + "</div>";
                   //  this.element.append(elem);
-
+                  
                     this.form.EmailSignature.value = resp.Entity;
                 });
         }
