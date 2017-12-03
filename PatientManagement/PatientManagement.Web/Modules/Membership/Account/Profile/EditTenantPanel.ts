@@ -25,11 +25,8 @@
 
                     if (this.form.TenantImage.value != null)
                         this.form.TenantImage.value.Filename = tenant.TenantImage;
-
                     this.form.TenantEmailSignature.value = tenant.TenantEmailSignature;
-                   // this.form.OverrideUsersEmailSignature = tenant.OverrideUsersEmailSignature;
-                    //this.form.WorkHoursEnd.value = tenant.WorkHoursEnd;
-                    //this.form.WorkHoursStart.value = tenant.WorkHoursStart;
+                    this.form.OverrideUsersEmailSignature.element.bootstrapSwitch('state', tenant.OverrideUsersEmailSignature);
                 });
 
 
