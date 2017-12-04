@@ -13,6 +13,7 @@
         UpdateUserId?: number;
         UpdateDateField?: string;
         IsActive?: number;
+        EmailSignature?: string;
         TenantName?: string;
         InsertUserName?: string;
         UpdateUserName?: string;
@@ -43,6 +44,7 @@
             export declare const UpdateUserId: string;
             export declare const UpdateDateField: string;
             export declare const IsActive: string;
+            export declare const EmailSignature: string;
             export declare const TenantName: string;
             export declare const InsertUserName: string;
             export declare const UpdateUserName: string;
@@ -62,6 +64,7 @@
             'UpdateUserId', 
             'UpdateDateField', 
             'IsActive', 
+            'EmailSignature', 
             'TenantName', 
             'InsertUserName', 
             'UpdateUserName'

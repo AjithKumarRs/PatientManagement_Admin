@@ -8962,11 +8962,14 @@ section.content > .s-DataGrid {
   background-color: #4fff62;
 }
 .s-Administration-SentEmailsDialog > .size {
-  width: 700px;
+  width: 900px;
   min-height: 500px;
 }
 .s-Administration-SentEmailsDialog .caption {
   width: 150px;
+}
+.s-Administration-SentEmailsDialog .email-signature-read .cke_top {
+  display: none;
 }
 .s-PatientManagement-CabinetsDialog > .size {
   width: 650px;
