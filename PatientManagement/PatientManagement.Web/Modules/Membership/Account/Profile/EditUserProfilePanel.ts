@@ -5,7 +5,7 @@
         protected getFormKey() { return EditUserProfileForm.formKey; }
 
         private form: EditUserProfileForm;
-
+        
         constructor(container: JQuery) {
             super(container);
 
@@ -27,9 +27,8 @@
                     this.form.WebSite.value = user.WebSite;
                     this.form.EmailSignature.value = user.EmailSignature;
 
-                    this.form.EmailSignature.element.triggerHandler('shown');
-
-
+                   // this.form.EmailSignature.element.triggerHandler('shown');
+                   
                 });
 
             this.byId('EditUserProfileSubmitButton').click(e => {

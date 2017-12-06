@@ -18,8 +18,8 @@
 @Html.Stylesheet("~/Content/css/select2.css")
 @Html.Stylesheet("~/Content/toastr.css")
 @Html.Stylesheet("~/Content/serenity/serenity.css")
-@Html.Stylesheet("~/Content/bootstrap-switch/bootstrap-switch.css")
 @Html.Stylesheet("~/Content/site/site.css")
+@Html.Stylesheet("~/Content/bootstrap-switch/bootstrap-switch.css")
 @Html.Stylesheet("~/Scripts/colorpicker/bootstrap-colorpicker.min.css")
 @if (System.Globalization.CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft)
 {
@@ -46,9 +46,14 @@
 @Html.Script("~/Scripts/fastclick/fastclick.js")
 @Html.Script("~/Scripts/adminlte/app.js")
 @Html.Script("~/Scripts/site/PatientManagement.Web.js")
+
+@*@Html.Script("~/Scripts/jquery-ui.js")*@
+
 @Html.Script("~/Scripts/colorpicker/bootstrap-colorpicker.min.js")
 @Html.Script("~/Scripts/jquery.signalR.min.js")
 @Html.Script("~/Scripts/bootstrap-switch/bootstrap-switch.js")
+@Html.Script("~/Scripts/jquery-migrate-3.0.0.js")
+
 <script src="~/DynJS.axd/@HtmlScriptExtensions.GetLocalTextInclude(this.Html, "Site")"></script>
 <script src="~/DynJS.axd/@DynamicScriptManager.GetScriptInclude("ColumnsBundle")"></script>
 <script src="~/DynJS.axd/@DynamicScriptManager.GetScriptInclude("FormBundle")"></script>

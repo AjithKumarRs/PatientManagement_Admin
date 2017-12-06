@@ -25,7 +25,8 @@ namespace PatientManagement.PatientManagement {
 
             this.form.PatientId.changeSelect2(e => {
                 var patientId = this.form.PatientId.value;
-                
+                if (!patientId)
+                    return;
                 PatientsService.Retrieve({
                         EntityId: patientId
                     },

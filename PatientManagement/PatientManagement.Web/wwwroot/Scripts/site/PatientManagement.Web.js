@@ -852,7 +852,7 @@ var PatientManagement;
         }(Serenity.PrefixedContext));
         SentEmailsForm.formKey = 'Administration.SentEmails';
         Administration.SentEmailsForm = SentEmailsForm;
-        [['ToEmail', function () { return PatientManagement.LKCodeDescr; }], ['Subject', function () { return Serenity.StringEditor; }], ['Body', function () { return Serenity.HtmlContentEditor; }]].forEach(function (x) { return Object.defineProperty(SentEmailsForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
+        [['ToEmail', function () { return PatientManagement.LKCodeDescr; }], ['Subject', function () { return Serenity.StringEditor; }], ['Body', function () { return Serenity.HtmlContentEditor; }], ['EmailSignature', function () { return Serenity.HtmlContentEditor; }]].forEach(function (x) { return Object.defineProperty(SentEmailsForm.prototype, x[0], { get: function () { return this.w(x[0], x[1]()); }, enumerable: true, configurable: true }); });
     })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
@@ -887,6 +887,7 @@ var PatientManagement;
                 'UpdateUserId',
                 'UpdateDateField',
                 'IsActive',
+                'EmailSignature',
                 'TenantName',
                 'InsertUserName',
                 'UpdateUserName'
@@ -909,6 +910,7 @@ var PatientManagement;
                 'Update',
                 'Delete',
                 'Retrieve',
+                'RetrieveEmailSignature',
                 'List'
             ].forEach(function (x) {
                 SentEmailsService[x] = function (r, s, o) {
@@ -3405,6 +3407,7 @@ var PatientManagement;
             SentEmailsDialog.prototype.getNameProperty = function () { return Administration.SentEmailsRow.nameProperty; };
             SentEmailsDialog.prototype.getService = function () { return Administration.SentEmailsService.baseUrl; };
             SentEmailsDialog.prototype.loadEntity = function (entity) {
+                var _this = this;
                 _super.prototype.loadEntity.call(this, entity);
                 if (this.isEditMode()) {
                     Serenity.EditorUtils.setReadOnly(this.form.Subject, true);
@@ -3412,10 +3415,17 @@ var PatientManagement;
                 var items = this.form.ToEmail.get_items();
                 items = items.filter(function (item) { return typeof item.source["Email"] !== 'undefined'; });
                 this.form.ToEmail.items = items;
+                Administration.SentEmailsService.RetrieveEmailSignature({}, function (resp) {
+                    //this.form.EmailSignature.element.html(resp.Entity);
+                    // var elem = "<div class='pull-right' style='width: 80%;'>" + resp.Entity + "</div>";
+                    //  this.element.append(elem);
+                    _this.form.EmailSignature.value = resp.Entity;
+                });
             };
             return SentEmailsDialog;
         }(Serenity.EntityDialog));
         SentEmailsDialog = SentEmailsDialog_1 = __decorate([
+            Serenity.Decorators.maximizable(),
             Serenity.Decorators.registerClass(),
             Serenity.Decorators.responsive()
         ], SentEmailsDialog);
@@ -5972,9 +5982,7 @@ var PatientManagement;
                     if (_this.form.TenantImage.value != null)
                         _this.form.TenantImage.value.Filename = tenant.TenantImage;
                     _this.form.TenantEmailSignature.value = tenant.TenantEmailSignature;
-                    // this.form.OverrideUsersEmailSignature = tenant.OverrideUsersEmailSignature;
-                    //this.form.WorkHoursEnd.value = tenant.WorkHoursEnd;
-                    //this.form.WorkHoursStart.value = tenant.WorkHoursStart;
+                    _this.form.OverrideUsersEmailSignature.element.bootstrapSwitch('state', tenant.OverrideUsersEmailSignature);
                 });
                 _this.byId('EditTenantSubmitButton').click(function (e) {
                     e.preventDefault();
@@ -6025,7 +6033,7 @@ var PatientManagement;
                     _this.form.Email.value = user.Email;
                     _this.form.WebSite.value = user.WebSite;
                     _this.form.EmailSignature.value = user.EmailSignature;
-                    _this.form.EmailSignature.element.triggerHandler('shown');
+                    // this.form.EmailSignature.element.triggerHandler('shown');
                 });
                 _this.byId('EditUserProfileSubmitButton').click(function (e) {
                     e.preventDefault();
@@ -6634,6 +6642,8 @@ var PatientManagement;
                 _this.form = new PatientManagement.VisitsForm(_this.idPrefix);
                 _this.form.PatientId.changeSelect2(function (e) {
                     var patientId = _this.form.PatientId.value;
+                    if (!patientId)
+                        return;
                     PatientManagement.PatientsService.Retrieve({
                         EntityId: patientId
                     }, function (response) {
@@ -6946,7 +6956,7 @@ var PatientManagement;
                         }
                     }
                     else {
-                        $('.btn-continiue-hellomodal').hide(400);
+                        $('.btn-continiue-hellomodal').hide();
                         $('#btn-close-hellomodal').removeClass("btn-default");
                         $('#btn-close-hellomodal').addClass("btn-success").text(Q.text("Site.HelloModal.ButtonCloseAndFinnish"));
                         $('#btn-close-hellomodal').attr("data-reaload-page", 1);
