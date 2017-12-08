@@ -13,7 +13,7 @@
             
             var user = <Administration.UserRow>{};
             
-            Administration.UserService.Retrieve(<Administration.UserRow>{
+            Administration.UserService.Retrieve({
                 EntityId: Authorization.userDefinition.UserId
             },
                 resp => {

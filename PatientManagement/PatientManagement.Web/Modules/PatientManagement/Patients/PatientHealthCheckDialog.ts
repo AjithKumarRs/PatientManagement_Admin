@@ -1,4 +1,4 @@
-﻿/// <reference path="../PatientsFileUploads/PatientsFileUploadsDialog.ts" />
+﻿/// <reference path="../PatientHealth/PatientHealthDialog.ts" />
 
 
 namespace PatientManagement.PatientManagement {
