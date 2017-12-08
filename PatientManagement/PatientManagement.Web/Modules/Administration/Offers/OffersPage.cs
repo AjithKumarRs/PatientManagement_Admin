@@ -21,7 +21,7 @@ namespace PatientManagement.Administration.Pages
         [Route("Administration/Offers")]
         public ActionResult Index()
         {
-            return View("~/Modules/Administration/Offers/OffersIndex.cshtml");
+            return View(MVC.Views.Administration.Offers.OffersIndex);
         }
     }
 

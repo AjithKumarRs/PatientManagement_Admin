@@ -11,7 +11,7 @@ namespace PatientManagement.PatientManagement.Pages
         [Route("PatientManagement/Cabinets")]
         public ActionResult Index()
         {
-            return View("~/Modules/PatientManagement/Cabinets/CabinetsIndex.cshtml");
+            return View(MVC.Views.PatientManagement.Cabinets.CabinetsIndex);
         }
     }
 }

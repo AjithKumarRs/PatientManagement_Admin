@@ -5,11 +5,10 @@ namespace PatientManagement.Administration.Pages
     using Serenity;
     using Serenity.Web;
     using Microsoft.AspNetCore.Mvc;
-
-    [PageAuthorize("Administration:Coupons:Page")]
-    public class CouponsController : Controller
+    
+    public class AboutController : Controller
     {
-        [Route("Administration/Coupons")]
+        [Route("Administration/About")]
         public ActionResult Index()
         {
             return View(MVC.Views.Administration.About.AboutIndex);

@@ -11,7 +11,7 @@ namespace PatientManagement.Administration.Pages
         [Route("Administration/PaymentsDetails")]
         public ActionResult Index()
         {
-            return View("~/Modules/Administration/PaymentsDetails/PaymentsDetailsIndex.cshtml");
+            return View(MVC.Views.Administration.PaymentsDetails.PaymentsDetailsIndex);
         }
     }
 }
