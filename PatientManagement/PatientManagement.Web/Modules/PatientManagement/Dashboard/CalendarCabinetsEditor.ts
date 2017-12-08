@@ -55,17 +55,12 @@ namespace PatientManagement.PatientManagement {
                         },
                         response => {
                             var entity = response.Entity;
-                            $('#calendar').fullCalendar('option',
+                            $('#calendar').fullCalendar('option', 'businessHours',
                                 {
-                                    businessHours: [
-                                        {
-                                            dow: entity.workDays,
-                                            start: entity.start,
-                                            end: entity.end
-                                        }
-                                    ]
+                                    dow: entity.workDays,
+                                    start: entity.start,
+                                    end: entity.end
                                 });
-
 
                             if ($('#cabinet-name-right-header').length > 0) {
 
