@@ -27,4 +27,5 @@ using PatientManagement2 = PatientManagement.PatientManagement.Pages;
 [assembly: NavigationLink(9000, "System Settings/Tenant", typeof(Administration.TenantController), icon: "fa-user-secret")]
 [assembly: NavigationLink(9000, "System Settings/Translations", typeof(Administration.TranslationController), icon: "icon-speech")]
 [assembly: NavigationLink(9000, "System Settings/Currencies", typeof(Administration.CurrenciesController), icon: "fa-eur")]
+[assembly: NavigationLink(9000, "System Settings/About", typeof(Administration.AboutController), icon: "fa-question")]
 //[assembly: NavigationLink(9000, "System Settings/Sergen", typeof(Administration.SergenController), icon: "icon-magic-wand")]
