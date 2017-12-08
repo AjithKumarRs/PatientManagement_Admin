@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewData["Title"] = Texts.Site.About.AboutPageTitle;
+}
+@section Head{
+    <style>
+        .widget-user {
+            
+            height: 80% !important;
+        }
+         .header-background {
+             background: url('../Content/images/Clario/clario-featured.jpg') center center;
+             background-size: 100% 100%;
+             height: 90% !important;
+             background-repeat: no-repeat;
+         }
+        .description-block {
+            font-size: 30px;
+        }
+    </style>
+}
+<div id="about-page">
+    <div  class="box box-widget widget-user">
+        <div class="widget-user-header bg-black header-background">
+            @*<h3 class="widget-user-username">Elizabeth Pierce</h3>
+                <h5 class="widget-user-desc">Web Designer</h5>*@
+        </div>
+        <div class="box-footer">
+            <div class="row">
+                <div class="col-sm-4 border-right">
+                    <div class="description-block">
+                        <a href="https://help.myclario.com/" target="_blank"><i class="fa fa-book"></i>
+                            <br/>
+                            @Texts.Site.About.CheckTheDocuments
+                        </a>
+                    </div>
+                    <!-- /.description-block -->
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-4 border-right">
+                    <div class="description-block">
+                        <a href="https://faq.myclario.com/" target="_blank"><i class="fa fa-question-circle-o"></i>
+                            <br/>
+                            @Texts.Site.About.Faq
+                        </a>
+                    </div>
+                    <!-- /.description-block -->
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-4">
+                    <div class="description-block">
+                        <a href="https://sway.com/u8J9obFvPLt1fbIm" target="_blank"><i class="fa fa-file-powerpoint-o "></i>
+                            <br/>
+                            @Texts.Site.About.TechnicalPresentation
+                        </a>
+                    </div>
+                    <!-- /.description-block -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+    </div>
+</div>
+<div>
+    
+</div>
+<script type="text/javascript">
+    jQuery(function () {
+        Q.initFullHeightGridPage($('#about-page'));
+    });
+</script>

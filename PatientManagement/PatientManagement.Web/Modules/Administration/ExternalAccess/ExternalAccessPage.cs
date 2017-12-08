@@ -21,7 +21,7 @@ namespace PatientManagement.Administration.Pages
         [Route("Administration/ExternalAccess")]
         public ActionResult Index()
         {
-            return View("~/Modules/Administration/ExternalAccess/ExternalAccessIndex.cshtml");
+            return View(MVC.Views.Administration.ExternalAccess.ExternalAccessIndex);
         }
     }
 

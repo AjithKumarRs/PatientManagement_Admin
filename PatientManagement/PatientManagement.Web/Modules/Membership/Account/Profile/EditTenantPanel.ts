@@ -15,7 +15,7 @@
 
             var tenant = <Administration.TenantRow>{};
 
-            Administration.TenantService.Retrieve(<Administration.TenantRow>{
+            Administration.TenantService.Retrieve({
                     EntityId: Authorization.userDefinition.TenantId
                 },
                 resp => {

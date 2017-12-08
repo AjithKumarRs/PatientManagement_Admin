@@ -99,8 +99,8 @@ namespace PatientManagement.PatientManagement {
 
                 entity.NotificationId = this.notificationIds[Number(id)];
 
-                if (entities.indexOf(this.notificationIds[Number(id)]) > -1)
-                    return;
+                //if (entities.indexOf(this.notificationIds[Number(id)]) > -1)
+                //    return;
 
                 entities.push(entity);
             }

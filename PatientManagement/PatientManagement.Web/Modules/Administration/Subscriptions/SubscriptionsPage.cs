@@ -20,7 +20,7 @@ namespace PatientManagement.Administration.Pages
         [Route("Administration/Subscriptions")]
         public ActionResult Index()
         {
-            return View("~/Modules/Administration/Subscriptions/SubscriptionsIndex.cshtml");
+            return View(MVC.Views.Administration.Subscriptions.SubscriptionsIndex);
         }
 
         [Route("Administration/Subscriptions/GetPayments")]

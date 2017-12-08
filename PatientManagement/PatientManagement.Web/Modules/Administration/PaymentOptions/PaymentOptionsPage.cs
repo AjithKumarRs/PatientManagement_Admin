@@ -12,7 +12,7 @@ namespace PatientManagement.Administration.Pages
         [Route("Administration/PaymentOptions")]
         public ActionResult Index()
         {
-            return View("~/Modules/Administration/PaymentOptions/PaymentOptionsIndex.cshtml");
+            return View(MVC.Views.Administration.PaymentOptions.PaymentOptionsIndex);
         }
     }
 }

@@ -6,6 +6,11 @@ namespace MVC
     {
         public static class Administration
         {
+            public static class About
+            {
+                public const string AboutIndex = "~/Modules/Administration/About/AboutIndex.cshtml";
+            }
+
             public static class Coupons
             {
                 public const string CouponsIndex = "~/Modules/Administration/Coupons/CouponsIndex.cshtml";

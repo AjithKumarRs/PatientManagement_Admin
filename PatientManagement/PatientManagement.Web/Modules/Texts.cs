@@ -134,6 +134,13 @@ namespace PatientManagement
         }
         public static class Site
         {
+            public static class About
+            {
+                public static LocalText AboutPageTitle = "About";
+                public static LocalText CheckTheDocuments = "Check The Documents";
+                public static LocalText Faq = "Most Recent Questions";
+                public static LocalText TechnicalPresentation = "Technical Presentation";
+            }
             public static class HelloModal
             {
                 public static LocalText Title = "Welcome";

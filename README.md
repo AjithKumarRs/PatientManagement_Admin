@@ -1,4 +1,6 @@
 # PatientManagement_Admin
+### Current Version - [![GitHub version](https://badge.fury.io/gh/Magik3a%2FPatientManagement_Admin.svg)](https://badge.fury.io/gh/Magik3a%2FPatientManagement_Admin)
+
 ### Windows - [![Build status](https://ci.appveyor.com/api/projects/status/fsvv6mhubamfmnvw?svg=true)](https://ci.appveyor.com/project/Magik3a/patientmanagement-admin)
 ### Linux - [![Build Status](https://travis-ci.org/Magik3a/PatientManagement_Admin.svg?branch=master)](https://travis-ci.org/Magik3a/PatientManagement_Admin)
 
