@@ -15,7 +15,7 @@ namespace PatientManagement.Administration.TermsOfUse
         public object GetData()
         {
             //TODO Add auditing when user open this kind of reports #204
-            return null;
+            return new object();
         }
 
         public void Customize(IHtmlToPdfOptions options)

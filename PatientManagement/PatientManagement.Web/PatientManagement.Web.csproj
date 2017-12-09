@@ -101,4 +101,9 @@
   <ItemGroup>
     <DotNetCliToolReference Include="Serenity.CodeGenerator" Version="3.3.12" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="App_Data\Reporting\wkhtmltopdf.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>
