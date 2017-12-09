@@ -112,7 +112,8 @@ namespace PatientManagement
 
                     public static LocalText AcceptTerms = "I agree to the terms";
                     public static LocalText BackToLogin = "I already have a membership";
-                    
+                    public static LocalText TermsOfUse = "Terms Of Use";
+
                     public static LocalText FormatCabinetName = "{0} - First Room";
 
                     public static LocalText AcceptTermsAndConditionsError = "You must accept terms and conditions";

@@ -11,7 +11,7 @@ namespace PatientManagement.Administration.Pages
         [Route("Administration/SentEmails")]
         public ActionResult Index()
         {
-            return View("~/Modules/Administration/SentEmails/SentEmailsIndex.cshtml");
+            return View(MVC.Views.Administration.SentEmails.SentEmailsIndex);
         }
     }
 }

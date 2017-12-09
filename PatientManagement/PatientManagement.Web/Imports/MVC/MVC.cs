@@ -109,6 +109,14 @@ namespace MVC
             {
                 public const string ReportPage = "~/Modules/Common/Reporting/ReportPage.cshtml";
             }
+
+            public static class Terms
+            {
+                public static class TermsOfUse
+                {
+                    public const string Terms_TermsOfUse = "~/Modules/Common/Terms/TermsOfUse/Terms.TermsOfUse.cshtml";
+                }
+            }
         }
 
         public static class Errors
