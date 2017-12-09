@@ -6,7 +6,7 @@ using PatientManagement.Administration.Entities;
 using Serenity.Data;
 using Serenity.Reporting;
 
-namespace PatientManagement.Web.Modules.Common.Terms.TermsOfUse
+namespace PatientManagement.Administration.TermsOfUse
 {
     [Report("Administration.TermsOfUse")]
     [ReportDesign(MVC.Views.Common.Terms.TermsOfUse.Terms_TermsOfUse)]
