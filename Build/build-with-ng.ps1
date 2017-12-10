@@ -2,7 +2,7 @@
 
 $buildFolder = (Get-Item -Path "./" -Verbose).FullName
 $slnFolder = Join-Path $buildFolder "../"
-$outputFolder = Join-Path $buildFolder "outputs"
+$outputFolder = Join-Path $buildFolder "../../clario_reservation"
 $webHostFolder = Join-Path $slnFolder "PatientManagement.Reservation/PatientManagement.Reservation.Web.Host"
 $ngFolder = Join-Path $buildFolder "../../angular"
 
