@@ -46,15 +46,17 @@
         <link href="~/lib/famfamfam-flags/dist/sprite/famfamfam-flags.css" rel="stylesheet" asp-append-version="true" />
         <link href="~/lib/font-awesome/css/font-awesome.css" rel="stylesheet" asp-append-version="true" />
         <link href="~/lib/Waves/dist/waves.css" rel="stylesheet" asp-append-version="true" />
+        
+        <link href="~/lib/jquery-ui/themes/base/jquery-ui.css" rel="stylesheet" asp-append-version="true" />
         <link href="~/lib/animate.css/animate.css" rel="stylesheet" asp-append-version="true" />
-        <link href="~/css/materialize.css" rel="stylesheet" asp-append-version="true" />
-        <link href="~/css/style.css" rel="stylesheet" asp-append-version="true">
-        <link href="~/css/themes/all-themes.css" rel="stylesheet" asp-append-version="true" />
-        <link href="~/view-resources/Views/Shared/_Layout.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/lib/SelectInspiration/css/cs-select.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/lib/lightgallery/dist/css/lightgallery.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/lib/bootstrap-fileinput/css/fileinput.css" rel="stylesheet" asp-append-version="true" />
+
     </environment>
 
     <environment names="Staging,Production">
-        <link href="~/view-resources/Views/_Bundles/shared-layout.min.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/view-resources/Views/_Bundles/clario-layout.min.css" rel="stylesheet" asp-append-version="true" />
     </environment>
 
     <!-- View specific styles -->
@@ -68,7 +70,6 @@
 
 </head>
 <body class="@("theme-" + uiTheme)">
-
     <!-- Page Loader -->
     <div class="page-loader-wrapper">
         <div class="loader">
@@ -113,9 +114,7 @@
                     <!-- Call Search -->
                     <li><a href="javascript:void(0);" class="js-search" data-close="true"><i class="material-icons">search</i></a></li>
                     <!-- #END# Call Search -->
-
                     @await Component.InvokeAsync(typeof(TopBarLanguageSwitchViewComponent))
-
                     <li class="pull-right"><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i class="material-icons">more_vert</i></a></li>
                 </ul>
             </div>
@@ -124,10 +123,8 @@
     <!-- #Top Bar -->
     <section>
         <aside id="leftsidebar" class="sidebar">
-
             @await Component.InvokeAsync(typeof(SideBarUserAreaViewComponent))
             @await Component.InvokeAsync(typeof(SideBarNavViewComponent), new { activeMenu = ViewBag.CurrentPageName })
-
             <!-- Footer -->
             <div class="legal">
                 <div class="copyright">
@@ -139,20 +136,20 @@
             </div>
             <!-- #Footer -->
         </aside>
-
         @await Component.InvokeAsync(typeof(RightSideBarViewComponent))
-
     </section>
-
     <section class="content">
         <div class="container-fluid">
             @RenderBody()
         </div>
     </section>
-
     <environment names="Development">
         <script src="~/lib/json2/json2.js" asp-append-version="true"></script>
         <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
+
+        <script src="~/lib/jquery-ui/jquery-ui.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery.ui.touch-punch/dist/jquery.ui.touch-punch.js" asp-append-version="true"></script>
+
         <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
         <script src="~/lib/moment/min/moment-with-locales.js" asp-append-version="true"></script>
         <script src="~/lib/jquery-validation/dist/jquery.validate.js" asp-append-version="true"></script>
@@ -171,36 +168,77 @@
         <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.blockUI.js" asp-append-version="true"></script>
         <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.spin.js" asp-append-version="true"></script>
         <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.sweet-alert.js" asp-append-version="true"></script>
-        <script src="~/js/admin.js"></script>
-        <script src="~/js/main.js" asp-append-version="true"></script>
-        <script src="~/view-resources/Views/Shared/_Layout.js" asp-append-version="true"></script>
-        
+
+
         @if (SignalRFeature.IsAvailable)
-        {
-            <script src="~/lib/signalr/jquery.signalR.js" asp-append-version="true"></script>
+    {
+        <script src="~/lib/signalr/jquery.signalR.js" asp-append-version="true"></script>
+}
+    </environment>
+<environment names="Staging,Production">
+    <script src="~/view-resources/Views/_Bundles/clario-layout.min.js" asp-append-version="true"></script>
+</environment>
+<!-- Google Maps -->
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDfDCV5hXiPamCIT8_vwGXuzimLQ9MF76g&amp;sensor=false&amp;libraries=places"></script>
+	
+<!-- template scripts -->
+    
+    
+
+<!-- google maps initialization -->
+    <script type="text/javascript">
+        google.maps.event.addDomListener(window, 'load', init);
+        function init() {
+            var locations = [
+                [40.6128, -73.9976, "images/pin-apartment.png", "estate-details-right-sidebar.html", "images/infobox-offer1.jpg", "Fort Collins, Colorado 80523, USA", "$320 000"],
+                [40.6128, -73.9976, "images/pin-apartment.png", "estate-details-right-sidebar.html", "images/infobox-offer7.jpg", "Fort Collins, Colorado 80523, USA", "$330 000"],
+                [40.6128, -73.9976, "images/pin-apartment.png", "estate-details-right-sidebar.html", "images/infobox-offer3.jpg", "Fort Collins, Colorado 80523, USA", "$310 000"],
+                [40.7222, -73.7903, "images/pin-commercial.png", "estate-details-right-sidebar.html", "images/infobox-offer2.jpg", "West Fourth Street, New York 10003, USA", "$350 000"],
+                [41.0306, -73.7669, "images/pin-house.png", "estate-details-right-sidebar.html", "images/infobox-offer3.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$300 000"],
+                [41.3006, -72.9440, "images/pin-apartment.png", "estate-details-right-sidebar.html", "images/infobox-offer4.jpg", "Fort Collins, Colorado 80523, USA", "$410 000"],
+                [42.2418, -74.3626, "images/pin-land.png", "estate-details-right-sidebar.html", "images/infobox-offer5.jpg", "West Fourth Street, New York 10003, USA", "$295 000"],
+                [38.8974, -77.0365, "images/pin-house.png", "estate-details-right-sidebar.html", "images/infobox-offer6.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$390 600"],
+                [38.7860, -77.0129, "images/pin-apartment.png", "estate-details-right-sidebar.html", "images/infobox-offer7.jpg", "Fort Collins, Colorado 80523, USA", "$299 000"],
+                [41.2693, -70.0874, "images/pin-house.png", "estate-details-right-sidebar.html", "images/infobox-offer8.jpg", "Fort Collins, Colorado 80523, USA", "$600 000"],
+                [33.7544, -84.3857, "images/pin-commercial.png", "estate-details-right-sidebar.html", "images/infobox-offer9.jpg", "West Fourth Street, New York 10003, USA", "$350 000"],
+                [33.7337, -84.4443, "images/pin-house.png", "estate-details-right-sidebar.html", "images/infobox-offer10.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$550 000"],
+                [33.8588, -84.4858, "images/pin-land.png", "estate-details-right-sidebar.html", "images/infobox-offer1.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$670 000"],
+                [34.0254, -84.3560, "images/pin-commercial.png", "estate-details-right-sidebar.html", "images/infobox-offer5.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$300 000"],
+                [39.6282, -86.1320, "images/pin-apartment.png", "estate-details-right-sidebar.html", "images/infobox-offer6.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$390 600"],
+                [40.5521, -84.5658, "images/pin-apartment.png", "estate-details-right-sidebar.html", "images/infobox-offer2.jpg", "West Fourth Street, New York 10003, USA", "$350 000"],
+                [41.6926, -87.6021, "images/pin-house.png", "estate-details-right-sidebar.html", "images/infobox-offer5.jpg", "E. Elwood St. Phoenix, AZ 85034, USA", "$300 000"]
+            ];
+
+            offersMapInit("offers-map", locations);
+            mapInit(40.6128, -73.7903, "featured-map1", "images/pin-house.png", false);
+            mapInit(40.7222, -73.7903, "featured-map2", "images/pin-apartment.png", false);
+            mapInit(41.0306, -73.7669, "featured-map3", "images/pin-land.png", false);
+            mapInit(41.3006, -72.9440, "featured-map4", "images/pin-commercial.png", false);
+            mapInit(42.2418, -74.3626, "featured-map5", "images/pin-house.png", false);
+            mapInit(38.8974, -77.0365, "featured-map6", "images/pin-apartment.png", false);
+            mapInit(38.7860, -77.0129, "featured-map7", "images/pin-house.png", false);
+
+            mapInit(41.2693, -70.0874, "grid-map1", "images/pin-house.png", false);
+            mapInit(33.7544, -84.3857, "grid-map2", "images/pin-apartment.png", false);
+            mapInit(33.7337, -84.4443, "grid-map3", "images/pin-land.png", false);
+            mapInit(33.8588, -84.4858, "grid-map4", "images/pin-commercial.png", false);
+            mapInit(34.0254, -84.3560, "grid-map5", "images/pin-apartment.png", false);
+            mapInit(40.6128, -73.9976, "grid-map6", "images/pin-house.png", false);
         }
-    </environment>
-
-    <environment names="Staging,Production">
-        <script src="~/view-resources/Views/_Bundles/shared-layout.min.js" asp-append-version="true"></script>
-    </environment>
-
+    </script>
     <script>
     //Localizing momentjs
     moment.locale('@CultureInfo.CurrentUICulture.Name');
     </script>
-
     <!-- Dynamic scripts of ABP system (They are created on runtime and can not be bundled) -->
     <script src="~/AbpServiceProxies/GetAll?v=@(AppTimes.StartupTime.Ticks)" type="text/javascript"></script>
     <script src="~/AbpScripts/GetScripts?v=@(AppTimes.StartupTime.Ticks)" type="text/javascript"></script>
-
     @if (SignalRFeature.IsAvailable)
     {
         <!-- SignalR scripts -->
         <script src="~/signalr/hubs"></script>
         <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.signalr.js" type="text/javascript"></script>
     }
-
     @WebResourceManager.RenderScripts();
 
     <!-- View specific scripts -->
