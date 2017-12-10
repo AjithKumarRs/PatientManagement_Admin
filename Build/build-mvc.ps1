@@ -25,8 +25,8 @@ dotnet publish --output (Join-Path $outputFolder "Mvc")
 # Mvc
 Set-Location (Join-Path $outputFolder "Mvc")
 
-docker rmi abp/mvc -f
-docker build -t abp/mvc .
+#docker rmi abp/mvc -f
+#docker build -t abp/mvc .
 
 ## DOCKER COMPOSE FILES #######################################################
 
