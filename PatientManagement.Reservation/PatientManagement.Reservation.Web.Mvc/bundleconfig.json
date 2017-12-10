@@ -16,7 +16,9 @@
       "wwwroot/lib/SelectInspiration/css/cs-select.css",
       "wwwroot/lib/lightgallery/dist/css/lightgallery.css",
       "wwwroot/lib/bootstrap-fileinput/css/fileinput.css",
-      "wwwroot/lib/jquery-ui/themes/base/jquery-ui.css"
+      "wwwroot/lib/jquery-ui/themes/base/jquery-ui.css",
+      "wwwroot/apartment-layout.css",
+      "wwwroot/apartment-colors-blue.css"
     ]
   },
   {
@@ -24,6 +26,10 @@
     "inputFiles": [
       "wwwroot/lib/json2/json2.js",
       "wwwroot/lib/jquery/dist/jquery.js",
+
+      "wwwroot/lib/jquery-ui/jquery-ui.js",
+      "wwwroot/lib/jquery.ui.touch-punch/dist/jquery.ui.touch-punch.js",
+
       "wwwroot/lib/bootstrap/dist/js/bootstrap.js",
       "wwwroot/lib/moment/min/moment-with-locales.js",
       "wwwroot/lib/jquery-validation/dist/jquery.validate.js",
@@ -41,7 +47,29 @@
       "wwwroot/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.toastr.js",
       "wwwroot/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.blockUI.js",
       "wwwroot/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.spin.js",
-      "wwwroot/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.sweet-alert.js"
+      "wwwroot/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.sweet-alert.js",
+      "wwwroot/lib/js-marker-clusterer/src/markerclusterer.js",
+      "wwwroot/lib/markerspiderfier/oms.min.js",
+      "wwwroot/lib/geocomplete/jquery.geocomplete.js",
+      "wwwroot/lib/infobox/infobox.js",
+      "wwwroot/lib/lightgallery/dist/js/lightgallery.js",
+      "wwwroot/lib/lightgallery/modules/lg-fullscreen.js",
+      "wwwroot/lib/lightgallery/modules/lg-video.js",
+      "wwwroot/lib/lightgallery/modules/lg-autoplay.js",
+      "wwwroot/lib/lightgallery/modules/lg-zoom.js",
+      "wwwroot/lib/jquery_appear/jquery.appear.js",
+      "wwwroot/lib/jquery-countTo/jquery.countTo.js",
+      "wwwroot/lib/swiper/dist/js/swiper.js",
+      "wwwroot/lib/owl.carousel/dist/owl.carousel.js",
+      "wwwroot/lib/SelectInspiration/js/classie.js",
+      "wwwroot/lib/SelectInspiration/js/selectFx.js",
+      "wwwroot/lib/bootstrap-select/js/bootstrap-select.js",
+      "wwwroot/lib/jquery.parallax/jquery.parallax.js",
+      "wwwroot/lib/isotope/dist/isotope.pkgd.js",
+      "wwwroot/lib/bootstrap-fileinput/js/fileinput.js",
+      "wwwroot/lib/dist/wow.js",
+      "wwwroot/apartment.js"
+
     ]
   },
 
