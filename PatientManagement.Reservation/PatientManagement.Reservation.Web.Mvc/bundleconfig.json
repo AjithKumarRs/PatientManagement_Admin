@@ -68,7 +68,7 @@
       "wwwroot/lib/jquery.parallax/jquery.parallax.js",
       "wwwroot/lib/isotope/dist/isotope.pkgd.js",
       "wwwroot/lib/bootstrap-fileinput/js/fileinput.js",
-      "wwwroot/lib/dist/wow.js",
+      "wwwroot/lib/wow/dist/wow.js",
       "wwwroot/js/apartment.js"
 
     ]
