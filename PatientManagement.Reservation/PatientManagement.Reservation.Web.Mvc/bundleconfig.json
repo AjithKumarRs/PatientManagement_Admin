@@ -11,14 +11,15 @@
       "wwwroot/lib/famfamfam-flags/dist/sprite/famfamfam-flags.css",
       "wwwroot/lib/font-awesome/css/font-awesome.css",
       "wwwroot/lib/Waves/dist/waves.css",
+
+      "wwwroot/lib/jquery-ui/themes/base/jquery-ui.css",
       "wwwroot/lib/animate.css/animate.css",
       "wwwroot/lib/owl-carousel/owl.carousel.css",
       "wwwroot/lib/SelectInspiration/css/cs-select.css",
       "wwwroot/lib/lightgallery/dist/css/lightgallery.css",
       "wwwroot/lib/bootstrap-fileinput/css/fileinput.css",
-      "wwwroot/lib/jquery-ui/themes/base/jquery-ui.css",
-      "wwwroot/apartment-layout.css",
-      "wwwroot/apartment-colors-blue.css"
+      "wwwroot/css/apartment-layout.css",
+      "wwwroot/css/apartment-colors-blue.css"
     ]
   },
   {
