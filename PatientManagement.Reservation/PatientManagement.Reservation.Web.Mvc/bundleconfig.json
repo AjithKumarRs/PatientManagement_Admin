@@ -1,7 +1,6 @@
 [
   {
     "outputFileName": "wwwroot/view-resources/Views/_Bundles/clario-layout.min.css",
-    "outputFileName": "wwwroot/view-resources/Views/_Bundles/clario-layout.min.css",
     "inputFiles": [
       "wwwroot/fonts/roboto/roboto.css",
       "wwwroot/fonts/material-icons/materialicons.css",
@@ -13,6 +12,7 @@
       "wwwroot/lib/font-awesome/css/font-awesome.css",
       "wwwroot/lib/Waves/dist/waves.css",
       "wwwroot/lib/animate.css/animate.css",
+      "wwwroot/lib/owl-carousel/owl.carousel.css",
       "wwwroot/lib/SelectInspiration/css/cs-select.css",
       "wwwroot/lib/lightgallery/dist/css/lightgallery.css",
       "wwwroot/lib/bootstrap-fileinput/css/fileinput.css",
@@ -60,7 +60,7 @@
       "wwwroot/lib/jquery_appear/jquery.appear.js",
       "wwwroot/lib/jquery-countTo/jquery.countTo.js",
       "wwwroot/lib/swiper/dist/js/swiper.js",
-      "wwwroot/lib/owl.carousel/dist/owl.carousel.js",
+      "wwwroot/lib/owl-carousel/owl.carousel.js",
       "wwwroot/lib/SelectInspiration/js/classie.js",
       "wwwroot/lib/SelectInspiration/js/selectFx.js",
       "wwwroot/lib/bootstrap-select/js/bootstrap-select.js",
