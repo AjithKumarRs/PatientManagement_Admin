@@ -17,7 +17,7 @@ namespace PatientManagement.Reservation.Web.Startup
                         PageNames.Home,
                         L("HomePage"),
                         url: "",
-                        icon: "home",
+                        icon: "",
                         requiresAuthentication: true
                     )
                 ).AddItem(
@@ -25,7 +25,7 @@ namespace PatientManagement.Reservation.Web.Startup
                         PageNames.Tenants,
                         L("Tenants"),
                         url: "Tenants",
-                        icon: "business",
+                        icon: "",
                         requiredPermissionName: PermissionNames.Pages_Tenants
                     )
                 ).AddItem(
@@ -33,7 +33,7 @@ namespace PatientManagement.Reservation.Web.Startup
                         PageNames.Users,
                         L("Users"),
                         url: "Users",
-                        icon: "people",
+                        icon: "",
                         requiredPermissionName: PermissionNames.Pages_Users
                     )
                 ).AddItem(
@@ -41,7 +41,7 @@ namespace PatientManagement.Reservation.Web.Startup
                         PageNames.Roles,
                         L("Roles"),
                         url: "Roles",
-                        icon: "local_offer",
+                        icon: "",
                         requiredPermissionName: PermissionNames.Pages_Roles
                     )
                 )
@@ -50,13 +50,13 @@ namespace PatientManagement.Reservation.Web.Startup
                         PageNames.About,
                         L("About"),
                         url: "About",
-                        icon: "info"
+                        icon: ""
                     )
                 ).AddItem( //Menu items below is just for demonstration!
                     new MenuItemDefinition(
                         "MultiLevelMenu",
                         L("MultiLevelMenu"),
-                        icon: "menu"
+                        icon: ""
                     ).AddItem(
                         new MenuItemDefinition(
                             "AspNetBoilerplate",
