@@ -5,6 +5,7 @@
 @using PatientManagement.Reservation
 @using PatientManagement.Reservation.SignalR
 @using PatientManagement.Reservation.Web.Resources
+@using PatientManagement.Reservation.Web.Views.Shared.Components.MainTopBar
 @using PatientManagement.Reservation.Web.Views.Shared.Components.MainTopBarNav
 @using PatientManagement.Reservation.Web.Views.Shared.Components.FooterSmallBar
 @using PatientManagement.Reservation.Web.Views.Shared.Components.FooterLargeBar
@@ -71,61 +72,9 @@
 
         <!-- Page header -->
         <header>
-            <div class="top-bar-wrapper">
-                <div class="container top-bar">
-                    <div class="row">
-                        <div class="col-xs-5 col-sm-8">
-                            <div class="top-mail pull-left hidden-xs">
-                                <span class="top-icon-circle">
-                                    <i class="fa fa-envelope fa-sm"></i>
-                                </span>
-                                <span class="top-bar-text">apartment@domain.tld</span>
-                            </div>
-                            <div class="top-phone pull-left hidden-xxs">
-                                <span class="top-icon-circle">
-                                    <i class="fa fa-phone"></i>
-                                </span>
-                                <span class="top-bar-text">(0)-123-456-789</span>
-                            </div>
-                            <div class="top-localization pull-left hidden-sm hidden-md hidden-xs">
-                                <span class="top-icon-circle pull-left">
-                                    <i class="fa fa-map-marker"></i>
-                                </span>
-                                <span class="top-bar-text">One Brookings Drive St. Louis, Missouri 63130-4899, USA</span>
-                            </div>
-                        </div>
-                        <div class="col-xs-7 col-sm-4">
-                            <div class="top-social-last top-dark pull-right" data-toggle="tooltip" data-placement="bottom" title="Login/Register">
-                                <a class="top-icon-circle" href="#login-modal" data-toggle="modal">
-                                    <i class="fa fa-lock"></i>
-                                </a>
-                            </div>
+            @await Component.InvokeAsync(typeof(MainTopBarViewComponent))
 
-                            <div class="top-social pull-right">
-                                <a class="top-icon-circle" href="#">
-                                    <i class="fa fa-facebook"></i>
-                                </a>
-                            </div>
-                            <div class="top-social pull-right">
-                                <a class="top-icon-circle" href="#">
-                                    <i class="fa fa-twitter"></i>
-                                </a>
-                            </div>
-                            <div class="top-social pull-right">
-                                <a class="top-icon-circle" href="#">
-                                    <i class="fa fa-google-plus"></i>
-                                </a>
-                            </div>
-                            <div class="top-social pull-right">
-                                <a class="top-icon-circle" href="#">
-                                    <i class="fa fa-skype"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- /.top-bar -->
-            </div><!-- /.Page top-bar-wrapper -->
-            
+
             @await Component.InvokeAsync(typeof(MainTopBarNavViewComponent), new { activeMenu = ViewBag.CurrentPageName })
 
         </header>

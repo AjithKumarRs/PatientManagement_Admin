@@ -14,6 +14,20 @@
         <script src="~/view-resources/Views/Users/Index.min.js" asp-append-version="true"></script>
     </environment>
 }
+		
+<section class="short-image no-padding blog-short-title">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-lg-12 short-image-title">
+                <h5 class="subtitle-margin second-color">system</h5>
+                <h1 class="second-color">  @L("Users")</h1>
+                <div class="short-title-separator"></div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section-light section-top-shadow">
+<div class="container">
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card">
@@ -35,33 +49,33 @@
             <div class="body table-responsive">
                 <table class="table">
                     <thead>
-                        <tr>
-                            <th>@L("UserName")</th>
-                            <th>@L("FullName")</th>
-                            <th>@L("EmailAddress")</th>
-                            <th>@L("IsActive")</th>
-                            <th>@L("Actions")</th>
-                        </tr>
+                    <tr>
+                        <th>@L("UserName")</th>
+                        <th>@L("FullName")</th>
+                        <th>@L("EmailAddress")</th>
+                        <th>@L("IsActive")</th>
+                        <th>@L("Actions")</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        @foreach (var user in Model.Users)
-                        {
-                            <tr>
-                                <td>@user.UserName</td>
-                                <td>@user.FullName</td>
-                                <td>@user.EmailAddress</td>
-                                <td><i class="material-icons" style="color:@(user.IsActive ? "green":"red");">@(user.IsActive ? "check_box" : "indeterminate_check_box")</i></td>
-                                <td class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">menu</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="#" class="waves-effect waves-block edit-user" data-user-id="@user.Id" data-toggle="modal" data-target="#UserEditModal"><i class="material-icons">edit</i>@L("Edit")</a></li>
-                                        <li><a href="#" class="waves-effect waves-block delete-user" data-user-id="@user.Id" data-user-name="@user.UserName"><i class="material-icons">delete_sweep</i>@L("Delete")</a></li>
-                                    </ul>
-                                </td>
-                            </tr>
-                        }
+                    @foreach (var user in Model.Users)
+                    {
+                        <tr>
+                            <td>@user.UserName</td>
+                            <td>@user.FullName</td>
+                            <td>@user.EmailAddress</td>
+                            <td><i class="material-icons" style="color:@(user.IsActive ? "green":"red");">@(user.IsActive ? "check_box" : "indeterminate_check_box")</i></td>
+                            <td class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <i class="material-icons">menu</i>
+                                </a>
+                                <ul class="dropdown-menu pull-right">
+                                    <li><a href="#" class="waves-effect waves-block edit-user" data-user-id="@user.Id" data-toggle="modal" data-target="#UserEditModal"><i class="material-icons">edit</i>@L("Edit")</a></li>
+                                    <li><a href="#" class="waves-effect waves-block delete-user" data-user-id="@user.Id" data-user-name="@user.UserName"><i class="material-icons">delete_sweep</i>@L("Delete")</a></li>
+                                </ul>
+                            </td>
+                        </tr>
+                    }
                     </tbody>
                 </table>
                 <button type="button" class="btn btn-primary btn-circle waves-effect waves-circle waves-float pull-right" data-toggle="modal" data-target="#UserCreateModal">
@@ -71,6 +85,10 @@
         </div>
     </div>
 </div>
+    
+    </div>
+</section>
+
 <div class="modal fade" id="UserCreateModal" tabindex="-1" role="dialog" aria-labelledby="UserCreateModalLabel" data-backdrop="static">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

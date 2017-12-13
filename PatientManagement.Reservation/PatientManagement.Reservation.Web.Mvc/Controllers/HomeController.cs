@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace PatientManagement.Reservation.Web.Controllers
 {
-    [AbpMvcAuthorize]
+    //[AbpMvcAuthorize]
     public class HomeController : ReservationControllerBase
     {
         public ActionResult Index()
