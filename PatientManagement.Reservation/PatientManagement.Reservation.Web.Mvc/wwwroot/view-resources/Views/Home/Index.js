@@ -1,5 +1,4 @@
 ﻿
-google.maps.event.addDomListener(window, 'load', init);
 function init() {
     var locations = [
         [40.6128, -73.9976, "images/pin-apartment.png", "estate-details-right-sidebar.html", "images/infobox-offer1.jpg", "Fort Collins, Colorado 80523, USA", "$320 000"],
@@ -37,3 +36,5 @@ function init() {
     mapInit(34.0254, -84.3560, "grid-map5", "images/pin-apartment.png", false);
     mapInit(40.6128, -73.9976, "grid-map6", "images/pin-house.png", false);
 };
+
+google.maps.event.addDomListener(window, 'load', init);

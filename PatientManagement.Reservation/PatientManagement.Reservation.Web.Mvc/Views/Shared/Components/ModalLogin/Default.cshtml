@@ -1,0 +1,64 @@
+﻿@using Abp.Extensions
+@using Abp.Authorization.Users
+@using Abp.MultiTenancy
+@using PatientManagement.Reservation.Web.Resources
+@inject IWebResourceManager WebResourceManager
+
+@model PatientManagement.Reservation.Web.Models.Account.LoginFormViewModel
+
+@{
+    WebResourceManager.AddScript(ApplicationPath + "view-resources/Views/Shared/Components/ModalLogin/Default.js");
+}
+<!-- Login modal -->
+<div class="modal fade apartment-modal" id="login-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form id="LoginForm" asp-action="Login" method="post" asp-controller="Account">
+                    <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+                    <input type="hidden" name="returnUrlHash" />
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <div class="modal-title">
+                        <h1>
+                            @L("LogIn")<span class="special-color">.</span>
+                        </h1>
+                        <div class="short-title-separator"></div>
+                    </div>
+                    <div class="form-line">
+                        <input type="text" class="input-full main-input" name="usernameOrEmailAddress" placeholder="@L("UserNameOrEmail")" required autofocus maxlength="@AbpUserBase.MaxEmailAddressLength">
+                    </div>
+                    <div class="form-line">
+                        <input type="password" class="input-full main-input" name="Password" placeholder="@L("Password")" required maxlength="@AbpUserBase.MaxPlainPasswordLength">
+                    </div>
+                    <div class="form-line">
+                        <input type="checkbox" name="RememberMe" id="rememberme" class="filled-in chk-col-pink" value="true">
+                        <label for="rememberme">@L("RememberMe")</label>
+                    </div>
+                        <a href="#" class="button-primary button-shadow button-full" onclick="$(this).closest('form').submit()">
+                            <span>@L("LogIn")</span>
+                            <div class="button-triangle"></div>
+                            <div class="button-triangle2"></div>
+                            <div class="button-icon">
+                                <i class="fa fa-user"></i>
+                            </div>
+                        </a>
+                        <a href="#" class="forgot-link pull-right">Forgot your password?</a>
+                        <div class="clearfix"></div>
+                        <p class="login-or">OR</p>
+                        <a href="#" class="facebook-button">
+                            <i class="fa fa-facebook"></i>
+                            <span>Login with Facebook</span>
+                        </a>
+                        <a href="#" class="google-button margin-top-15">
+                            <i class="fa fa-google-plus"></i>
+                            <span>Login with Google</span>
+                        </a>
+                        <p class="modal-bottom">
+                            Don't have an account? <a href="#" class="register-link">REGISTER</a>
+                        </p>
+
+</form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

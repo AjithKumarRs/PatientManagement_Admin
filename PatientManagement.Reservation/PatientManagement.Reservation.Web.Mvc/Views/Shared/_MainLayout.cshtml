@@ -9,6 +9,7 @@
 @using PatientManagement.Reservation.Web.Views.Shared.Components.MainTopBarNav
 @using PatientManagement.Reservation.Web.Views.Shared.Components.FooterSmallBar
 @using PatientManagement.Reservation.Web.Views.Shared.Components.FooterLargeBar
+@using PatientManagement.Reservation.Web.Views.Shared.Components.ModalLogin
 
 @using PatientManagement.Reservation.Web.Views.Shared.Components.TopBarLanguageSwitch
 @using PatientManagement.Reservation.Configuration
@@ -93,41 +94,8 @@
         <div class="big-triangle-second-color"></div>
         <div class="big-icon-second-color"><i class="jfont fa-lg">&#xe803;</i></div>
     </div>
+  
 
-    <!-- Login modal -->
-    <div class="modal fade apartment-modal" id="login-modal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <div class="modal-title">
-                        <h1>Login<span class="special-color">.</span></h1>
-                        <div class="short-title-separator"></div>
-                    </div>
-                    <input name="login" type="email" class="input-full main-input" placeholder="Email" />
-                    <input name="password" type="password" class="input-full main-input" placeholder="Your Password" />
-                    <a href="my-profile.html" class="button-primary button-shadow button-full">
-                        <span>Sing In</span>
-                        <div class="button-triangle"></div>
-                        <div class="button-triangle2"></div>
-                        <div class="button-icon"><i class="fa fa-user"></i></div>
-                    </a>
-                    <a href="#" class="forgot-link pull-right">Forgot your password?</a>
-                    <div class="clearfix"></div>
-                    <p class="login-or">OR</p>
-                    <a href="#" class="facebook-button">
-                        <i class="fa fa-facebook"></i>
-                        <span>Login with Facebook</span>
-                    </a>
-                    <a href="#" class="google-button margin-top-15">
-                        <i class="fa fa-google-plus"></i>
-                        <span>Login with Google</span>
-                    </a>
-                    <p class="modal-bottom">Don't have an account? <a href="#" class="register-link">REGISTER</a></p>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
     <!-- Register modal -->
     <div class="modal fade apartment-modal" id="register-modal">
         <div class="modal-dialog">
@@ -247,7 +215,11 @@
     <environment names="Staging,Production">
         <script src="~/view-resources/Views/_Bundles/clario-layout.min.js" asp-append-version="true"></script>
     </environment>
+@if (!User.Identity.IsAuthenticated)
+{
+    @await Component.InvokeAsync(typeof(ModalLoginViewComponent))
 
+}
     <!-- template scripts -->
 
     <script>
