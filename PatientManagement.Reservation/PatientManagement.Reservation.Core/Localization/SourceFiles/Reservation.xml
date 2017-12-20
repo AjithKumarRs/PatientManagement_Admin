@@ -1,7 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <localizationDictionary culture="en">
   <texts>
-    <text name="HomePage" value="Home page" />
+    <text name="HomePage" value="Home" />
+    <text name="SystemPage" value="System" />
+    <text name="ProfilePage" value="Profile" />
+    <text name="ReservationPage" value="Reservations" />
     <text name="About" value="About" />
     <text name="WellcomeMessage" value="Welcome to Reservation!" />
 

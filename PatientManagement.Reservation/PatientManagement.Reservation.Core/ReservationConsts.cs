@@ -2,7 +2,7 @@
 {
     public class ReservationConsts
     {
-        public const string LocalizationSourceName = "Reservation";
+        public const string LocalizationSourceName = "Clario";
 
         public const string ConnectionStringName = "Default";
 
