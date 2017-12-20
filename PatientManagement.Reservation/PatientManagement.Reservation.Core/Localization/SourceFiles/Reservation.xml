@@ -1,11 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <localizationDictionary culture="en">
   <texts>
-    <text name="HomePage" value="Home" />
-    <text name="SystemPage" value="System" />
-    <text name="ProfilePage" value="Profile" />
-    <text name="ReservationPage" value="Reservations" />
-    <text name="About" value="About" />
+    <text name="HomePage" value="Начало" />
+    <text name="DoctorsPage" value="Специалисти" />
+    <text name="CabinetsPage" value="Кабинети" />
+    <text name="ClinicsPage" value="Клиники" />
+    <text name="SystemPage" value="Система" />
+    <text name="SettingsPage" value="Настройки" />
+    <text name="ProfilePage" value="Моят Профил" />
+    <text name="ReservationPage" value="Моите Записани Часове" />
+    <text name="About" value="Разбери Повече" />
     <text name="WellcomeMessage" value="Welcome to Reservation!" />
 
     <text name="FormIsNotValidMessage" value="Form is not valid. Please check and fix errors." />
