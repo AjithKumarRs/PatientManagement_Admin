@@ -11,7 +11,7 @@
             $(input).parents('.form-line').removeClass('error');
         },
         errorPlacement: function (error, element) {
-            $(element).parents('.input-group').append(error);
+            $(element).parents('.input-field').append(error);
         }
     });
 
@@ -23,7 +23,7 @@
         }
 
         abp.ui.setBusy(
-            $('#LoginArea'),
+            $('#login-modal'),
 
             abp.ajax({
                 contentType: 'application/x-www-form-urlencoded',
@@ -39,10 +39,7 @@
         $form.find('input[name=provider]').val($a.attr('data-provider'));
         $form.submit();
     });
-
-    $('#LoginButton').click(function(e) {
-        $loginForm.submit(e);
-    });
+    
 
     $loginForm.find('input[type=text]:first-child').focus();
 });

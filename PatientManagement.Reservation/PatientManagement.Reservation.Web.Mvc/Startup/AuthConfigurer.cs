@@ -38,7 +38,15 @@ namespace PatientManagement.Reservation.Web.Startup
                             ClockSkew = TimeSpan.Zero
                         };
                     });
-                
+                if (bool.Parse(configuration["Authentication:Facebook:IsEnabled"]))
+                {
+                    services.AddAuthentication()
+                        .AddFacebook(facebookOptions =>
+                        {
+                            facebookOptions.AppId = configuration["Authentication:Facebook:AppId"];
+                            facebookOptions.AppSecret = configuration["Authentication:Facebook:AppSecret"];
+                        });
+                }
             }
         }
     }

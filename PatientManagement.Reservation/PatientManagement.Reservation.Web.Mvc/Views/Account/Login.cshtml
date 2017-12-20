@@ -1,24 +1,24 @@
 ﻿@using Abp.Extensions
 @using Abp.Authorization.Users
 @using Abp.MultiTenancy
+@using PatientManagement.Reservation.Identity
 @model PatientManagement.Reservation.Web.Models.Account.LoginFormViewModel
+@inject SignInManager SignInManager
+
 @section Styles
-{
+    {
     <environment names="Development">
         <link rel="stylesheet" href="~/view-resources/Views/Account/Login.css" asp-append-version="true" />
     </environment>
-
     <environment names="Staging,Production">
         <link rel="stylesheet" href="~/view-resources/Views/Account/Login.min.css" asp-append-version="true" />
     </environment>
-
 }
 @section Scripts
-{
+    {
     <environment names="Development">
         <script src="~/view-resources/Views/Account/Login.js" asp-append-version="true"></script>
     </environment>
-
     <environment names="Staging,Production">
         <script src="~/view-resources/Views/Account/Login.min.js" asp-append-version="true"></script>
     </environment>
@@ -63,5 +63,31 @@
                 </div>
             }
         </form>
+
+        @{
+
+            var loginProviders = (await SignInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            if (loginProviders.Any())
+            {
+
+                <form asp-action="ExternalLogin" asp-controller="Account" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
+      
+                    @foreach (var provider in loginProviders)
+                    {
+                        <button type="submit" class="btn btn-default" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.Name</button>
+
+                    }
+                </form>
+
+            }
+            else
+            {
+                <div>
+                    <p>
+                        There are no external authentication services configured.
+                    </p>
+                </div>
+            }
+        }
+        </div>
     </div>
-</div>

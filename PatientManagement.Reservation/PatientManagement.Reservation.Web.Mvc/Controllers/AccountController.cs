@@ -89,6 +89,7 @@ namespace PatientManagement.Reservation.Web.Controllers
             });
         }
 
+#pragma warning disable SG0016 // Controller method is vulnerable to CSRF -- No it's not!
         [HttpPost]
         [UnitOfWork]
         public virtual async Task<JsonResult> Login(LoginViewModel loginModel, string returnUrl = "", string returnUrlHash = "")
@@ -106,11 +107,12 @@ namespace PatientManagement.Reservation.Web.Controllers
 
             return Json(new AjaxResponse { TargetUrl = returnUrl });
         }
+#pragma warning restore SG0016 // Controller method is vulnerable to CSRF -- No it's not!
 
         public async Task<ActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Login");
+            return RedirectToAppHome();
         }
 
 
@@ -153,6 +155,7 @@ namespace PatientManagement.Reservation.Web.Controllers
             return true;
         }
 
+#pragma warning disable SG0016 // Controller method is vulnerable to CSRF
         [HttpPost]
         [UnitOfWork]
         public async Task<ActionResult> Register(RegisterViewModel model)
@@ -257,6 +260,7 @@ namespace PatientManagement.Reservation.Web.Controllers
                 return View("Register", model);
             }
         }
+#pragma warning restore SG0016 // Controller method is vulnerable to CSRF
 
         #endregion
 
