@@ -13,7 +13,7 @@ namespace PatientManagement.Reservation.Web.Startup
         {
             context.Manager.MainMenu
                 .AddItem(new MenuItemDefinition(PageNames.Home, L("HomePage"), url: "", icon: ""))
-                .AddItem(new MenuItemDefinition("Doctors", L("DoctorsPage")))
+                .AddItem(new MenuItemDefinition(PageNames.Doctors, L("DoctorsPage"), url: "Doctors"))
                 .AddItem(new MenuItemDefinition("Cabinets", L("CabinetsPage")))
                 .AddItem(new MenuItemDefinition("Cabinets", L("ClinicsPage")))
                 .AddItem(new MenuItemDefinition("Settings", L("SettingsPage"))
