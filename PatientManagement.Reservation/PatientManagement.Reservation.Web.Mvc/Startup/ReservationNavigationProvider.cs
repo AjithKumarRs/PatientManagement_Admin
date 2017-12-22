@@ -14,8 +14,8 @@ namespace PatientManagement.Reservation.Web.Startup
             context.Manager.MainMenu
                 .AddItem(new MenuItemDefinition(PageNames.Home, L("HomePage"), url: "", icon: ""))
                 .AddItem(new MenuItemDefinition(PageNames.Doctors, L("DoctorsPage"), url: "Doctors"))
-                .AddItem(new MenuItemDefinition("Cabinets", L("CabinetsPage")))
-                .AddItem(new MenuItemDefinition("Cabinets", L("ClinicsPage")))
+                .AddItem(new MenuItemDefinition(PageNames.Cabinets, L("CabinetsPage"), url: "Cabinets"))
+                .AddItem(new MenuItemDefinition(PageNames.Clinics, L("ClinicsPage"), url: "Clinics"))
                 .AddItem(new MenuItemDefinition("Settings", L("SettingsPage"))
                     .AddItem(new MenuItemDefinition("Profile", L("ProfilePage")))
                     .AddItem(new MenuItemDefinition("Reservations", L("ReservationPage")))
