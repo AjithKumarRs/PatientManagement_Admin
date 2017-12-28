@@ -7,14 +7,16 @@ namespace PatientManagement {
 
         constructor(element: JQuery) {
             super(element);
-            console.log("Heelo");
             this.element.addClass('geocomplete');
         }
 
         public setEditValue(source: any, property: Serenity.PropertyItem): void {
-            console.log("From");
-            $("#geocomplete-hidden").trigger('geocomplete');
+           $("#geocomplete-hidden").trigger('geocomplete');
+
+           // $(".geocomplete").trigger("geocode");
             this.element.val(source[property.name]);
+
+          //  $('.map_input').html('');
         }
         
     }
