@@ -18,31 +18,8 @@
         new PatientManagement.PatientManagement.CabinetsGrid($('#GridDiv'), { }).init();
 
         Q.initFullHeightGridPage($('#GridDiv'));
-
-        // TODO: Move to template for dialog 
-
-        $('.City').after('<div class="field map_input" />');
-        $('body').append('<input type="hidden" id="geocomplete-hidden"/>');
-        $("#geocomplete-hidden").on('geocomplete',
-            function () {
-                $('.map_input').height(200);
-               
-                var options = {
-                    map: ".map_input"
-                };
-                $(".geocomplete").geocomplete(options).bind("geocode:result", function(event, result){
-                        console.log("Result: " + result.formatted_address);
-                    })
-                    .bind("geocode:error", function(event, status){
-                        console.log("ERROR: " + status);
-                    })
-                    .bind("geocode:multiple", function(event, results){
-                        console.log("Multiple: " + results.length + " results found");
-                    });
-            });
-
+        
     });
 
     
-    $(".geocomplete").trigger('geocomplete');
 </script>

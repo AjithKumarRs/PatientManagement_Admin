@@ -18,8 +18,8 @@ namespace PatientManagement.PatientManagement.Columns
 
         [EditLink, CabinetsFormatter]
         public String Name { get; set; }
-        [Width(300)]
-        public String Description { get; set; }
+        //[Width(300)]
+        //public String Description { get; set; }
         [Width(150)]
         public String City { get; set; }
         //[Width(150)]

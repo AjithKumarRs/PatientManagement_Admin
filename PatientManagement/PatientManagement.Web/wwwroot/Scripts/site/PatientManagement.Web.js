@@ -4541,14 +4541,21 @@ var PatientManagement;
         __extends(AddressAutocomplete, _super);
         function AddressAutocomplete(element) {
             var _this = _super.call(this, element) || this;
-            _this.element.addClass('geocomplete');
+            var divField = _this.element.parents('.field');
+            divField.after('<input name="formatted_address" class="formatted_address" type="hidden" value="">');
+            divField.after('<div class="field map_geocomplete" style="height: 300px;" />');
+            divField.parents("form").addClass("form_geocomplete");
+            element
+                .geocomplete({
+                map: '.map_geocomplete',
+                details: '.form_geocomplete',
+            });
             return _this;
         }
         AddressAutocomplete.prototype.setEditValue = function (source, property) {
-            $("#geocomplete-hidden").trigger('geocomplete');
-            // $(".geocomplete").trigger("geocode");
             this.element.val(source[property.name]);
-            //  $('.map_input').html('');
+            $('.formatted_address').val(source[property.name]);
+            $(".s-AddressAutocomplete").trigger('geocode');
         };
         AddressAutocomplete = __decorate([
             Serenity.Decorators.element('<input type="text"/>'),

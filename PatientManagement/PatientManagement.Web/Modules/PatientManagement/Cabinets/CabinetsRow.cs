@@ -37,7 +37,7 @@ namespace PatientManagement.PatientManagement.Entities
 
 
         [DisplayName("Description"), Size(-1),  QuickSearch]
-        [TextAreaEditor(Rows = 10)]
+        [HtmlContentEditor(Rows = 10)]
         public String Description
         {
             get { return Fields.Description[this]; }
