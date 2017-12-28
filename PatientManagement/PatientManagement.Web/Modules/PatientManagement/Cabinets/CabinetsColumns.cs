@@ -22,9 +22,9 @@ namespace PatientManagement.PatientManagement.Columns
         public String Description { get; set; }
         [Width(150)]
         public String City { get; set; }
-        [Width(150)]
-        [DefaultValue("България")]
-        public String Country { get; set; }
+        //[Width(150)]
+        //[DefaultValue("България")]
+        //public String Country { get; set; }
 
         [Width(200)]
         public int PhoneNumber { get; set; }

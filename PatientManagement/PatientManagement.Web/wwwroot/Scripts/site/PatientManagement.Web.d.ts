@@ -732,6 +732,12 @@ declare namespace PatientManagement.Common {
     }
 }
 declare namespace PatientManagement {
+    class AddressAutocomplete extends Serenity.Widget<any> implements Serenity.ISetEditValue {
+        constructor(element: JQuery);
+        setEditValue(source: any, property: Serenity.PropertyItem): void;
+    }
+}
+declare namespace PatientManagement {
     class BasicProgressDialog extends Serenity.TemplatedDialog<any> {
         constructor();
         cancelled: boolean;

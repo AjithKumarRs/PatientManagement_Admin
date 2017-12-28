@@ -32,7 +32,7 @@ namespace PatientManagement.Migrations.PatientManagementDB
             Alter.Table("Cabinets")
                 .AddColumn("Description").AsString(Int32.MaxValue).Nullable()
                 .AddColumn("City").AsString(500).Nullable()
-                .AddColumn("Country").AsString(500).Nullable()
+                //.AddColumn("Country").AsString(500).Nullable()
                 .AddColumn("PhoneNumber").AsInt32().Nullable();
         }
     }

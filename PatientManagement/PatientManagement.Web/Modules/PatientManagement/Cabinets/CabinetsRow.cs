@@ -52,12 +52,12 @@ namespace PatientManagement.PatientManagement.Entities
             set { Fields.City[this] = value; }
         }
 
-        [DisplayName("Country"), Size(500),  QuickSearch]
-        public String Country
-        {
-            get { return Fields.Country[this]; }
-            set { Fields.Country[this] = value; }
-        }
+        //[DisplayName("Country"), Size(500),  QuickSearch]
+        //public String Country
+        //{
+        //    get { return Fields.Country[this]; }
+        //    set { Fields.Country[this] = value; }
+        //}
 
         [DisplayName("Phone Number"),  QuickSearch]
         public Int32? PhoneNumber
@@ -237,7 +237,7 @@ namespace PatientManagement.PatientManagement.Entities
             public StringField Name;
             public StringField Description;
             public StringField City;
-            public StringField Country;
+          //  public StringField Country;
             public ListField<Int32> Representatives;
             public ListField<String> UserSpecialties;
             public Int16Field WorkHoursStart;

@@ -4,6 +4,7 @@
 namespace PatientManagement.PatientManagement {
 
     @Serenity.Decorators.registerClass()
+    @Serenity.Decorators.panel(true)
     @Serenity.Decorators.responsive()
     export class CabinetsDialog extends Serenity.EntityDialog<CabinetsRow, any> {
 
@@ -12,11 +13,10 @@ namespace PatientManagement.PatientManagement {
         protected getLocalTextPrefix() { return CabinetsRow.localTextPrefix; }
         protected getNameProperty() { return CabinetsRow.nameProperty; }
         protected getService() { return CabinetsService.baseUrl; }
-
+        
         protected form = new CabinetsForm(this.idPrefix);
         constructor() {
             super();
-
             this.form.WorkHoursEnd.addValidationRule(this.uniqueName, e => {
                 if (this.form.WorkHoursEnd != null &&
                     this.form.WorkHoursStart != null &&
@@ -39,8 +39,10 @@ namespace PatientManagement.PatientManagement {
                     text: Q.tryGetText("Enums.PatientManagement.PatientManagement.WeekDays." + WeekDays[i])
                 });
             }
-            
+
+
         }
+
 
         protected onSaveSuccess(response: Serenity.SaveResponse): void {
             CabinetsService.List({},
@@ -58,4 +60,5 @@ namespace PatientManagement.PatientManagement {
 
         }
     }
+
 }

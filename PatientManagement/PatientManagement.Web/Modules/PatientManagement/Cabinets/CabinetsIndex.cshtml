@@ -2,13 +2,27 @@
 @{
     ViewData["Title"] = Serenity.LocalText.Get("Db.PatientManagement.Cabinets.EntityPlural");
 }
+@section Head {
+    <!-- Google Maps -->
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAVFshjFz13i9kcQDkKXE9uDA2nwk9zc_k&amp;sensor=false&amp;libraries=places"></script>
+
+
+    <script src="~/Scripts/geocomplete/jquery.geocomplete.js"></script>
+}
 
 <div id="GridDiv"></div>
 
 <script type="text/javascript">
     jQuery(function () {
-        new PatientManagement.PatientManagement.CabinetsGrid($('#GridDiv'), {}).init();
+        new PatientManagement.PatientManagement.CabinetsGrid($('#GridDiv'), { }).init();
 
         Q.initFullHeightGridPage($('#GridDiv'));
+        $('body').append('<input type="hidden" id="geocomplete-hidden"/>');
+        $("#geocomplete-hidden").on('geocomplete',
+            function () {
+                console.log(' side');
+                $(".geocomplete").geocomplete();
+            });
+
     });
 </script>

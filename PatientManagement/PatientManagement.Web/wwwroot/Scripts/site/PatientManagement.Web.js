@@ -2288,6 +2288,7 @@ var PatientManagement;
             };
             CabinetsDialog = __decorate([
                 Serenity.Decorators.registerClass(),
+                Serenity.Decorators.panel(true),
                 Serenity.Decorators.responsive()
             ], CabinetsDialog);
             return CabinetsDialog;
@@ -3416,6 +3417,29 @@ var PatientManagement;
         }(Serenity.Widget));
         Common.ThemeSelection = ThemeSelection;
     })(Common = PatientManagement.Common || (PatientManagement.Common = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement) {
+    var AddressAutocomplete = /** @class */ (function (_super) {
+        __extends(AddressAutocomplete, _super);
+        function AddressAutocomplete(element) {
+            var _this = _super.call(this, element) || this;
+            console.log("Heelo");
+            _this.element.addClass('geocomplete');
+            return _this;
+        }
+        AddressAutocomplete.prototype.setEditValue = function (source, property) {
+            console.log("From");
+            $("#geocomplete-hidden").trigger('geocomplete');
+            this.element.val(source[property.name]);
+        };
+        AddressAutocomplete = __decorate([
+            Serenity.Decorators.element('<input type="text"/>'),
+            Serenity.Decorators.registerClass([Serenity.ISetEditValue])
+        ], AddressAutocomplete);
+        return AddressAutocomplete;
+    }(Serenity.Widget));
+    PatientManagement.AddressAutocomplete = AddressAutocomplete;
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
 (function (PatientManagement) {
