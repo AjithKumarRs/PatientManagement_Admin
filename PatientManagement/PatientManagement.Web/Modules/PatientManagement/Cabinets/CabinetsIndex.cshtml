@@ -2,17 +2,6 @@
 @{
     ViewData["Title"] = Serenity.LocalText.Get("Db.PatientManagement.Cabinets.EntityPlural");
 }
-@section Head {
-    @{
-        var mapsApiKey = Environment.GetEnvironmentVariable("GOOGLE_MAPS_API_KEY");
-    }
-    <!-- Google Maps -->
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=@mapsApiKey&amp;sensor=false&amp;libraries=places"></script>
-
-    @*<script type="text/javascript" src="@mapsString"></script>*@
-
-    <script src="~/Scripts/geocomplete/jquery.geocomplete.js"></script>
-}
 
 <div id="GridDiv"></div>
 
