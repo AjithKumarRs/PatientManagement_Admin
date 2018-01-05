@@ -21,6 +21,8 @@ using Microsoft.Owin.Cors;
 using Owin;
 using Abp.Owin;
 using PatientManagement.Reservation.Owin;
+#elif FEATURE_SIGNALR_ASPNETCORE
+using Abp.AspNetCore.SignalR.Hubs;
 #endif
 
 namespace PatientManagement.Reservation.Web.Host.Startup
@@ -39,28 +41,33 @@ namespace PatientManagement.Reservation.Web.Host.Startup
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             // MVC
-            services.AddMvc(options =>
-            {
-                options.Filters.Add(new CorsAuthorizationFilterFactory(_defaultCorsPolicyName));
-            });
+            services.AddMvc(
+                options => options.Filters.Add(new CorsAuthorizationFilterFactory(_defaultCorsPolicyName))
+            );
 
             IdentityRegistrar.Register(services);
             AuthConfigurer.Configure(services, _appConfiguration);
 
+#if FEATURE_SIGNALR_ASPNETCORE
+            services.AddSignalR();
+#endif
+
             // Configure CORS for angular2 UI
-            services.AddCors(options =>
-            {
-                options.AddPolicy(_defaultCorsPolicyName, builder =>
-                {
-                    // App:CorsOrigins in appsettings.json can contain more than one address separated by comma.
-                    builder
-                        .WithOrigins(_appConfiguration["App:CorsOrigins"].Split(",", StringSplitOptions.RemoveEmptyEntries)
-                                                                         .Select(o => o.RemovePostFix("/"))
-                                                                         .ToArray())
+            services.AddCors(
+                options => options.AddPolicy(
+                    _defaultCorsPolicyName,
+                    builder => builder
+                        .WithOrigins(
+                            // App:CorsOrigins in appsettings.json can contain more than one address separated by comma.
+                            _appConfiguration["App:CorsOrigins"]
+                                .Split(",", StringSplitOptions.RemoveEmptyEntries)
+                                .Select(o => o.RemovePostFix("/"))
+                                .ToArray()
+                        )
                         .AllowAnyHeader()
-                        .AllowAnyMethod();
-                });
-            });
+                        .AllowAnyMethod()
+                )
+            );
 
             // Swagger - Enable this line and the related lines in Configure method to enable swagger UI
             services.AddSwaggerGen(options =>
@@ -81,13 +88,12 @@ namespace PatientManagement.Reservation.Web.Host.Startup
             });
 
             // Configure Abp and Dependency Injection
-            return services.AddAbp<ReservationWebHostModule>(options =>
-            {
+            return services.AddAbp<ReservationWebHostModule>(
                 // Configure Log4Net logging
-                options.IocManager.IocContainer.AddFacility<LoggingFacility>(
+                options => options.IocManager.IocContainer.AddFacility<LoggingFacility>(
                     f => f.UseAbpLog4Net().WithConfig("log4net.config")
-                );
-            });
+                )
+            );
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -99,13 +105,19 @@ namespace PatientManagement.Reservation.Web.Host.Startup
             app.UseStaticFiles();
 
             app.UseAuthentication();
+
             app.UseJwtTokenMiddleware();
 
             app.UseAbpRequestLocalization();
 
 #if FEATURE_SIGNALR
-            // Integrate to OWIN
+            // Integrate with OWIN
             app.UseAppBuilder(ConfigureOwinServices);
+#elif FEATURE_SIGNALR_ASPNETCORE
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<AbpCommonHub>("/signalr");
+            });
 #endif
 
             app.UseMvc(routes =>

@@ -19,7 +19,8 @@ namespace PatientManagement.Reservation.Sessions
                     ReleaseDate = AppVersionHelper.ReleaseDate,
                     Features = new Dictionary<string, bool>
                     {
-                        { "SignalR", SignalRFeature.IsAvailable }
+                        { "SignalR", SignalRFeature.IsAvailable },
+                        { "SignalR.AspNetCore", SignalRFeature.IsAspNetCore }
                     }
                 }
             };

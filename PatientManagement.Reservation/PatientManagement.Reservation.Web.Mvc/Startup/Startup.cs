@@ -1,5 +1,6 @@
 ﻿using System;
 using Abp.AspNetCore;
+using Abp.AspNetCore.SignalR.Hubs;
 using Abp.Castle.Logging.Log4Net;
 using PatientManagement.Reservation.Authentication.JwtBearer;
 using PatientManagement.Reservation.Configuration;
@@ -43,6 +44,8 @@ namespace PatientManagement.Reservation.Web.Startup
 
             services.AddScoped<IWebResourceManager, WebResourceManager>();
 
+            services.AddSignalR();
+
             //Configure Abp and Dependency Injection
             return services.AddAbp<ReservationWebMvcModule>(options =>
             {
@@ -75,7 +78,10 @@ namespace PatientManagement.Reservation.Web.Startup
             //Integrate to OWIN
             app.UseAppBuilder(ConfigureOwinServices);
 #endif
-
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<AbpCommonHub>("/signalr");
+            });
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

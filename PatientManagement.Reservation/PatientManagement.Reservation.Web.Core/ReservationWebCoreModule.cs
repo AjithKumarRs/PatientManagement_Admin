@@ -14,6 +14,8 @@ using PatientManagement.Reservation.EntityFrameworkCore;
 
 #if FEATURE_SIGNALR
 using Abp.Web.SignalR;
+#elif FEATURE_SIGNALR_ASPNETCORE
+using Abp.AspNetCore.SignalR;
 #endif
 
 namespace PatientManagement.Reservation
@@ -24,6 +26,8 @@ namespace PatientManagement.Reservation
          typeof(AbpAspNetCoreModule)
 #if FEATURE_SIGNALR 
         ,typeof(AbpWebSignalRModule)
+#elif FEATURE_SIGNALR_ASPNETCORE
+        ,typeof(AbpAspNetCoreSignalRModule)
 #endif
      )]
     public class ReservationWebCoreModule : AbpModule

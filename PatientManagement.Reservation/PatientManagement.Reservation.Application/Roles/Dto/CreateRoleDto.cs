@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Abp.Authorization.Roles;
 using Abp.AutoMapper;
 using PatientManagement.Reservation.Authorization.Roles;
-
-using Abp.Authorization.Roles;
 
 namespace PatientManagement.Reservation.Roles.Dto
 {

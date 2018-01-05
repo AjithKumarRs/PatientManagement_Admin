@@ -53,7 +53,7 @@
 
         <link href="~/css/apartment-layout.css" rel="stylesheet" asp-append-version="true" />
         <link href="~/css/apartment-colors-blue.css" rel="stylesheet" asp-append-version="true" />
-
+     
     </environment>
     <environment names="Staging,Production">
         <link href="~/view-resources/Views/_Bundles/clario-layout.min.css" rel="stylesheet" asp-append-version="true" />
@@ -206,8 +206,7 @@
         <script src="~/lib/wow/dist/wow.js" asp-append-version="true"></script>
         <script src="~/js/apartment.js" asp-append-version="true"></script>
 
-
-        @if (SignalRFeature.IsAvailable)
+        @if (SignalRFeature.IsAvailable && !SignalRFeature.IsAspNetCore)
         {
             <script src="~/lib/signalr/jquery.signalR.js" asp-append-version="true"></script>
         }
@@ -229,12 +228,21 @@
     <!-- Dynamic scripts of ABP system (They are created on runtime and can not be bundled) -->
     <script src="~/AbpServiceProxies/GetAll?v=@(AppTimes.StartupTime.Ticks)" type="text/javascript"></script>
     <script src="~/AbpScripts/GetScripts?v=@(AppTimes.StartupTime.Ticks)" type="text/javascript"></script>
-    @if (SignalRFeature.IsAvailable)
+@if (SignalRFeature.IsAvailable)
+{
+    <!-- SignalR scripts -->
+    if (SignalRFeature.IsAspNetCore)
     {
-        <!-- SignalR scripts -->
+        <script src="~/lib/signalr-client/signalr-client.min.js" asp-append-version="true"></script>
+        <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.signalr-client.js" asp-append-version="true"></script>
+    }
+    else
+    {
         <script src="~/signalr/hubs"></script>
         <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.signalr.js" type="text/javascript"></script>
     }
+}
+
     @WebResourceManager.RenderScripts()
 
     <!-- View specific scripts -->

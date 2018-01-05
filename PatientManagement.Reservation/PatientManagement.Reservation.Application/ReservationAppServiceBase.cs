@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Identity;
 using Abp.Application.Services;
 using Abp.IdentityFramework;
 using Abp.Runtime.Session;
-using PatientManagement.Reservation.MultiTenancy;
 using PatientManagement.Reservation.Authorization.Users;
+using PatientManagement.Reservation.MultiTenancy;
 
 namespace PatientManagement.Reservation
 {

@@ -6,6 +6,7 @@ using Abp;
 using Abp.Authorization.Users;
 using Abp.Events.Bus;
 using Abp.Events.Bus.Entities;
+using Abp.MultiTenancy;
 using Abp.Runtime.Session;
 using Abp.TestBase;
 using PatientManagement.Reservation.Authorization.Users;
@@ -143,7 +144,7 @@ namespace PatientManagement.Reservation.Tests
 
         protected void LoginAsDefaultTenantAdmin()
         {
-            LoginAsTenant(Tenant.DefaultTenantName, AbpUserBase.AdminUserName);
+            LoginAsTenant(AbpTenantBase.DefaultTenantName, AbpUserBase.AdminUserName);
         }
 
         protected void LoginAsHost(string userName)

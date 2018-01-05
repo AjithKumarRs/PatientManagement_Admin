@@ -21,11 +21,10 @@ namespace PatientManagement.Reservation
 
             IocManager.RegisterAssemblyByConvention(thisAssembly);
 
-            Configuration.Modules.AbpAutoMapper().Configurators.Add(cfg =>
-            {
+            Configuration.Modules.AbpAutoMapper().Configurators.Add(
                 // Scan the assembly for classes which inherit from AutoMapper.Profile
-                cfg.AddProfiles(thisAssembly);
-            });
+                cfg => cfg.AddProfiles(thisAssembly)
+            );
         }
     }
 }

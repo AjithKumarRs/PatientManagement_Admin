@@ -7,6 +7,8 @@ using Abp.MultiTenancy;
 using PatientManagement.Reservation.Authorization;
 using PatientManagement.Reservation.Authorization.Roles;
 using PatientManagement.Reservation.Authorization.Users;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Options;
 
 namespace PatientManagement.Reservation.EntityFrameworkCore.Seed.Host
 {
@@ -76,10 +78,10 @@ namespace PatientManagement.Reservation.EntityFrameworkCore.Seed.Host
                     Surname = "admin",
                     EmailAddress = "admin@aspnetboilerplate.com",
                     IsEmailConfirmed = true,
-                    IsActive = true,
-                    Password = "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==" // 123qwe
+                    IsActive = true
                 };
 
+                user.Password = new PasswordHasher<User>(new OptionsWrapper<PasswordHasherOptions>(new PasswordHasherOptions())).HashPassword(user, "123qwe");
                 user.SetNormalizedNames();
 
                 adminUserForHost = _context.Users.Add(user).Entity;

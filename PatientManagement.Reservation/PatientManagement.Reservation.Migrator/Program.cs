@@ -18,8 +18,8 @@ namespace PatientManagement.Reservation.Migrator
             using (var bootstrapper = AbpBootstrapper.Create<ReservationMigratorModule>())
             {
                 bootstrapper.IocManager.IocContainer
-                    .AddFacility<LoggingFacility>(f => f.UseAbpLog4Net()
-                        .WithConfig("log4net.config")
+                    .AddFacility<LoggingFacility>(
+                        f => f.UseAbpLog4Net().WithConfig("log4net.config")
                     );
 
                 bootstrapper.Initialize();

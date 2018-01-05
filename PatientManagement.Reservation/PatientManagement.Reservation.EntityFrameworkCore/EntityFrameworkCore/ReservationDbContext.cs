@@ -8,7 +8,7 @@ namespace PatientManagement.Reservation.EntityFrameworkCore
 {
     public class ReservationDbContext : AbpZeroDbContext<Tenant, Role, User, ReservationDbContext>
     {
-        /* Define an IDbSet for each entity of the application */
+        /* Define a DbSet for each entity of the application */
         
         public ReservationDbContext(DbContextOptions<ReservationDbContext> options)
             : base(options)
