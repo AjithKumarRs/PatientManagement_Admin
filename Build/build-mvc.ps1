@@ -18,6 +18,7 @@ dotnet restore
 ## PUBLISH WEB MVC PROJECT ###################################################
 
 Set-Location $webMvcFolder
+New-Item -ItemType directory -Path (Join-Path $outputFolder "Mvc")
 dotnet publish --output (Join-Path $outputFolder "Mvc")
 
 ## CREATE DOCKER IMAGES #######################################################
