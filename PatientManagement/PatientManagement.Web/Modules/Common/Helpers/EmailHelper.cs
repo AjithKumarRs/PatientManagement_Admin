@@ -34,24 +34,31 @@ namespace PatientManagement.Common
     {
         public static void Send(string subject, string body, string address, string displayName = "")
         {
+            //TODO: Rename the method 
+            SendToPatient("no-reply@myclario.com","myclario.com", subject, body, address, displayName);
+            
+        }
+
+        public static void SendToPatient(string fromEmail, string FromName, string subject, string body, string toEmail,
+            string toName = "")
+        {
             var apiKey = Config.Get<SendGridMailSettings>();
             if (apiKey.Enabled != null && bool.Parse(apiKey.Enabled))
             {
                 var client = new SendGridClient(apiKey.SENDGRID_API_KEY);
-                var from = new EmailAddress("no-reply@myclario.com", "Registration");
-                var to = new EmailAddress(address, displayName);
+                var from = new EmailAddress(fromEmail, FromName);
+                var to = new EmailAddress(toEmail, toName);
                 var plainTextContent = body;
                 var htmlContent = body;
                 var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
                 var response = client.SendEmailAsync(msg).Result;
-
             }
-#if COREFX
+
             var config = Config.Get<MailSettings>();
             if (config.Enabled != null && bool.Parse(config.Enabled))
             {
                 var message = new MimeMessage();
-                message.To.Add(new MailboxAddress(displayName, address));
+                message.To.Add(new MailboxAddress(toName, toEmail));
                 message.Subject = subject;
                 var bodyBuilder = new BodyBuilder();
                 bodyBuilder.HtmlBody = body;
@@ -72,40 +79,6 @@ namespace PatientManagement.Common
                     message.WriteTo(Path.Combine(pickupPath, DateTime.Now.ToString("yyyyMMdd_HHmmss_fff") + ".eml"));
                 }
             }
-#else
-            var message = new MailMessage();
-            message.To.Add(new MailAddress(address, ""));
-            message.Subject = subject;
-            message.Body = body;
-            message.IsBodyHtml = true;
-
-            var client = new SmtpClient();
-
-            if (client.DeliveryMethod == SmtpDeliveryMethod.SpecifiedPickupDirectory &&
-                string.IsNullOrEmpty(client.PickupDirectoryLocation))
-            {
-                var pickupPath = HostingEnvironment.MapPath("~/App_Data");
-                pickupPath = Path.Combine(pickupPath, "Mail");
-                Directory.CreateDirectory(pickupPath);
-                client.PickupDirectoryLocation = pickupPath;
-            }
-
-            client.Send(message);
-#endif
-        }
-
-        public static void SendToPatient(string fromEmail, string FromName, string subject, string body, string toEmail,
-            string toName = "")
-        {
-            var apiKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
-
-            var client = new SendGridClient(apiKey);
-            var from = new EmailAddress(fromEmail, FromName);
-            var to = new EmailAddress(toEmail, toName);
-            var plainTextContent = body;
-            var htmlContent = body;
-            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
-            var response = client.SendEmailAsync(msg).Result;
         }
 
     }
