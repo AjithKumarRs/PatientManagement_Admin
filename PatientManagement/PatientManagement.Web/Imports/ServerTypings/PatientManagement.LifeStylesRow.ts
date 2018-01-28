@@ -4,6 +4,9 @@
         PatientId?: number;
         Regime?: string;
         DailyMeals?: string;
+        RemarksForFoodTake?: string;
+        BadHabits?: string;
+        NotEating?: string;
         InsertUserId?: number;
         InsertDate?: string;
         UpdateUserId?: number;
@@ -32,6 +35,9 @@
             PatientId = "PatientId",
             Regime = "Regime",
             DailyMeals = "DailyMeals",
+            RemarksForFoodTake = "RemarksForFoodTake",
+            BadHabits = "BadHabits",
+            NotEating = "NotEating",
             InsertUserId = "InsertUserId",
             InsertDate = "InsertDate",
             UpdateUserId = "UpdateUserId",

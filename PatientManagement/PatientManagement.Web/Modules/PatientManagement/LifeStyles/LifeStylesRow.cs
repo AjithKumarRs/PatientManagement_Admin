@@ -31,7 +31,7 @@ namespace PatientManagement.PatientManagement.Entities
             get { return Fields.PatientId[this]; }
             set { Fields.PatientId[this] = value; }
         }
-
+        
         [DisplayName("Regime"), Size(500)]
         [TextAreaEditor(Rows = 6)]
         public String Regime
@@ -39,7 +39,13 @@ namespace PatientManagement.PatientManagement.Entities
             get { return Fields.Regime[this]; }
             set { Fields.Regime[this] = value; }
         }
-
+        [DisplayName("Bad Habits"), Size(2000)]
+        [TextAreaEditor(Rows = 6)]
+        public String BadHabits
+        {
+            get { return Fields.BadHabits[this]; }
+            set { Fields.BadHabits[this] = value; }
+        }
         [DisplayName("Daily Meals"), Size(500)]
         [TextAreaEditor(Rows = 6)]
         public String DailyMeals
@@ -47,7 +53,30 @@ namespace PatientManagement.PatientManagement.Entities
             get { return Fields.DailyMeals[this]; }
             set { Fields.DailyMeals[this] = value; }
         }
-        
+
+        [DisplayName("Remarks For Food Take"), Size(500)]
+        [TextAreaEditor(Rows = 6)]
+        public String RemarksForFoodTake
+        {
+            get { return Fields.RemarksForFoodTake[this]; }
+            set { Fields.RemarksForFoodTake[this] = value; }
+        }
+
+        // TODO: Still exist in migrations 
+        //[DisplayName("Favorite Food"), Size(500)]
+        //[TextAreaEditor(Rows = 6)]
+        //public String FavoriteFood
+        //{
+        //    get { return Fields.FavoriteFood[this]; }
+        //    set { Fields.FavoriteFood[this] = value; }
+        //}
+        [DisplayName("Not Eating"), Size(500)]
+        [TextAreaEditor(Rows = 6)]
+        public String NotEating
+        {
+            get { return Fields.NotEating[this]; }
+            set { Fields.NotEating[this] = value; }
+        }
         [DisplayName("Patient Name"), Expression("jPatient.[Name]")]
         public String PatientName
         {
@@ -178,6 +207,10 @@ namespace PatientManagement.PatientManagement.Entities
             
             public StringField Regime;
             public StringField DailyMeals;
+            public StringField RemarksForFoodTake;
+            public StringField BadHabits;
+            //public StringField FavoriteFood;
+            public StringField NotEating;
 
             public Int32Field InsertUserId;
             public DateTimeField InsertDate;

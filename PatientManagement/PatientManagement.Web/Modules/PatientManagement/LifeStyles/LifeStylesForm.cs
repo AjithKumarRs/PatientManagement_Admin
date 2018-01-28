@@ -19,6 +19,11 @@ namespace PatientManagement.PatientManagement.Forms
         
         public String Regime { get; set; }
         public String DailyMeals { get; set; }
+        public String RemarksForFoodTake { get; set; }
+        public String BadHabits { get; set; }
+        public String NotEating { get; set; }
+       // public String FavoriteFood { get; set; }
+
 
     }
 }

@@ -3,6 +3,9 @@
         PatientId: Serenity.LookupEditor;
         Regime: Serenity.TextAreaEditor;
         DailyMeals: Serenity.TextAreaEditor;
+        RemarksForFoodTake: Serenity.TextAreaEditor;
+        BadHabits: Serenity.TextAreaEditor;
+        NotEating: Serenity.TextAreaEditor;
     }
 
     export class LifeStylesForm extends Serenity.PrefixedContext {
@@ -22,7 +25,10 @@
                 Q.initFormType(LifeStylesForm, [
                     'PatientId', w0,
                     'Regime', w1,
-                    'DailyMeals', w1
+                    'DailyMeals', w1,
+                    'RemarksForFoodTake', w1,
+                    'BadHabits', w1,
+                    'NotEating', w1
                 ]);
             }
         }
