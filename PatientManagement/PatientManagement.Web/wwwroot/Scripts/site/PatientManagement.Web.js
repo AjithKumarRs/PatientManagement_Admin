@@ -7036,7 +7036,7 @@ var PatientManagement;
         (function (UserRow) {
             UserRow.idProperty = 'UserId';
             UserRow.isActiveProperty = 'IsActive';
-            UserRow.nameProperty = 'Username';
+            UserRow.nameProperty = 'DisplayName';
             UserRow.localTextPrefix = 'Administration.User';
             UserRow.lookupKey = 'Administration.User';
             function getLookup() {

@@ -140,6 +140,8 @@ namespace PatientManagement.PatientManagement.Pages
                 var visitFlds = VisitsRow.Fields.As("vis");
                 var patient = PatientsRow.Fields.As("ptn");
                 var visitType = VisitTypesRow.Fields.As("vstt");
+                var users = UserRow.Fields.As("assUsr");
+
                 var query = new SqlQuery()
                     .From(visitFlds)
                     .Select("*")
@@ -148,6 +150,8 @@ namespace PatientManagement.PatientManagement.Pages
                     & new Criteria(visitFlds.EndDate) <= endDate
                     & new Criteria(visitFlds.CabinetId) == int.Parse(cabinetIdActive)
                         ))
+                        .LeftJoin(users, visitFlds.AssignedUserId == users.UserId)
+                            .Select(users.DisplayName = visitFlds.AssignedUserName)
                         .LeftJoin(patient, visitFlds.PatientId == patient.PatientId)
                             .Select(patient.Name = visitFlds.PatientName, patient.NotifyOnChange = visitFlds.PatientNotifyOnChange)
                         .LeftJoin(visitType, visitFlds.VisitTypeId == visitType.VisitTypeId)
@@ -167,8 +171,9 @@ namespace PatientManagement.PatientManagement.Pages
                     {
                         id = visit.VisitId ?? 0,
                         patientId = visit.PatientId ?? 0,
+                        assignedToUser = visit.AssignedUserName,
                         patientAutoEmailActive = visit.PatientNotifyOnChange ?? false,
-                        title = visit.PatientName + "\n" + visit.Description,
+                        title = string.Join("\n", visit.PatientName ,visit.Description),
                         start = (visit.StartDate ?? DateTime.Now).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
                         end = (visit.EndDate ?? DateTime.Now).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
                         allDay = false,

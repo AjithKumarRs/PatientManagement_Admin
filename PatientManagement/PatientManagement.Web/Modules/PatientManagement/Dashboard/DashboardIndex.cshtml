@@ -208,7 +208,7 @@
         //$('.fc-event-droppable').each(function (i, element) {
 
         //});
-        console.log(@ViewData["WorkDays"]);
+      //  console.log(@ViewData["WorkDays"]);
 
         $(window).resize(function() {
             $('#calendar').fullCalendar('option', 'height', get_calendar_height());
@@ -258,9 +258,18 @@
             selectable: true,
             selectHelper: true,
             eventRender: function (event, element) {
+                console.log(event.assignedToUser);
+                if (event.assignedToUser) {
+                    $(element).tooltip({
+                        title: Q.text("Db.PatientManagement.Visits.AssignedUserName") + ":\n" + event.assignedToUser
+                    });
+                } else {
+                    $(element).tooltip({
+                        title: Q.text("Db.PatientManagement.Visits.AssignedUserName") + ":\n ----" 
+                    });
+                }
                 element.bind('mousedown', function (e) {
                     if (e.which == 3) {
-
                         element.data('visitId', event.id);
                         element.toggleClass('context_menu');
                         element.contextMenu();
@@ -301,7 +310,8 @@
                         }
                     }
                 );
-            }
+            },
+
         });
         $('#calendar').fullCalendar('addEventSource', "/Dashboard/GetVisitsTasks/");
         if (/Mobi/.test(navigator.userAgent)) {

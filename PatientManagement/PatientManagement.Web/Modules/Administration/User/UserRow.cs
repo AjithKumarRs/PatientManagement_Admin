@@ -228,7 +228,7 @@ namespace PatientManagement.Administration.Entities
 
         StringField INameRow.NameField
         {
-            get { return Fields.Username; }
+            get { return Fields.DisplayName; }
         }
 
         Int16Field IIsActiveRow.IsActiveField

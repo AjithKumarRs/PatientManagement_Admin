@@ -2692,7 +2692,7 @@ declare namespace PatientManagement.Administration {
     namespace UserRow {
         const idProperty = "UserId";
         const isActiveProperty = "IsActive";
-        const nameProperty = "Username";
+        const nameProperty = "DisplayName";
         const localTextPrefix = "Administration.User";
         const lookupKey = "Administration.User";
         function getLookup(): Q.Lookup<UserRow>;
