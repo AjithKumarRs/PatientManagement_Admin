@@ -30,44 +30,24 @@
             return Q.getLookup<SentEmailsRow>('AdministrationTenants.SentEmails');
         }
 
-        export namespace Fields {
-            export declare const SentEmailId: string;
-            export declare const FromEmail: string;
-            export declare const FromName: string;
-            export declare const Subject: string;
-            export declare const Body: string;
-            export declare const ToEmail: string;
-            export declare const ToName: string;
-            export declare const TenantId: string;
-            export declare const InsertUserId: string;
-            export declare const InsertDate: string;
-            export declare const UpdateUserId: string;
-            export declare const UpdateDateField: string;
-            export declare const IsActive: string;
-            export declare const EmailSignature: string;
-            export declare const TenantName: string;
-            export declare const InsertUserName: string;
-            export declare const UpdateUserName: string;
+        export declare const enum Fields {
+            SentEmailId = "SentEmailId",
+            FromEmail = "FromEmail",
+            FromName = "FromName",
+            Subject = "Subject",
+            Body = "Body",
+            ToEmail = "ToEmail",
+            ToName = "ToName",
+            TenantId = "TenantId",
+            InsertUserId = "InsertUserId",
+            InsertDate = "InsertDate",
+            UpdateUserId = "UpdateUserId",
+            UpdateDateField = "UpdateDateField",
+            IsActive = "IsActive",
+            EmailSignature = "EmailSignature",
+            TenantName = "TenantName",
+            InsertUserName = "InsertUserName",
+            UpdateUserName = "UpdateUserName"
         }
-
-        [
-            'SentEmailId', 
-            'FromEmail', 
-            'FromName', 
-            'Subject', 
-            'Body', 
-            'ToEmail', 
-            'ToName', 
-            'TenantId', 
-            'InsertUserId', 
-            'InsertDate', 
-            'UpdateUserId', 
-            'UpdateDateField', 
-            'IsActive', 
-            'EmailSignature', 
-            'TenantName', 
-            'InsertUserName', 
-            'UpdateUserName'
-        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

@@ -11,5 +11,5 @@
         Blocked = 8,
         Cancelled = 9
     }
-    Serenity.Decorators.registerEnum(PaymentStatus, 'PatientManagement.PatientManagement.Entities.PaymentStatus');
+    Serenity.Decorators.registerEnumType(PaymentStatus, 'PatientManagement.PatientManagement.PaymentStatus', 'PatientManagement.PatientManagement.Entities.PaymentStatus');
 }

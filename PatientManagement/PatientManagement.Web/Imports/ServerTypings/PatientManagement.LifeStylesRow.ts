@@ -27,38 +27,21 @@
             return Q.getLookup<LifeStylesRow>('PatientManagement.LifeStyles');
         }
 
-        export namespace Fields {
-            export declare const LifeStyleId: string;
-            export declare const PatientId: string;
-            export declare const Regime: string;
-            export declare const DailyMeals: string;
-            export declare const InsertUserId: string;
-            export declare const InsertDate: string;
-            export declare const UpdateUserId: string;
-            export declare const UpdateDateField: string;
-            export declare const IsActive: string;
-            export declare const TenantName: string;
-            export declare const InsertUserName: string;
-            export declare const UpdateUserName: string;
-            export declare const PatientName: string;
-            export declare const TenantId: string;
+        export declare const enum Fields {
+            LifeStyleId = "LifeStyleId",
+            PatientId = "PatientId",
+            Regime = "Regime",
+            DailyMeals = "DailyMeals",
+            InsertUserId = "InsertUserId",
+            InsertDate = "InsertDate",
+            UpdateUserId = "UpdateUserId",
+            UpdateDateField = "UpdateDateField",
+            IsActive = "IsActive",
+            TenantName = "TenantName",
+            InsertUserName = "InsertUserName",
+            UpdateUserName = "UpdateUserName",
+            PatientName = "PatientName",
+            TenantId = "TenantId"
         }
-
-        [
-            'LifeStyleId', 
-            'PatientId', 
-            'Regime', 
-            'DailyMeals', 
-            'InsertUserId', 
-            'InsertDate', 
-            'UpdateUserId', 
-            'UpdateDateField', 
-            'IsActive', 
-            'TenantName', 
-            'InsertUserName', 
-            'UpdateUserName', 
-            'PatientName', 
-            'TenantId'
-        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

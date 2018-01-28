@@ -1949,7 +1949,7 @@ div.s-Toolbar .s-PopupToolButton .button-outer > span > b {
   padding: 0;
 }
 .s-AlertDialog .ui-dialog-content:before {
-  content: "\f165";
+  content: "\f06a";
   color: #dd4b39;
 }
 .s-AlertDialog .ui-dialog-titlebar {

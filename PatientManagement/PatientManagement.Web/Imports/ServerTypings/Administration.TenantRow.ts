@@ -38,60 +38,32 @@
             return Q.getLookup<TenantRow>('Administration.Tenant');
         }
 
-        export namespace Fields {
-            export declare const TenantId: string;
-            export declare const TenantName: string;
-            export declare const CurrencyId: string;
-            export declare const CurrencyName: string;
-            export declare const SubscriptionRequired: string;
-            export declare const SubscriptionId: string;
-            export declare const TenantWebSite: string;
-            export declare const TenantImage: string;
-            export declare const OverrideUsersEmailSignature: string;
-            export declare const TenantEmailSignature: string;
-            export declare const SubscriptionOfferId: string;
-            export declare const SubscriptionTenantId: string;
-            export declare const SubscriptionSubscriptionEndDate: string;
-            export declare const SubscriptionInsertUserId: string;
-            export declare const SubscriptionInsertDate: string;
-            export declare const SubscriptionUpdateUserId: string;
-            export declare const SubscriptionUpdateDateField: string;
-            export declare const SubscriptionName: string;
-            export declare const InsertUserId: string;
-            export declare const InsertDate: string;
-            export declare const UpdateUserId: string;
-            export declare const UpdateDateField: string;
-            export declare const InsertUserName: string;
-            export declare const UpdateUserName: string;
-            export declare const IsActive: string;
+        export declare const enum Fields {
+            TenantId = "TenantId",
+            TenantName = "TenantName",
+            CurrencyId = "CurrencyId",
+            CurrencyName = "CurrencyName",
+            SubscriptionRequired = "SubscriptionRequired",
+            SubscriptionId = "SubscriptionId",
+            TenantWebSite = "TenantWebSite",
+            TenantImage = "TenantImage",
+            OverrideUsersEmailSignature = "OverrideUsersEmailSignature",
+            TenantEmailSignature = "TenantEmailSignature",
+            SubscriptionOfferId = "SubscriptionOfferId",
+            SubscriptionTenantId = "SubscriptionTenantId",
+            SubscriptionSubscriptionEndDate = "SubscriptionSubscriptionEndDate",
+            SubscriptionInsertUserId = "SubscriptionInsertUserId",
+            SubscriptionInsertDate = "SubscriptionInsertDate",
+            SubscriptionUpdateUserId = "SubscriptionUpdateUserId",
+            SubscriptionUpdateDateField = "SubscriptionUpdateDateField",
+            SubscriptionName = "SubscriptionName",
+            InsertUserId = "InsertUserId",
+            InsertDate = "InsertDate",
+            UpdateUserId = "UpdateUserId",
+            UpdateDateField = "UpdateDateField",
+            InsertUserName = "InsertUserName",
+            UpdateUserName = "UpdateUserName",
+            IsActive = "IsActive"
         }
-
-        [
-            'TenantId', 
-            'TenantName', 
-            'CurrencyId', 
-            'CurrencyName', 
-            'SubscriptionRequired', 
-            'SubscriptionId', 
-            'TenantWebSite', 
-            'TenantImage', 
-            'OverrideUsersEmailSignature', 
-            'TenantEmailSignature', 
-            'SubscriptionOfferId', 
-            'SubscriptionTenantId', 
-            'SubscriptionSubscriptionEndDate', 
-            'SubscriptionInsertUserId', 
-            'SubscriptionInsertDate', 
-            'SubscriptionUpdateUserId', 
-            'SubscriptionUpdateDateField', 
-            'SubscriptionName', 
-            'InsertUserId', 
-            'InsertDate', 
-            'UpdateUserId', 
-            'UpdateDateField', 
-            'InsertUserName', 
-            'UpdateUserName', 
-            'IsActive'
-        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

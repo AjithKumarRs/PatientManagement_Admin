@@ -44,7 +44,7 @@
     <PackageReference Include="EPPlus.Core" Version="1.5.2" />
     <PackageReference Include="FastMember" Version="1.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
-    <PackageReference Include="Serenity.Web" Version="3.3.15" />
+    <PackageReference Include="Serenity.Web" Version="3.4.2" />
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">
     <PackageReference Include="EPPlus" Version="4.1.0" />
@@ -99,7 +99,7 @@
     <Exec Command="&quot;$(TscToolPath.Replace('build\\..\tools\', 'tools\'))\tsc&quot; -p ./tsconfig.json" ContinueOnError="true" />
   </Target>
   <ItemGroup>
-    <DotNetCliToolReference Include="Serenity.CodeGenerator" Version="3.3.15" />
+    <DotNetCliToolReference Include="Serenity.CodeGenerator" Version="3.4.2" />
   </ItemGroup>
   <ItemGroup>
     <None Update="App_Data\Reporting\wkhtmltopdf.exe">

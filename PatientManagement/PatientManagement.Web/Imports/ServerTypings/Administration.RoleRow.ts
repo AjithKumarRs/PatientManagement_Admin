@@ -25,34 +25,19 @@
             return Q.getLookup<RoleRow>('Administration.Role');
         }
 
-        export namespace Fields {
-            export declare const RoleId: string;
-            export declare const RoleName: string;
-            export declare const TenantId: string;
-            export declare const InsertUserId: string;
-            export declare const InsertDate: string;
-            export declare const UpdateUserId: string;
-            export declare const UpdateDateField: string;
-            export declare const IsActive: string;
-            export declare const UsersInRole: string;
-            export declare const TenantName: string;
-            export declare const InsertUserName: string;
-            export declare const UpdateUserName: string;
+        export declare const enum Fields {
+            RoleId = "RoleId",
+            RoleName = "RoleName",
+            TenantId = "TenantId",
+            InsertUserId = "InsertUserId",
+            InsertDate = "InsertDate",
+            UpdateUserId = "UpdateUserId",
+            UpdateDateField = "UpdateDateField",
+            IsActive = "IsActive",
+            UsersInRole = "UsersInRole",
+            TenantName = "TenantName",
+            InsertUserName = "InsertUserName",
+            UpdateUserName = "UpdateUserName"
         }
-
-        [
-            'RoleId', 
-            'RoleName', 
-            'TenantId', 
-            'InsertUserId', 
-            'InsertDate', 
-            'UpdateUserId', 
-            'UpdateDateField', 
-            'IsActive', 
-            'UsersInRole', 
-            'TenantName', 
-            'InsertUserName', 
-            'UpdateUserName'
-        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

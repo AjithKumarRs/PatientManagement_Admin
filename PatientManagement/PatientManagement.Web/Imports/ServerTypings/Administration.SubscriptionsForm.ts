@@ -1,9 +1,4 @@
 ﻿namespace PatientManagement.Administration {
-    export class SubscriptionsForm extends Serenity.PrefixedContext {
-        static formKey = 'Administration.Subscriptions';
-
-    }
-
     export interface SubscriptionsForm {
         Name: Serenity.StringEditor;
         OfferId: Serenity.LookupEditor;
@@ -13,5 +8,32 @@
         TenantId: Serenity.LookupEditor;
     }
 
-    [['Name', () => Serenity.StringEditor], ['OfferId', () => Serenity.LookupEditor], ['SubscriptionEndDate', () => Serenity.DateEditor], ['Enabled', () => BsSwitchEditor], ['FreeDaysFromOffer', () => Serenity.IntegerEditor], ['TenantId', () => Serenity.LookupEditor]].forEach(x => Object.defineProperty(SubscriptionsForm.prototype, <string>x[0], { get: function () { return this.w(x[0], (x[1] as any)()); }, enumerable: true, configurable: true }));
+    export class SubscriptionsForm extends Serenity.PrefixedContext {
+        static formKey = 'Administration.Subscriptions';
+        private static init: boolean;
+
+        constructor(prefix: string) {
+            super(prefix);
+
+            if (!SubscriptionsForm.init)  {
+                SubscriptionsForm.init = true;
+
+                var s = Serenity;
+                var w0 = s.StringEditor;
+                var w1 = s.LookupEditor;
+                var w2 = s.DateEditor;
+                var w3 = BsSwitchEditor;
+                var w4 = s.IntegerEditor;
+
+                Q.initFormType(SubscriptionsForm, [
+                    'Name', w0,
+                    'OfferId', w1,
+                    'SubscriptionEndDate', w2,
+                    'Enabled', w3,
+                    'FreeDaysFromOffer', w4,
+                    'TenantId', w1
+                ]);
+            }
+        }
+    }
 }

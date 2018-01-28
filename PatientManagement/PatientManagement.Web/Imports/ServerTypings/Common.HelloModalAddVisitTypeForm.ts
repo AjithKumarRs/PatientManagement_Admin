@@ -1,14 +1,29 @@
 ﻿namespace PatientManagement.Common {
-    export class HelloModalAddVisitTypeForm extends Serenity.PrefixedContext {
-        static formKey = 'Common.HelloModalAddVisitType';
-
-    }
-
     export interface HelloModalAddVisitTypeForm {
         Name: Serenity.StringEditor;
         BorderColor: Serenity.StringEditor;
         BackgroundColor: Serenity.StringEditor;
     }
 
-    [['Name', () => Serenity.StringEditor], ['BorderColor', () => Serenity.StringEditor], ['BackgroundColor', () => Serenity.StringEditor]].forEach(x => Object.defineProperty(HelloModalAddVisitTypeForm.prototype, <string>x[0], { get: function () { return this.w(x[0], (x[1] as any)()); }, enumerable: true, configurable: true }));
+    export class HelloModalAddVisitTypeForm extends Serenity.PrefixedContext {
+        static formKey = 'Common.HelloModalAddVisitType';
+        private static init: boolean;
+
+        constructor(prefix: string) {
+            super(prefix);
+
+            if (!HelloModalAddVisitTypeForm.init)  {
+                HelloModalAddVisitTypeForm.init = true;
+
+                var s = Serenity;
+                var w0 = s.StringEditor;
+
+                Q.initFormType(HelloModalAddVisitTypeForm, [
+                    'Name', w0,
+                    'BorderColor', w0,
+                    'BackgroundColor', w0
+                ]);
+            }
+        }
+    }
 }

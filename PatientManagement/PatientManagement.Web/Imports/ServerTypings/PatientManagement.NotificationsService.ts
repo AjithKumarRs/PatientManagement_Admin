@@ -10,14 +10,14 @@
         export declare function ListForDropdown(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<NotificationsRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         export declare function CountNotifications(request: Serenity.ListRequest, onSuccess?: (response: CountNotificationsResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
 
-        export namespace Methods {
-            export declare const Create: string;
-            export declare const Update: string;
-            export declare const Delete: string;
-            export declare const Retrieve: string;
-            export declare const List: string;
-            export declare const ListForDropdown: string;
-            export declare const CountNotifications: string;
+        export declare const enum Methods {
+            Create = "PatientManagement/Notifications/Create",
+            Update = "PatientManagement/Notifications/Update",
+            Delete = "PatientManagement/Notifications/Delete",
+            Retrieve = "PatientManagement/Notifications/Retrieve",
+            List = "PatientManagement/Notifications/List",
+            ListForDropdown = "PatientManagement/Notifications/ListForDropdown",
+            CountNotifications = "PatientManagement/Notifications/CountNotifications"
         }
 
         [
@@ -32,7 +32,6 @@
             (<any>NotificationsService)[x] = function (r, s, o) {
                 return Q.serviceRequest(baseUrl + '/' + x, r, s, o);
             };
-            (<any>Methods)[x] = baseUrl + '/' + x;
         });
     }
 }

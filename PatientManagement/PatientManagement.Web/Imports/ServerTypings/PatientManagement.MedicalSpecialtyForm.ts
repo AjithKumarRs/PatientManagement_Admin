@@ -1,12 +1,25 @@
 ﻿namespace PatientManagement.PatientManagement {
-    export class MedicalSpecialtyForm extends Serenity.PrefixedContext {
-        static formKey = 'PatientManagement.MedicalSpecialty';
-
-    }
-
     export interface MedicalSpecialtyForm {
         Name: Serenity.StringEditor;
     }
 
-    [['Name', () => Serenity.StringEditor]].forEach(x => Object.defineProperty(MedicalSpecialtyForm.prototype, <string>x[0], { get: function () { return this.w(x[0], (x[1] as any)()); }, enumerable: true, configurable: true }));
+    export class MedicalSpecialtyForm extends Serenity.PrefixedContext {
+        static formKey = 'PatientManagement.MedicalSpecialty';
+        private static init: boolean;
+
+        constructor(prefix: string) {
+            super(prefix);
+
+            if (!MedicalSpecialtyForm.init)  {
+                MedicalSpecialtyForm.init = true;
+
+                var s = Serenity;
+                var w0 = s.StringEditor;
+
+                Q.initFormType(MedicalSpecialtyForm, [
+                    'Name', w0
+                ]);
+            }
+        }
+    }
 }

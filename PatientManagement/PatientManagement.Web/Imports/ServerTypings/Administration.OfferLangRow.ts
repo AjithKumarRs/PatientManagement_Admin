@@ -12,20 +12,12 @@
         export const nameProperty = 'Name';
         export const localTextPrefix = 'Administration.OfferLang';
 
-        export namespace Fields {
-            export declare const Id: string;
-            export declare const OfferId: string;
-            export declare const LanguageId: string;
-            export declare const Name: string;
-            export declare const Description: string;
+        export declare const enum Fields {
+            Id = "Id",
+            OfferId = "OfferId",
+            LanguageId = "LanguageId",
+            Name = "Name",
+            Description = "Description"
         }
-
-        [
-            'Id', 
-            'OfferId', 
-            'LanguageId', 
-            'Name', 
-            'Description'
-        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

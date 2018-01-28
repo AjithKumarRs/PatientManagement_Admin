@@ -9,16 +9,10 @@
         export const idProperty = 'PaymentCouponId';
         export const localTextPrefix = 'PaymentCoupons';
 
-        export namespace Fields {
-            export declare const PaymentCouponId: string;
-            export declare const CouponId: string;
-            export declare const PaymentId: string;
+        export declare const enum Fields {
+            PaymentCouponId = "PaymentCouponId",
+            CouponId = "CouponId",
+            PaymentId = "PaymentId"
         }
-
-        [
-            'PaymentCouponId', 
-            'CouponId', 
-            'PaymentId'
-        ].forEach(x => (<any>Fields)[x] = x);
     }
 }
