@@ -5,7 +5,6 @@
         Name?: string;
         Description?: string;
         City?: string;
-        Country?: string;
         Representatives?: number[];
         UserSpecialties?: string[];
         WorkHoursStart?: number;
@@ -39,7 +38,6 @@
             Name = "Name",
             Description = "Description",
             City = "City",
-            Country = "Country",
             Representatives = "Representatives",
             UserSpecialties = "UserSpecialties",
             WorkHoursStart = "WorkHoursStart",

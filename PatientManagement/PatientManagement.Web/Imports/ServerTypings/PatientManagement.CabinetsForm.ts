@@ -5,10 +5,9 @@
         WorkHoursEnd: Serenity.TimeEditor;
         WorkDays: Serenity.LookupEditor;
         Representatives: Serenity.LookupEditor;
-        Description: Serenity.TextAreaEditor;
-        City: Serenity.StringEditor;
-        Country: Serenity.StringEditor;
+        Description: Serenity.HtmlContentEditor;
         PhoneNumber: Serenity.IntegerEditor;
+        City: AddressAutocomplete;
         TenantId: Serenity.LookupEditor;
     }
 
@@ -26,8 +25,9 @@
                 var w0 = s.StringEditor;
                 var w1 = s.TimeEditor;
                 var w2 = s.LookupEditor;
-                var w3 = s.TextAreaEditor;
+                var w3 = s.HtmlContentEditor;
                 var w4 = s.IntegerEditor;
+                var w5 = AddressAutocomplete;
 
                 Q.initFormType(CabinetsForm, [
                     'Name', w0,
@@ -36,9 +36,8 @@
                     'WorkDays', w2,
                     'Representatives', w2,
                     'Description', w3,
-                    'City', w0,
-                    'Country', w0,
                     'PhoneNumber', w4,
+                    'City', w5,
                     'TenantId', w2
                 ]);
             }

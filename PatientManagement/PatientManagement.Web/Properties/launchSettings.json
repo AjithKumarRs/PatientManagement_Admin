@@ -12,7 +12,8 @@
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "GOOGLE_MAPS_API_KEY": "AIzaSyAVFshjFz13i9kcQDkKXE9uDA2nwk9zc_k"
       }
     },
     "Kestrel": {

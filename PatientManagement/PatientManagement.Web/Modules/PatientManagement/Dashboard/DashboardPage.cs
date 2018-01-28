@@ -348,9 +348,13 @@ namespace PatientManagement.PatientManagement.Pages
             var connection = SqlConnections.NewFor<UserRoleRow>();
 
             var userRoleFld = UserRoleRow.Fields;
-            var userRoles = connection.List<UserRoleRow>(userRoleFld.UserId == user.UserId).Select(s => s.RoleId);
-            var roleFlds = RoleRow.Fields;
-            var roleNames = connection.List<RoleRow>(roleFlds.RoleId.In(userRoles)).Select(s => s.RoleName);
+            var userRoles = connection.List<UserRoleRow>(userRoleFld.UserId == user.UserId).Select(s => s.RoleId).ToList();
+            var roleNames = new List<string>();
+            if (userRoles.Any())
+            {
+                var roleFlds = RoleRow.Fields;
+                roleNames = connection.List<RoleRow>(roleFlds.RoleId.In(userRoles)).Select(s => s.RoleName).ToList();
+            }
 
             return Json(roleNames);
         }
