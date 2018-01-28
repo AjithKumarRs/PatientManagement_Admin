@@ -1,4 +1,6 @@
-﻿
+﻿/// <reference types="googlemaps" />
+/// <reference types="jqueryui" />
+
 namespace PatientManagement {
     @Serenity.Decorators.element('<input type="text"/>')
     @Serenity.Decorators.registerClass([Serenity.ISetEditValue])
@@ -17,15 +19,23 @@ namespace PatientManagement {
                 .geocomplete({
                     map: '.map_geocomplete',
                     details: '.form_geocomplete',
-        });
+                });
 
         }
 
         public setEditValue(source: any, property: Serenity.PropertyItem): void {
             this.element.val(source[property.name]);
             $('.formatted_address').val(source[property.name]);
-            
-            $(".s-AddressAutocomplete").trigger('geocode');
+
+
+            window.setTimeout(
+                function () {
+                    // TODO: waiting for rendered input
+                    var map = $(".s-AddressAutocomplete").geocomplete("map");
+                    $(".s-AddressAutocomplete").trigger('geocode');
+                    google.maps.event.trigger(map, 'resize');
+                }, 1000);
+
         }
 
     }
