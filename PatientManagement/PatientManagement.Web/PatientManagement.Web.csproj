@@ -3,7 +3,7 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <PreserveCompilationContext>true</PreserveCompilationContext>
     <AssemblyName>PatientManagement.Web</AssemblyName>
-    <Version>0.8.0</Version>
+    <Version>1.2.650</Version>
     <Product>Clario Admin</Product>
     <Company>s2kdesign</Company>
     <Authors>Svetlin Krastanov</Authors>

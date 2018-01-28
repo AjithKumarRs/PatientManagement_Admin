@@ -49,8 +49,8 @@ namespace PatientManagement.PatientManagement.Endpoints
         {
             var visit = uow.Connection.ById<VisitsRow>(request.EntityId);
             var patient = uow.Connection.ById<PatientsRow>(visit.PatientId);
-
-            SendAutomaticEmailToPatient(uow, patient, request.Entity.StartDate ?? DateTime.MinValue, false);
+            if (request.Entity.StartDate != visit.StartDate || request.Entity.EndDate != visit.EndDate)
+                SendAutomaticEmailToPatient(uow, patient, request.Entity.StartDate ?? DateTime.MinValue, false);
 
             return new MyRepository().Update(uow, request);
         }
@@ -113,7 +113,7 @@ namespace PatientManagement.PatientManagement.Endpoints
         public FileStreamResult ListIcs(IDbConnection connection, ListRequest request)
         {
             var data = List(connection, request).Entities;
-            
+
             return File(VisitsExportHelper.ExportToIcs(data, AccessType.Private), "text/calendar", "event.ics");
         }
     }

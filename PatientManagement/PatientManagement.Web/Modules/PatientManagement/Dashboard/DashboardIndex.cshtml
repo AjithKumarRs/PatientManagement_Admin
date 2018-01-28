@@ -257,18 +257,22 @@
             droppable: false,
             selectable: true,
             selectHelper: true,
-            eventRender: function (event, element) {
-                console.log(event.assignedToUser);
+            eventMouseover: function (event, element) {
                 if (event.assignedToUser) {
-                    $(element).tooltip({
+                    
+                    $(this).tooltip({
                         title: Q.text("Db.PatientManagement.Visits.AssignedUserName") + ":\n" + event.assignedToUser
-                    });
+                    }).triggerHandler('mouseover');
                 } else {
-                    $(element).tooltip({
-                        title: Q.text("Db.PatientManagement.Visits.AssignedUserName") + ":\n ----" 
-                    });
+                    $(this).tooltip({
+                        title: Q.text("Db.PatientManagement.Visits.AssignedUserName") + ":\n ----"
+                    }).triggerHandler('mouseover');
                 }
+            },
+            eventRender: function (event, element) {
+             
                 element.bind('mousedown', function (e) {
+                 
                     if (e.which == 3) {
                         element.data('visitId', event.id);
                         element.toggleClass('context_menu');
