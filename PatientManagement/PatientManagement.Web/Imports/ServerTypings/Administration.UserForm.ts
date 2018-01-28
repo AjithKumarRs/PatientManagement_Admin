@@ -8,6 +8,7 @@
         PasswordConfirm: Serenity.PasswordEditor;
         Cabinets: Serenity.LookupEditor;
         RestrictedToCabinets: BsSwitchEditor;
+        CanBeAssignedToVisit: BsSwitchEditor;
         PhoneNumber: Serenity.StringEditor;
         WebSite: Serenity.StringEditor;
         UserImage: Serenity.ImageUploadEditor;
@@ -47,6 +48,7 @@
                     'PasswordConfirm', w3,
                     'Cabinets', w2,
                     'RestrictedToCabinets', w4,
+                    'CanBeAssignedToVisit', w4,
                     'PhoneNumber', w0,
                     'WebSite', w0,
                     'UserImage', w5,

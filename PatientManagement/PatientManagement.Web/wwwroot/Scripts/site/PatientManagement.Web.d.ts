@@ -1019,7 +1019,7 @@ declare namespace PatientManagement.Administration {
         protected onClick(e: JQueryEventObject, row: number, cell: number): any;
         protected getColumns(): Slick.Column[];
         protected createToolbarExtensions(): void;
-        protected saveChanges(language: string): RSVP.Promise<any>;
+        protected saveChanges(language: string): PromiseLike<any>;
         protected onViewSubmit(): boolean;
         protected getButtons(): Serenity.ToolButton[];
         protected createQuickSearchInput(): void;
@@ -2543,6 +2543,7 @@ declare namespace PatientManagement.Administration {
         PasswordConfirm: Serenity.PasswordEditor;
         Cabinets: Serenity.LookupEditor;
         RestrictedToCabinets: BsSwitchEditor;
+        CanBeAssignedToVisit: BsSwitchEditor;
         PhoneNumber: Serenity.StringEditor;
         WebSite: Serenity.StringEditor;
         UserImage: Serenity.ImageUploadEditor;
@@ -2666,6 +2667,7 @@ declare namespace PatientManagement.Administration {
         PasswordSalt?: string;
         DisplayName?: string;
         Email?: string;
+        CanBeAssignedToVisit?: number;
         RestrictedToCabinets?: number;
         Info?: string;
         UserImage?: string;
@@ -2702,6 +2704,7 @@ declare namespace PatientManagement.Administration {
             PasswordSalt = "PasswordSalt",
             DisplayName = "DisplayName",
             Email = "Email",
+            CanBeAssignedToVisit = "CanBeAssignedToVisit",
             RestrictedToCabinets = "RestrictedToCabinets",
             Info = "Info",
             UserImage = "UserImage",
@@ -3694,10 +3697,11 @@ declare namespace PatientManagement.PatientManagement {
         PersonalNumber: Serenity.StringEditor;
         PhoneNumber: Serenity.StringEditor;
         Email: Serenity.EmailEditor;
-        FirstRegistrationDate: Serenity.DateTimeEditor;
+        Picture: Serenity.ImageUploadEditor;
         Address: Serenity.StringEditor;
         Height: Serenity.IntegerEditor;
         Weight: Serenity.IntegerEditor;
+        FirstRegistrationDate: Serenity.DateTimeEditor;
         NotifyOnChange: BsSwitchEditor;
         NoteList: NotesEditor;
         TenantId: Serenity.LookupEditor;
@@ -3715,6 +3719,7 @@ declare namespace PatientManagement.PatientManagement {
         PersonalNumber?: number;
         PhoneNumber?: string;
         Gender?: Gender;
+        Picture?: string;
         FirstRegistrationDate?: string;
         Address?: string;
         Height?: number;
@@ -3743,6 +3748,7 @@ declare namespace PatientManagement.PatientManagement {
             PersonalNumber = "PersonalNumber",
             PhoneNumber = "PhoneNumber",
             Gender = "Gender",
+            Picture = "Picture",
             FirstRegistrationDate = "FirstRegistrationDate",
             Address = "Address",
             Height = "Height",
@@ -3889,6 +3895,7 @@ declare namespace PatientManagement.PatientManagement {
     interface VisitsForm {
         PatientId: Serenity.LookupEditor;
         VisitTypeId: Serenity.LookupEditor;
+        AssignedUserId: Serenity.LookupEditor;
         CabinetId: Serenity.LookupEditor;
         StartDate: Serenity.DateTimeEditor;
         EndDate: Serenity.DateTimeEditor;
@@ -3909,6 +3916,8 @@ declare namespace PatientManagement.PatientManagement {
         CabinetId?: number;
         CabinetName?: string;
         CabinetIsActive?: number;
+        AssignedUserId?: number;
+        AssignedUserName?: string;
         Description?: string;
         StartDate?: string;
         EndDate?: string;
@@ -3938,6 +3947,8 @@ declare namespace PatientManagement.PatientManagement {
             CabinetId = "CabinetId",
             CabinetName = "CabinetName",
             CabinetIsActive = "CabinetIsActive",
+            AssignedUserId = "AssignedUserId",
+            AssignedUserName = "AssignedUserName",
             Description = "Description",
             StartDate = "StartDate",
             EndDate = "EndDate",

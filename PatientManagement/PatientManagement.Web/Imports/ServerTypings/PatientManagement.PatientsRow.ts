@@ -5,6 +5,7 @@
         PersonalNumber?: number;
         PhoneNumber?: string;
         Gender?: Gender;
+        Picture?: string;
         FirstRegistrationDate?: string;
         Address?: string;
         Height?: number;
@@ -38,6 +39,7 @@
             PersonalNumber = "PersonalNumber",
             PhoneNumber = "PhoneNumber",
             Gender = "Gender",
+            Picture = "Picture",
             FirstRegistrationDate = "FirstRegistrationDate",
             Address = "Address",
             Height = "Height",

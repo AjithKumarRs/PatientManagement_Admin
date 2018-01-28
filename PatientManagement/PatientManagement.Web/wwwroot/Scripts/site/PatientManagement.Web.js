@@ -4751,7 +4751,7 @@ var PatientManagement;
                     var item = _a[_i];
                     translations[item.Key] = item.CustomText;
                 }
-                return RSVP.resolve(Administration.TranslationService.Update({
+                return Promise.resolve(Administration.TranslationService.Update({
                     TargetLanguageID: language,
                     Translations: translations
                 })).then(function () {
@@ -6948,6 +6948,7 @@ var PatientManagement;
                         'PasswordConfirm', w3,
                         'Cabinets', w2,
                         'RestrictedToCabinets', w4,
+                        'CanBeAssignedToVisit', w4,
                         'PhoneNumber', w0,
                         'WebSite', w0,
                         'UserImage', w5,
@@ -8020,10 +8021,11 @@ var PatientManagement;
                     var w1 = s.StringEditor;
                     var w2 = s.EnumEditor;
                     var w3 = s.EmailEditor;
-                    var w4 = s.DateTimeEditor;
-                    var w5 = PatientManagement_84.BsSwitchEditor;
-                    var w6 = PatientManagement.NotesEditor;
-                    var w7 = s.LookupEditor;
+                    var w4 = s.ImageUploadEditor;
+                    var w5 = s.DateTimeEditor;
+                    var w6 = PatientManagement_84.BsSwitchEditor;
+                    var w7 = PatientManagement.NotesEditor;
+                    var w8 = s.LookupEditor;
                     Q.initFormType(PatientsForm, [
                         'PatientId', w0,
                         'Name', w1,
@@ -8031,13 +8033,14 @@ var PatientManagement;
                         'PersonalNumber', w1,
                         'PhoneNumber', w1,
                         'Email', w3,
-                        'FirstRegistrationDate', w4,
+                        'Picture', w4,
                         'Address', w1,
                         'Height', w0,
                         'Weight', w0,
-                        'NotifyOnChange', w5,
-                        'NoteList', w6,
-                        'TenantId', w7
+                        'FirstRegistrationDate', w5,
+                        'NotifyOnChange', w6,
+                        'NoteList', w7,
+                        'TenantId', w8
                     ]);
                 }
                 return _this;
@@ -8219,6 +8222,7 @@ var PatientManagement;
                     Q.initFormType(VisitsForm, [
                         'PatientId', w0,
                         'VisitTypeId', w0,
+                        'AssignedUserId', w0,
                         'CabinetId', w0,
                         'StartDate', w1,
                         'EndDate', w1,

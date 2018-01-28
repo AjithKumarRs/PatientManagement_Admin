@@ -160,10 +160,20 @@ namespace PatientManagement.Administration.Entities
         [ModifyPermission("Administration:User:IsActiveRead")]
         [ReadPermission("Administration:User:IsActiveRead")]
         [BsSwitchEditor]
+        [LookupInclude]
         public Int16? IsActive
         {
             get { return Fields.IsActive[this]; }
             set { Fields.IsActive[this] = value; }
+        }
+
+        [BsSwitchEditor]
+        [DisplayName("Can Be Assigned To Visit")]
+        [LookupInclude]
+        public Int16? CanBeAssignedToVisit
+        {
+            get { return Fields.CanBeAssignedToVisit[this]; }
+            set { Fields.CanBeAssignedToVisit[this] = value; }
         }
 
         [DisplayName("Confirm Password"), Size(50), NotMapped]
@@ -242,6 +252,7 @@ namespace PatientManagement.Administration.Entities
             public StringField PasswordSalt;
             public StringField DisplayName;
             public StringField Email;
+            public Int16Field CanBeAssignedToVisit;
             public Int16Field RestrictedToCabinets;
             public StringField Info;
             public StringField UserImage;

@@ -105,7 +105,7 @@ namespace PatientManagement.Migrations.PatientManagementDB
 
             Create.Table("Visits")
                 .WithColumn("VisitId").AsInt32().Identity().PrimaryKey().NotNullable()
-                .WithColumn("PatientId").AsInt32().NotNullable()
+                .WithColumn("PatientId").AsInt32().Nullable()
                 .ForeignKey("FK_Visits_Patients", "Patients", "PatientId")
                 .WithColumn("VisitTypeId").AsInt32().NotNullable()
                 .ForeignKey("FK_Visits_VisitTypes", "VisitTypes", "VisitTypeId")

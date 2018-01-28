@@ -26,6 +26,8 @@ namespace PatientManagement.Administration.Columns
 
         [Width(250), CabinetsListFormatter]
         public string Cabinets { get; set; }
+        public bool RestrictedToCabinets { get; set; }
+        public bool CanBeAssignedToVisit { get; set; }
 
         [Width(250), RoleListFormatter]
         public ListField<Int32> UsersInRole { get; set; }

@@ -30,13 +30,15 @@ namespace PatientManagement.PatientManagement.Forms
 
         public string Email { get; set; }
         [Category("Additional Information")]
+        public string Picture { get; set; }
 
-        [DefaultValue("now")]
-        public DateTime FirstRegistrationDate { get; set; }
         public String Address { get; set; }
         public Int32 Height { get; set; }
         public Int32 Weight { get; set; }
-        
+
+        [DefaultValue("now")]
+        public DateTime FirstRegistrationDate { get; set; }
+
         [Hint("When visit for the patient is changed, the user will receive email automatically (if email is added). ")]
         public bool NotifyOnChange { get; set; }
 

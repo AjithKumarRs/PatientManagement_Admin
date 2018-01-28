@@ -2,6 +2,7 @@
     export interface VisitsForm {
         PatientId: Serenity.LookupEditor;
         VisitTypeId: Serenity.LookupEditor;
+        AssignedUserId: Serenity.LookupEditor;
         CabinetId: Serenity.LookupEditor;
         StartDate: Serenity.DateTimeEditor;
         EndDate: Serenity.DateTimeEditor;
@@ -27,6 +28,7 @@
                 Q.initFormType(VisitsForm, [
                     'PatientId', w0,
                     'VisitTypeId', w0,
+                    'AssignedUserId', w0,
                     'CabinetId', w0,
                     'StartDate', w1,
                     'EndDate', w1,

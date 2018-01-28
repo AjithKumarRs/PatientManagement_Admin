@@ -6,6 +6,8 @@
         CabinetId?: number;
         CabinetName?: string;
         CabinetIsActive?: number;
+        AssignedUserId?: number;
+        AssignedUserName?: string;
         Description?: string;
         StartDate?: string;
         EndDate?: string;
@@ -40,6 +42,8 @@
             CabinetId = "CabinetId",
             CabinetName = "CabinetName",
             CabinetIsActive = "CabinetIsActive",
+            AssignedUserId = "AssignedUserId",
+            AssignedUserName = "AssignedUserName",
             Description = "Description",
             StartDate = "StartDate",
             EndDate = "EndDate",

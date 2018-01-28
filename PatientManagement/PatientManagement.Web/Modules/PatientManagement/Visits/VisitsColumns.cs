@@ -28,6 +28,13 @@ namespace PatientManagement.PatientManagement.Columns
 
        [VisitsTypesFormatter(BackgroundProperty = "VisitTypeBackgroundColor", BorderProperty = "VisitTypeBorderColor")]
         public Int32 VisitTypeName { get; set; }
+
+        [Hidden]
+        public Int32 AssignedUserId { get; set; }
+
+        [Width(150)]
+        public string AssignedUserName { get; set; }
+
         [Width(200), CabinetsFormatter]
         public string CabinetName { get; set; }
         [Width(300)]

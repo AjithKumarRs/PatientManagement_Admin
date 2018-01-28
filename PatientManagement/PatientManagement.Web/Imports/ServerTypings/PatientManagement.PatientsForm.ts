@@ -6,10 +6,11 @@
         PersonalNumber: Serenity.StringEditor;
         PhoneNumber: Serenity.StringEditor;
         Email: Serenity.EmailEditor;
-        FirstRegistrationDate: Serenity.DateTimeEditor;
+        Picture: Serenity.ImageUploadEditor;
         Address: Serenity.StringEditor;
         Height: Serenity.IntegerEditor;
         Weight: Serenity.IntegerEditor;
+        FirstRegistrationDate: Serenity.DateTimeEditor;
         NotifyOnChange: BsSwitchEditor;
         NoteList: NotesEditor;
         TenantId: Serenity.LookupEditor;
@@ -30,10 +31,11 @@
                 var w1 = s.StringEditor;
                 var w2 = s.EnumEditor;
                 var w3 = s.EmailEditor;
-                var w4 = s.DateTimeEditor;
-                var w5 = BsSwitchEditor;
-                var w6 = NotesEditor;
-                var w7 = s.LookupEditor;
+                var w4 = s.ImageUploadEditor;
+                var w5 = s.DateTimeEditor;
+                var w6 = BsSwitchEditor;
+                var w7 = NotesEditor;
+                var w8 = s.LookupEditor;
 
                 Q.initFormType(PatientsForm, [
                     'PatientId', w0,
@@ -42,13 +44,14 @@
                     'PersonalNumber', w1,
                     'PhoneNumber', w1,
                     'Email', w3,
-                    'FirstRegistrationDate', w4,
+                    'Picture', w4,
                     'Address', w1,
                     'Height', w0,
                     'Weight', w0,
-                    'NotifyOnChange', w5,
-                    'NoteList', w6,
-                    'TenantId', w7
+                    'FirstRegistrationDate', w5,
+                    'NotifyOnChange', w6,
+                    'NoteList', w7,
+                    'TenantId', w8
                 ]);
             }
         }

@@ -7,6 +7,7 @@
         PasswordSalt?: string;
         DisplayName?: string;
         Email?: string;
+        CanBeAssignedToVisit?: number;
         RestrictedToCabinets?: number;
         Info?: string;
         UserImage?: string;
@@ -48,6 +49,7 @@
             PasswordSalt = "PasswordSalt",
             DisplayName = "DisplayName",
             Email = "Email",
+            CanBeAssignedToVisit = "CanBeAssignedToVisit",
             RestrictedToCabinets = "RestrictedToCabinets",
             Info = "Info",
             UserImage = "UserImage",

@@ -28,7 +28,7 @@ namespace PatientManagement.PatientManagement.Columns
         [Width(250)]
         public String BadHabits { get; set; }
         [Width(250)]
-        public String NotEating { get; set; }
+        public String NotEating { get; set; } 
         // public String FavoriteFood { get; set; }
 
         [Width(80)]

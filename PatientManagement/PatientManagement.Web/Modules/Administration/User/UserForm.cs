@@ -32,6 +32,7 @@ namespace PatientManagement.Administration.Forms
         public List<Int32> Cabinets { get; set; }
 
         public short RestrictedToCabinets { get; set; }
+        public short CanBeAssignedToVisit { get; set; }
         [Category("Extra fields")]
         
         public string PhoneNumber { get; set; }
