@@ -24,6 +24,8 @@ namespace PatientManagement.Dashboard
 
         public string title { get; set; }
 
+        public string assignedToUser { get; set; }
+
         public string backgroundColor { get; set; }
 
         public string borderColor { get; set; }

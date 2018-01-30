@@ -9,13 +9,13 @@
         export declare function RetrieveEmailSignature(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<string>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         export declare function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<SentEmailsRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
 
-        export namespace Methods {
-            export declare const Create: string;
-            export declare const Update: string;
-            export declare const Delete: string;
-            export declare const Retrieve: string;
-            export declare const RetrieveEmailSignature: string;
-            export declare const List: string;
+        export declare const enum Methods {
+            Create = "Administration/SentEmails/Create",
+            Update = "Administration/SentEmails/Update",
+            Delete = "Administration/SentEmails/Delete",
+            Retrieve = "Administration/SentEmails/Retrieve",
+            RetrieveEmailSignature = "Administration/SentEmails/RetrieveEmailSignature",
+            List = "Administration/SentEmails/List"
         }
 
         [
@@ -29,7 +29,6 @@
             (<any>SentEmailsService)[x] = function (r, s, o) {
                 return Q.serviceRequest(baseUrl + '/' + x, r, s, o);
             };
-            (<any>Methods)[x] = baseUrl + '/' + x;
         });
     }
 }

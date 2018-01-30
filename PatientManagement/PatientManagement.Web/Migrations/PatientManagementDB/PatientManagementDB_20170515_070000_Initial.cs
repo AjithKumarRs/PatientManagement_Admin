@@ -51,6 +51,8 @@ namespace PatientManagement.Migrations.PatientManagementDB
             #region PatientHealth Table
 
             Create.Table("PatientHealth")
+                //TODO: Issue #208 - After migration refactoring uncomment, Clean all sql statements in PatientManagementDB_20171017_220500_AlterTablePatientHealth
+                //   .WithColumn("PatientHealthId").AsInt32().Identity().PrimaryKey().NotNullable() 
                 .WithColumn("PatientId").AsInt32().PrimaryKey().NotNullable()
                 .ForeignKey("FK_PatientHealth_Patients1", "Patients", "PatientId")
                 .WithColumn("Diseases").AsString(Int32.MaxValue).Nullable()
@@ -76,6 +78,8 @@ namespace PatientManagement.Migrations.PatientManagementDB
             #region LifeStyles Table
 
             Create.Table("LifeStyles")
+                //TODO:  Issue #208 - After migration refactoring uncomment, Clean all sql statements in PatientManagementDB_20171017_220500_AlterTablePatientHealth
+                //   .WithColumn("LifeStyleId").AsInt32().Identity().PrimaryKey().NotNullable()
                 .WithColumn("PatientId").AsInt32().PrimaryKey().NotNullable()
                 .ForeignKey("FK_LifeStyles_Patients1", "Patients", "PatientId")
                 .WithColumn("BadHabits").AsString(Int32.MaxValue).Nullable()
@@ -101,7 +105,7 @@ namespace PatientManagement.Migrations.PatientManagementDB
 
             Create.Table("Visits")
                 .WithColumn("VisitId").AsInt32().Identity().PrimaryKey().NotNullable()
-                .WithColumn("PatientId").AsInt32().NotNullable()
+                .WithColumn("PatientId").AsInt32().Nullable()
                 .ForeignKey("FK_Visits_Patients", "Patients", "PatientId")
                 .WithColumn("VisitTypeId").AsInt32().NotNullable()
                 .ForeignKey("FK_Visits_VisitTypes", "VisitTypes", "VisitTypeId")

@@ -67,6 +67,14 @@ namespace PatientManagement.PatientManagement.Entities
             set { Fields.FirstRegistrationDate[this] = value; }
         }
 
+        [DisplayName("Picture"), Size(100)]
+        [ImageUploadEditor(FilenameFormat = "PatientPicture/~", CopyToHistory = true)]
+        public String Picture
+        {
+            get { return Fields.Picture[this]; }
+            set { Fields.Picture[this] = value; }
+        }
+
         [DisplayName("Address"), Size(200)]
         public String Address
         {
@@ -212,6 +220,7 @@ namespace PatientManagement.PatientManagement.Entities
             public Int64Field PersonalNumber;
             public StringField PhoneNumber;
             public Int32Field Gender;
+            public StringField Picture;
 
             public DateTimeField FirstRegistrationDate;
             public StringField Address;

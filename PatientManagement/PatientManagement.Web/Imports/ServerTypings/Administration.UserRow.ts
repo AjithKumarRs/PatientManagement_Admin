@@ -7,6 +7,7 @@
         PasswordSalt?: string;
         DisplayName?: string;
         Email?: string;
+        CanBeAssignedToVisit?: number;
         RestrictedToCabinets?: number;
         Info?: string;
         UserImage?: string;
@@ -32,7 +33,7 @@
     export namespace UserRow {
         export const idProperty = 'UserId';
         export const isActiveProperty = 'IsActive';
-        export const nameProperty = 'Username';
+        export const nameProperty = 'DisplayName';
         export const localTextPrefix = 'Administration.User';
         export const lookupKey = 'Administration.User';
 
@@ -40,64 +41,35 @@
             return Q.getLookup<UserRow>('Administration.User');
         }
 
-        export namespace Fields {
-            export declare const UserId: string;
-            export declare const Username: string;
-            export declare const Source: string;
-            export declare const PasswordHash: string;
-            export declare const PasswordSalt: string;
-            export declare const DisplayName: string;
-            export declare const Email: string;
-            export declare const RestrictedToCabinets: string;
-            export declare const Info: string;
-            export declare const UserImage: string;
-            export declare const LastDirectoryUpdate: string;
-            export declare const IsActive: string;
-            export declare const WebSite: string;
-            export declare const PhoneNumber: string;
-            export declare const EmailSignature: string;
-            export declare const UsersInRole: string;
-            export declare const Cabinets: string;
-            export declare const Specialties: string;
-            export declare const Password: string;
-            export declare const PasswordConfirm: string;
-            export declare const TenantId: string;
-            export declare const TenantName: string;
-            export declare const TenantCurrencyId: string;
-            export declare const InsertUserId: string;
-            export declare const InsertDate: string;
-            export declare const UpdateUserId: string;
-            export declare const UpdateDate: string;
+        export declare const enum Fields {
+            UserId = "UserId",
+            Username = "Username",
+            Source = "Source",
+            PasswordHash = "PasswordHash",
+            PasswordSalt = "PasswordSalt",
+            DisplayName = "DisplayName",
+            Email = "Email",
+            CanBeAssignedToVisit = "CanBeAssignedToVisit",
+            RestrictedToCabinets = "RestrictedToCabinets",
+            Info = "Info",
+            UserImage = "UserImage",
+            LastDirectoryUpdate = "LastDirectoryUpdate",
+            IsActive = "IsActive",
+            WebSite = "WebSite",
+            PhoneNumber = "PhoneNumber",
+            EmailSignature = "EmailSignature",
+            UsersInRole = "UsersInRole",
+            Cabinets = "Cabinets",
+            Specialties = "Specialties",
+            Password = "Password",
+            PasswordConfirm = "PasswordConfirm",
+            TenantId = "TenantId",
+            TenantName = "TenantName",
+            TenantCurrencyId = "TenantCurrencyId",
+            InsertUserId = "InsertUserId",
+            InsertDate = "InsertDate",
+            UpdateUserId = "UpdateUserId",
+            UpdateDate = "UpdateDate"
         }
-
-        [
-            'UserId', 
-            'Username', 
-            'Source', 
-            'PasswordHash', 
-            'PasswordSalt', 
-            'DisplayName', 
-            'Email', 
-            'RestrictedToCabinets', 
-            'Info', 
-            'UserImage', 
-            'LastDirectoryUpdate', 
-            'IsActive', 
-            'WebSite', 
-            'PhoneNumber', 
-            'EmailSignature', 
-            'UsersInRole', 
-            'Cabinets', 
-            'Specialties', 
-            'Password', 
-            'PasswordConfirm', 
-            'TenantId', 
-            'TenantName', 
-            'TenantCurrencyId', 
-            'InsertUserId', 
-            'InsertDate', 
-            'UpdateUserId', 
-            'UpdateDate'
-        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

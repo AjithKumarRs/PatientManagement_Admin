@@ -27,38 +27,21 @@
             return Q.getLookup<PatientHealthRow>('PatientManagement.PatientHealth');
         }
 
-        export namespace Fields {
-            export declare const PatientHealthId: string;
-            export declare const PatientId: string;
-            export declare const Diseases: string;
-            export declare const MedicinesIntake: string;
-            export declare const InsertUserId: string;
-            export declare const InsertDate: string;
-            export declare const PatientName: string;
-            export declare const UpdateUserId: string;
-            export declare const UpdateDateField: string;
-            export declare const TenantId: string;
-            export declare const IsActive: string;
-            export declare const TenantName: string;
-            export declare const InsertUserName: string;
-            export declare const UpdateUserName: string;
+        export declare const enum Fields {
+            PatientHealthId = "PatientHealthId",
+            PatientId = "PatientId",
+            Diseases = "Diseases",
+            MedicinesIntake = "MedicinesIntake",
+            InsertUserId = "InsertUserId",
+            InsertDate = "InsertDate",
+            PatientName = "PatientName",
+            UpdateUserId = "UpdateUserId",
+            UpdateDateField = "UpdateDateField",
+            TenantId = "TenantId",
+            IsActive = "IsActive",
+            TenantName = "TenantName",
+            InsertUserName = "InsertUserName",
+            UpdateUserName = "UpdateUserName"
         }
-
-        [
-            'PatientHealthId', 
-            'PatientId', 
-            'Diseases', 
-            'MedicinesIntake', 
-            'InsertUserId', 
-            'InsertDate', 
-            'PatientName', 
-            'UpdateUserId', 
-            'UpdateDateField', 
-            'TenantId', 
-            'IsActive', 
-            'TenantName', 
-            'InsertUserName', 
-            'UpdateUserName'
-        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

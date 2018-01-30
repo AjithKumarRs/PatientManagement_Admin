@@ -1,13 +1,28 @@
 ﻿namespace PatientManagement.Administration {
-    export class PaymentOptionsForm extends Serenity.PrefixedContext {
-        static formKey = 'Administration.PaymentOptions';
-
-    }
-
     export interface PaymentOptionsForm {
         Months: Serenity.IntegerEditor;
         Name: Serenity.StringEditor;
     }
 
-    [['Months', () => Serenity.IntegerEditor], ['Name', () => Serenity.StringEditor]].forEach(x => Object.defineProperty(PaymentOptionsForm.prototype, <string>x[0], { get: function () { return this.w(x[0], (x[1] as any)()); }, enumerable: true, configurable: true }));
+    export class PaymentOptionsForm extends Serenity.PrefixedContext {
+        static formKey = 'Administration.PaymentOptions';
+        private static init: boolean;
+
+        constructor(prefix: string) {
+            super(prefix);
+
+            if (!PaymentOptionsForm.init)  {
+                PaymentOptionsForm.init = true;
+
+                var s = Serenity;
+                var w0 = s.IntegerEditor;
+                var w1 = s.StringEditor;
+
+                Q.initFormType(PaymentOptionsForm, [
+                    'Months', w0,
+                    'Name', w1
+                ]);
+            }
+        }
+    }
 }

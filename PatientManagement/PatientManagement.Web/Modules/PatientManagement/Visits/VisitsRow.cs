@@ -2,6 +2,7 @@
 using PatientManagement.Administration;
 using PatientManagement.Administration.Entities;
 using PatientManagement.PatientManagement.Scripts;
+using Remotion.Linq.Clauses;
 
 namespace PatientManagement.PatientManagement.Entities
 {
@@ -100,6 +101,21 @@ namespace PatientManagement.PatientManagement.Entities
             set => Fields.EndDate[this] = value;
         }
 
+        [DisplayName("Assigned to User"), ForeignKey("Users", "UserId"), LeftJoin("usrA"), TextualField("AssignedUserName")]
+        [LookupEditor(typeof(UserRow), InplaceAdd = false, FilterField = "CanBeAssignedToVisit", FilterValue = 1)]
+        [QuickFilter()]
+        public Int32? AssignedUserId
+        {
+            get { return Fields.AssignedUserId[this]; }
+            set { Fields.AssignedUserId[this] = value; }
+        }
+
+        [DisplayName("Assigned to"), Expression("usrA.DisplayName")]
+        public String AssignedUserName
+        {
+            get { return Fields.AssignedUserName[this]; }
+            set { Fields.AssignedUserName[this] = value; }
+        }
 
         [DisplayName("Insert User Id"), NotNull, ForeignKey("Users", "UserId"), LeftJoin("usrI"), TextualField("InsertUserName")]
         [ReadPermission("Administration:Tenants")]
@@ -198,6 +214,8 @@ namespace PatientManagement.PatientManagement.Entities
             public Int32Field CabinetId;
             public StringField CabinetName;
             public Int16Field CabinetIsActive;
+            public Int32Field AssignedUserId;
+            public StringField AssignedUserName;
 
             public StringField Description;
             public DateTimeField StartDate;

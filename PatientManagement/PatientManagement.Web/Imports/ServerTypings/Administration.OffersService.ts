@@ -9,13 +9,13 @@
         export declare function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<OffersRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         export declare function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<OffersRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
 
-        export namespace Methods {
-            export declare const Create: string;
-            export declare const Update: string;
-            export declare const Delete: string;
-            export declare const Undelete: string;
-            export declare const Retrieve: string;
-            export declare const List: string;
+        export declare const enum Methods {
+            Create = "Administration/Offers/Create",
+            Update = "Administration/Offers/Update",
+            Delete = "Administration/Offers/Delete",
+            Undelete = "Administration/Offers/Undelete",
+            Retrieve = "Administration/Offers/Retrieve",
+            List = "Administration/Offers/List"
         }
 
         [
@@ -29,7 +29,6 @@
             (<any>OffersService)[x] = function (r, s, o) {
                 return Q.serviceRequest(baseUrl + '/' + x, r, s, o);
             };
-            (<any>Methods)[x] = baseUrl + '/' + x;
         });
     }
 }

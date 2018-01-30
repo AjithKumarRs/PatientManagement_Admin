@@ -1,4 +1,6 @@
-﻿
+﻿@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Mvc.RazorPages
+
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -30,11 +32,12 @@
     @Html.Raw(Serenity.JSON.Stringify(new ScriptCulture()))
 </script>
 
+
 <script src="~/Scripts/moment/moment.min.js"></script>
-<script type="text/javascript">window.paceOptions = { minTime: 250, ghostTime: 250, restartOnRequestAfter: 250, ajax: { trackMethods: ['GET', 'POST'], trackWebSockets: false, ignoreURLs: [] } };</script>
+<script type="text/javascript">window.paceOptions = { minTime: 250, ghostTime: 250, restartOnRequestAfter: 250, ajax: { trackMethods: ['GET', 'POST'], trackWebSockets: false, ignoreURLs: [/.*signalr.*/] } };</script>
 @Html.Script("~/Scripts/pace.js")
 @foreach (var x in CommonIncludes.Scripts)
-{ @Html.Script(x) }
+{@Html.Script(x)}
 @Html.Script("~/Scripts/jquery.cropzoom.js")
 @Html.Script("~/Scripts/jquery.hotkeys.js")
 @Html.Script("~/Scripts/jquery.fileupload.js")
@@ -59,3 +62,13 @@
 <script src="~/DynJS.axd/@DynamicScriptManager.GetScriptInclude("FormBundle")"></script>
 <script src="~/DynJS.axd/@DynamicScriptManager.GetScriptInclude("TemplateBundle")"></script>
 <script src="~/DynJS.axd/@DynamicScriptManager.GetScriptInclude("RegisteredScripts")"></script>
+
+ @{
+     var mapsApiKey = Environment.GetEnvironmentVariable("GOOGLE_MAPS_API_KEY");
+ }
+ <!-- Google Maps -->
+ <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=@mapsApiKey&amp;sensor=false&amp;libraries=places"></script>
+
+ @*<script type="text/javascript" src="@mapsString"></script>*@
+
+ <script src="~/Scripts/geocomplete/jquery.geocomplete.js"></script>

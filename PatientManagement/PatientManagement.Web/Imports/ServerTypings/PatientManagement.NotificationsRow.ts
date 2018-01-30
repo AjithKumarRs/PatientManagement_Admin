@@ -22,30 +22,17 @@
             return Q.getLookup<NotificationsRow>('PatientManagement.Notifications');
         }
 
-        export namespace Fields {
-            export declare const NotificationId: string;
-            export declare const EntityType: string;
-            export declare const EntityId: string;
-            export declare const Text: string;
-            export declare const InsertUserId: string;
-            export declare const InsertDate: string;
-            export declare const InsertUserDisplayName: string;
-            export declare const InsertUserPicture: string;
-            export declare const TenantId: string;
-            export declare const TenantName: string;
+        export declare const enum Fields {
+            NotificationId = "NotificationId",
+            EntityType = "EntityType",
+            EntityId = "EntityId",
+            Text = "Text",
+            InsertUserId = "InsertUserId",
+            InsertDate = "InsertDate",
+            InsertUserDisplayName = "InsertUserDisplayName",
+            InsertUserPicture = "InsertUserPicture",
+            TenantId = "TenantId",
+            TenantName = "TenantName"
         }
-
-        [
-            'NotificationId', 
-            'EntityType', 
-            'EntityId', 
-            'Text', 
-            'InsertUserId', 
-            'InsertDate', 
-            'InsertUserDisplayName', 
-            'InsertUserPicture', 
-            'TenantId', 
-            'TenantName'
-        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

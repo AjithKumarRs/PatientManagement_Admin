@@ -1,0 +1,435 @@
+﻿@using PatientManagement.Reservation.Web.Startup
+@{
+    ViewBag.CurrentPageName = PageNames.Doctors; //The menu item will be active for this page.
+}
+<section class="short-image no-padding agency">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-lg-12 short-image-title">
+                <h5 class="subtitle-margin second-color">запознай се</h5>
+                <h1 class="second-color">с нашите специалисти</h1>
+                <div class="short-title-separator"></div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section-light section-top-shadow">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-9">
+
+                <div class="row">
+                    <div class="col-xs-4 col-sm-4 col-lg-3">
+                        <img src="images/page-photo.jpg" class="img-responsive" alt="">
+                    </div>
+                    <div class="col-xs-8 col-sm-8 col-lg-9">
+                        <p class="negative-margin">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
+                        <br>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                    </div>
+                </div>
+                <div class="margin-top-75"></div>
+                <div class="row">
+                    <div class="col-xs-12 col-lg-6">
+                        <h5 class="subtitle-margin">LOCALIZATION: ALL</h5>
+                        <h1>96 doctors found<span class="special-color">.</span></h1>
+                    </div>
+                    <div class="col-xs-12 col-lg-6">
+                        <div class="order-by-container">
+                            <div class="btn-group bootstrap-select">
+                                @*<button type="button" class="btn dropdown-toggle btn-default" data-toggle="dropdown" title="Localization:" aria-expanded="false">
+                                <span class="filter-option pull-left">Localization:</span>&nbsp;<span class="bs-caret"><span class="caret"></span></span>
+                            </button>*@
+                                <select name="transaction1" class="bootstrap-select" title="Localization:" tabindex="-98">
+                                    <option class="bs-title-option" value="">Localization:</option>
+                                    <option>Localization 1</option>
+                                    <option>Localization 2</option>
+                                    <option>Localization 3</option>
+                                    <option>Some Long Localization 4</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="title-separator-primary"></div>
+                    </div>
+                </div>
+                <div class="row team-member-row">
+                    <div class="col-xs-12 col-sm-6 col-lg-4 team-member-col">
+                        <div class="team-member">
+                            <div class="team-photo">
+                                <img src="images/agent2.jpg" alt="">
+                                <div class="big-triangle"></div>
+                                <div class="big-triangle2"></div>
+                                <a class="big-icon big-icon-plus" href="agent-right-sidebar.html"><i class="jfont"></i></a>
+                                <div class="team-description">
+                                    <div>
+                                        <div class="team-desc-line">
+                                            <span class="team-icon-circle">
+                                                <i class="fa fa-phone"></i>
+                                            </span>
+                                            <span>(0)-123-456-789</span>
+                                        </div>
+                                        <div class="team-desc-line">
+                                            <span class="team-icon-circle">
+                                                <i class="fa fa-envelope fa-sm"></i>
+                                            </span>
+                                            <span>apartment@domain.tld</span>
+                                        </div>
+                                        <div class="team-social-cont">
+                                            <div class="team-social">
+                                                <a class="team-icon-circle" href="#">
+                                                    <i class="fa fa-facebook"></i>
+                                                </a>
+                                            </div>
+                                            <div class="team-social">
+                                                <a class="team-icon-circle" href="#">
+                                                    <i class="fa fa-twitter"></i>
+                                                </a>
+                                            </div>
+                                            <div class="team-social">
+                                                <a class="team-icon-circle" href="#">
+                                                    <i class="fa fa-google-plus"></i>
+                                                </a>
+                                            </div>
+                                            <div class="team-social">
+                                                <a class="team-icon-circle" href="#">
+                                                    <i class="fa fa-skype"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <p class="team-text">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="team-name">
+                                <h5>Agent</h5>
+                                <h4>Michelle Jackson<span class="special-color">.</span></h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-6 col-lg-4 team-member-col">
+                        <div class="team-member">
+                            <div class="team-photo">
+                                <img src="images/agent2.jpg" alt="">
+                                <div class="big-triangle"></div>
+                                <div class="big-triangle2"></div>
+                                <a class="big-icon big-icon-plus" href="agent-right-sidebar.html"><i class="jfont"></i></a>
+                                <div class="team-description">
+                                    <div>
+                                        <div class="team-desc-line">
+                                            <span class="team-icon-circle">
+                                                <i class="fa fa-phone"></i>
+                                            </span>
+                                            <span>(0)-123-456-789</span>
+                                        </div>
+                                        <div class="team-desc-line">
+                                            <span class="team-icon-circle">
+                                                <i class="fa fa-envelope fa-sm"></i>
+                                            </span>
+                                            <span>apartment@domain.tld</span>
+                                        </div>
+                                        <div class="team-social-cont">
+                                            <div class="team-social">
+                                                <a class="team-icon-circle" href="#">
+                                                    <i class="fa fa-facebook"></i>
+                                                </a>
+                                            </div>
+                                            <div class="team-social">
+                                                <a class="team-icon-circle" href="#">
+                                                    <i class="fa fa-twitter"></i>
+                                                </a>
+                                            </div>
+                                            <div class="team-social">
+                                                <a class="team-icon-circle" href="#">
+                                                    <i class="fa fa-google-plus"></i>
+                                                </a>
+                                            </div>
+                                            <div class="team-social">
+                                                <a class="team-icon-circle" href="#">
+                                                    <i class="fa fa-skype"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <p class="team-text">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="team-name">
+                                <h5>Agent</h5>
+                                <h4>Michelle Jackson<span class="special-color">.</span></h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-6 col-lg-4 team-member-col">
+                        <div class="team-member">
+                            <div class="team-photo">
+                                <img src="images/agent2.jpg" alt="">
+                                <div class="big-triangle"></div>
+                                <div class="big-triangle2"></div>
+                                <a class="big-icon big-icon-plus" href="agent-right-sidebar.html"><i class="jfont"></i></a>
+                                <div class="team-description">
+                                    <div>
+                                        <div class="team-desc-line">
+                                            <span class="team-icon-circle">
+                                                <i class="fa fa-phone"></i>
+                                            </span>
+                                            <span>(0)-123-456-789</span>
+                                        </div>
+                                        <div class="team-desc-line">
+                                            <span class="team-icon-circle">
+                                                <i class="fa fa-envelope fa-sm"></i>
+                                            </span>
+                                            <span>apartment@domain.tld</span>
+                                        </div>
+                                        <div class="team-social-cont">
+                                            <div class="team-social">
+                                                <a class="team-icon-circle" href="#">
+                                                    <i class="fa fa-facebook"></i>
+                                                </a>
+                                            </div>
+                                            <div class="team-social">
+                                                <a class="team-icon-circle" href="#">
+                                                    <i class="fa fa-twitter"></i>
+                                                </a>
+                                            </div>
+                                            <div class="team-social">
+                                                <a class="team-icon-circle" href="#">
+                                                    <i class="fa fa-google-plus"></i>
+                                                </a>
+                                            </div>
+                                            <div class="team-social">
+                                                <a class="team-icon-circle" href="#">
+                                                    <i class="fa fa-skype"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <p class="team-text">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="team-name">
+                                <h5>Agent</h5>
+                                <h4>Michelle Jackson<span class="special-color">.</span></h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-6 col-lg-4 team-member-col">
+                        <div class="team-member">
+                            <div class="team-photo">
+                                <img src="images/agent2.jpg" alt="">
+                                <div class="big-triangle"></div>
+                                <div class="big-triangle2"></div>
+                                <a class="big-icon big-icon-plus" href="agent-right-sidebar.html"><i class="jfont"></i></a>
+                                <div class="team-description">
+                                    <div>
+                                        <div class="team-desc-line">
+                                            <span class="team-icon-circle">
+                                                <i class="fa fa-phone"></i>
+                                            </span>
+                                            <span>(0)-123-456-789</span>
+                                        </div>
+                                        <div class="team-desc-line">
+                                            <span class="team-icon-circle">
+                                                <i class="fa fa-envelope fa-sm"></i>
+                                            </span>
+                                            <span>apartment@domain.tld</span>
+                                        </div>
+                                        <div class="team-social-cont">
+                                            <div class="team-social">
+                                                <a class="team-icon-circle" href="#">
+                                                    <i class="fa fa-facebook"></i>
+                                                </a>
+                                            </div>
+                                            <div class="team-social">
+                                                <a class="team-icon-circle" href="#">
+                                                    <i class="fa fa-twitter"></i>
+                                                </a>
+                                            </div>
+                                            <div class="team-social">
+                                                <a class="team-icon-circle" href="#">
+                                                    <i class="fa fa-google-plus"></i>
+                                                </a>
+                                            </div>
+                                            <div class="team-social">
+                                                <a class="team-icon-circle" href="#">
+                                                    <i class="fa fa-skype"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <p class="team-text">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="team-name">
+                                <h5>Agent</h5>
+                                <h4>Michelle Jackson<span class="special-color">.</span></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="offer-pagination margin-top-15">
+                    <a href="#" class="prev"><i class="jfont"></i></a><a class="active">1</a><a href="#">2</a><a href="#">3</a><a href="#">4</a><a href="#" class="next"><i class="jfont"></i></a>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-md-3">
+                <div class="sidebar">
+                    <h3 class="sidebar-title">narrow search<span class="special-color">.</span></h3>
+                    <div class="title-separator-primary"></div>
+
+                    <div class="sidebar-select-cont">
+                        <div class="btn-group bootstrap-select show-tick">
+                            <button type="button" class="btn dropdown-toggle btn-default" data-toggle="dropdown" title="Transaction:"><span class="filter-option pull-left">Transaction:</span>&nbsp;<span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open"><ul class="dropdown-menu inner" role="menu"><li data-original-index="0"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">For sale</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="1"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">For rent</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li></ul></div><select name="transaction1" class="bootstrap-select" title="Transaction:" multiple="" tabindex="-98">
+                                <option>For sale</option>
+                                <option>For rent</option>
+                            </select>
+                        </div>
+                        <div class="btn-group bootstrap-select show-tick">
+                            <button type="button" class="btn dropdown-toggle btn-default" data-toggle="dropdown" title="Country:"><span class="filter-option pull-left">Country:</span>&nbsp;<span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open"><div class="bs-actionsbox"><div class="btn-group btn-group-sm btn-block"><button type="button" class="actions-btn bs-select-all btn btn-default">Select All</button><button type="button" class="actions-btn bs-deselect-all btn btn-default">Deselect All</button></div></div><ul class="dropdown-menu inner" role="menu"><li data-original-index="0"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">United States</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="1"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Canada</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="2"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Mexico</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li></ul></div><select name="conuntry1" class="bootstrap-select" title="Country:" multiple="" data-actions-box="true" tabindex="-98">
+                                <option>United States</option>
+                                <option>Canada</option>
+                                <option>Mexico</option>
+                            </select>
+                        </div>
+                        <div class="btn-group bootstrap-select show-tick">
+                            <button type="button" class="btn dropdown-toggle btn-default" data-toggle="dropdown" title="City:"><span class="filter-option pull-left">City:</span>&nbsp;<span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open"><div class="bs-actionsbox"><div class="btn-group btn-group-sm btn-block"><button type="button" class="actions-btn bs-select-all btn btn-default">Select All</button><button type="button" class="actions-btn bs-deselect-all btn btn-default">Deselect All</button></div></div><ul class="dropdown-menu inner" role="menu"><li data-original-index="0"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">New York</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="1"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Los Angeles</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="2"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Chicago</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="3"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Houston</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="4"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Philadelphia</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="5"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Phoenix</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="6"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Washington</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="7"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Salt Lake Cty</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="8"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Detroit</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="9"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Boston</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li></ul></div><select name="city1" class="bootstrap-select" title="City:" multiple="" data-actions-box="true" tabindex="-98">
+                                <option>New York</option>
+                                <option>Los Angeles</option>
+                                <option>Chicago</option>
+                                <option>Houston</option>
+                                <option>Philadelphia</option>
+                                <option>Phoenix</option>
+                                <option>Washington</option>
+                                <option>Salt Lake Cty</option>
+                                <option>Detroit</option>
+                                <option>Boston</option>
+                            </select>
+                        </div>
+                        <div class="btn-group bootstrap-select show-tick">
+                            <button type="button" class="btn dropdown-toggle btn-default" data-toggle="dropdown" title="Location:"><span class="filter-option pull-left">Location:</span>&nbsp;<span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open"><div class="bs-actionsbox"><div class="btn-group btn-group-sm btn-block"><button type="button" class="actions-btn bs-select-all btn btn-default">Select All</button><button type="button" class="actions-btn bs-deselect-all btn btn-default">Deselect All</button></div></div><ul class="dropdown-menu inner" role="menu"><li data-original-index="0"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Some location 1</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="1"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Some location 2</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="2"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Some location 3</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="3"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">Some location 4</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li></ul></div><select name="location1" class="bootstrap-select" title="Location:" multiple="" data-actions-box="true" tabindex="-98">
+                                <option>Some location 1</option>
+                                <option>Some location 2</option>
+                                <option>Some location 3</option>
+                                <option>Some location 4</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="adv-search-range-cont">
+                        <label for="slider-range-price-sidebar-value" class="adv-search-label">Price:</label>
+                        <span>$</span>
+                        <input type="text" id="slider-range-price-sidebar-value" readonly="" class="adv-search-amount">
+                        <div class="clearfix"></div>
+                        <div id="slider-range-price-sidebar" data-min="0" data-max="300000" class="slider-range ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"><div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 0%; width: 100%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 0%;"></span><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 100%;"></span></div>
+                    </div>
+                    <div class="adv-search-range-cont">
+                        <label for="slider-range-area-sidebar-value" class="adv-search-label">Area:</label>
+                        <span>m<sup>2</sup></span>
+                        <input type="text" id="slider-range-area-sidebar-value" readonly="" class="adv-search-amount">
+                        <div class="clearfix"></div>
+                        <div id="slider-range-area-sidebar" data-min="0" data-max="180" class="slider-range ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"><div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 0%; width: 100%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 0%;"></span><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 100%;"></span></div>
+                    </div>
+                    <div class="adv-search-range-cont">
+                        <label for="slider-range-bedrooms-sidebar-value" class="adv-search-label">Bedrooms:</label>
+                        <input type="text" id="slider-range-bedrooms-sidebar-value" readonly="" class="adv-search-amount">
+                        <div class="clearfix"></div>
+                        <div id="slider-range-bedrooms-sidebar" data-min="1" data-max="10" class="slider-range ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"><div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 0%; width: 100%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 0%;"></span><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 100%;"></span></div>
+                    </div>
+                    <div class="adv-search-range-cont">
+                        <label for="slider-range-bathrooms-sidebar-value" class="adv-search-label">Bathrooms:</label>
+                        <input type="text" id="slider-range-bathrooms-sidebar-value" readonly="" class="adv-search-amount">
+                        <div class="clearfix"></div>
+                        <div id="slider-range-bathrooms-sidebar" data-min="1" data-max="4" class="slider-range ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"><div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 0%; width: 100%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 0%;"></span><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 100%;"></span></div>
+                    </div>
+                    <div class="sidebar-search-button-cont">
+                        <a href="#" class="button-primary">
+                            <span>search</span>
+                            <div class="button-triangle"></div>
+                            <div class="button-triangle2"></div>
+                            <div class="button-icon"><i class="fa fa-search"></i></div>
+                        </a>
+                    </div>
+                    <div class="sidebar-title-cont">
+                        <h4 class="sidebar-title">featured offers<span class="special-color">.</span></h4>
+                        <div class="title-separator-primary"></div>
+                    </div>
+                    <div class="sidebar-featured-cont">
+                        <div class="sidebar-featured">
+                            <a class="sidebar-featured-image" href="estate-details-right-sidebar.html">
+                                <img src="images/sidebar-featured1.jpg" alt="">
+                                <div class="sidebar-featured-type">
+                                    <div class="sidebar-featured-estate">A</div>
+                                    <div class="sidebar-featured-transaction">S</div>
+                                </div>
+                            </a>
+                            <div class="sidebar-featured-title"><a href="estate-details-right-sidebar.html">Fort Collins, Colorado 80523, USA</a></div>
+                            <div class="sidebar-featured-price">$ 320 000</div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="sidebar-featured">
+                            <a class="sidebar-featured-image" href="estate-details-right-sidebar.html">
+                                <img src="images/sidebar-featured2.jpg" alt="">
+                                <div class="sidebar-featured-type">
+                                    <div class="sidebar-featured-estate">A</div>
+                                    <div class="sidebar-featured-transaction">S</div>
+                                </div>
+                            </a>
+                            <div class="sidebar-featured-title"><a href="estate-details-right-sidebar.html">West Fourth Street, New York 10003, USA</a></div>
+                            <div class="sidebar-featured-price">$ 350 000</div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="sidebar-featured">
+                            <a class="sidebar-featured-image" href="estate-details-right-sidebar.html">
+                                <img src="images/sidebar-featured3.jpg" alt="">
+                                <div class="sidebar-featured-type">
+                                    <div class="sidebar-featured-estate">A</div>
+                                    <div class="sidebar-featured-transaction">S</div>
+                                </div>
+                            </a>
+                            <div class="sidebar-featured-title"><a href="estate-details-right-sidebar.html">E. Elwood St. Phoenix, AZ 85034, USA</a></div>
+                            <div class="sidebar-featured-price">$ 410 000</div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <div class="sidebar-title-cont">
+                        <h4 class="sidebar-title">latest news<span class="special-color">.</span></h4>
+                        <div class="title-separator-primary"></div>
+                    </div>
+                    <div class="sidebar-blog-cont">
+                        <article>
+                            <a href="blog-right-sidebar.html"><img src="images/footer-blog1.jpg" alt="" class="sidebar-blog-image"></a>
+                            <div class="sidebar-blog-title"><a href="blog-right-sidebar.html">This post title, lorem ipsum dolor sit</a></div>
+                            <div class="sidebar-blog-date"><i class="fa fa-calendar-o"></i>28/09/15</div>
+                            <div class="clearfix"></div>
+                        </article>
+                        <article>
+                            <a href="blog-right-sidebar.html"><img src="images/footer-blog2.jpg" alt="" class="sidebar-blog-image"></a>
+                            <div class="sidebar-blog-title"><a href="blog-right-sidebar.html">This post title, lorem ipsum dolor sit</a></div>
+                            <div class="sidebar-blog-date"><i class="fa fa-calendar-o"></i>28/09/15</div>
+                            <div class="clearfix"></div>
+                        </article>
+                        <article>
+                            <a href="blog-right-sidebar.html"><img src="images/footer-blog3.jpg" alt="" class="sidebar-blog-image"></a>
+                            <div class="sidebar-blog-title"><a href="blog-right-sidebar.html">This post title, lorem ipsum dolor sit</a></div>
+                            <div class="sidebar-blog-date"><i class="fa fa-calendar-o"></i>28/09/15</div>
+                            <div class="clearfix"></div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

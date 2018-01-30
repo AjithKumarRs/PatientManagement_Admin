@@ -1,9 +1,4 @@
 ﻿namespace PatientManagement.Administration {
-    export class TenantForm extends Serenity.PrefixedContext {
-        static formKey = 'Administration.Tenant';
-
-    }
-
     export interface TenantForm {
         TenantName: Serenity.StringEditor;
         TenantImage: Serenity.ImageUploadEditor;
@@ -15,5 +10,34 @@
         SubscriptionRequired: BsSwitchEditor;
     }
 
-    [['TenantName', () => Serenity.StringEditor], ['TenantImage', () => Serenity.ImageUploadEditor], ['TenantWebSite', () => Serenity.StringEditor], ['OverrideUsersEmailSignature', () => BsSwitchEditor], ['TenantEmailSignature', () => Serenity.HtmlContentEditor], ['CurrencyId', () => Serenity.LookupEditor], ['SubscriptionId', () => Serenity.LookupEditor], ['SubscriptionRequired', () => BsSwitchEditor]].forEach(x => Object.defineProperty(TenantForm.prototype, <string>x[0], { get: function () { return this.w(x[0], (x[1] as any)()); }, enumerable: true, configurable: true }));
+    export class TenantForm extends Serenity.PrefixedContext {
+        static formKey = 'Administration.Tenant';
+        private static init: boolean;
+
+        constructor(prefix: string) {
+            super(prefix);
+
+            if (!TenantForm.init)  {
+                TenantForm.init = true;
+
+                var s = Serenity;
+                var w0 = s.StringEditor;
+                var w1 = s.ImageUploadEditor;
+                var w2 = BsSwitchEditor;
+                var w3 = s.HtmlContentEditor;
+                var w4 = s.LookupEditor;
+
+                Q.initFormType(TenantForm, [
+                    'TenantName', w0,
+                    'TenantImage', w1,
+                    'TenantWebSite', w0,
+                    'OverrideUsersEmailSignature', w2,
+                    'TenantEmailSignature', w3,
+                    'CurrencyId', w4,
+                    'SubscriptionId', w4,
+                    'SubscriptionRequired', w2
+                ]);
+            }
+        }
+    }
 }

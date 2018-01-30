@@ -1,9 +1,4 @@
 ﻿namespace PatientManagement.Membership {
-    export class EditTenantForm extends Serenity.PrefixedContext {
-        static formKey = 'Membership.EditTenant';
-
-    }
-
     export interface EditTenantForm {
         TenantName: Serenity.StringEditor;
         TenantWebSite: Serenity.StringEditor;
@@ -12,5 +7,30 @@
         TenantEmailSignature: Serenity.HtmlContentEditor;
     }
 
-    [['TenantName', () => Serenity.StringEditor], ['TenantWebSite', () => Serenity.StringEditor], ['TenantImage', () => Serenity.ImageUploadEditor], ['OverrideUsersEmailSignature', () => BsSwitchEditor], ['TenantEmailSignature', () => Serenity.HtmlContentEditor]].forEach(x => Object.defineProperty(EditTenantForm.prototype, <string>x[0], { get: function () { return this.w(x[0], (x[1] as any)()); }, enumerable: true, configurable: true }));
+    export class EditTenantForm extends Serenity.PrefixedContext {
+        static formKey = 'Membership.EditTenant';
+        private static init: boolean;
+
+        constructor(prefix: string) {
+            super(prefix);
+
+            if (!EditTenantForm.init)  {
+                EditTenantForm.init = true;
+
+                var s = Serenity;
+                var w0 = s.StringEditor;
+                var w1 = s.ImageUploadEditor;
+                var w2 = BsSwitchEditor;
+                var w3 = s.HtmlContentEditor;
+
+                Q.initFormType(EditTenantForm, [
+                    'TenantName', w0,
+                    'TenantWebSite', w0,
+                    'TenantImage', w1,
+                    'OverrideUsersEmailSignature', w2,
+                    'TenantEmailSignature', w3
+                ]);
+            }
+        }
+    }
 }

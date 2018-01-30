@@ -54,94 +54,49 @@
             return Q.getLookup<PaymentsRow>('AdministrationTenants.Payment');
         }
 
-        export namespace Fields {
-            export declare const PaymentId: string;
-            export declare const SubscriptionId: string;
-            export declare const TenantId: string;
-            export declare const PaymentDetailsId: string;
-            export declare const PaymentOptionId: string;
-            export declare const CurrencyId: string;
-            export declare const Value: string;
-            export declare const SubTotal: string;
-            export declare const CustomerName: string;
-            export declare const CustomerBankName: string;
-            export declare const CustomerIban: string;
-            export declare const ReasonForPayment: string;
-            export declare const Description: string;
-            export declare const Receiver: string;
-            export declare const IBANReceiver: string;
-            export declare const BICReceiver: string;
-            export declare const BankNameReceiver: string;
-            export declare const PaymentStatus: string;
-            export declare const MonthsPayed: string;
-            export declare const PaymentCurrency: string;
-            export declare const PaymentType: string;
-            export declare const SubscriptionOfferId: string;
-            export declare const SubscriptionSubscriptionEndDate: string;
-            export declare const SubscriptionName: string;
-            export declare const PaymentDetailName: string;
-            export declare const PaymentDetailsBankName: string;
-            export declare const PaymentDetailsIbanBeneficient: string;
-            export declare const PaymentOptionMonths: string;
-            export declare const PaymentOptionName: string;
-            export declare const CouponId: string;
-            export declare const CouponKey: string;
-            export declare const CouponDiscount: string;
-            export declare const CurrencyCurrencyId: string;
-            export declare const CurrencyName: string;
-            export declare const CurrencyRate: string;
-            export declare const InsertUserId: string;
-            export declare const InsertDate: string;
-            export declare const UpdateUserId: string;
-            export declare const UpdateDateField: string;
-            export declare const TenantName: string;
-            export declare const InsertUserName: string;
-            export declare const UpdateUserName: string;
+        export declare const enum Fields {
+            PaymentId = "PaymentId",
+            SubscriptionId = "SubscriptionId",
+            TenantId = "TenantId",
+            PaymentDetailsId = "PaymentDetailsId",
+            PaymentOptionId = "PaymentOptionId",
+            CurrencyId = "CurrencyId",
+            Value = "Value",
+            SubTotal = "SubTotal",
+            CustomerName = "CustomerName",
+            CustomerBankName = "CustomerBankName",
+            CustomerIban = "CustomerIban",
+            ReasonForPayment = "ReasonForPayment",
+            Description = "Description",
+            Receiver = "Receiver",
+            IBANReceiver = "IBANReceiver",
+            BICReceiver = "BICReceiver",
+            BankNameReceiver = "BankNameReceiver",
+            PaymentStatus = "PaymentStatus",
+            MonthsPayed = "MonthsPayed",
+            PaymentCurrency = "PaymentCurrency",
+            PaymentType = "PaymentType",
+            SubscriptionOfferId = "SubscriptionOfferId",
+            SubscriptionSubscriptionEndDate = "SubscriptionSubscriptionEndDate",
+            SubscriptionName = "SubscriptionName",
+            PaymentDetailName = "PaymentDetailName",
+            PaymentDetailsBankName = "PaymentDetailsBankName",
+            PaymentDetailsIbanBeneficient = "PaymentDetailsIbanBeneficient",
+            PaymentOptionMonths = "PaymentOptionMonths",
+            PaymentOptionName = "PaymentOptionName",
+            CouponId = "CouponId",
+            CouponKey = "CouponKey",
+            CouponDiscount = "CouponDiscount",
+            CurrencyCurrencyId = "CurrencyCurrencyId",
+            CurrencyName = "CurrencyName",
+            CurrencyRate = "CurrencyRate",
+            InsertUserId = "InsertUserId",
+            InsertDate = "InsertDate",
+            UpdateUserId = "UpdateUserId",
+            UpdateDateField = "UpdateDateField",
+            TenantName = "TenantName",
+            InsertUserName = "InsertUserName",
+            UpdateUserName = "UpdateUserName"
         }
-
-        [
-            'PaymentId', 
-            'SubscriptionId', 
-            'TenantId', 
-            'PaymentDetailsId', 
-            'PaymentOptionId', 
-            'CurrencyId', 
-            'Value', 
-            'SubTotal', 
-            'CustomerName', 
-            'CustomerBankName', 
-            'CustomerIban', 
-            'ReasonForPayment', 
-            'Description', 
-            'Receiver', 
-            'IBANReceiver', 
-            'BICReceiver', 
-            'BankNameReceiver', 
-            'PaymentStatus', 
-            'MonthsPayed', 
-            'PaymentCurrency', 
-            'PaymentType', 
-            'SubscriptionOfferId', 
-            'SubscriptionSubscriptionEndDate', 
-            'SubscriptionName', 
-            'PaymentDetailName', 
-            'PaymentDetailsBankName', 
-            'PaymentDetailsIbanBeneficient', 
-            'PaymentOptionMonths', 
-            'PaymentOptionName', 
-            'CouponId', 
-            'CouponKey', 
-            'CouponDiscount', 
-            'CurrencyCurrencyId', 
-            'CurrencyName', 
-            'CurrencyRate', 
-            'InsertUserId', 
-            'InsertDate', 
-            'UpdateUserId', 
-            'UpdateDateField', 
-            'TenantName', 
-            'InsertUserName', 
-            'UpdateUserName'
-        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

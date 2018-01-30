@@ -17,6 +17,7 @@ namespace PatientManagement.PatientManagement.Forms
 
         public Int32 PatientId { get; set; }
         public Int32 VisitTypeId { get; set; }
+        public Int32 AssignedUserId { get; set; }
 
         public Int32 CabinetId { get; set; }
 

@@ -38,60 +38,32 @@
             return Q.getLookup<OffersRow>('Administration.Offers');
         }
 
-        export namespace Fields {
-            export declare const OfferId: string;
-            export declare const Name: string;
-            export declare const MaximumSubscriptionTime: string;
-            export declare const MaximumUsersPerTenant: string;
-            export declare const MaximumVisitsPerTenant: string;
-            export declare const MaximumPatientsPerTenant: string;
-            export declare const MaximumCabinets: string;
-            export declare const ExpirationDate: string;
-            export declare const Description: string;
-            export declare const Price: string;
-            export declare const Enabled: string;
-            export declare const CurrencyId: string;
-            export declare const RoleId: string;
-            export declare const CurrencyCurrencyId: string;
-            export declare const CurrencyName: string;
-            export declare const CurrencyEnabled: string;
-            export declare const RoleRoleName: string;
-            export declare const IsPublic: string;
-            export declare const InsertUserId: string;
-            export declare const InsertDate: string;
-            export declare const UpdateUserId: string;
-            export declare const UpdateDateField: string;
-            export declare const IsActive: string;
-            export declare const InsertUserName: string;
-            export declare const UpdateUserName: string;
+        export declare const enum Fields {
+            OfferId = "OfferId",
+            Name = "Name",
+            MaximumSubscriptionTime = "MaximumSubscriptionTime",
+            MaximumUsersPerTenant = "MaximumUsersPerTenant",
+            MaximumVisitsPerTenant = "MaximumVisitsPerTenant",
+            MaximumPatientsPerTenant = "MaximumPatientsPerTenant",
+            MaximumCabinets = "MaximumCabinets",
+            ExpirationDate = "ExpirationDate",
+            Description = "Description",
+            Price = "Price",
+            Enabled = "Enabled",
+            CurrencyId = "CurrencyId",
+            RoleId = "RoleId",
+            CurrencyCurrencyId = "CurrencyCurrencyId",
+            CurrencyName = "CurrencyName",
+            CurrencyEnabled = "CurrencyEnabled",
+            RoleRoleName = "RoleRoleName",
+            IsPublic = "IsPublic",
+            InsertUserId = "InsertUserId",
+            InsertDate = "InsertDate",
+            UpdateUserId = "UpdateUserId",
+            UpdateDateField = "UpdateDateField",
+            IsActive = "IsActive",
+            InsertUserName = "InsertUserName",
+            UpdateUserName = "UpdateUserName"
         }
-
-        [
-            'OfferId', 
-            'Name', 
-            'MaximumSubscriptionTime', 
-            'MaximumUsersPerTenant', 
-            'MaximumVisitsPerTenant', 
-            'MaximumPatientsPerTenant', 
-            'MaximumCabinets', 
-            'ExpirationDate', 
-            'Description', 
-            'Price', 
-            'Enabled', 
-            'CurrencyId', 
-            'RoleId', 
-            'CurrencyCurrencyId', 
-            'CurrencyName', 
-            'CurrencyEnabled', 
-            'RoleRoleName', 
-            'IsPublic', 
-            'InsertUserId', 
-            'InsertDate', 
-            'UpdateUserId', 
-            'UpdateDateField', 
-            'IsActive', 
-            'InsertUserName', 
-            'UpdateUserName'
-        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

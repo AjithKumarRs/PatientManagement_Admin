@@ -1,5 +1,6 @@
 ﻿/// <reference path="../PatientHealth/PatientHealthGrid.ts"/>
 namespace PatientManagement.PatientManagement {
+    import fld = PatientHealthRow.Fields;
 
     @Serenity.Decorators.registerClass()
     export class PatientHealthCheckGrid extends PatientHealthGrid {
@@ -11,7 +12,6 @@ namespace PatientManagement.PatientManagement {
 
 
         protected getColumns(): Slick.Column[] {
-            let fld = PatientHealthRow.Fields;
             return super.getColumns();
         }
 

@@ -1,14 +1,36 @@
 ﻿namespace PatientManagement.PatientManagement {
-    export class LifeStylesForm extends Serenity.PrefixedContext {
-        static formKey = 'PatientManagement.LifeStyles';
-
-    }
-
     export interface LifeStylesForm {
         PatientId: Serenity.LookupEditor;
         Regime: Serenity.TextAreaEditor;
         DailyMeals: Serenity.TextAreaEditor;
+        RemarksForFoodTake: Serenity.TextAreaEditor;
+        BadHabits: Serenity.TextAreaEditor;
+        NotEating: Serenity.TextAreaEditor;
     }
 
-    [['PatientId', () => Serenity.LookupEditor], ['Regime', () => Serenity.TextAreaEditor], ['DailyMeals', () => Serenity.TextAreaEditor]].forEach(x => Object.defineProperty(LifeStylesForm.prototype, <string>x[0], { get: function () { return this.w(x[0], (x[1] as any)()); }, enumerable: true, configurable: true }));
+    export class LifeStylesForm extends Serenity.PrefixedContext {
+        static formKey = 'PatientManagement.LifeStyles';
+        private static init: boolean;
+
+        constructor(prefix: string) {
+            super(prefix);
+
+            if (!LifeStylesForm.init)  {
+                LifeStylesForm.init = true;
+
+                var s = Serenity;
+                var w0 = s.LookupEditor;
+                var w1 = s.TextAreaEditor;
+
+                Q.initFormType(LifeStylesForm, [
+                    'PatientId', w0,
+                    'Regime', w1,
+                    'DailyMeals', w1,
+                    'RemarksForFoodTake', w1,
+                    'BadHabits', w1,
+                    'NotEating', w1
+                ]);
+            }
+        }
+    }
 }

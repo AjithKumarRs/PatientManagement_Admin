@@ -8,5 +8,5 @@
         Saturday = 6,
         Sunday = 7
     }
-    Serenity.Decorators.registerEnum(WeekDays, 'PatientManagement.PatientManagement.WeekDays');
+    Serenity.Decorators.registerEnumType(WeekDays, 'PatientManagement.PatientManagement.WeekDays');
 }

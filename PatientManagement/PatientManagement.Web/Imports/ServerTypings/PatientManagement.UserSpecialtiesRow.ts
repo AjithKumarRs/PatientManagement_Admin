@@ -9,16 +9,10 @@
         export const idProperty = 'UserSpecialtyId';
         export const localTextPrefix = 'UserSpecialties';
 
-        export namespace Fields {
-            export declare const UserSpecialtyId: string;
-            export declare const UserId: string;
-            export declare const SpecialtyId: string;
+        export declare const enum Fields {
+            UserSpecialtyId = "UserSpecialtyId",
+            UserId = "UserId",
+            SpecialtyId = "SpecialtyId"
         }
-
-        [
-            'UserSpecialtyId', 
-            'UserId', 
-            'SpecialtyId'
-        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

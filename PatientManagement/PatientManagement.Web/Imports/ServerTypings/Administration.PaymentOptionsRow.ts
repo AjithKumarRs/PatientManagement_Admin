@@ -21,28 +21,16 @@
             return Q.getLookup<PaymentOptionsRow>('Administration.PaymentOptions');
         }
 
-        export namespace Fields {
-            export declare const PaymentOptionId: string;
-            export declare const Months: string;
-            export declare const Name: string;
-            export declare const InsertUserId: string;
-            export declare const InsertDate: string;
-            export declare const UpdateUserId: string;
-            export declare const UpdateDateField: string;
-            export declare const InsertUserName: string;
-            export declare const UpdateUserName: string;
+        export declare const enum Fields {
+            PaymentOptionId = "PaymentOptionId",
+            Months = "Months",
+            Name = "Name",
+            InsertUserId = "InsertUserId",
+            InsertDate = "InsertDate",
+            UpdateUserId = "UpdateUserId",
+            UpdateDateField = "UpdateDateField",
+            InsertUserName = "InsertUserName",
+            UpdateUserName = "UpdateUserName"
         }
-
-        [
-            'PaymentOptionId', 
-            'Months', 
-            'Name', 
-            'InsertUserId', 
-            'InsertDate', 
-            'UpdateUserId', 
-            'UpdateDateField', 
-            'InsertUserName', 
-            'UpdateUserName'
-        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

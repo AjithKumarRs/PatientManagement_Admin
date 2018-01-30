@@ -11,6 +11,7 @@ namespace PatientManagement.Migrations.PatientManagementDB
     {
         public override void Up()
         {
+            //TODO: Issue #208 - Clean all sql statements here, see PatientManagementDB_20170515_070000_Initial
             Execute.Sql(@"
                             IF (OBJECT_ID('[PK_LifeStyles]', 'PK') IS NOT NULL)
                             BEGIN
@@ -24,12 +25,15 @@ namespace PatientManagement.Migrations.PatientManagementDB
                             ");
 
 
+            // TODO: Move to initial migration - issue #208
             Alter.Table("LifeStyles")
                 .AddColumn("LifeStyleId").AsInt32().Identity().PrimaryKey().NotNullable();
 
+            // TODO: Move to initial migration - issue #208
             Alter.Table("Activity")
                 .AddColumn("ActivityId").AsInt32().Identity().PrimaryKey().NotNullable();
 
+            //TODO: Issue #208 - Clean all sql statements here, see PatientManagementDB_20170515_070000_Initial
             Execute.Sql(@"
                           IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS 
                                 WHERE CONSTRAINT_TYPE = 'PRIMARY KEY' AND TABLE_NAME = 'LifeStyles' 
@@ -38,6 +42,7 @@ namespace PatientManagement.Migrations.PatientManagementDB
                                    ALTER TABLE LifeStyles ADD CONSTRAINT PK_LifeStyleId PRIMARY KEY (LifeStyleId)
                                 END
                             ");
+            //TODO: Issue #208 - Clean all sql statements here, see PatientManagementDB_20170515_070000_Initial
             Execute.Sql(@"
                           IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS 
                                 WHERE CONSTRAINT_TYPE = 'PRIMARY KEY' AND TABLE_NAME = 'Activity' 

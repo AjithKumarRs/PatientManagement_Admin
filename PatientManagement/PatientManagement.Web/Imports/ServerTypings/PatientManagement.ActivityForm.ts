@@ -1,14 +1,30 @@
 ﻿namespace PatientManagement.PatientManagement {
-    export class ActivityForm extends Serenity.PrefixedContext {
-        static formKey = 'PatientManagement.Activity';
-
-    }
-
     export interface ActivityForm {
         PatientId: Serenity.LookupEditor;
         MovementAndTraining: Serenity.TextAreaEditor;
         Profession: Serenity.TextAreaEditor;
     }
 
-    [['PatientId', () => Serenity.LookupEditor], ['MovementAndTraining', () => Serenity.TextAreaEditor], ['Profession', () => Serenity.TextAreaEditor]].forEach(x => Object.defineProperty(ActivityForm.prototype, <string>x[0], { get: function () { return this.w(x[0], (x[1] as any)()); }, enumerable: true, configurable: true }));
+    export class ActivityForm extends Serenity.PrefixedContext {
+        static formKey = 'PatientManagement.Activity';
+        private static init: boolean;
+
+        constructor(prefix: string) {
+            super(prefix);
+
+            if (!ActivityForm.init)  {
+                ActivityForm.init = true;
+
+                var s = Serenity;
+                var w0 = s.LookupEditor;
+                var w1 = s.TextAreaEditor;
+
+                Q.initFormType(ActivityForm, [
+                    'PatientId', w0,
+                    'MovementAndTraining', w1,
+                    'Profession', w1
+                ]);
+            }
+        }
+    }
 }

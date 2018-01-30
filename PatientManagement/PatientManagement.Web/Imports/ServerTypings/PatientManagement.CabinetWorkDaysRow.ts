@@ -14,16 +14,10 @@
             return Q.getLookup<CabinetWorkDaysRow>('PatientManagement.CabinetWorkDays');
         }
 
-        export namespace Fields {
-            export declare const WorkDayId: string;
-            export declare const WeekDayId: string;
-            export declare const CabinetId: string;
+        export declare const enum Fields {
+            WorkDayId = "WorkDayId",
+            WeekDayId = "WeekDayId",
+            CabinetId = "CabinetId"
         }
-
-        [
-            'WorkDayId', 
-            'WeekDayId', 
-            'CabinetId'
-        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

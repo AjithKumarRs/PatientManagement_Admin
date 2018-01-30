@@ -28,40 +28,22 @@
             return Q.getLookup<CouponsRow>('Administration.Coupons');
         }
 
-        export namespace Fields {
-            export declare const CouponId: string;
-            export declare const Key: string;
-            export declare const Name: string;
-            export declare const Discount: string;
-            export declare const Description: string;
-            export declare const EndDate: string;
-            export declare const IsUsed: string;
-            export declare const InsertUserId: string;
-            export declare const InsertDate: string;
-            export declare const UpdateUserId: string;
-            export declare const UpdateDateField: string;
-            export declare const IsActive: string;
-            export declare const MaxTimeUsing: string;
-            export declare const InsertUserName: string;
-            export declare const UpdateUserName: string;
+        export declare const enum Fields {
+            CouponId = "CouponId",
+            Key = "Key",
+            Name = "Name",
+            Discount = "Discount",
+            Description = "Description",
+            EndDate = "EndDate",
+            IsUsed = "IsUsed",
+            InsertUserId = "InsertUserId",
+            InsertDate = "InsertDate",
+            UpdateUserId = "UpdateUserId",
+            UpdateDateField = "UpdateDateField",
+            IsActive = "IsActive",
+            MaxTimeUsing = "MaxTimeUsing",
+            InsertUserName = "InsertUserName",
+            UpdateUserName = "UpdateUserName"
         }
-
-        [
-            'CouponId', 
-            'Key', 
-            'Name', 
-            'Discount', 
-            'Description', 
-            'EndDate', 
-            'IsUsed', 
-            'InsertUserId', 
-            'InsertDate', 
-            'UpdateUserId', 
-            'UpdateDateField', 
-            'IsActive', 
-            'MaxTimeUsing', 
-            'InsertUserName', 
-            'UpdateUserName'
-        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

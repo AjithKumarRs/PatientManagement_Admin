@@ -14,16 +14,10 @@
             return Q.getLookup<ExternalAccessCabinetsRow>('PatientManagement.ExternalAccessCabinets');
         }
 
-        export namespace Fields {
-            export declare const ExternalAccessCabinetId: string;
-            export declare const ExternalAccessId: string;
-            export declare const CabinetId: string;
+        export declare const enum Fields {
+            ExternalAccessCabinetId = "ExternalAccessCabinetId",
+            ExternalAccessId = "ExternalAccessId",
+            CabinetId = "CabinetId"
         }
-
-        [
-            'ExternalAccessCabinetId', 
-            'ExternalAccessId', 
-            'CabinetId'
-        ].forEach(x => (<any>Fields)[x] = x);
     }
 }
