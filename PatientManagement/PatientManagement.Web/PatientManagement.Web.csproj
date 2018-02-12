@@ -34,7 +34,7 @@
   <ItemGroup>
     <PackageReference Include="Ical.Net" Version="3.0.12" />
     <PackageReference Include="MailKit" Version="1.18.0" />
-    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="2.5.3" />
+    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="2.7.1" />
     <PackageReference Include="Serenity.FluentMigrator.Runner" Version="1.6.904" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Server" Version="0.2.0-preview2-22683" />
     <PackageReference Include="NodaMoney" Version="1.0.0" />
@@ -44,7 +44,7 @@
     <PackageReference Include="EPPlus.Core" Version="1.5.2" />
     <PackageReference Include="FastMember" Version="1.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
-    <PackageReference Include="Serenity.Web" Version="3.4.2" />
+    <PackageReference Include="Serenity.Web" Version="3.4.4" />
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">
     <PackageReference Include="EPPlus" Version="4.1.0" />

@@ -932,7 +932,6 @@ declare namespace Serenity {
 declare namespace Serenity.Decorators {
     function registerFormatter(nameOrIntf?: string | any[], intf2?: any[]): (target: Function) => void;
     function addAttribute(type: any, attr: any): void;
-    function addMemberAttr(type: any, memberName: string, attr: any): void;
     function columnsKey(value: string): (target: Function) => void;
     function dialogType(value: Function): (target: Function) => void;
     function editor(key?: string): (target: Function) => void;
@@ -1494,7 +1493,7 @@ declare namespace Serenity {
         constructor(input: JQuery, opt: EmailEditorOptions);
         static registerValidationMethods(): void;
         get_value(): string;
-        readonly value: string;
+        value: string;
         set_value(value: string): void;
         get_readOnly(): boolean;
         set_readOnly(value: boolean): void;
@@ -1572,7 +1571,7 @@ declare namespace Serenity {
         get_readOnly(): boolean;
         set_readOnly(value: boolean): void;
         get_value(): UploadedFile;
-        readonly value: UploadedFile;
+        value: UploadedFile;
         set_value(value: UploadedFile): void;
         getEditValue(property: PropertyItem, target: any): void;
         setEditValue(source: any, property: PropertyItem): void;
@@ -1616,6 +1615,9 @@ declare namespace Serenity {
         value: string;
         protected get_value(): string;
         protected set_value(value: string): void;
+    }
+    class EmailAddressEditor extends Serenity.StringEditor {
+        constructor(input: JQuery);
     }
     class PasswordEditor extends StringEditor {
         constructor(input: JQuery);
@@ -1983,9 +1985,7 @@ declare namespace Serenity {
     class DateFormatter implements Slick.Formatter {
         constructor();
         static format(value: any, format?: string): any;
-        private displayFormat;
-        get_displayFormat(): string;
-        set_displayFormat(value: string): void;
+        displayFormat: string;
         format(ctx: Slick.FormatterContext): string;
     }
     class DateTimeFormatter extends DateFormatter {
