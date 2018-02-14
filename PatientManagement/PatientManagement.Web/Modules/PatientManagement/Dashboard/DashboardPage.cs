@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using PatientManagement.Administration;
 using PatientManagement.Administration.Entities;
@@ -13,6 +14,7 @@ using PatientManagement.PatientManagement.Repositories;
 using PatientManagement.Web.Modules.Common;
 using Remotion.Linq.Clauses;
 using Serenity.Services;
+using StackExchange.Exceptional;
 
 namespace PatientManagement.PatientManagement.Pages
 {
@@ -71,6 +73,9 @@ namespace PatientManagement.PatientManagement.Pages
             ViewData["WorkHoursEnd"] = TimeSpan.FromMinutes(1200);
             return View(MVC.Views.PatientManagement.Dashboard.DashboardIndex);
         }
+
+        [Route("~/Exceptions")]
+        public async Task Exceptions() => await ExceptionalMiddleware.HandleRequestAsync(HttpContext).ConfigureAwait(false);
 
         //[PageAuthorize]
         //public JsonResult GetVisitsTasks(string start, string end)
