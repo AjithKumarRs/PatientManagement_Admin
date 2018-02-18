@@ -237,12 +237,18 @@
             slotDuration: '00:15:00',
             //minTime: "@ViewData["WorkHoursStart"]",
             //maxTime: "@ViewData["WorkHoursEnd"]",
-            eventClick: function(event) {
-
-                new PatientManagement.PatientManagement.CalendarPatientDialog().loadByIdAndOpenDialog(event.patientId);
-                if (event.url) {
-                    return false;
+            eventClick: function (event) {
+                console.log(event);
+                if (event.patientId > 0) {
+                    new PatientManagement.PatientManagement.CalendarPatientDialog().loadByIdAndOpenDialog(
+                        event.patientId);
+                    if (event.url) {
+                        return false;
+                    }
+                } else {
+                    new PatientManagement.PatientManagement.CalendarVisitsDialog().loadByIdAndOpenDialog(event.id);
                 }
+              
             },
             loading: function (bool) {
                 if (bool)
