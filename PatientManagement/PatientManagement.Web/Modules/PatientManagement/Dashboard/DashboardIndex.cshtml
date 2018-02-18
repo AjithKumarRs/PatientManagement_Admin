@@ -238,7 +238,6 @@
             //minTime: "@ViewData["WorkHoursStart"]",
             //maxTime: "@ViewData["WorkHoursEnd"]",
             eventClick: function (event) {
-                console.log(event);
                 if (event.patientId > 0) {
                     new PatientManagement.PatientManagement.CalendarPatientDialog().loadByIdAndOpenDialog(
                         event.patientId);
