@@ -21,6 +21,8 @@ using Microsoft.AspNetCore.SignalR;
 using PatientManagement.Administration;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Serenity.Web;
+using StackExchange.Exceptional;
+using StackExchange.Exceptional.Stores;
 
 namespace PatientManagement
 {
@@ -70,6 +72,15 @@ namespace PatientManagement
             services.AddSingleton<IRequestContext, Serenity.Web.RequestContext>();
             services.AddSingleton<IUserIdProvider, CustomUserIdProvider>();
             services.AddSignalR(options => options.Hubs.EnableDetailedErrors = true);
+
+            services.AddExceptional(settings =>
+            {
+                settings.Store.ApplicationName = "Clario";
+                settings.Render.CSSIncludes.Add("../../exceptions/errors.css");
+                settings.Render.JSIncludes.Add("../../Scripts/jquery-3.1.1.min.js");
+
+                settings.Render.JSIncludes.Add("../../exceptions/errors.js");
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -143,6 +154,8 @@ namespace PatientManagement
             app.UseSignalR();
 
             DataMigrations.Initialize();
+
+            app.UseExceptional();
         }
 
         public static void RegisterDataProviders()
