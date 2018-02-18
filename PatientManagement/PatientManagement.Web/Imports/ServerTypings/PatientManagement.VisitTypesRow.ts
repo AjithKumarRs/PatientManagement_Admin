@@ -4,6 +4,9 @@
         Name?: string;
         BorderColor?: string;
         BackgroundColor?: string;
+        PriceWithCurrencie?: string;
+        Price?: number;
+        Currencie?: string;
         InsertUserId?: number;
         InsertDate?: string;
         IsActive?: number;
@@ -28,6 +31,9 @@
             Name = "Name",
             BorderColor = "BorderColor",
             BackgroundColor = "BackgroundColor",
+            PriceWithCurrencie = "PriceWithCurrencie",
+            Price = "Price",
+            Currencie = "Currencie",
             InsertUserId = "InsertUserId",
             InsertDate = "InsertDate",
             IsActive = "IsActive",

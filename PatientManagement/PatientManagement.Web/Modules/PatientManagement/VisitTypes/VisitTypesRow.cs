@@ -47,7 +47,35 @@ namespace PatientManagement.PatientManagement.Entities
             get { return Fields.BackgroundColor[this]; }
             set { Fields.BackgroundColor[this] = value; }
         }
-        
+
+        [DisplayName("Price")]
+        [ReadPermission(PermissionKeys.AdministrationTenantsVisitPayments)]
+        public Decimal? Price
+        {
+            get { return Fields.Price[this]; }
+            set { Fields.Price[this] = value; }
+        }
+
+        [DisplayName("Price")]
+        [ReadPermission(PermissionKeys.AdministrationTenantsVisitPayments)]
+        [NotMapped]
+        public string PriceWithCurrencie
+        {
+            get { return Fields.PriceWithCurrencie[this]; }
+            set { Fields.PriceWithCurrencie[this] = value; }
+        }
+
+
+        [DisplayName("Currencie")]
+        [NotMapped]
+        [ReadOnly(true)]
+        [ReadPermission(PermissionKeys.AdministrationTenantsVisitPayments)]
+        public string Currencie
+        {
+            get { return Fields.Currencie[this]; }
+            set { Fields.Currencie[this] = value; }
+        }
+
         IIdField IIdRow.IdField
         {
             get { return Fields.VisitTypeId; }
@@ -91,6 +119,9 @@ namespace PatientManagement.PatientManagement.Entities
             public StringField Name;
             public StringField BorderColor;
             public StringField BackgroundColor;
+            public StringField PriceWithCurrencie;
+            public DecimalField Price;
+            public StringField Currencie;
 
             public Int32Field InsertUserId;
             public DateTimeField InsertDate;

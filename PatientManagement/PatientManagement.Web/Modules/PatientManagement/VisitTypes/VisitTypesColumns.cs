@@ -18,7 +18,13 @@ namespace PatientManagement.PatientManagement.Columns
 
         [VisitsTypesFormatter(BackgroundProperty = "BackgroundColor", BorderProperty = "BorderColor")]
         [Width(200)]
+        [EditLink]
         public String Name { get; set; }
+
+        [EditLink]
+        [Width(120)]
+        public string PriceWithCurrencie { get; set; }
+
 
         [Width(80)]
         public String TenantName { get; set; }

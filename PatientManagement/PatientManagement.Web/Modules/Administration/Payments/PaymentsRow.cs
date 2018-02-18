@@ -14,8 +14,8 @@ namespace PatientManagement.Administration.Entities
     using System.IO;
 
     [ConnectionKey("Default"), TableName("[dbo].[Payments]"), DisplayName("Payments"), InstanceName("Payments"), TwoLevelCached]
-    [ReadPermission("AdministrationTenants:Payments")]
-    [ModifyPermission("AdministrationTenants:Payments")]
+    [ReadPermission(PermissionKeys.AdministrationTenantsPaymentsRead)]
+    [ModifyPermission(PermissionKeys.AdministrationTenantsPaymentsModify)]
     [LookupScript("AdministrationTenants.Payment",
         LookupType = typeof(MultiTenantRowLookupScript<>))]
     public sealed class PaymentsRow : Row, IIdRow, INameRow, ILoggingRow, IMultiTenantRow
