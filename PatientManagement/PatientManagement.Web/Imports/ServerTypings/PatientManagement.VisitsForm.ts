@@ -4,6 +4,7 @@
         VisitTypeId: Serenity.LookupEditor;
         AssignedUserId: Serenity.LookupEditor;
         CabinetId: Serenity.LookupEditor;
+        FreeForReservation: BsSwitchEditor;
         StartDate: Serenity.DateTimeEditor;
         EndDate: Serenity.DateTimeEditor;
         Description: Serenity.TextAreaEditor;
@@ -22,17 +23,19 @@
 
                 var s = Serenity;
                 var w0 = s.LookupEditor;
-                var w1 = s.DateTimeEditor;
-                var w2 = s.TextAreaEditor;
+                var w1 = BsSwitchEditor;
+                var w2 = s.DateTimeEditor;
+                var w3 = s.TextAreaEditor;
 
                 Q.initFormType(VisitsForm, [
                     'PatientId', w0,
                     'VisitTypeId', w0,
                     'AssignedUserId', w0,
                     'CabinetId', w0,
-                    'StartDate', w1,
-                    'EndDate', w1,
-                    'Description', w2,
+                    'FreeForReservation', w1,
+                    'StartDate', w2,
+                    'EndDate', w2,
+                    'Description', w3,
                     'TenantId', w0
                 ]);
             }

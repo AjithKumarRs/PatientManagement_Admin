@@ -50,6 +50,11 @@ namespace PatientManagement.PatientManagement.Repositories
             protected override void AfterSave()
             {
                 base.AfterSave();
+
+                //Added to not try to send notification
+                if (this.Row.FreeForReservation??true)
+                    return;
+
                 var cabinetName = Connection.ById<CabinetsRow>(Row.CabinetId).Name;
                 if (IsUpdate)
                 {
@@ -96,6 +101,11 @@ namespace PatientManagement.PatientManagement.Repositories
             {
 
                 base.OnAfterDelete();
+
+                //Added to not try to send notification
+                if (this.Row.FreeForReservation ?? true)
+                    return;
+
                 var cabinetName = Connection.ById<CabinetsRow>(Row.CabinetId).Name;
 
                 NotificationHelpers.SendVisitNotification(

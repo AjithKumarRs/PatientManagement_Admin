@@ -8,6 +8,7 @@
         CabinetIsActive?: number;
         AssignedUserId?: number;
         AssignedUserName?: string;
+        FreeForReservation?: boolean;
         Description?: string;
         StartDate?: string;
         EndDate?: string;
@@ -44,6 +45,7 @@
             CabinetIsActive = "CabinetIsActive",
             AssignedUserId = "AssignedUserId",
             AssignedUserName = "AssignedUserName",
+            FreeForReservation = "FreeForReservation",
             Description = "Description",
             StartDate = "StartDate",
             EndDate = "EndDate",

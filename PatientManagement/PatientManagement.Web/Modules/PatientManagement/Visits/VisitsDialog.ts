@@ -23,6 +23,16 @@ namespace PatientManagement.PatientManagement {
         constructor() {
             super();
 
+            this.form.FreeForReservation.element.bootstrapSwitch('onSwitchChange', e => {
+                if (this.form.FreeForReservation.getState()) {
+                    Serenity.EditorUtils.setReadOnly(this.form.PatientId, true);
+                    Serenity.EditorUtils.setRequired(this.form.PatientId, false);
+                    this.form.PatientId.value = null;
+                } else {
+                    Serenity.EditorUtils.setReadOnly(this.form.PatientId, false);
+                    Serenity.EditorUtils.setRequired(this.form.PatientId, true);
+                }
+            });
             this.form.PatientId.changeSelect2(e => {
                 var patientId = this.form.PatientId.value;
                 if (!patientId)
@@ -33,7 +43,7 @@ namespace PatientManagement.PatientManagement {
                     response => {
                         if (response.Entity.NotifyOnChange) {
                             var parentCat = this.form.PatientId.element.parents(".categories ");
-                            console.log(parentCat);
+                           
                             var text = Q.text("Site.Dashboard.AlertMessagePatientWithNotificationActiveVisitDialog");
                             parentCat.append(
                                 "<div class='alert alert-info' style='display: none' id='automatic-notification-email'>" + text + "</div>");
@@ -63,7 +73,7 @@ namespace PatientManagement.PatientManagement {
 
 
         }
-
+        
         protected getCloningEntity() {
             var clone = super.getCloningEntity();
 

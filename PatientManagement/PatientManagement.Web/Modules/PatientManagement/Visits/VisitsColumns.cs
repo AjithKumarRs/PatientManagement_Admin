@@ -26,8 +26,10 @@ namespace PatientManagement.PatientManagement.Columns
         [EditLink, Width(200), PatientsEmailFormatter]
         public String PatientEmail { get; set; }
 
-       [VisitsTypesFormatter(BackgroundProperty = "VisitTypeBackgroundColor", BorderProperty = "VisitTypeBorderColor")]
+       [EditLink, VisitsTypesFormatter(BackgroundProperty = "VisitTypeBackgroundColor", BorderProperty = "VisitTypeBorderColor")]
         public Int32 VisitTypeName { get; set; }
+
+        public bool FreeForReservation { get; set; }
 
         [Hidden]
         public Int32 AssignedUserId { get; set; }
@@ -35,9 +37,9 @@ namespace PatientManagement.PatientManagement.Columns
         [Width(150)]
         public string AssignedUserName { get; set; }
 
-        [Width(200), CabinetsFormatter]
+        [EditLink, Width(200), CabinetsFormatter]
         public string CabinetName { get; set; }
-        [Width(300)]
+        [EditLink, Width(300)]
         public String Description { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }

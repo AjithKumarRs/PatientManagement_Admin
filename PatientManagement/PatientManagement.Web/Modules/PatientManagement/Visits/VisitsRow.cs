@@ -151,6 +151,14 @@ namespace PatientManagement.PatientManagement.Entities
             set => Fields.Description[this] = value;
         }
 
+        [DisplayName("Free For Reservation")]
+        [BsSwitchEditor]
+        public Boolean? FreeForReservation
+        {
+            get => Fields.FreeForReservation[this];
+            set => Fields.FreeForReservation[this] = value;
+        }
+
         #region PatientFields
         [DisplayName("Patient Name"), Expression("jPatient.[Name]"), Width(150), EditLink, QuickSearch ]
         public String PatientName
@@ -216,6 +224,7 @@ namespace PatientManagement.PatientManagement.Entities
             public Int16Field CabinetIsActive;
             public Int32Field AssignedUserId;
             public StringField AssignedUserName;
+            public BooleanField FreeForReservation;
 
             public StringField Description;
             public DateTimeField StartDate;

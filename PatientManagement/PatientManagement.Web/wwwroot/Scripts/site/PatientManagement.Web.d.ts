@@ -1,1348 +1,5 @@
-﻿/// <reference types="jqueryui" />
-/// <reference types="jquery" />
-declare namespace PatientManagement.PatientManagement {
-    class VisitTypesDialog extends Serenity.EntityDialog<VisitTypesRow, any> {
-        protected getFormKey(): string;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getNameProperty(): string;
-        protected getService(): string;
-        protected form: VisitTypesForm;
-        loadEntity(entity: VisitTypesRow): void;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class NewVisitTypeDialog extends PatientManagement.VisitTypesDialog {
-        protected onSaveSuccess(response: Serenity.SaveResponse): void;
-        protected onDeleteSuccess(response: Serenity.DeleteResponse): void;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class VisitsTypesFormatter implements Slick.Formatter {
-        format(ctx: Slick.FormatterContext): string;
-        backgroundProperty: string;
-        borderProperty: string;
-        initializeColumn(column: Slick.Column): void;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class VisitTypesGrid extends Serenity.EntityGrid<VisitTypesRow, any> {
-        protected getColumnsKey(): string;
-        protected getDialogType(): typeof VisitTypesDialog;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getService(): string;
-        protected getIsActiveProperty(): string;
-        constructor(container: JQuery);
-    }
-}
-declare namespace PatientManagement {
-    class VisiTypesBottomLeftMenu extends Serenity.Widget<any> {
-        constructor(elem: JQuery, opt: {});
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class VisitsDialog extends Serenity.EntityDialog<VisitsRow, any> {
-        protected getFormKey(): string;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getService(): string;
-        protected form: VisitsForm;
-        protected updateInterface(): void;
-        constructor();
-        protected getCloningEntity(): VisitsRow;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class VisitsGrid extends Serenity.EntityGrid<VisitsRow, any> {
-        protected getColumnsKey(): string;
-        protected getDialogType(): typeof VisitsDialog;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getService(): string;
-        constructor(container: JQuery);
-        protected getButtons(): Serenity.ToolButton[];
-        protected getQuickFilters(): Serenity.QuickFilter<Serenity.Widget<any>, any>[];
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class UserNotificationsDialog extends Serenity.EntityDialog<UserNotificationsRow, any> {
-        protected getFormKey(): string;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getService(): string;
-        protected form: UserNotificationsForm;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class UserNotificationsGrid extends Serenity.EntityGrid<UserNotificationsRow, any> {
-        protected getColumnsKey(): string;
-        protected getDialogType(): typeof UserNotificationsDialog;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getService(): string;
-        constructor(container: JQuery);
-        protected getButtons(): Serenity.ToolButton[];
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class PatientsFileUploadsDialog extends Serenity.EntityDialog<PatientsFileUploadsRow, any> {
-        protected getFormKey(): string;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getNameProperty(): string;
-        protected getService(): string;
-        protected form: PatientsFileUploadsForm;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class PatientsFileUploadsGrid extends Serenity.EntityGrid<PatientsFileUploadsRow, any> {
-        protected getColumnsKey(): string;
-        protected getDialogType(): typeof PatientsFileUploadsDialog;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getService(): string;
-        constructor(container: JQuery);
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class FIleUploadsForPatientDialog extends PatientsFileUploadsDialog {
-        constructor();
-        updateInterface(): void;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class FIleUploadsForPatientGrid extends PatientsFileUploadsGrid {
-        protected getDialogType(): typeof FIleUploadsForPatientDialog;
-        constructor(container: JQuery);
-        protected getColumns(): Slick.Column[];
-        protected initEntityDialog(itemType: any, dialog: any): void;
-        protected addButtonClick(): void;
-        protected getInitialTitle(): any;
-        protected getGridCanLoad(): boolean;
-        private _patientId;
-        patientId: number;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class ActivityDialog extends Serenity.EntityDialog<ActivityRow, any> {
-        protected getFormKey(): string;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getNameProperty(): string;
-        protected getService(): string;
-        protected form: ActivityForm;
-        private loadedState;
-        constructor();
-        getSaveState(): string;
-        loadResponse(data: any): void;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class PatienActivityDialog extends ActivityDialog {
-        constructor();
-        updateInterface(): void;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class ActivityGrid extends Serenity.EntityGrid<ActivityRow, any> {
-        protected getColumnsKey(): string;
-        protected getDialogType(): typeof ActivityDialog;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getService(): string;
-        constructor(container: JQuery);
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class PatientActivityGrid extends ActivityGrid {
-        protected getDialogType(): typeof PatienActivityDialog;
-        constructor(container: JQuery);
-        protected getColumns(): Slick.Column[];
-        protected initEntityDialog(itemType: any, dialog: any): void;
-        protected addButtonClick(): void;
-        protected getInitialTitle(): any;
-        protected getGridCanLoad(): boolean;
-        private _patientId;
-        patientId: number;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class PatientHealthDialog extends Serenity.EntityDialog<PatientHealthRow, any> {
-        protected getFormKey(): string;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getNameProperty(): string;
-        protected getService(): string;
-        protected form: PatientHealthForm;
-        private loadedState;
-        constructor();
-        getSaveState(): string;
-        loadResponse(data: any): void;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class PatientHealthCheckDialog extends PatientHealthDialog {
-        constructor();
-        updateInterface(): void;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class PatientHealthGrid extends Serenity.EntityGrid<PatientHealthRow, any> {
-        protected getColumnsKey(): string;
-        protected getDialogType(): typeof PatientHealthDialog;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getService(): string;
-        constructor(container: JQuery);
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class PatientHealthCheckGrid extends PatientHealthGrid {
-        protected getDialogType(): typeof PatientHealthCheckDialog;
-        constructor(container: JQuery);
-        protected getColumns(): Slick.Column[];
-        protected initEntityDialog(itemType: any, dialog: any): void;
-        protected addButtonClick(): void;
-        protected getInitialTitle(): any;
-        protected getGridCanLoad(): boolean;
-        private _patientId;
-        patientId: number;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class LifeStylesDialog extends Serenity.EntityDialog<LifeStylesRow, any> {
-        protected getFormKey(): string;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getNameProperty(): string;
-        protected getService(): string;
-        protected form: LifeStylesForm;
-        private loadedState;
-        constructor();
-        getSaveState(): string;
-        loadResponse(data: any): void;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class PatientLifeStyleDialog extends LifeStylesDialog {
-        constructor();
-        updateInterface(): void;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class LifeStylesGrid extends Serenity.EntityGrid<LifeStylesRow, any> {
-        protected getColumnsKey(): string;
-        protected getDialogType(): typeof LifeStylesDialog;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getService(): string;
-        constructor(container: JQuery);
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class PatientLifeStylesGrid extends LifeStylesGrid {
-        protected getDialogType(): typeof PatientLifeStyleDialog;
-        constructor(container: JQuery);
-        protected getColumns(): Slick.Column[];
-        protected initEntityDialog(itemType: any, dialog: any): void;
-        protected addButtonClick(): void;
-        protected getInitialTitle(): any;
-        protected getGridCanLoad(): boolean;
-        private _patientId;
-        patientId: number;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class PatientsDialog extends Serenity.EntityDialog<PatientsRow, any> {
-        protected getFormKey(): string;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getNameProperty(): string;
-        protected getService(): string;
-        protected form: PatientsForm;
-        private visitsGrid;
-        private loadedState;
-        private patientActivityGrid;
-        private patientsFileUploadsGrid;
-        private patientHealthGrid;
-        private patientlifeStyleGrid;
-        private patientValidator;
-        private selfChange;
-        private checkEgn;
-        private checkPhone;
-        protected isValidDate: (y: any, m: any, d: any) => boolean;
-        constructor();
-        getSaveState(): string;
-        loadResponse(data: any): void;
-        loadEntity(entity: PatientsRow): void;
-        onSaveSuccess(response: any): void;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class PatientsFormatter implements Slick.Formatter {
-        format(ctx: Slick.FormatterContext): string;
-        genderProperty: string;
-        initializeColumn(column: Slick.Column): void;
-    }
-    class PatientsPhoneFormatter implements Slick.Formatter {
-        format(ctx: Slick.FormatterContext): string;
-    }
-    class PatientsEmailFormatter implements Slick.Formatter {
-        format(ctx: Slick.FormatterContext): string;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class PatientsGrid extends Serenity.EntityGrid<PatientsRow, any> {
-        protected getColumnsKey(): string;
-        protected getDialogType(): typeof PatientsDialog;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getService(): string;
-        protected getIsActiveProperty(): string;
-        constructor(container: JQuery);
-        protected getButtons(): Serenity.ToolButton[];
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class PatientVisitsDialog extends VisitsDialog {
-        constructor();
-        updateInterface(): void;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class PatientVisitsGrid extends VisitsGrid {
-        protected getDialogType(): typeof PatientVisitsDialog;
-        constructor(container: JQuery);
-        protected getColumns(): Slick.Column[];
-        protected initEntityDialog(itemType: any, dialog: any): void;
-        protected addButtonClick(): void;
-        protected getInitialTitle(): any;
-        protected getGridCanLoad(): boolean;
-        private _patientId;
-        patientId: number;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class NotificationsUserImageFormatter implements Slick.Formatter, Serenity.IInitializeColumn {
-        format(ctx: Slick.FormatterContext): string;
-        initializeColumn(column: Slick.Column): void;
-        fileProperty: string;
-        thumb: boolean;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class NotificationDropdownMenu extends Serenity.TemplatedWidget<any> {
-        protected getService(): string;
-        private notificationIds;
-        constructor(elem: JQuery, opt: {});
-        updateNotifications: () => void;
-        protected openClick(e: any): void;
-        protected markAsSeen(): void;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class NotificationsDialog extends Serenity.EntityDialog<NotificationsRow, any> {
-        protected getFormKey(): string;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getNameProperty(): string;
-        protected getService(): string;
-        protected form: NotificationsForm;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class NotificationsGrid extends Serenity.EntityGrid<NotificationsRow, any> {
-        protected getColumnsKey(): string;
-        protected getDialogType(): typeof NotificationsDialog;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getService(): string;
-        constructor(container: JQuery);
-        protected getButtons(): Serenity.ToolButton[];
-        protected getSlickOptions(): Slick.GridOptions;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class NotesDialog extends Serenity.TemplatedDialog<any> {
-        private textEditor;
-        constructor();
-        protected getTemplate(): string;
-        protected getDialogOptions(): JQueryUI.DialogOptions;
-        text: string;
-        okClick: () => void;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class NotesEditor extends Serenity.TemplatedWidget<any> implements Serenity.IGetEditValue, Serenity.ISetEditValue {
-        private isDirty;
-        private items;
-        constructor(div: JQuery);
-        protected getTemplate(): string;
-        protected updateContent(): void;
-        protected addClick(): void;
-        protected editClick(e: any): void;
-        deleteClick(e: any): void;
-        value: NotesRow[];
-        getEditValue(prop: Serenity.PropertyItem, target: any): void;
-        setEditValue(source: any, prop: Serenity.PropertyItem): void;
-        get_isDirty(): boolean;
-        set_isDirty(value: any): void;
-        onChange: () => void;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class MedicalSpecialtiesFormatter implements Slick.Formatter {
-        format(ctx: Slick.FormatterContext): string;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class MedicalSpecialtyDialog extends Serenity.EntityDialog<MedicalSpecialtyRow, any> {
-        protected getFormKey(): string;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getNameProperty(): string;
-        protected getService(): string;
-        protected form: MedicalSpecialtyForm;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class MedicalSpecialtyExcelImportDialog extends Serenity.PropertyDialog<any, any> {
-        private form;
-        constructor();
-        protected getDialogTitle(): string;
-        protected getImageUploadEditorOptions(): Serenity.ImageUploadEditorOptions;
-        protected getDialogButtons(): Serenity.DialogButton[];
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class MedicalSpecialtyGrid extends Serenity.EntityGrid<MedicalSpecialtyRow, any> {
-        protected getColumnsKey(): string;
-        protected getDialogType(): typeof MedicalSpecialtyDialog;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getService(): string;
-        protected getIsActiveProperty(): string;
-        constructor(container: JQuery);
-        protected getButtons(): Serenity.ToolButton[];
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class HelloModal extends Serenity.TemplatedWidget<any> {
-        private formCabinet;
-        private formPatient;
-        private formVisitType;
-        private formVisit;
-        constructor(elem: JQuery, opt: {});
-        protected validateFormById(thisElemId: any): boolean;
-    }
-}
-declare namespace PatientManagement.Common {
-    class HelloModalAddCabinetPanel extends Serenity.PropertyPanel<HelloModalAddCabinetRequest, any> {
-        protected getFormKey(): string;
-        private form;
-        constructor(container: JQuery);
-        protected getTemplate(): any;
-        ValidateForm(): boolean;
-        SaveEntity(): boolean;
-    }
-}
-declare namespace PatientManagement.Common {
-    class HelloModalAddPatientPanel extends Serenity.PropertyPanel<HelloModalAddPatientRequest, any> {
-        protected getFormKey(): string;
-        private form;
-        constructor(container: JQuery);
-        protected getTemplate(): any;
-        ValidateForm(): boolean;
-        SaveEntity(): boolean;
-    }
-}
-declare namespace PatientManagement.Common {
-    class HelloModalAddVisitPanel extends Serenity.PropertyPanel<HelloModalAddVisitRequest, any> {
-        protected getFormKey(): string;
-        private form;
-        constructor(container: JQuery);
-        protected getTemplate(): any;
-        ValidateForm(): boolean;
-        SaveEntity(): boolean;
-    }
-}
-declare namespace PatientManagement.Common {
-    class HelloModalAddVisitTypePanel extends Serenity.PropertyPanel<HelloModalAddVisitTypeRequest, any> {
-        protected getFormKey(): string;
-        private form;
-        constructor(container: JQuery);
-        protected getTemplate(): any;
-        ValidateForm(): boolean;
-        SaveEntity(): boolean;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class CalendarCabinetsEditor extends Serenity.Select2Editor<any, any> {
-        protected getService(): string;
-        constructor(container: JQuery);
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class CalendarPatientDialog extends PatientsDialog {
-        onSaveSuccess(response: Serenity.SaveResponse): void;
-        loadEntity(entity: PatientsRow): void;
-    }
-}
-declare var FullCalendar: any;
-declare namespace PatientManagement.PatientManagement {
-    class CalendarVisitsDialog extends VisitsDialog {
-        protected updateTitle(): void;
-        newPredifinedVisit: (start: any, end: any) => void;
-        updateVisit: (visitId: any, start: any, end: any) => void;
-        deleteVisit: (visitId: any) => void;
-        protected onSaveSuccess(response: Serenity.SaveResponse): void;
-        refreshVisitForTodayBox(): void;
-        protected onDeleteSuccess(response: Serenity.DeleteResponse): void;
-        protected formatAlertMessage(firstLine: any, title: any, startDate: Date, endDate: Date): string;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class CalendarVisitsGrid extends VisitsGrid {
-        protected getDialogType(): typeof CalendarVisitsDialog;
-        constructor(container: JQuery);
-        protected getInitialTitle(): any;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class CabinetsDialog extends Serenity.EntityDialog<CabinetsRow, any> {
-        protected getFormKey(): string;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getNameProperty(): string;
-        protected getService(): string;
-        protected form: CabinetsForm;
-        constructor();
-        protected onSaveSuccess(response: Serenity.SaveResponse): void;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class CabinetsFormatter implements Slick.Formatter {
-        format(ctx: Slick.FormatterContext): string;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class CabinetsGrid extends Serenity.EntityGrid<CabinetsRow, any> {
-        protected getColumnsKey(): string;
-        protected getDialogType(): typeof CabinetsDialog;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getIsActiveProperty(): string;
-        protected getService(): string;
-        constructor(container: JQuery);
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class CabinetsListFormatter implements Slick.Formatter {
-        format(ctx: Slick.FormatterContext): string;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class UserListFormatter implements Slick.Formatter {
-        format(ctx: Slick.FormatterContext): string;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class WorkDaysListFormatter implements Slick.Formatter {
-        format(ctx: Slick.FormatterContext): string;
-    }
-}
-declare namespace PatientManagement.Membership {
-    class LoginPanel extends Serenity.PropertyPanel<LoginRequest, any> {
-        protected getFormKey(): string;
-        private form;
-        constructor(container: JQuery);
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class OfferDropDownEditor extends Serenity.Select2Editor<any, any> {
-        constructor(container: JQuery);
-    }
-}
-declare namespace PatientManagement.Membership {
-    class SignUpPanel extends Serenity.PropertyPanel<SignUpRequest, any> {
-        protected getFormKey(): string;
-        private form;
-        constructor(container: JQuery);
-    }
-}
-declare namespace PatientManagement.Membership {
-    class ResetPasswordPanel extends Serenity.PropertyPanel<ResetPasswordRequest, any> {
-        protected getFormKey(): string;
-        private form;
-        constructor(container: JQuery);
-    }
-}
-declare namespace PatientManagement.Membership {
-    import VisitsGrid = PatientManagement.VisitsGrid;
-    class AddedVisitsFromUserPanel extends VisitsGrid {
-        private visitsGrid;
-        constructor(container: JQuery, userId: number);
-        protected getColumns(): Slick.Column[];
-        protected getInitialTitle(): any;
-        protected getGridCanLoad(): boolean;
-        private _insertUserId;
-        insertUserId: number;
-    }
-}
-declare namespace PatientManagement.Membership {
-    class EditTenantPanel extends Serenity.PropertyPanel<EditTenantRequest, any> {
-        protected getFormKey(): string;
-        private form;
-        constructor(container: JQuery);
-    }
-}
-declare namespace PatientManagement.Membership {
-    class EditUserProfilePanel extends Serenity.PropertyPanel<EditUserProfileRequest, any> {
-        protected getFormKey(): string;
-        private form;
-        constructor(container: JQuery);
-    }
-}
-declare namespace PatientManagement.Membership {
-    class ForgotPasswordPanel extends Serenity.PropertyPanel<ForgotPasswordRequest, any> {
-        protected getFormKey(): string;
-        private form;
-        constructor(container: JQuery);
-    }
-}
-declare namespace PatientManagement.Membership {
-    class ChangePasswordPanel extends Serenity.PropertyPanel<ChangePasswordRequest, any> {
-        protected getFormKey(): string;
-        private form;
-        constructor(container: JQuery);
-    }
-}
-declare namespace PatientManagement.LanguageList {
-    function getValue(): string[][];
-}
-declare namespace PatientManagement.ScriptInitialization {
-}
-declare namespace PatientManagement.Common {
-    class UserPreferenceStorage implements Serenity.SettingStorage {
-        getItem(key: string): string;
-        setItem(key: string, data: string): void;
-    }
-}
-declare var jsPDF: any;
-declare namespace PatientManagement.Common {
-    interface PdfExportOptions {
-        grid: Serenity.DataGrid<any, any>;
-        onViewSubmit: () => boolean;
-        title?: string;
-        hint?: string;
-        separator?: boolean;
-        reportTitle?: string;
-        titleTop?: number;
-        titleFontSize?: number;
-        fileName?: string;
-        pageNumbers?: boolean;
-        columnTitles?: {
-            [key: string]: string;
-        };
-        tableOptions?: jsPDF.AutoTableOptions;
-        output?: string;
-        autoPrint?: boolean;
-    }
-    namespace PdfExportHelper {
-        function exportToPdf(options: PdfExportOptions): void;
-        function createToolButton(options: PdfExportOptions): Serenity.ToolButton;
-    }
-}
-declare var jsPDF: any;
-declare namespace PatientManagement.Common {
-    class ReportDialog extends Serenity.TemplatedDialog<ReportDialogOptions> {
-        private report;
-        private propertyGrid;
-        constructor(options: ReportDialogOptions);
-        protected getDialogButtons(): any;
-        protected createPropertyGrid(): void;
-        protected loadReport(reportKey: string): void;
-        protected updateInterface(): void;
-        executeReport(target: string, ext: string, download: boolean): void;
-        getToolbarButtons(): {
-            title: string;
-            cssClass: string;
-            onClick: () => void;
-        }[];
-    }
-    interface ReportDialogOptions {
-        reportKey: string;
-    }
-}
-declare namespace PatientManagement.Common {
-    interface ReportExecuteOptions {
-        reportKey: string;
-        download?: boolean;
-        extension?: 'pdf' | 'htm' | 'html' | 'xlsx' | 'docx';
-        getParams?: () => any;
-        params?: {
-            [key: string]: any;
-        };
-        target?: string;
-    }
-    interface ReportButtonOptions extends ReportExecuteOptions {
-        title?: string;
-        cssClass?: string;
-        icon?: string;
-    }
-    namespace ReportHelper {
-        function createToolButton(options: ReportButtonOptions): Serenity.ToolButton;
-        function execute(options: ReportExecuteOptions): void;
-    }
-}
-declare var jsPDF: any;
-declare namespace PatientManagement.Common {
-    class ReportPage extends Serenity.Widget<any> {
-        private reportKey;
-        private propertyItems;
-        private propertyGrid;
-        constructor(element: JQuery);
-        protected updateMatchFlags(text: string): void;
-        protected categoryClick(e: any): void;
-        protected reportLinkClick(e: any): void;
-    }
-}
-declare namespace PatientManagement.Common {
-    class LanguageSelection extends Serenity.Widget<any> {
-        constructor(select: JQuery, currentLanguage: string);
-    }
-}
-declare namespace PatientManagement.Common {
-    class RecieveNotificationToggle extends Serenity.Widget<any> {
-        constructor(input: JQuery, opt: BootstrapSwitchOptions);
-    }
-}
-declare namespace PatientManagement.Common {
-    class SidebarSearch extends Serenity.Widget<any> {
-        private menuUL;
-        constructor(input: JQuery, menuUL: JQuery);
-        protected updateMatchFlags(text: string): void;
-    }
-}
-declare namespace PatientManagement.Common {
-    class ThemeSelection extends Serenity.Widget<any> {
-        constructor(select: JQuery);
-        protected getCurrentTheme(): string;
-    }
-}
-declare namespace PatientManagement {
-    class AddressAutocomplete extends Serenity.Widget<any> implements Serenity.ISetEditValue {
-        constructor(element: JQuery);
-        setEditValue(source: any, property: Serenity.PropertyItem): void;
-    }
-}
-declare namespace PatientManagement {
-    class BasicProgressDialog extends Serenity.TemplatedDialog<any> {
-        constructor();
-        cancelled: boolean;
-        max: number;
-        value: number;
-        title: string;
-        cancelTitle: string;
-        getDialogOptions(): JQueryUI.DialogOptions;
-        initDialog(): void;
-        getTemplate(): string;
-    }
-}
-declare namespace PatientManagement {
-    class BsSwitchEditor extends Serenity.Widget<BootstrapSwitchOptions> implements Serenity.IGetEditValue, Serenity.ISetEditValue {
-        constructor(element: JQuery, opt: BootstrapSwitchOptions);
-        setEditValue(source: any, property: Serenity.PropertyItem): void;
-        getEditValue(property: Serenity.PropertyItem, target: any): void;
-    }
-    interface BootstrapSwitchOptions {
-        state?: boolean;
-        size?: string;
-        animate?: boolean;
-        disabled?: boolean;
-        readonly?: boolean;
-        indeterminate?: boolean;
-        invers?: boolean;
-        radioAllOff?: boolean;
-        onColor?: string;
-        offColor?: string;
-        onText?: string;
-        offText?: string;
-        labelText?: string;
-        handleWidth?: string;
-        labelWidth?: string;
-        baseClass?: string;
-        wrapperClass?: string;
-        onInit?: any;
-        onSwitchChange?: any;
-    }
-}
-declare namespace PatientManagement.Common {
-    class BulkServiceAction {
-        protected keys: string[];
-        protected queue: string[];
-        protected queueIndex: number;
-        protected progressDialog: BasicProgressDialog;
-        protected pendingRequests: number;
-        protected completedRequests: number;
-        protected errorByKey: Q.Dictionary<Serenity.ServiceError>;
-        private successCount;
-        private errorCount;
-        done: () => void;
-        protected createProgressDialog(): void;
-        protected getConfirmationFormat(): string;
-        protected getConfirmationMessage(targetCount: any): string;
-        protected confirm(targetCount: any, action: any): void;
-        protected getNothingToProcessMessage(): string;
-        protected nothingToProcess(): void;
-        protected getParallelRequests(): number;
-        protected getBatchSize(): number;
-        protected startParallelExecution(): void;
-        protected serviceCallCleanup(): void;
-        protected executeForBatch(batch: string[]): void;
-        protected executeNextBatch(): void;
-        protected getAllHadErrorsFormat(): string;
-        protected showAllHadErrors(): void;
-        protected getSomeHadErrorsFormat(): string;
-        protected showSomeHadErrors(): void;
-        protected getAllSuccessFormat(): string;
-        protected showAllSuccess(): void;
-        protected showResults(): void;
-        execute(keys: string[]): void;
-        get_successCount(): any;
-        set_successCount(value: number): void;
-        get_errorCount(): any;
-        set_errorCount(value: number): void;
-    }
-}
-declare namespace PatientManagement.DialogUtils {
-    function pendingChangesConfirmation(element: JQuery, hasPendingChanges: () => boolean): void;
-}
-declare namespace PatientManagement.Common {
-    class EnumSelectFormatter implements Slick.Formatter {
-        constructor();
-        format(ctx: Slick.FormatterContext): string;
-        enumKey: string;
-        allowClear: boolean;
-        emptyItemText: string;
-    }
-}
-declare namespace PatientManagement.Common {
-    interface ExcelExportOptions {
-        grid: Serenity.DataGrid<any, any>;
-        service: string;
-        onViewSubmit: () => boolean;
-        title?: string;
-        hint?: string;
-        separator?: boolean;
-    }
-    namespace ExcelExportHelper {
-        function createToolButton(options: ExcelExportOptions): Serenity.ToolButton;
-    }
-}
-declare namespace PatientManagement.Common {
-    class GridEditorBase<TEntity> extends Serenity.EntityGrid<TEntity, any> implements Serenity.IGetEditValue, Serenity.ISetEditValue {
-        protected getIdProperty(): string;
-        protected nextId: number;
-        constructor(container: JQuery);
-        protected id(entity: TEntity): any;
-        protected getNextId(): string;
-        protected setNewId(entity: TEntity): void;
-        protected save(opt: Serenity.ServiceOptions<any>, callback: (r: Serenity.ServiceResponse) => void): void;
-        protected deleteEntity(id: number): boolean;
-        protected validateEntity(row: TEntity, id: number): boolean;
-        protected setEntities(items: TEntity[]): void;
-        protected getNewEntity(): TEntity;
-        protected getButtons(): Serenity.ToolButton[];
-        protected editItem(entityOrId: any): void;
-        getEditValue(property: any, target: any): void;
-        setEditValue(source: any, property: any): void;
-        value: TEntity[];
-        protected getGridCanLoad(): boolean;
-        protected usePager(): boolean;
-        protected getInitialTitle(): any;
-        protected createQuickSearchInput(): void;
-    }
-}
-declare namespace PatientManagement.Common {
-    class GridEditorDialog<TEntity> extends Serenity.EntityDialog<TEntity, any> {
-        protected getIdProperty(): string;
-        onSave: (options: Serenity.ServiceOptions<Serenity.SaveResponse>, callback: (response: Serenity.SaveResponse) => void) => void;
-        onDelete: (options: Serenity.ServiceOptions<Serenity.DeleteResponse>, callback: (response: Serenity.DeleteResponse) => void) => void;
-        destroy(): void;
-        protected updateInterface(): void;
-        protected saveHandler(options: Serenity.ServiceOptions<Serenity.SaveResponse>, callback: (response: Serenity.SaveResponse) => void): void;
-        protected deleteHandler(options: Serenity.ServiceOptions<Serenity.DeleteResponse>, callback: (response: Serenity.DeleteResponse) => void): void;
-    }
-}
-declare namespace PatientManagement.Common {
-    interface IcsExportOptions {
-        grid: Serenity.DataGrid<any, any>;
-        service: string;
-        onViewSubmit: () => boolean;
-        title?: string;
-        hint?: string;
-        separator?: boolean;
-    }
-    namespace IcsExportHelper {
-        function createToolButton(options: IcsExportOptions): Serenity.ToolButton;
-    }
-}
-declare namespace PatientManagement {
-    interface LKCodeDescOptions extends Serenity.LookupEditorOptions {
-        codeFieldName: string;
-        descrFieldName: string;
-    }
-}
-declare namespace PatientManagement {
-    class LKCodeDescr extends Serenity.LookupEditorBase<LKCodeDescOptions, any> {
-        constructor(container: JQuery, opt?: LKCodeDescOptions);
-        getSelect2Options(): Select2Options;
-        protected myFormatSelection(item: Serenity.Select2Item): string;
-        protected myFormatResult(item: Serenity.Select2Item): string;
-    }
-}
-declare namespace PatientManagement.Administration {
-    class RoleCheckEditor extends Serenity.CheckTreeEditor<Serenity.CheckTreeItem<any>, any> {
-        private searchText;
-        constructor(div: JQuery);
-        protected createToolbarExtensions(): void;
-        protected getButtons(): any[];
-        protected getTreeItems(): Serenity.CheckTreeItem<any>[];
-        protected onViewFilter(item: any): boolean;
-    }
-}
-declare namespace PatientManagement.Administration {
-    class UserRoleDialog extends Serenity.TemplatedDialog<UserRoleDialogOptions> {
-        private permissions;
-        constructor(opt: UserRoleDialogOptions);
-        protected getDialogOptions(): JQueryUI.DialogOptions;
-        protected getTemplate(): string;
-    }
-    interface UserRoleDialogOptions {
-        userID: number;
-        username: string;
-    }
-}
-declare namespace PatientManagement.Administration {
-    class PermissionCheckEditor extends Serenity.DataGrid<PermissionCheckItem, PermissionCheckEditorOptions> {
-        protected getIdProperty(): string;
-        private searchText;
-        private byParentKey;
-        private rolePermissions;
-        constructor(container: JQuery, opt: PermissionCheckEditorOptions);
-        private getItemGrantRevokeClass(item, grant);
-        private getItemEffectiveClass(item);
-        protected getColumns(): Slick.Column[];
-        setItems(items: PermissionCheckItem[]): void;
-        protected onViewSubmit(): boolean;
-        protected onViewFilter(item: PermissionCheckItem): boolean;
-        private matchContains(item);
-        private getDescendants(item, excludeGroups);
-        protected onClick(e: any, row: any, cell: any): void;
-        private getParentKey(key);
-        protected getButtons(): Serenity.ToolButton[];
-        protected createToolbarExtensions(): void;
-        private getSortedGroupAndPermissionKeys(titleByKey);
-        get_value(): UserPermissionRow[];
-        set_value(value: UserPermissionRow[]): void;
-        get_rolePermissions(): string[];
-        set_rolePermissions(value: string[]): void;
-    }
-    interface PermissionCheckEditorOptions {
-        showRevoke?: boolean;
-    }
-    interface PermissionCheckItem {
-        ParentKey?: string;
-        Key?: string;
-        Title?: string;
-        IsGroup?: boolean;
-        GrantRevoke?: boolean;
-    }
-}
-declare namespace PatientManagement.Administration {
-    class UserPermissionDialog extends Serenity.TemplatedDialog<UserPermissionDialogOptions> {
-        private permissions;
-        constructor(opt: UserPermissionDialogOptions);
-        protected getDialogOptions(): JQueryUI.DialogOptions;
-        protected getTemplate(): string;
-    }
-    interface UserPermissionDialogOptions {
-        userID?: number;
-        username?: string;
-    }
-}
-declare namespace PatientManagement.Administration {
-    class UserDialog extends Serenity.EntityDialog<UserRow, any> {
-        protected getFormKey(): string;
-        protected getIdProperty(): string;
-        protected getIsActiveProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getNameProperty(): string;
-        protected getService(): string;
-        protected form: UserForm;
-        constructor();
-        protected getPropertyItems(): any;
-        protected getToolbarButtons(): Serenity.ToolButton[];
-        protected updateInterface(): void;
-        protected afterLoadEntity(): void;
-    }
-}
-declare namespace PatientManagement.Administration {
-    class UserGrid extends Serenity.EntityGrid<UserRow, any> {
-        protected getColumnsKey(): string;
-        protected getDialogType(): typeof UserDialog;
-        protected getIdProperty(): string;
-        protected getIsActiveProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getService(): string;
-        constructor(container: JQuery);
-        protected getDefaultSortBy(): UserRow.Fields[];
-    }
-}
-declare namespace PatientManagement.Authorization {
-    let userDefinition: ScriptUserDefinition;
-    function hasPermission(permissionKey: string): boolean;
-}
-declare namespace PatientManagement.Administration {
-    class TranslationGrid extends Serenity.EntityGrid<TranslationItem, any> {
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getService(): string;
-        private hasChanges;
-        private searchText;
-        private sourceLanguage;
-        private targetLanguage;
-        private targetLanguageKey;
-        constructor(container: JQuery);
-        protected onClick(e: JQueryEventObject, row: number, cell: number): any;
-        protected getColumns(): Slick.Column[];
-        protected createToolbarExtensions(): void;
-        protected saveChanges(language: string): PromiseLike<any>;
-        protected onViewSubmit(): boolean;
-        protected getButtons(): Serenity.ToolButton[];
-        protected createQuickSearchInput(): void;
-        protected onViewFilter(item: TranslationItem): boolean;
-        protected usePager(): boolean;
-    }
-}
-declare namespace PatientManagement.Administration {
-    class TenantDialog extends Serenity.EntityDialog<TenantRow, any> {
-        protected getFormKey(): string;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getNameProperty(): string;
-        protected getService(): string;
-        protected form: TenantForm;
-    }
-}
-declare namespace PatientManagement.Administration {
-    class TenantGrid extends Serenity.EntityGrid<TenantRow, any> {
-        protected getColumnsKey(): string;
-        protected getDialogType(): typeof TenantDialog;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getService(): string;
-        protected getIsActiveProperty(): string;
-        constructor(container: JQuery);
-    }
-}
-declare namespace PatientManagement.Administration {
-    class SubscriptionsDialog extends Serenity.EntityDialog<SubscriptionsRow, any> {
-        protected getFormKey(): string;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getNameProperty(): string;
-        protected getService(): string;
-        protected form: SubscriptionsForm;
-        constructor();
-    }
-}
-declare namespace PatientManagement.Administration {
-    class SubscriptionsGrid extends Serenity.EntityGrid<SubscriptionsRow, any> {
-        protected getColumnsKey(): string;
-        protected getDialogType(): typeof SubscriptionsDialog;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getService(): string;
-        protected getIsActiveProperty(): string;
-        constructor(container: JQuery);
-        protected getColumns(): Slick.Column[];
-        protected getItemCssClass(item: SubscriptionsRow, index: number): string;
-        protected onClick(e: JQueryEventObject, row: number, cell: number): void;
-    }
-}
-declare var Vue: any;
-declare namespace PatientManagement.Administration {
-    class SergenPanel extends Serenity.Widget<any> {
-        constructor(container: JQuery);
-    }
-}
-declare namespace PatientManagement.Administration {
-    class SentEmailsDialog extends Serenity.EntityDialog<SentEmailsRow, any> {
-        protected getFormKey(): string;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getNameProperty(): string;
-        protected getService(): string;
-        protected form: SentEmailsForm;
-        loadEntity(entity: SentEmailsRow): void;
-        sendPredefinedEmail: (visitId: any) => void;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class SentEmailsToEmailFormatter implements Slick.Formatter {
-        format(ctx: Slick.FormatterContext): string;
-    }
-    class SentEmailsFromEmailFormatter implements Slick.Formatter {
-        format(ctx: Slick.FormatterContext): string;
-    }
-}
-declare namespace PatientManagement.Administration {
-    class SentEmailsGrid extends Serenity.EntityGrid<SentEmailsRow, any> {
-        protected getColumnsKey(): string;
-        protected getDialogType(): typeof SentEmailsDialog;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getService(): string;
-        constructor(container: JQuery);
-        protected getColumns(): Slick.Column[];
-        protected onClick(e: JQueryEventObject, row: number, cell: number): void;
-    }
-}
-declare namespace PatientManagement.Administration {
-    class ViewEmailDialog extends Serenity.TemplatedDialog<any> {
-        private email;
-        private emailId;
-        private toEmail;
-        private insertedDate;
-        constructor(entityId: number, toEmail: string, insertedDate: string);
-        protected onDialogOpen(): void;
-        protected getTemplate(): string;
-    }
-}
-declare namespace PatientManagement.Administration {
-    class RolePermissionDialog extends Serenity.TemplatedDialog<RolePermissionDialogOptions> {
-        private permissions;
-        constructor(opt: RolePermissionDialogOptions);
-        protected getDialogOptions(): JQueryUI.DialogOptions;
-        protected getTemplate(): string;
-    }
-    interface RolePermissionDialogOptions {
-        roleID?: number;
-        title?: string;
-    }
-}
-declare namespace PatientManagement.Administration {
-    class RoleDialog extends Serenity.EntityDialog<RoleRow, any> {
-        protected getFormKey(): string;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getNameProperty(): string;
-        protected getService(): string;
-        protected form: RoleForm;
-        protected getToolbarButtons(): Serenity.ToolButton[];
-        protected updateInterface(): void;
-    }
-}
-declare namespace PatientManagement.Administration {
-    class RoleGrid extends Serenity.EntityGrid<RoleRow, any> {
-        protected getColumnsKey(): string;
-        protected getDialogType(): typeof RoleDialog;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getService(): string;
-        protected getIsActiveProperty(): string;
-        constructor(container: JQuery);
-        protected getDefaultSortBy(): RoleRow.Fields[];
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class RoleListFormatter implements Slick.Formatter {
-        format(ctx: Slick.FormatterContext): string;
-    }
-}
-declare namespace PatientManagement.Administration {
-    class PaymentsDetailsDialog extends Serenity.EntityDialog<PaymentsDetailsRow, any> {
-        protected getFormKey(): string;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getNameProperty(): string;
-        protected getService(): string;
-        protected form: PaymentsDetailsForm;
-        onSaveSuccess(response: Serenity.SaveResponse): void;
-    }
-}
-declare namespace PatientManagement.Administration {
-    class PaymentsDetailsGrid extends Serenity.EntityGrid<PaymentsDetailsRow, any> {
-        protected getColumnsKey(): string;
-        protected getDialogType(): typeof PaymentsDetailsDialog;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getService(): string;
-        constructor(container: JQuery);
-    }
-}
-declare namespace PatientManagement.Administration {
-    class PaymentsDialog extends Serenity.EntityDialog<PaymentsRow, any> {
-        protected getFormKey(): string;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getNameProperty(): string;
-        protected getService(): string;
-        protected form: PaymentsForm;
-        constructor();
-        loadEntity(entity: PaymentsRow): void;
-        protected SetInnerFields(): void;
-        protected CheckIfFieldsAreEmpty(): void;
-        private setPaymentDetails(details);
-        private setSubscriptionDetails(details);
-    }
-}
-declare namespace PatientManagement.Administration {
-    class PaymentsGrid extends Serenity.EntityGrid<PaymentsRow, any> {
-        protected getColumnsKey(): string;
-        protected getDialogType(): typeof PaymentsDialog;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getService(): string;
-        constructor(container: JQuery);
-        protected getItemCssClass(item: PaymentsRow, index: number): string;
-        protected getColumns(): Slick.Column[];
-        protected getButtons(): Serenity.ToolButton[];
-        protected onClick(e: JQueryEventObject, row: number, cell: number): void;
-    }
-}
-declare namespace PatientManagement.Administration {
-    class PaymentOptionsDialog extends Serenity.EntityDialog<PaymentOptionsRow, any> {
-        protected getFormKey(): string;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getNameProperty(): string;
-        protected getService(): string;
-        protected form: PaymentOptionsForm;
-    }
-}
-declare namespace PatientManagement.Administration {
-    class PaymentOptionsGrid extends Serenity.EntityGrid<PaymentOptionsRow, any> {
-        protected getColumnsKey(): string;
-        protected getDialogType(): typeof PaymentOptionsDialog;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getService(): string;
-        constructor(container: JQuery);
-    }
-}
-declare namespace PatientManagement.Administration {
-    class OffersDialog extends Serenity.EntityDialog<OffersRow, any> {
-        protected getFormKey(): string;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getNameProperty(): string;
-        protected getService(): string;
-        protected form: OffersForm;
-    }
-}
-declare namespace PatientManagement.Administration {
-    class OffersGrid extends Serenity.EntityGrid<OffersRow, any> {
-        protected getColumnsKey(): string;
-        protected getDialogType(): typeof OffersDialog;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getService(): string;
-        protected getIsActiveProperty(): string;
-        constructor(container: JQuery);
-    }
-}
-declare namespace PatientManagement.Administration {
-    class LanguageDialog extends Serenity.EntityDialog<LanguageRow, any> {
-        protected getFormKey(): string;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getNameProperty(): string;
-        protected getService(): string;
-        protected form: LanguageForm;
-    }
-}
-declare namespace PatientManagement.Administration {
-    class LanguageGrid extends Serenity.EntityGrid<LanguageRow, any> {
-        protected getColumnsKey(): string;
-        protected getDialogType(): typeof LanguageDialog;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getService(): string;
-        constructor(container: JQuery);
-        protected getDefaultSortBy(): LanguageRow.Fields[];
-    }
-}
-declare namespace PatientManagement.Administration {
-    class ExternalAccessDialog extends Serenity.EntityDialog<ExternalAccessRow, any> {
-        protected getFormKey(): string;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getNameProperty(): string;
-        protected getService(): string;
-        protected form: ExternalAccessForm;
-    }
-}
-declare namespace PatientManagement.Administration {
-    class ExternalAccessGrid extends Serenity.EntityGrid<ExternalAccessRow, any> {
-        protected getColumnsKey(): string;
-        protected getDialogType(): typeof ExternalAccessDialog;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getService(): string;
-        constructor(container: JQuery);
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class ExternalAccessUrlFormatter implements Slick.Formatter {
-        format(ctx: Slick.FormatterContext): string;
-    }
-}
-declare namespace PatientManagement.Administration {
-    class CurrenciesDialog extends Serenity.EntityDialog<CurrenciesRow, any> {
-        protected getFormKey(): string;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getNameProperty(): string;
-        protected getService(): string;
-        protected form: CurrenciesForm;
-    }
-}
-declare namespace PatientManagement.Administration {
-    class CurrenciesGrid extends Serenity.EntityGrid<CurrenciesRow, any> {
-        protected getColumnsKey(): string;
-        protected getDialogType(): typeof CurrenciesDialog;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getService(): string;
-        constructor(container: JQuery);
-        protected getButtons(): Serenity.ToolButton[];
-    }
-}
-declare namespace PatientManagement.Administration {
-    class CouponsDialog extends Serenity.EntityDialog<CouponsRow, any> {
-        protected getFormKey(): string;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getNameProperty(): string;
-        protected getService(): string;
-        protected form: CouponsForm;
-    }
-}
-declare namespace PatientManagement.Administration {
-    class CouponsGrid extends Serenity.EntityGrid<CouponsRow, any> {
-        protected getColumnsKey(): string;
-        protected getDialogType(): typeof CouponsDialog;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getService(): string;
-        protected getIsActiveProperty(): string;
-        constructor(container: JQuery);
-    }
-}
+﻿/// <reference types="jquery" />
+/// <reference types="jqueryui" />
 declare namespace PatientManagement.Administration {
 }
 declare namespace PatientManagement.Administration {
@@ -3897,6 +2554,7 @@ declare namespace PatientManagement.PatientManagement {
         VisitTypeId: Serenity.LookupEditor;
         AssignedUserId: Serenity.LookupEditor;
         CabinetId: Serenity.LookupEditor;
+        FreeForReservation: BsSwitchEditor;
         StartDate: Serenity.DateTimeEditor;
         EndDate: Serenity.DateTimeEditor;
         Description: Serenity.TextAreaEditor;
@@ -3918,6 +2576,7 @@ declare namespace PatientManagement.PatientManagement {
         CabinetIsActive?: number;
         AssignedUserId?: number;
         AssignedUserName?: string;
+        FreeForReservation?: boolean;
         Description?: string;
         StartDate?: string;
         EndDate?: string;
@@ -3949,6 +2608,7 @@ declare namespace PatientManagement.PatientManagement {
             CabinetIsActive = "CabinetIsActive",
             AssignedUserId = "AssignedUserId",
             AssignedUserName = "AssignedUserName",
+            FreeForReservation = "FreeForReservation",
             Description = "Description",
             StartDate = "StartDate",
             EndDate = "EndDate",
@@ -4084,5 +2744,1349 @@ declare namespace PatientManagement {
         TenantId?: number;
         RolesList?: string[];
         PaidPeriod?: string;
+    }
+}
+declare namespace PatientManagement.Administration {
+    class CouponsDialog extends Serenity.EntityDialog<CouponsRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getService(): string;
+        protected form: CouponsForm;
+    }
+}
+declare namespace PatientManagement.Administration {
+    class CouponsGrid extends Serenity.EntityGrid<CouponsRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof CouponsDialog;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        protected getIsActiveProperty(): string;
+        constructor(container: JQuery);
+    }
+}
+declare namespace PatientManagement.Administration {
+    class CurrenciesDialog extends Serenity.EntityDialog<CurrenciesRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getService(): string;
+        protected form: CurrenciesForm;
+    }
+}
+declare namespace PatientManagement.Administration {
+    class CurrenciesGrid extends Serenity.EntityGrid<CurrenciesRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof CurrenciesDialog;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        constructor(container: JQuery);
+        protected getButtons(): Serenity.ToolButton[];
+    }
+}
+declare namespace PatientManagement.Administration {
+    class ExternalAccessDialog extends Serenity.EntityDialog<ExternalAccessRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getService(): string;
+        protected form: ExternalAccessForm;
+    }
+}
+declare namespace PatientManagement.Administration {
+    class ExternalAccessGrid extends Serenity.EntityGrid<ExternalAccessRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof ExternalAccessDialog;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        constructor(container: JQuery);
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class ExternalAccessUrlFormatter implements Slick.Formatter {
+        format(ctx: Slick.FormatterContext): string;
+    }
+}
+declare namespace PatientManagement.Administration {
+    class LanguageDialog extends Serenity.EntityDialog<LanguageRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getService(): string;
+        protected form: LanguageForm;
+    }
+}
+declare namespace PatientManagement.Administration {
+    class LanguageGrid extends Serenity.EntityGrid<LanguageRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof LanguageDialog;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        constructor(container: JQuery);
+        protected getDefaultSortBy(): LanguageRow.Fields[];
+    }
+}
+declare namespace PatientManagement.Administration {
+    class OffersDialog extends Serenity.EntityDialog<OffersRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getService(): string;
+        protected form: OffersForm;
+    }
+}
+declare namespace PatientManagement.Administration {
+    class OffersGrid extends Serenity.EntityGrid<OffersRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof OffersDialog;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        protected getIsActiveProperty(): string;
+        constructor(container: JQuery);
+    }
+}
+declare namespace PatientManagement.Administration {
+    class PaymentOptionsDialog extends Serenity.EntityDialog<PaymentOptionsRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getService(): string;
+        protected form: PaymentOptionsForm;
+    }
+}
+declare namespace PatientManagement.Administration {
+    class PaymentOptionsGrid extends Serenity.EntityGrid<PaymentOptionsRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof PaymentOptionsDialog;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        constructor(container: JQuery);
+    }
+}
+declare namespace PatientManagement.Administration {
+    class PaymentsDialog extends Serenity.EntityDialog<PaymentsRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getService(): string;
+        protected form: PaymentsForm;
+        constructor();
+        loadEntity(entity: PaymentsRow): void;
+        protected SetInnerFields(): void;
+        protected CheckIfFieldsAreEmpty(): void;
+        private setPaymentDetails(details);
+        private setSubscriptionDetails(details);
+    }
+}
+declare namespace PatientManagement.Administration {
+    class PaymentsGrid extends Serenity.EntityGrid<PaymentsRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof PaymentsDialog;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        constructor(container: JQuery);
+        protected getItemCssClass(item: PaymentsRow, index: number): string;
+        protected getColumns(): Slick.Column[];
+        protected getButtons(): Serenity.ToolButton[];
+        protected onClick(e: JQueryEventObject, row: number, cell: number): void;
+    }
+}
+declare namespace PatientManagement.Administration {
+    class PaymentsDetailsDialog extends Serenity.EntityDialog<PaymentsDetailsRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getService(): string;
+        protected form: PaymentsDetailsForm;
+        onSaveSuccess(response: Serenity.SaveResponse): void;
+    }
+}
+declare namespace PatientManagement.Administration {
+    class PaymentsDetailsGrid extends Serenity.EntityGrid<PaymentsDetailsRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof PaymentsDetailsDialog;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        constructor(container: JQuery);
+    }
+}
+declare namespace PatientManagement.Administration {
+    class RoleDialog extends Serenity.EntityDialog<RoleRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getService(): string;
+        protected form: RoleForm;
+        protected getToolbarButtons(): Serenity.ToolButton[];
+        protected updateInterface(): void;
+    }
+}
+declare namespace PatientManagement.Administration {
+    class RoleGrid extends Serenity.EntityGrid<RoleRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof RoleDialog;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        protected getIsActiveProperty(): string;
+        constructor(container: JQuery);
+        protected getDefaultSortBy(): RoleRow.Fields[];
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class RoleListFormatter implements Slick.Formatter {
+        format(ctx: Slick.FormatterContext): string;
+    }
+}
+declare namespace PatientManagement.Administration {
+    class RolePermissionDialog extends Serenity.TemplatedDialog<RolePermissionDialogOptions> {
+        private permissions;
+        constructor(opt: RolePermissionDialogOptions);
+        protected getDialogOptions(): JQueryUI.DialogOptions;
+        protected getTemplate(): string;
+    }
+    interface RolePermissionDialogOptions {
+        roleID?: number;
+        title?: string;
+    }
+}
+declare namespace PatientManagement.Administration {
+    class SentEmailsDialog extends Serenity.EntityDialog<SentEmailsRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getService(): string;
+        protected form: SentEmailsForm;
+        loadEntity(entity: SentEmailsRow): void;
+        sendPredefinedEmail: (visitId: any) => void;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class SentEmailsToEmailFormatter implements Slick.Formatter {
+        format(ctx: Slick.FormatterContext): string;
+    }
+    class SentEmailsFromEmailFormatter implements Slick.Formatter {
+        format(ctx: Slick.FormatterContext): string;
+    }
+}
+declare namespace PatientManagement.Administration {
+    class SentEmailsGrid extends Serenity.EntityGrid<SentEmailsRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof SentEmailsDialog;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        constructor(container: JQuery);
+        protected getColumns(): Slick.Column[];
+        protected onClick(e: JQueryEventObject, row: number, cell: number): void;
+    }
+}
+declare namespace PatientManagement.Administration {
+    class ViewEmailDialog extends Serenity.TemplatedDialog<any> {
+        private email;
+        private emailId;
+        private toEmail;
+        private insertedDate;
+        constructor(entityId: number, toEmail: string, insertedDate: string);
+        protected onDialogOpen(): void;
+        protected getTemplate(): string;
+    }
+}
+declare var Vue: any;
+declare namespace PatientManagement.Administration {
+    class SergenPanel extends Serenity.Widget<any> {
+        constructor(container: JQuery);
+    }
+}
+declare namespace PatientManagement.Administration {
+    class SubscriptionsDialog extends Serenity.EntityDialog<SubscriptionsRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getService(): string;
+        protected form: SubscriptionsForm;
+        constructor();
+    }
+}
+declare namespace PatientManagement.Administration {
+    class SubscriptionsGrid extends Serenity.EntityGrid<SubscriptionsRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof SubscriptionsDialog;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        protected getIsActiveProperty(): string;
+        constructor(container: JQuery);
+        protected getColumns(): Slick.Column[];
+        protected getItemCssClass(item: SubscriptionsRow, index: number): string;
+        protected onClick(e: JQueryEventObject, row: number, cell: number): void;
+    }
+}
+declare namespace PatientManagement.Administration {
+    class TenantDialog extends Serenity.EntityDialog<TenantRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getService(): string;
+        protected form: TenantForm;
+    }
+}
+declare namespace PatientManagement.Administration {
+    class TenantGrid extends Serenity.EntityGrid<TenantRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof TenantDialog;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        protected getIsActiveProperty(): string;
+        constructor(container: JQuery);
+    }
+}
+declare namespace PatientManagement.Administration {
+    class TranslationGrid extends Serenity.EntityGrid<TranslationItem, any> {
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        private hasChanges;
+        private searchText;
+        private sourceLanguage;
+        private targetLanguage;
+        private targetLanguageKey;
+        constructor(container: JQuery);
+        protected onClick(e: JQueryEventObject, row: number, cell: number): any;
+        protected getColumns(): Slick.Column[];
+        protected createToolbarExtensions(): void;
+        protected saveChanges(language: string): PromiseLike<any>;
+        protected onViewSubmit(): boolean;
+        protected getButtons(): Serenity.ToolButton[];
+        protected createQuickSearchInput(): void;
+        protected onViewFilter(item: TranslationItem): boolean;
+        protected usePager(): boolean;
+    }
+}
+declare namespace PatientManagement.Administration {
+    class UserDialog extends Serenity.EntityDialog<UserRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getIsActiveProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getService(): string;
+        protected form: UserForm;
+        constructor();
+        protected getPropertyItems(): any;
+        protected getToolbarButtons(): Serenity.ToolButton[];
+        protected updateInterface(): void;
+        protected afterLoadEntity(): void;
+    }
+}
+declare namespace PatientManagement.Administration {
+    class UserGrid extends Serenity.EntityGrid<UserRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof UserDialog;
+        protected getIdProperty(): string;
+        protected getIsActiveProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        constructor(container: JQuery);
+        protected getDefaultSortBy(): UserRow.Fields[];
+    }
+}
+declare namespace PatientManagement.Authorization {
+    let userDefinition: ScriptUserDefinition;
+    function hasPermission(permissionKey: string): boolean;
+}
+declare namespace PatientManagement.Administration {
+    class PermissionCheckEditor extends Serenity.DataGrid<PermissionCheckItem, PermissionCheckEditorOptions> {
+        protected getIdProperty(): string;
+        private searchText;
+        private byParentKey;
+        private rolePermissions;
+        constructor(container: JQuery, opt: PermissionCheckEditorOptions);
+        private getItemGrantRevokeClass(item, grant);
+        private getItemEffectiveClass(item);
+        protected getColumns(): Slick.Column[];
+        setItems(items: PermissionCheckItem[]): void;
+        protected onViewSubmit(): boolean;
+        protected onViewFilter(item: PermissionCheckItem): boolean;
+        private matchContains(item);
+        private getDescendants(item, excludeGroups);
+        protected onClick(e: any, row: any, cell: any): void;
+        private getParentKey(key);
+        protected getButtons(): Serenity.ToolButton[];
+        protected createToolbarExtensions(): void;
+        private getSortedGroupAndPermissionKeys(titleByKey);
+        get_value(): UserPermissionRow[];
+        set_value(value: UserPermissionRow[]): void;
+        get_rolePermissions(): string[];
+        set_rolePermissions(value: string[]): void;
+    }
+    interface PermissionCheckEditorOptions {
+        showRevoke?: boolean;
+    }
+    interface PermissionCheckItem {
+        ParentKey?: string;
+        Key?: string;
+        Title?: string;
+        IsGroup?: boolean;
+        GrantRevoke?: boolean;
+    }
+}
+declare namespace PatientManagement.Administration {
+    class UserPermissionDialog extends Serenity.TemplatedDialog<UserPermissionDialogOptions> {
+        private permissions;
+        constructor(opt: UserPermissionDialogOptions);
+        protected getDialogOptions(): JQueryUI.DialogOptions;
+        protected getTemplate(): string;
+    }
+    interface UserPermissionDialogOptions {
+        userID?: number;
+        username?: string;
+    }
+}
+declare namespace PatientManagement.Administration {
+    class RoleCheckEditor extends Serenity.CheckTreeEditor<Serenity.CheckTreeItem<any>, any> {
+        private searchText;
+        constructor(div: JQuery);
+        protected createToolbarExtensions(): void;
+        protected getButtons(): any[];
+        protected getTreeItems(): Serenity.CheckTreeItem<any>[];
+        protected onViewFilter(item: any): boolean;
+    }
+}
+declare namespace PatientManagement.Administration {
+    class UserRoleDialog extends Serenity.TemplatedDialog<UserRoleDialogOptions> {
+        private permissions;
+        constructor(opt: UserRoleDialogOptions);
+        protected getDialogOptions(): JQueryUI.DialogOptions;
+        protected getTemplate(): string;
+    }
+    interface UserRoleDialogOptions {
+        userID: number;
+        username: string;
+    }
+}
+declare namespace PatientManagement.LanguageList {
+    function getValue(): string[][];
+}
+declare namespace PatientManagement.ScriptInitialization {
+}
+declare namespace PatientManagement {
+    class AddressAutocomplete extends Serenity.Widget<any> implements Serenity.ISetEditValue {
+        constructor(element: JQuery);
+        setEditValue(source: any, property: Serenity.PropertyItem): void;
+    }
+}
+declare namespace PatientManagement {
+    class BasicProgressDialog extends Serenity.TemplatedDialog<any> {
+        constructor();
+        cancelled: boolean;
+        max: number;
+        value: number;
+        title: string;
+        cancelTitle: string;
+        getDialogOptions(): JQueryUI.DialogOptions;
+        initDialog(): void;
+        getTemplate(): string;
+    }
+}
+declare namespace PatientManagement {
+    class BsSwitchEditor extends Serenity.Widget<BootstrapSwitchOptions> implements Serenity.IGetEditValue, Serenity.ISetEditValue {
+        constructor(element: JQuery, opt: BootstrapSwitchOptions);
+        setEditValue(source: any, property: Serenity.PropertyItem): void;
+        getState(): boolean;
+        getEditValue(property: Serenity.PropertyItem, target: any): void;
+    }
+    interface BootstrapSwitchOptions {
+        state?: boolean;
+        size?: string;
+        animate?: boolean;
+        disabled?: boolean;
+        readonly?: boolean;
+        indeterminate?: boolean;
+        invers?: boolean;
+        radioAllOff?: boolean;
+        onColor?: string;
+        offColor?: string;
+        onText?: string;
+        offText?: string;
+        labelText?: string;
+        handleWidth?: string;
+        labelWidth?: string;
+        baseClass?: string;
+        wrapperClass?: string;
+        onInit?: any;
+        onSwitchChange?: any;
+    }
+}
+declare namespace PatientManagement.Common {
+    class BulkServiceAction {
+        protected keys: string[];
+        protected queue: string[];
+        protected queueIndex: number;
+        protected progressDialog: BasicProgressDialog;
+        protected pendingRequests: number;
+        protected completedRequests: number;
+        protected errorByKey: Q.Dictionary<Serenity.ServiceError>;
+        private successCount;
+        private errorCount;
+        done: () => void;
+        protected createProgressDialog(): void;
+        protected getConfirmationFormat(): string;
+        protected getConfirmationMessage(targetCount: any): string;
+        protected confirm(targetCount: any, action: any): void;
+        protected getNothingToProcessMessage(): string;
+        protected nothingToProcess(): void;
+        protected getParallelRequests(): number;
+        protected getBatchSize(): number;
+        protected startParallelExecution(): void;
+        protected serviceCallCleanup(): void;
+        protected executeForBatch(batch: string[]): void;
+        protected executeNextBatch(): void;
+        protected getAllHadErrorsFormat(): string;
+        protected showAllHadErrors(): void;
+        protected getSomeHadErrorsFormat(): string;
+        protected showSomeHadErrors(): void;
+        protected getAllSuccessFormat(): string;
+        protected showAllSuccess(): void;
+        protected showResults(): void;
+        execute(keys: string[]): void;
+        get_successCount(): any;
+        set_successCount(value: number): void;
+        get_errorCount(): any;
+        set_errorCount(value: number): void;
+    }
+}
+declare namespace PatientManagement.DialogUtils {
+    function pendingChangesConfirmation(element: JQuery, hasPendingChanges: () => boolean): void;
+}
+declare namespace PatientManagement.Common {
+    class EnumSelectFormatter implements Slick.Formatter {
+        constructor();
+        format(ctx: Slick.FormatterContext): string;
+        enumKey: string;
+        allowClear: boolean;
+        emptyItemText: string;
+    }
+}
+declare namespace PatientManagement.Common {
+    interface ExcelExportOptions {
+        grid: Serenity.DataGrid<any, any>;
+        service: string;
+        onViewSubmit: () => boolean;
+        title?: string;
+        hint?: string;
+        separator?: boolean;
+    }
+    namespace ExcelExportHelper {
+        function createToolButton(options: ExcelExportOptions): Serenity.ToolButton;
+    }
+}
+declare namespace PatientManagement.Common {
+    class GridEditorBase<TEntity> extends Serenity.EntityGrid<TEntity, any> implements Serenity.IGetEditValue, Serenity.ISetEditValue {
+        protected getIdProperty(): string;
+        protected nextId: number;
+        constructor(container: JQuery);
+        protected id(entity: TEntity): any;
+        protected getNextId(): string;
+        protected setNewId(entity: TEntity): void;
+        protected save(opt: Serenity.ServiceOptions<any>, callback: (r: Serenity.ServiceResponse) => void): void;
+        protected deleteEntity(id: number): boolean;
+        protected validateEntity(row: TEntity, id: number): boolean;
+        protected setEntities(items: TEntity[]): void;
+        protected getNewEntity(): TEntity;
+        protected getButtons(): Serenity.ToolButton[];
+        protected editItem(entityOrId: any): void;
+        getEditValue(property: any, target: any): void;
+        setEditValue(source: any, property: any): void;
+        value: TEntity[];
+        protected getGridCanLoad(): boolean;
+        protected usePager(): boolean;
+        protected getInitialTitle(): any;
+        protected createQuickSearchInput(): void;
+    }
+}
+declare namespace PatientManagement.Common {
+    class GridEditorDialog<TEntity> extends Serenity.EntityDialog<TEntity, any> {
+        protected getIdProperty(): string;
+        onSave: (options: Serenity.ServiceOptions<Serenity.SaveResponse>, callback: (response: Serenity.SaveResponse) => void) => void;
+        onDelete: (options: Serenity.ServiceOptions<Serenity.DeleteResponse>, callback: (response: Serenity.DeleteResponse) => void) => void;
+        destroy(): void;
+        protected updateInterface(): void;
+        protected saveHandler(options: Serenity.ServiceOptions<Serenity.SaveResponse>, callback: (response: Serenity.SaveResponse) => void): void;
+        protected deleteHandler(options: Serenity.ServiceOptions<Serenity.DeleteResponse>, callback: (response: Serenity.DeleteResponse) => void): void;
+    }
+}
+declare namespace PatientManagement.Common {
+    interface IcsExportOptions {
+        grid: Serenity.DataGrid<any, any>;
+        service: string;
+        onViewSubmit: () => boolean;
+        title?: string;
+        hint?: string;
+        separator?: boolean;
+    }
+    namespace IcsExportHelper {
+        function createToolButton(options: IcsExportOptions): Serenity.ToolButton;
+    }
+}
+declare namespace PatientManagement {
+    interface LKCodeDescOptions extends Serenity.LookupEditorOptions {
+        codeFieldName: string;
+        descrFieldName: string;
+    }
+}
+declare namespace PatientManagement {
+    class LKCodeDescr extends Serenity.LookupEditorBase<LKCodeDescOptions, any> {
+        constructor(container: JQuery, opt?: LKCodeDescOptions);
+        getSelect2Options(): Select2Options;
+        protected myFormatSelection(item: Serenity.Select2Item): string;
+        protected myFormatResult(item: Serenity.Select2Item): string;
+    }
+}
+declare namespace PatientManagement.Common {
+    class LanguageSelection extends Serenity.Widget<any> {
+        constructor(select: JQuery, currentLanguage: string);
+    }
+}
+declare namespace PatientManagement.Common {
+    class RecieveNotificationToggle extends Serenity.Widget<any> {
+        constructor(input: JQuery, opt: BootstrapSwitchOptions);
+    }
+}
+declare namespace PatientManagement.Common {
+    class SidebarSearch extends Serenity.Widget<any> {
+        private menuUL;
+        constructor(input: JQuery, menuUL: JQuery);
+        protected updateMatchFlags(text: string): void;
+    }
+}
+declare namespace PatientManagement.Common {
+    class ThemeSelection extends Serenity.Widget<any> {
+        constructor(select: JQuery);
+        protected getCurrentTheme(): string;
+    }
+}
+declare var jsPDF: any;
+declare namespace PatientManagement.Common {
+    interface PdfExportOptions {
+        grid: Serenity.DataGrid<any, any>;
+        onViewSubmit: () => boolean;
+        title?: string;
+        hint?: string;
+        separator?: boolean;
+        reportTitle?: string;
+        titleTop?: number;
+        titleFontSize?: number;
+        fileName?: string;
+        pageNumbers?: boolean;
+        columnTitles?: {
+            [key: string]: string;
+        };
+        tableOptions?: jsPDF.AutoTableOptions;
+        output?: string;
+        autoPrint?: boolean;
+    }
+    namespace PdfExportHelper {
+        function exportToPdf(options: PdfExportOptions): void;
+        function createToolButton(options: PdfExportOptions): Serenity.ToolButton;
+    }
+}
+declare var jsPDF: any;
+declare namespace PatientManagement.Common {
+    class ReportDialog extends Serenity.TemplatedDialog<ReportDialogOptions> {
+        private report;
+        private propertyGrid;
+        constructor(options: ReportDialogOptions);
+        protected getDialogButtons(): any;
+        protected createPropertyGrid(): void;
+        protected loadReport(reportKey: string): void;
+        protected updateInterface(): void;
+        executeReport(target: string, ext: string, download: boolean): void;
+        getToolbarButtons(): {
+            title: string;
+            cssClass: string;
+            onClick: () => void;
+        }[];
+    }
+    interface ReportDialogOptions {
+        reportKey: string;
+    }
+}
+declare namespace PatientManagement.Common {
+    interface ReportExecuteOptions {
+        reportKey: string;
+        download?: boolean;
+        extension?: 'pdf' | 'htm' | 'html' | 'xlsx' | 'docx';
+        getParams?: () => any;
+        params?: {
+            [key: string]: any;
+        };
+        target?: string;
+    }
+    interface ReportButtonOptions extends ReportExecuteOptions {
+        title?: string;
+        cssClass?: string;
+        icon?: string;
+    }
+    namespace ReportHelper {
+        function createToolButton(options: ReportButtonOptions): Serenity.ToolButton;
+        function execute(options: ReportExecuteOptions): void;
+    }
+}
+declare var jsPDF: any;
+declare namespace PatientManagement.Common {
+    class ReportPage extends Serenity.Widget<any> {
+        private reportKey;
+        private propertyItems;
+        private propertyGrid;
+        constructor(element: JQuery);
+        protected updateMatchFlags(text: string): void;
+        protected categoryClick(e: any): void;
+        protected reportLinkClick(e: any): void;
+    }
+}
+declare namespace PatientManagement.Common {
+    class UserPreferenceStorage implements Serenity.SettingStorage {
+        getItem(key: string): string;
+        setItem(key: string, data: string): void;
+    }
+}
+declare namespace PatientManagement.Membership {
+    class LoginPanel extends Serenity.PropertyPanel<LoginRequest, any> {
+        protected getFormKey(): string;
+        private form;
+        constructor(container: JQuery);
+    }
+}
+declare namespace PatientManagement.Membership {
+    class ChangePasswordPanel extends Serenity.PropertyPanel<ChangePasswordRequest, any> {
+        protected getFormKey(): string;
+        private form;
+        constructor(container: JQuery);
+    }
+}
+declare namespace PatientManagement.Membership {
+    class ForgotPasswordPanel extends Serenity.PropertyPanel<ForgotPasswordRequest, any> {
+        protected getFormKey(): string;
+        private form;
+        constructor(container: JQuery);
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class VisitsGrid extends Serenity.EntityGrid<VisitsRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof VisitsDialog;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        constructor(container: JQuery);
+        protected getButtons(): Serenity.ToolButton[];
+        protected getQuickFilters(): Serenity.QuickFilter<Serenity.Widget<any>, any>[];
+    }
+}
+declare namespace PatientManagement.Membership {
+    import VisitsGrid = PatientManagement.VisitsGrid;
+    class AddedVisitsFromUserPanel extends VisitsGrid {
+        private visitsGrid;
+        constructor(container: JQuery, userId: number);
+        protected getColumns(): Slick.Column[];
+        protected getInitialTitle(): any;
+        protected getGridCanLoad(): boolean;
+        private _insertUserId;
+        insertUserId: number;
+    }
+}
+declare namespace PatientManagement.Membership {
+    class EditTenantPanel extends Serenity.PropertyPanel<EditTenantRequest, any> {
+        protected getFormKey(): string;
+        private form;
+        constructor(container: JQuery);
+    }
+}
+declare namespace PatientManagement.Membership {
+    class EditUserProfilePanel extends Serenity.PropertyPanel<EditUserProfileRequest, any> {
+        protected getFormKey(): string;
+        private form;
+        constructor(container: JQuery);
+    }
+}
+declare namespace PatientManagement.Membership {
+    class ResetPasswordPanel extends Serenity.PropertyPanel<ResetPasswordRequest, any> {
+        protected getFormKey(): string;
+        private form;
+        constructor(container: JQuery);
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class OfferDropDownEditor extends Serenity.Select2Editor<any, any> {
+        constructor(container: JQuery);
+    }
+}
+declare namespace PatientManagement.Membership {
+    class SignUpPanel extends Serenity.PropertyPanel<SignUpRequest, any> {
+        protected getFormKey(): string;
+        private form;
+        constructor(container: JQuery);
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class ActivityDialog extends Serenity.EntityDialog<ActivityRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getService(): string;
+        protected form: ActivityForm;
+        private loadedState;
+        constructor();
+        getSaveState(): string;
+        loadResponse(data: any): void;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class ActivityGrid extends Serenity.EntityGrid<ActivityRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof ActivityDialog;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        constructor(container: JQuery);
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class CabinetsDialog extends Serenity.EntityDialog<CabinetsRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getService(): string;
+        protected form: CabinetsForm;
+        constructor();
+        protected onSaveSuccess(response: Serenity.SaveResponse): void;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class CabinetsFormatter implements Slick.Formatter {
+        format(ctx: Slick.FormatterContext): string;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class CabinetsGrid extends Serenity.EntityGrid<CabinetsRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof CabinetsDialog;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getIsActiveProperty(): string;
+        protected getService(): string;
+        constructor(container: JQuery);
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class CabinetsListFormatter implements Slick.Formatter {
+        format(ctx: Slick.FormatterContext): string;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class UserListFormatter implements Slick.Formatter {
+        format(ctx: Slick.FormatterContext): string;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class WorkDaysListFormatter implements Slick.Formatter {
+        format(ctx: Slick.FormatterContext): string;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class CalendarCabinetsEditor extends Serenity.Select2Editor<any, any> {
+        protected getService(): string;
+        constructor(container: JQuery);
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class PatientsDialog extends Serenity.EntityDialog<PatientsRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getService(): string;
+        protected form: PatientsForm;
+        private visitsGrid;
+        private loadedState;
+        private patientActivityGrid;
+        private patientsFileUploadsGrid;
+        private patientHealthGrid;
+        private patientlifeStyleGrid;
+        private patientValidator;
+        private selfChange;
+        private checkEgn;
+        private checkPhone;
+        protected isValidDate: (y: any, m: any, d: any) => boolean;
+        constructor();
+        getSaveState(): string;
+        loadResponse(data: any): void;
+        loadEntity(entity: PatientsRow): void;
+        onSaveSuccess(response: any): void;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class CalendarPatientDialog extends PatientsDialog {
+        onSaveSuccess(response: Serenity.SaveResponse): void;
+        loadEntity(entity: PatientsRow): void;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class VisitsDialog extends Serenity.EntityDialog<VisitsRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        protected form: VisitsForm;
+        protected updateInterface(): void;
+        constructor();
+        protected getCloningEntity(): VisitsRow;
+    }
+}
+declare var FullCalendar: any;
+declare namespace PatientManagement.PatientManagement {
+    class CalendarVisitsDialog extends VisitsDialog {
+        protected updateTitle(): void;
+        newPredifinedVisit: (start: any, end: any) => void;
+        updateVisit: (visitId: any, start: any, end: any) => void;
+        deleteVisit: (visitId: any) => void;
+        protected onSaveSuccess(response: Serenity.SaveResponse): void;
+        refreshVisitForTodayBox(): void;
+        protected onDeleteSuccess(response: Serenity.DeleteResponse): void;
+        protected formatAlertMessage(firstLine: any, title: any, startDate: Date, endDate: Date): string;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class CalendarVisitsGrid extends VisitsGrid {
+        protected getDialogType(): typeof CalendarVisitsDialog;
+        constructor(container: JQuery);
+        protected getInitialTitle(): any;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class HelloModal extends Serenity.TemplatedWidget<any> {
+        private formCabinet;
+        private formPatient;
+        private formVisitType;
+        private formVisit;
+        constructor(elem: JQuery, opt: {});
+        protected validateFormById(thisElemId: any): boolean;
+    }
+}
+declare namespace PatientManagement.Common {
+    class HelloModalAddCabinetPanel extends Serenity.PropertyPanel<HelloModalAddCabinetRequest, any> {
+        protected getFormKey(): string;
+        private form;
+        constructor(container: JQuery);
+        protected getTemplate(): any;
+        ValidateForm(): boolean;
+        SaveEntity(): boolean;
+    }
+}
+declare namespace PatientManagement.Common {
+    class HelloModalAddPatientPanel extends Serenity.PropertyPanel<HelloModalAddPatientRequest, any> {
+        protected getFormKey(): string;
+        private form;
+        constructor(container: JQuery);
+        protected getTemplate(): any;
+        ValidateForm(): boolean;
+        SaveEntity(): boolean;
+    }
+}
+declare namespace PatientManagement.Common {
+    class HelloModalAddVisitPanel extends Serenity.PropertyPanel<HelloModalAddVisitRequest, any> {
+        protected getFormKey(): string;
+        private form;
+        constructor(container: JQuery);
+        protected getTemplate(): any;
+        ValidateForm(): boolean;
+        SaveEntity(): boolean;
+    }
+}
+declare namespace PatientManagement.Common {
+    class HelloModalAddVisitTypePanel extends Serenity.PropertyPanel<HelloModalAddVisitTypeRequest, any> {
+        protected getFormKey(): string;
+        private form;
+        constructor(container: JQuery);
+        protected getTemplate(): any;
+        ValidateForm(): boolean;
+        SaveEntity(): boolean;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class LifeStylesDialog extends Serenity.EntityDialog<LifeStylesRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getService(): string;
+        protected form: LifeStylesForm;
+        private loadedState;
+        constructor();
+        getSaveState(): string;
+        loadResponse(data: any): void;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class LifeStylesGrid extends Serenity.EntityGrid<LifeStylesRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof LifeStylesDialog;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        constructor(container: JQuery);
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class MedicalSpecialtiesFormatter implements Slick.Formatter {
+        format(ctx: Slick.FormatterContext): string;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class MedicalSpecialtyDialog extends Serenity.EntityDialog<MedicalSpecialtyRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getService(): string;
+        protected form: MedicalSpecialtyForm;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class MedicalSpecialtyExcelImportDialog extends Serenity.PropertyDialog<any, any> {
+        private form;
+        constructor();
+        protected getDialogTitle(): string;
+        protected getImageUploadEditorOptions(): Serenity.ImageUploadEditorOptions;
+        protected getDialogButtons(): Serenity.DialogButton[];
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class MedicalSpecialtyGrid extends Serenity.EntityGrid<MedicalSpecialtyRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof MedicalSpecialtyDialog;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        protected getIsActiveProperty(): string;
+        constructor(container: JQuery);
+        protected getButtons(): Serenity.ToolButton[];
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class NotesDialog extends Serenity.TemplatedDialog<any> {
+        private textEditor;
+        constructor();
+        protected getTemplate(): string;
+        protected getDialogOptions(): JQueryUI.DialogOptions;
+        text: string;
+        okClick: () => void;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class NotesEditor extends Serenity.TemplatedWidget<any> implements Serenity.IGetEditValue, Serenity.ISetEditValue {
+        private isDirty;
+        private items;
+        constructor(div: JQuery);
+        protected getTemplate(): string;
+        protected updateContent(): void;
+        protected addClick(): void;
+        protected editClick(e: any): void;
+        deleteClick(e: any): void;
+        value: NotesRow[];
+        getEditValue(prop: Serenity.PropertyItem, target: any): void;
+        setEditValue(source: any, prop: Serenity.PropertyItem): void;
+        get_isDirty(): boolean;
+        set_isDirty(value: any): void;
+        onChange: () => void;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class NotificationsUserImageFormatter implements Slick.Formatter, Serenity.IInitializeColumn {
+        format(ctx: Slick.FormatterContext): string;
+        initializeColumn(column: Slick.Column): void;
+        fileProperty: string;
+        thumb: boolean;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class NotificationDropdownMenu extends Serenity.TemplatedWidget<any> {
+        protected getService(): string;
+        private notificationIds;
+        constructor(elem: JQuery, opt: {});
+        updateNotifications: () => void;
+        protected openClick(e: any): void;
+        protected markAsSeen(): void;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class NotificationsDialog extends Serenity.EntityDialog<NotificationsRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getService(): string;
+        protected form: NotificationsForm;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class NotificationsGrid extends Serenity.EntityGrid<NotificationsRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof NotificationsDialog;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        constructor(container: JQuery);
+        protected getButtons(): Serenity.ToolButton[];
+        protected getSlickOptions(): Slick.GridOptions;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class PatientHealthDialog extends Serenity.EntityDialog<PatientHealthRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getService(): string;
+        protected form: PatientHealthForm;
+        private loadedState;
+        constructor();
+        getSaveState(): string;
+        loadResponse(data: any): void;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class PatientHealthGrid extends Serenity.EntityGrid<PatientHealthRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof PatientHealthDialog;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        constructor(container: JQuery);
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class PatientsFileUploadsDialog extends Serenity.EntityDialog<PatientsFileUploadsRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getService(): string;
+        protected form: PatientsFileUploadsForm;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class FIleUploadsForPatientDialog extends PatientsFileUploadsDialog {
+        constructor();
+        updateInterface(): void;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class PatientsFileUploadsGrid extends Serenity.EntityGrid<PatientsFileUploadsRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof PatientsFileUploadsDialog;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        constructor(container: JQuery);
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class FIleUploadsForPatientGrid extends PatientsFileUploadsGrid {
+        protected getDialogType(): typeof FIleUploadsForPatientDialog;
+        constructor(container: JQuery);
+        protected getColumns(): Slick.Column[];
+        protected initEntityDialog(itemType: any, dialog: any): void;
+        protected addButtonClick(): void;
+        protected getInitialTitle(): any;
+        protected getGridCanLoad(): boolean;
+        private _patientId;
+        patientId: number;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class PatienActivityDialog extends ActivityDialog {
+        constructor();
+        updateInterface(): void;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class PatientActivityGrid extends ActivityGrid {
+        protected getDialogType(): typeof PatienActivityDialog;
+        constructor(container: JQuery);
+        protected getColumns(): Slick.Column[];
+        protected initEntityDialog(itemType: any, dialog: any): void;
+        protected addButtonClick(): void;
+        protected getInitialTitle(): any;
+        protected getGridCanLoad(): boolean;
+        private _patientId;
+        patientId: number;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class PatientHealthCheckDialog extends PatientHealthDialog {
+        constructor();
+        updateInterface(): void;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class PatientHealthCheckGrid extends PatientHealthGrid {
+        protected getDialogType(): typeof PatientHealthCheckDialog;
+        constructor(container: JQuery);
+        protected getColumns(): Slick.Column[];
+        protected initEntityDialog(itemType: any, dialog: any): void;
+        protected addButtonClick(): void;
+        protected getInitialTitle(): any;
+        protected getGridCanLoad(): boolean;
+        private _patientId;
+        patientId: number;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class PatientLifeStyleDialog extends LifeStylesDialog {
+        constructor();
+        updateInterface(): void;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class PatientLifeStylesGrid extends LifeStylesGrid {
+        protected getDialogType(): typeof PatientLifeStyleDialog;
+        constructor(container: JQuery);
+        protected getColumns(): Slick.Column[];
+        protected initEntityDialog(itemType: any, dialog: any): void;
+        protected addButtonClick(): void;
+        protected getInitialTitle(): any;
+        protected getGridCanLoad(): boolean;
+        private _patientId;
+        patientId: number;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class PatientsFormatter implements Slick.Formatter {
+        format(ctx: Slick.FormatterContext): string;
+        genderProperty: string;
+        initializeColumn(column: Slick.Column): void;
+    }
+    class PatientsPhoneFormatter implements Slick.Formatter {
+        format(ctx: Slick.FormatterContext): string;
+    }
+    class PatientsEmailFormatter implements Slick.Formatter {
+        format(ctx: Slick.FormatterContext): string;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class PatientsGrid extends Serenity.EntityGrid<PatientsRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof PatientsDialog;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        protected getIsActiveProperty(): string;
+        constructor(container: JQuery);
+        protected getButtons(): Serenity.ToolButton[];
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class PatientVisitsDialog extends VisitsDialog {
+        constructor();
+        updateInterface(): void;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class PatientVisitsGrid extends VisitsGrid {
+        protected getDialogType(): typeof PatientVisitsDialog;
+        constructor(container: JQuery);
+        protected getColumns(): Slick.Column[];
+        protected initEntityDialog(itemType: any, dialog: any): void;
+        protected addButtonClick(): void;
+        protected getInitialTitle(): any;
+        protected getGridCanLoad(): boolean;
+        private _patientId;
+        patientId: number;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class UserNotificationsDialog extends Serenity.EntityDialog<UserNotificationsRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        protected form: UserNotificationsForm;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class UserNotificationsGrid extends Serenity.EntityGrid<UserNotificationsRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof UserNotificationsDialog;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        constructor(container: JQuery);
+        protected getButtons(): Serenity.ToolButton[];
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class VisitTypesDialog extends Serenity.EntityDialog<VisitTypesRow, any> {
+        protected getFormKey(): string;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getNameProperty(): string;
+        protected getService(): string;
+        protected form: VisitTypesForm;
+        loadEntity(entity: VisitTypesRow): void;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class NewVisitTypeDialog extends PatientManagement.VisitTypesDialog {
+        protected onSaveSuccess(response: Serenity.SaveResponse): void;
+        protected onDeleteSuccess(response: Serenity.DeleteResponse): void;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class VisitsTypesFormatter implements Slick.Formatter {
+        format(ctx: Slick.FormatterContext): string;
+        backgroundProperty: string;
+        borderProperty: string;
+        initializeColumn(column: Slick.Column): void;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class VisitTypesGrid extends Serenity.EntityGrid<VisitTypesRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof VisitTypesDialog;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        protected getIsActiveProperty(): string;
+        constructor(container: JQuery);
+    }
+}
+declare namespace PatientManagement {
+    class VisiTypesBottomLeftMenu extends Serenity.Widget<any> {
+        constructor(elem: JQuery, opt: {});
     }
 }

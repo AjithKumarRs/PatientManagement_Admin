@@ -21,6 +21,8 @@ namespace PatientManagement.PatientManagement.Forms
 
         public Int32 CabinetId { get; set; }
 
+        public bool FreeForReservation { get; set; }
+
         [DefaultValue("now")]
         public DateTime StartDate { get; set; }
         [DefaultValue("now")]
