@@ -23,7 +23,7 @@ namespace PatientManagement.PatientManagement.Forms
         public Decimal Price { get; set; }
 
         [HalfWidth]
-        public string Currencie { get; set; }
+        public string CurrencyId { get; set; }
 
         public Int32? TenantId { get; set; }
 

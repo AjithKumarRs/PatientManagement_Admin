@@ -4,9 +4,11 @@
         Name?: string;
         BorderColor?: string;
         BackgroundColor?: string;
-        PriceWithCurrencie?: string;
         Price?: number;
-        Currencie?: string;
+        CurrencyId?: number;
+        CurrencyCurrencyId?: string;
+        CurrencyName?: string;
+        CurrencyRate?: number;
         InsertUserId?: number;
         InsertDate?: string;
         IsActive?: number;
@@ -31,9 +33,11 @@
             Name = "Name",
             BorderColor = "BorderColor",
             BackgroundColor = "BackgroundColor",
-            PriceWithCurrencie = "PriceWithCurrencie",
             Price = "Price",
-            Currencie = "Currencie",
+            CurrencyId = "CurrencyId",
+            CurrencyCurrencyId = "CurrencyCurrencyId",
+            CurrencyName = "CurrencyName",
+            CurrencyRate = "CurrencyRate",
             InsertUserId = "InsertUserId",
             InsertDate = "InsertDate",
             IsActive = "IsActive",

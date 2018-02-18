@@ -1,5 +1,6 @@
 ﻿
 
+using PatientManagement.Administration;
 using PatientManagement.Administration.Entities;
 using Serenity.Navigation;
 
@@ -82,7 +83,10 @@ namespace PatientManagement.PatientManagement.Repositories
                 }
             }
         }
-        private class MyRetrieveHandler : RetrieveRequestHandler<MyRow> { }
+
+        private class MyRetrieveHandler : RetrieveRequestHandler<MyRow>
+        {
+        }
 
         private class MyListHandler : ListRequestHandler<MyRow>
         {

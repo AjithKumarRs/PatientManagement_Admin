@@ -15,7 +15,9 @@ namespace PatientManagement.Migrations.PatientManagementDB
                 .AddColumn("FreeForReservation").AsInt16().Nullable();
 
             Alter.Table("VisitTypes")
-                .AddColumn("Price").AsDecimal(8, 4).Nullable();
+                .AddColumn("Price").AsDecimal(8, 4).Nullable()
+                .AddColumn("CurrencyId").AsInt32().NotNullable().WithDefaultValue(1)
+                .ForeignKey("FK_VisitTypesCurrencies_CurrencyId", "Currencies", "Id");
         }
     }
 }

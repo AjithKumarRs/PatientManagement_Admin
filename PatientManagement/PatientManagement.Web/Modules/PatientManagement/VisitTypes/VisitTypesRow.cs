@@ -55,26 +55,46 @@ namespace PatientManagement.PatientManagement.Entities
             get { return Fields.Price[this]; }
             set { Fields.Price[this] = value; }
         }
+        
+        #region Currency
 
-        [DisplayName("Price")]
+        [DisplayName("Currency"), NotNull, ForeignKey("[dbo].[Currencies]", "Id"), LeftJoin("jCurrency"), TextualField("CurrencyCurrencyId")]
         [ReadPermission(PermissionKeys.AdministrationTenantsVisitPayments)]
-        [NotMapped]
-        public string PriceWithCurrencie
+        [Updatable(false)]
+        [LookupEditor(typeof(CurrenciesRow), FilterField = "Enabled", FilterValue = true)]
+        public Int32? CurrencyId
         {
-            get { return Fields.PriceWithCurrencie[this]; }
-            set { Fields.PriceWithCurrencie[this] = value; }
+            get { return Fields.CurrencyId[this]; }
+            set { Fields.CurrencyId[this] = value; }
+        }
+
+        [DisplayName("Currency Code"), Expression("jCurrency.[CurrencyId]")]
+        [ReadPermission(PermissionKeys.AdministrationTenantsVisitPayments)]
+        public String CurrencyCurrencyId
+        {
+            get { return Fields.CurrencyCurrencyId[this]; }
+            set { Fields.CurrencyCurrencyId[this] = value; }
+        }
+
+        [DisplayName("Currency Name"), Expression("jCurrency.[Name]")]
+        [ReadPermission(PermissionKeys.AdministrationTenantsVisitPayments)]
+        public String CurrencyName
+        {
+            get { return Fields.CurrencyName[this]; }
+            set { Fields.CurrencyName[this] = value; }
+        }
+
+        [DisplayName("Currency Rate"), Expression("jCurrency.[Rate]")]
+        [ReadPermission(PermissionKeys.AdministrationTenantsVisitPayments)]
+        public Decimal? CurrencyRate
+        {
+            get { return Fields.CurrencyRate[this]; }
+            set { Fields.CurrencyRate[this] = value; }
         }
 
 
-        [DisplayName("Currencie")]
-        [NotMapped]
-        [ReadOnly(true)]
-        [ReadPermission(PermissionKeys.AdministrationTenantsVisitPayments)]
-        public string Currencie
-        {
-            get { return Fields.Currencie[this]; }
-            set { Fields.Currencie[this] = value; }
-        }
+        #endregion
+
 
         IIdField IIdRow.IdField
         {
@@ -119,9 +139,12 @@ namespace PatientManagement.PatientManagement.Entities
             public StringField Name;
             public StringField BorderColor;
             public StringField BackgroundColor;
-            public StringField PriceWithCurrencie;
             public DecimalField Price;
-            public StringField Currencie;
+
+            public Int32Field CurrencyId;
+            public StringField CurrencyCurrencyId;
+            public StringField CurrencyName;
+            public DecimalField CurrencyRate;
 
             public Int32Field InsertUserId;
             public DateTimeField InsertDate;

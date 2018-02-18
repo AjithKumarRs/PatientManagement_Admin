@@ -22,9 +22,12 @@ namespace PatientManagement.PatientManagement.Columns
         public String Name { get; set; }
 
         [EditLink]
-        [Width(120)]
-        public string PriceWithCurrencie { get; set; }
+        [Width(60)]
+        public string Price { get; set; }
 
+        [EditLink]
+        [Width(60)]
+        public string CurrencyName { get; set; }
 
         [Width(80)]
         public String TenantName { get; set; }

@@ -3997,7 +3997,7 @@ declare namespace PatientManagement.PatientManagement {
         BorderColor: Serenity.StringEditor;
         BackgroundColor: Serenity.StringEditor;
         Price: Serenity.DecimalEditor;
-        Currencie: Serenity.StringEditor;
+        CurrencyId: Serenity.LookupEditor;
         TenantId: Serenity.LookupEditor;
     }
     class VisitTypesForm extends Serenity.PrefixedContext {
@@ -4012,9 +4012,11 @@ declare namespace PatientManagement.PatientManagement {
         Name?: string;
         BorderColor?: string;
         BackgroundColor?: string;
-        PriceWithCurrencie?: string;
         Price?: number;
-        Currencie?: string;
+        CurrencyId?: number;
+        CurrencyCurrencyId?: string;
+        CurrencyName?: string;
+        CurrencyRate?: number;
         InsertUserId?: number;
         InsertDate?: string;
         IsActive?: number;
@@ -4034,9 +4036,11 @@ declare namespace PatientManagement.PatientManagement {
             Name = "Name",
             BorderColor = "BorderColor",
             BackgroundColor = "BackgroundColor",
-            PriceWithCurrencie = "PriceWithCurrencie",
             Price = "Price",
-            Currencie = "Currencie",
+            CurrencyId = "CurrencyId",
+            CurrencyCurrencyId = "CurrencyCurrencyId",
+            CurrencyName = "CurrencyName",
+            CurrencyRate = "CurrencyRate",
             InsertUserId = "InsertUserId",
             InsertDate = "InsertDate",
             IsActive = "IsActive",
@@ -4090,6 +4094,7 @@ declare namespace PatientManagement {
         DisplayName?: string;
         IsAdmin?: boolean;
         RestrictedToCabinets?: number;
+        TenantCurrencyId?: number;
         Permissions?: {
             [key: string]: boolean;
         };

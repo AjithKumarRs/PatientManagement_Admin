@@ -63,7 +63,7 @@ namespace PatientManagement.Administration.Entities
         }
 
         [DisplayName("Base Currency"), ForeignKey("Currencies", "Id"), LeftJoin("crnc"), Required]
-        [LookupEditor(typeof(CurrenciesRow))]
+        [LookupEditor(typeof(CurrenciesRow), FilterField = "Enabled", FilterValue = true)]
         public Int32? CurrencyId
         {
             get { return Fields.CurrencyId[this]; }

@@ -108,6 +108,7 @@ namespace PatientManagement.Administration.Endpoints
             result.RestrictedToCabinets = user.RestrictedToCabinets;
             //TODO: Major speed issue when using in the Frond End
             //result.PaidPeriod = UserSubscriptionHelper.GetTenantPaidDays(user.TenantId);
+            result.TenantCurrencyId = user.TenantCurrencyId;
 
             result.Permissions = TwoLevelCache.GetLocalStoreOnly("ScriptUserPermissions:" + user.Id, TimeSpan.Zero,
                 UserPermissionRow.Fields.GenerationKey, () =>

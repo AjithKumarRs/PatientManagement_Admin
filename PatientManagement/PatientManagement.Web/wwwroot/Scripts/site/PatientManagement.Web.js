@@ -36,6 +36,14 @@ var PatientManagement;
                 _super.prototype.loadEntity.call(this, entity);
                 $(".BorderColor input").colorpicker();
                 $(".BackgroundColor input").colorpicker();
+                if (this.isNew()) {
+                    this.form.CurrencyId.value = Q.Authorization.userDefinition.TenantCurrencyId;
+                }
+                if (Q.Authorization.hasPermission("AdministrationTenants:VisitPayments")) {
+                    console.log(Q.Authorization.userDefinition.TenantCurrencyId);
+                    if (!Q.Authorization.hasPermission("Administration:Tenants"))
+                        Serenity.EditorUtils.setReadOnly(this.form.CurrencyId, true);
+                }
                 Serenity.EditorUtils.setReadOnly(this.form.BorderColor, true);
                 Serenity.EditorUtils.setReadOnly(this.form.BackgroundColor, true);
             };
@@ -8320,7 +8328,7 @@ var PatientManagement;
                         'BorderColor', w0,
                         'BackgroundColor', w0,
                         'Price', w1,
-                        'Currencie', w0,
+                        'CurrencyId', w2,
                         'TenantId', w2
                     ]);
                 }

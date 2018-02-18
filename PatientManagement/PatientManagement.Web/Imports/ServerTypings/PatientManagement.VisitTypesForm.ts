@@ -4,7 +4,7 @@
         BorderColor: Serenity.StringEditor;
         BackgroundColor: Serenity.StringEditor;
         Price: Serenity.DecimalEditor;
-        Currencie: Serenity.StringEditor;
+        CurrencyId: Serenity.LookupEditor;
         TenantId: Serenity.LookupEditor;
     }
 
@@ -28,7 +28,7 @@
                     'BorderColor', w0,
                     'BackgroundColor', w0,
                     'Price', w1,
-                    'Currencie', w0,
+                    'CurrencyId', w2,
                     'TenantId', w2
                 ]);
             }
