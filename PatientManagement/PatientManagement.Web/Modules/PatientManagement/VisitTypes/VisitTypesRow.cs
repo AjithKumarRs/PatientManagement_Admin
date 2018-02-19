@@ -48,6 +48,14 @@ namespace PatientManagement.PatientManagement.Entities
             set { Fields.BackgroundColor[this] = value; }
         }
 
+        [DisplayName("Show In Menu")]
+        [BsSwitchEditor]
+        public Int16? ShowInMenu
+        {
+            get { return Fields.ShowInMenu[this]; }
+            set { Fields.ShowInMenu[this] = value; }
+        }
+
         [DisplayName("Price")]
         [ReadPermission(PermissionKeys.AdministrationTenantsVisitPayments)]
         public Decimal? Price
@@ -111,6 +119,7 @@ namespace PatientManagement.PatientManagement.Entities
         [DisplayName("Is Active"), NotNull]
         [ReadPermission(PermissionKeys.Tenants)]
         [LookupInclude]
+        [BsSwitchEditor]
         public Int16? IsActive
         {
             get { return Fields.IsActive[this]; }
@@ -140,6 +149,7 @@ namespace PatientManagement.PatientManagement.Entities
             public StringField BorderColor;
             public StringField BackgroundColor;
             public DecimalField Price;
+            public Int16Field ShowInMenu;
 
             public Int32Field CurrencyId;
             public StringField CurrencyCurrencyId;

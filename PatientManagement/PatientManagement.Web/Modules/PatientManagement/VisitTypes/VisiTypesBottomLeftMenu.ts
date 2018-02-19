@@ -7,7 +7,7 @@ namespace PatientManagement {
         constructor(elem: JQuery, opt: {}) {
             super(elem, opt);
 
-            PatientManagement.VisitTypesService.List({},
+            PatientManagement.VisitTypesService.ListForMenu({},
                 resp => {
                     if (resp.Entities.length > 0) {
 

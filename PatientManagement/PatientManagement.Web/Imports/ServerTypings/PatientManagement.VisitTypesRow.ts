@@ -5,6 +5,7 @@
         BorderColor?: string;
         BackgroundColor?: string;
         Price?: number;
+        ShowInMenu?: number;
         CurrencyId?: number;
         CurrencyCurrencyId?: string;
         CurrencyName?: string;
@@ -34,6 +35,7 @@
             BorderColor = "BorderColor",
             BackgroundColor = "BackgroundColor",
             Price = "Price",
+            ShowInMenu = "ShowInMenu",
             CurrencyId = "CurrencyId",
             CurrencyCurrencyId = "CurrencyCurrencyId",
             CurrencyName = "CurrencyName",

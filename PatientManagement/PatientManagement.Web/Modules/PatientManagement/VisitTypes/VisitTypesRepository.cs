@@ -46,6 +46,10 @@ namespace PatientManagement.PatientManagement.Repositories
             return new MyListHandler().Process(connection, request);
         }
 
+        public ListResponse<MyRow> ListForMenu(IDbConnection connection, ListRequest request)
+        {
+            return new MyListForMenuHandler().Process(connection, request);
+        }
         private class MySaveHandler : SaveRequestHandler<MyRow>
         {
             protected override void AfterSave()
@@ -88,17 +92,33 @@ namespace PatientManagement.PatientManagement.Repositories
         {
         }
 
+        private class MyListForMenuHandler : ListRequestHandler<MyRow>
+        {
+            protected override void ApplyFilters(SqlQuery query)
+            {
+                base.ApplyFilters(query);
+
+
+                var user = (UserDefinition)Authorization.UserDefinition;
+
+                if (!Authorization.HasPermission(PermissionKeys.Tenants))
+                    query.Where(fld.TenantId == user.TenantId);
+
+                query.Where(fld.ShowInMenu == 1);
+            }
+        }
+
         private class MyListHandler : ListRequestHandler<MyRow>
         {
             protected override void ApplyFilters(SqlQuery query)
             {
                 base.ApplyFilters(query);
 
-                
+
                 var user = (UserDefinition)Authorization.UserDefinition;
 
                 // if (!Authorization.HasPermission(PermissionKeys.Tenants))
-                query.Where(fld.TenantId == user.TenantId );
+                query.Where(fld.TenantId == user.TenantId);
             }
         }
     }

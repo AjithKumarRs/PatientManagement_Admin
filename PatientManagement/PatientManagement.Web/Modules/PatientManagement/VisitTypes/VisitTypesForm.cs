@@ -19,6 +19,8 @@ namespace PatientManagement.PatientManagement.Forms
 
         public String BackgroundColor { get; set; }
 
+        public Boolean ShowInMenu { get; set; }
+
         [HalfWidth]
         public Decimal Price { get; set; }
 
@@ -26,6 +28,8 @@ namespace PatientManagement.PatientManagement.Forms
         public string CurrencyId { get; set; }
 
         public Int32? TenantId { get; set; }
+
+        public Boolean IsActive { get; set; }
 
     }
 }

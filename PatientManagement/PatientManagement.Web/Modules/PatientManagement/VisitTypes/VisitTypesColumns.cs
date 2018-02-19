@@ -25,9 +25,15 @@ namespace PatientManagement.PatientManagement.Columns
         [Width(60)]
         public string Price { get; set; }
 
+        public Boolean ShowInMenu { get; set; }
+
+
         [EditLink]
         [Width(60)]
         public string CurrencyName { get; set; }
+
+        public Boolean IsActive { get; set; }
+
 
         [Width(80)]
         public String TenantName { get; set; }

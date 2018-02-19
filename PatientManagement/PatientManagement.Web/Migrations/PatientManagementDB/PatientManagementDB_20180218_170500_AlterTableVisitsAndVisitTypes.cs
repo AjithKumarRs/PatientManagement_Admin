@@ -16,6 +16,7 @@ namespace PatientManagement.Migrations.PatientManagementDB
 
             Alter.Table("VisitTypes")
                 .AddColumn("Price").AsDecimal(8, 4).Nullable()
+                .AddColumn("ShowInMenu").AsInt16().Nullable()
                 .AddColumn("CurrencyId").AsInt32().NotNullable().WithDefaultValue(1)
                 .ForeignKey("FK_VisitTypesCurrencies_CurrencyId", "Currencies", "Id");
         }
