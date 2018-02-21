@@ -160,8 +160,8 @@ namespace PatientManagement.PatientManagement.Repositories
                                 currencies.TryGetValue(x.VisitTypeCurrencyId.Value, out s))
                             {
                                 var currencyName = string.IsNullOrEmpty(s[1]) ? s[0] : s[1];
-                                var price = (x.VisitTypePrice != null) ? x.VisitTypePrice.Value.ToString("#.##") : "0";
-                                x.VisitTypePriceFormatted = $"{price} {currencyName}";
+                                var price = x.VisitTypePrice?.ToString("#.## "+ currencyName);
+                                x.VisitTypePriceFormatted = $"{price}";
                             }
                         }
                     }

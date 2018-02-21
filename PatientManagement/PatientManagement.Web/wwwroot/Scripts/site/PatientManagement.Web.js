@@ -8232,10 +8232,49 @@ var PatientManagement;
         PatientManagement.UserNotificationsGrid = UserNotificationsGrid;
     })(PatientManagement = PatientManagement_97.PatientManagement || (PatientManagement_97.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement_98) {
+    var PatientManagement;
+    (function (PatientManagement) {
+        var VisitsPriceFormatter = /** @class */ (function () {
+            function VisitsPriceFormatter() {
+            }
+            VisitsPriceFormatter.prototype.format = function (ctx) {
+                if (!this.visitTypePriceProperty || !this.visitTypeCurrencyIdProperty) {
+                    return text;
+                }
+                var visitTypePrice = ctx.item[this.visitTypePriceProperty];
+                var visitTypeCurrencyId = ctx.item[this.visitTypeCurrencyIdProperty];
+                if (!ctx.value)
+                    return "";
+                var text = Q.htmlEncode(ctx.value);
+                return "<span class='money-symbol'>" + ctx.value + '</span>';
+            };
+            VisitsPriceFormatter.prototype.initializeColumn = function (column) {
+                column.referencedFields = column.referencedFields || [];
+                if (this.visitTypePriceProperty)
+                    column.referencedFields.push(this.visitTypePriceProperty);
+                if (this.visitTypeCurrencyIdProperty)
+                    column.referencedFields.push(this.visitTypeCurrencyIdProperty);
+            };
+            __decorate([
+                Serenity.Decorators.option()
+            ], VisitsPriceFormatter.prototype, "visitTypePriceProperty", void 0);
+            __decorate([
+                Serenity.Decorators.option()
+            ], VisitsPriceFormatter.prototype, "visitTypeCurrencyIdProperty", void 0);
+            VisitsPriceFormatter = __decorate([
+                Serenity.Decorators.registerFormatter([Serenity.ISlickFormatter, Serenity.IInitializeColumn])
+            ], VisitsPriceFormatter);
+            return VisitsPriceFormatter;
+        }());
+        PatientManagement.VisitsPriceFormatter = VisitsPriceFormatter;
+    })(PatientManagement = PatientManagement_98.PatientManagement || (PatientManagement_98.PatientManagement = {}));
+})(PatientManagement || (PatientManagement = {}));
 /// <reference types="jqueryui" />
 /// <returns type="jquery.colorpicker"></returns>
 var PatientManagement;
-(function (PatientManagement_98) {
+(function (PatientManagement_99) {
     var PatientManagement;
     (function (PatientManagement) {
         var VisitTypesDialog = /** @class */ (function (_super) {
@@ -8271,11 +8310,11 @@ var PatientManagement;
             return VisitTypesDialog;
         }(Serenity.EntityDialog));
         PatientManagement.VisitTypesDialog = VisitTypesDialog;
-    })(PatientManagement = PatientManagement_98.PatientManagement || (PatientManagement_98.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_99.PatientManagement || (PatientManagement_99.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 /// <reference path="../VisitTypes/VisitTypesDialog.ts" />
 var PatientManagement;
-(function (PatientManagement_99) {
+(function (PatientManagement_100) {
     var PatientManagement;
     (function (PatientManagement) {
         var NewVisitTypeDialog = /** @class */ (function (_super) {
@@ -8295,10 +8334,10 @@ var PatientManagement;
             return NewVisitTypeDialog;
         }(PatientManagement.VisitTypesDialog));
         PatientManagement.NewVisitTypeDialog = NewVisitTypeDialog;
-    })(PatientManagement = PatientManagement_99.PatientManagement || (PatientManagement_99.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_100.PatientManagement || (PatientManagement_100.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
-(function (PatientManagement_100) {
+(function (PatientManagement_101) {
     var PatientManagement;
     (function (PatientManagement) {
         var VisitsTypesFormatter = /** @class */ (function () {
@@ -8333,10 +8372,10 @@ var PatientManagement;
             return VisitsTypesFormatter;
         }());
         PatientManagement.VisitsTypesFormatter = VisitsTypesFormatter;
-    })(PatientManagement = PatientManagement_100.PatientManagement || (PatientManagement_100.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_101.PatientManagement || (PatientManagement_101.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 var PatientManagement;
-(function (PatientManagement_101) {
+(function (PatientManagement_102) {
     var PatientManagement;
     (function (PatientManagement) {
         var VisitTypesGrid = /** @class */ (function (_super) {
@@ -8356,7 +8395,7 @@ var PatientManagement;
             return VisitTypesGrid;
         }(Serenity.EntityGrid));
         PatientManagement.VisitTypesGrid = VisitTypesGrid;
-    })(PatientManagement = PatientManagement_101.PatientManagement || (PatientManagement_101.PatientManagement = {}));
+    })(PatientManagement = PatientManagement_102.PatientManagement || (PatientManagement_102.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 /// <reference types="jqueryui" />
 var PatientManagement;
@@ -8394,42 +8433,5 @@ var PatientManagement;
         return VisiTypesBottomLeftMenu;
     }(Serenity.Widget));
     PatientManagement.VisiTypesBottomLeftMenu = VisiTypesBottomLeftMenu;
-})(PatientManagement || (PatientManagement = {}));
-var PatientManagement;
-(function (PatientManagement_102) {
-    var PatientManagement;
-    (function (PatientManagement) {
-        var VisitsPriceFormatter = /** @class */ (function () {
-            function VisitsPriceFormatter() {
-            }
-            VisitsPriceFormatter.prototype.format = function (ctx) {
-                if (!this.visitTypePriceProperty || !this.visitTypeCurrencyIdProperty) {
-                    return text;
-                }
-                var visitTypePrice = ctx.item[this.visitTypePriceProperty];
-                var visitTypeCurrencyId = ctx.item[this.visitTypeCurrencyIdProperty];
-                var text = Q.htmlEncode(ctx.value);
-                return "<span class='money-symbol'>" + text + '</span>';
-            };
-            VisitsPriceFormatter.prototype.initializeColumn = function (column) {
-                column.referencedFields = column.referencedFields || [];
-                if (this.visitTypePriceProperty)
-                    column.referencedFields.push(this.visitTypePriceProperty);
-                if (this.visitTypeCurrencyIdProperty)
-                    column.referencedFields.push(this.visitTypeCurrencyIdProperty);
-            };
-            __decorate([
-                Serenity.Decorators.option()
-            ], VisitsPriceFormatter.prototype, "visitTypePriceProperty", void 0);
-            __decorate([
-                Serenity.Decorators.option()
-            ], VisitsPriceFormatter.prototype, "visitTypeCurrencyIdProperty", void 0);
-            VisitsPriceFormatter = __decorate([
-                Serenity.Decorators.registerFormatter([Serenity.ISlickFormatter, Serenity.IInitializeColumn])
-            ], VisitsPriceFormatter);
-            return VisitsPriceFormatter;
-        }());
-        PatientManagement.VisitsPriceFormatter = VisitsPriceFormatter;
-    })(PatientManagement = PatientManagement_102.PatientManagement || (PatientManagement_102.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 //# sourceMappingURL=PatientManagement.Web.js.map

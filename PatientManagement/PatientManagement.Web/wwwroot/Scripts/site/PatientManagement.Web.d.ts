@@ -4075,6 +4075,14 @@ declare namespace PatientManagement.PatientManagement {
     }
 }
 declare namespace PatientManagement.PatientManagement {
+    class VisitsPriceFormatter implements Slick.Formatter {
+        format(ctx: Slick.FormatterContext): string;
+        visitTypePriceProperty: string;
+        visitTypeCurrencyIdProperty: string;
+        initializeColumn(column: Slick.Column): void;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
     class VisitTypesDialog extends Serenity.EntityDialog<VisitTypesRow, any> {
         protected getFormKey(): string;
         protected getIdProperty(): string;
@@ -4113,13 +4121,5 @@ declare namespace PatientManagement.PatientManagement {
 declare namespace PatientManagement {
     class VisiTypesBottomLeftMenu extends Serenity.Widget<any> {
         constructor(elem: JQuery, opt: {});
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class VisitsPriceFormatter implements Slick.Formatter {
-        format(ctx: Slick.FormatterContext): string;
-        visitTypePriceProperty: string;
-        visitTypeCurrencyIdProperty: string;
-        initializeColumn(column: Slick.Column): void;
     }
 }

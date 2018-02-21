@@ -8,10 +8,11 @@
             }
             var visitTypePrice = ctx.item[this.visitTypePriceProperty];
             var visitTypeCurrencyId = ctx.item[this.visitTypeCurrencyIdProperty];
-
+            if (!ctx.value)
+                return "";
             var text = Q.htmlEncode(ctx.value);
-            
-            return "<span class='money-symbol'>" + text + '</span>';
+     
+            return "<span class='money-symbol'>" + ctx.value  + '</span>';
             
 
         }

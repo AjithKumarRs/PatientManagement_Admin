@@ -58,6 +58,7 @@ namespace PatientManagement.PatientManagement.Entities
 
         [DisplayName("Price")]
         [ReadPermission(PermissionKeys.AdministrationTenantsVisitPayments)]
+        [DecimalEditor(Decimals = 2, MaxValue = "10000")]
         public Decimal? Price
         {
             get { return Fields.Price[this]; }
