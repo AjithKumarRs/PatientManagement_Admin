@@ -31,6 +31,7 @@ namespace PatientManagement.PatientManagement.Columns
 
         public bool FreeForReservation { get; set; }
         
+        [VisitsPriceFormatter(VisitTypePriceProperty = "VisitTypePrice", VisitTypeCurrencyIdProperty = "VisitTypeCurrencyId")]
         public String VisitTypePriceFormatted { get; set; }
         
         [Hidden]
