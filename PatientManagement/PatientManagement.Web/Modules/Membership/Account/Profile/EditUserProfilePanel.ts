@@ -10,25 +10,27 @@
             super(container);
 
             this.form = new EditUserProfileForm(this.idPrefix);
-            
+
             var user = <Administration.UserRow>{};
-            
+
             Administration.UserService.Retrieve({
                 EntityId: Authorization.userDefinition.UserId
             },
                 resp => {
                     user = resp.Entity;
                     this.form.DisplayName.value = user.DisplayName;
-                    if (user.UserImage != null)
-                       //TODO how to add image to ImageUploadEditor
 
+                    if (user.UserImage != null) {
+                        this.form.UserImage.value = <Serenity.UploadedFile>{ Filename: user.UserImage };
+                    }
+
+                    this.form.Info.value = user.Info;
                     this.form.PhoneNumber.value = user.PhoneNumber;
                     this.form.Email.value = user.Email;
                     this.form.WebSite.value = user.WebSite;
                     this.form.EmailSignature.value = user.EmailSignature;
 
-                   // this.form.EmailSignature.element.triggerHandler('shown');
-                   
+                    // this.form.EmailSignature.element.triggerHandler('shown');
                 });
 
             this.byId('EditUserProfileSubmitButton').click(e => {
@@ -50,6 +52,6 @@
                 });
             });
         }
-        
+
     }
 }

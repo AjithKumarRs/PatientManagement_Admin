@@ -3191,7 +3191,7 @@ var PatientManagement;
                             }
                             else {
                                 var sentEmail = {};
-                                var dialog = new SentEmailsDialog_1();
+                                var dialog = new SentEmailsDialog();
                                 //TODO We open new dialog with PatientID. Correct?
                                 sentEmail.ToEmail = patient.PatientId.toString();
                                 dialog.form.ToEmail.readOnly = true;
@@ -3202,7 +3202,6 @@ var PatientManagement;
                 };
                 return _this;
             }
-            SentEmailsDialog_1 = SentEmailsDialog;
             SentEmailsDialog.prototype.getFormKey = function () { return Administration.SentEmailsForm.formKey; };
             SentEmailsDialog.prototype.getIdProperty = function () { return Administration.SentEmailsRow.idProperty; };
             SentEmailsDialog.prototype.getLocalTextPrefix = function () { return Administration.SentEmailsRow.localTextPrefix; };
@@ -3225,13 +3224,12 @@ var PatientManagement;
                     _this.form.EmailSignature.value = resp.Entity;
                 });
             };
-            SentEmailsDialog = SentEmailsDialog_1 = __decorate([
+            SentEmailsDialog = __decorate([
                 Serenity.Decorators.maximizable(),
                 Serenity.Decorators.registerClass(),
                 Serenity.Decorators.responsive()
             ], SentEmailsDialog);
             return SentEmailsDialog;
-            var SentEmailsDialog_1;
         }(Serenity.EntityDialog));
         Administration.SentEmailsDialog = SentEmailsDialog;
     })(Administration = PatientManagement.Administration || (PatientManagement.Administration = {}));
@@ -5822,8 +5820,9 @@ var PatientManagement;
                     tenant = resp.Entity;
                     _this.form.TenantName.value = tenant.TenantName;
                     _this.form.TenantWebSite.value = tenant.TenantWebSite;
-                    if (_this.form.TenantImage.value != null)
-                        _this.form.TenantImage.value.Filename = tenant.TenantImage;
+                    if (tenant.TenantImage != null) {
+                        _this.form.TenantImage.value = { Filename: tenant.TenantImage };
+                    }
                     _this.form.TenantEmailSignature.value = tenant.TenantEmailSignature;
                     _this.form.OverrideUsersEmailSignature.element.bootstrapSwitch('state', tenant.OverrideUsersEmailSignature);
                 });
@@ -5870,9 +5869,11 @@ var PatientManagement;
                 }, function (resp) {
                     user = resp.Entity;
                     _this.form.DisplayName.value = user.DisplayName;
-                    if (user.UserImage != null)
-                        //TODO how to add image to ImageUploadEditor
-                        _this.form.PhoneNumber.value = user.PhoneNumber;
+                    if (user.UserImage != null) {
+                        _this.form.UserImage.value = { Filename: user.UserImage };
+                    }
+                    _this.form.Info.value = user.Info;
+                    _this.form.PhoneNumber.value = user.PhoneNumber;
                     _this.form.Email.value = user.Email;
                     _this.form.WebSite.value = user.WebSite;
                     _this.form.EmailSignature.value = user.EmailSignature;
