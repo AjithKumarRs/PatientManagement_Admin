@@ -1,5 +1,10 @@
-﻿using PatientManagement.PatientManagement.Entities;
+﻿using System.Collections.Generic;
+using System.Linq;
+using PatientManagement.Administration;
+using PatientManagement.Administration.Entities;
+using PatientManagement.PatientManagement.Entities;
 using PatientManagement.Web.Modules.Common.Helpers;
+using Serenity;
 
 namespace PatientManagement.PatientManagement.Repositories
 {
@@ -118,6 +123,52 @@ namespace PatientManagement.PatientManagement.Repositories
             }
         }
         private class MyRetrieveHandler : RetrieveRequestHandler<MyRow> { }
-        private class MyListHandler : ListRequestHandler<MyRow> { }
+
+        private class MyListHandler : ListRequestHandler<MyRow>
+        {
+            protected override void OnReturn()
+            {
+                base.OnReturn();
+
+                if (!Authorization.HasPermission(PermissionKeys.AdministrationTenantsVisitPayments))
+                    return;
+
+                var currencyIdList = Response.Entities.Where(x => x.VisitTypeCurrencyId != null)
+                    .Select(x => x.VisitTypeCurrencyId.Value)
+                    .Distinct();
+
+                if (currencyIdList.Any())
+                {
+
+                    using (var connection = SqlConnections.NewFor<CurrenciesRow>())
+                    {
+                        var currencyFlds = CurrenciesRow.Fields;
+                        
+                        IDictionary<int, List<string>>  currencies = connection.Query(new SqlQuery()
+                                .From(currencyFlds)
+                                .Select(currencyFlds.Id)
+                                .Select(currencyFlds.CurrencyId)
+                                .Select(currencyFlds.Name)
+                                .Where(currencyFlds.Id.In(currencyIdList)))
+                            .ToDictionary(x =>
+                                    (int)(x.Id ?? x.ID), x => new List<string>() { x.CurrencyId, x.Name }
+                            );
+                        List<string> s;
+                        foreach (var x in Response.Entities)
+                        {
+                            if (x.VisitTypeCurrencyId != null &&
+                                currencies.TryGetValue(x.VisitTypeCurrencyId.Value, out s))
+                            {
+                                var currencyName = string.IsNullOrEmpty(s[1]) ? s[0] : s[1];
+                                var price = (x.VisitTypePrice != null) ? x.VisitTypePrice.Value.ToString("#.##") : "0";
+                                x.VisitTypePriceFormatted = $"{price} {currencyName}";
+                            }
+                        }
+                    }
+
+
+                }
+            }
+        }
     }
 }

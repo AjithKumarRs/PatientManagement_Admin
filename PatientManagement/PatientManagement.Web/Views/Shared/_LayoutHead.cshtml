@@ -7,26 +7,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 <link rel="home" id="ApplicationPath" href="~/" />
 <link rel="icon" type="image/x-icon" href="~/favicon.ico" />
-@Html.Stylesheet("~/Content/font-open-sans.css")
-@Html.Stylesheet("~/Content/font-awesome.css")
-@Html.Stylesheet("~/Content/simple-line-icons.css")
-@Html.Stylesheet("~/Content/ionicons.css")
-@Html.Stylesheet("~/Content/aristo/aristo.css")
-@Html.Stylesheet("~/Content/bootstrap.css")
-@Html.Stylesheet("~/Content/colorbox/jquery.colorbox.css")
-@Html.Stylesheet("~/Content/jquery.fileupload.css")
-@Html.Stylesheet("~/Content/pace.css")
-@Html.Stylesheet("~/Content/slick.grid.css")
-@Html.Stylesheet("~/Content/css/select2.css")
-@Html.Stylesheet("~/Content/toastr.css")
-@Html.Stylesheet("~/Content/serenity/serenity.css")
-@Html.Stylesheet("~/Content/site/site.css")
-@Html.Stylesheet("~/Content/bootstrap-switch/bootstrap-switch.css")
-@Html.Stylesheet("~/Scripts/colorpicker/bootstrap-colorpicker.min.css")
+@Html.StyleBundle("Base")
+@Html.StyleBundle("Site")
 @if (System.Globalization.CultureInfo.CurrentUICulture.TextInfo.IsRightToLeft)
 {
     @Html.Stylesheet("~/Content/site/site.rtl.css")
 }
+
+
 @*{var cookie = Request.Cookies["ThemePreference"]; var theme = cookie != null && !cookie.Value.IsEmptyOrNull() ? cookie.Value : "default"; *}*@
 <script type="application/json" id="ScriptCulture">
     @Html.Raw(Serenity.JSON.Stringify(new ScriptCulture()))
@@ -52,23 +40,23 @@
 
 @*@Html.Script("~/Scripts/jquery-ui.js")*@
 
-@Html.Script("~/Scripts/colorpicker/bootstrap-colorpicker.min.js")
-@Html.Script("~/Scripts/jquery.signalR.min.js")
-@Html.Script("~/Scripts/bootstrap-switch/bootstrap-switch.js")
-@Html.Script("~/Scripts/jquery-migrate-3.0.0.js")
 
-<script src="~/DynJS.axd/@HtmlScriptExtensions.GetLocalTextInclude(this.Html, "Site")"></script>
+<script src="~/DynJS.axd/@(this.Html.GetLocalTextInclude("Site"))"></script>
 <script src="~/DynJS.axd/@DynamicScriptManager.GetScriptInclude("ColumnsBundle")"></script>
 <script src="~/DynJS.axd/@DynamicScriptManager.GetScriptInclude("FormBundle")"></script>
 <script src="~/DynJS.axd/@DynamicScriptManager.GetScriptInclude("TemplateBundle")"></script>
 <script src="~/DynJS.axd/@DynamicScriptManager.GetScriptInclude("RegisteredScripts")"></script>
 
- @{
-     var mapsApiKey = Environment.GetEnvironmentVariable("GOOGLE_MAPS_API_KEY");
- }
- <!-- Google Maps -->
- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=@mapsApiKey&amp;sensor=false&amp;libraries=places"></script>
+@Html.Script("~/Scripts/colorpicker/bootstrap-colorpicker.min.js")
+@Html.Script("~/Scripts/jquery.signalR.min.js")
+@Html.Script("~/Scripts/bootstrap-switch/bootstrap-switch.js")
+@Html.Script("~/Scripts/jquery-migrate-3.0.0.js")
+@{
+    var mapsApiKey = Environment.GetEnvironmentVariable("GOOGLE_MAPS_API_KEY");
+}
+<!-- Google Maps -->
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=@mapsApiKey&amp;sensor=false&amp;libraries=places"></script>
 
- @*<script type="text/javascript" src="@mapsString"></script>*@
+@*<script type="text/javascript" src="@mapsString"></script>*@
 
- <script src="~/Scripts/geocomplete/jquery.geocomplete.js"></script>
+<script src="~/Scripts/geocomplete/jquery.geocomplete.js"></script>

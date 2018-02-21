@@ -1,6 +1,8 @@
 ﻿namespace PatientManagement.Administration {
     export interface SentEmailsForm {
-        ToEmail: LKCodeDescr;
+        ToEmail: PatientManagement.LKCodeDescr;
+        Email: Serenity.StringEditor;
+        Name: Serenity.StringEditor;
         Subject: Serenity.StringEditor;
         Body: Serenity.HtmlContentEditor;
         EmailSignature: Serenity.HtmlContentEditor;
@@ -17,12 +19,14 @@
                 SentEmailsForm.init = true;
 
                 var s = Serenity;
-                var w0 = LKCodeDescr;
+                var w0 = PatientManagement.LKCodeDescr;
                 var w1 = s.StringEditor;
                 var w2 = s.HtmlContentEditor;
 
                 Q.initFormType(SentEmailsForm, [
                     'ToEmail', w0,
+                    'Email', w1,
+                    'Name', w1,
                     'Subject', w1,
                     'Body', w2,
                     'EmailSignature', w2

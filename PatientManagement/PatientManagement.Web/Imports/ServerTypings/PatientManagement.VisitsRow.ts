@@ -24,6 +24,9 @@
         VisitTypeName?: string;
         VisitTypeBackgroundColor?: string;
         VisitTypeBorderColor?: string;
+        VisitTypePrice?: number;
+        VisitTypePriceFormatted?: string;
+        VisitTypeCurrencyId?: number;
         TenantId?: number;
     }
 
@@ -61,6 +64,9 @@
             VisitTypeName = "VisitTypeName",
             VisitTypeBackgroundColor = "VisitTypeBackgroundColor",
             VisitTypeBorderColor = "VisitTypeBorderColor",
+            VisitTypePrice = "VisitTypePrice",
+            VisitTypePriceFormatted = "VisitTypePriceFormatted",
+            VisitTypeCurrencyId = "VisitTypeCurrencyId",
             TenantId = "TenantId"
         }
     }

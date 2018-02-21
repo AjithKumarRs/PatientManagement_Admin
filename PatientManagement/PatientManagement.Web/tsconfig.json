@@ -5,11 +5,13 @@
     "experimentalDecorators": true,
     "declaration": true,
     "emitBOM": true,
+    "noEmitHelpers": true,
     "sourceMap": true,
-    "inlineSources": true,
     "outFile": "wwwroot/Scripts/site/PatientManagement.Web.js",
     "target": "es5",
-    "allowJs": false
+    "typeRoots": [
+      "./node_modules/@types/"
+    ]
   },
   "exclude": [
     ".vs/",

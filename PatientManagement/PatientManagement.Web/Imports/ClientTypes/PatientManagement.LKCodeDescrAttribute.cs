@@ -5,11 +5,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace PatientManagement
+namespace PatientManagement.PatientManagement
 {
     public partial class LKCodeDescrAttribute : LookupEditorBaseAttribute
     {
-        public const string Key = "PatientManagement.LKCodeDescr";
+        public const string Key = "PatientManagement.PatientManagement.LKCodeDescr";
 
         public LKCodeDescrAttribute()
             : base(Key)

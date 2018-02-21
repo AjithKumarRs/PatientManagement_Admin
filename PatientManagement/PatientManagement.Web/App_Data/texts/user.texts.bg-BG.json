@@ -429,6 +429,7 @@
   "Db.PatientManagement.Visits.TenantName": "Клиника",
   "Db.PatientManagement.Visits.VisitTypeId": "Тип на визита",
   "Db.PatientManagement.Visits.VisitTypeName": "Име на тип визита",
+  "Db.PatientManagement.Visits.VisitTypePriceFormatted": "Цена за визита",
   "Db.PatientManagement.VisitTypes.BackgroundColor": "Цвят на фона",
   "Db.PatientManagement.VisitTypes.BorderColor": "Цвят на рамката",
   "Db.PatientManagement.VisitTypes.CurrencyCurrencyId": "Код на валута",

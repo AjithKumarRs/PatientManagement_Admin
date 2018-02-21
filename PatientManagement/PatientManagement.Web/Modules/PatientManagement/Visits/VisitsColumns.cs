@@ -26,13 +26,15 @@ namespace PatientManagement.PatientManagement.Columns
         [EditLink, Width(200), PatientsEmailFormatter]
         public String PatientEmail { get; set; }
 
-       [EditLink, VisitsTypesFormatter(BackgroundProperty = "VisitTypeBackgroundColor", BorderProperty = "VisitTypeBorderColor")]
+        [EditLink, VisitsTypesFormatter(BackgroundProperty = "VisitTypeBackgroundColor", BorderProperty = "VisitTypeBorderColor")]
         public Int32 VisitTypeName { get; set; }
 
         public bool FreeForReservation { get; set; }
-
+        
+        public String VisitTypePriceFormatted { get; set; }
+        
         [Hidden]
-        public Int32 AssignedUserId { get; set; }
+        public int AssignedUserId { get; set; }
 
         [Width(150)]
         public string AssignedUserName { get; set; }

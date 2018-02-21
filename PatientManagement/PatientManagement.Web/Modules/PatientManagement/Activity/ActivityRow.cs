@@ -14,7 +14,7 @@ namespace PatientManagement.PatientManagement.Entities
     [ConnectionKey("PatientManagement"), TableName("[dbo].[Activity]"), DisplayName("Activity"), InstanceName("Activity"), TwoLevelCached]
     [ReadPermission("PatientManagement:Activity:Read")]
     [ModifyPermission("PatientManagement:Activity:Modify")]
-    [LookupScript("PatientManagement.LifeStyles",
+    [LookupScript("PatientManagement.Activity",
         LookupType = typeof(MultiTenantRowLookupScript<>))]
     public sealed class ActivityRow : Row, IIdRow, INameRow, ILoggingRow, IMultiTenantRow, IIsActiveRow
     {

@@ -19,7 +19,7 @@ namespace PatientManagement.Administration {
             if (this.isEditMode()) {
                 Serenity.EditorUtils.setReadOnly(this.form.Subject, true);
             }
-            
+            console.log(this.form.ToEmail);
             var items = this.form.ToEmail.get_items();
             items = items.filter(item => typeof item.source["Email"] !== 'undefined');
             this.form.ToEmail.items = items;
@@ -41,14 +41,18 @@ namespace PatientManagement.Administration {
             }, resp => {
                 var visit = <PatientManagement.VisitsRow>{};
                 visit = resp.Entity;
-
+                console.log(visit.PatientId);
+                if (!visit.PatientId) {
+                    Q.alert("Can't send email");
+                    return;
+                }
                 //TODO: Remove this service call! 
                 PatientManagement.PatientsService.Retrieve(<any>{
                     EntityId: visit.PatientId
                 },
-                    resp => {
+                    resp2 => {
                         var patient = <PatientManagement.PatientsRow>{};
-                        patient = resp.Entity;
+                        patient = resp2.Entity;
                         if (!patient.Email) {
 
                             Q.confirm(Q.text("Site.Dashboard.AlertOnPatientNoEmail"),
@@ -62,6 +66,7 @@ namespace PatientManagement.Administration {
 
                             //TODO We open new dialog with PatientID. Correct?
                             sentEmail.ToEmail = patient.PatientId.toString();
+                            
                             dialog.form.ToEmail.readOnly = true;
                             dialog.loadEntityAndOpenDialog(sentEmail);
                         }
