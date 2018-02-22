@@ -20,6 +20,7 @@ using System.IO;
 using Microsoft.AspNetCore.SignalR;
 using PatientManagement.Administration;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
 using Serenity.Web;
 using StackExchange.Exceptional;
 using StackExchange.Exceptional.Stores;
@@ -41,6 +42,8 @@ namespace PatientManagement
             services.AddCors();
             services.AddMvc(options =>
             {
+                options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+                options.Filters.Add(typeof(AntiforgeryCookieResultFilterAttribute));
                 options.ModelBinderProviders.Insert(0, new ServiceEndpointModelBinderProvider());
                 options.Conventions.Add(new ServiceEndpointActionModelConvention());
             })

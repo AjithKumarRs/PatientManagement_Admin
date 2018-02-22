@@ -1,4 +1,4 @@
-﻿namespace PatientManagement {
+﻿namespace PatientManagement.PatientManagement {
     @Serenity.Decorators.registerEditor()
     export class LKCodeDescr extends Serenity.LookupEditorBase<LKCodeDescOptions, any> {
 
@@ -43,5 +43,9 @@
 
             return markup;
         }
+    }
+    export interface LKCodeDescOptions extends Serenity.LookupEditorOptions {
+        codeFieldName: string;
+        descrFieldName: string;
     }
 }

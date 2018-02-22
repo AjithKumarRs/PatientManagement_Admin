@@ -1,4 +1,6 @@
 ﻿
+using PatientManagement.Common;
+using PatientManagement.PatientManagement.Entities;
 using PatientManagement.PatientManagement.Scripts;
 
 namespace PatientManagement.Administration.Entities

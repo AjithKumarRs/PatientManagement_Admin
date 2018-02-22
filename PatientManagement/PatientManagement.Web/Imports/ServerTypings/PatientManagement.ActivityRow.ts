@@ -20,10 +20,10 @@
         export const isActiveProperty = 'IsActive';
         export const nameProperty = 'Profession';
         export const localTextPrefix = 'PatientManagement.Activity';
-        export const lookupKey = 'PatientManagement.LifeStyles';
+        export const lookupKey = 'PatientManagement.Activity';
 
         export function getLookup(): Q.Lookup<ActivityRow> {
-            return Q.getLookup<ActivityRow>('PatientManagement.LifeStyles');
+            return Q.getLookup<ActivityRow>('PatientManagement.Activity');
         }
 
         export declare const enum Fields {

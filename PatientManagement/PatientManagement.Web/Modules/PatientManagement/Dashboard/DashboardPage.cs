@@ -178,7 +178,9 @@ namespace PatientManagement.PatientManagement.Pages
                         patientId = visit.PatientId ?? 0,
                         assignedToUser = visit.AssignedUserName,
                         patientAutoEmailActive = visit.PatientNotifyOnChange ?? false,
-                        title = string.Join("\n", visit.PatientName ,visit.Description),
+                        title = string.Join("\n",
+                            string.IsNullOrEmpty(visit.PatientName)?"* " +LocalText.Get("Db.PatientManagement.Visits.FreeForReservation") + " *": visit.PatientName
+                            , visit.Description),
                         start = (visit.StartDate ?? DateTime.Now).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
                         end = (visit.EndDate ?? DateTime.Now).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
                         allDay = false,

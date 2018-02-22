@@ -84,6 +84,7 @@ namespace PatientManagement.PatientManagement.Entities
             set { Fields.VisitTypeBorderColor[this] = value; }
         }
 
+
         [DisplayFormat("dd/MM/yyyy HH:mm")]
         [DisplayName("Start Date"), NotNull, QuickSearch, QuickFilter, SortOrder(1, true), Width(150)]
         [DateTimeKind(DateTimeKind.Unspecified), DateTimeEditor]
@@ -151,6 +152,14 @@ namespace PatientManagement.PatientManagement.Entities
             set => Fields.Description[this] = value;
         }
 
+        [DisplayName("Free For Reservation")]
+        [BsSwitchEditor]
+        public Boolean? FreeForReservation
+        {
+            get => Fields.FreeForReservation[this];
+            set => Fields.FreeForReservation[this] = value;
+        }
+
         #region PatientFields
         [DisplayName("Patient Name"), Expression("jPatient.[Name]"), Width(150), EditLink, QuickSearch ]
         public String PatientName
@@ -188,7 +197,6 @@ namespace PatientManagement.PatientManagement.Entities
         }
         #endregion
 
-
         [DisplayName("Visit Type Name"), Expression("jVisitType.[Name]"), Width(150), QuickFilter]
         public String VisitTypeName
         {
@@ -196,6 +204,33 @@ namespace PatientManagement.PatientManagement.Entities
             set => Fields.VisitTypeName[this] = value;
         }
 
+
+        [ReadPermission(PermissionKeys.AdministrationTenantsVisitPayments)]
+        [NotMapped]
+        [DisplayName("Price Per Visit")]
+        public String VisitTypePriceFormatted
+        {
+            get { return Fields.VisitTypePriceFormatted[this]; }
+            set { Fields.VisitTypePriceFormatted[this] = value; }
+        }
+
+        [ReadPermission(PermissionKeys.AdministrationTenantsVisitPayments)]
+        [Expression("jVisitType.[Price]")]
+        public Decimal? VisitTypePrice
+        {
+            get { return Fields.VisitTypePrice[this]; }
+            set { Fields.VisitTypePrice[this] = value; }
+        }
+
+        [ReadPermission(PermissionKeys.AdministrationTenantsVisitPayments)]
+        [Expression("jVisitType.[CurrencyId]")]
+        [DisplayName("Visit Type Currency Id")]
+        public Int32? VisitTypeCurrencyId
+        {
+            get => Fields.VisitTypeCurrencyId[this]; 
+            set => Fields.VisitTypeCurrencyId[this] = value; 
+        }
+        
         IIdField IIdRow.IdField => Fields.VisitId;
 
         public static readonly RowFields Fields = new RowFields().Init();
@@ -216,10 +251,11 @@ namespace PatientManagement.PatientManagement.Entities
             public Int16Field CabinetIsActive;
             public Int32Field AssignedUserId;
             public StringField AssignedUserName;
-
+            public BooleanField FreeForReservation;
             public StringField Description;
             public DateTimeField StartDate;
             public DateTimeField EndDate;
+
             public Int32Field InsertUserId;
             public DateTimeField InsertDate;
 
@@ -235,7 +271,10 @@ namespace PatientManagement.PatientManagement.Entities
             public StringField VisitTypeName;
             public StringField VisitTypeBackgroundColor;
             public StringField VisitTypeBorderColor;
-
+            public DecimalField VisitTypePrice;
+            public StringField VisitTypePriceFormatted;
+            public Int32Field VisitTypeCurrencyId;
+            
             public readonly Int32Field TenantId;
             public RowFields()
                 : base()

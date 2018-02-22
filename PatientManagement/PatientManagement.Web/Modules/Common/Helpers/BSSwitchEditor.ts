@@ -15,7 +15,9 @@
             if (this.element.hasClass('required')) this.element.removeClass('required');
             this.element.bootstrapSwitch('state', source[property.name]);
         }
-
+        public getState(): boolean {
+            return this.element.bootstrapSwitch('state');
+        }
         public getEditValue(property: Serenity.PropertyItem, target: any): void {
             target[property.name] = this.element.bootstrapSwitch('state');
         }

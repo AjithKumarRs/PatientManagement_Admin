@@ -12,11 +12,15 @@ namespace PatientManagement.PatientManagement {
             super.updateTitle();
             if (this.isEditMode()) {
 
-
-                Serenity.EditorUtils.setReadOnly(this.form.PatientId, true);
                 Serenity.EditorUtils.setReadOnly(this.form.CabinetId, true);
-                var patientId = this.form.PatientId.value;
+                if (!this.form.FreeForReservation.getState()) {
+                    Serenity.EditorUtils.setReadOnly(this.form.PatientId, true);
+                } else {
+                    return;
+                }
 
+                var patientId = this.form.PatientId.value;
+                if(patientId)
                 PatientsService.Retrieve({
                         EntityId: patientId
                     },
@@ -62,7 +66,13 @@ namespace PatientManagement.PatientManagement {
             }, resp => {
 
                 p = resp.Entity;
-                Q.notifyInfo(Q.text("Site.Dashboard.SuccessChangedVisitDates") + p.PatientName);
+                
+                if (p.PatientName) {
+                    Q.notifyInfo(Q.text("Site.Dashboard.SuccessChangedVisitDates") + p.PatientName);
+
+                } else {
+                    Q.notifyInfo(Q.text("Site.Dashboard.SuccessChangedVisitDatesFreeForReservation"));
+                }
 
                 var beforeDateStart = resp.Entity.StartDate;
                 var beforeDateEnd = resp.Entity.EndDate;

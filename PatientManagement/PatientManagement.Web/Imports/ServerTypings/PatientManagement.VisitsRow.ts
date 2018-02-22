@@ -8,6 +8,7 @@
         CabinetIsActive?: number;
         AssignedUserId?: number;
         AssignedUserName?: string;
+        FreeForReservation?: boolean;
         Description?: string;
         StartDate?: string;
         EndDate?: string;
@@ -23,6 +24,9 @@
         VisitTypeName?: string;
         VisitTypeBackgroundColor?: string;
         VisitTypeBorderColor?: string;
+        VisitTypePrice?: number;
+        VisitTypePriceFormatted?: string;
+        VisitTypeCurrencyId?: number;
         TenantId?: number;
     }
 
@@ -44,6 +48,7 @@
             CabinetIsActive = "CabinetIsActive",
             AssignedUserId = "AssignedUserId",
             AssignedUserName = "AssignedUserName",
+            FreeForReservation = "FreeForReservation",
             Description = "Description",
             StartDate = "StartDate",
             EndDate = "EndDate",
@@ -59,6 +64,9 @@
             VisitTypeName = "VisitTypeName",
             VisitTypeBackgroundColor = "VisitTypeBackgroundColor",
             VisitTypeBorderColor = "VisitTypeBorderColor",
+            VisitTypePrice = "VisitTypePrice",
+            VisitTypePriceFormatted = "VisitTypePriceFormatted",
+            VisitTypeCurrencyId = "VisitTypeCurrencyId",
             TenantId = "TenantId"
         }
     }
