@@ -305,14 +305,9 @@ namespace PatientManagement.PatientManagement.Pages
 
             var countVisitsForToday = 0;
             var alreadyExpired = 0;
+            
+            var endDateToday = DateTime.Now;
 
-#if DEBUG
-            //TODO: 3 hours added because azure app service is set to UTC <- For simplicity
-            var endDateBgCulture = DateTime.Now;
-#endif
-#if !DEBUG
-            var endDateBgCulture = DateTime.Now.AddHours(3);
-#endif
             var visitFlds = VisitsRow.Fields.As("vs");
 
             using (var conection = SqlConnections.NewFor<VisitsRow>())
@@ -329,7 +324,7 @@ namespace PatientManagement.PatientManagement.Pages
                     query.Where(visitFlds.TenantId == user.TenantId);
 
                 countVisitsForToday = connection.Query(query.Where(visitFlds.EndDate <= endDate)).Count();
-                alreadyExpired = connection.Query(query.Where(visitFlds.EndDate <= endDateBgCulture)).Count();
+                alreadyExpired = connection.Query(query.Where(visitFlds.EndDate <= endDateToday)).Count();
             }
 
             return Json(new { countVisitsForToday, alreadyExpired });
