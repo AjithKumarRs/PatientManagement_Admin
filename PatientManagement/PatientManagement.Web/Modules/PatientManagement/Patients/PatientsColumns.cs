@@ -28,12 +28,18 @@ namespace PatientManagement.PatientManagement.Columns
         [Width(200), PatientsEmailFormatter]
         public string Email { get; set; }
 
-        public DateTime FirstRegistrationDate { get; set; }
+        public Int32 VisitsCount { get; set; }
+        [Width(150)]
+        public DateTime LastVisitEndDate { get; set; }
+
         public String Address { get; set; }
+        public String City { get; set; }
+        public String Country { get; set; }
         public Int32 Height { get; set; }
         public Int32 Weight { get; set; }
         
         public bool NotifyOnChange { get; set; }
+        public DateTime FirstRegistrationDate { get; set; }
 
         [Width(80)]
         public String TenantName { get; set; }

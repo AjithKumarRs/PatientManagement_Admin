@@ -9024,3 +9024,6 @@ section.content > .s-DataGrid {
 .s-Administration-CouponsDialog .caption {
   width: 150px;
 }
+.pac-container {
+  z-index: 2051 !important;
+}

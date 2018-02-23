@@ -6,8 +6,12 @@
         PhoneNumber?: string;
         Gender?: Gender;
         Picture?: string;
+        VisitsCount?: number;
+        LastVisitEndDate?: string;
         FirstRegistrationDate?: string;
         Address?: string;
+        City?: string;
+        Country?: string;
         Height?: number;
         Weight?: number;
         Email?: string;
@@ -40,8 +44,12 @@
             PhoneNumber = "PhoneNumber",
             Gender = "Gender",
             Picture = "Picture",
+            VisitsCount = "VisitsCount",
+            LastVisitEndDate = "LastVisitEndDate",
             FirstRegistrationDate = "FirstRegistrationDate",
             Address = "Address",
+            City = "City",
+            Country = "Country",
             Height = "Height",
             Weight = "Weight",
             Email = "Email",

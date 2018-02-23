@@ -1,9 +1,10 @@
 ﻿
 interface GeoOptions {
-    map: string,
+    map?: string,
     find?: string,
     details?: string,
     mapOptions?: MapOption,
+    types?: string[],
 }
 
 interface MapOption extends GeoOptions {

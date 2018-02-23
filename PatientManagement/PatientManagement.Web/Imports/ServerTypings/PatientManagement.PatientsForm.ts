@@ -3,11 +3,13 @@
         PatientId: Serenity.IntegerEditor;
         Name: Serenity.StringEditor;
         Gender: Serenity.EnumEditor;
-        PersonalNumber: Serenity.StringEditor;
         PhoneNumber: Serenity.StringEditor;
+        PersonalNumber: Serenity.StringEditor;
         Email: Serenity.EmailEditor;
-        Picture: Serenity.ImageUploadEditor;
         Address: Serenity.StringEditor;
+        City: AddressAutocompleteNoMap;
+        Country: AddressAutocompleteNoMap;
+        Picture: Serenity.ImageUploadEditor;
         Height: Serenity.IntegerEditor;
         Weight: Serenity.IntegerEditor;
         FirstRegistrationDate: Serenity.DateTimeEditor;
@@ -31,27 +33,30 @@
                 var w1 = s.StringEditor;
                 var w2 = s.EnumEditor;
                 var w3 = s.EmailEditor;
-                var w4 = s.ImageUploadEditor;
-                var w5 = s.DateTimeEditor;
-                var w6 = BsSwitchEditor;
-                var w7 = NotesEditor;
-                var w8 = s.LookupEditor;
+                var w4 = AddressAutocompleteNoMap;
+                var w5 = s.ImageUploadEditor;
+                var w6 = s.DateTimeEditor;
+                var w7 = BsSwitchEditor;
+                var w8 = NotesEditor;
+                var w9 = s.LookupEditor;
 
                 Q.initFormType(PatientsForm, [
                     'PatientId', w0,
                     'Name', w1,
                     'Gender', w2,
-                    'PersonalNumber', w1,
                     'PhoneNumber', w1,
+                    'PersonalNumber', w1,
                     'Email', w3,
-                    'Picture', w4,
                     'Address', w1,
+                    'City', w4,
+                    'Country', w4,
+                    'Picture', w5,
                     'Height', w0,
                     'Weight', w0,
-                    'FirstRegistrationDate', w5,
-                    'NotifyOnChange', w6,
-                    'NoteList', w7,
-                    'TenantId', w8
+                    'FirstRegistrationDate', w6,
+                    'NotifyOnChange', w7,
+                    'NoteList', w8,
+                    'TenantId', w9
                 ]);
             }
         }

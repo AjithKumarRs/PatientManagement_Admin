@@ -24,19 +24,31 @@ namespace PatientManagement.PatientManagement.Forms
         public String Name { get; set; }
 
         public Int32 Gender { get; set; }
-        public Int64 PersonalNumber { get; set; }
+        [HalfWidth]
         public string PhoneNumber { get; set; }
+        [HalfWidth]
+        public Int64 PersonalNumber { get; set; }
         [EmailEditor]
 
         public string Email { get; set; }
+        [Category("Location")]
+        public String Address { get; set; }
+        [HalfWidth]
+        [AddressAutocompleteNoMap(Option = "city")]
+        public String City { get; set; }
+        [HalfWidth]
+        [AddressAutocompleteNoMap(Option = "country")]
+        public String Country { get; set; }
+
         [Category("Additional Information")]
         public string Picture { get; set; }
 
-        public String Address { get; set; }
+        [HalfWidth]
         public Int32 Height { get; set; }
+        [HalfWidth]
         public Int32 Weight { get; set; }
 
-        [DefaultValue("now")]
+        [DefaultValue("now"), ReadOnly(true)]
         public DateTime FirstRegistrationDate { get; set; }
 
         [Hint("When visit for the patient is changed, the user will receive email automatically (if email is added). ")]
