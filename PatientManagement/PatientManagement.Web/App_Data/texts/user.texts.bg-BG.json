@@ -31,6 +31,7 @@
   "Controls.FilterPanel.FixErrorsMessage": "Моля оправете грешките, маркирани с червено",
   "Controls.FilterPanel.ValueRequired": "стойноста е задължителна!",
   "Controls.ImageUpload.DeleteButtonHint": "Изтрий",
+  "Controls.ImageUpload.NotAnImageFile": "Файла за качване не е картина!",
   "Controls.Pager.DefaultLoadError": "Грешка при зареждане на данни!!",
   "Controls.Pager.LoadingStatus": "Моля изчакайте, зареждат се данни...",
   "Controls.Pager.NoRowStatus": "Няма записи",

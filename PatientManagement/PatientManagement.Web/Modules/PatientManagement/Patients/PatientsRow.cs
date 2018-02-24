@@ -68,7 +68,7 @@ namespace PatientManagement.PatientManagement.Entities
         }
 
         [DisplayName("Picture"), Size(100)]
-        [ImageUploadEditor(FilenameFormat = "PatientPicture/~", CopyToHistory = true)]
+        [ImageUploadEditor(FilenameFormat = "PatientPicture/~", CopyToHistory = true, AllowNonImage = false)]
         public String Picture
         {
             get { return Fields.Picture[this]; }
