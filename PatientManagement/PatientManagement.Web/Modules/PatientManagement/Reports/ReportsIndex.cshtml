@@ -1,17 +1,20 @@
-﻿
+﻿@using PatientManagement.Administration
+
 @{
     ViewData["Title"] = Serenity.LocalText.Get("Navigation.Reports");
 }
 <div class="row">
     
     <div id="newPatientsThisMonth"></div>
+    
+@if (Serenity.Authorization.HasPermission(PermissionKeys.AdministrationTenantsReportsNewPatientsThisMonth))
+{
     <script>
         jQuery(document).ready(function() {
-            new PatientManagement.PatientManagement.NewPatientsThisMonth( $("#newPatientsThisMonth"), {});
+            new PatientManagement.PatientManagement.NewPatientsThisMonth($("#newPatientsThisMonth"), {});
         });
-
     </script>
-
+}
     <div class="col-lg-3 col-xs-6">
         <!-- small box -->
         <div class="small-box bg-green-gradient">

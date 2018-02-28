@@ -4,6 +4,11 @@
 
         constructor(elem: JQuery, opt: {}) {
             super(elem, opt);
+
+            ReportsEndpointService.NewPatientsThisMonth({},
+                response => {
+                    console.log("Jooohu");
+                });
         }
     }
-}
+} 

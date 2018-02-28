@@ -1,5 +1,7 @@
 ﻿
 
+using PatientManagement.Administration;
+
 namespace PatientManagement.PatientManagement.Pages
 {
     using System;
@@ -9,7 +11,7 @@ namespace PatientManagement.PatientManagement.Pages
     using Microsoft.AspNetCore.Mvc;
     using Serenity.Web;
 
-    [PageAuthorize]
+    [PageAuthorize(PermissionKeys.AdministrationTenantsReportsPage)]
     public class ReportsController : Controller
     {
         [HttpGet, Route("PatientManagement/Reports")]
