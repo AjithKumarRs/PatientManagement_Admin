@@ -702,6 +702,7 @@
   "Site.Payments.Invoice.TotalForPayment": "Тотал за плащане",
   "Site.Payments.PaymentBlank": "Платежно",
   "Site.Payments.PaymentEmptyValueError": "Не може да добавите нулево плащане!",
+  "Site.Reports.ReportNewPatientsThisMonthBox": "Регистрирани пациенти този месец",
   "Site.RolePermissionDialog.DialogTitle": "Редактирай Права За Роля ({0})",
   "Site.RolePermissionDialog.EditButton": "Редактирай Права",
   "Site.RolePermissionDialog.SaveSuccess": "Обнови права за ролята.",

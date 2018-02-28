@@ -7,6 +7,6 @@ namespace PatientManagement.PatientManagement.Entities
 {
     public class NewPatientsThisMonthResponse
     {
-        public string Counter { get; set; }
+        public int Counter { get; set; }
     }
 }

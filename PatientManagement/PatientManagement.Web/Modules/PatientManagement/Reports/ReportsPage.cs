@@ -11,7 +11,7 @@ namespace PatientManagement.PatientManagement.Pages
     using Microsoft.AspNetCore.Mvc;
     using Serenity.Web;
 
-    [PageAuthorize(PermissionKeys.AdministrationTenantsReportsPage)]
+    [PageAuthorize(PatientManagementPermissionKeys.ReportsPage)]
     public class ReportsController : Controller
     {
         [HttpGet, Route("PatientManagement/Reports")]

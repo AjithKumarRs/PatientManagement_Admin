@@ -135,6 +135,11 @@ namespace PatientManagement
         }
         public static class Site
         {
+            public static class Reports
+            {
+                public static LocalText ReportNewPatientsThisMonthBox = "New patients this month";
+            }
+
             public static class About
             {
                 public static LocalText AboutPageTitle = "About";
