@@ -8538,7 +8538,14 @@ var PatientManagement;
                             $(this).text(this.Counter.toFixed(2));
                         }
                     });
-                    ;
+                    if (response.Entity.PercentMonthBefore >= 0) {
+                        $(_this.byId("NewPatientsThisMonthBox")).addClass("bg-green-gradient");
+                        $(_this.byId("NewPatientsThisMonthIcon")).addClass("fa-arrow-circle-o-up");
+                    }
+                    else {
+                        $(_this.byId("NewPatientsThisMonthBox")).addClass("bg-red-gradient");
+                        $(_this.byId("NewPatientsThisMonthIcon")).addClass("fa-arrow-circle-o-down");
+                    }
                 });
                 return _this;
             }
@@ -8556,6 +8563,14 @@ var PatientManagement;
             function NewVisitsThisMonth(elem, opt) {
                 var _this = _super.call(this, elem, opt) || this;
                 PatientManagement.ReportsEndpointService.NewVisitsThisMonth({}, function (response) {
+                    if (response.Entity.PercentMonthBefore >= 0) {
+                        $(_this.byId("NewVisitsThisMonthBox")).addClass("bg-green-gradient");
+                        $(_this.byId("NewVisitsThisMonthIcon")).addClass("fa-arrow-circle-o-up");
+                    }
+                    else {
+                        $(_this.byId("NewVisitsThisMonthBox")).addClass("bg-red-gradient");
+                        $(_this.byId("NewVisitsThisMonthIcon")).addClass("fa-arrow-circle-o-down");
+                    }
                     _this.byId("NewVisitsThisMonthCounter").animate({
                         Counter: response.Entity.Counter
                     }, {

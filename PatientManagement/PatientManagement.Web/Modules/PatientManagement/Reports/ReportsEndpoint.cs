@@ -50,7 +50,7 @@ namespace PatientManagement.PatientManagement.Endpoints
                 throw new InvalidOperationException();
 
             var change = current - previous;
-            return (double)change / previous;
+            return (double)change / previous * 100;
         }
 
         [ServiceAuthorize(PatientManagementPermissionKeys.ReportsNewVisitsThisMonth)]

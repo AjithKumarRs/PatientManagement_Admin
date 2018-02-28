@@ -7,6 +7,15 @@
 
             ReportsEndpointService.NewVisitsThisMonth({},
                 response => {
+                    if (response.Entity.PercentMonthBefore >= 0) {
+                        $(this.byId("NewVisitsThisMonthBox")).addClass("bg-green-gradient");
+                        $(this.byId("NewVisitsThisMonthIcon")).addClass("fa-arrow-circle-o-up");
+
+                    } else {
+                        $(this.byId("NewVisitsThisMonthBox")).addClass("bg-red-gradient");
+                        $(this.byId("NewVisitsThisMonthIcon")).addClass("fa-arrow-circle-o-down");
+                    }   
+
                     this.byId("NewVisitsThisMonthCounter").animate({
                         Counter: response.Entity.Counter
                     }, {
@@ -26,7 +35,6 @@
                             $(this).text(Math.floor(now));
                         }
                     });
-                    console.log(response.Entity.PercentMonthBefore);
                     this.byId("NewVisitsThisMonthPercent").prop('Counter', 0).animate({
                         Counter: response.Entity.PercentMonthBefore
                     }, {

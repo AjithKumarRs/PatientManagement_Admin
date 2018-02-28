@@ -7,7 +7,8 @@
 
             ReportsEndpointService.NewPatientsThisMonth({},
                 response => {
-                    
+                  
+
                     this.byId("NewPatientsThisMonthCounter").animate({
                         Counter: response.Entity.Counter
                     }, {
@@ -37,7 +38,15 @@
                         step: function (now) {
                             $(this).text(this.Counter.toFixed(2));
                         }
-                    });;
+                        });
+
+                    if (response.Entity.PercentMonthBefore >= 0) {
+                        $(this.byId("NewPatientsThisMonthBox")).addClass("bg-green-gradient");
+                        $(this.byId("NewPatientsThisMonthIcon")).addClass("fa-arrow-circle-o-up");
+                    } else {
+                        $(this.byId("NewPatientsThisMonthBox")).addClass("bg-red-gradient");
+                        $(this.byId("NewPatientsThisMonthIcon")).addClass("fa-arrow-circle-o-down");
+                    }  
                 });
         }
     }
