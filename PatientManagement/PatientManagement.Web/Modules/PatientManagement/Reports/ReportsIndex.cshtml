@@ -4,61 +4,24 @@
     ViewData["Title"] = Serenity.LocalText.Get("Navigation.Reports");
 }
 <div class="row">
-    
-    <div id="newPatientsThisMonth"></div>
-    
-@if (Authorization.HasPermission(PatientManagementPermissionKeys.ReportsNewPatientsThisMonth))
-{
-    <script>
-        jQuery(document).ready(function() {
-            new PatientManagement.PatientManagement.NewPatientsThisMonth($("#newPatientsThisMonth"), {});
-        });
-    </script>
-}
-    <div class="col-lg-3 col-xs-6">
-        <!-- small box -->
-        <div class="small-box bg-green-gradient">
-            <div class="inner">
-                <h3>533</h3>
-
-                <p>New visits this month</p>
-            </div>
-            <div class="icon">
-                <i class="fa fa-calendar"></i>
-            </div>
-        </div>
-    </div>
 
 
-
-    <div class="col-lg-3 col-xs-6">
-        <!-- small box -->
-        <div class="small-box bg-green-gradient">
-            <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-                <p>Patients than previous month</p>
-            </div>
-            <div class="icon">
-                <i class="fa fa-arrow-circle-o-up"></i>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="col-lg-3 col-xs-6">
-        <!-- small box -->
-        <div class="small-box bg-red-gradient">
-            <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-                <p>Visits than previous month</p>
-            </div>
-            <div class="icon">
-                <i class="fa fa-arrow-circle-o-down"></i>
-            </div>
-        </div>
-    </div>
-    
-
+    @if (Authorization.HasPermission(PatientManagementPermissionKeys.ReportsNewPatientsThisMonth))
+    {
+        <div id="newPatientsThisMonth"></div>
+        <script>
+            jQuery(document).ready(function () {
+                new PatientManagement.PatientManagement.NewPatientsThisMonth($("#newPatientsThisMonth"), {});
+            });
+        </script>
+    }
+    @if (Authorization.HasPermission(PatientManagementPermissionKeys.ReportsNewVisitsThisMonth))
+    {
+        <div id="newVisitsThisMonth"></div>
+        <script>
+            jQuery(document).ready(function () {
+                new PatientManagement.PatientManagement.NewVisitsThisMonth($("#newVisitsThisMonth"), {});
+            });
+        </script>
+    }
 </div>

@@ -4146,8 +4146,10 @@ declare namespace PatientManagement.PatientManagement {
     namespace ReportsEndpointService {
         const baseUrl = "PatientManagement/Reports";
         function NewPatientsThisMonth(request: Serenity.ServiceRequest, onSuccess?: (response: Serenity.RetrieveResponse<NewPatientsThisMonthResponse>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function NewVisitsThisMonth(request: Serenity.ServiceRequest, onSuccess?: (response: Serenity.RetrieveResponse<NewVisitsThisMonthResponse>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         const enum Methods {
             NewPatientsThisMonth = "PatientManagement/Reports/NewPatientsThisMonth",
+            NewVisitsThisMonth = "PatientManagement/Reports/NewVisitsThisMonth",
         }
     }
 }
@@ -4159,5 +4161,15 @@ declare namespace PatientManagement.PatientManagement {
 declare namespace PatientManagement.PatientManagement {
     class NewPatientsThisMonth extends Serenity.TemplatedWidget<any> {
         constructor(elem: JQuery, opt: {});
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class NewVisitsThisMonth extends Serenity.TemplatedWidget<any> {
+        constructor(elem: JQuery, opt: {});
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    interface NewVisitsThisMonthResponse {
+        Counter?: number;
     }
 }

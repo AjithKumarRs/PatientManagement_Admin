@@ -7,8 +7,8 @@ namespace PatientManagement.PatientManagement
 {
     public class PatientManagementPermissionKeys
     {
-
         public const string ReportsPage = "PatientManagement:Reports:Page";
-        public const string ReportsNewPatientsThisMonth = "PatientManagement:Reports:NewPatientsThisMonth";
+        public const string ReportsNewPatientsThisMonth = "PatientManagement:Reports:NewPatientsThisMonthBox";
+        public const string ReportsNewVisitsThisMonth = "PatientManagement:Reports:NewVisitsThisMonthBox";
     }
 }

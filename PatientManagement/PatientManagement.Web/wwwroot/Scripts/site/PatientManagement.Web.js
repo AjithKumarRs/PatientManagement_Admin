@@ -8492,7 +8492,8 @@ var PatientManagement;
         (function (ReportsEndpointService) {
             ReportsEndpointService.baseUrl = 'PatientManagement/Reports';
             [
-                'NewPatientsThisMonth'
+                'NewPatientsThisMonth',
+                'NewVisitsThisMonth'
             ].forEach(function (x) {
                 ReportsEndpointService[x] = function (r, s, o) {
                     return Q.serviceRequest(ReportsEndpointService.baseUrl + '/' + x, r, s, o);
@@ -8510,7 +8511,7 @@ var PatientManagement;
             function NewPatientsThisMonth(elem, opt) {
                 var _this = _super.call(this, elem, opt) || this;
                 PatientManagement.ReportsEndpointService.NewPatientsThisMonth({}, function (response) {
-                    $("#newPatientsThisMonth-counter").animate({
+                    _this.byId("NewPatientsThisMonthCounter").animate({
                         Counter: response.Entity.Counter
                     }, {
                         duration: 4000,
@@ -8527,5 +8528,31 @@ var PatientManagement;
         }(Serenity.TemplatedWidget));
         PatientManagement.NewPatientsThisMonth = NewPatientsThisMonth;
     })(PatientManagement = PatientManagement_104.PatientManagement || (PatientManagement_104.PatientManagement = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement_105) {
+    var PatientManagement;
+    (function (PatientManagement) {
+        var NewVisitsThisMonth = /** @class */ (function (_super) {
+            __extends(NewVisitsThisMonth, _super);
+            function NewVisitsThisMonth(elem, opt) {
+                var _this = _super.call(this, elem, opt) || this;
+                PatientManagement.ReportsEndpointService.NewVisitsThisMonth({}, function (response) {
+                    _this.byId("NewVisitsThisMonthCounter").animate({
+                        Counter: response.Entity.Counter
+                    }, {
+                        duration: 4000,
+                        easing: 'swing',
+                        step: function (now) {
+                            $(this).text(Math.ceil(now));
+                        }
+                    });
+                });
+                return _this;
+            }
+            return NewVisitsThisMonth;
+        }(Serenity.TemplatedWidget));
+        PatientManagement.NewVisitsThisMonth = NewVisitsThisMonth;
+    })(PatientManagement = PatientManagement_105.PatientManagement || (PatientManagement_105.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 //# sourceMappingURL=PatientManagement.Web.js.map

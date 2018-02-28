@@ -34,6 +34,23 @@ namespace PatientManagement.PatientManagement.Endpoints
             return new RetrieveResponse<NewPatientsThisMonthResponse>{Entity = response};
         }
 
+        [ServiceAuthorize(PatientManagementPermissionKeys.ReportsNewVisitsThisMonth)]
+        public RetrieveResponse<NewVisitsThisMonthResponse> NewVisitsThisMonth(IDbConnection connection)
+        {
+            var response = new NewVisitsThisMonthResponse();
 
+            var patientFlds = VisitsRow.Fields;
+
+            var listReq = new ListRequest();
+            listReq.Criteria = (
+                new Criteria(patientFlds.InsertDate.PropertyName) > DateTime.Now.AddMonths(-1)
+                & new Criteria(patientFlds.InsertDate.PropertyName) < DateTime.Now
+            );
+            listReq.ColumnSelection = ColumnSelection.KeyOnly;
+            var counter = new VisitsRepository().List(connection, listReq).TotalCount;
+
+            response.Counter = counter;
+            return new RetrieveResponse<NewVisitsThisMonthResponse> { Entity = response };
+        }
     }
 }
