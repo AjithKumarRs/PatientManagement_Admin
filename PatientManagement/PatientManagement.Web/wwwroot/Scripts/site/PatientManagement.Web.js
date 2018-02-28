@@ -8510,6 +8510,7 @@ var PatientManagement;
             __extends(NewPatientsThisMonth, _super);
             function NewPatientsThisMonth(elem, opt) {
                 var _this = _super.call(this, elem, opt) || this;
+                $(_this.byId("NewPatientsThisMonthBoxLeft")).addClass("bg-" + _this.getCurrentTheme() + "-gradient");
                 PatientManagement.ReportsEndpointService.NewPatientsThisMonth({}, function (response) {
                     _this.byId("NewPatientsThisMonthCounter").animate({
                         Counter: response.Entity.Counter
@@ -8549,6 +8550,13 @@ var PatientManagement;
                 });
                 return _this;
             }
+            NewPatientsThisMonth.prototype.getCurrentTheme = function () {
+                var skinClass = Q.first(($('body').attr('class') || '').split(' '), function (x) { return Q.startsWith(x, 'skin-'); });
+                if (skinClass) {
+                    return skinClass.substr(5);
+                }
+                return 'blue';
+            };
             return NewPatientsThisMonth;
         }(Serenity.TemplatedWidget));
         PatientManagement.NewPatientsThisMonth = NewPatientsThisMonth;
@@ -8562,6 +8570,7 @@ var PatientManagement;
             __extends(NewVisitsThisMonth, _super);
             function NewVisitsThisMonth(elem, opt) {
                 var _this = _super.call(this, elem, opt) || this;
+                $(_this.byId("NewVisitsThisMonthBoxLeft")).addClass("bg-" + _this.getCurrentTheme() + "-gradient");
                 PatientManagement.ReportsEndpointService.NewVisitsThisMonth({}, function (response) {
                     if (response.Entity.PercentMonthBefore >= 0) {
                         $(_this.byId("NewVisitsThisMonthBox")).addClass("bg-green-gradient");
@@ -8601,6 +8610,13 @@ var PatientManagement;
                 });
                 return _this;
             }
+            NewVisitsThisMonth.prototype.getCurrentTheme = function () {
+                var skinClass = Q.first(($('body').attr('class') || '').split(' '), function (x) { return Q.startsWith(x, 'skin-'); });
+                if (skinClass) {
+                    return skinClass.substr(5);
+                }
+                return 'blue';
+            };
             return NewVisitsThisMonth;
         }(Serenity.TemplatedWidget));
         PatientManagement.NewVisitsThisMonth = NewVisitsThisMonth;

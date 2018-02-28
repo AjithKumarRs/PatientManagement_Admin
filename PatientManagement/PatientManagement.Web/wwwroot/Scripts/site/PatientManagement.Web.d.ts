@@ -4162,11 +4162,13 @@ declare namespace PatientManagement.PatientManagement {
 }
 declare namespace PatientManagement.PatientManagement {
     class NewPatientsThisMonth extends Serenity.TemplatedWidget<any> {
+        protected getCurrentTheme(): string;
         constructor(elem: JQuery, opt: {});
     }
 }
 declare namespace PatientManagement.PatientManagement {
     class NewVisitsThisMonth extends Serenity.TemplatedWidget<any> {
+        protected getCurrentTheme(): string;
         constructor(elem: JQuery, opt: {});
     }
 }
