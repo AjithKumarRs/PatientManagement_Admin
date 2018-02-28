@@ -4155,7 +4155,9 @@ declare namespace PatientManagement.PatientManagement {
 }
 declare namespace PatientManagement.PatientManagement {
     interface NewPatientsThisMonthResponse {
-        Counter?: string;
+        PercentMonthBefore?: number;
+        CounterMonthBefore?: number;
+        Counter?: number;
     }
 }
 declare namespace PatientManagement.PatientManagement {
@@ -4171,5 +4173,7 @@ declare namespace PatientManagement.PatientManagement {
 declare namespace PatientManagement.PatientManagement {
     interface NewVisitsThisMonthResponse {
         Counter?: number;
+        CounterMonthBefore?: number;
+        PercentMonthBefore?: number;
     }
 }

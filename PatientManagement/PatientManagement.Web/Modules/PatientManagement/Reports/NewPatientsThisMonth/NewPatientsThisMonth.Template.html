@@ -1,7 +1,13 @@
 ﻿<div class="col-lg-3 col-xs-6">
     <div class="small-box bg-green-gradient">
         <div class="inner">
-            <h3 id="~_NewPatientsThisMonthCounter">0</h3>
+            <h3>
+                <span id="~_NewPatientsThisMonthCounter">0</span>
+                <sup style="font-size: 20px">
+                    / <span id="~_NewPatientsMonthBeforeCounter">0</span>
+
+                </sup>
+            </h3>
 
             <p>{{text:"Site.Reports.ReportNewPatientsThisMonthBox"}}</p>
         </div>
@@ -15,9 +21,12 @@
     <!-- small box -->
     <div class="small-box bg-green-gradient">
         <div class="inner">
-            <h3>53<sup style="font-size: 20px">%</sup></h3>
+            <h3>
+                <span id="~_NewPatientsThisMonthPercent">0</span>
+                <sup style="font-size: 20px">%</sup>
+            </h3>
 
-            <p>Patients than previous month</p>
+            <p>{{text:"Site.Reports.ReportNewPatientsThanPreviousMonthBox"}}</p>
         </div>
         <div class="icon">
             <i class="fa fa-arrow-circle-o-up"></i>

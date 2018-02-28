@@ -23,15 +23,34 @@ namespace PatientManagement.PatientManagement.Endpoints
             var patientFlds = PatientsRow.Fields;
 
             var listReq = new ListRequest();
+
+            // Get for this month
             listReq.Criteria = (
                 new Criteria(patientFlds.FirstRegistrationDate.PropertyName) > DateTime.Now.AddMonths(-1)
                 & new Criteria(patientFlds.FirstRegistrationDate.PropertyName) < DateTime.Now
             );
             listReq.ColumnSelection = ColumnSelection.KeyOnly;
-            var counter = new PatientsRepository().List(connection, listReq).TotalCount;
+            response.Counter = new PatientsRepository().List(connection, listReq).TotalCount;
 
-            response.Counter = counter;
+            // Get for month before
+            listReq.Criteria = null;
+            listReq.Criteria = (
+                new Criteria(patientFlds.FirstRegistrationDate.PropertyName) > DateTime.Now.AddMonths(-2)
+                & new Criteria(patientFlds.FirstRegistrationDate.PropertyName) < DateTime.Now.AddMonths(-1)
+            );
+            response.CounterMonthBefore = new PatientsRepository().List(connection, listReq).TotalCount;
+            response.PercentMonthBefore = CalculateChange(response.CounterMonthBefore, response.Counter);
+
             return new RetrieveResponse<NewPatientsThisMonthResponse>{Entity = response};
+        }
+
+        double CalculateChange(long previous, long current)
+        {
+            if (previous == 0)
+                throw new InvalidOperationException();
+
+            var change = current - previous;
+            return (double)change / previous;
         }
 
         [ServiceAuthorize(PatientManagementPermissionKeys.ReportsNewVisitsThisMonth)]
@@ -39,17 +58,26 @@ namespace PatientManagement.PatientManagement.Endpoints
         {
             var response = new NewVisitsThisMonthResponse();
 
-            var patientFlds = VisitsRow.Fields;
+            var visitsFlds = VisitsRow.Fields;
 
+            // Get for this month
             var listReq = new ListRequest();
             listReq.Criteria = (
-                new Criteria(patientFlds.InsertDate.PropertyName) > DateTime.Now.AddMonths(-1)
-                & new Criteria(patientFlds.InsertDate.PropertyName) < DateTime.Now
+                new Criteria(visitsFlds.InsertDate.PropertyName) > DateTime.Now.AddMonths(-1)
+                & new Criteria(visitsFlds.InsertDate.PropertyName) < DateTime.Now
             );
             listReq.ColumnSelection = ColumnSelection.KeyOnly;
-            var counter = new VisitsRepository().List(connection, listReq).TotalCount;
+            response.Counter = new VisitsRepository().List(connection, listReq).TotalCount;
 
-            response.Counter = counter;
+            // Get for month before
+            listReq.Criteria = null;
+            listReq.Criteria = (
+                new Criteria(visitsFlds.InsertDate.PropertyName) > DateTime.Now.AddMonths(-2)
+                & new Criteria(visitsFlds.InsertDate.PropertyName) < DateTime.Now.AddMonths(-1)
+            );
+            response.CounterMonthBefore = new VisitsRepository().List(connection, listReq).TotalCount;
+            response.PercentMonthBefore = CalculateChange(response.CounterMonthBefore, response.Counter);
+
             return new RetrieveResponse<NewVisitsThisMonthResponse> { Entity = response };
         }
     }

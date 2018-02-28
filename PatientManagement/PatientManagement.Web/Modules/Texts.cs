@@ -138,7 +138,10 @@ namespace PatientManagement
             public static class Reports
             {
                 public static LocalText ReportNewPatientsThisMonthBox = "New patients this month";
+                public static LocalText ReportNewPatientsThanPreviousMonthBox = "Patients than previous month";
+
                 public static LocalText ReportNewVisitsThisMonthBox = "New visits this month";
+                public static LocalText ReportNewVisitsThanPreviousMonthBox = "Visits than previous month";
             }
 
             public static class About

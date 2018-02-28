@@ -8520,6 +8520,24 @@ var PatientManagement;
                             $(this).text(Math.ceil(now));
                         }
                     });
+                    _this.byId("NewPatientsMonthBeforeCounter").animate({
+                        Counter: response.Entity.CounterMonthBefore
+                    }, {
+                        duration: 4000,
+                        easing: 'swing',
+                        step: function (now) {
+                            $(this).text(Math.ceil(now));
+                        }
+                    });
+                    _this.byId("NewPatientsThisMonthPercent").prop('Counter', 0).animate({
+                        Counter: response.Entity.PercentMonthBefore
+                    }, {
+                        duration: 4000,
+                        easing: 'swing',
+                        step: function (now) {
+                            $(this).text(this.Counter.toFixed(2));
+                        }
+                    });
                     ;
                 });
                 return _this;
@@ -8544,7 +8562,25 @@ var PatientManagement;
                         duration: 4000,
                         easing: 'swing',
                         step: function (now) {
-                            $(this).text(Math.ceil(now));
+                            $(this).text(Math.floor(now));
+                        }
+                    });
+                    _this.byId("NewVisitsMonthBeforeCounter").animate({
+                        Counter: response.Entity.CounterMonthBefore
+                    }, {
+                        duration: 4000,
+                        easing: 'swing',
+                        step: function (now) {
+                            $(this).text(Math.floor(now));
+                        }
+                    });
+                    _this.byId("NewVisitsThisMonthPercent").prop('Counter', 0).animate({
+                        Counter: response.Entity.PercentMonthBefore
+                    }, {
+                        duration: 4000,
+                        easing: 'swing',
+                        step: function (now) {
+                            $(this).text(this.Counter.toFixed(2));
                         }
                     });
                 });

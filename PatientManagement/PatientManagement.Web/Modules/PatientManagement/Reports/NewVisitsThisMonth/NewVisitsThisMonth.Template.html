@@ -1,7 +1,14 @@
 ﻿<div class="col-lg-3 col-xs-6">
     <div class="small-box bg-green-gradient">
         <div class="inner">
-            <h3 id="~_NewVisitsThisMonthCounter" >0</h3>
+            <h3>
+                <span id="~_NewVisitsThisMonthCounter">0</span>
+                <sup style="font-size: 20px">
+                    / <span id="~_NewVisitsMonthBeforeCounter">
+                        0
+                    </span> 
+                </sup>
+                </h3>
            
             <p>{{text:"Site.Reports.ReportNewVisitsThisMonthBox"}}</p>
         </div>
@@ -15,9 +22,13 @@
     <!-- small box -->
     <div class="small-box bg-red-gradient">
         <div class="inner">
-            <h3>53<sup style="font-size: 20px">%</sup></h3>
+            <h3>
+                <span id="~_NewVisitsThisMonthPercent">0</span>
+                
+                <sup style="font-size: 20px">%</sup>
+            </h3>
 
-            <p>Visits than previous month</p>
+            <p>{{text:"Site.Reports.ReportNewVisitsThanPreviousMonthBox"}}</p>
         </div>
         <div class="icon">
             <i class="fa fa-arrow-circle-o-down"></i>
