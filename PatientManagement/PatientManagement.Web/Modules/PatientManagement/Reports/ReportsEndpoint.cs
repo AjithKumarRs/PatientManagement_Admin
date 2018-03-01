@@ -46,8 +46,10 @@ namespace PatientManagement.PatientManagement.Endpoints
 
         double CalculateChange(long previous, long current)
         {
-            if (previous == 0)
-                throw new InvalidOperationException();
+            if (previous == 0 && current == 0)
+                return 0;
+            if (previous == 0 && current > 0)
+                return 100;
 
             var change = current - previous;
             return (double)change / previous * 100;
