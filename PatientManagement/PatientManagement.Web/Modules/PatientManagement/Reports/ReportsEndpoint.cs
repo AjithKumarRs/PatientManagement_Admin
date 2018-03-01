@@ -12,7 +12,7 @@ using Serenity.Services;
 namespace PatientManagement.PatientManagement.Endpoints
 {
     [Route("Services/PatientManagement/Reports/[action]")]
-    [ConnectionKey(typeof(PatientsRow)), ServiceAuthorize(PatientManagementPermissionKeys.ReportsPage)]
+    [ConnectionKey(typeof(PatientsRow))]
     public class ReportsEndpoint : ServiceEndpoint
     {
         [ServiceAuthorize(PatientManagementPermissionKeys.ReportsNewPatientsThisMonth)]

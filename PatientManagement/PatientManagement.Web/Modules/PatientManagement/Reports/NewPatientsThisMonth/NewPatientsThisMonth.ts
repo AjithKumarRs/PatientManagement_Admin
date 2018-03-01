@@ -1,19 +1,10 @@
 ﻿namespace PatientManagement.PatientManagement {
 
     export class NewPatientsThisMonth extends Serenity.TemplatedWidget<any> {
-
-        protected getCurrentTheme() {
-            var skinClass = Q.first(($('body').attr('class') || '').split(' '), x => Q.startsWith(x, 'skin-'));
-            if (skinClass) {
-                return skinClass.substr(5);
-            }
-
-            return 'blue';
-        }
-
+    
         constructor(elem: JQuery, opt: {}) {
             super(elem, opt);
-            $(this.byId("NewPatientsThisMonthBoxLeft")).addClass("bg-"+ this.getCurrentTheme()+ "-gradient");
+            $(this.byId("NewPatientsThisMonthBoxLeft")).addClass("bg-" + ThemeHelper.getCurrentTheme() + "-gradient");
 
             ReportsEndpointService.NewPatientsThisMonth({},
                 response => {
