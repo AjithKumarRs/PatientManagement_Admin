@@ -4205,3 +4205,9 @@ declare namespace PatientManagement.PatientManagement {
         };
     }
 }
+declare var Chart: any;
+declare namespace PatientManagement.PatientManagement {
+    class VisitsPerMonthLineChart extends Serenity.TemplatedWidget<any> {
+        constructor(elem: JQuery, opt: {});
+    }
+}

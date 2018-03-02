@@ -4,16 +4,9 @@ namespace PatientManagement.PatientManagement {
     export class VisitTypesPerGenderChart extends Serenity.TemplatedWidget<any> {
         constructor(elem: JQuery, opt: {}) {
             super(elem, opt);
-
-            var randomScalingFactor = function () {
-                return Math.round(Math.random() * 100);
-            };
-
-
-
+            
             ReportsEndpointService.VisitTypesPerGenderChart({},
                 response => {
-                    console.log(response);
 
                     var config = {
                         type: 'pie',

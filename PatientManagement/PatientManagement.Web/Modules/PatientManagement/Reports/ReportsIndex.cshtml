@@ -36,4 +36,14 @@
             });
         </script>
     }
+    
+    @if (Authorization.HasPermission(PatientManagementPermissionKeys.ReportsVisitsPerMonthLinearChart))
+    {
+        <div id="VisitsPerMonthLineChart"></div>
+        <script>
+            jQuery(document).ready(function () {
+                new PatientManagement.PatientManagement.VisitsPerMonthLineChart($("#VisitsPerMonthLineChart"), {});
+            });
+        </script>
+    }
 </div>

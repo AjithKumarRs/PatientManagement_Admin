@@ -11,5 +11,6 @@ namespace PatientManagement.PatientManagement
         public const string ReportsVisitTypesPerGenderChart = "PatientManagement:Reports:VisitTypesPerGenderChart";
         public const string ReportsNewPatientsThisMonth = "PatientManagement:Reports:NewPatientsThisMonthBox";
         public const string ReportsNewVisitsThisMonth = "PatientManagement:Reports:NewVisitsThisMonthBox";
+        public const string ReportsVisitsPerMonthLinearChart = "PatientManagement:Reports:VisitsPerMonthLineChart";
     }
 }

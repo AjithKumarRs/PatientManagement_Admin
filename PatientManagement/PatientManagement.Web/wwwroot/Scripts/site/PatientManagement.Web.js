@@ -8636,11 +8636,7 @@ var PatientManagement;
             __extends(VisitTypesPerGenderChart, _super);
             function VisitTypesPerGenderChart(elem, opt) {
                 var _this = _super.call(this, elem, opt) || this;
-                var randomScalingFactor = function () {
-                    return Math.round(Math.random() * 100);
-                };
                 PatientManagement.ReportsEndpointService.VisitTypesPerGenderChart({}, function (response) {
-                    console.log(response);
                     var config = {
                         type: 'pie',
                         data: {
@@ -8702,5 +8698,34 @@ var PatientManagement;
         }(Serenity.TemplatedWidget));
         PatientManagement.VisitTypesPerGenderChart = VisitTypesPerGenderChart;
     })(PatientManagement = PatientManagement_107.PatientManagement || (PatientManagement_107.PatientManagement = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement_108) {
+    var PatientManagement;
+    (function (PatientManagement) {
+        var VisitsPerMonthLineChart = /** @class */ (function (_super) {
+            __extends(VisitsPerMonthLineChart, _super);
+            function VisitsPerMonthLineChart(elem, opt) {
+                var _this = _super.call(this, elem, opt) || this;
+                PatientManagement.ReportsEndpointService.VisitTypesPerGenderChart({}, function (response) {
+                    //var config = {
+                    //    type: 'pie',
+                    //    data: {
+                    //        datasets: response.Entity.datasets,
+                    //        labels: response.Entity.Labels
+                    //    },
+                    //    options: {
+                    //        responsive: true
+                    //    }
+                    //};
+                    //var ctx = $(this.byId("VisitTypesPieChart")).get(0).getContext("2d", {});
+                    //var myPie = new Chart(ctx, config);
+                });
+                return _this;
+            }
+            return VisitsPerMonthLineChart;
+        }(Serenity.TemplatedWidget));
+        PatientManagement.VisitsPerMonthLineChart = VisitsPerMonthLineChart;
+    })(PatientManagement = PatientManagement_108.PatientManagement || (PatientManagement_108.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 //# sourceMappingURL=PatientManagement.Web.js.map
