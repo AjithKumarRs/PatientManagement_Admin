@@ -142,6 +142,14 @@ namespace PatientManagement
 
                 public static LocalText ReportNewVisitsThisMonthBox = "New visits this month";
                 public static LocalText ReportNewVisitsThanPreviousMonthBox = "Visits than previous month";
+
+                public static LocalText ReportVisitTypesRoundDiagramTitle = "Visit Types";
+                public static LocalText ReportVisitTypesRoundDiagramMales = "Males (Outer)";
+                public static LocalText ReportVisitTypesRoundDiagramFemales = "Females (Inner)";
+                public static LocalText ReportVisitTypesRoundDiagramTotalPatients = "Total patients:";
+                public static LocalText ReportVisitTypesRoundDiagramTotalVisits = "Total visits:";
+                public static LocalText ReportVisitTypesRoundDiagramMostReservedVisitType = "Most reserved visit type:";
+
             }
 
             public static class About

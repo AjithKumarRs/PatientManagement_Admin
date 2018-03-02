@@ -117,7 +117,7 @@ namespace PatientManagement.PatientManagement.Endpoints
                     var visitsFields = VisitsRow.Fields;
                     var visits = connection.List<VisitsRow>(s => s
                         .Select(visitsFields.VisitId).Select(visitsFields.VisitTypeId).Select(visitsFields.PatientId)
-                        .Where(visitsFields.VisitId.In(patients.Select(p => p.PatientId))));
+                        .Where(visitsFields.PatientId.In(patients.Select(p => p.PatientId))));
 
                     dataset.VisitsTotal = visits.Count;
                     var tempCounter = 0;
