@@ -8493,7 +8493,8 @@ var PatientManagement;
             ReportsEndpointService.baseUrl = 'PatientManagement/Reports';
             [
                 'NewPatientsThisMonth',
-                'NewVisitsThisMonth'
+                'NewVisitsThisMonth',
+                'VisitTypesPerGenderChart'
             ].forEach(function (x) {
                 ReportsEndpointService[x] = function (r, s, o) {
                     return Q.serviceRequest(ReportsEndpointService.baseUrl + '/' + x, r, s, o);
@@ -8626,5 +8627,80 @@ var PatientManagement;
         }());
         PatientManagement.ThemeHelper = ThemeHelper;
     })(PatientManagement = PatientManagement_106.PatientManagement || (PatientManagement_106.PatientManagement = {}));
+})(PatientManagement || (PatientManagement = {}));
+var PatientManagement;
+(function (PatientManagement_107) {
+    var PatientManagement;
+    (function (PatientManagement) {
+        var VisitTypesPerGenderChart = /** @class */ (function (_super) {
+            __extends(VisitTypesPerGenderChart, _super);
+            function VisitTypesPerGenderChart(elem, opt) {
+                var _this = _super.call(this, elem, opt) || this;
+                var randomScalingFactor = function () {
+                    return Math.round(Math.random() * 100);
+                };
+                PatientManagement.ReportsEndpointService.VisitTypesPerGenderChart({}, function (response) {
+                    console.log(response);
+                    var config = {
+                        type: 'pie',
+                        data: {
+                            datasets: response.Entity.datasets,
+                            labels: response.Entity.Labels
+                        },
+                        options: {
+                            responsive: true
+                        }
+                    };
+                    var ctx = $(_this.byId("VisitTypesPieChart")).get(0).getContext("2d", {});
+                    var myPie = new Chart(ctx, config);
+                    if (response.Entity.datasets[0]) {
+                        _this.byId("PatientsTotalMales").animate({
+                            Counter: response.Entity.datasets[0].PatientsTotal
+                        }, {
+                            duration: 2000,
+                            easing: 'swing',
+                            step: function (now) {
+                                $(this).text(Math.ceil(now));
+                            }
+                        });
+                        _this.byId("VisitsTotalMales").animate({
+                            Counter: response.Entity.datasets[0].VisitsTotal
+                        }, {
+                            duration: 2000,
+                            easing: 'swing',
+                            step: function (now) {
+                                $(this).text(Math.ceil(now));
+                            }
+                        });
+                        $(_this.byId("MostReservedVisitTypeMales")).text(response.Entity.datasets[0].MostReservedVisitType);
+                    }
+                    if (response.Entity.datasets[1]) {
+                        _this.byId("PatientsTotalFemales").animate({
+                            Counter: response.Entity.datasets[1].PatientsTotal
+                        }, {
+                            duration: 2000,
+                            easing: 'swing',
+                            step: function (now) {
+                                $(this).text(Math.ceil(now));
+                            }
+                        });
+                        _this.byId("VisitsTotalFemales").animate({
+                            Counter: response.Entity.datasets[1].VisitsTotal
+                        }, {
+                            duration: 2000,
+                            easing: 'swing',
+                            step: function (now) {
+                                $(this).text(Math.ceil(now));
+                            }
+                        });
+                        $(_this.byId("MostReservedVisitTypeFemales")).text(response.Entity.datasets[1].MostReservedVisitType);
+                    }
+                });
+                return _this;
+            }
+            return VisitTypesPerGenderChart;
+        }(Serenity.TemplatedWidget));
+        PatientManagement.VisitTypesPerGenderChart = VisitTypesPerGenderChart;
+    })(PatientManagement = PatientManagement_107.PatientManagement || (PatientManagement_107.PatientManagement = {}));
 })(PatientManagement || (PatientManagement = {}));
 //# sourceMappingURL=PatientManagement.Web.js.map

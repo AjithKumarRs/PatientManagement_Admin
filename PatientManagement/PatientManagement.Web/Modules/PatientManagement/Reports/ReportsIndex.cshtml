@@ -25,3 +25,15 @@
         </script>
     }
 </div>
+<div class="row">
+
+    @if (Authorization.HasPermission(PatientManagementPermissionKeys.ReportsVisitTypesPerGenderChart))
+    {
+        <div id="newVisitTypesRoundDiagram"></div>
+        <script>
+            jQuery(document).ready(function () {
+                new PatientManagement.PatientManagement.VisitTypesPerGenderChart($("#newVisitTypesRoundDiagram"), {});
+            });
+        </script>
+    }
+</div>

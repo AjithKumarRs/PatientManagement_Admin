@@ -4,15 +4,18 @@
 
         export declare function NewPatientsThisMonth(request: Serenity.ServiceRequest, onSuccess?: (response: Serenity.RetrieveResponse<NewPatientsThisMonthResponse>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         export declare function NewVisitsThisMonth(request: Serenity.ServiceRequest, onSuccess?: (response: Serenity.RetrieveResponse<NewVisitsThisMonthResponse>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        export declare function VisitTypesPerGenderChart(request: Serenity.ServiceRequest, onSuccess?: (response: Serenity.RetrieveResponse<VisitTypesPerGenderChartResponse>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
 
         export declare const enum Methods {
             NewPatientsThisMonth = "PatientManagement/Reports/NewPatientsThisMonth",
-            NewVisitsThisMonth = "PatientManagement/Reports/NewVisitsThisMonth"
+            NewVisitsThisMonth = "PatientManagement/Reports/NewVisitsThisMonth",
+            VisitTypesPerGenderChart = "PatientManagement/Reports/VisitTypesPerGenderChart"
         }
 
         [
             'NewPatientsThisMonth', 
-            'NewVisitsThisMonth'
+            'NewVisitsThisMonth', 
+            'VisitTypesPerGenderChart'
         ].forEach(x => {
             (<any>ReportsEndpointService)[x] = function (r, s, o) {
                 return Q.serviceRequest(baseUrl + '/' + x, r, s, o);

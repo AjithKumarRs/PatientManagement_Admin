@@ -41,7 +41,7 @@ namespace PatientManagement.PatientManagement.Endpoints
             response.CounterMonthBefore = new PatientsRepository().List(connection, listReq).TotalCount;
             response.PercentMonthBefore = CalculateChange(response.CounterMonthBefore, response.Counter);
 
-            return new RetrieveResponse<NewPatientsThisMonthResponse>{Entity = response};
+            return new RetrieveResponse<NewPatientsThisMonthResponse> { Entity = response };
         }
 
         double CalculateChange(long previous, long current)
@@ -81,6 +81,68 @@ namespace PatientManagement.PatientManagement.Endpoints
             response.PercentMonthBefore = CalculateChange(response.CounterMonthBefore, response.Counter);
 
             return new RetrieveResponse<NewVisitsThisMonthResponse> { Entity = response };
+        }
+
+
+        [ServiceAuthorize(PatientManagementPermissionKeys.ReportsVisitTypesPerGenderChart)]
+        public RetrieveResponse<VisitTypesPerGenderChartResponse> VisitTypesPerGenderChart(IDbConnection connection)
+        {
+            var response = new VisitTypesPerGenderChartResponse();
+            var visitTypes = new VisitTypesRepository().List(connection, new ListRequest()).Entities;
+            if (visitTypes.Any())
+                response.Labels = visitTypes.Select(vt => vt.Name).ToList();
+            // For each the enum because we don't know the count of genders
+            foreach (Gender gender in Enum.GetValues(typeof(Gender)))
+            {
+                var dataset = new Dataset();
+                dataset.label = gender.ToString();
+                dataset.backgroundColor = visitTypes.Select(s => s.BackgroundColor).ToList();
+
+                // Get Patients contained in filtered visits
+                var patientFields = PatientsRow.Fields;
+                var patientsRequest = new ListRequest();
+                patientsRequest.ColumnSelection = ColumnSelection.KeyOnly;
+                patientsRequest.IncludeColumns = new HashSet<string>
+                {
+                    patientFields.Gender.Name
+                };
+                patientsRequest.Criteria = (new Criteria(patientFields.Gender.Name) == gender);
+
+                var patients = new PatientsRepository().List(connection, patientsRequest).Entities;
+
+                if (patients.Any())
+                {
+                    dataset.PatientsTotal = patients.Count;
+
+                    var visitsFields = VisitsRow.Fields;
+                    var visits = connection.List<VisitsRow>(s => s
+                        .Select(visitsFields.VisitId).Select(visitsFields.VisitTypeId).Select(visitsFields.PatientId)
+                        .Where(visitsFields.VisitId.In(patients.Select(p => p.PatientId))));
+
+                    dataset.VisitsTotal = visits.Count;
+                    var tempCounter = 0;
+                    foreach (var visitTypesRow in visitTypes)
+                    {
+                        var visitsCounter = connection.Count<VisitsRow>(
+                            visitsFields.VisitTypeId == visitTypesRow.VisitTypeId.Value
+                            && visitsFields.PatientId.In(patients.Select(p => p.PatientId)));
+
+                        if (visitsCounter > tempCounter)
+                            dataset.MostReservedVisitType = visitTypesRow.Name;
+
+                        dataset.data.Add(visitsCounter);
+                    }
+
+                }
+                else
+                {
+                    dataset.data.Add(0);
+                }
+
+                response.datasets.Add(dataset);
+            }
+
+            return new RetrieveResponse<VisitTypesPerGenderChartResponse> { Entity = response };
         }
     }
 }

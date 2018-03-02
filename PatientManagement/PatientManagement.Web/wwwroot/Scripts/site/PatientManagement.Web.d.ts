@@ -4147,9 +4147,11 @@ declare namespace PatientManagement.PatientManagement {
         const baseUrl = "PatientManagement/Reports";
         function NewPatientsThisMonth(request: Serenity.ServiceRequest, onSuccess?: (response: Serenity.RetrieveResponse<NewPatientsThisMonthResponse>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function NewVisitsThisMonth(request: Serenity.ServiceRequest, onSuccess?: (response: Serenity.RetrieveResponse<NewVisitsThisMonthResponse>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function VisitTypesPerGenderChart(request: Serenity.ServiceRequest, onSuccess?: (response: Serenity.ListResponse<VisitTypesPerGenderChartResponse>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         const enum Methods {
             NewPatientsThisMonth = "PatientManagement/Reports/NewPatientsThisMonth",
             NewVisitsThisMonth = "PatientManagement/Reports/NewVisitsThisMonth",
+            VisitTypesPerGenderChart = "PatientManagement/Reports/VisitTypesPerGenderChart",
         }
     }
 }
@@ -4180,5 +4182,26 @@ declare namespace PatientManagement.PatientManagement {
 declare namespace PatientManagement.PatientManagement {
     class ThemeHelper {
         static getCurrentTheme(): string;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    interface Dataset {
+        Label?: string;
+        Data?: number[];
+        BackgroundColor?: string[];
+    }
+}
+declare var Chart: any;
+declare namespace PatientManagement.PatientManagement {
+    class VisitTypesPerGenderChart extends Serenity.TemplatedWidget<any> {
+        constructor(elem: JQuery, opt: {});
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    interface VisitTypesPerGenderChartResponse {
+        Labels?: string[];
+        Datasets?: {
+            [key: string]: Dataset;
+        };
     }
 }
