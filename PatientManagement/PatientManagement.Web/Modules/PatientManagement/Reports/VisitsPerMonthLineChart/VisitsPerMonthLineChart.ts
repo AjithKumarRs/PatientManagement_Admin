@@ -7,7 +7,6 @@ namespace PatientManagement.PatientManagement {
 
             ReportsEndpointService.VisitTypesPerGenderChart({},
                 response => {
-                    console.log(response);
 
                     //var config = {
                     //    type: 'pie',

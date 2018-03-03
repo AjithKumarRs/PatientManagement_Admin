@@ -16,34 +16,11 @@
                         $(this.byId("NewVisitsThisMonthIcon")).addClass("fa-arrow-circle-o-down");
                     }   
 
-                    this.byId("NewVisitsThisMonthCounter").animate({
-                        Counter: response.Entity.Counter
-                    }, {
-                        duration: 4000,
-                        easing: 'swing', 
-                        step: function (now) {
-                            $(this).text(Math.floor(now));
-                        }
-                        });
+                    ReportsCommon.animateAndFillNumbers(this.byId("NewVisitsThisMonthCounter"), response.Entity.Counter, 4000);
+                    ReportsCommon.animateAndFillNumbers(this.byId("NewVisitsMonthBeforeCounter"), response.Entity.CounterMonthBefore, 4000);
 
-                    this.byId("NewVisitsMonthBeforeCounter").animate({
-                        Counter: response.Entity.CounterMonthBefore
-                    }, {
-                        duration: 4000,
-                        easing: 'swing',
-                        step: function (now) {
-                            $(this).text(Math.floor(now));
-                        }
-                    });
-                    this.byId("NewVisitsThisMonthPercent").prop('Counter', 0).animate({
-                        Counter: response.Entity.PercentMonthBefore
-                    }, {
-                        duration: 4000,
-                        easing: 'swing',
-                        step: function (now) {
-                            $(this).text(this.Counter.toFixed(2));
-                        }
-                    });
+                    ReportsCommon.animateAndFillDecimals(this.byId("NewVisitsThisMonthPercent"), response.Entity.PercentMonthBefore, 4000);
+                    
                 });
         }
     }

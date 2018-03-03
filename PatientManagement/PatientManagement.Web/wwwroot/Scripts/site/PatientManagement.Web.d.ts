@@ -1932,6 +1932,16 @@ declare namespace PatientManagement.PatientManagement {
     }
 }
 declare namespace PatientManagement.PatientManagement {
+    interface Dataset {
+        label?: string;
+        PatientsTotal?: number;
+        VisitsTotal?: number;
+        MostReservedVisitType?: string;
+        data?: number[];
+        backgroundColor?: string[];
+    }
+}
+declare namespace PatientManagement.PatientManagement {
     interface ExternalAccessCabinetsRow {
         ExternalAccessCabinetId?: number;
         ExternalAccessId?: number;
@@ -2110,6 +2120,20 @@ declare namespace PatientManagement.PatientManagement {
             ExcelImport = "PatientManagement/MedicalSpecialty/ExcelImport",
             List = "PatientManagement/MedicalSpecialty/List",
         }
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    interface NewPatientsThisMonthResponse {
+        PercentMonthBefore?: number;
+        CounterMonthBefore?: number;
+        Counter?: number;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    interface NewVisitsThisMonthResponse {
+        Counter?: number;
+        CounterMonthBefore?: number;
+        PercentMonthBefore?: number;
     }
 }
 declare namespace PatientManagement.PatientManagement {
@@ -2474,6 +2498,19 @@ declare namespace PatientManagement.PatientManagement {
     }
 }
 declare namespace PatientManagement.PatientManagement {
+    namespace ReportsEndpointService {
+        const baseUrl = "PatientManagement/Reports";
+        function NewPatientsThisMonth(request: Serenity.ServiceRequest, onSuccess?: (response: Serenity.RetrieveResponse<NewPatientsThisMonthResponse>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function NewVisitsThisMonth(request: Serenity.ServiceRequest, onSuccess?: (response: Serenity.RetrieveResponse<NewVisitsThisMonthResponse>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function VisitTypesPerGenderChart(request: Serenity.ServiceRequest, onSuccess?: (response: Serenity.RetrieveResponse<VisitTypesPerGenderChartResponse>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        const enum Methods {
+            NewPatientsThisMonth = "PatientManagement/Reports/NewPatientsThisMonth",
+            NewVisitsThisMonth = "PatientManagement/Reports/NewVisitsThisMonth",
+            VisitTypesPerGenderChart = "PatientManagement/Reports/VisitTypesPerGenderChart",
+        }
+    }
+}
+declare namespace PatientManagement.PatientManagement {
     enum SubscriptionState {
         NotActive = 0,
         Active = 1,
@@ -2680,6 +2717,12 @@ declare namespace PatientManagement.PatientManagement {
         static formKey: string;
         private static init;
         constructor(prefix: string);
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    interface VisitTypesPerGenderChartResponse {
+        Labels?: string[];
+        datasets?: Dataset[];
     }
 }
 declare namespace PatientManagement.PatientManagement {
@@ -3408,6 +3451,11 @@ declare namespace PatientManagement.PatientManagement {
         descrFieldName: string;
     }
 }
+declare namespace PatientManagement.PatientManagement {
+    class ThemeHelper {
+        static getCurrentTheme(): string;
+    }
+}
 declare namespace PatientManagement.Common {
     class LanguageSelection extends Serenity.Widget<any> {
         constructor(select: JQuery, currentLanguage: string);
@@ -4074,6 +4122,28 @@ declare namespace PatientManagement.PatientManagement {
     }
 }
 declare namespace PatientManagement.PatientManagement {
+    class NewPatientsThisMonth extends Serenity.TemplatedWidget<any> {
+        constructor(elem: JQuery, opt: {});
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class NewVisitsThisMonth extends Serenity.TemplatedWidget<any> {
+        constructor(elem: JQuery, opt: {});
+    }
+}
+declare var Chart: any;
+declare namespace PatientManagement.PatientManagement {
+    class VisitsPerMonthLineChart extends Serenity.TemplatedWidget<any> {
+        constructor(elem: JQuery, opt: {});
+    }
+}
+declare var Chart: any;
+declare namespace PatientManagement.PatientManagement {
+    class VisitTypesPerGenderChart extends Serenity.TemplatedWidget<any> {
+        constructor(elem: JQuery, opt: {});
+    }
+}
+declare namespace PatientManagement.PatientManagement {
     class UserNotificationsDialog extends Serenity.EntityDialog<UserNotificationsRow, any> {
         protected getFormKey(): string;
         protected getIdProperty(): string;
@@ -4143,71 +4213,8 @@ declare namespace PatientManagement {
     }
 }
 declare namespace PatientManagement.PatientManagement {
-    namespace ReportsEndpointService {
-        const baseUrl = "PatientManagement/Reports";
-        function NewPatientsThisMonth(request: Serenity.ServiceRequest, onSuccess?: (response: Serenity.RetrieveResponse<NewPatientsThisMonthResponse>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        function NewVisitsThisMonth(request: Serenity.ServiceRequest, onSuccess?: (response: Serenity.RetrieveResponse<NewVisitsThisMonthResponse>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        function VisitTypesPerGenderChart(request: Serenity.ServiceRequest, onSuccess?: (response: Serenity.ListResponse<VisitTypesPerGenderChartResponse>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        const enum Methods {
-            NewPatientsThisMonth = "PatientManagement/Reports/NewPatientsThisMonth",
-            NewVisitsThisMonth = "PatientManagement/Reports/NewVisitsThisMonth",
-            VisitTypesPerGenderChart = "PatientManagement/Reports/VisitTypesPerGenderChart",
-        }
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    interface NewPatientsThisMonthResponse {
-        PercentMonthBefore?: number;
-        CounterMonthBefore?: number;
-        Counter?: number;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class NewPatientsThisMonth extends Serenity.TemplatedWidget<any> {
-        constructor(elem: JQuery, opt: {});
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class NewVisitsThisMonth extends Serenity.TemplatedWidget<any> {
-        constructor(elem: JQuery, opt: {});
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    interface NewVisitsThisMonthResponse {
-        Counter?: number;
-        CounterMonthBefore?: number;
-        PercentMonthBefore?: number;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class ThemeHelper {
-        static getCurrentTheme(): string;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    interface Dataset {
-        Label?: string;
-        Data?: number[];
-        BackgroundColor?: string[];
-    }
-}
-declare var Chart: any;
-declare namespace PatientManagement.PatientManagement {
-    class VisitTypesPerGenderChart extends Serenity.TemplatedWidget<any> {
-        constructor(elem: JQuery, opt: {});
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    interface VisitTypesPerGenderChartResponse {
-        Labels?: string[];
-        Datasets?: {
-            [key: string]: Dataset;
-        };
-    }
-}
-declare var Chart: any;
-declare namespace PatientManagement.PatientManagement {
-    class VisitsPerMonthLineChart extends Serenity.TemplatedWidget<any> {
-        constructor(elem: JQuery, opt: {});
+    class ReportsCommon {
+        static animateAndFillNumbers(elem: JQuery, num: Number, dur: Number): void;
+        static animateAndFillDecimals(elem: JQuery, num: Number, dur: Number): void;
     }
 }
