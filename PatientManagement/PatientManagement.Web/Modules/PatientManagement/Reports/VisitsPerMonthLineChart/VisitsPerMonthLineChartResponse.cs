@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace PatientManagement.PatientManagement.Entities
 {
-    public class VisitTypesPerGenderChartResponse
+    public class VisitsPerMonthLineChartResponse
     {
-        public VisitTypesPerGenderChartResponse()
+        public VisitsPerMonthLineChartResponse()
         {
             labels = new List<string>();
             datasets = new List<Dataset>();
@@ -21,24 +21,20 @@ namespace PatientManagement.PatientManagement.Entities
 
         public class Dataset
         {
+            public bool fill { get; set; }
+
             public Dataset()
             {
                 data = new List<int>();
-                backgroundColor = new List<string>();
             }
             public string label { get; set; }
-
-            public int PatientsTotal { get; set; }
-            public int VisitsTotal { get; set; }
-
-            public string MostReservedVisitType { get; set; }
-
+            
             public List<int> data { get; set; }
 
-            public List<string> backgroundColor { get; set; }
+            public string backgroundColor { get; set; }
 
+            public string borderColor { get; set; }
         }
     }
 
-  
 }

@@ -1933,12 +1933,11 @@ declare namespace PatientManagement.PatientManagement {
 }
 declare namespace PatientManagement.PatientManagement {
     interface Dataset {
+        fill?: boolean;
         label?: string;
-        PatientsTotal?: number;
-        VisitsTotal?: number;
-        MostReservedVisitType?: string;
         data?: number[];
-        backgroundColor?: string[];
+        backgroundColor?: string;
+        borderColor?: string;
     }
 }
 declare namespace PatientManagement.PatientManagement {
@@ -2503,10 +2502,12 @@ declare namespace PatientManagement.PatientManagement {
         function NewPatientsThisMonth(request: Serenity.ServiceRequest, onSuccess?: (response: Serenity.RetrieveResponse<NewPatientsThisMonthResponse>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function NewVisitsThisMonth(request: Serenity.ServiceRequest, onSuccess?: (response: Serenity.RetrieveResponse<NewVisitsThisMonthResponse>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function VisitTypesPerGenderChart(request: Serenity.ServiceRequest, onSuccess?: (response: Serenity.RetrieveResponse<VisitTypesPerGenderChartResponse>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function VisitsPerMonthLineChart(request: Serenity.ServiceRequest, onSuccess?: (response: Serenity.RetrieveResponse<VisitsPerMonthLineChartResponse>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         const enum Methods {
             NewPatientsThisMonth = "PatientManagement/Reports/NewPatientsThisMonth",
             NewVisitsThisMonth = "PatientManagement/Reports/NewVisitsThisMonth",
             VisitTypesPerGenderChart = "PatientManagement/Reports/VisitTypesPerGenderChart",
+            VisitsPerMonthLineChart = "PatientManagement/Reports/VisitsPerMonthLineChart",
         }
     }
 }
@@ -2721,7 +2722,7 @@ declare namespace PatientManagement.PatientManagement {
 }
 declare namespace PatientManagement.PatientManagement {
     interface VisitTypesPerGenderChartResponse {
-        Labels?: string[];
+        labels?: string[];
         datasets?: Dataset[];
     }
 }
@@ -4216,5 +4217,11 @@ declare namespace PatientManagement.PatientManagement {
     class ReportsCommon {
         static animateAndFillNumbers(elem: JQuery, num: Number, dur: Number): void;
         static animateAndFillDecimals(elem: JQuery, num: Number, dur: Number): void;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    interface VisitsPerMonthLineChartResponse {
+        labels?: string[];
+        datasets?: Dataset[];
     }
 }

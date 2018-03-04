@@ -2178,7 +2178,8 @@ var PatientManagement;
             [
                 'NewPatientsThisMonth',
                 'NewVisitsThisMonth',
-                'VisitTypesPerGenderChart'
+                'VisitTypesPerGenderChart',
+                'VisitsPerMonthLineChart'
             ].forEach(function (x) {
                 ReportsEndpointService[x] = function (r, s, o) {
                     return Q.serviceRequest(ReportsEndpointService.baseUrl + '/' + x, r, s, o);
@@ -8335,19 +8336,48 @@ var PatientManagement;
             __extends(VisitsPerMonthLineChart, _super);
             function VisitsPerMonthLineChart(elem, opt) {
                 var _this = _super.call(this, elem, opt) || this;
-                PatientManagement.ReportsEndpointService.VisitTypesPerGenderChart({}, function (response) {
-                    //var config = {
-                    //    type: 'pie',
-                    //    data: {
-                    //        datasets: response.Entity.datasets,
-                    //        labels: response.Entity.Labels
-                    //    },
-                    //    options: {
-                    //        responsive: true
-                    //    }
-                    //};
-                    //var ctx = $(this.byId("VisitTypesPieChart")).get(0).getContext("2d", {});
-                    //var myPie = new Chart(ctx, config);
+                PatientManagement.ReportsEndpointService.VisitsPerMonthLineChart({}, function (response) {
+                    var config = {
+                        type: 'line',
+                        data: {
+                            datasets: response.Entity.datasets,
+                            labels: response.Entity.labels
+                        },
+                        options: {
+                            responsive: true,
+                            legend: {
+                                display: false
+                            },
+                            tooltips: {
+                                mode: 'index',
+                                intersect: false,
+                            },
+                            hover: {
+                                mode: 'nearest',
+                                intersect: true
+                            },
+                            scales: {
+                                xAxes: [
+                                    {
+                                        display: true,
+                                        scaleLabel: {
+                                            display: true,
+                                        }
+                                    }
+                                ],
+                                yAxes: [
+                                    {
+                                        display: true,
+                                        scaleLabel: {
+                                            display: true,
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                    };
+                    var ctx = $(_this.byId("VisitsPerMonthLineChart")).get(0).getContext("2d", {});
+                    var myPie = new Chart(ctx, config);
                 });
                 return _this;
             }

@@ -1,10 +1,9 @@
 ﻿namespace PatientManagement.PatientManagement {
     export interface Dataset {
+        fill?: boolean;
         label?: string;
-        PatientsTotal?: number;
-        VisitsTotal?: number;
-        MostReservedVisitType?: string;
         data?: number[];
-        backgroundColor?: string[];
+        backgroundColor?: string;
+        borderColor?: string;
     }
 }

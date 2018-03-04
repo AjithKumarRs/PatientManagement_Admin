@@ -90,11 +90,11 @@ namespace PatientManagement.PatientManagement.Endpoints
             var response = new VisitTypesPerGenderChartResponse();
             var visitTypes = new VisitTypesRepository().List(connection, new ListRequest()).Entities;
             if (visitTypes.Any())
-                response.Labels = visitTypes.Select(vt => vt.Name).ToList();
+                response.labels = visitTypes.Select(vt => vt.Name).ToList();
             // For each the enum because we don't know the count of genders
             foreach (Gender gender in Enum.GetValues(typeof(Gender)))
             {
-                var dataset = new Dataset();
+                var dataset = new VisitTypesPerGenderChartResponse.Dataset();
                 dataset.label = gender.ToString();
                 dataset.backgroundColor = visitTypes.Select(s => s.BackgroundColor).ToList();
 
@@ -143,6 +143,54 @@ namespace PatientManagement.PatientManagement.Endpoints
             }
 
             return new RetrieveResponse<VisitTypesPerGenderChartResponse> { Entity = response };
+        }
+
+        [ServiceAuthorize(PatientManagementPermissionKeys.ReportsVisitsPerMonthLinearChart)]
+        public RetrieveResponse<VisitsPerMonthLineChartResponse> VisitsPerMonthLineChart(IDbConnection connection)
+        {
+            var response = new VisitsPerMonthLineChartResponse();
+
+            var visitTypes = new VisitTypesRepository().List(connection, new ListRequest()).Entities;
+            //if (visitTypes.Any())
+            //    response.Labels = visitTypes.Select(vt => vt.Name).ToList();
+            for (int i = 0; i < 6; i++)
+            {
+                response.labels.Add(DateTime.Now.AddMonths(-i).ToString("MMMM"));
+            }
+
+            foreach (var visitTypesRow in visitTypes)
+            {
+                var dataset = new VisitsPerMonthLineChartResponse.Dataset();
+                dataset.label = visitTypesRow.Name;
+                dataset.backgroundColor = visitTypesRow.BackgroundColor;
+                dataset.borderColor = visitTypesRow.BackgroundColor;
+
+                var visitReq = new ListRequest();
+                visitReq.ColumnSelection = ColumnSelection.KeyOnly;
+
+                var visitFlds = VisitsRow.Fields;
+                visitReq.IncludeColumns = new HashSet<string>
+                    {
+                        visitFlds.StartDate.Name,
+                        visitFlds.EndDate.Name,
+                        visitFlds.VisitTypeId.Name
+                    };
+                for (int i = 0; i < 6; i++)
+                {
+                    var firstDayOfMonth = new DateTime(DateTime.Now.AddMonths(-i).Year,
+                        DateTime.Now.AddMonths(-i).Month, 1);
+                    var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+
+                    visitReq.Criteria = (new Criteria(visitFlds.StartDate.Name) >= firstDayOfMonth
+                                         & new Criteria(visitFlds.EndDate.Name) <= lastDayOfMonth
+                                         & new Criteria(visitFlds.VisitTypeId.Name) == visitTypesRow.VisitTypeId.Value);
+
+                    var visits = new VisitsRepository().List(connection, visitReq);
+                    dataset.data.Add(visits.TotalCount);
+                }
+                response.datasets.Add(dataset);
+            }
+            return new RetrieveResponse<VisitsPerMonthLineChartResponse> { Entity = response };
         }
     }
 }

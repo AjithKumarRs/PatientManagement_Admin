@@ -706,6 +706,7 @@
   "Site.Reports.ReportNewPatientsThisMonthBox": "Нови пациенти този месец",
   "Site.Reports.ReportNewVisitsThanPreviousMonthBox": "Визити спрямо предишния месец",
   "Site.Reports.ReportNewVisitsThisMonthBox": "Нови визити този месец",
+  "Site.Reports.ReportVisitsPerMonthLineChartBoxTitle": "Визити за месец",
   "Site.Reports.ReportVisitTypesRoundDiagramFemales": "Жени (Вътрешен)",
   "Site.Reports.ReportVisitTypesRoundDiagramMales": "Мъже (Външен)",
   "Site.Reports.ReportVisitTypesRoundDiagramMostReservedVisitType": "Най - често резервиран тип:",
