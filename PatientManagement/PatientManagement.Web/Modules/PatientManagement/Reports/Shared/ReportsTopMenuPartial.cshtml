@@ -1,0 +1,93 @@
+﻿@using PatientManagement.PatientManagement
+@{
+
+    var themeCookie = Context.Request.Cookies["ThemePreference"];
+    var theme = !themeCookie.IsEmptyOrNull() ? themeCookie : "blue";
+    var controller = ViewContext.RouteData.Values["controller"].ToString();
+}
+<style>
+    
+    .reports-top-menu-partial {
+        margin-bottom: 20px;
+        font-size: 1.5em;
+    }
+    .nav-item-underlined:after, .nav-underlined > li:after {
+        display: block;
+        content: " ";
+        bottom: 10px;
+        border-bottom: 5px solid transparent;
+        width: 0;
+        width: auto;
+        -webkit-transition: all 0.2s;
+        transition: all 0.2s;
+    }
+    .nav-underlined .fa{
+        margin-right: 20px;
+    } 
+    .unline-deactived:after, .nav-underlined:hover > li.active:after, .nav-underlined:active > li.active:after {
+        border-color: transparent;
+    }
+
+    .nav-underlined > li > a:hover, .nav-underlined > li > a:active, .nav-underlined > li > a:focus {
+        background: transparent;
+    }
+    .box-underline {
+        border-bottom: 1px solid #eee;
+    }
+
+</style>
+<style>
+
+    .underlined-active:after, .nav-underlined:hover > li:hover:after, .nav-underlined:active > li:hover:after, .nav-underlined:hover > li.active:hover:after, .nav-underlined:active > li.active:hover:after, .nav-underlined > li.active:after, .nav-underlined > li:hover:after {
+        border-color: @theme;
+    }
+
+    .nav-underlined > li > a:visited {
+        color: @theme
+    }
+</style>
+<div class="row reports-top-menu-partial">
+    <div class="col-md-6">
+        <ul class="nav nav-underlined nav-justified">
+            @if (Authorization.HasPermission(PatientManagementPermissionKeys.ReportsVisitsPage))
+            {
+                if (controller == "ReportsVisits")
+                {
+                    <li role="presentation" class="active">
+                        <a href="@Url.Action("Index", "ReportsVisits")">
+                            <i class="fa fa-calendar"></i>
+                            @LocalText.Get("Navigation.Reports/Visits")
+                        </a></li>
+                }
+                else
+                {
+                    <li role="presentation">
+                        <a href="@Url.Action("Index", "ReportsVisits")">
+                            <i class="fa fa-calendar"></i>
+                            @LocalText.Get("Navigation.Reports/Visits")
+                        </a></li>
+                }
+            }
+            @if (Authorization.HasPermission(PatientManagementPermissionKeys.ReportsIncomePage))
+            {
+                if (controller == "ReportsIncome")
+                {
+                    <li role="presentation" class="active">
+                        <a href="@Url.Action("Index", "ReportsIncome")">
+                            <i class="fa fa-money"></i>
+                            @LocalText.Get("Navigation.Reports/Income")
+                        </a></li>
+                }
+                else
+                {
+                    <li role="presentation">
+                        <a href="@Url.Action("Index", "ReportsIncome")">
+                            <i class="fa fa-money"></i>
+                            @LocalText.Get("Navigation.Reports/Income")
+                        </a></li>
+                }
+            }
+        </ul>
+    </div>
+</div>
+<div class="clearfix"></div>

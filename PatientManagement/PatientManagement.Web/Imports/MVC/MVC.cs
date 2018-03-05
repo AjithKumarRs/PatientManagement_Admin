@@ -221,6 +221,11 @@ namespace MVC
                 {
                     public const string ReportsVisitsIndex = "~/Modules/PatientManagement/Reports/ReportsVisits/ReportsVisitsIndex.cshtml";
                 }
+
+                public static class Shared
+                {
+                    public const string ReportsTopMenuPartial = "~/Modules/PatientManagement/Reports/Shared/ReportsTopMenuPartial.cshtml";
+                }
             }
 
             public static class UserNotifications
