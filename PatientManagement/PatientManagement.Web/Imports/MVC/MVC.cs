@@ -212,7 +212,10 @@ namespace MVC
 
             public static class Reports
             {
-                public const string ReportsIndex = "~/Modules/PatientManagement/Reports/ReportsIndex.cshtml";
+                public static class ReportsVisits
+                {
+                    public const string ReportsVisitsIndex = "~/Modules/PatientManagement/Reports/ReportsVisits/ReportsVisitsIndex.cshtml";
+                }
             }
 
             public static class UserNotifications

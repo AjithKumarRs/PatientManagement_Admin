@@ -5,7 +5,7 @@ namespace PatientManagement.PatientManagement {
         constructor(elem: JQuery, opt: {}) {
             super(elem, opt);
             
-            ReportsEndpointService.VisitTypesPerGenderChart({},
+            ReportsVisitsEndpointService.VisitTypesPerGenderChart({},
                 response => {
 
                     var config = {

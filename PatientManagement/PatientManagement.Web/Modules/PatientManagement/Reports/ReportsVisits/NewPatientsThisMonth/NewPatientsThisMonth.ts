@@ -6,7 +6,7 @@
             super(elem, opt);
             $(this.byId("NewPatientsThisMonthBoxLeft")).addClass("bg-" + ThemeHelper.getCurrentTheme() + "-gradient");
 
-            ReportsEndpointService.NewPatientsThisMonth({},
+            ReportsVisitsEndpointService.NewPatientsThisMonth({},
                 response => {
                     ReportsCommon.animateAndFillNumbers(this.byId("NewPatientsThisMonthCounter"), response.Entity.Counter, 4000);
                     ReportsCommon.animateAndFillNumbers(this.byId("NewPatientsMonthBeforeCounter"), response.Entity.CounterMonthBefore, 4000);

@@ -11,9 +11,9 @@ using Serenity.Services;
 
 namespace PatientManagement.PatientManagement.Endpoints
 {
-    [Route("Services/PatientManagement/Reports/[action]")]
+    [Route("Services/PatientManagement/ReportsVisits/[action]")]
     [ConnectionKey(typeof(PatientsRow))]
-    public class ReportsEndpoint : ServiceEndpoint
+    public class ReportsVisitsEndpoint : ServiceEndpoint
     {
         [ServiceAuthorize(PatientManagementPermissionKeys.ReportsNewPatientsThisMonth)]
         public RetrieveResponse<NewPatientsThisMonthResponse> NewPatientsThisMonth(IDbConnection connection)

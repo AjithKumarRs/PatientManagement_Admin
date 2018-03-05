@@ -2495,21 +2495,6 @@ declare namespace PatientManagement.PatientManagement {
     }
 }
 declare namespace PatientManagement.PatientManagement {
-    namespace ReportsEndpointService {
-        const baseUrl = "PatientManagement/Reports";
-        function NewPatientsThisMonth(request: Serenity.ServiceRequest, onSuccess?: (response: Serenity.RetrieveResponse<NewPatientsThisMonthResponse>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        function NewVisitsThisMonth(request: Serenity.ServiceRequest, onSuccess?: (response: Serenity.RetrieveResponse<NewVisitsThisMonthResponse>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        function VisitTypesPerGenderChart(request: Serenity.ServiceRequest, onSuccess?: (response: Serenity.RetrieveResponse<VisitTypesPerGenderChartResponse>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        function VisitsPerMonthLineChart(request: Serenity.ServiceRequest, onSuccess?: (response: Serenity.RetrieveResponse<VisitsPerMonthLineChartResponse>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        const enum Methods {
-            NewPatientsThisMonth = "PatientManagement/Reports/NewPatientsThisMonth",
-            NewVisitsThisMonth = "PatientManagement/Reports/NewVisitsThisMonth",
-            VisitTypesPerGenderChart = "PatientManagement/Reports/VisitTypesPerGenderChart",
-            VisitsPerMonthLineChart = "PatientManagement/Reports/VisitsPerMonthLineChart",
-        }
-    }
-}
-declare namespace PatientManagement.PatientManagement {
     enum SubscriptionState {
         NotActive = 0,
         Active = 1,
@@ -2612,12 +2597,6 @@ declare namespace PatientManagement.PatientManagement {
         static formKey: string;
         private static init;
         constructor(prefix: string);
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    interface VisitsPerMonthLineChartResponse {
-        labels?: string[];
-        datasets?: Dataset[];
     }
 }
 declare namespace PatientManagement.PatientManagement {
@@ -2830,11 +2809,6 @@ declare namespace PatientManagement {
         RolesList?: string[];
         PaidPeriod?: string;
     }
-}
-declare namespace PatientManagement.LanguageList {
-    function getValue(): string[][];
-}
-declare namespace PatientManagement.ScriptInitialization {
 }
 declare namespace PatientManagement.Administration {
     class CouponsDialog extends Serenity.EntityDialog<CouponsRow, any> {
@@ -3202,6 +3176,10 @@ declare namespace PatientManagement.Administration {
         protected getDefaultSortBy(): UserRow.Fields[];
     }
 }
+declare namespace PatientManagement.Authorization {
+    let userDefinition: ScriptUserDefinition;
+    function hasPermission(permissionKey: string): boolean;
+}
 declare namespace PatientManagement.Administration {
     class PermissionCheckEditor extends Serenity.DataGrid<PermissionCheckItem, PermissionCheckEditorOptions> {
         protected getIdProperty(): string;
@@ -3271,6 +3249,11 @@ declare namespace PatientManagement.Administration {
         userID: number;
         username: string;
     }
+}
+declare namespace PatientManagement.LanguageList {
+    function getValue(): string[][];
+}
+declare namespace PatientManagement.ScriptInitialization {
 }
 declare namespace PatientManagement {
     class AddressAutocomplete extends Serenity.Widget<any> implements Serenity.ISetEditValue {
@@ -3572,6 +3555,77 @@ declare namespace PatientManagement.Membership {
         constructor(container: JQuery);
     }
 }
+declare namespace PatientManagement.Membership {
+    class ChangePasswordPanel extends Serenity.PropertyPanel<ChangePasswordRequest, any> {
+        protected getFormKey(): string;
+        private form;
+        constructor(container: JQuery);
+    }
+}
+declare namespace PatientManagement.Membership {
+    class ForgotPasswordPanel extends Serenity.PropertyPanel<ForgotPasswordRequest, any> {
+        protected getFormKey(): string;
+        private form;
+        constructor(container: JQuery);
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class VisitsGrid extends Serenity.EntityGrid<VisitsRow, any> {
+        protected getColumnsKey(): string;
+        protected getDialogType(): typeof VisitsDialog;
+        protected getIdProperty(): string;
+        protected getLocalTextPrefix(): string;
+        protected getService(): string;
+        constructor(container: JQuery);
+        protected getButtons(): Serenity.ToolButton[];
+        protected getQuickFilters(): Serenity.QuickFilter<Serenity.Widget<any>, any>[];
+    }
+}
+declare namespace PatientManagement.Membership {
+    import VisitsGrid = PatientManagement.VisitsGrid;
+    class AddedVisitsFromUserPanel extends VisitsGrid {
+        private visitsGrid;
+        constructor(container: JQuery, userId: number);
+        protected getColumns(): Slick.Column[];
+        protected getInitialTitle(): any;
+        protected getGridCanLoad(): boolean;
+        private _insertUserId;
+        insertUserId: number;
+    }
+}
+declare namespace PatientManagement.Membership {
+    class EditTenantPanel extends Serenity.PropertyPanel<EditTenantRequest, any> {
+        protected getFormKey(): string;
+        private form;
+        constructor(container: JQuery);
+    }
+}
+declare namespace PatientManagement.Membership {
+    class EditUserProfilePanel extends Serenity.PropertyPanel<EditUserProfileRequest, any> {
+        protected getFormKey(): string;
+        private form;
+        constructor(container: JQuery);
+    }
+}
+declare namespace PatientManagement.Membership {
+    class ResetPasswordPanel extends Serenity.PropertyPanel<ResetPasswordRequest, any> {
+        protected getFormKey(): string;
+        private form;
+        constructor(container: JQuery);
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class OfferDropDownEditor extends Serenity.Select2Editor<any, any> {
+        constructor(container: JQuery);
+    }
+}
+declare namespace PatientManagement.Membership {
+    class SignUpPanel extends Serenity.PropertyPanel<SignUpRequest, any> {
+        protected getFormKey(): string;
+        private form;
+        constructor(container: JQuery);
+    }
+}
 declare namespace PatientManagement.PatientManagement {
     class ActivityDialog extends Serenity.EntityDialog<ActivityRow, any> {
         protected getFormKey(): string;
@@ -3700,18 +3754,6 @@ declare namespace PatientManagement.PatientManagement {
         refreshVisitForTodayBox(): void;
         protected onDeleteSuccess(response: Serenity.DeleteResponse): void;
         protected formatAlertMessage(firstLine: any, title: any, startDate: Date, endDate: Date): string;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class VisitsGrid extends Serenity.EntityGrid<VisitsRow, any> {
-        protected getColumnsKey(): string;
-        protected getDialogType(): typeof VisitsDialog;
-        protected getIdProperty(): string;
-        protected getLocalTextPrefix(): string;
-        protected getService(): string;
-        constructor(container: JQuery);
-        protected getButtons(): Serenity.ToolButton[];
-        protected getQuickFilters(): Serenity.QuickFilter<Serenity.Widget<any>, any>[];
     }
 }
 declare namespace PatientManagement.PatientManagement {
@@ -4064,12 +4106,6 @@ declare namespace PatientManagement.PatientManagement {
     }
 }
 declare namespace PatientManagement.PatientManagement {
-    class ReportsCommon {
-        static animateAndFillNumbers(elem: JQuery, num: Number, dur: Number): void;
-        static animateAndFillDecimals(elem: JQuery, num: Number, dur: Number): void;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
     class UserNotificationsDialog extends Serenity.EntityDialog<UserNotificationsRow, any> {
         protected getFormKey(): string;
         protected getIdProperty(): string;
@@ -4110,6 +4146,7 @@ declare namespace PatientManagement.PatientManagement {
 }
 declare namespace PatientManagement.PatientManagement {
     class NewVisitTypeDialog extends PatientManagement.VisitTypesDialog {
+        constructor(opt?: Object);
         protected onSaveSuccess(response: Serenity.SaveResponse): void;
         protected onDeleteSuccess(response: Serenity.DeleteResponse): void;
     }
@@ -4138,67 +4175,16 @@ declare namespace PatientManagement {
         constructor(elem: JQuery, opt: {});
     }
 }
-declare namespace PatientManagement.Authorization {
-    let userDefinition: ScriptUserDefinition;
-    function hasPermission(permissionKey: string): boolean;
-}
-declare namespace PatientManagement.Membership {
-    class ChangePasswordPanel extends Serenity.PropertyPanel<ChangePasswordRequest, any> {
-        protected getFormKey(): string;
-        private form;
-        constructor(container: JQuery);
-    }
-}
-declare namespace PatientManagement.Membership {
-    class ForgotPasswordPanel extends Serenity.PropertyPanel<ForgotPasswordRequest, any> {
-        protected getFormKey(): string;
-        private form;
-        constructor(container: JQuery);
-    }
-}
-declare namespace PatientManagement.Membership {
-    import VisitsGrid = PatientManagement.VisitsGrid;
-    class AddedVisitsFromUserPanel extends VisitsGrid {
-        private visitsGrid;
-        constructor(container: JQuery, userId: number);
-        protected getColumns(): Slick.Column[];
-        protected getInitialTitle(): any;
-        protected getGridCanLoad(): boolean;
-        private _insertUserId;
-        insertUserId: number;
-    }
-}
-declare namespace PatientManagement.Membership {
-    class EditTenantPanel extends Serenity.PropertyPanel<EditTenantRequest, any> {
-        protected getFormKey(): string;
-        private form;
-        constructor(container: JQuery);
-    }
-}
-declare namespace PatientManagement.Membership {
-    class EditUserProfilePanel extends Serenity.PropertyPanel<EditUserProfileRequest, any> {
-        protected getFormKey(): string;
-        private form;
-        constructor(container: JQuery);
-    }
-}
-declare namespace PatientManagement.Membership {
-    class ResetPasswordPanel extends Serenity.PropertyPanel<ResetPasswordRequest, any> {
-        protected getFormKey(): string;
-        private form;
-        constructor(container: JQuery);
+declare namespace PatientManagement.PatientManagement {
+    class ReportsCommon {
+        static animateAndFillNumbers(elem: JQuery, num: Number, dur: Number): void;
+        static animateAndFillDecimals(elem: JQuery, num: Number, dur: Number): void;
     }
 }
 declare namespace PatientManagement.PatientManagement {
-    class OfferDropDownEditor extends Serenity.Select2Editor<any, any> {
-        constructor(container: JQuery);
-    }
-}
-declare namespace PatientManagement.Membership {
-    class SignUpPanel extends Serenity.PropertyPanel<SignUpRequest, any> {
-        protected getFormKey(): string;
-        private form;
-        constructor(container: JQuery);
+    interface VisitsPerMonthLineChartResponse {
+        labels?: string[];
+        datasets?: Dataset[];
     }
 }
 declare namespace PatientManagement.PatientManagement {
@@ -4221,5 +4207,20 @@ declare var Chart: any;
 declare namespace PatientManagement.PatientManagement {
     class VisitTypesPerGenderChart extends Serenity.TemplatedWidget<any> {
         constructor(elem: JQuery, opt: {});
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    namespace ReportsVisitsEndpointService {
+        const baseUrl = "PatientManagement/ReportsVisits";
+        function NewPatientsThisMonth(request: Serenity.ServiceRequest, onSuccess?: (response: Serenity.RetrieveResponse<NewPatientsThisMonthResponse>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function NewVisitsThisMonth(request: Serenity.ServiceRequest, onSuccess?: (response: Serenity.RetrieveResponse<NewVisitsThisMonthResponse>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function VisitTypesPerGenderChart(request: Serenity.ServiceRequest, onSuccess?: (response: Serenity.RetrieveResponse<VisitTypesPerGenderChartResponse>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function VisitsPerMonthLineChart(request: Serenity.ServiceRequest, onSuccess?: (response: Serenity.RetrieveResponse<VisitsPerMonthLineChartResponse>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        const enum Methods {
+            NewPatientsThisMonth = "PatientManagement/ReportsVisits/NewPatientsThisMonth",
+            NewVisitsThisMonth = "PatientManagement/ReportsVisits/NewVisitsThisMonth",
+            VisitTypesPerGenderChart = "PatientManagement/ReportsVisits/VisitTypesPerGenderChart",
+            VisitsPerMonthLineChart = "PatientManagement/ReportsVisits/VisitsPerMonthLineChart",
+        }
     }
 }

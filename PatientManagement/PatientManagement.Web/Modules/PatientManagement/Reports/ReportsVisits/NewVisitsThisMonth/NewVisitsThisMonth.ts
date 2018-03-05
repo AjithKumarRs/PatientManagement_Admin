@@ -5,7 +5,7 @@
             super(elem, opt);
             $(this.byId("NewVisitsThisMonthBoxLeft")).addClass("bg-" + ThemeHelper.getCurrentTheme() + "-gradient");
             
-            ReportsEndpointService.NewVisitsThisMonth({},
+            ReportsVisitsEndpointService.NewVisitsThisMonth({},
                 response => {
                     if (response.Entity.PercentMonthBefore >= 0) {
                         $(this.byId("NewVisitsThisMonthBox")).addClass("bg-green-gradient");

@@ -17,7 +17,7 @@ namespace PatientManagement.PatientManagement.Pages
         [HttpGet, Route("PatientManagement/Reports/Visits")]
         public ActionResult Index()
         {
-            return View("~/Modules/PatientManagement/Reports/ReportsIndex.cshtml");
+            return View(MVC.Views.PatientManagement.Reports.ReportsVisits.ReportsVisitsIndex);
         }
     }
 }

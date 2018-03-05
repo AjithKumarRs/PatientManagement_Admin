@@ -1,6 +1,6 @@
 ﻿namespace PatientManagement.PatientManagement {
-    export namespace ReportsEndpointService {
-        export const baseUrl = 'PatientManagement/Reports';
+    export namespace ReportsVisitsEndpointService {
+        export const baseUrl = 'PatientManagement/ReportsVisits';
 
         export declare function NewPatientsThisMonth(request: Serenity.ServiceRequest, onSuccess?: (response: Serenity.RetrieveResponse<NewPatientsThisMonthResponse>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         export declare function NewVisitsThisMonth(request: Serenity.ServiceRequest, onSuccess?: (response: Serenity.RetrieveResponse<NewVisitsThisMonthResponse>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
@@ -8,10 +8,10 @@
         export declare function VisitsPerMonthLineChart(request: Serenity.ServiceRequest, onSuccess?: (response: Serenity.RetrieveResponse<VisitsPerMonthLineChartResponse>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
 
         export declare const enum Methods {
-            NewPatientsThisMonth = "PatientManagement/Reports/NewPatientsThisMonth",
-            NewVisitsThisMonth = "PatientManagement/Reports/NewVisitsThisMonth",
-            VisitTypesPerGenderChart = "PatientManagement/Reports/VisitTypesPerGenderChart",
-            VisitsPerMonthLineChart = "PatientManagement/Reports/VisitsPerMonthLineChart"
+            NewPatientsThisMonth = "PatientManagement/ReportsVisits/NewPatientsThisMonth",
+            NewVisitsThisMonth = "PatientManagement/ReportsVisits/NewVisitsThisMonth",
+            VisitTypesPerGenderChart = "PatientManagement/ReportsVisits/VisitTypesPerGenderChart",
+            VisitsPerMonthLineChart = "PatientManagement/ReportsVisits/VisitsPerMonthLineChart"
         }
 
         [
@@ -20,7 +20,7 @@
             'VisitTypesPerGenderChart', 
             'VisitsPerMonthLineChart'
         ].forEach(x => {
-            (<any>ReportsEndpointService)[x] = function (r, s, o) {
+            (<any>ReportsVisitsEndpointService)[x] = function (r, s, o) {
                 return Q.serviceRequest(baseUrl + '/' + x, r, s, o);
             };
         });
