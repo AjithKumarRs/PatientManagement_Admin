@@ -128,7 +128,10 @@ namespace PatientManagement.PatientManagement.Endpoints
                             && visitsFields.PatientId.In(patients.Select(p => p.PatientId)));
 
                         if (visitsCounter > tempCounter)
+                        {
+                            tempCounter = visitsCounter;
                             dataset.MostReservedVisitType = visitTypesRow.Name;
+                        }
 
                         dataset.data.Add(visitsCounter);
                     }
