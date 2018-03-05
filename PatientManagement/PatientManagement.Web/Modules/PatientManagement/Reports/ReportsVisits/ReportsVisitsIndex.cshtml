@@ -1,0 +1,49 @@
+﻿@using PatientManagement.PatientManagement
+
+@{
+    ViewData["Title"] = Serenity.LocalText.Get("Navigation.Reports");
+}
+<div class="row">
+
+
+    @if (Authorization.HasPermission(PatientManagementPermissionKeys.ReportsNewPatientsThisMonth))
+    {
+        <div id="newPatientsThisMonth"></div>
+        <script>
+            jQuery(document).ready(function () {
+                new PatientManagement.PatientManagement.NewPatientsThisMonth($("#newPatientsThisMonth"), {});
+            });
+        </script>
+    }
+    @if (Authorization.HasPermission(PatientManagementPermissionKeys.ReportsNewVisitsThisMonth))
+    {
+        <div id="newVisitsThisMonth"></div>
+        <script>
+            jQuery(document).ready(function () {
+                new PatientManagement.PatientManagement.NewVisitsThisMonth($("#newVisitsThisMonth"), {});
+            });
+        </script>
+    }
+</div>
+<div class="row">
+
+    @if (Authorization.HasPermission(PatientManagementPermissionKeys.ReportsVisitTypesPerGenderChart))
+    {
+        <div id="newVisitTypesRoundDiagram"></div>
+        <script>
+            jQuery(document).ready(function () {
+                new PatientManagement.PatientManagement.VisitTypesPerGenderChart($("#newVisitTypesRoundDiagram"), {});
+            });
+        </script>
+    }
+    
+    @if (Authorization.HasPermission(PatientManagementPermissionKeys.ReportsVisitsPerMonthLinearChart))
+    {
+        <div id="VisitsPerMonthLineChart"></div>
+        <script>
+            jQuery(document).ready(function () {
+                new PatientManagement.PatientManagement.VisitsPerMonthLineChart($("#VisitsPerMonthLineChart"), {});
+            });
+        </script>
+    }
+</div>

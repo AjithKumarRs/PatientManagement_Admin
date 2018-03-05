@@ -135,6 +135,26 @@ namespace PatientManagement
         }
         public static class Site
         {
+            public static class Reports
+            {
+                public static LocalText ReportNewPatientsThisMonthBox = "New patients this month";
+                public static LocalText ReportNewPatientsThanPreviousMonthBox = "Patients than previous month";
+
+                public static LocalText ReportNewVisitsThisMonthBox = "New visits this month";
+                public static LocalText ReportNewVisitsThanPreviousMonthBox = "Visits than previous month";
+
+                public static LocalText ReportVisitTypesRoundDiagramTitle = "Visit Types";
+                public static LocalText ReportVisitTypesRoundDiagramMales = "Males (Outer)";
+                public static LocalText ReportVisitTypesRoundDiagramFemales = "Females (Inner)";
+                public static LocalText ReportVisitTypesRoundDiagramTotalPatients = "Total patients:";
+                public static LocalText ReportVisitTypesRoundDiagramTotalVisits = "Total visits:";
+                public static LocalText ReportVisitTypesRoundDiagramMostReservedVisitType = "Most reserved visit type:";
+                
+                public static LocalText ReportVisitsPerMonthLineChartBoxTitle = "Visits per month";
+
+
+            }
+
             public static class About
             {
                 public static LocalText AboutPageTitle = "About";

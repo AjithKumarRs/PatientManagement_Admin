@@ -18,7 +18,7 @@ namespace PatientManagement {
 
         public setEditValue(source: any, property: Serenity.PropertyItem): void {
             this.element.val(source[property.name]);
-
+           
             this.element.geocomplete({
                 details: '.form_geocomplete', types: ["(cities)"]
             }).bind("geocode:result", function (event, result) {

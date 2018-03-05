@@ -1,0 +1,103 @@
+﻿
+<div class="col-lg-6 col-xs-12">
+    <div class="box box-default">
+        <div class="box-header with-border">
+            <h3 class="box-title">
+                {{text:"Site.Reports.ReportVisitTypesRoundDiagramTitle"}}
+            </h3>
+
+            <!--<div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                    <i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+            </div>-->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="chart-responsive">
+                        <canvas id="~_VisitTypesPieChart" height="200" width="220" style="width: 220px; height: 200px;"></canvas>
+                    </div>
+                    <!-- ./chart-responsive -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-4">
+                    <ul class="chart-legend clearfix">
+
+                        <li>
+                            <i class="employee-symbol male"></i>
+                            - 
+                            {{text:"Site.Reports.ReportVisitTypesRoundDiagramMales"}}
+                            <ul class="list-unstyled" style="padding: 5px">
+
+                                <li>
+                                    <i class="fa fa-circle-o text-light-blue"></i>
+                                    {{text:"Site.Reports.ReportVisitTypesRoundDiagramTotalPatients"}}
+                                    <ul>
+                                        <li id="~_PatientsTotalMales">0</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <i class="fa fa-circle-o text-light-blue"></i>
+                                    {{text:"Site.Reports.ReportVisitTypesRoundDiagramTotalVisits"}}
+                                    <ul>
+                                        <li id="~_VisitsTotalMales">0</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <i class="fa fa-circle-o text-light-blue"></i>
+                                    {{text:"Site.Reports.ReportVisitTypesRoundDiagramMostReservedVisitType"}}
+                                    <ul>
+                                        <li id="~_MostReservedVisitTypeMales"></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <hr style="width: 100%"/>
+                        </li>
+
+                        <li>
+                            <i class="employee-symbol female"></i>
+                            -
+                            {{text:"Site.Reports.ReportVisitTypesRoundDiagramFemales"}}
+
+                            <ul class="list-unstyled" style="padding: 5px">
+                                <li>
+                                    <i class="fa fa-circle-o text-red"></i>
+                                    {{text:"Site.Reports.ReportVisitTypesRoundDiagramTotalPatients"}}
+                                    <ul>
+                                        <li id="~_PatientsTotalFemales">0</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <i class="fa fa-circle-o text-red"></i>
+                                    {{text:"Site.Reports.ReportVisitTypesRoundDiagramTotalVisits"}}
+                                    <ul>
+                                        <li id="~_VisitsTotalFemales">0</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <i class="fa fa-circle-o text-red"></i>
+                                    {{text:"Site.Reports.ReportVisitTypesRoundDiagramMostReservedVisitType"}}
+                                    <ul>
+                                        <li id="~_MostReservedVisitTypeFemales"> </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <hr style="width: 100%"/>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.box-body -->
+       
+    </div>
+</div>

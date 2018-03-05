@@ -18,8 +18,8 @@ namespace PatientManagement.Administration.Forms
     {
         [LKCodeDescr(LookupKey = "PatientManagement.Patients", CodeFieldName = "Email", DescrFieldName = "Name")]
         public String ToEmail { get; set; }
-        public String Email { get; set; }
-        public String Name { get; set; }
+        //public String Email { get; set; }
+        //public String Name { get; set; }
         // public String ToName { get; set; }
         public String Subject { get; set; }
         public String Body { get; set; }
