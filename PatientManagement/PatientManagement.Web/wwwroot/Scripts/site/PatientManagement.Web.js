@@ -8415,7 +8415,9 @@ var PatientManagement;
                 }
             };
             VisitTypesDialog.prototype.onDeleteSuccess = function (response) {
-                location.reload();
+                if (this.form.ShowInMenu.getState()) {
+                    location.reload();
+                }
             };
             VisitTypesDialog = __decorate([
                 Serenity.Decorators.registerClass(),

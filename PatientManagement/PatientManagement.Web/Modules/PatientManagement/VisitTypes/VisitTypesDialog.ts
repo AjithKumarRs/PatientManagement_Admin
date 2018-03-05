@@ -39,7 +39,9 @@ namespace PatientManagement.PatientManagement {
             }
         }
         protected onDeleteSuccess(response: Serenity.DeleteResponse): void {
-            location.reload();
+            if (this.form.ShowInMenu.getState()) {
+                location.reload();
+            }
         }
     }
 }
