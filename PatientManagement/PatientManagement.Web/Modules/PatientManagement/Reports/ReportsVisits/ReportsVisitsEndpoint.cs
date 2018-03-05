@@ -158,6 +158,8 @@ namespace PatientManagement.PatientManagement.Endpoints
                 response.labels.Add(DateTime.Now.AddMonths(-i).ToString("MMMM"));
             }
 
+            response.labels.Reverse();
+
             foreach (var visitTypesRow in visitTypes)
             {
                 var dataset = new VisitsPerMonthLineChartResponse.Dataset();
@@ -187,7 +189,10 @@ namespace PatientManagement.PatientManagement.Endpoints
 
                     var visits = new VisitsRepository().List(connection, visitReq);
                     dataset.data.Add(visits.TotalCount);
+                    
                 }
+
+                dataset.data.Reverse();
                 response.datasets.Add(dataset);
             }
             return new RetrieveResponse<VisitsPerMonthLineChartResponse> { Entity = response };
