@@ -8,5 +8,6 @@ using Patients = PatientManagement.PatientManagement.Pages;
 
 [assembly: NavigationMenu(514, "Reports", icon: "fa-area-chart")]
 [assembly: NavigationLink(515, "Reports/Visits", typeof(Patients.ReportsVisitsController), icon: "fa-calendar")]
+[assembly: NavigationLink(516, "Reports/Income", typeof(Patients.ReportsIncomeController), icon: "fa-money")]
 
 [assembly: NavigationLink(550, "Notifications", typeof(Patients.NotificationsController), icon: "fa-bell-o")]
