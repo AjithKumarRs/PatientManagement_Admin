@@ -12,9 +12,9 @@ namespace PatientManagement.PatientManagement.Pages
     using Serenity.Web;
 
     [PageAuthorize(PatientManagementPermissionKeys.ReportsPage)]
-    public class ReportsController : Controller
+    public class ReportsVisitsController : Controller
     {
-        [HttpGet, Route("PatientManagement/Reports")]
+        [HttpGet, Route("PatientManagement/Reports/Visits")]
         public ActionResult Index()
         {
             return View("~/Modules/PatientManagement/Reports/ReportsIndex.cshtml");
