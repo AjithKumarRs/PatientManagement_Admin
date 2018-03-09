@@ -23,8 +23,10 @@
                     this.form.TenantName.value = tenant.TenantName;
                     this.form.TenantWebSite.value = tenant.TenantWebSite;
 
-                    if (this.form.TenantImage.value != null)
-                        this.form.TenantImage.value.Filename = tenant.TenantImage;
+                    if (tenant.TenantImage != null) {
+                        this.form.TenantImage.value = <Serenity.UploadedFile>{ Filename: tenant.TenantImage };
+                    }
+                    
                     this.form.TenantEmailSignature.value = tenant.TenantEmailSignature;
                     this.form.OverrideUsersEmailSignature.element.bootstrapSwitch('state', tenant.OverrideUsersEmailSignature);
                 });

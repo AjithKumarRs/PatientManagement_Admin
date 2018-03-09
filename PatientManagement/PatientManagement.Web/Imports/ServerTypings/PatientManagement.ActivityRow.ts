@@ -20,42 +20,26 @@
         export const isActiveProperty = 'IsActive';
         export const nameProperty = 'Profession';
         export const localTextPrefix = 'PatientManagement.Activity';
-        export const lookupKey = 'PatientManagement.LifeStyles';
+        export const lookupKey = 'PatientManagement.Activity';
 
         export function getLookup(): Q.Lookup<ActivityRow> {
-            return Q.getLookup<ActivityRow>('PatientManagement.LifeStyles');
+            return Q.getLookup<ActivityRow>('PatientManagement.Activity');
         }
 
-        export namespace Fields {
-            export declare const ActivityId: string;
-            export declare const PatientId: string;
-            export declare const MovementAndTraining: string;
-            export declare const Profession: string;
-            export declare const InsertUserId: string;
-            export declare const InsertDate: string;
-            export declare const UpdateUserId: string;
-            export declare const UpdateDateField: string;
-            export declare const IsActive: string;
-            export declare const TenantId: string;
-            export declare const TenantName: string;
-            export declare const InsertUserName: string;
-            export declare const UpdateUserName: string;
+        export declare const enum Fields {
+            ActivityId = "ActivityId",
+            PatientId = "PatientId",
+            MovementAndTraining = "MovementAndTraining",
+            Profession = "Profession",
+            InsertUserId = "InsertUserId",
+            InsertDate = "InsertDate",
+            UpdateUserId = "UpdateUserId",
+            UpdateDateField = "UpdateDateField",
+            IsActive = "IsActive",
+            TenantId = "TenantId",
+            TenantName = "TenantName",
+            InsertUserName = "InsertUserName",
+            UpdateUserName = "UpdateUserName"
         }
-
-        [
-            'ActivityId', 
-            'PatientId', 
-            'MovementAndTraining', 
-            'Profession', 
-            'InsertUserId', 
-            'InsertDate', 
-            'UpdateUserId', 
-            'UpdateDateField', 
-            'IsActive', 
-            'TenantId', 
-            'TenantName', 
-            'InsertUserName', 
-            'UpdateUserName'
-        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

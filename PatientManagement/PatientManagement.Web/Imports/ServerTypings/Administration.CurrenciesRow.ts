@@ -22,30 +22,17 @@
             return Q.getLookup<CurrenciesRow>('Administration.Currencies');
         }
 
-        export namespace Fields {
-            export declare const Id: string;
-            export declare const CurrencyId: string;
-            export declare const Name: string;
-            export declare const Rate: string;
-            export declare const Enabled: string;
-            export declare const BaseCurrencyId: string;
-            export declare const BaseCurrencyName: string;
-            export declare const UpdateUserId: string;
-            export declare const UserName: string;
-            export declare const UpdateDateField: string;
+        export declare const enum Fields {
+            Id = "Id",
+            CurrencyId = "CurrencyId",
+            Name = "Name",
+            Rate = "Rate",
+            Enabled = "Enabled",
+            BaseCurrencyId = "BaseCurrencyId",
+            BaseCurrencyName = "BaseCurrencyName",
+            UpdateUserId = "UpdateUserId",
+            UserName = "UserName",
+            UpdateDateField = "UpdateDateField"
         }
-
-        [
-            'Id', 
-            'CurrencyId', 
-            'Name', 
-            'Rate', 
-            'Enabled', 
-            'BaseCurrencyId', 
-            'BaseCurrencyName', 
-            'UpdateUserId', 
-            'UserName', 
-            'UpdateDateField'
-        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

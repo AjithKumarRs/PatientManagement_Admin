@@ -2,6 +2,7 @@
 using PatientManagement.Administration;
 using PatientManagement.Administration.Entities;
 using PatientManagement.PatientManagement.Scripts;
+using Remotion.Linq.Clauses;
 
 namespace PatientManagement.PatientManagement.Entities
 {
@@ -83,6 +84,7 @@ namespace PatientManagement.PatientManagement.Entities
             set { Fields.VisitTypeBorderColor[this] = value; }
         }
 
+
         [DisplayFormat("dd/MM/yyyy HH:mm")]
         [DisplayName("Start Date"), NotNull, QuickSearch, QuickFilter, SortOrder(1, true), Width(150)]
         [DateTimeKind(DateTimeKind.Unspecified), DateTimeEditor]
@@ -100,6 +102,21 @@ namespace PatientManagement.PatientManagement.Entities
             set => Fields.EndDate[this] = value;
         }
 
+        [DisplayName("Assigned to User"), ForeignKey("Users", "UserId"), LeftJoin("usrA"), TextualField("AssignedUserName")]
+        [LookupEditor(typeof(UserRow), InplaceAdd = false, FilterField = "CanBeAssignedToVisit", FilterValue = 1)]
+        [QuickFilter()]
+        public Int32? AssignedUserId
+        {
+            get { return Fields.AssignedUserId[this]; }
+            set { Fields.AssignedUserId[this] = value; }
+        }
+
+        [DisplayName("Assigned to"), Expression("usrA.DisplayName")]
+        public String AssignedUserName
+        {
+            get { return Fields.AssignedUserName[this]; }
+            set { Fields.AssignedUserName[this] = value; }
+        }
 
         [DisplayName("Insert User Id"), NotNull, ForeignKey("Users", "UserId"), LeftJoin("usrI"), TextualField("InsertUserName")]
         [ReadPermission("Administration:Tenants")]
@@ -133,6 +150,14 @@ namespace PatientManagement.PatientManagement.Entities
         {
             get => Fields.Description[this];
             set => Fields.Description[this] = value;
+        }
+
+        [DisplayName("Free For Reservation")]
+        [BsSwitchEditor]
+        public Boolean? FreeForReservation
+        {
+            get => Fields.FreeForReservation[this];
+            set => Fields.FreeForReservation[this] = value;
         }
 
         #region PatientFields
@@ -172,7 +197,6 @@ namespace PatientManagement.PatientManagement.Entities
         }
         #endregion
 
-
         [DisplayName("Visit Type Name"), Expression("jVisitType.[Name]"), Width(150), QuickFilter]
         public String VisitTypeName
         {
@@ -180,6 +204,33 @@ namespace PatientManagement.PatientManagement.Entities
             set => Fields.VisitTypeName[this] = value;
         }
 
+
+        [ReadPermission(PermissionKeys.AdministrationTenantsVisitPayments)]
+        [NotMapped]
+        [DisplayName("Price Per Visit")]
+        public String VisitTypePriceFormatted
+        {
+            get { return Fields.VisitTypePriceFormatted[this]; }
+            set { Fields.VisitTypePriceFormatted[this] = value; }
+        }
+
+        [ReadPermission(PermissionKeys.AdministrationTenantsVisitPayments)]
+        [Expression("jVisitType.[Price]")]
+        public Decimal? VisitTypePrice
+        {
+            get { return Fields.VisitTypePrice[this]; }
+            set { Fields.VisitTypePrice[this] = value; }
+        }
+
+        [ReadPermission(PermissionKeys.AdministrationTenantsVisitPayments)]
+        [Expression("jVisitType.[CurrencyId]")]
+        [DisplayName("Visit Type Currency Id")]
+        public Int32? VisitTypeCurrencyId
+        {
+            get => Fields.VisitTypeCurrencyId[this]; 
+            set => Fields.VisitTypeCurrencyId[this] = value; 
+        }
+        
         IIdField IIdRow.IdField => Fields.VisitId;
 
         public static readonly RowFields Fields = new RowFields().Init();
@@ -198,10 +249,13 @@ namespace PatientManagement.PatientManagement.Entities
             public Int32Field CabinetId;
             public StringField CabinetName;
             public Int16Field CabinetIsActive;
-
+            public Int32Field AssignedUserId;
+            public StringField AssignedUserName;
+            public BooleanField FreeForReservation;
             public StringField Description;
             public DateTimeField StartDate;
             public DateTimeField EndDate;
+
             public Int32Field InsertUserId;
             public DateTimeField InsertDate;
 
@@ -217,7 +271,10 @@ namespace PatientManagement.PatientManagement.Entities
             public StringField VisitTypeName;
             public StringField VisitTypeBackgroundColor;
             public StringField VisitTypeBorderColor;
-
+            public DecimalField VisitTypePrice;
+            public StringField VisitTypePriceFormatted;
+            public Int32Field VisitTypeCurrencyId;
+            
             public readonly Int32Field TenantId;
             public RowFields()
                 : base()

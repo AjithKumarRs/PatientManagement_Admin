@@ -112,7 +112,8 @@ namespace PatientManagement
 
                     public static LocalText AcceptTerms = "I agree to the terms";
                     public static LocalText BackToLogin = "I already have a membership";
-                    
+                    public static LocalText TermsOfUse = "Terms Of Use";
+
                     public static LocalText FormatCabinetName = "{0} - First Room";
 
                     public static LocalText AcceptTermsAndConditionsError = "You must accept terms and conditions";
@@ -134,6 +135,26 @@ namespace PatientManagement
         }
         public static class Site
         {
+            public static class Reports
+            {
+                public static LocalText ReportNewPatientsThisMonthBox = "New patients this month";
+                public static LocalText ReportNewPatientsThanPreviousMonthBox = "Patients than previous month";
+
+                public static LocalText ReportNewVisitsThisMonthBox = "New visits this month";
+                public static LocalText ReportNewVisitsThanPreviousMonthBox = "Visits than previous month";
+
+                public static LocalText ReportVisitTypesRoundDiagramTitle = "Visit Types";
+                public static LocalText ReportVisitTypesRoundDiagramMales = "Males (Outer)";
+                public static LocalText ReportVisitTypesRoundDiagramFemales = "Females (Inner)";
+                public static LocalText ReportVisitTypesRoundDiagramTotalPatients = "Total patients:";
+                public static LocalText ReportVisitTypesRoundDiagramTotalVisits = "Total visits:";
+                public static LocalText ReportVisitTypesRoundDiagramMostReservedVisitType = "Most reserved visit type:";
+                
+                public static LocalText ReportVisitsPerMonthLineChartBoxTitle = "Visits per month";
+
+
+            }
+
             public static class About
             {
                 public static LocalText AboutPageTitle = "About";
@@ -174,10 +195,10 @@ namespace PatientManagement
 
                 public static LocalText PaymentEmptyValueError = "You can't make empty payment!";
                 public static LocalText PaymentBlank = "File";
-                public static LocalText Reciever = "АЙ ПИ ООД";
-                public static LocalText IBANReciever = "BG56UNCR70001520323712";
-                public static LocalText BICreciever = "UNCRBGSF";
-                public static LocalText BankNameReciever = "УНИКРЕДИТ ЦЕНТРАЛИЗИРИНА С-МА";
+                public static LocalText Reciever = "Svetlin Krastanov";
+                public static LocalText IBANReciever = "BG1111111111111";
+                public static LocalText BICreciever = "CNTRLBNK";
+                public static LocalText BankNameReciever = "CENTRAL BANK";
 
                 public static LocalText CouponExpiredError = "The coupon that you entered is expired!";
                 public static LocalText CouponNotExist = "The coupon that you entered not exist!";
@@ -265,10 +286,11 @@ namespace PatientManagement
                 public static LocalText SendEmail = "Send Email";
                 public static LocalText DeleteVisit = "Delete Visit";
                 public static LocalText QuitContextMenu = "Quit";
-
+                 
                 public static LocalText VisitTypesLeftMenu = "VISIT TYPES";
 
                 public static LocalText SuccessChangedVisitDates = "You successfully change visit with patient name: ";
+                public static LocalText SuccessChangedVisitDatesFreeForReservation = "You successfully change visit";
                 public static LocalText SuccessDeletingVisitDates = "You successfully deleted a visit with patient name: ";
                 public static LocalText ErrorEndDateBiggerThanStartDate = "End Date can't be earlier than Start Date";
                 public static LocalText ErrorEndDateEqualStartDate = "End Date can't be equal to Start Date";

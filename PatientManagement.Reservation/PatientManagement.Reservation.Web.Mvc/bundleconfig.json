@@ -1,0 +1,206 @@
+[
+  {
+    "outputFileName": "wwwroot/view-resources/Views/_Bundles/clario-layout.min.css",
+    "inputFiles": [
+      "wwwroot/fonts/roboto/roboto.css",
+      "wwwroot/fonts/material-icons/materialicons.css",
+      "wwwroot/lib/bootstrap/dist/css/bootstrap.css",
+      "wwwroot/lib/bootstrap-select/dist/css/bootstrap-select.css",
+      "wwwroot/lib/toastr/toastr.css",
+      "wwwroot/lib/sweetalert/dist/sweetalert.css",
+      "wwwroot/lib/famfamfam-flags/dist/sprite/famfamfam-flags.css",
+      "wwwroot/lib/font-awesome/css/font-awesome.css",
+      "wwwroot/lib/Waves/dist/waves.css",
+
+      "wwwroot/lib/jquery-ui/themes/base/jquery-ui.css",
+      "wwwroot/lib/animate.css/animate.css",
+      "wwwroot/lib/owl-carousel/owl.carousel.css",
+      "wwwroot/lib/SelectInspiration/css/cs-select.css",
+      "wwwroot/lib/lightgallery/dist/css/lightgallery.css",
+      "wwwroot/lib/bootstrap-fileinput/css/fileinput.css",
+      "wwwroot/css/apartment-layout.css",
+      "wwwroot/css/apartment-colors-blue.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/_Bundles/clario-layout.min.js",
+    "inputFiles": [
+      "wwwroot/lib/json2/json2.js",
+      "wwwroot/lib/jquery/dist/jquery.js",
+
+      "wwwroot/lib/jquery-ui/jquery-ui.js",
+      "wwwroot/lib/jquery.ui.touch-punch/dist/jquery.ui.touch-punch.js",
+
+      "wwwroot/lib/bootstrap/dist/js/bootstrap.js",
+      "wwwroot/lib/moment/min/moment-with-locales.js",
+      "wwwroot/lib/jquery-validation/dist/jquery.validate.js",
+      "wwwroot/lib/blockUI/jquery.blockUI.js",
+      "wwwroot/lib/toastr/toastr.js",
+      "wwwroot/lib/sweetalert/dist/sweetalert-dev.js",
+      "wwwroot/lib/spin.js/spin.js",
+      "wwwroot/lib/spin.js/jquery.spin.js",
+      "wwwroot/lib/bootstrap-select/dist/js/bootstrap-select.js",
+      "wwwroot/lib/jquery-slimscroll/jquery.slimscroll.js",
+      "wwwroot/lib/Waves/dist/waves.js",
+      "wwwroot/lib/push.js/push.js",
+      "wwwroot/lib/abp-web-resources/Abp/Framework/scripts/abp.js",
+      "wwwroot/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.jquery.js",
+      "wwwroot/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.toastr.js",
+      "wwwroot/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.blockUI.js",
+      "wwwroot/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.spin.js",
+      "wwwroot/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.sweet-alert.js",
+      "wwwroot/lib/js-marker-clusterer/src/markerclusterer.js",
+      "wwwroot/lib/markerspiderfier/oms.min.js",
+      "wwwroot/lib/geocomplete/jquery.geocomplete.js",
+      "wwwroot/lib/infobox/infobox.js",
+      "wwwroot/lib/lightgallery/dist/js/lightgallery.js",
+      "wwwroot/lib/lightgallery/modules/lg-fullscreen.js",
+      "wwwroot/lib/lightgallery/modules/lg-video.js",
+      "wwwroot/lib/lightgallery/modules/lg-autoplay.js",
+      "wwwroot/lib/lightgallery/modules/lg-zoom.js",
+      "wwwroot/lib/jquery_appear/jquery.appear.js",
+      "wwwroot/lib/jquery-countTo/jquery.countTo.js",
+      "wwwroot/lib/swiper/dist/js/swiper.js",
+      "wwwroot/lib/owl-carousel/owl.carousel.js",
+      "wwwroot/lib/SelectInspiration/js/classie.js",
+      "wwwroot/lib/SelectInspiration/js/selectFx.js",
+      "wwwroot/lib/jquery.parallax/jquery.parallax.js",
+      "wwwroot/lib/isotope/dist/isotope.pkgd.js",
+      "wwwroot/lib/bootstrap-fileinput/js/fileinput.js",
+      "wwwroot/lib/wow/dist/wow.js",
+      "wwwroot/js/apartment.js"
+
+    ]
+  },
+
+  {
+    "outputFileName": "wwwroot/view-resources/Views/_Bundles/account-layout.min.css",
+    "inputFiles": [
+      "wwwroot/fonts/roboto/roboto.css",
+      "wwwroot/fonts/material-icons/materialicons.css",
+      "wwwroot/lib/bootstrap/dist/css/bootstrap.css",
+      "wwwroot/lib/toastr/toastr.css",
+      "wwwroot/lib/sweetalert/dist/sweetalert.css",
+      "wwwroot/lib/famfamfam-flags/dist/sprite/famfamfam-flags.css",
+      "wwwroot/lib/font-awesome/css/font-awesome.css",
+      "wwwroot/lib/Waves/dist/waves.css",
+      "wwwroot/lib/animate.css/animate.css",
+      "wwwroot/css/materialize.css",
+      "wwwroot/css/style.css",
+      "wwwroot/view-resources/Views/Account/_Layout.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/_Bundles/account-layout.min.js",
+    "inputFiles": [
+      "wwwroot/lib/json2/json2.js",
+      "wwwroot/lib/jquery/dist/jquery.js",
+      "wwwroot/lib/bootstrap/dist/js/bootstrap.js",
+      "wwwroot/lib/moment/min/moment-with-locales.js",
+      "wwwroot/lib/jquery-validation/dist/jquery.validate.js",
+      "wwwroot/lib/blockUI/jquery.blockUI.js",
+      "wwwroot/lib/toastr/toastr.js",
+      "wwwroot/lib/sweetalert/dist/sweetalert-dev.js",
+      "wwwroot/lib/spin.js/spin.js",
+      "wwwroot/lib/spin.js/jquery.spin.js",
+      "wwwroot/lib/Waves/dist/waves.js",
+      "wwwroot/lib/abp-web-resources/Abp/Framework/scripts/abp.js",
+      "wwwroot/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.jquery.js",
+      "wwwroot/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.toastr.js",
+      "wwwroot/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.blockUI.js",
+      "wwwroot/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.spin.js",
+      "wwwroot/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.sweet-alert.js",
+      "wwwroot/js/admin.js",
+      "wwwroot/js/main.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/_Bundles/shared-layout.min.css",
+    "inputFiles": [
+      "wwwroot/fonts/roboto/roboto.css",
+      "wwwroot/fonts/material-icons/materialicons.css",
+      "wwwroot/lib/bootstrap/dist/css/bootstrap.css",
+      "wwwroot/lib/bootstrap-select/dist/css/bootstrap-select.css",
+      "wwwroot/lib/toastr/toastr.css",
+      "wwwroot/lib/sweetalert/dist/sweetalert.css",
+      "wwwroot/lib/famfamfam-flags/dist/sprite/famfamfam-flags.css",
+      "wwwroot/lib/font-awesome/css/font-awesome.css",
+      "wwwroot/lib/Waves/dist/waves.css",
+      "wwwroot/lib/animate.css/animate.css",
+      "wwwroot/css/materialize.css",
+      "wwwroot/css/style.css",
+      "wwwroot/css/themes/all-themes.css",
+      "wwwroot/view-resources/Views/Shared/_Layout.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/_Bundles/shared-layout.min.js",
+    "inputFiles": [
+      "wwwroot/lib/json2/json2.js",
+      "wwwroot/lib/jquery/dist/jquery.js",
+      "wwwroot/lib/bootstrap/dist/js/bootstrap.js",
+      "wwwroot/lib/moment/min/moment-with-locales.js",
+      "wwwroot/lib/jquery-validation/dist/jquery.validate.js",
+      "wwwroot/lib/blockUI/jquery.blockUI.js",
+      "wwwroot/lib/toastr/toastr.js",
+      "wwwroot/lib/sweetalert/dist/sweetalert-dev.js",
+      "wwwroot/lib/spin.js/spin.js",
+      "wwwroot/lib/spin.js/jquery.spin.js",
+      "wwwroot/lib/bootstrap-select/dist/js/bootstrap-select.js",
+      "wwwroot/lib/jquery-slimscroll/jquery.slimscroll.js",
+      "wwwroot/lib/Waves/dist/waves.js",
+      "wwwroot/lib/push.js/push.js",
+      "wwwroot/lib/abp-web-resources/Abp/Framework/scripts/abp.js",
+      "wwwroot/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.jquery.js",
+      "wwwroot/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.toastr.js",
+      "wwwroot/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.blockUI.js",
+      "wwwroot/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.spin.js",
+      "wwwroot/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.sweet-alert.js",
+      "wwwroot/js/admin.js",
+      "wwwroot/js/main.js",
+      "wwwroot/view-resources/Views/Shared/_Layout.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/_Bundles/home-index.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Home/Index.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Account/Login.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Account/Login.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Account/Register.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Account/Register.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Users/Index.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Users/Index.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Tenants/Index.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Tenants/Index.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Shared/Components/TenantChange/_ChangeModal.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Shared/Components/TenantChange/_ChangeModal.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/view-resources/Views/Shared/Components/TenantChange/Default.min.js",
+    "inputFiles": [
+      "wwwroot/view-resources/Views/Shared/Components/TenantChange/Default.js"
+    ]
+  }
+]

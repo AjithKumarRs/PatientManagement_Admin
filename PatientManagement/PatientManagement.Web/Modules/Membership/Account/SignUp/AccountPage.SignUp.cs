@@ -202,5 +202,6 @@ namespace PatientManagement.Membership.Pages
                 return new RedirectResult("~/Account/Login?activated=" + Uri.EscapeDataString(user.Email));
             }
         }
+        
     }
 }

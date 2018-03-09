@@ -1,9 +1,4 @@
 ﻿namespace PatientManagement.PatientManagement {
-    export class NotificationsForm extends Serenity.PrefixedContext {
-        static formKey = 'PatientManagement.Notifications';
-
-    }
-
     export interface NotificationsForm {
         EntityType: Serenity.StringEditor;
         EntityId: Serenity.StringEditor;
@@ -12,5 +7,29 @@
         InsertDate: Serenity.DateEditor;
     }
 
-    [['EntityType', () => Serenity.StringEditor], ['EntityId', () => Serenity.StringEditor], ['Text', () => Serenity.StringEditor], ['InsertUserId', () => Serenity.IntegerEditor], ['InsertDate', () => Serenity.DateEditor]].forEach(x => Object.defineProperty(NotificationsForm.prototype, <string>x[0], { get: function () { return this.w(x[0], (x[1] as any)()); }, enumerable: true, configurable: true }));
+    export class NotificationsForm extends Serenity.PrefixedContext {
+        static formKey = 'PatientManagement.Notifications';
+        private static init: boolean;
+
+        constructor(prefix: string) {
+            super(prefix);
+
+            if (!NotificationsForm.init)  {
+                NotificationsForm.init = true;
+
+                var s = Serenity;
+                var w0 = s.StringEditor;
+                var w1 = s.IntegerEditor;
+                var w2 = s.DateEditor;
+
+                Q.initFormType(NotificationsForm, [
+                    'EntityType', w0,
+                    'EntityId', w0,
+                    'Text', w0,
+                    'InsertUserId', w1,
+                    'InsertDate', w2
+                ]);
+            }
+        }
+    }
 }

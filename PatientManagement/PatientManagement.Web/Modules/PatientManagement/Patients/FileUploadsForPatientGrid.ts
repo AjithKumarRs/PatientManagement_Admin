@@ -1,5 +1,6 @@
 ﻿/// <reference path="../PatientsFileUploads/PatientsFileUploadsGrid.ts"/>
 namespace PatientManagement.PatientManagement {
+    import fld = PatientsFileUploadsRow.Fields;
 
     @Serenity.Decorators.registerClass()
     export class FIleUploadsForPatientGrid extends PatientsFileUploadsGrid {
@@ -11,7 +12,6 @@ namespace PatientManagement.PatientManagement {
 
 
         protected getColumns(): Slick.Column[] {
-            let fld = PatientsFileUploadsRow.Fields;
             return super.getColumns();
         }
 

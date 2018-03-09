@@ -71,7 +71,7 @@
 
                             <script type="text/javascript">
                                 jQuery(function () {
-                                   new PatientManagement.PatientManagement.NotificationDropdownMenu($('#NotificationDropdownMenu'), {});
+                                    new PatientManagement.PatientManagement.NotificationDropdownMenu($('#NotificationDropdownMenu'), {});
                                 });
                             </script>
 
@@ -118,11 +118,11 @@
 
             <aside class="main-sidebar">
                 <section class="sidebar">
-                   
+
                     <!-- Sidebar user panel -->
                     <div class="user-panel" style="min-height: 60px">
                         <p class="info" style="position: inherit; padding: 5px 0; left: 0; text-align: center; border: 1px solid @theme ">
-                             <strong> @user.TenantName</strong>  
+                            <strong> @user.TenantName</strong>
                         </p>
                         <div class="clearfix"></div>
 
@@ -147,7 +147,7 @@
                             </a>
 
                             <div class="clearfix"></div>
-                           
+
                         </div>
                     </div>
                     <div class="sidebar-form today-visits-box" style="margin: 10px">
@@ -168,14 +168,14 @@
                             </div>
 
                             <script type="text/javascript">
-                                $(document).ready(function() {
+                                $(document).ready(function () {
 
                                     ReFetchVisitsForTodayBox();
                                 });
 
                                 function ReFetchVisitsForTodayBox() {
                                     $.get('/Dashboard/GetTodayVisits/',
-                                        function(data) {
+                                        function (data) {
                                             $('#today-visit-counter').text(data.countVisitsForToday);
                                             var width = (data.alreadyExpired / data.countVisitsForToday) * 100;
                                             $('#today-visits-progress').attr('aria-valuemax', data.countVisitsForToday);
@@ -297,23 +297,42 @@
                             <hr />
                             <div class="form-group" style="margin-top: 15px;">
                                 <label class="control-sidebar-subheading">@Texts.Site.Layout.RightBoxHeader</label>
-                                
+
                                 <div class="box no-padding disabled ">
                                     <ul class="nav nav-stacked">
-                                        <li><a href="@Texts.Site.Layout.RightBoxLayoutFaqLink" target="_blank" style="min-height: 50px" class="text-center">
-                                            @Texts.Site.Layout.RightBoxLayoutFaq
+                                        <li>
+                                            <a href="@Texts.Site.Layout.RightBoxLayoutFaqLink" target="_blank" style="min-height: 50px" class="text-center">
+                                                @Texts.Site.Layout.RightBoxLayoutFaq
 
-                                        </a></li>
-                                        <li><a href="@Texts.Site.Layout.RightBoxLayoutTechnicalDocumentationLink" target="_blank" style="min-height: 50px" class="text-center">
-                                            @Texts.Site.Layout.RightBoxLayoutTechnicalDocumentation
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="@Texts.Site.Layout.RightBoxLayoutTechnicalDocumentationLink" target="_blank" style="min-height: 50px" class="text-center">
+                                                @Texts.Site.Layout.RightBoxLayoutTechnicalDocumentation
 
-                                        </a></li>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a id="terms-of-use-link" href="#" title="@Texts.Forms.Membership.SignUp.TermsOfUse" style="min-height: 50px" class="text-center" target="_blank">@Texts.Forms.Membership.SignUp.TermsOfUse</a>
+
+                                        </li>
                                     </ul>
+                                    <script type="text/javascript">
 
+                                        $('#terms-of-use-link').click(function (e) {
+                                            e.preventDefault();
+
+                                            new PatientManagement.Common.ReportHelper.execute({
+                                                target: "_blank",
+                                                reportKey: 'Administration.TermsOfUse',
+                                                extension: 'pdf',
+                                                params: {}
+                                            });
+                                        });
+                                    </script>
                                 </div>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </aside>
@@ -371,7 +390,7 @@
 
                 $('.open-new-visit-dialog').parent().click(function (event) {
                     event.preventDefault();
-                    new PatientManagement.PatientManagement.NewVisitTypeDialog().loadNewAndOpenDialog();
+                    new PatientManagement.PatientManagement.VisitTypesDialog().loadNewAndOpenDialog();
                 });
 
                 @RenderSection("PageInitScript", false);
@@ -433,7 +452,7 @@
 
         </script>
 
-        
+
         <script async>
             $('#btn-close-subscription-box').click(function (e) {
                 Q.confirm("Информация за абонамента няма да се показва в следващите 24 часа?",() => {
@@ -449,72 +468,72 @@
             //TODO: Finded major speed issue here! Cache user data or make a cookie if user is closing the subscription box
             jQuery(document).ready(function () {
                 jQuery(document).ready(function () {
-                 
+
                     //var userData = new Q.getRemoteData('UserData');
                     if ($.cookie('SubcriptionInfoBox') != 1)
-                    $.get('../Administration/GetTenantSubscriptionEndDate', function (date) {
-                        var subscriptionEndDate = date;
+                        $.get('../Administration/GetTenantSubscriptionEndDate', function (date) {
+                            var subscriptionEndDate = date;
 
-                        // Show user permision
-                        if (subscriptionEndDate) {
-                            String.prototype.format = function () {
-                                var args = arguments;
-                                return this.replace(/\{\{|\}\}|\{(\d+)\}/g,
-                                    function (m, n) {
-                                        if (m == "{{") {
-                                            return "{";
-                                        }
-                                        if (m == "}}") {
-                                            return "}";
-                                        }
-                                        return args[n];
+                            // Show user permision
+                            if (subscriptionEndDate) {
+                                String.prototype.format = function () {
+                                    var args = arguments;
+                                    return this.replace(/\{\{|\}\}|\{(\d+)\}/g,
+                                        function (m, n) {
+                                            if (m == "{{") {
+                                                return "{";
+                                            }
+                                            if (m == "}}") {
+                                                return "}";
+                                            }
+                                            return args[n];
+                                        });
+                                };
+
+                                var expireDate = new Date(subscriptionEndDate);
+                                var todayDate = new Date();
+
+                                if (subscriptionEndDate !== "0001-01-01T00:00:00" && todayDate > expireDate) {
+                                    $('#subscription-information-box h4')
+                                        .text(Q.text("Site.Subscriptions.Expired.SubscriptionInfoBoxHeader"));
+
+
+                                    var diff2 = Math.floor((Date.parse(new Date()) - Date.parse(expireDate)) / 86400000);
+                                    var formatFooter =
+                                        Q.format(Q.text("Site.Subscriptions.Expired.SubscriptionInfoBoxFooter"), diff2);
+
+                                    $('#subscription-information-box p')
+                                        .html(Q.text("Site.Subscriptions.Expired.SubscriptionInfoBoxBody") + '<br />' + formatFooter);
+
+                                    $('#subscription-information-box').addClass('callout-danger');
+                                    $('#subscription-information-box').parents('.row').show('slide', { direction: 'up' }, 500);
+                                } else if (subscriptionEndDate !== "0001-01-01T00:00:00" &&
+                                    todayDate.setMonth(todayDate.getMonth() + 1) > expireDate) {
+
+                                    var diff = Math.floor((Date.parse(expireDate) - Date.parse(new Date())) / 86400000);
+
+                                    $('#subscription-information-box h4').text(
+                                        Q.text("Site.Subscriptions.WillExpire.SubscriptionInfoBoxHeader"));
+
+                                    $('#subscription-information-box p')
+                                        .text(
+                                            Q.text("Site.Subscriptions.WillExpire.SubscriptionInfoBoxBody").format(diff));
+
+                                    $('#subscription-information-box').addClass('callout-warning');
+                                    $('#subscription-information-box').parents('.row')
+                                        .show('slide', { direction: 'up' }, 500);
+                                } else {
+                                    $.cookie('SubcriptionInfoBox', 1, {
+                                        path: Q.Config.applicationPath,
+                                        expires: 1
                                     });
-                            };
+                                }
 
-                            var expireDate = new Date(subscriptionEndDate);
-                            var todayDate = new Date();
-
-                            if (subscriptionEndDate !== "0001-01-01T00:00:00" && todayDate > expireDate) {
-                                $('#subscription-information-box h4')
-                                    .text(Q.text("Site.Subscriptions.Expired.SubscriptionInfoBoxHeader"));
-
-
-                                var diff2 = Math.floor((Date.parse(new Date()) - Date.parse(expireDate)) / 86400000);
-                                var formatFooter =
-                                    Q.format(Q.text("Site.Subscriptions.Expired.SubscriptionInfoBoxFooter"), diff2);
-
-                                $('#subscription-information-box p')
-                                    .html(Q.text("Site.Subscriptions.Expired.SubscriptionInfoBoxBody") + '<br />' + formatFooter);
-
-                                $('#subscription-information-box').addClass('callout-danger');
-                                $('#subscription-information-box').parents('.row').show('slide', { direction: 'up' }, 500);
-                            } else if (subscriptionEndDate !== "0001-01-01T00:00:00" &&
-                                todayDate.setMonth(todayDate.getMonth() + 1) > expireDate) {
-
-                                var diff = Math.floor((Date.parse(expireDate) - Date.parse(new Date())) / 86400000);
-
-                                $('#subscription-information-box h4').text(
-                                    Q.text("Site.Subscriptions.WillExpire.SubscriptionInfoBoxHeader"));
-
-                                $('#subscription-information-box p')
-                                    .text(
-                                        Q.text("Site.Subscriptions.WillExpire.SubscriptionInfoBoxBody").format(diff));
-
-                                $('#subscription-information-box').addClass('callout-warning');
-                                $('#subscription-information-box').parents('.row')
-                                    .show('slide', { direction: 'up' }, 500);
-                            } else {
-                                $.cookie('SubcriptionInfoBox', 1, {
-                                    path: Q.Config.applicationPath,
-                                    expires: 1
-                                });
                             }
-
-                        }
-                    });
+                        });
 
 
-                    $.get('../Administration/GetTenantRole', function (role) {
+                    $.get('../../../Administration/GetTenantRole', function (role) {
                         // Show user permision
                         if (role) {
 
@@ -557,7 +576,7 @@
                     }
                     var number = +($('.counter-label-notifications').text());
                     if ($('.counter-label-notifications').text() !== "50+")
-                    $('.counter-label-notifications').text(number + 1);
+                        $('.counter-label-notifications').text(number + 1);
 
                     ReFetchVisitsForTodayBox();
                 };
@@ -580,7 +599,7 @@
 
                     var number = +($('.counter-label-notifications').text());
                     if ($('.counter-label-notifications').text() !== "50+")
-                    $('.counter-label-notifications').text(number + 1);
+                        $('.counter-label-notifications').text(number + 1);
 
                 };
                 //    }
@@ -596,6 +615,6 @@
             });
         </script>
 
-                }
+    }
 </body>
 </html>

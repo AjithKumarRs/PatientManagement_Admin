@@ -1,0 +1,112 @@
+﻿@using Abp.Collections.Extensions
+@using PatientManagement.Reservation.Web.Views
+@using PatientManagement.Reservation.Web.Views.Shared.Components.MainTopBarNav
+@model MainTopBarNavViewModel
+@{
+    var calculateMenuUrl = new Func<string, string>((url) =>
+    {
+        if (string.IsNullOrEmpty(url))
+        {
+            return ApplicationPath;
+        }
+
+        if (UrlChecker.IsRooted(url))
+        {
+            return url;
+        }
+
+        return ApplicationPath + url;
+    });
+}
+
+
+<nav class="navbar main-menu-cont">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar icon-bar1"></span>
+                <span class="icon-bar icon-bar2"></span>
+                <span class="icon-bar icon-bar3"></span>
+            </button>
+            <a href="~/" title="" class="navbar-brand">
+                <img src="images/clario-logo-medium.png" alt="Apartment - Premium Real Estate Template" />
+            </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                @foreach (var menuItem in Model.MainMenu.Items)
+                {
+                    if (menuItem.Items.IsNullOrEmpty())
+                    {
+
+                        <li>
+                            <!-- menu item without dropdown -->
+                            <a href="@calculateMenuUrl(menuItem.Url)" class="@(Model.ActiveMenuItemName == menuItem.Name ? "special-color" : "")">
+                                @if (!string.IsNullOrWhiteSpace(menuItem.Icon))
+                                {
+                                    <i class="material-icons">@menuItem.Icon</i>
+                                }
+                                <span>@menuItem.DisplayName</span>
+                            </a>
+
+                        </li>
+                    }
+                    else
+                    {
+                        <!-- menu item with dropdown -->
+                        <li class="dropdown">
+                            <a href="javascript:void(0);" class="@(Model.ActiveMenuItemName == menuItem.Name ? "special-color" : "") dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                @if (!string.IsNullOrWhiteSpace(menuItem.Icon))
+                                {
+                                    <i class="material-icons">@menuItem.Icon</i>
+                                }
+                                <span>@menuItem.DisplayName</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                @foreach (var subMenuItem in menuItem.Items)
+                                {
+                                    if (subMenuItem.Items.IsNullOrEmpty())
+                                    {
+                                        <li>
+                                            <a href="@calculateMenuUrl(subMenuItem.Url)" class="@(Model.ActiveMenuItemName == subMenuItem.Name ? "special-color" : "")">
+                                                @if (!string.IsNullOrWhiteSpace(subMenuItem.Icon))
+                                                {
+                                                    <i class="material-icons">@subMenuItem.Icon</i>
+                                                }
+                                                <span>@subMenuItem.DisplayName</span>
+                                            </a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="dropdown-submenu">
+                                            <a tabindex="-1" href="@calculateMenuUrl(subMenuItem.Url)" class="@(Model.ActiveMenuItemName == subMenuItem.Name ? "special-color" : "")">
+                                                @if (!string.IsNullOrWhiteSpace(subMenuItem.Icon))
+                                                {
+                                                    <i class="material-icons">@subMenuItem.Icon</i>
+                                                }
+                                                <span>@subMenuItem.DisplayName</span>
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                @foreach (var subSubMenuItem in subMenuItem.Items)
+                                                {
+                                                    <li>
+                                                        <a href="@calculateMenuUrl(subSubMenuItem.Url)" class="@(Model.ActiveMenuItemName == subMenuItem.Name ? "special-color" : "")">
+                                                            @subSubMenuItem.DisplayName
+                                                        </a>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </li>
+                                    }
+                                }
+
+                            </ul>
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+</nav><!-- /.mani-menu-cont -->

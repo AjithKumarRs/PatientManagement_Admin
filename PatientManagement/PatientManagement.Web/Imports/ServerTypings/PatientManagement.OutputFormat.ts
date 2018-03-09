@@ -3,5 +3,5 @@
         Ics = 0,
         Json = 1
     }
-    Serenity.Decorators.registerEnum(OutputFormat, 'PatientManagement.PatientManagement.Entities.OutputFormat');
+    Serenity.Decorators.registerEnumType(OutputFormat, 'PatientManagement.PatientManagement.OutputFormat', 'PatientManagement.PatientManagement.Entities.OutputFormat');
 }

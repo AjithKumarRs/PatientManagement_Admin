@@ -47,7 +47,64 @@ namespace PatientManagement.PatientManagement.Entities
             get { return Fields.BackgroundColor[this]; }
             set { Fields.BackgroundColor[this] = value; }
         }
+
+        [DisplayName("Show In Menu")]
+        [BsSwitchEditor]
+        public Int16? ShowInMenu
+        {
+            get { return Fields.ShowInMenu[this]; }
+            set { Fields.ShowInMenu[this] = value; }
+        }
+
+        [DisplayName("Price")]
+        [ReadPermission(PermissionKeys.AdministrationTenantsVisitPayments)]
+        [DecimalEditor(Decimals = 2, MaxValue = "10000")]
+        public Decimal? Price
+        {
+            get { return Fields.Price[this]; }
+            set { Fields.Price[this] = value; }
+        }
         
+        #region Currency
+
+        [DisplayName("Currency"), NotNull, ForeignKey("[dbo].[Currencies]", "Id"), LeftJoin("jCurrency"), TextualField("CurrencyCurrencyId")]
+        [ReadPermission(PermissionKeys.AdministrationTenantsVisitPayments)]
+        [Updatable(false)]
+        [LookupEditor(typeof(CurrenciesRow), FilterField = "Enabled", FilterValue = true)]
+        public Int32? CurrencyId
+        {
+            get { return Fields.CurrencyId[this]; }
+            set { Fields.CurrencyId[this] = value; }
+        }
+
+        [DisplayName("Currency Code"), Expression("jCurrency.[CurrencyId]")]
+        [ReadPermission(PermissionKeys.AdministrationTenantsVisitPayments)]
+        public String CurrencyCurrencyId
+        {
+            get { return Fields.CurrencyCurrencyId[this]; }
+            set { Fields.CurrencyCurrencyId[this] = value; }
+        }
+
+        [DisplayName("Currency Name"), Expression("jCurrency.[Name]")]
+        [ReadPermission(PermissionKeys.AdministrationTenantsVisitPayments)]
+        public String CurrencyName
+        {
+            get { return Fields.CurrencyName[this]; }
+            set { Fields.CurrencyName[this] = value; }
+        }
+
+        [DisplayName("Currency Rate"), Expression("jCurrency.[Rate]")]
+        [ReadPermission(PermissionKeys.AdministrationTenantsVisitPayments)]
+        public Decimal? CurrencyRate
+        {
+            get { return Fields.CurrencyRate[this]; }
+            set { Fields.CurrencyRate[this] = value; }
+        }
+
+
+        #endregion
+
+
         IIdField IIdRow.IdField
         {
             get { return Fields.VisitTypeId; }
@@ -63,6 +120,7 @@ namespace PatientManagement.PatientManagement.Entities
         [DisplayName("Is Active"), NotNull]
         [ReadPermission(PermissionKeys.Tenants)]
         [LookupInclude]
+        [BsSwitchEditor]
         public Int16? IsActive
         {
             get { return Fields.IsActive[this]; }
@@ -91,6 +149,13 @@ namespace PatientManagement.PatientManagement.Entities
             public StringField Name;
             public StringField BorderColor;
             public StringField BackgroundColor;
+            public DecimalField Price;
+            public Int16Field ShowInMenu;
+
+            public Int32Field CurrencyId;
+            public StringField CurrencyCurrencyId;
+            public StringField CurrencyName;
+            public DecimalField CurrencyRate;
 
             public Int32Field InsertUserId;
             public DateTimeField InsertDate;

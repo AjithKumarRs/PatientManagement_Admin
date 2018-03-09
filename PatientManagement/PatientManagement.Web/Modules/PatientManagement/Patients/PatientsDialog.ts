@@ -2,6 +2,7 @@
 namespace PatientManagement.PatientManagement {
 
     @Serenity.Decorators.maximizable()
+    @Serenity.Decorators.panel(true)
     @Serenity.Decorators.registerClass()
     @Serenity.Decorators.responsive()
     export class PatientsDialog extends Serenity.EntityDialog<PatientsRow, any> {

@@ -22,10 +22,9 @@ namespace PatientManagement.Migrations.PatientManagementDB
                 .AddColumn("NotEating").AsString(2000).Nullable().WithDefaultValue("");
 
             Create.Table("Activity")
-                .WithColumn("PatientId")
-                .AsInt32()
-                .PrimaryKey()
-                .NotNullable()
+                //TODO: Issue #208 - After migration refactoring uncomment, Clean all sql statements in PatientManagementDB_20171017_220500_AlterTablePatientHealth
+                //  .WithColumn("ActivityId").AsInt32().Identity().PrimaryKey().NotNullable()
+                .WithColumn("PatientId").AsInt32().NotNullable().PrimaryKey()
                 .ForeignKey("FK_Activity_Patients1", "Patients", "PatientId")
                 .WithColumn("MovementAndTraining").AsString(2000).Nullable()
                 .WithColumn("Profession").AsString(200).Nullable()

@@ -20,26 +20,15 @@
             return Q.getLookup<PatientsFileUploadsRow>('PatientManagement.PatientsFileUploads');
         }
 
-        export namespace Fields {
-            export declare const PatientFileUploadId: string;
-            export declare const PatientId: string;
-            export declare const FilePath: string;
-            export declare const Description: string;
-            export declare const InsertUserId: string;
-            export declare const InsertDate: string;
-            export declare const PatientName: string;
-            export declare const TenantId: string;
+        export declare const enum Fields {
+            PatientFileUploadId = "PatientFileUploadId",
+            PatientId = "PatientId",
+            FilePath = "FilePath",
+            Description = "Description",
+            InsertUserId = "InsertUserId",
+            InsertDate = "InsertDate",
+            PatientName = "PatientName",
+            TenantId = "TenantId"
         }
-
-        [
-            'PatientFileUploadId', 
-            'PatientId', 
-            'FilePath', 
-            'Description', 
-            'InsertUserId', 
-            'InsertDate', 
-            'PatientName', 
-            'TenantId'
-        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

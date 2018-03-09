@@ -42,6 +42,8 @@
         <div id="SignUpPanel">
         </div>
         <a href="~/Account/Login" class="text-center">@Texts.Forms.Membership.SignUp.BackToLogin</a>
+        <a id="terms-of-use-link" href="#" title="@Texts.Forms.Membership.SignUp.TermsOfUse" class="text-center pull-right" target="_blank">@Texts.Forms.Membership.SignUp.TermsOfUse</a>
+
     </div>
 </div>
 
@@ -60,6 +62,17 @@ $(function() {
         checkboxClass: 'icheckbox_square-blue',
         radioClass: 'iradio_square-blue',
         increaseArea: '20%'
+    });
+    });
+
+$('#terms-of-use-link').click(function(e) {
+    e.preventDefault();
+    
+    new PatientManagement.Common.ReportHelper.execute({
+        target:"_blank",
+        reportKey: 'Administration.TermsOfUse',
+        extension: 'pdf',
+        params: {}
     });
 });
 </script>

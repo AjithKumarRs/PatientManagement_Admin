@@ -1,9 +1,4 @@
 ﻿namespace PatientManagement.Administration {
-    export class CurrenciesForm extends Serenity.PrefixedContext {
-        static formKey = 'Administration.Currencies';
-
-    }
-
     export interface CurrenciesForm {
         CurrencyId: Serenity.StringEditor;
         Name: Serenity.StringEditor;
@@ -12,5 +7,30 @@
         BaseCurrencyId: Serenity.LookupEditor;
     }
 
-    [['CurrencyId', () => Serenity.StringEditor], ['Name', () => Serenity.StringEditor], ['Rate', () => Serenity.DecimalEditor], ['Enabled', () => BsSwitchEditor], ['BaseCurrencyId', () => Serenity.LookupEditor]].forEach(x => Object.defineProperty(CurrenciesForm.prototype, <string>x[0], { get: function () { return this.w(x[0], (x[1] as any)()); }, enumerable: true, configurable: true }));
+    export class CurrenciesForm extends Serenity.PrefixedContext {
+        static formKey = 'Administration.Currencies';
+        private static init: boolean;
+
+        constructor(prefix: string) {
+            super(prefix);
+
+            if (!CurrenciesForm.init)  {
+                CurrenciesForm.init = true;
+
+                var s = Serenity;
+                var w0 = s.StringEditor;
+                var w1 = s.DecimalEditor;
+                var w2 = BsSwitchEditor;
+                var w3 = s.LookupEditor;
+
+                Q.initFormType(CurrenciesForm, [
+                    'CurrencyId', w0,
+                    'Name', w0,
+                    'Rate', w1,
+                    'Enabled', w2,
+                    'BaseCurrencyId', w3
+                ]);
+            }
+        }
+    }
 }

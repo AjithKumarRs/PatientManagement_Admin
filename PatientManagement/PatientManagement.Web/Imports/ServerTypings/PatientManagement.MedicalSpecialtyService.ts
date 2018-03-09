@@ -10,14 +10,14 @@
         export declare function ExcelImport(request: ExcelImportRequest, onSuccess?: (response: ExcelImportResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         export declare function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<MedicalSpecialtyRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
 
-        export namespace Methods {
-            export declare const Create: string;
-            export declare const Update: string;
-            export declare const Delete: string;
-            export declare const Retrieve: string;
-            export declare const Undelete: string;
-            export declare const ExcelImport: string;
-            export declare const List: string;
+        export declare const enum Methods {
+            Create = "PatientManagement/MedicalSpecialty/Create",
+            Update = "PatientManagement/MedicalSpecialty/Update",
+            Delete = "PatientManagement/MedicalSpecialty/Delete",
+            Retrieve = "PatientManagement/MedicalSpecialty/Retrieve",
+            Undelete = "PatientManagement/MedicalSpecialty/Undelete",
+            ExcelImport = "PatientManagement/MedicalSpecialty/ExcelImport",
+            List = "PatientManagement/MedicalSpecialty/List"
         }
 
         [
@@ -32,7 +32,6 @@
             (<any>MedicalSpecialtyService)[x] = function (r, s, o) {
                 return Q.serviceRequest(baseUrl + '/' + x, r, s, o);
             };
-            (<any>Methods)[x] = baseUrl + '/' + x;
         });
     }
 }

@@ -1,4 +1,4 @@
-﻿@using NUglify.Helpers
+﻿
 @using PatientManagement.PatientManagement
 
 @{
@@ -208,7 +208,7 @@
         //$('.fc-event-droppable').each(function (i, element) {
 
         //});
-        console.log(@ViewData["WorkDays"]);
+      //  console.log(@ViewData["WorkDays"]);
 
         $(window).resize(function() {
             $('#calendar').fullCalendar('option', 'height', get_calendar_height());
@@ -237,12 +237,17 @@
             slotDuration: '00:15:00',
             //minTime: "@ViewData["WorkHoursStart"]",
             //maxTime: "@ViewData["WorkHoursEnd"]",
-            eventClick: function(event) {
-
-                new PatientManagement.PatientManagement.CalendarPatientDialog().loadByIdAndOpenDialog(event.patientId);
-                if (event.url) {
-                    return false;
+            eventClick: function (event) {
+                if (event.patientId > 0) {
+                    new PatientManagement.PatientManagement.CalendarPatientDialog().loadByIdAndOpenDialog(
+                        event.patientId);
+                    if (event.url) {
+                        return false;
+                    }
+                } else {
+                    new PatientManagement.PatientManagement.CalendarVisitsDialog().loadByIdAndOpenDialog(event.id);
                 }
+              
             },
             loading: function (bool) {
                 if (bool)
@@ -257,10 +262,23 @@
             droppable: false,
             selectable: true,
             selectHelper: true,
+            eventMouseover: function (event, element) {
+                if (event.assignedToUser) {
+                    
+                    $(this).tooltip({
+                        title: Q.text("Db.PatientManagement.Visits.AssignedUserName") + ":\n" + event.assignedToUser
+                    }).triggerHandler('mouseover');
+                } else {
+                    $(this).tooltip({
+                        title: Q.text("Db.PatientManagement.Visits.AssignedUserName") + ":\n ----"
+                    }).triggerHandler('mouseover');
+                }
+            },
             eventRender: function (event, element) {
+             
                 element.bind('mousedown', function (e) {
+                 
                     if (e.which == 3) {
-
                         element.data('visitId', event.id);
                         element.toggleClass('context_menu');
                         element.contextMenu();
@@ -301,7 +319,8 @@
                         }
                     }
                 );
-            }
+            },
+
         });
         $('#calendar').fullCalendar('addEventSource', "/Dashboard/GetVisitsTasks/");
         if (/Mobi/.test(navigator.userAgent)) {

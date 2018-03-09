@@ -16,13 +16,32 @@ namespace PatientManagement.PatientManagement {
 
         loadEntity(entity: VisitTypesRow) {
             super.loadEntity(entity);
-
             $(".BorderColor input").colorpicker();
             $(".BackgroundColor input").colorpicker();
+            if (this.isNew()) {
+                this.form.CurrencyId.value = Q.getRemoteData("UserData").TenantCurrencyId;
+            }
+            if (Q.Authorization.hasPermission("AdministrationTenants:VisitPayments")) {
+                if (!Q.Authorization.hasPermission("Administration:Tenants"))
+                    Serenity.EditorUtils.setReadOnly(this.form.CurrencyId, true);
 
+            }
             Serenity.EditorUtils.setReadOnly(this.form.BorderColor, true);
             Serenity.EditorUtils.setReadOnly(this.form.BackgroundColor, true);
 
+        }
+
+
+        protected onSaveSuccess(response: Serenity.SaveResponse): void {
+            console.log(this.form.ShowInMenu.getState());
+            if (this.isNew() && this.form.ShowInMenu.getState()) {
+                location.reload();
+            }
+        }
+        protected onDeleteSuccess(response: Serenity.DeleteResponse): void {
+            if (this.form.ShowInMenu.getState()) {
+                location.reload();
+            }
         }
     }
 }

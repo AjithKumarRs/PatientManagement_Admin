@@ -109,6 +109,14 @@ namespace MVC
             {
                 public const string ReportPage = "~/Modules/Common/Reporting/ReportPage.cshtml";
             }
+
+            public static class Terms
+            {
+                public static class TermsOfUse
+                {
+                    public const string Terms_TermsOfUse = "~/Modules/Common/Terms/TermsOfUse/Terms.TermsOfUse.cshtml";
+                }
+            }
         }
 
         public static class Errors
@@ -200,6 +208,14 @@ namespace MVC
             public static class PatientsFileUploads
             {
                 public const string PatientsFileUploadsIndex = "~/Modules/PatientManagement/PatientsFileUploads/PatientsFileUploadsIndex.cshtml";
+            }
+
+            public static class Reports
+            {
+                public static class ReportsVisits
+                {
+                    public const string ReportsVisitsIndex = "~/Modules/PatientManagement/Reports/ReportsVisits/ReportsVisitsIndex.cshtml";
+                }
             }
 
             public static class UserNotifications

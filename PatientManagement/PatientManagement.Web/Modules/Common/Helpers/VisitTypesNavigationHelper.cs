@@ -49,7 +49,7 @@ public class VisitTypesNavigationHelper : NavigationHelper
         var connection = SqlConnections.NewFor<VisitTypesRow>();
         var visitTypesFlds = VisitTypesRow.Fields;
 
-        var visitTypes = connection.List<VisitTypesRow>(visitTypesFlds.TenantId == user.TenantId && visitTypesFlds.IsActive == 1);
+        var visitTypes = connection.List<VisitTypesRow>(visitTypesFlds.TenantId == user.TenantId && visitTypesFlds.IsActive == 1 && visitTypesFlds.ShowInMenu ==1);
 
         list.Add(new NavigationMenuAttribute(506, LocalText.Get("Db.PatientManagement.VisitTypes.EntityPlural"), "fa-stethoscope"));
 

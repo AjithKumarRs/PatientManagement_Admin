@@ -31,12 +31,14 @@ namespace PatientManagement.PatientManagement.Forms
 
         public String Description { get; set; }
 
-        public String City { get; set; }
 
-        public String Country { get; set; }
+       // public String Country { get; set; }
 
         public Int32 PhoneNumber { get; set; }
 
+        [AddressAutocomplete]
+        public String City { get; set; }
+        
         public Int32? TenantId { get; set; }
 
     }

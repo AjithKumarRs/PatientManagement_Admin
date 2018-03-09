@@ -6,8 +6,8 @@
     using System.ComponentModel;
 
     [ConnectionKey("Administration"), DisplayName("PaymentCoupons"), InstanceName("PaymentCoupons")]
-    [ReadPermission("AdministrationTenants:Payments")]
-    [ModifyPermission("AdministrationTenants:Payments")]
+    [ReadPermission(PermissionKeys.AdministrationTenantsPaymentsRead)]
+    [ModifyPermission(PermissionKeys.AdministrationTenantsPaymentsModify)]
     public sealed class PaymentCouponsRow : Row, IIdRow
     {
         [DisplayName("PaymentCoupon Id"), Column("PaymentCouponId"), Identity]

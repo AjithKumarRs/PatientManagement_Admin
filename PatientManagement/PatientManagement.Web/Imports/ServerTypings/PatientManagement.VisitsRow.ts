@@ -6,6 +6,9 @@
         CabinetId?: number;
         CabinetName?: string;
         CabinetIsActive?: number;
+        AssignedUserId?: number;
+        AssignedUserName?: string;
+        FreeForReservation?: boolean;
         Description?: string;
         StartDate?: string;
         EndDate?: string;
@@ -21,6 +24,9 @@
         VisitTypeName?: string;
         VisitTypeBackgroundColor?: string;
         VisitTypeBorderColor?: string;
+        VisitTypePrice?: number;
+        VisitTypePriceFormatted?: string;
+        VisitTypeCurrencyId?: number;
         TenantId?: number;
     }
 
@@ -33,54 +39,35 @@
             return Q.getLookup<VisitsRow>('PatientManagement.Visits');
         }
 
-        export namespace Fields {
-            export declare const VisitId: string;
-            export declare const PatientId: string;
-            export declare const VisitTypeId: string;
-            export declare const CabinetId: string;
-            export declare const CabinetName: string;
-            export declare const CabinetIsActive: string;
-            export declare const Description: string;
-            export declare const StartDate: string;
-            export declare const EndDate: string;
-            export declare const InsertUserId: string;
-            export declare const InsertDate: string;
-            export declare const TenantName: string;
-            export declare const InsertUserName: string;
-            export declare const PatientGender: string;
-            export declare const PatientEmail: string;
-            export declare const PatientNotifyOnChange: string;
-            export declare const PhoneNumber: string;
-            export declare const PatientName: string;
-            export declare const VisitTypeName: string;
-            export declare const VisitTypeBackgroundColor: string;
-            export declare const VisitTypeBorderColor: string;
-            export declare const TenantId: string;
+        export declare const enum Fields {
+            VisitId = "VisitId",
+            PatientId = "PatientId",
+            VisitTypeId = "VisitTypeId",
+            CabinetId = "CabinetId",
+            CabinetName = "CabinetName",
+            CabinetIsActive = "CabinetIsActive",
+            AssignedUserId = "AssignedUserId",
+            AssignedUserName = "AssignedUserName",
+            FreeForReservation = "FreeForReservation",
+            Description = "Description",
+            StartDate = "StartDate",
+            EndDate = "EndDate",
+            InsertUserId = "InsertUserId",
+            InsertDate = "InsertDate",
+            TenantName = "TenantName",
+            InsertUserName = "InsertUserName",
+            PatientGender = "PatientGender",
+            PatientEmail = "PatientEmail",
+            PatientNotifyOnChange = "PatientNotifyOnChange",
+            PhoneNumber = "PhoneNumber",
+            PatientName = "PatientName",
+            VisitTypeName = "VisitTypeName",
+            VisitTypeBackgroundColor = "VisitTypeBackgroundColor",
+            VisitTypeBorderColor = "VisitTypeBorderColor",
+            VisitTypePrice = "VisitTypePrice",
+            VisitTypePriceFormatted = "VisitTypePriceFormatted",
+            VisitTypeCurrencyId = "VisitTypeCurrencyId",
+            TenantId = "TenantId"
         }
-
-        [
-            'VisitId', 
-            'PatientId', 
-            'VisitTypeId', 
-            'CabinetId', 
-            'CabinetName', 
-            'CabinetIsActive', 
-            'Description', 
-            'StartDate', 
-            'EndDate', 
-            'InsertUserId', 
-            'InsertDate', 
-            'TenantName', 
-            'InsertUserName', 
-            'PatientGender', 
-            'PatientEmail', 
-            'PatientNotifyOnChange', 
-            'PhoneNumber', 
-            'PatientName', 
-            'VisitTypeName', 
-            'VisitTypeBackgroundColor', 
-            'VisitTypeBorderColor', 
-            'TenantId'
-        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

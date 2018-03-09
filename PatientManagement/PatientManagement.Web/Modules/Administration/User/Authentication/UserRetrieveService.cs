@@ -16,7 +16,7 @@
             var user = connection.TrySingle<Entities.UserRow>(criteria);
             if (user != null)
             {
-                var tenantName = connection.ById<Entities.TenantRow>(user.TenantId).TenantName;
+                var tenant = connection.ById<Entities.TenantRow>(user.TenantId);
                 return new UserDefinition
                 {
                     UserId = user.UserId.Value,
@@ -32,9 +32,10 @@
                     UpdateDate = user.UpdateDate,
                     LastDirectoryUpdate = user.LastDirectoryUpdate,
                     TenantId = user.TenantId.Value,
-                    TenantName = tenantName,
+                    TenantName = tenant.TenantName,
                     InsertDate = user.InsertDate,
-                    RestrictedToCabinets = user.RestrictedToCabinets??1
+                    RestrictedToCabinets = user.RestrictedToCabinets??1,
+                    TenantCurrencyId = tenant.CurrencyId??1
                 };
             }
             return null;

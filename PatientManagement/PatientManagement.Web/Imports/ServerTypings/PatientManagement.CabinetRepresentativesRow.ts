@@ -9,16 +9,10 @@
         export const idProperty = 'RepresentativeId';
         export const localTextPrefix = 'CabinetRepresentatives';
 
-        export namespace Fields {
-            export declare const RepresentativeId: string;
-            export declare const UserId: string;
-            export declare const CabinetId: string;
+        export declare const enum Fields {
+            RepresentativeId = "RepresentativeId",
+            UserId = "UserId",
+            CabinetId = "CabinetId"
         }
-
-        [
-            'RepresentativeId', 
-            'UserId', 
-            'CabinetId'
-        ].forEach(x => (<any>Fields)[x] = x);
     }
 }

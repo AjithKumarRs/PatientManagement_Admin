@@ -1,6 +1,7 @@
 ﻿
 namespace PatientManagement.Administration {
-    
+    import fld = SentEmailsRow.Fields;
+
     @Serenity.Decorators.registerClass()
     export class SentEmailsGrid extends Serenity.EntityGrid<SentEmailsRow, any> {
         protected getColumnsKey() { return 'Administration.SentEmails'; }
@@ -15,7 +16,6 @@ namespace PatientManagement.Administration {
 
         protected getColumns(): Slick.Column[] {
             var columns = super.getColumns();
-            var fld = SentEmailsRow.Fields;
             columns.splice(1,
                 0,
                 {

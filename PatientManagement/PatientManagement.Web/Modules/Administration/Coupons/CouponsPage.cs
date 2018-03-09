@@ -12,7 +12,7 @@ namespace PatientManagement.Administration.Pages
         [Route("Administration/Coupons")]
         public ActionResult Index()
         {
-            return View(MVC.Views.Administration.About.AboutIndex);
+            return View(MVC.Views.Administration.Coupons.CouponsIndex);
         }
     }
 }

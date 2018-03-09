@@ -44,6 +44,7 @@ namespace PatientManagement.Membership.Pages
             return View(MVC.Views.Membership.Account.Profile.AccountProfile);
         }
 
+#pragma warning disable SG0016 // Controller method is vulnerable to CSRF
         [HttpPost, JsonFilter, ServiceAuthorize(PermissionKeys.AdministrationTenantsTenantEditing)]
         [Route("Account/EditTenant")]
         public Result<ServiceResponse> EditTenant(EditTenantRequest request)
@@ -122,6 +123,7 @@ namespace PatientManagement.Membership.Pages
                 saveRequest.Entity.UserId = user.UserId;
                 saveRequest.Entity.DisplayName = request.DisplayName;
                 saveRequest.Entity.Email = request.Email;
+                saveRequest.Entity.Info = request.Info;
 
                 if (!request.UserImage.IsNullOrEmpty())
                     saveRequest.Entity.UserImage = request.UserImage;

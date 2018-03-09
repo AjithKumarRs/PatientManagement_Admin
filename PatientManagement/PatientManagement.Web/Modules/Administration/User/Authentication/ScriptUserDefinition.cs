@@ -16,6 +16,7 @@
         public String DisplayName { get; set; }
         public Boolean IsAdmin { get; set; }
         public short RestrictedToCabinets { get; set; }
+        public int TenantCurrencyId { get; set; }
 
         public Dictionary<string, bool> Permissions { get; set; }
         public Int32 TenantId { get; set; }

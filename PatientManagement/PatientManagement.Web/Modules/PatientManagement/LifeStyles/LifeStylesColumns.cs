@@ -23,6 +23,14 @@ namespace PatientManagement.PatientManagement.Columns
         [Width(250)]
         public String DailyMeals { get; set; }
 
+        [Width(250)]
+        public String RemarksForFoodTake { get; set; }
+        [Width(250)]
+        public String BadHabits { get; set; }
+        [Width(250)]
+        public String NotEating { get; set; } 
+        // public String FavoriteFood { get; set; }
+
         [Width(80)]
         public String TenantName { get; set; }
 

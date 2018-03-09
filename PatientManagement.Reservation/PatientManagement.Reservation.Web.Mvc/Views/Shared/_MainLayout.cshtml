@@ -1,0 +1,251 @@
+﻿@using System.Globalization
+@using Abp.Configuration
+@using Abp.Web.Security.AntiForgery
+@using Abp.Configuration.Startup
+@using PatientManagement.Reservation
+@using PatientManagement.Reservation.SignalR
+@using PatientManagement.Reservation.Web.Resources
+@using PatientManagement.Reservation.Web.Views.Shared.Components.MainTopBar
+@using PatientManagement.Reservation.Web.Views.Shared.Components.MainTopBarNav
+@using PatientManagement.Reservation.Web.Views.Shared.Components.FooterSmallBar
+@using PatientManagement.Reservation.Web.Views.Shared.Components.FooterLargeBar
+@using PatientManagement.Reservation.Web.Views.Shared.Components.ModalLogin
+
+@using PatientManagement.Reservation.Web.Views.Shared.Components.TopBarLanguageSwitch
+@using PatientManagement.Reservation.Configuration
+@using PatientManagement.Reservation.Web.Views.Shared.Components.RightSideBar
+@inject PatientManagement.Reservation.Timing.AppTimes AppTimes
+@inject IAbpAntiForgeryManager AbpAntiForgeryManager
+@inject IMultiTenancyConfig MultiTenancyConfig
+@inject IWebResourceManager WebResourceManager
+@inject ISettingManager SettingManager;
+@{
+    Layout = null;
+    AbpAntiForgeryManager.SetCookie(Context);
+    var uiTheme = await SettingManager.GetSettingValueAsync(AppSettingNames.UiTheme);
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta name="description" content="Clario - Software ">
+    <meta name="author" content="Svetlin Krastanov">
+    <link rel="shortcut icon" href="~/favicon.ico">
+    <title>Reservation</title>
+    <environment names="Development">
+        <link href="~/fonts/material-icons/materialicons.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/lib/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/lib/toastr/toastr.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/lib/sweetalert/dist/sweetalert.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/lib/famfamfam-flags/dist/sprite/famfamfam-flags.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/lib/font-awesome/css/font-awesome.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/lib/Waves/dist/waves.css" rel="stylesheet" asp-append-version="true" />
+
+        <link href="~/lib/jquery-ui/themes/base/jquery-ui.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/lib/animate.css/animate.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/lib/owl-carousel/owl.carousel.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/lib/SelectInspiration/css/cs-select.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/lib/lightgallery/dist/css/lightgallery.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/lib/bootstrap-fileinput/css/fileinput.css" rel="stylesheet" asp-append-version="true" />
+
+        <link href="~/css/apartment-layout.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/css/apartment-colors-blue.css" rel="stylesheet" asp-append-version="true" />
+     
+    </environment>
+    <environment names="Staging,Production">
+        <link href="~/view-resources/Views/_Bundles/clario-layout.min.css" rel="stylesheet" asp-append-version="true" />
+    </environment>
+    <!-- View specific styles -->
+    @RenderSection("styles", required: false)
+    <script type="text/javascript">
+        //This is used to get the application's root path from javascript. It's useful if you're running application in a virtual directory under IIS.
+        var abp = abp || {};
+        abp.appPath = '@ApplicationPath';
+    </script>
+</head>
+<body>
+    <!-- Page Loader -->
+    <div class="loader-bg"></div>
+    <div id="wrapper">
+
+        <!-- Page header -->
+        <header>
+            @await Component.InvokeAsync(typeof(MainTopBarViewComponent))
+
+
+            @await Component.InvokeAsync(typeof(MainTopBarNavViewComponent), new { activeMenu = ViewBag.CurrentPageName })
+
+        </header>
+
+        @RenderBody()
+
+        @await Component.InvokeAsync(typeof(FooterLargeBarViewComponent))
+
+        @await Component.InvokeAsync(typeof(FooterSmallBarViewComponent))
+
+    </div>
+
+    <!-- Move to top button -->
+
+    <div class="move-top">
+        <div class="big-triangle-second-color"></div>
+        <div class="big-icon-second-color"><i class="jfont fa-lg">&#xe803;</i></div>
+    </div>
+  
+
+    <!-- Register modal -->
+    <div class="modal fade apartment-modal" id="register-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <div class="modal-title">
+                        <h1>Register<span class="special-color">.</span></h1>
+                        <div class="short-title-separator"></div>
+                    </div>
+                    <input name="first-name" type="text" class="input-full main-input" placeholder="Frist name" />
+                    <input name="last-name" type="text" class="input-full main-input" placeholder="Last name" />
+                    <input name="email" type="email" class="input-full main-input" placeholder="Email" />
+                    <input name="password" type="password" class="input-full main-input" placeholder="Password" />
+                    <input name="repeat-password" type="password" class="input-full main-input" placeholder="Repeat Password" />
+                    <a href="my-profile.html" class="button-primary button-shadow button-full">
+                        <span>Sing up</span>
+                        <div class="button-triangle"></div>
+                        <div class="button-triangle2"></div>
+                        <div class="button-icon"><i class="fa fa-user"></i></div>
+                    </a>
+                    <div class="clearfix"></div>
+                    <p class="login-or">OR</p>
+                    <a href="#" class="facebook-button">
+                        <i class="fa fa-facebook"></i>
+                        <span>Sing Up with Facebook</span>
+                    </a>
+                    <a href="#" class="google-button margin-top-15">
+                        <i class="fa fa-google-plus"></i>
+                        <span>Sing Up with Google</span>
+                    </a>
+                    <p class="modal-bottom">Already registered? <a href="#" class="login-link">SING IN</a></p>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- Forgotten password modal -->
+    <div class="modal fade apartment-modal" id="forgot-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <div class="modal-title">
+                        <h1>Forgot your password<span class="special-color">?</span></h1>
+                        <div class="short-title-separator"></div>
+                    </div>
+                    <p class="negative-margin forgot-info">Instert your account email address.<br />We will send you a link to reset your password.</p>
+                    <input name="login" type="email" class="input-full main-input" placeholder="Your email" />
+                    <a href="my-profile.html" class="button-primary button-shadow button-full">
+                        <span>Reset password</span>
+                        <div class="button-triangle"></div>
+                        <div class="button-triangle2"></div>
+                        <div class="button-icon"><i class="fa fa-user"></i></div>
+                    </a>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- Google Maps -->
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAVFshjFz13i9kcQDkKXE9uDA2nwk9zc_k&amp;sensor=false&amp;libraries=places"></script>
+
+
+    <environment names="Development">
+        <script src="~/lib/json2/json2.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
+
+        <script src="~/lib/jquery-ui/jquery-ui.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery.ui.touch-punch/dist/jquery.ui.touch-punch.js" asp-append-version="true"></script>
+
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
+        <script src="~/lib/moment/min/moment-with-locales.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.js" asp-append-version="true"></script>
+        <script src="~/lib/blockUI/jquery.blockUI.js" asp-append-version="true"></script>
+        <script src="~/lib/toastr/toastr.js" asp-append-version="true"></script>
+        <script src="~/lib/sweetalert/dist/sweetalert-dev.js" asp-append-version="true"></script>
+        <script src="~/lib/spin.js/spin.js" asp-append-version="true"></script>
+        <script src="~/lib/spin.js/jquery.spin.js" asp-append-version="true"></script>
+        <script src="~/lib/bootstrap-select/dist/js/bootstrap-select.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-slimscroll/jquery.slimscroll.js" asp-append-version="true"></script>
+        <script src="~/lib/Waves/dist/waves.js" asp-append-version="true"></script>
+        <script src="~/lib/push.js/push.js" asp-append-version="true"></script>
+        <script src="~/lib/abp-web-resources/Abp/Framework/scripts/abp.js" asp-append-version="true"></script>
+        <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.jquery.js" asp-append-version="true"></script>
+        <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.toastr.js" asp-append-version="true"></script>
+        <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.blockUI.js" asp-append-version="true"></script>
+        <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.spin.js" asp-append-version="true"></script>
+        <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.sweet-alert.js" asp-append-version="true"></script>
+
+        <script src="~/lib/js-marker-clusterer/src/markerclusterer.js" asp-append-version="true"></script>
+        <script src="~/lib/markerspiderfier/oms.min.js" asp-append-version="true"></script>
+        <script src="~/lib/geocomplete/jquery.geocomplete.js" asp-append-version="true"></script>
+        <script src="~/lib/infobox/infobox.js" asp-append-version="true"></script>
+        <script src="~/lib/lightgallery/dist/js/lightgallery.js" asp-append-version="true"></script>
+        <script src="~/lib/lightgallery/modules/lg-fullscreen.js" asp-append-version="true"></script>
+        <script src="~/lib/lightgallery/modules/lg-video.js" asp-append-version="true"></script>
+        <script src="~/lib/lightgallery/modules/lg-autoplay.js" asp-append-version="true"></script>
+        <script src="~/lib/lightgallery/modules/lg-zoom.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery_appear/jquery.appear.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-countTo/jquery.countTo.js" asp-append-version="true"></script>
+        <script src="~/lib/swiper/dist/js/swiper.js" asp-append-version="true"></script>
+        <script src="~/lib/owl-carousel/owl.carousel.js" asp-append-version="true"></script>
+        <script src="~/lib/SelectInspiration/js/classie.js" asp-append-version="true"></script>
+        <script src="~/lib/SelectInspiration/js/selectFx.js" asp-append-version="true"></script>
+        <script src="~/lib/bootstrap-select/js/bootstrap-select.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery.parallax/jquery.parallax.js" asp-append-version="true"></script>
+        <script src="~/lib/isotope/dist/isotope.pkgd.js" asp-append-version="true"></script>
+        <script src="~/lib/bootstrap-fileinput/js/fileinput.js" asp-append-version="true"></script>
+        <script src="~/lib/wow/dist/wow.js" asp-append-version="true"></script>
+        <script src="~/js/apartment.js" asp-append-version="true"></script>
+
+        @if (SignalRFeature.IsAvailable && !SignalRFeature.IsAspNetCore)
+        {
+            <script src="~/lib/signalr/jquery.signalR.js" asp-append-version="true"></script>
+        }
+    </environment>
+    <environment names="Staging,Production">
+        <script src="~/view-resources/Views/_Bundles/clario-layout.min.js" asp-append-version="true"></script>
+    </environment>
+@if (!User.Identity.IsAuthenticated)
+{
+    @await Component.InvokeAsync(typeof(ModalLoginViewComponent))
+
+}
+    <!-- template scripts -->
+
+    <script>
+    //Localizing momentjs
+    moment.locale('@CultureInfo.CurrentUICulture.Name');
+    </script>
+    <!-- Dynamic scripts of ABP system (They are created on runtime and can not be bundled) -->
+    <script src="~/AbpServiceProxies/GetAll?v=@(AppTimes.StartupTime.Ticks)" type="text/javascript"></script>
+    <script src="~/AbpScripts/GetScripts?v=@(AppTimes.StartupTime.Ticks)" type="text/javascript"></script>
+@if (SignalRFeature.IsAvailable)
+{
+    <!-- SignalR scripts -->
+    if (SignalRFeature.IsAspNetCore)
+    {
+        <script src="~/lib/signalr-client/signalr-client.min.js" asp-append-version="true"></script>
+        <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.signalr-client.js" asp-append-version="true"></script>
+    }
+    else
+    {
+        <script src="~/signalr/hubs"></script>
+        <script src="~/lib/abp-web-resources/Abp/Framework/scripts/libs/abp.signalr.js" type="text/javascript"></script>
+    }
+}
+
+    @WebResourceManager.RenderScripts()
+
+    <!-- View specific scripts -->
+    @RenderSection("scripts", required: false)
+</body>
+</html>

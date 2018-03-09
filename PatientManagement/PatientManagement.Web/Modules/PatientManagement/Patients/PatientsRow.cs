@@ -67,11 +67,33 @@ namespace PatientManagement.PatientManagement.Entities
             set { Fields.FirstRegistrationDate[this] = value; }
         }
 
+        [DisplayName("Picture"), Size(100)]
+        [ImageUploadEditor(FilenameFormat = "PatientPicture/~", CopyToHistory = true, AllowNonImage = false)]
+        public String Picture
+        {
+            get { return Fields.Picture[this]; }
+            set { Fields.Picture[this] = value; }
+        }
+
         [DisplayName("Address"), Size(200)]
         public String Address
         {
             get { return Fields.Address[this]; }
             set { Fields.Address[this] = value; }
+        }
+
+        [DisplayName("City"), Size(200)]
+        public String City
+        {
+            get { return Fields.City[this]; }
+            set { Fields.City[this] = value; }
+        }
+
+        [DisplayName("Country"), Size(200)]
+        public String Country
+        {
+            get { return Fields.Country[this]; }
+            set { Fields.Country[this] = value; }
         }
 
         [DisplayName("Wanted Weight"), Size(100)]
@@ -110,32 +132,6 @@ namespace PatientManagement.PatientManagement.Entities
             set { Fields.Weight[this] = value; }
         }
 
-        [DisplayName("Insert User Id"), NotNull, ForeignKey("Users", "UserId"), LeftJoin("usrI"), TextualField("InsertUserName")]
-        [ReadPermission("Administration:Tenants")]
-        public Int32? InsertUserId
-        {
-            get { return Fields.InsertUserId[this]; }
-            set { Fields.InsertUserId[this] = value; }
-        }
-
-
-        [DisplayName("Created by"), Expression("usrI.UserName")]
-        [ReadPermission("Administration:Tenants")]
-        public String InsertUserName
-        {
-            get { return Fields.InsertUserName[this]; }
-            set { Fields.InsertUserName[this] = value; }
-        }
-
-
-        [DisplayName("Insert Date"), NotNull, QuickFilter()]
-        [ReadPermission("Administration:Tenants")]
-        public DateTime? InsertDate
-        {
-            get { return Fields.InsertDate[this]; }
-            set { Fields.InsertDate[this] = value; }
-        }
-
         [NotesEditor, NotMapped]
         public List<NotesRow> NoteList
         {
@@ -143,6 +139,22 @@ namespace PatientManagement.PatientManagement.Entities
             set { Fields.NoteList[this] = value; }
         }
 
+        [DisplayName("Visits Count"), Insertable(false), Updatable(false)]
+        [Expression("(SELECT COUNT(*) FROM Visits vsts WHERE PatientId = T0.[PatientId])")]
+        public Int32? VisitsCount
+        {
+            get { return Fields.VisitsCount[this]; }
+            set { Fields.VisitsCount[this] = value; }
+        }
+
+        [DisplayName("Last Visit Date"), Insertable(false), Updatable(false)]
+        [DateTimeKind(DateTimeKind.Utc)]
+        [Expression("(SELECT TOP 1 EndDate FROM Visits vsts WHERE PatientId = T0.[PatientId] ORDER BY InsertDate DESC)")]
+        public DateTime? LastVisitEndDate
+        {
+            get { return Fields.LastVisitEndDate[this]; }
+            set { Fields.LastVisitEndDate[this] = value; }
+        }
 
         #region Tenant
 
@@ -188,6 +200,36 @@ namespace PatientManagement.PatientManagement.Entities
 
         #endregion
 
+        #region IInsertLog
+
+        [DisplayName("Insert User Id"), NotNull, ForeignKey("Users", "UserId"), LeftJoin("usrI"), TextualField("InsertUserName")]
+        [ReadPermission("Administration:Tenants")]
+        public Int32? InsertUserId
+        {
+            get { return Fields.InsertUserId[this]; }
+            set { Fields.InsertUserId[this] = value; }
+        }
+
+
+        [DisplayName("Created by"), Expression("usrI.UserName")]
+        [ReadPermission("Administration:Tenants")]
+        public String InsertUserName
+        {
+            get { return Fields.InsertUserName[this]; }
+            set { Fields.InsertUserName[this] = value; }
+        }
+
+
+        [DisplayName("Insert Date"), NotNull, QuickFilter()]
+        [ReadPermission("Administration:Tenants")]
+        public DateTime? InsertDate
+        {
+            get { return Fields.InsertDate[this]; }
+            set { Fields.InsertDate[this] = value; }
+        }
+
+        #endregion
+
         IIdField IIdRow.IdField
         {
             get { return Fields.PatientId; }
@@ -212,9 +254,15 @@ namespace PatientManagement.PatientManagement.Entities
             public Int64Field PersonalNumber;
             public StringField PhoneNumber;
             public Int32Field Gender;
+            public StringField Picture;
+
+            public Int32Field VisitsCount;
+            public DateTimeField LastVisitEndDate;
 
             public DateTimeField FirstRegistrationDate;
             public StringField Address;
+            public StringField City;
+            public StringField Country;
             public Int32Field Height;
             public Int32Field Weight;
             public StringField Email;

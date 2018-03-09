@@ -1,4 +1,5 @@
 {
+  "Navigation.Administration/Profile": "Profile",
   "Navigation.Dashboard": "Dashboard",
   "Navigation.SiteTitle": "CLARIO",
   "Site.Dashboard.ContentDescription": "all saved meetings for period."

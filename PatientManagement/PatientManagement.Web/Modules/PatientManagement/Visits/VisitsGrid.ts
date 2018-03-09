@@ -1,6 +1,7 @@
 ﻿
 namespace PatientManagement.PatientManagement {
-    
+    import fields = VisitsRow.Fields;
+
     @Serenity.Decorators.registerClass()
     export class VisitsGrid extends Serenity.EntityGrid<VisitsRow, any> {
         protected getColumnsKey() { return 'PatientManagement.Visits'; }
@@ -42,7 +43,6 @@ namespace PatientManagement.PatientManagement {
             // get quick filter list from base class
             let filters = super.getQuickFilters();
             var cookie = $.cookie("CabinetPreference");
-            let fields = VisitsRow.Fields;
             if (cookie) {
 
                 Q.first(filters, x => x.field == fields.CabinetId).init = w => {

@@ -8,14 +8,16 @@
         export declare function Undelete(request: Serenity.UndeleteRequest, onSuccess?: (response: Serenity.UndeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         export declare function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<VisitTypesRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         export declare function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<VisitTypesRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        export declare function ListForMenu(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<VisitTypesRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
 
-        export namespace Methods {
-            export declare const Create: string;
-            export declare const Update: string;
-            export declare const Delete: string;
-            export declare const Undelete: string;
-            export declare const Retrieve: string;
-            export declare const List: string;
+        export declare const enum Methods {
+            Create = "PatientManagement/VisitTypes/Create",
+            Update = "PatientManagement/VisitTypes/Update",
+            Delete = "PatientManagement/VisitTypes/Delete",
+            Undelete = "PatientManagement/VisitTypes/Undelete",
+            Retrieve = "PatientManagement/VisitTypes/Retrieve",
+            List = "PatientManagement/VisitTypes/List",
+            ListForMenu = "PatientManagement/VisitTypes/ListForMenu"
         }
 
         [
@@ -24,12 +26,12 @@
             'Delete', 
             'Undelete', 
             'Retrieve', 
-            'List'
+            'List', 
+            'ListForMenu'
         ].forEach(x => {
             (<any>VisitTypesService)[x] = function (r, s, o) {
                 return Q.serviceRequest(baseUrl + '/' + x, r, s, o);
             };
-            (<any>Methods)[x] = baseUrl + '/' + x;
         });
     }
 }

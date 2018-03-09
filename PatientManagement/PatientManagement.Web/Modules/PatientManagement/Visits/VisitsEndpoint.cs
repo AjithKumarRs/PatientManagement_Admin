@@ -29,6 +29,7 @@ namespace PatientManagement.PatientManagement.Endpoints
     public class VisitsController : ServiceEndpoint
     {
 
+#pragma warning disable SG0016 // Controller method is vulnerable to CSRF
         [HttpPost, AuthorizeCreate(typeof(MyRow))]
         public SaveResponse Create(IUnitOfWork uow, SaveRequest<MyRow> request)
         {
@@ -37,9 +38,14 @@ namespace PatientManagement.PatientManagement.Endpoints
             {
                 throw new ValidationError(string.Format(Texts.Site.Subscriptions.MaximumVisitsError, maximumInserts));
             }
-            var patient = uow.Connection.ById<PatientsRow>(request.Entity.PatientId);
 
-            SendAutomaticEmailToPatient(uow, patient, request.Entity.StartDate ?? DateTime.MinValue, true);
+            if (request.Entity.FreeForReservation.HasValue
+                && !request.Entity.FreeForReservation.Value)
+            {
+                var patient = uow.Connection.ById<PatientsRow>(request.Entity.PatientId);
+
+                SendAutomaticEmailToPatient(uow, patient, request.Entity.StartDate ?? DateTime.MinValue, true);
+            }
 
             return new MyRepository().Create(uow, request);
         }
@@ -48,9 +54,13 @@ namespace PatientManagement.PatientManagement.Endpoints
         public SaveResponse Update(IUnitOfWork uow, SaveRequest<MyRow> request)
         {
             var visit = uow.Connection.ById<VisitsRow>(request.EntityId);
-            var patient = uow.Connection.ById<PatientsRow>(visit.PatientId);
 
-            SendAutomaticEmailToPatient(uow, patient, request.Entity.StartDate ?? DateTime.MinValue, false);
+            if(request.Entity.FreeForReservation.HasValue && !request.Entity.FreeForReservation.Value)
+                if (request.Entity.StartDate != visit.StartDate || request.Entity.EndDate != visit.EndDate)
+                {
+                    var patient = uow.Connection.ById<PatientsRow>(visit.PatientId);
+                    SendAutomaticEmailToPatient(uow, patient, request.Entity.StartDate ?? DateTime.MinValue, false);
+                }
 
             return new MyRepository().Update(uow, request);
         }
@@ -113,7 +123,7 @@ namespace PatientManagement.PatientManagement.Endpoints
         public FileStreamResult ListIcs(IDbConnection connection, ListRequest request)
         {
             var data = List(connection, request).Entities;
-            
+
             return File(VisitsExportHelper.ExportToIcs(data, AccessType.Private), "text/calendar", "event.ics");
         }
     }

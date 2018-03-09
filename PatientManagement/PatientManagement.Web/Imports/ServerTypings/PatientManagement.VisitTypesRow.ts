@@ -4,6 +4,12 @@
         Name?: string;
         BorderColor?: string;
         BackgroundColor?: string;
+        Price?: number;
+        ShowInMenu?: number;
+        CurrencyId?: number;
+        CurrencyCurrencyId?: string;
+        CurrencyName?: string;
+        CurrencyRate?: number;
         InsertUserId?: number;
         InsertDate?: string;
         IsActive?: number;
@@ -23,30 +29,23 @@
             return Q.getLookup<VisitTypesRow>('PatientManagement.VisitTypes');
         }
 
-        export namespace Fields {
-            export declare const VisitTypeId: string;
-            export declare const Name: string;
-            export declare const BorderColor: string;
-            export declare const BackgroundColor: string;
-            export declare const InsertUserId: string;
-            export declare const InsertDate: string;
-            export declare const IsActive: string;
-            export declare const TenantName: string;
-            export declare const InsertUserName: string;
-            export declare const TenantId: string;
+        export declare const enum Fields {
+            VisitTypeId = "VisitTypeId",
+            Name = "Name",
+            BorderColor = "BorderColor",
+            BackgroundColor = "BackgroundColor",
+            Price = "Price",
+            ShowInMenu = "ShowInMenu",
+            CurrencyId = "CurrencyId",
+            CurrencyCurrencyId = "CurrencyCurrencyId",
+            CurrencyName = "CurrencyName",
+            CurrencyRate = "CurrencyRate",
+            InsertUserId = "InsertUserId",
+            InsertDate = "InsertDate",
+            IsActive = "IsActive",
+            TenantName = "TenantName",
+            InsertUserName = "InsertUserName",
+            TenantId = "TenantId"
         }
-
-        [
-            'VisitTypeId', 
-            'Name', 
-            'BorderColor', 
-            'BackgroundColor', 
-            'InsertUserId', 
-            'InsertDate', 
-            'IsActive', 
-            'TenantName', 
-            'InsertUserName', 
-            'TenantId'
-        ].forEach(x => (<any>Fields)[x] = x);
     }
 }
