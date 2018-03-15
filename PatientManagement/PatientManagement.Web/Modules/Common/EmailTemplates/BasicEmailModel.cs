@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -37,14 +37,14 @@ namespace PatientManagement.Common.EmailTemplates
                 else if (!string.IsNullOrWhiteSpace(tenantWebSite))
                     this.ExternalUrl = tenantWebSite;
                 else
-                    this.ExternalUrl = "https://myclario.com";
+                    this.ExternalUrl = "https://clario.site";
 
                 //Get Logo url
                 var tenantImage = connection.ById<TenantRow>(user.TenantId).TenantImage;
                 if (!string.IsNullOrWhiteSpace(tenantImage))
                     this.LogoUrl = UriHelper.Combine(externalUrl, "/upload/" + tenantImage);
                 else
-                    this.LogoUrl = "http://admin.myclario.com/Content/images/clario/clario-logo-large.png";
+                    this.LogoUrl = "http://my.clario.site/Content/images/clario/clario-logo-large.png";
 
             }
         }
