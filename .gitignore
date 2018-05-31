@@ -262,3 +262,5 @@ paket-files/
 __pycache__/
 *.pyc
 *.pubxml
+PatientManagement.Reservation/PatientManagement.Reservation.Web.Host/App_Data/Logs/
+PatientManagement.Reservation/PatientManagement.Reservation.Web.Mvc/App_Data/Logs/

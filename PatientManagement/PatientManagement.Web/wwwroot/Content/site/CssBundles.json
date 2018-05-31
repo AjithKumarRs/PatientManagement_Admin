@@ -17,6 +17,7 @@
     "~/Content/colorbox/jquery.colorbox.css",
     "~/Content/site/site.css",
     "~/Content/iCheck/flat/blue.css",
+    "~/Scripts/vue.js",
     "~/Scripts/morris/morris.css",
     "~/Scripts/jvectormap/jquery-jvectormap-1.2.2.css",
     "~/Scripts/datepicker/datepicker3.css",
