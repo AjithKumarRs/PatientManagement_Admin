@@ -1811,6 +1811,24 @@ declare namespace PatientManagement.PatientManagement {
     }
 }
 declare namespace PatientManagement.PatientManagement {
+    interface CabinetWorkDaysRow {
+        WorkDayId?: number;
+        WeekDayId?: WeekDays;
+        CabinetId?: number;
+    }
+    namespace CabinetWorkDaysRow {
+        const idProperty = "WorkDayId";
+        const localTextPrefix = "CabinetWorkDays";
+        const lookupKey = "PatientManagement.CabinetWorkDays";
+        function getLookup(): Q.Lookup<CabinetWorkDaysRow>;
+        const enum Fields {
+            WorkDayId = "WorkDayId",
+            WeekDayId = "WeekDayId",
+            CabinetId = "CabinetId",
+        }
+    }
+}
+declare namespace PatientManagement.PatientManagement {
 }
 declare namespace PatientManagement.PatientManagement {
     interface CabinetsForm {
@@ -1898,24 +1916,6 @@ declare namespace PatientManagement.PatientManagement {
             RetrieveWorkHours = "PatientManagement/Cabinets/RetrieveWorkHours",
             Retrieve = "PatientManagement/Cabinets/Retrieve",
             List = "PatientManagement/Cabinets/List",
-        }
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    interface CabinetWorkDaysRow {
-        WorkDayId?: number;
-        WeekDayId?: WeekDays;
-        CabinetId?: number;
-    }
-    namespace CabinetWorkDaysRow {
-        const idProperty = "WorkDayId";
-        const localTextPrefix = "CabinetWorkDays";
-        const lookupKey = "PatientManagement.CabinetWorkDays";
-        function getLookup(): Q.Lookup<CabinetWorkDaysRow>;
-        const enum Fields {
-            WorkDayId = "WorkDayId",
-            WeekDayId = "WeekDayId",
-            CabinetId = "CabinetId",
         }
     }
 }
@@ -2495,6 +2495,21 @@ declare namespace PatientManagement.PatientManagement {
     }
 }
 declare namespace PatientManagement.PatientManagement {
+    namespace ReportsVisitsEndpointService {
+        const baseUrl = "PatientManagement/ReportsVisits";
+        function NewPatientsThisMonth(request: Serenity.ServiceRequest, onSuccess?: (response: Serenity.RetrieveResponse<NewPatientsThisMonthResponse>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function NewVisitsThisMonth(request: Serenity.ServiceRequest, onSuccess?: (response: Serenity.RetrieveResponse<NewVisitsThisMonthResponse>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function VisitTypesPerGenderChart(request: Serenity.ServiceRequest, onSuccess?: (response: Serenity.RetrieveResponse<VisitTypesPerGenderChartResponse>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function VisitsPerMonthLineChart(request: Serenity.ServiceRequest, onSuccess?: (response: Serenity.RetrieveResponse<VisitsPerMonthLineChartResponse>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        const enum Methods {
+            NewPatientsThisMonth = "PatientManagement/ReportsVisits/NewPatientsThisMonth",
+            NewVisitsThisMonth = "PatientManagement/ReportsVisits/NewVisitsThisMonth",
+            VisitTypesPerGenderChart = "PatientManagement/ReportsVisits/VisitTypesPerGenderChart",
+            VisitsPerMonthLineChart = "PatientManagement/ReportsVisits/VisitsPerMonthLineChart",
+        }
+    }
+}
+declare namespace PatientManagement.PatientManagement {
     enum SubscriptionState {
         NotActive = 0,
         Active = 1,
@@ -2576,111 +2591,6 @@ declare namespace PatientManagement.PatientManagement {
             UserSpecialtyId = "UserSpecialtyId",
             UserId = "UserId",
             SpecialtyId = "SpecialtyId",
-        }
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-}
-declare namespace PatientManagement.PatientManagement {
-    interface VisitsForm {
-        PatientId: Serenity.LookupEditor;
-        VisitTypeId: Serenity.LookupEditor;
-        AssignedUserId: Serenity.LookupEditor;
-        CabinetId: Serenity.LookupEditor;
-        FreeForReservation: BsSwitchEditor;
-        StartDate: Serenity.DateTimeEditor;
-        EndDate: Serenity.DateTimeEditor;
-        Description: Serenity.TextAreaEditor;
-        TenantId: Serenity.LookupEditor;
-    }
-    class VisitsForm extends Serenity.PrefixedContext {
-        static formKey: string;
-        private static init;
-        constructor(prefix: string);
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    interface VisitsRow {
-        VisitId?: number;
-        PatientId?: number;
-        VisitTypeId?: number;
-        CabinetId?: number;
-        CabinetName?: string;
-        CabinetIsActive?: number;
-        AssignedUserId?: number;
-        AssignedUserName?: string;
-        FreeForReservation?: boolean;
-        Description?: string;
-        StartDate?: string;
-        EndDate?: string;
-        InsertUserId?: number;
-        InsertDate?: string;
-        TenantName?: string;
-        InsertUserName?: string;
-        PatientGender?: Gender;
-        PatientEmail?: string;
-        PatientNotifyOnChange?: boolean;
-        PhoneNumber?: string;
-        PatientName?: string;
-        VisitTypeName?: string;
-        VisitTypeBackgroundColor?: string;
-        VisitTypeBorderColor?: string;
-        VisitTypePrice?: number;
-        VisitTypePriceFormatted?: string;
-        VisitTypeCurrencyId?: number;
-        TenantId?: number;
-    }
-    namespace VisitsRow {
-        const idProperty = "VisitId";
-        const localTextPrefix = "PatientManagement.Visits";
-        const lookupKey = "PatientManagement.Visits";
-        function getLookup(): Q.Lookup<VisitsRow>;
-        const enum Fields {
-            VisitId = "VisitId",
-            PatientId = "PatientId",
-            VisitTypeId = "VisitTypeId",
-            CabinetId = "CabinetId",
-            CabinetName = "CabinetName",
-            CabinetIsActive = "CabinetIsActive",
-            AssignedUserId = "AssignedUserId",
-            AssignedUserName = "AssignedUserName",
-            FreeForReservation = "FreeForReservation",
-            Description = "Description",
-            StartDate = "StartDate",
-            EndDate = "EndDate",
-            InsertUserId = "InsertUserId",
-            InsertDate = "InsertDate",
-            TenantName = "TenantName",
-            InsertUserName = "InsertUserName",
-            PatientGender = "PatientGender",
-            PatientEmail = "PatientEmail",
-            PatientNotifyOnChange = "PatientNotifyOnChange",
-            PhoneNumber = "PhoneNumber",
-            PatientName = "PatientName",
-            VisitTypeName = "VisitTypeName",
-            VisitTypeBackgroundColor = "VisitTypeBackgroundColor",
-            VisitTypeBorderColor = "VisitTypeBorderColor",
-            VisitTypePrice = "VisitTypePrice",
-            VisitTypePriceFormatted = "VisitTypePriceFormatted",
-            VisitTypeCurrencyId = "VisitTypeCurrencyId",
-            TenantId = "TenantId",
-        }
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    namespace VisitsService {
-        const baseUrl = "PatientManagement/Visits";
-        function Create(request: Serenity.SaveRequest<VisitsRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        function Update(request: Serenity.SaveRequest<VisitsRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<VisitsRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<VisitsRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        const enum Methods {
-            Create = "PatientManagement/Visits/Create",
-            Update = "PatientManagement/Visits/Update",
-            Delete = "PatientManagement/Visits/Delete",
-            Retrieve = "PatientManagement/Visits/Retrieve",
-            List = "PatientManagement/Visits/List",
         }
     }
 }
@@ -2773,6 +2683,117 @@ declare namespace PatientManagement.PatientManagement {
             Retrieve = "PatientManagement/VisitTypes/Retrieve",
             List = "PatientManagement/VisitTypes/List",
             ListForMenu = "PatientManagement/VisitTypes/ListForMenu",
+        }
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+}
+declare namespace PatientManagement.PatientManagement {
+    interface VisitsForm {
+        PatientId: Serenity.LookupEditor;
+        VisitTypeId: Serenity.LookupEditor;
+        AssignedUserId: Serenity.LookupEditor;
+        CabinetId: Serenity.LookupEditor;
+        FreeForReservation: BsSwitchEditor;
+        StartDate: Serenity.DateTimeEditor;
+        EndDate: Serenity.DateTimeEditor;
+        Description: Serenity.TextAreaEditor;
+        TenantId: Serenity.LookupEditor;
+    }
+    class VisitsForm extends Serenity.PrefixedContext {
+        static formKey: string;
+        private static init;
+        constructor(prefix: string);
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    interface VisitsPerMonthLineChartResponse {
+        labels?: string[];
+        datasets?: Dataset[];
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    interface VisitsRow {
+        VisitId?: number;
+        PatientId?: number;
+        VisitTypeId?: number;
+        CabinetId?: number;
+        CabinetName?: string;
+        CabinetIsActive?: number;
+        AssignedUserId?: number;
+        AssignedUserName?: string;
+        FreeForReservation?: boolean;
+        Description?: string;
+        StartDate?: string;
+        EndDate?: string;
+        InsertUserId?: number;
+        InsertDate?: string;
+        TenantName?: string;
+        InsertUserName?: string;
+        PatientGender?: Gender;
+        PatientEmail?: string;
+        PatientNotifyOnChange?: boolean;
+        PhoneNumber?: string;
+        PatientName?: string;
+        VisitTypeName?: string;
+        VisitTypeBackgroundColor?: string;
+        VisitTypeBorderColor?: string;
+        VisitTypePrice?: number;
+        VisitTypePriceFormatted?: string;
+        VisitTypeCurrencyId?: number;
+        TenantId?: number;
+    }
+    namespace VisitsRow {
+        const idProperty = "VisitId";
+        const localTextPrefix = "PatientManagement.Visits";
+        const lookupKey = "PatientManagement.Visits";
+        function getLookup(): Q.Lookup<VisitsRow>;
+        const enum Fields {
+            VisitId = "VisitId",
+            PatientId = "PatientId",
+            VisitTypeId = "VisitTypeId",
+            CabinetId = "CabinetId",
+            CabinetName = "CabinetName",
+            CabinetIsActive = "CabinetIsActive",
+            AssignedUserId = "AssignedUserId",
+            AssignedUserName = "AssignedUserName",
+            FreeForReservation = "FreeForReservation",
+            Description = "Description",
+            StartDate = "StartDate",
+            EndDate = "EndDate",
+            InsertUserId = "InsertUserId",
+            InsertDate = "InsertDate",
+            TenantName = "TenantName",
+            InsertUserName = "InsertUserName",
+            PatientGender = "PatientGender",
+            PatientEmail = "PatientEmail",
+            PatientNotifyOnChange = "PatientNotifyOnChange",
+            PhoneNumber = "PhoneNumber",
+            PatientName = "PatientName",
+            VisitTypeName = "VisitTypeName",
+            VisitTypeBackgroundColor = "VisitTypeBackgroundColor",
+            VisitTypeBorderColor = "VisitTypeBorderColor",
+            VisitTypePrice = "VisitTypePrice",
+            VisitTypePriceFormatted = "VisitTypePriceFormatted",
+            VisitTypeCurrencyId = "VisitTypeCurrencyId",
+            TenantId = "TenantId",
+        }
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    namespace VisitsService {
+        const baseUrl = "PatientManagement/Visits";
+        function Create(request: Serenity.SaveRequest<VisitsRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Update(request: Serenity.SaveRequest<VisitsRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<VisitsRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<VisitsRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        const enum Methods {
+            Create = "PatientManagement/Visits/Create",
+            Update = "PatientManagement/Visits/Update",
+            Delete = "PatientManagement/Visits/Delete",
+            Retrieve = "PatientManagement/Visits/Retrieve",
+            List = "PatientManagement/Visits/List",
         }
     }
 }
@@ -3158,7 +3179,7 @@ declare namespace PatientManagement.Administration {
         protected getService(): string;
         protected form: UserForm;
         constructor();
-        protected getPropertyItems(): any;
+        protected getPropertyItems(): Serenity.PropertyItem[];
         protected getToolbarButtons(): Serenity.ToolButton[];
         protected updateInterface(): void;
         protected afterLoadEntity(): void;
@@ -3271,19 +3292,6 @@ declare namespace PatientManagement {
     }
 }
 declare namespace PatientManagement {
-    class BasicProgressDialog extends Serenity.TemplatedDialog<any> {
-        constructor();
-        cancelled: boolean;
-        max: number;
-        value: number;
-        title: string;
-        cancelTitle: string;
-        getDialogOptions(): JQueryUI.DialogOptions;
-        initDialog(): void;
-        getTemplate(): string;
-    }
-}
-declare namespace PatientManagement {
     class BsSwitchEditor extends Serenity.Widget<BootstrapSwitchOptions> implements Serenity.IGetEditValue, Serenity.ISetEditValue {
         constructor(element: JQuery, opt: BootstrapSwitchOptions);
         setEditValue(source: any, property: Serenity.PropertyItem): void;
@@ -3310,6 +3318,19 @@ declare namespace PatientManagement {
         wrapperClass?: string;
         onInit?: any;
         onSwitchChange?: any;
+    }
+}
+declare namespace PatientManagement {
+    class BasicProgressDialog extends Serenity.TemplatedDialog<any> {
+        constructor();
+        cancelled: boolean;
+        max: number;
+        value: number;
+        title: string;
+        cancelTitle: string;
+        getDialogOptions(): JQueryUI.DialogOptions;
+        initDialog(): void;
+        getTemplate(): string;
     }
 }
 declare namespace PatientManagement.Common {
@@ -3732,6 +3753,13 @@ declare namespace PatientManagement.PatientManagement {
     }
 }
 declare namespace PatientManagement.PatientManagement {
+    class CalendarVisitsGrid extends VisitsGrid {
+        protected getDialogType(): typeof CalendarVisitsDialog;
+        constructor(container: JQuery);
+        protected getInitialTitle(): any;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
     class VisitsDialog extends Serenity.EntityDialog<VisitsRow, any> {
         protected getFormKey(): string;
         protected getIdProperty(): string;
@@ -3757,13 +3785,6 @@ declare namespace PatientManagement.PatientManagement {
     }
 }
 declare namespace PatientManagement.PatientManagement {
-    class CalendarVisitsGrid extends VisitsGrid {
-        protected getDialogType(): typeof CalendarVisitsDialog;
-        constructor(container: JQuery);
-        protected getInitialTitle(): any;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
     class HelloModal extends Serenity.TemplatedWidget<any> {
         private formCabinet;
         private formPatient;
@@ -3778,7 +3799,7 @@ declare namespace PatientManagement.Common {
         protected getFormKey(): string;
         private form;
         constructor(container: JQuery);
-        protected getTemplate(): any;
+        protected getTemplate(): string;
         ValidateForm(): boolean;
         SaveEntity(): boolean;
     }
@@ -3788,7 +3809,7 @@ declare namespace PatientManagement.Common {
         protected getFormKey(): string;
         private form;
         constructor(container: JQuery);
-        protected getTemplate(): any;
+        protected getTemplate(): string;
         ValidateForm(): boolean;
         SaveEntity(): boolean;
     }
@@ -3798,7 +3819,7 @@ declare namespace PatientManagement.Common {
         protected getFormKey(): string;
         private form;
         constructor(container: JQuery);
-        protected getTemplate(): any;
+        protected getTemplate(): string;
         ValidateForm(): boolean;
         SaveEntity(): boolean;
     }
@@ -3808,7 +3829,7 @@ declare namespace PatientManagement.Common {
         protected getFormKey(): string;
         private form;
         constructor(container: JQuery);
-        protected getTemplate(): any;
+        protected getTemplate(): string;
         ValidateForm(): boolean;
         SaveEntity(): boolean;
     }
@@ -4062,6 +4083,25 @@ declare namespace PatientManagement.PatientManagement {
     }
 }
 declare namespace PatientManagement.PatientManagement {
+    class PatientVisitsDialog extends VisitsDialog {
+        constructor();
+        updateInterface(): void;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class PatientVisitsGrid extends VisitsGrid {
+        protected getDialogType(): typeof PatientVisitsDialog;
+        constructor(container: JQuery);
+        protected getColumns(): Slick.Column[];
+        protected initEntityDialog(itemType: any, dialog: any): void;
+        protected addButtonClick(): void;
+        protected getInitialTitle(): any;
+        protected getGridCanLoad(): boolean;
+        private _patientId;
+        patientId: number;
+    }
+}
+declare namespace PatientManagement.PatientManagement {
     class PatientsFormatter implements Slick.Formatter {
         format(ctx: Slick.FormatterContext): string;
         genderProperty: string;
@@ -4087,22 +4127,31 @@ declare namespace PatientManagement.PatientManagement {
     }
 }
 declare namespace PatientManagement.PatientManagement {
-    class PatientVisitsDialog extends VisitsDialog {
-        constructor();
-        updateInterface(): void;
+    class ReportsCommon {
+        static animateAndFillNumbers(elem: JQuery, num: Number, dur: Number): void;
+        static animateAndFillDecimals(elem: JQuery, num: Number, dur: Number): void;
     }
 }
 declare namespace PatientManagement.PatientManagement {
-    class PatientVisitsGrid extends VisitsGrid {
-        protected getDialogType(): typeof PatientVisitsDialog;
-        constructor(container: JQuery);
-        protected getColumns(): Slick.Column[];
-        protected initEntityDialog(itemType: any, dialog: any): void;
-        protected addButtonClick(): void;
-        protected getInitialTitle(): any;
-        protected getGridCanLoad(): boolean;
-        private _patientId;
-        patientId: number;
+    class NewPatientsThisMonth extends Serenity.TemplatedWidget<any> {
+        constructor(elem: JQuery, opt: {});
+    }
+}
+declare namespace PatientManagement.PatientManagement {
+    class NewVisitsThisMonth extends Serenity.TemplatedWidget<any> {
+        constructor(elem: JQuery, opt: {});
+    }
+}
+declare var Chart: any;
+declare namespace PatientManagement.PatientManagement {
+    class VisitTypesPerGenderChart extends Serenity.TemplatedWidget<any> {
+        constructor(elem: JQuery, opt: {});
+    }
+}
+declare var Chart: any;
+declare namespace PatientManagement.PatientManagement {
+    class VisitsPerMonthLineChart extends Serenity.TemplatedWidget<any> {
+        constructor(elem: JQuery, opt: {});
     }
 }
 declare namespace PatientManagement.PatientManagement {
@@ -4125,20 +4174,9 @@ declare namespace PatientManagement.PatientManagement {
         protected getButtons(): Serenity.ToolButton[];
     }
 }
-declare namespace PatientManagement.PatientManagement {
-    class VisitsPriceFormatter implements Slick.Formatter {
-        format(ctx: Slick.FormatterContext): string;
-        visitTypePriceProperty: string;
-        visitTypeCurrencyIdProperty: string;
-        initializeColumn(column: Slick.Column): void;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class VisitsTypesFormatter implements Slick.Formatter {
-        format(ctx: Slick.FormatterContext): string;
-        backgroundProperty: string;
-        borderProperty: string;
-        initializeColumn(column: Slick.Column): void;
+declare namespace PatientManagement {
+    class VisiTypesBottomLeftMenu extends Serenity.Widget<any> {
+        constructor(elem: JQuery, opt: {});
     }
 }
 declare namespace PatientManagement.PatientManagement {
@@ -4165,57 +4203,19 @@ declare namespace PatientManagement.PatientManagement {
         constructor(container: JQuery);
     }
 }
-declare namespace PatientManagement {
-    class VisiTypesBottomLeftMenu extends Serenity.Widget<any> {
-        constructor(elem: JQuery, opt: {});
+declare namespace PatientManagement.PatientManagement {
+    class VisitsTypesFormatter implements Slick.Formatter {
+        format(ctx: Slick.FormatterContext): string;
+        backgroundProperty: string;
+        borderProperty: string;
+        initializeColumn(column: Slick.Column): void;
     }
 }
 declare namespace PatientManagement.PatientManagement {
-    class ReportsCommon {
-        static animateAndFillNumbers(elem: JQuery, num: Number, dur: Number): void;
-        static animateAndFillDecimals(elem: JQuery, num: Number, dur: Number): void;
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    interface VisitsPerMonthLineChartResponse {
-        labels?: string[];
-        datasets?: Dataset[];
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class NewPatientsThisMonth extends Serenity.TemplatedWidget<any> {
-        constructor(elem: JQuery, opt: {});
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    class NewVisitsThisMonth extends Serenity.TemplatedWidget<any> {
-        constructor(elem: JQuery, opt: {});
-    }
-}
-declare var Chart: any;
-declare namespace PatientManagement.PatientManagement {
-    class VisitsPerMonthLineChart extends Serenity.TemplatedWidget<any> {
-        constructor(elem: JQuery, opt: {});
-    }
-}
-declare namespace PatientManagement.PatientManagement {
-    namespace ReportsVisitsEndpointService {
-        const baseUrl = "PatientManagement/ReportsVisits";
-        function NewPatientsThisMonth(request: Serenity.ServiceRequest, onSuccess?: (response: Serenity.RetrieveResponse<NewPatientsThisMonthResponse>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        function NewVisitsThisMonth(request: Serenity.ServiceRequest, onSuccess?: (response: Serenity.RetrieveResponse<NewVisitsThisMonthResponse>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        function VisitTypesPerGenderChart(request: Serenity.ServiceRequest, onSuccess?: (response: Serenity.RetrieveResponse<VisitTypesPerGenderChartResponse>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        function VisitsPerMonthLineChart(request: Serenity.ServiceRequest, onSuccess?: (response: Serenity.RetrieveResponse<VisitsPerMonthLineChartResponse>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
-        const enum Methods {
-            NewPatientsThisMonth = "PatientManagement/ReportsVisits/NewPatientsThisMonth",
-            NewVisitsThisMonth = "PatientManagement/ReportsVisits/NewVisitsThisMonth",
-            VisitTypesPerGenderChart = "PatientManagement/ReportsVisits/VisitTypesPerGenderChart",
-            VisitsPerMonthLineChart = "PatientManagement/ReportsVisits/VisitsPerMonthLineChart",
-        }
-    }
-}
-declare var Chart: any;
-declare namespace PatientManagement.PatientManagement {
-    class VisitTypesPerGenderChart extends Serenity.TemplatedWidget<any> {
-        constructor(elem: JQuery, opt: {});
+    class VisitsPriceFormatter implements Slick.Formatter {
+        format(ctx: Slick.FormatterContext): string;
+        visitTypePriceProperty: string;
+        visitTypeCurrencyIdProperty: string;
+        initializeColumn(column: Slick.Column): void;
     }
 }

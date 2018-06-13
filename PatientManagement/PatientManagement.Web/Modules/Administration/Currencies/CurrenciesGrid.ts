@@ -24,7 +24,7 @@ namespace PatientManagement.Administration {
                 onClick: () => {
                     Q.confirm("Are You sure that you want to update all Currencies?", () => {
                         var joined = "";
-                        var url = "http://api.fixer.io/latest";
+                        var url = "http://data.fixer.io/api/latest?access_key=fb5a4c0dfd8455c9ca33abc357907202";
 
                         var entities = CurrenciesService.List({}, response => {
 
