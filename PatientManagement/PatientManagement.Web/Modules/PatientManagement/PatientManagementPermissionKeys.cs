@@ -27,5 +27,42 @@ namespace PatientManagement.PatientManagement
             [Description("Delete"), ImplicitPermission(ReadPermission), ImplicitPermission(UpdatePermission)]
             public const string DeletePermission = "PatientManagement:Activity:Delete";
         }
+
+        public class Cabinets
+        {
+            [Description("Page")]
+            public const string PagePermission = "PatientManagement:Cabinets:Page";
+            [Description("View")]
+            public const string ReadPermission = "PatientManagement:Cabinets:Read";
+            [Description("Update"), ImplicitPermission(ReadPermission)]
+            public const string UpdatePermission = "PatientManagement:Cabinets:Update";
+            [Description("Delete"), ImplicitPermission(ReadPermission), ImplicitPermission(UpdatePermission)]
+            public const string DeletePermission = "PatientManagement:Cabinets:Delete";
+        }
+
+
+        public class LifeStyles
+        {
+            [Description("Page")]
+            public const string PagePermission = "PatientManagement:LifeStyles:Page";
+            [Description("View")]
+            public const string ReadPermission = "PatientManagement:LifeStyles:Read";
+            [Description("Update"), ImplicitPermission(ReadPermission)]
+            public const string UpdatePermission = "PatientManagement:LifeStyles:Update";
+            [Description("Delete"), ImplicitPermission(ReadPermission), ImplicitPermission(UpdatePermission)]
+            public const string DeletePermission = "PatientManagement:LifeStyles:Delete";
+        }
+
+        public class MedicalSpecialties
+        {
+            [Description("Page")]
+            public const string PagePermission = "PatientManagement:MedicalSpecialties:Page";
+            [Description("View")]
+            public const string ReadPermission = "PatientManagement:MedicalSpecialties:Read";
+            [Description("Update"), ImplicitPermission(ReadPermission)]
+            public const string UpdatePermission = "PatientManagement:MedicalSpecialties:Update";
+            [Description("Delete"), ImplicitPermission(ReadPermission), ImplicitPermission(UpdatePermission)]
+            public const string DeletePermission = "PatientManagement:MedicalSpecialties:Delete";
+        }
     }
 }

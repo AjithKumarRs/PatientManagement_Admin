@@ -76,56 +76,7 @@ namespace PatientManagement.PatientManagement.Pages
 
         [Route("~/Exceptions")]
         public async Task Exceptions() => await ExceptionalMiddleware.HandleRequestAsync(HttpContext).ConfigureAwait(false);
-
-        //[PageAuthorize]
-        //public JsonResult GetVisitsTasks(string start, string end)
-        //{
-        //    var user = (UserDefinition)Authorization.UserDefinition;
-
-        //    var startDate = DateTime.ParseExact(start, "yyyy-MM-dd", new CultureInfo("en-US"),
-        //        DateTimeStyles.None);
-
-        //    var endDate = DateTime.ParseExact(end, "yyyy-MM-dd", new CultureInfo("en-US"),
-        //        DateTimeStyles.None);
-
-        //    var model = new DashboardPageModel();
-        //    var connection = SqlConnections.NewFor<VisitsRow>();
-        //    var cabinetIdActive = Request.Cookies["CabinetPreference"];
-
-
-        //    List<VisitsRow> entity = new List<VisitsRow>();
-
-        //    if (Authorization.HasPermission(PermissionKeys.Tenants))
-        //        entity = connection.List<VisitsRow>()
-        //            .Where(e => e.StartDate >= startDate && e.EndDate <= endDate && e.CabinetId == int.Parse(cabinetIdActive))
-        //            .ToList();
-        //    else
-        //        entity = connection.List<VisitsRow>()
-        //            .Where(e => e.StartDate >= startDate && e.EndDate <= endDate && e.CabinetId == int.Parse(cabinetIdActive) && e.TenantId == user.TenantId)
-        //            .ToList();
-
-
-        //    foreach (var visit in entity)
-        //    {
-        //        var patient = connection.ById<PatientsRow>(visit.PatientId);
-        //        var visitType = connection.ById<VisitTypesRow>(visit.VisitTypeId);
-        //        model.EventsList.Add(new Event
-        //        {
-        //            id = visit.VisitId ?? 0,
-        //            patientId = visit.PatientId ?? 0,
-        //            patientAutoEmailActive = patient.NotifyOnChange ?? false,
-        //            title = patient.Name + "\n" + visit.Description,
-        //            start = (visit.StartDate ?? DateTime.Now).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
-        //            end = (visit.EndDate ?? DateTime.Now).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
-        //            allDay = false,
-        //            backgroundColor = visitType.BackgroundColor,
-        //            borderColor = visitType.BorderColor
-        //        });
-        //    }
-        //    return Json(model.EventsList);
-        //}
-
-
+        
         [PageAuthorize]
         public JsonResult GetVisitsTasks(string start, string end)
         {

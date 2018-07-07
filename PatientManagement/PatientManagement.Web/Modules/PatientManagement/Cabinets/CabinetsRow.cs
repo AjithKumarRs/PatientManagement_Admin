@@ -14,9 +14,9 @@ namespace PatientManagement.PatientManagement.Entities
     using System.IO;
     using System.Collections.Generic;
     [ConnectionKey("PatientManagement"), TableName("[dbo].[Cabinets]"), DisplayName("Cabinets"), InstanceName("Cabinet") ,TwoLevelCached]
-    [ReadPermission("PatientManagement:Cabinets:Read")]
-    [ModifyPermission("PatientManagement:Cabinets:Modify")]
-    [DeletePermission("PatientManagement:Cabinets:Delete")]
+    [ReadPermission(PatientManagementPermissionKeys.Cabinets.ReadPermission)]
+    [UpdatePermission(PatientManagementPermissionKeys.Cabinets.UpdatePermission)]
+    [DeletePermission(PatientManagementPermissionKeys.Cabinets.DeletePermission)]
     [LookupScript("PatientManagement.Cabinets",
         LookupType = typeof(MultiTenantRowLookupScript<>))]
     public sealed class CabinetsRow : Row, IIdRow, INameRow, ILoggingRow, IMultiTenantRow, IIsActiveDeletedRow

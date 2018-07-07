@@ -5,7 +5,7 @@ namespace PatientManagement.PatientManagement.Pages
     using Serenity.Web;
     using Microsoft.AspNetCore.Mvc;
 
-    [PageAuthorize(typeof(Entities.CabinetsRow))]
+    [PageAuthorize(PatientManagementPermissionKeys.Cabinets.PagePermission)]
     public class CabinetsController : Controller
     {
         [Route("PatientManagement/Cabinets")]

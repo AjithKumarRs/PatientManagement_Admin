@@ -7,10 +7,10 @@
     [PageAuthorize(typeof(Entities.LifeStylesRow))]
     public class LifeStylesController : Controller
     {
-        [Route("PatientManagement/LifeStyles")]
+        [Route(PatientManagementPermissionKeys.LifeStyles.PagePermission)]
         public ActionResult Index()
         {
-            return View("~/Modules/PatientManagement/LifeStyles/LifeStylesIndex.cshtml");
+            return View(MVC.Views.PatientManagement.LifeStyles.LifeStylesIndex);
         }
     }
 }

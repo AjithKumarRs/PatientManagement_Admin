@@ -13,8 +13,9 @@ namespace PatientManagement.PatientManagement.Entities
 
     [ConnectionKey("PatientManagement"), TableName("[dbo].[MedicalSpecialties]")]
     [DisplayName("Medical Specialty"), InstanceName("Medical Specialty"), TwoLevelCached]
-    [ReadPermission("PatientManagement:MedicalSpecialties:Read")]
-    [ModifyPermission("Administration:MedicalSpecialties:Modify")]
+    [ReadPermission(PatientManagementPermissionKeys.MedicalSpecialties.ReadPermission)]
+    [UpdatePermission(PatientManagementPermissionKeys.MedicalSpecialties.UpdatePermission)]
+    [DeletePermission(PatientManagementPermissionKeys.MedicalSpecialties.DeletePermission)]
     [LookupScript("PatientManagement.MedicalSpecialties")]
     public sealed class MedicalSpecialtyRow : Row, IIdRow, INameRow, ILoggingRow,  IIsActiveDeletedRow
     {
