@@ -5,7 +5,7 @@ namespace PatientManagement.Administration.Pages
     using Serenity.Web;
     using Microsoft.AspNetCore.Mvc;
 
-    [PageAuthorize(typeof(Entities.SentEmailsRow))]
+    [PageAuthorize(PermissionKeys.SentEmails.PagePermission)]
     public class SentEmailsController : Controller
     {
         [Route("Administration/SentEmails")]

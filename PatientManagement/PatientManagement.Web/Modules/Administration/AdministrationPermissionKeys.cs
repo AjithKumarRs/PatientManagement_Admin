@@ -17,6 +17,25 @@ namespace PatientManagement.Administration
         public const string AdministrationTenantsTenantEditing = "AdministrationTenants:TenantEditing";
         public const string AdministrationTenantsVisitPayments = "AdministrationTenants:VisitPayments";
 
+        [DisplayName("Roles")]
+        public class Roles
+        {
+            [Description("View")]
+            public const string ReadPermission = "Administration:Roles:Read";
+            [Description("Page"), ImplicitPermission(ReadPermission)]
+            public const string PagePermission = "Administration:Roles:Page";
+            [Description("Modify"), ImplicitPermission(ReadPermission)]
+            public const string ModifyPermission = "Administration:Roles:Modify";
+        }
+
+        [DisplayName("Role Permissions")]
+        public class RolePermissions
+        {
+            [Description("View")]
+            public const string ReadPermission = "Administration:RolePermissions:Read";
+            [Description("Modify"), ImplicitPermission(ReadPermission)]
+            public const string ModifyPermission = "Administration:RolePermissions:Modify";
+        }
         [DisplayName("Coupons")]
         public class Coupons
         {
@@ -94,6 +113,44 @@ namespace PatientManagement.Administration
             [Description("Modify"), ImplicitPermission(ReadPermission)]
             public const string ModifyPermission = "AdministrationTenants:Payments:Modify";
         }
+
+        [DisplayName("Payments Details")]
+        public class PaymentsDetails
+        {
+            [Description("View")]
+            public const string ReadPermission = "AdministrationTenants:PaymentsDetails:Read";
+            [Description("Page"), ImplicitPermission(ReadPermission)]
+            public const string PagePermission = "AdministrationTenants:PaymentsDetails:Page";
+            [Description("Modify"), ImplicitPermission(ReadPermission)]
+            public const string ModifyPermission = "AdministrationTenants:PaymentsDetails:Modify";
+        }
+
+
+        [DisplayName("Sent Emails")]
+        public class SentEmails
+        {
+            [Description("View")]
+            public const string ReadPermission = "PatientManagement:SentEmails:Read";
+            [Description("Page"), ImplicitPermission(ReadPermission)]
+            public const string PagePermission = "PatientManagement:SentEmails:Page";
+            [Description("Insert"), ImplicitPermission(ReadPermission)]
+            public const string InsertPermission = "PatientManagement:SentEmails:Insert";
+            [Description("Update"), ImplicitPermission(ReadPermission), ImplicitPermission(InsertPermission)]
+            public const string UpdatePermission = "Administration:SentEmails:Update";
+            [Description("Delete"), ImplicitPermission(ReadPermission), ImplicitPermission(InsertPermission), ImplicitPermission(UpdatePermission)]
+            public const string DeletePermission = "Administration:SentEmails:Delete";
+        }
+        [DisplayName("Subscriptions")]
+        public class Subscriptions
+        {
+            [Description("View")]
+            public const string ReadPermission = "AdministrationTenants:Subscriptions:Read";
+            [Description("Page"), ImplicitPermission(ReadPermission)]
+            public const string PagePermission = "AdministrationTenants:Subscriptions:Page";
+            [Description("Modify"), ImplicitPermission(ReadPermission)]
+            public const string ModifyPermission = "AdministrationTenants:Subscriptions:Modify";
+        }
+
     }
 
 }

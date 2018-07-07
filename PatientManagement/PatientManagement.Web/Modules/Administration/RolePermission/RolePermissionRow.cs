@@ -7,14 +7,14 @@ namespace PatientManagement.Administration.Entities
     using System.ComponentModel;
 
     [ConnectionKey("Default"), DisplayName("Role Permissions"), InstanceName("Role Permission"), TwoLevelCached]
-    [ReadPermission("Administration:RolePermission:Read")]
-    [ModifyPermission("Administration:RolePermission:Modify")]
+    [ReadPermission(PermissionKeys.RolePermissions.ReadPermission)]
+    [ModifyPermission(PermissionKeys.RolePermissions.ModifyPermission)]
     public sealed class RolePermissionRow : Row, IIdRow, INameRow
     {
         [DisplayName("Role Permission Id"), Identity]
         public Int64? RolePermissionId
         {
-            get { return Fields.RolePermissionId[this]; }
+            get { return Fields.RolePermissionId[this]; } 
             set { Fields.RolePermissionId[this] = value; }
         }
 

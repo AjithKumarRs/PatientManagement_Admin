@@ -13,8 +13,8 @@ namespace PatientManagement.Administration.Entities
     using System.IO;
 
     [ConnectionKey("Default"), TableName("[dbo].[PaymentsDetails]"), DisplayName("Payments Details"), InstanceName("Payments Details"), TwoLevelCached]
-    [ReadPermission("AdministrationTenants:PaymentsDetails:Read")]
-    [ModifyPermission("AdministrationTenants:PaymentsDetails:Modify")]
+    [ReadPermission(PermissionKeys.Payments.ReadPermission)]
+    [ModifyPermission(PermissionKeys.Payments.ModifyPermission)]
     [LookupScript("Administration.PaymentsDetails", 
         LookupType = typeof(MultiTenantRowLookupScript<>))]
     public sealed class PaymentsDetailsRow : Row, IIdRow, INameRow, ILoggingRow, IMultiTenantRow

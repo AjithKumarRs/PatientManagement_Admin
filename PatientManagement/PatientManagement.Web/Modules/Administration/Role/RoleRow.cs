@@ -10,8 +10,8 @@ namespace PatientManagement.Administration.Entities
     using System.ComponentModel;
 
     [ConnectionKey("Default"), DisplayName("Roles"), InstanceName("Role"), TwoLevelCached]
-    [ReadPermission("Administration:Role:Read")]
-    [ModifyPermission("Administration:Role:Modify")]
+    [ReadPermission(PermissionKeys.Roles.ReadPermission)]
+    [ModifyPermission(PermissionKeys.Roles.ModifyPermission)]
     [LookupScript("Administration.Role", 
         LookupType = typeof(MultiTenantRowLookupScript<>) )]
     public sealed class RoleRow : Row, IIdRow, INameRow, IMultiTenantRow, ILoggingRow, IIsActiveDeletedRow

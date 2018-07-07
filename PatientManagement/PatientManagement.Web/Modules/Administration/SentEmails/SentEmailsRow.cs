@@ -14,11 +14,10 @@ namespace PatientManagement.Administration.Entities
     using System.IO;
 
     [ConnectionKey("Default"), TableName("[dbo].[SentEmails]"), DisplayName("Sent Emails"), InstanceName("Sent Emails"), TwoLevelCached]
-
-    [ReadPermission("PatientManagement:SentEmails:Read")]
-    [InsertPermission("PatientManagement:SentEmails:Insert")]
-    [DeletePermission("Administration:SentEmails:Delete")]
-    [UpdatePermission("Administration:SentEmails:Update")]
+    [ReadPermission(PermissionKeys.SentEmails.ReadPermission)]
+    [InsertPermission(PermissionKeys.SentEmails.InsertPermission)]
+    [UpdatePermission(PermissionKeys.SentEmails.UpdatePermission)]
+    [DeletePermission(PermissionKeys.SentEmails.DeletePermission)]
     [LookupScript("AdministrationTenants.SentEmails",
         LookupType = typeof(MultiTenantRowLookupScript<>))]
     public sealed class SentEmailsRow : Row, IIdRow, INameRow, ILoggingRow, IMultiTenantRow, IIsActiveRow
