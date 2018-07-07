@@ -5,6 +5,7 @@
         export declare function Create(request: Serenity.SaveRequest<VisitsRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         export declare function Update(request: Serenity.SaveRequest<VisitsRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         export declare function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        export declare function Undelete(request: Serenity.UndeleteRequest, onSuccess?: (response: Serenity.UndeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         export declare function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<VisitsRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         export declare function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<VisitsRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
 
@@ -12,6 +13,7 @@
             Create = "PatientManagement/Visits/Create",
             Update = "PatientManagement/Visits/Update",
             Delete = "PatientManagement/Visits/Delete",
+            Undelete = "PatientManagement/Visits/Undelete",
             Retrieve = "PatientManagement/Visits/Retrieve",
             List = "PatientManagement/Visits/List"
         }
@@ -20,6 +22,7 @@
             'Create', 
             'Update', 
             'Delete', 
+            'Undelete', 
             'Retrieve', 
             'List'
         ].forEach(x => {

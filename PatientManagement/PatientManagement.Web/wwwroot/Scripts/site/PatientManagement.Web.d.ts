@@ -2748,12 +2748,14 @@ declare namespace PatientManagement.PatientManagement {
         function Create(request: Serenity.SaveRequest<VisitsRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Update(request: Serenity.SaveRequest<VisitsRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Undelete(request: Serenity.UndeleteRequest, onSuccess?: (response: Serenity.UndeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<VisitsRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<VisitsRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         const enum Methods {
             Create = "PatientManagement/Visits/Create",
             Update = "PatientManagement/Visits/Update",
             Delete = "PatientManagement/Visits/Delete",
+            Undelete = "PatientManagement/Visits/Undelete",
             Retrieve = "PatientManagement/Visits/Retrieve",
             List = "PatientManagement/Visits/List",
         }
@@ -3773,6 +3775,7 @@ declare namespace PatientManagement.PatientManagement {
         protected getIdProperty(): string;
         protected getLocalTextPrefix(): string;
         protected getService(): string;
+        protected getIsActiveProperty(): string;
         constructor(container: JQuery);
         protected getButtons(): Serenity.ToolButton[];
         protected getQuickFilters(): Serenity.QuickFilter<Serenity.Widget<any>, any>[];

@@ -2338,6 +2338,7 @@ var PatientManagement;
                 'Create',
                 'Update',
                 'Delete',
+                'Undelete',
                 'Retrieve',
                 'List'
             ].forEach(function (x) {
@@ -6420,6 +6421,7 @@ var PatientManagement;
             VisitsGrid.prototype.getIdProperty = function () { return PatientManagement.VisitsRow.idProperty; };
             VisitsGrid.prototype.getLocalTextPrefix = function () { return PatientManagement.VisitsRow.localTextPrefix; };
             VisitsGrid.prototype.getService = function () { return PatientManagement.VisitsService.baseUrl; };
+            VisitsGrid.prototype.getIsActiveProperty = function () { return PatientManagement.VisitTypesRow.isActiveProperty; };
             VisitsGrid.prototype.getButtons = function () {
                 var _this = this;
                 var buttons = _super.prototype.getButtons.call(this);
