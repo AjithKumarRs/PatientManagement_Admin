@@ -12,10 +12,14 @@
         CurrencyRate?: number;
         InsertUserId?: number;
         InsertDate?: string;
-        IsActive?: number;
-        TenantName?: string;
         InsertUserName?: string;
+        UpdateUserName?: string;
+        UpdateUserId?: number;
+        UpdateDate?: string;
+        IsActive?: number;
         TenantId?: number;
+        TenantName?: string;
+        TenantCurrencyId?: number;
     }
 
     export namespace VisitTypesRow {
@@ -42,10 +46,14 @@
             CurrencyRate = "CurrencyRate",
             InsertUserId = "InsertUserId",
             InsertDate = "InsertDate",
-            IsActive = "IsActive",
-            TenantName = "TenantName",
             InsertUserName = "InsertUserName",
-            TenantId = "TenantId"
+            UpdateUserName = "UpdateUserName",
+            UpdateUserId = "UpdateUserId",
+            UpdateDate = "UpdateDate",
+            IsActive = "IsActive",
+            TenantId = "TenantId",
+            TenantName = "TenantName",
+            TenantCurrencyId = "TenantCurrencyId"
         }
     }
 }

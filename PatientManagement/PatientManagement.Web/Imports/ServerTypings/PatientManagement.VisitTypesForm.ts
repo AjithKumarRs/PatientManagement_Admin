@@ -6,8 +6,8 @@
         ShowInMenu: BsSwitchEditor;
         Price: Serenity.DecimalEditor;
         CurrencyId: Serenity.LookupEditor;
-        TenantId: Serenity.LookupEditor;
-        IsActive: BsSwitchEditor;
+        TenantId: Serenity.IntegerEditor;
+        IsActive: Serenity.BooleanEditor;
     }
 
     export class VisitTypesForm extends Serenity.PrefixedContext {
@@ -25,6 +25,8 @@
                 var w1 = BsSwitchEditor;
                 var w2 = s.DecimalEditor;
                 var w3 = s.LookupEditor;
+                var w4 = s.IntegerEditor;
+                var w5 = s.BooleanEditor;
 
                 Q.initFormType(VisitTypesForm, [
                     'Name', w0,
@@ -33,8 +35,8 @@
                     'ShowInMenu', w1,
                     'Price', w2,
                     'CurrencyId', w3,
-                    'TenantId', w3,
-                    'IsActive', w1
+                    'TenantId', w4,
+                    'IsActive', w5
                 ]);
             }
         }

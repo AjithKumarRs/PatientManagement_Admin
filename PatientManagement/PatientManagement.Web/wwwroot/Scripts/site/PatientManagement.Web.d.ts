@@ -1830,7 +1830,7 @@ declare namespace PatientManagement.PatientManagement {
         Description: Serenity.HtmlContentEditor;
         PhoneNumber: Serenity.IntegerEditor;
         City: AddressAutocomplete;
-        TenantId: Serenity.LookupEditor;
+        TenantId: Serenity.IntegerEditor;
     }
     class CabinetsForm extends Serenity.PrefixedContext {
         static formKey: string;
@@ -1850,15 +1850,16 @@ declare namespace PatientManagement.PatientManagement {
         WorkHoursStart?: number;
         WorkHoursEnd?: number;
         PhoneNumber?: number;
-        TenantId?: number;
         InsertUserId?: number;
         InsertDate?: string;
-        UpdateUserId?: number;
-        UpdateDateField?: string;
-        IsActive?: number;
-        TenantName?: string;
         InsertUserName?: string;
         UpdateUserName?: string;
+        UpdateUserId?: number;
+        UpdateDate?: string;
+        IsActive?: number;
+        TenantId?: number;
+        TenantName?: string;
+        TenantCurrencyId?: number;
     }
     namespace CabinetsRow {
         const idProperty = "CabinetId";
@@ -1878,15 +1879,16 @@ declare namespace PatientManagement.PatientManagement {
             WorkHoursStart = "WorkHoursStart",
             WorkHoursEnd = "WorkHoursEnd",
             PhoneNumber = "PhoneNumber",
-            TenantId = "TenantId",
             InsertUserId = "InsertUserId",
             InsertDate = "InsertDate",
-            UpdateUserId = "UpdateUserId",
-            UpdateDateField = "UpdateDateField",
-            IsActive = "IsActive",
-            TenantName = "TenantName",
             InsertUserName = "InsertUserName",
             UpdateUserName = "UpdateUserName",
+            UpdateUserId = "UpdateUserId",
+            UpdateDate = "UpdateDate",
+            IsActive = "IsActive",
+            TenantId = "TenantId",
+            TenantName = "TenantName",
+            TenantCurrencyId = "TenantCurrencyId",
         }
     }
 }
@@ -2085,7 +2087,7 @@ declare namespace PatientManagement.PatientManagement {
         InsertUserId?: number;
         InsertDate?: string;
         UpdateUserId?: number;
-        UpdateDateField?: string;
+        UpdateDate?: string;
         IsActive?: number;
         InsertUserName?: string;
         UpdateUserName?: string;
@@ -2103,7 +2105,7 @@ declare namespace PatientManagement.PatientManagement {
             InsertUserId = "InsertUserId",
             InsertDate = "InsertDate",
             UpdateUserId = "UpdateUserId",
-            UpdateDateField = "UpdateDateField",
+            UpdateDate = "UpdateDate",
             IsActive = "IsActive",
             InsertUserName = "InsertUserName",
             UpdateUserName = "UpdateUserName",
@@ -2345,13 +2347,21 @@ declare namespace PatientManagement.PatientManagement {
         PatientId?: number;
         FilePath?: string;
         Description?: string;
+        PatientName?: string;
         InsertUserId?: number;
         InsertDate?: string;
-        PatientName?: string;
+        InsertUserName?: string;
+        UpdateUserName?: string;
+        UpdateUserId?: number;
+        UpdateDate?: string;
+        IsActive?: number;
         TenantId?: number;
+        TenantName?: string;
+        TenantCurrencyId?: number;
     }
     namespace PatientsFileUploadsRow {
         const idProperty = "PatientFileUploadId";
+        const isActiveProperty = "IsActive";
         const nameProperty = "PatientName";
         const localTextPrefix = "PatientManagement.PatientsFileUploads";
         const lookupKey = "PatientManagement.PatientsFileUploads";
@@ -2361,10 +2371,17 @@ declare namespace PatientManagement.PatientManagement {
             PatientId = "PatientId",
             FilePath = "FilePath",
             Description = "Description",
+            PatientName = "PatientName",
             InsertUserId = "InsertUserId",
             InsertDate = "InsertDate",
-            PatientName = "PatientName",
+            InsertUserName = "InsertUserName",
+            UpdateUserName = "UpdateUserName",
+            UpdateUserId = "UpdateUserId",
+            UpdateDate = "UpdateDate",
+            IsActive = "IsActive",
             TenantId = "TenantId",
+            TenantName = "TenantName",
+            TenantCurrencyId = "TenantCurrencyId",
         }
     }
 }
@@ -2374,12 +2391,14 @@ declare namespace PatientManagement.PatientManagement {
         function Create(request: Serenity.SaveRequest<PatientsFileUploadsRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Update(request: Serenity.SaveRequest<PatientsFileUploadsRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Undelete(request: Serenity.UndeleteRequest, onSuccess?: (response: Serenity.UndeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<PatientsFileUploadsRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<PatientsFileUploadsRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         const enum Methods {
             Create = "PatientManagement/PatientsFileUploads/Create",
             Update = "PatientManagement/PatientsFileUploads/Update",
             Delete = "PatientManagement/PatientsFileUploads/Delete",
+            Undelete = "PatientManagement/PatientsFileUploads/Undelete",
             Retrieve = "PatientManagement/PatientsFileUploads/Retrieve",
             List = "PatientManagement/PatientsFileUploads/List",
         }
@@ -2402,7 +2421,7 @@ declare namespace PatientManagement.PatientManagement {
         FirstRegistrationDate: Serenity.DateTimeEditor;
         NotifyOnChange: BsSwitchEditor;
         NoteList: NotesEditor;
-        TenantId: Serenity.LookupEditor;
+        TenantId: Serenity.IntegerEditor;
     }
     class PatientsForm extends Serenity.PrefixedContext {
         static formKey: string;
@@ -2429,13 +2448,17 @@ declare namespace PatientManagement.PatientManagement {
         Email?: string;
         NotifyOnChange?: boolean;
         WantedWeight?: string;
+        NoteList?: NotesRow[];
         InsertUserId?: number;
         InsertDate?: string;
-        IsActive?: number;
-        TenantName?: string;
         InsertUserName?: string;
-        NoteList?: NotesRow[];
+        UpdateUserName?: string;
+        UpdateUserId?: number;
+        UpdateDate?: string;
+        IsActive?: number;
         TenantId?: number;
+        TenantName?: string;
+        TenantCurrencyId?: number;
     }
     namespace PatientsRow {
         const idProperty = "PatientId";
@@ -2462,13 +2485,17 @@ declare namespace PatientManagement.PatientManagement {
             Email = "Email",
             NotifyOnChange = "NotifyOnChange",
             WantedWeight = "WantedWeight",
+            NoteList = "NoteList",
             InsertUserId = "InsertUserId",
             InsertDate = "InsertDate",
-            IsActive = "IsActive",
-            TenantName = "TenantName",
             InsertUserName = "InsertUserName",
-            NoteList = "NoteList",
+            UpdateUserName = "UpdateUserName",
+            UpdateUserId = "UpdateUserId",
+            UpdateDate = "UpdateDate",
+            IsActive = "IsActive",
             TenantId = "TenantId",
+            TenantName = "TenantName",
+            TenantCurrencyId = "TenantCurrencyId",
         }
     }
 }
@@ -2731,8 +2758,8 @@ declare namespace PatientManagement.PatientManagement {
         ShowInMenu: BsSwitchEditor;
         Price: Serenity.DecimalEditor;
         CurrencyId: Serenity.LookupEditor;
-        TenantId: Serenity.LookupEditor;
-        IsActive: BsSwitchEditor;
+        TenantId: Serenity.IntegerEditor;
+        IsActive: Serenity.BooleanEditor;
     }
     class VisitTypesForm extends Serenity.PrefixedContext {
         static formKey: string;
@@ -2760,10 +2787,14 @@ declare namespace PatientManagement.PatientManagement {
         CurrencyRate?: number;
         InsertUserId?: number;
         InsertDate?: string;
-        IsActive?: number;
-        TenantName?: string;
         InsertUserName?: string;
+        UpdateUserName?: string;
+        UpdateUserId?: number;
+        UpdateDate?: string;
+        IsActive?: number;
         TenantId?: number;
+        TenantName?: string;
+        TenantCurrencyId?: number;
     }
     namespace VisitTypesRow {
         const idProperty = "VisitTypeId";
@@ -2785,10 +2816,14 @@ declare namespace PatientManagement.PatientManagement {
             CurrencyRate = "CurrencyRate",
             InsertUserId = "InsertUserId",
             InsertDate = "InsertDate",
-            IsActive = "IsActive",
-            TenantName = "TenantName",
             InsertUserName = "InsertUserName",
+            UpdateUserName = "UpdateUserName",
+            UpdateUserId = "UpdateUserId",
+            UpdateDate = "UpdateDate",
+            IsActive = "IsActive",
             TenantId = "TenantId",
+            TenantName = "TenantName",
+            TenantCurrencyId = "TenantCurrencyId",
         }
     }
 }
@@ -3966,6 +4001,7 @@ declare namespace PatientManagement.PatientManagement {
         protected getIdProperty(): string;
         protected getLocalTextPrefix(): string;
         protected getService(): string;
+        protected getIsActiveProperty(): string;
         constructor(container: JQuery);
     }
 }

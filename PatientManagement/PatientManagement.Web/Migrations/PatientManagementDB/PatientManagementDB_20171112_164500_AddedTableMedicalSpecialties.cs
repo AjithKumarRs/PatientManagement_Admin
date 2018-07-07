@@ -19,7 +19,7 @@ namespace PatientManagement.Migrations.PatientManagementDB
                 .WithColumn("InsertUserId").AsInt32().NotNullable()
                 .WithColumn("InsertDate").AsDateTime().NotNullable()
                 .WithColumn("UpdateUserId").AsInt32().Nullable()
-                .WithColumn("UpdateDateField").AsDateTime()
+                .WithColumn("UpdateDate").AsDateTime()
                 .Nullable().WithColumn("IsActive").AsInt16().NotNullable().WithDefaultValue(1);
 
 

@@ -8,7 +8,7 @@
         Description: Serenity.HtmlContentEditor;
         PhoneNumber: Serenity.IntegerEditor;
         City: AddressAutocomplete;
-        TenantId: Serenity.LookupEditor;
+        TenantId: Serenity.IntegerEditor;
     }
 
     export class CabinetsForm extends Serenity.PrefixedContext {
@@ -38,7 +38,7 @@
                     'Description', w3,
                     'PhoneNumber', w4,
                     'City', w5,
-                    'TenantId', w2
+                    'TenantId', w4
                 ]);
             }
         }

@@ -21,7 +21,7 @@ namespace PatientManagement.PatientManagement.Entities
     [LookupScript("PatientManagement.Patients",
         LookupType = typeof(MultiTenantRowLookupScript<>))]
     [LeftJoin("cd", "PatientHealth", "cd.[PatientId] = t0.[PatientId]", RowType = typeof(PatientHealthRow), TitlePrefix = "")]
-    public sealed class PatientsRow : Row, IIdRow, INameRow, IInsertLogRow, IMultiTenantRow, IIsActiveDeletedRow
+    public sealed class PatientsRow : LoggingRow, IIdRow, INameRow
     {
         [DisplayName("Patient Id"), Identity]
         public Int32? PatientId
@@ -156,80 +156,7 @@ namespace PatientManagement.PatientManagement.Entities
             get { return Fields.LastVisitEndDate[this]; }
             set { Fields.LastVisitEndDate[this] = value; }
         }
-
-        #region Tenant
-
-        [DisplayName("Tenant"), ForeignKey("Tenants", "TenantId"), LeftJoin("tnt")]
-        [LookupEditor(typeof(TenantRow))]
-        [ReadPermission(PermissionKeys.Tenant)]
-        [ModifyPermission(PermissionKeys.Tenant)]
-        public Int32? TenantId
-        {
-            get { return Fields.TenantId[this]; }
-            set { Fields.TenantId[this] = value; }
-        }
-        [DisplayName("Tenant"), Expression("tnt.TenantName")]
-        [ReadPermission(PermissionKeys.Tenant)]
-        public String TenantName
-        {
-            get { return Fields.TenantName[this]; }
-            set { Fields.TenantName[this] = value; }
-        }
-        public Int32Field TenantIdField
-        {
-            get { return Fields.TenantId; }
-        }
-        #endregion
-
-        #region IIsActive
-
-        [DisplayName("Is Active"), NotNull]
-        [ReadPermission(PermissionKeys.Tenant)]
-        [LookupInclude]
-        public Int16? IsActive
-        {
-            get { return Fields.IsActive[this]; }
-            set { Fields.IsActive[this] = value; }
-        }
-
-
-        Int16Field IIsActiveRow.IsActiveField
-        {
-            get { return Fields.IsActive; }
-        }
-
-
-        #endregion
-
-        #region IInsertLog
-
-        [DisplayName("Insert User Id"), NotNull, ForeignKey("Users", "UserId"), LeftJoin("usrI"), TextualField("InsertUserName")]
-        [ReadPermission(PermissionKeys.Tenant)]
-        public Int32? InsertUserId
-        {
-            get { return Fields.InsertUserId[this]; }
-            set { Fields.InsertUserId[this] = value; }
-        }
-
-
-        [DisplayName("Created by"), Expression("usrI.UserName")]
-        [ReadPermission(PermissionKeys.Tenant)]
-        public String InsertUserName
-        {
-            get { return Fields.InsertUserName[this]; }
-            set { Fields.InsertUserName[this] = value; }
-        }
-
-
-        [DisplayName("Insert Date"), NotNull, QuickFilter()]
-        [ReadPermission(PermissionKeys.Tenant)]
-        public DateTime? InsertDate
-        {
-            get { return Fields.InsertDate[this]; }
-            set { Fields.InsertDate[this] = value; }
-        }
-
-        #endregion
+        
 
         IIdField IIdRow.IdField
         {
@@ -248,7 +175,7 @@ namespace PatientManagement.PatientManagement.Entities
         {
         }
 
-        public class RowFields : RowFieldsBase
+        public class RowFields : LoggingRowFields
         {
             public Int32Field PatientId;
             public StringField Name;
@@ -268,30 +195,17 @@ namespace PatientManagement.PatientManagement.Entities
             public Int32Field Weight;
             public StringField Email;
             public BooleanField NotifyOnChange;
-
             public StringField WantedWeight;
-
-            public Int32Field InsertUserId;
-            public DateTimeField InsertDate;
-            public Int16Field IsActive;
-
-            public StringField TenantName;
-            public StringField InsertUserName;
-
+            
             public RowListField<NotesRow> NoteList;
-
-            public readonly Int32Field TenantId;
+            
             public RowFields()
                 : base()
             {
                 LocalTextPrefix = "PatientManagement.Patients";
             }
         }
-
-
-        public IIdField InsertUserIdField => Fields.InsertUserId;
-
-        public DateTimeField InsertDateField => Fields.InsertDate;
+        
         
     }
 }

@@ -11,6 +11,7 @@ namespace PatientManagement.Migrations.PatientManagementDB
     {
         public override void Up()
         {
+            //TODO: Issue #208 - Clean sql statement after all DBs are updated  - version ^1.2.650
             Execute.Sql(@"
 IF EXISTS(SELECT 1 FROM sys.columns WHERE [name] = N'UpdateDateField'
            AND [object_id] = OBJECT_ID(N'Activity'))
@@ -29,7 +30,39 @@ IF EXISTS(SELECT 1 FROM sys.columns WHERE [name] = N'UpdateDateField'
 BEGIN
     EXEC sp_RENAME 'PatientHealth.UpdateDateField', 'UpdateDate' , 'COLUMN'
 END;
+
+IF EXISTS(SELECT 1 FROM sys.columns WHERE [name] = N'UpdateDateField'
+           AND [object_id] = OBJECT_ID(N'Cabinets'))
+BEGIN
+    EXEC sp_RENAME 'Cabinets.UpdateDateField', 'UpdateDate' , 'COLUMN'
+END;
+
+IF EXISTS(SELECT 1 FROM sys.columns WHERE [name] = N'UpdateDateField'
+           AND [object_id] = OBJECT_ID(N'MedicalSpecialties'))
+BEGIN
+    EXEC sp_RENAME 'MedicalSpecialties.UpdateDateField', 'UpdateDate' , 'COLUMN'
+END;
 ");
+
+            Alter.Table("Patients")
+                .AddColumn("UpdateUserId").AsInt32().Nullable()
+                .AddColumn("UpdateDate").AsDateTime().Nullable();
+
+            Alter.Table("PatientsFileUploads")
+                .AddColumn("UpdateUserId").AsInt32().Nullable()
+                .AddColumn("UpdateDate").AsDateTime().Nullable()
+                .AddColumn("IsActive").AsInt16().NotNullable().WithDefaultValue(1)
+                ;
+
+            Alter.Table("VisitTypes")
+                .AddColumn("UpdateUserId").AsInt32().Nullable()
+                .AddColumn("UpdateDate").AsDateTime().Nullable();
+
+            Alter.Table("Visits")
+                .AddColumn("UpdateUserId").AsInt32().Nullable()
+                .AddColumn("UpdateDate").AsDateTime().Nullable()
+                .AddColumn("IsActive").AsInt16().NotNullable().WithDefaultValue(1)
+                ;
         }
     }
 }

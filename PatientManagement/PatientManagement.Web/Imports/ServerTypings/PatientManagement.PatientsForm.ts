@@ -15,7 +15,7 @@
         FirstRegistrationDate: Serenity.DateTimeEditor;
         NotifyOnChange: BsSwitchEditor;
         NoteList: NotesEditor;
-        TenantId: Serenity.LookupEditor;
+        TenantId: Serenity.IntegerEditor;
     }
 
     export class PatientsForm extends Serenity.PrefixedContext {
@@ -38,7 +38,6 @@
                 var w6 = s.DateTimeEditor;
                 var w7 = BsSwitchEditor;
                 var w8 = NotesEditor;
-                var w9 = s.LookupEditor;
 
                 Q.initFormType(PatientsForm, [
                     'PatientId', w0,
@@ -56,7 +55,7 @@
                     'FirstRegistrationDate', w6,
                     'NotifyOnChange', w7,
                     'NoteList', w8,
-                    'TenantId', w9
+                    'TenantId', w0
                 ]);
             }
         }

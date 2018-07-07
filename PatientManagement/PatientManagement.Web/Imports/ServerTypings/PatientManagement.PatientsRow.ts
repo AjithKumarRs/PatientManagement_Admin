@@ -17,13 +17,17 @@
         Email?: string;
         NotifyOnChange?: boolean;
         WantedWeight?: string;
+        NoteList?: NotesRow[];
         InsertUserId?: number;
         InsertDate?: string;
-        IsActive?: number;
-        TenantName?: string;
         InsertUserName?: string;
-        NoteList?: NotesRow[];
+        UpdateUserName?: string;
+        UpdateUserId?: number;
+        UpdateDate?: string;
+        IsActive?: number;
         TenantId?: number;
+        TenantName?: string;
+        TenantCurrencyId?: number;
     }
 
     export namespace PatientsRow {
@@ -55,13 +59,17 @@
             Email = "Email",
             NotifyOnChange = "NotifyOnChange",
             WantedWeight = "WantedWeight",
+            NoteList = "NoteList",
             InsertUserId = "InsertUserId",
             InsertDate = "InsertDate",
-            IsActive = "IsActive",
-            TenantName = "TenantName",
             InsertUserName = "InsertUserName",
-            NoteList = "NoteList",
-            TenantId = "TenantId"
+            UpdateUserName = "UpdateUserName",
+            UpdateUserId = "UpdateUserId",
+            UpdateDate = "UpdateDate",
+            IsActive = "IsActive",
+            TenantId = "TenantId",
+            TenantName = "TenantName",
+            TenantCurrencyId = "TenantCurrencyId"
         }
     }
 }

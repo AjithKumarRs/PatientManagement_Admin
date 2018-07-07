@@ -1,4 +1,5 @@
 ﻿
+using PatientManagement.Administration.Entities;
 using PatientManagement.PatientManagement.Scripts;
 
 namespace PatientManagement.PatientManagement.Entities
@@ -18,7 +19,7 @@ namespace PatientManagement.PatientManagement.Entities
     [LookupScript("PatientManagement.PatientsFileUploads",
         LookupType = typeof(MultiTenantRowLookupScript<>))]
     [LeftJoin("p", "Patients", "p.[PatientId] = t0.[PatientId]", RowType = typeof(PatientsRow), TitlePrefix = "")]
-    public sealed class PatientsFileUploadsRow : Row, IIdRow, INameRow, IInsertLogRow, IMultiTenantRow
+    public sealed class PatientsFileUploadsRow : LoggingRow, IIdRow, INameRow
     {
         [DisplayName("Patient File Upload Id"), Identity]
         public Int32? PatientFileUploadId
@@ -49,21 +50,7 @@ namespace PatientManagement.PatientManagement.Entities
             get { return Fields.Description[this]; }
             set { Fields.Description[this] = value; }
         }
-
-        [DisplayName("Insert User Id"), NotNull]
-        public Int32? InsertUserId
-        {
-            get { return Fields.InsertUserId[this]; }
-            set { Fields.InsertUserId[this] = value; }
-        }
-
-        [DisplayName("Insert Date"), NotNull, SortOrder(1)]
-        public DateTime? InsertDate
-        {
-            get { return Fields.InsertDate[this]; }
-            set { Fields.InsertDate[this] = value; }
-        }
-
+        
         [DisplayName("Patient Name"), Expression("jPatient.[Name]")]
         public String PatientName
         {
@@ -87,39 +74,21 @@ namespace PatientManagement.PatientManagement.Entities
         {
         }
 
-        public class RowFields : RowFieldsBase
+        public class RowFields : LoggingRow.LoggingRowFields
         {
             public Int32Field PatientFileUploadId;
             public Int32Field PatientId;
             public StringField FilePath;
             public StringField Description;
-            public Int32Field InsertUserId;
-            public DateTimeField InsertDate;
 
             public StringField PatientName;
-
-            public readonly Int32Field TenantId;
+            
             public RowFields()
                 : base()
             {
                 LocalTextPrefix = "PatientManagement.PatientsFileUploads";
             }
         }
-
-        public IIdField InsertUserIdField => Fields.InsertUserId;
-
-        public DateTimeField InsertDateField => Fields.InsertDate;
-
-        [Insertable(false), Updatable(false)]
-        public Int32? TenantId
-        {
-            get { return Fields.TenantId[this]; }
-            set { Fields.TenantId[this] = value; }
-        }
-
-        public Int32Field TenantIdField
-        {
-            get { return Fields.TenantId; }
-        }
+        
     }
 }

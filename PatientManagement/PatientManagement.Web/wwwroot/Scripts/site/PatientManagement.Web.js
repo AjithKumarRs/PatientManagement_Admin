@@ -1570,7 +1570,7 @@ var PatientManagement;
                         'Description', w3,
                         'PhoneNumber', w4,
                         'City', w5,
-                        'TenantId', w2
+                        'TenantId', w4
                     ]);
                 }
                 return _this;
@@ -2020,6 +2020,7 @@ var PatientManagement;
         var PatientsFileUploadsRow;
         (function (PatientsFileUploadsRow) {
             PatientsFileUploadsRow.idProperty = 'PatientFileUploadId';
+            PatientsFileUploadsRow.isActiveProperty = 'IsActive';
             PatientsFileUploadsRow.nameProperty = 'PatientName';
             PatientsFileUploadsRow.localTextPrefix = 'PatientManagement.PatientsFileUploads';
             PatientsFileUploadsRow.lookupKey = 'PatientManagement.PatientsFileUploads';
@@ -2041,6 +2042,7 @@ var PatientManagement;
                 'Create',
                 'Update',
                 'Delete',
+                'Undelete',
                 'Retrieve',
                 'List'
             ].forEach(function (x) {
@@ -2071,7 +2073,6 @@ var PatientManagement;
                     var w6 = s.DateTimeEditor;
                     var w7 = PatientManagement_30.BsSwitchEditor;
                     var w8 = PatientManagement.NotesEditor;
-                    var w9 = s.LookupEditor;
                     Q.initFormType(PatientsForm, [
                         'PatientId', w0,
                         'Name', w1,
@@ -2088,7 +2089,7 @@ var PatientManagement;
                         'FirstRegistrationDate', w6,
                         'NotifyOnChange', w7,
                         'NoteList', w8,
-                        'TenantId', w9
+                        'TenantId', w0
                     ]);
                 }
                 return _this;
@@ -2360,6 +2361,8 @@ var PatientManagement;
                     var w1 = PatientManagement_44.BsSwitchEditor;
                     var w2 = s.DecimalEditor;
                     var w3 = s.LookupEditor;
+                    var w4 = s.IntegerEditor;
+                    var w5 = s.BooleanEditor;
                     Q.initFormType(VisitTypesForm, [
                         'Name', w0,
                         'BorderColor', w0,
@@ -2367,8 +2370,8 @@ var PatientManagement;
                         'ShowInMenu', w1,
                         'Price', w2,
                         'CurrencyId', w3,
-                        'TenantId', w3,
-                        'IsActive', w1
+                        'TenantId', w4,
+                        'IsActive', w5
                     ]);
                 }
                 return _this;
@@ -7504,6 +7507,7 @@ var PatientManagement;
             PatientsFileUploadsGrid.prototype.getIdProperty = function () { return PatientManagement.PatientsFileUploadsRow.idProperty; };
             PatientsFileUploadsGrid.prototype.getLocalTextPrefix = function () { return PatientManagement.PatientsFileUploadsRow.localTextPrefix; };
             PatientsFileUploadsGrid.prototype.getService = function () { return PatientManagement.PatientsFileUploadsService.baseUrl; };
+            PatientsFileUploadsGrid.prototype.getIsActiveProperty = function () { return PatientManagement.PatientsFileUploadsRow.isActiveProperty; };
             PatientsFileUploadsGrid = __decorate([
                 Serenity.Decorators.registerClass()
             ], PatientsFileUploadsGrid);
