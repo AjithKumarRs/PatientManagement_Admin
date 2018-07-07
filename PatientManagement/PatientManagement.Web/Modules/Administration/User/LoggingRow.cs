@@ -67,7 +67,7 @@ namespace PatientManagement.Administration.Entities
         }
 
         [Insertable(false), Updatable(false)]
-        [DisplayName("Update Date Field")]
+        [DisplayName("Update Date")]
         [ReadPermission(PermissionKeys.Tenant)]
         public DateTime? UpdateDate
         {

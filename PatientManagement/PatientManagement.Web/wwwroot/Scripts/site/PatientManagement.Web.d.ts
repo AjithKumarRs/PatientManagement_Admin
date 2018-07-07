@@ -2649,7 +2649,7 @@ declare namespace PatientManagement.PatientManagement {
         StartDate: Serenity.DateTimeEditor;
         EndDate: Serenity.DateTimeEditor;
         Description: Serenity.TextAreaEditor;
-        TenantId: Serenity.LookupEditor;
+        TenantId: Serenity.IntegerEditor;
     }
     class VisitsForm extends Serenity.PrefixedContext {
         static formKey: string;
@@ -2677,10 +2677,6 @@ declare namespace PatientManagement.PatientManagement {
         Description?: string;
         StartDate?: string;
         EndDate?: string;
-        InsertUserId?: number;
-        InsertDate?: string;
-        TenantName?: string;
-        InsertUserName?: string;
         PatientGender?: Gender;
         PatientEmail?: string;
         PatientNotifyOnChange?: boolean;
@@ -2692,10 +2688,20 @@ declare namespace PatientManagement.PatientManagement {
         VisitTypePrice?: number;
         VisitTypePriceFormatted?: string;
         VisitTypeCurrencyId?: number;
+        InsertUserId?: number;
+        InsertDate?: string;
+        InsertUserName?: string;
+        UpdateUserName?: string;
+        UpdateUserId?: number;
+        UpdateDate?: string;
+        IsActive?: number;
         TenantId?: number;
+        TenantName?: string;
+        TenantCurrencyId?: number;
     }
     namespace VisitsRow {
         const idProperty = "VisitId";
+        const isActiveProperty = "IsActive";
         const localTextPrefix = "PatientManagement.Visits";
         const lookupKey = "PatientManagement.Visits";
         function getLookup(): Q.Lookup<VisitsRow>;
@@ -2712,10 +2718,6 @@ declare namespace PatientManagement.PatientManagement {
             Description = "Description",
             StartDate = "StartDate",
             EndDate = "EndDate",
-            InsertUserId = "InsertUserId",
-            InsertDate = "InsertDate",
-            TenantName = "TenantName",
-            InsertUserName = "InsertUserName",
             PatientGender = "PatientGender",
             PatientEmail = "PatientEmail",
             PatientNotifyOnChange = "PatientNotifyOnChange",
@@ -2727,7 +2729,16 @@ declare namespace PatientManagement.PatientManagement {
             VisitTypePrice = "VisitTypePrice",
             VisitTypePriceFormatted = "VisitTypePriceFormatted",
             VisitTypeCurrencyId = "VisitTypeCurrencyId",
+            InsertUserId = "InsertUserId",
+            InsertDate = "InsertDate",
+            InsertUserName = "InsertUserName",
+            UpdateUserName = "UpdateUserName",
+            UpdateUserId = "UpdateUserId",
+            UpdateDate = "UpdateDate",
+            IsActive = "IsActive",
             TenantId = "TenantId",
+            TenantName = "TenantName",
+            TenantCurrencyId = "TenantCurrencyId",
         }
     }
 }

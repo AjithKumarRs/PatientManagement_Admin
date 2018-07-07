@@ -46,7 +46,7 @@ namespace PatientManagement.PatientManagement.Columns
         public String Description { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        
+
         [Width(80)]
         public String TenantName { get; set; }
 
@@ -55,5 +55,11 @@ namespace PatientManagement.PatientManagement.Columns
         [DisplayFormat("dd/MM/yyyy HH:mm")]
         [Width(120)]
         public DateTime InsertDate { get; set; }
+        [Width(80)]
+        public String UpdateUserName { get; set; }
+        [DisplayFormat("dd/MM/yyyy HH:mm")]
+        [Width(120)]
+        public DateTime UpdateDate { get; set; }
+        public Boolean IsActive { get; set; }
     }
 }

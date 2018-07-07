@@ -12,10 +12,6 @@
         Description?: string;
         StartDate?: string;
         EndDate?: string;
-        InsertUserId?: number;
-        InsertDate?: string;
-        TenantName?: string;
-        InsertUserName?: string;
         PatientGender?: Gender;
         PatientEmail?: string;
         PatientNotifyOnChange?: boolean;
@@ -27,11 +23,21 @@
         VisitTypePrice?: number;
         VisitTypePriceFormatted?: string;
         VisitTypeCurrencyId?: number;
+        InsertUserId?: number;
+        InsertDate?: string;
+        InsertUserName?: string;
+        UpdateUserName?: string;
+        UpdateUserId?: number;
+        UpdateDate?: string;
+        IsActive?: number;
         TenantId?: number;
+        TenantName?: string;
+        TenantCurrencyId?: number;
     }
 
     export namespace VisitsRow {
         export const idProperty = 'VisitId';
+        export const isActiveProperty = 'IsActive';
         export const localTextPrefix = 'PatientManagement.Visits';
         export const lookupKey = 'PatientManagement.Visits';
 
@@ -52,10 +58,6 @@
             Description = "Description",
             StartDate = "StartDate",
             EndDate = "EndDate",
-            InsertUserId = "InsertUserId",
-            InsertDate = "InsertDate",
-            TenantName = "TenantName",
-            InsertUserName = "InsertUserName",
             PatientGender = "PatientGender",
             PatientEmail = "PatientEmail",
             PatientNotifyOnChange = "PatientNotifyOnChange",
@@ -67,7 +69,16 @@
             VisitTypePrice = "VisitTypePrice",
             VisitTypePriceFormatted = "VisitTypePriceFormatted",
             VisitTypeCurrencyId = "VisitTypeCurrencyId",
-            TenantId = "TenantId"
+            InsertUserId = "InsertUserId",
+            InsertDate = "InsertDate",
+            InsertUserName = "InsertUserName",
+            UpdateUserName = "UpdateUserName",
+            UpdateUserId = "UpdateUserId",
+            UpdateDate = "UpdateDate",
+            IsActive = "IsActive",
+            TenantId = "TenantId",
+            TenantName = "TenantName",
+            TenantCurrencyId = "TenantCurrencyId"
         }
     }
 }

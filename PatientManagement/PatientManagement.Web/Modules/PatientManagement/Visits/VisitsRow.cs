@@ -20,7 +20,7 @@ namespace PatientManagement.PatientManagement.Entities
     [DeletePermission(PatientManagementPermissionKeys.Visits.DeletePermission)]
     [LeftJoin("p", "Patients", "p.[PatientId] = t0.[PatientId]", RowType = typeof(PatientsRow), TitlePrefix = "")]
     [LookupScript("PatientManagement.Visits", LookupType = typeof(MultiTenantRowLookupScript<>))]
-    public sealed class VisitsRow : Row, IIdRow, IInsertLogRow, IMultiTenantRow
+    public sealed class VisitsRow : LoggingRow, IIdRow
     {
         [DisplayName("Visit Id"), Identity, QuickSearch]
         public Int32? VisitId
@@ -115,32 +115,6 @@ namespace PatientManagement.PatientManagement.Entities
         {
             get { return Fields.AssignedUserName[this]; }
             set { Fields.AssignedUserName[this] = value; }
-        }
-
-        [DisplayName("Insert User Id"), NotNull, ForeignKey("Users", "UserId"), LeftJoin("usrI"), TextualField("InsertUserName")]
-        [ReadPermission(PermissionKeys.Tenant)]
-        public Int32? InsertUserId
-        {
-            get { return Fields.InsertUserId[this]; }
-            set { Fields.InsertUserId[this] = value; }
-        }
-
-
-        [DisplayName("Created by"), Expression("usrI.UserName")]
-        [ReadPermission(PermissionKeys.Tenant)]
-        public String InsertUserName
-        {
-            get { return Fields.InsertUserName[this]; }
-            set { Fields.InsertUserName[this] = value; }
-        }
-
-
-        [DisplayName("Insert Date"), NotNull, QuickFilter()]
-        [ReadPermission(PermissionKeys.Tenant)]
-        public DateTime? InsertDate
-        {
-            get { return Fields.InsertDate[this]; }
-            set { Fields.InsertDate[this] = value; }
         }
         
         [DisplayName("Description"), Width(150)]
@@ -239,7 +213,7 @@ namespace PatientManagement.PatientManagement.Entities
         {
         }
 
-        public class RowFields : RowFieldsBase
+        public class RowFields : LoggingRowFields
         {
             public Int32Field VisitId;
             public Int32Field PatientId;
@@ -255,12 +229,6 @@ namespace PatientManagement.PatientManagement.Entities
             public DateTimeField StartDate;
             public DateTimeField EndDate;
 
-            public Int32Field InsertUserId;
-            public DateTimeField InsertDate;
-
-            public StringField TenantName;
-            public StringField InsertUserName;
-
             public Int32Field PatientGender;
             public StringField PatientEmail;
             public BooleanField PatientNotifyOnChange;
@@ -274,41 +242,11 @@ namespace PatientManagement.PatientManagement.Entities
             public StringField VisitTypePriceFormatted;
             public Int32Field VisitTypeCurrencyId;
             
-            public readonly Int32Field TenantId;
             public RowFields()
                 : base()
             {
                 LocalTextPrefix = "PatientManagement.Visits";
             }
         }
-
-        public IIdField InsertUserIdField => Fields.InsertUserId;
-
-        public DateTimeField InsertDateField => Fields.InsertDate;
-
-
-        #region Tenant
-
-        [DisplayName("Tenant"), ForeignKey("Tenants", "TenantId"), LeftJoin("tnt")]
-        [LookupEditor(typeof(TenantRow))]
-        [ReadPermission(PermissionKeys.Tenant)]
-        [ModifyPermission(PermissionKeys.Tenant)]
-        public Int32? TenantId
-        {
-            get { return Fields.TenantId[this]; }
-            set { Fields.TenantId[this] = value; }
-        }
-        [DisplayName("Tenant"), Expression("tnt.TenantName")]
-        [ReadPermission(PermissionKeys.Tenant)]
-        public String TenantName
-        {
-            get { return Fields.TenantName[this]; }
-            set { Fields.TenantName[this] = value; }
-        }
-        public Int32Field TenantIdField
-        {
-            get { return Fields.TenantId; }
-        }
-        #endregion
     }
 }

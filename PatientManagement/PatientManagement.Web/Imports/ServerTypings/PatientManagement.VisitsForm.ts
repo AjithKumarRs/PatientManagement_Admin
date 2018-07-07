@@ -8,7 +8,7 @@
         StartDate: Serenity.DateTimeEditor;
         EndDate: Serenity.DateTimeEditor;
         Description: Serenity.TextAreaEditor;
-        TenantId: Serenity.LookupEditor;
+        TenantId: Serenity.IntegerEditor;
     }
 
     export class VisitsForm extends Serenity.PrefixedContext {
@@ -26,6 +26,7 @@
                 var w1 = BsSwitchEditor;
                 var w2 = s.DateTimeEditor;
                 var w3 = s.TextAreaEditor;
+                var w4 = s.IntegerEditor;
 
                 Q.initFormType(VisitsForm, [
                     'PatientId', w0,
@@ -36,7 +37,7 @@
                     'StartDate', w2,
                     'EndDate', w2,
                     'Description', w3,
-                    'TenantId', w0
+                    'TenantId', w4
                 ]);
             }
         }

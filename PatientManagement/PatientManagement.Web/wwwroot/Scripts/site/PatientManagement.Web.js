@@ -2289,6 +2289,7 @@ var PatientManagement;
                     var w1 = PatientManagement_41.BsSwitchEditor;
                     var w2 = s.DateTimeEditor;
                     var w3 = s.TextAreaEditor;
+                    var w4 = s.IntegerEditor;
                     Q.initFormType(VisitsForm, [
                         'PatientId', w0,
                         'VisitTypeId', w0,
@@ -2298,7 +2299,7 @@ var PatientManagement;
                         'StartDate', w2,
                         'EndDate', w2,
                         'Description', w3,
-                        'TenantId', w0
+                        'TenantId', w4
                     ]);
                 }
                 return _this;
@@ -2316,6 +2317,7 @@ var PatientManagement;
         var VisitsRow;
         (function (VisitsRow) {
             VisitsRow.idProperty = 'VisitId';
+            VisitsRow.isActiveProperty = 'IsActive';
             VisitsRow.localTextPrefix = 'PatientManagement.Visits';
             VisitsRow.lookupKey = 'PatientManagement.Visits';
             function getLookup() {
