@@ -21,7 +21,7 @@ namespace PatientManagement.Administration
         public class Coupons
         {
             [Description("Coupons View")]
-            public const string ReadPermission = "AdministrationTenants:Coupons";
+            public const string ReadPermission = "AdministrationTenants:Coupons:Read";
             [Description("Page"), ImplicitPermission(ReadPermission)]
             public const string PagePermission = "Administration:Coupons:Page";
             [Description("Insert"), ImplicitPermission(ReadPermission)]
@@ -36,7 +36,7 @@ namespace PatientManagement.Administration
         public class Currencies
         {
             [Description("Currencies View")]
-            public const string ReadPermission = "AdministrationTenants:Currencies";
+            public const string ReadPermission = "AdministrationTenants:Currencies:Read";
             [Description("Page"), ImplicitPermission(ReadPermission)]
             public const string PagePermission = "Administration:Currencies:Page";
             [Description("Insert"), ImplicitPermission(ReadPermission)]
@@ -59,5 +59,41 @@ namespace PatientManagement.Administration
             [Description("Modify"), ImplicitPermission(ReadPermission)]
             public const string ModifyPermission = "Administration:Translation:Modify";
         }
+
+        [DisplayName("Offers")]
+        public class Offers
+        {
+            [Description("Offers View")]
+            public const string ReadPermission = "AdministrationTenants:Offers:Read";
+            [Description("Page"), ImplicitPermission(ReadPermission)]
+            public const string PagePermission = "Administration:Offers:Page";
+            [Description("Modify"), ImplicitPermission(ReadPermission)]
+            public const string ModifyPermission = "Administration:Offers:Modify";
+        }
+
+        [DisplayName("Payment Options")]
+        public class PaymentOptions
+        {
+            [Description("Payment Options View")]
+            public const string ReadPermission = "AdministrationTenants:PaymentOptions:Read";
+            [Description("Page"), ImplicitPermission(ReadPermission)]
+            public const string PagePermission = "Administration:PaymentOptions:Page";
+            [Description("Modify"), ImplicitPermission(ReadPermission)]
+            public const string ModifyPermission = "Administration:PaymentOptions:Modify";
+        }
+
+        [DisplayName("Payments")]
+        public class Payments
+        {
+            [Description("View")]
+            public const string ReadPermission = "AdministrationTenants:Payments:Read";
+            [Description("Page"), ImplicitPermission(ReadPermission)]
+            public const string PagePermission = "AdministrationTenants:Payments:Page";
+            [Description("Invoice View"), ImplicitPermission(ReadPermission)]
+            public const string InvoicePermission = "AdministrationTenants:Payments:Invoice";
+            [Description("Modify"), ImplicitPermission(ReadPermission)]
+            public const string ModifyPermission = "AdministrationTenants:Payments:Modify";
+        }
     }
+
 }

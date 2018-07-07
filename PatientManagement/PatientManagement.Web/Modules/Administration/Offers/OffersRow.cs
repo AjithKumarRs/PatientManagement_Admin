@@ -13,8 +13,8 @@ namespace PatientManagement.Administration.Entities
     using System.IO;
 
     [ConnectionKey("Default"), TableName("[dbo].[Offers]"), DisplayName("Offers"), InstanceName("Offers"), TwoLevelCached]
-    [ReadPermission("AdministrationTenants:Offers:Read")]
-    [ModifyPermission("Administration:Offers:Modify")]
+    [ReadPermission(PermissionKeys.Offers.ReadPermission)]
+    [ModifyPermission(PermissionKeys.Offers.ModifyPermission)]
     [LookupScript("Administration.Offers", LookupType = typeof(OfferRowLookupScript<>))]
     [LocalizationRow(typeof(OfferLangRow))]
     public sealed class OffersRow : Row, IIdRow, INameRow, ILoggingRow, IIsActiveDeletedRow, IOfferRow

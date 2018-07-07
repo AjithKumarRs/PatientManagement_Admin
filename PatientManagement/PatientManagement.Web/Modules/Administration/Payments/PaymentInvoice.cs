@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PatientManagement.Administration;
 using PatientManagement.Administration.Entities;
 using Serenity.Data;
 using Serenity.Reporting;
@@ -10,7 +11,7 @@ namespace PatientManagement.Payments
 {
     [Report("Administration.PaymentInvoice")]
     [ReportDesign(MVC.Views.Administration.Payments.PaymentInvoicePage)]
-    [ReadPermission("AdministrationTenants:PaymentsInvoice:Read")]
+    [ReadPermission(PermissionKeys.Payments.InvoicePermission)]
     public class PaymentInvoice : IReport, ICustomizeHtmlToPdf
     {
         public Int32 PaymentId { get; set; }

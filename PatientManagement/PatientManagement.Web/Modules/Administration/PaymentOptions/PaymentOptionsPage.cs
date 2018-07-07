@@ -6,7 +6,7 @@ namespace PatientManagement.Administration.Pages
     using Microsoft.AspNetCore.Mvc;
 
 
-    [PageAuthorize("Administration:PaymentOptions:Page")]
+    [PageAuthorize(PermissionKeys.PaymentOptions.PagePermission)]
     public class PaymentOptionsController : Controller
     {
         [Route("Administration/PaymentOptions")]
