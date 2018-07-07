@@ -15,7 +15,7 @@ namespace PatientManagement.PatientManagement.Endpoints
     [ConnectionKey(typeof(PatientsRow))]
     public class ReportsVisitsEndpoint : ServiceEndpoint
     {
-        [ServiceAuthorize(PatientManagementPermissionKeys.ReportsNewPatientsThisMonth)]
+        [ServiceAuthorize(PatientManagementPermissionKeys.Reports.ReportsNewPatientsThisMonth)]
         public RetrieveResponse<NewPatientsThisMonthResponse> NewPatientsThisMonth(IDbConnection connection)
         {
             var response = new NewPatientsThisMonthResponse();
@@ -55,7 +55,7 @@ namespace PatientManagement.PatientManagement.Endpoints
             return (double)change / previous * 100;
         }
 
-        [ServiceAuthorize(PatientManagementPermissionKeys.ReportsNewVisitsThisMonth)]
+        [ServiceAuthorize(PatientManagementPermissionKeys.Reports.ReportsNewVisitsThisMonth)]
         public RetrieveResponse<NewVisitsThisMonthResponse> NewVisitsThisMonth(IDbConnection connection)
         {
             var response = new NewVisitsThisMonthResponse();
@@ -84,7 +84,7 @@ namespace PatientManagement.PatientManagement.Endpoints
         }
 
 
-        [ServiceAuthorize(PatientManagementPermissionKeys.ReportsVisitTypesPerGenderChart)]
+        [ServiceAuthorize(PatientManagementPermissionKeys.Reports.ReportsVisitTypesPerGenderChart)]
         public RetrieveResponse<VisitTypesPerGenderChartResponse> VisitTypesPerGenderChart(IDbConnection connection)
         {
             var response = new VisitTypesPerGenderChartResponse();
@@ -145,7 +145,7 @@ namespace PatientManagement.PatientManagement.Endpoints
             return new RetrieveResponse<VisitTypesPerGenderChartResponse> { Entity = response };
         }
 
-        [ServiceAuthorize(PatientManagementPermissionKeys.ReportsVisitsPerMonthLinearChart)]
+        [ServiceAuthorize(PatientManagementPermissionKeys.Reports.ReportsVisitsPerMonthLinearChart)]
         public RetrieveResponse<VisitsPerMonthLineChartResponse> VisitsPerMonthLineChart(IDbConnection connection)
         {
             var response = new VisitsPerMonthLineChartResponse();

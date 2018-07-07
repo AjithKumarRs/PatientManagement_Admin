@@ -10,8 +10,9 @@ namespace PatientManagement.PatientManagement.Entities
     using System.IO;
 
     [ConnectionKey("PatientManagement"), TableName("[dbo].[Notes]"), DisplayName("Notes"), InstanceName("Note"), TwoLevelCached]
-    [ReadPermission("PatientManagement:Notes:Read")]
-    [ModifyPermission("PatientManagement:Notes:Modify")]
+    [ReadPermission(PatientManagementPermissionKeys.Notes.ReadPermission)]
+    [UpdatePermission(PatientManagementPermissionKeys.Notes.UpdatePermission)]
+    [DeletePermission(PatientManagementPermissionKeys.Notes.DeletePermission)]
     public sealed class NotesRow : Row, IIdRow, INameRow, IInsertLogRow
     {
         [DisplayName("Note Id"), Identity, Column("NoteID")]

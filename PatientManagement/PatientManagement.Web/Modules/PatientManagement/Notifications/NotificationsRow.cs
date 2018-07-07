@@ -14,13 +14,10 @@ namespace PatientManagement.PatientManagement.Entities
     using System.IO;
 
     [ConnectionKey("PatientManagement"), TableName("[dbo].[Notifications]"), DisplayName("Notifications"), InstanceName("Notifications"), TwoLevelCached]
-    [ReadPermission("PatientManagement:Notifications:Read")]
-    [InsertPermission("PatientManagement:Notifications:Insert")]
-    [DeletePermission("PatientManagement:Notifications:Delete")]
-    [UpdatePermission("Administration:NotificationsEntities:Update")]
-
+    [InsertPermission(PatientManagementPermissionKeys.Notifications.InsertPermission)]
+    [ReadPermission(PatientManagementPermissionKeys.Notifications.ReadPermission)]
+    [DeletePermission(PatientManagementPermissionKeys.Notifications.DeletePermission)]
     [LookupScript("PatientManagement.Notifications", LookupType = typeof(MultiTenantRowLookupScript<>))]
-
     public sealed class NotificationsRow : Row, IIdRow, INameRow, IInsertLogRow, IMultiTenantRow
     {
         [DisplayName("Notification Id"), SortOrder(1, true), Identity, Column("NotificationId"), Updatable(false)]
@@ -31,7 +28,7 @@ namespace PatientManagement.PatientManagement.Entities
         }
 
         [DisplayName("Entity Type"), Size(100), NotNull, QuickSearch, Updatable(false)]
-        [ReadPermission("Administration:NotificationsEntities:Read")]
+        [ReadPermission(PatientManagementPermissionKeys.Notifications.ExternalEntityColumns)]
         public String EntityType
         {
             get { return Fields.EntityType[this]; }
@@ -39,7 +36,7 @@ namespace PatientManagement.PatientManagement.Entities
         }
 
         [DisplayName("Entity Id"), Column("EntityID"), NotNull, Updatable(false)]
-        [ReadPermission("Administration:NotificationsEntities:Read")]
+        [ReadPermission(PatientManagementPermissionKeys.Notifications.ExternalEntityColumns)]
         public Int64? EntityId
         {
             get { return Fields.EntityId[this]; }

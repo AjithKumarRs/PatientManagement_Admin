@@ -15,12 +15,11 @@ namespace PatientManagement.PatientManagement.Entities
     using System.IO;
 
     [ConnectionKey("PatientManagement"), TableName("[dbo].[Visits]"), DisplayName("Visits"), InstanceName("Visit"), TwoLevelCached]
-    [ReadPermission("PatientManagement:Visits:Read")]
-    [ModifyPermission("PatientManagement:Visits:Modify")]
+    [ReadPermission(PatientManagementPermissionKeys.Visits.ReadPermission)]
+    [UpdatePermission(PatientManagementPermissionKeys.Visits.UpdatePermission)]
+    [DeletePermission(PatientManagementPermissionKeys.Visits.DeletePermission)]
     [LeftJoin("p", "Patients", "p.[PatientId] = t0.[PatientId]", RowType = typeof(PatientsRow), TitlePrefix = "")]
-    [LookupScript("PatientManagement.Visits",
-        LookupType = typeof(MultiTenantRowLookupScript<>))]
-
+    [LookupScript("PatientManagement.Visits", LookupType = typeof(MultiTenantRowLookupScript<>))]
     public sealed class VisitsRow : Row, IIdRow, IInsertLogRow, IMultiTenantRow
     {
         [DisplayName("Visit Id"), Identity, QuickSearch]

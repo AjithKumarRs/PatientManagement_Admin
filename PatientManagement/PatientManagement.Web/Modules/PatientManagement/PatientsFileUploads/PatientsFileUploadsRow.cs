@@ -12,8 +12,9 @@ namespace PatientManagement.PatientManagement.Entities
     using System.IO;
 
     [ConnectionKey("PatientManagement"), TableName("[dbo].[PatientsFileUploads]"), DisplayName("Patients File Uploads"), InstanceName("Patients File Uploads"), TwoLevelCached]
-    [ReadPermission("PatientManagement:PatientsFileUploads:Read")]
-    [ModifyPermission("PatientManagement:PatientsFileUploads:Modify")]
+    [ReadPermission(PatientManagementPermissionKeys.PatientsFileUploads.ReadPermission)]
+    [UpdatePermission(PatientManagementPermissionKeys.PatientsFileUploads.UpdatePermission)]
+    [DeletePermission(PatientManagementPermissionKeys.PatientsFileUploads.DeletePermission)]
     [LookupScript("PatientManagement.PatientsFileUploads",
         LookupType = typeof(MultiTenantRowLookupScript<>))]
     [LeftJoin("p", "Patients", "p.[PatientId] = t0.[PatientId]", RowType = typeof(PatientsRow), TitlePrefix = "")]

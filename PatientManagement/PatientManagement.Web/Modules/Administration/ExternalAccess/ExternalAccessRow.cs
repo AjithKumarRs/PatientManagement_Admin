@@ -1,4 +1,5 @@
 ﻿
+using PatientManagement.PatientManagement;
 using PatientManagement.PatientManagement.Entities;
 using PatientManagement.PatientManagement.Scripts;
 
@@ -14,8 +15,9 @@ namespace PatientManagement.Administration.Entities
     using System.Collections.Generic;
 
     [ConnectionKey("Default"), TableName("[dbo].[ExternalAccess]"), DisplayName("External Access"), InstanceName("External Access"), TwoLevelCached]
-    [ReadPermission("Administration:ExternalAccess:Read")]
-    [ModifyPermission("Administration:ExternalAccess:Modify")]
+    [ReadPermission(PatientManagementPermissionKeys.ExternalAccess.ReadPermission)]
+    [UpdatePermission(PatientManagementPermissionKeys.ExternalAccess.UpdatePermission)]
+    [DeletePermission(PatientManagementPermissionKeys.ExternalAccess.DeletePermission)]
     [LookupScript("AdministrationTenants.ExternalAccess",
         LookupType = typeof(MultiTenantRowLookupScript<>))]
     public sealed class ExternalAccessRow : Row, IIdRow, INameRow, ILoggingRow, IMultiTenantRow, IIsActiveRow

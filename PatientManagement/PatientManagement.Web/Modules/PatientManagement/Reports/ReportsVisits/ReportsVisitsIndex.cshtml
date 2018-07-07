@@ -6,7 +6,7 @@
 <div class="row">
 
 
-    @if (Authorization.HasPermission(PatientManagementPermissionKeys.ReportsNewPatientsThisMonth))
+    @if (Authorization.HasPermission(PatientManagementPermissionKeys.Reports.ReportsNewPatientsThisMonth))
     {
         <div id="newPatientsThisMonth"></div>
         <script>
@@ -15,7 +15,7 @@
             });
         </script>
     }
-    @if (Authorization.HasPermission(PatientManagementPermissionKeys.ReportsNewVisitsThisMonth))
+    @if (Authorization.HasPermission(PatientManagementPermissionKeys.Reports.ReportsNewVisitsThisMonth))
     {
         <div id="newVisitsThisMonth"></div>
         <script>
@@ -27,7 +27,7 @@
 </div>
 <div class="row">
 
-    @if (Authorization.HasPermission(PatientManagementPermissionKeys.ReportsVisitTypesPerGenderChart))
+    @if (Authorization.HasPermission(PatientManagementPermissionKeys.Reports.ReportsVisitTypesPerGenderChart))
     {
         <div id="newVisitTypesRoundDiagram"></div>
         <script>
@@ -37,7 +37,7 @@
         </script>
     }
     
-    @if (Authorization.HasPermission(PatientManagementPermissionKeys.ReportsVisitsPerMonthLinearChart))
+    @if (Authorization.HasPermission(PatientManagementPermissionKeys.Reports.ReportsVisitsPerMonthLinearChart))
     {
         <div id="VisitsPerMonthLineChart"></div>
         <script>

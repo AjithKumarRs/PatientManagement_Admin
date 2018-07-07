@@ -5,13 +5,13 @@ namespace PatientManagement.PatientManagement.Pages
     using Serenity.Web;
     using Microsoft.AspNetCore.Mvc;
 
-    [PageAuthorize(typeof(Entities.PatientsRow))]
+    [PageAuthorize(PatientManagementPermissionKeys.Patients.PagePermission)]
     public class PatientsController : Controller
     {
         [HttpGet, Route("PatientManagement/Patients")]
         public ActionResult Index()
         {
-            return View("~/Modules/PatientManagement/Patients/PatientsIndex.cshtml");
+            return View(MVC.Views.PatientManagement.Patients.PatientsIndex);
         }
     }
 }

@@ -12,10 +12,10 @@ namespace PatientManagement.PatientManagement.Entities
     using System.IO;
 
     [ConnectionKey("PatientManagement"), TableName("[dbo].[PatientHealth]"), DisplayName("Patient Health"), InstanceName("Patient Health"), TwoLevelCached]
-    [ReadPermission("PatientManagement:PatientHealth:Read")]
-    [ModifyPermission("PatientManagement:PatientHealth:Modify")]
+    [ReadPermission(PatientManagementPermissionKeys.PatientHealth.ReadPermission)]
+    [UpdatePermission(PatientManagementPermissionKeys.PatientHealth.UpdatePermission)]
+    [DeletePermission(PatientManagementPermissionKeys.PatientHealth.DeletePermission)]
     [LookupScript("PatientManagement.PatientHealth", LookupType = typeof(MultiTenantRowLookupScript<>))]
-
     public sealed class PatientHealthRow : Row, IIdRow, INameRow, ILoggingRow, IMultiTenantRow, IIsActiveRow
     {
         [DisplayName("Patient Health Id"), Identity]

@@ -14,8 +14,9 @@ namespace PatientManagement.PatientManagement.Entities
     using System.IO;
 
     [ConnectionKey("PatientManagement"), TableName("[dbo].[VisitTypes]"), DisplayName("Visit Types"), InstanceName("Visit Types"), TwoLevelCached]
-    [ReadPermission("PatientManagement:VisitTypes:Read")]
-    [ModifyPermission("PatientManagement:VisitTypes:Modify")]
+    [ReadPermission(PatientManagementPermissionKeys.VisitTypes.ReadPermission)]
+    [UpdatePermission(PatientManagementPermissionKeys.VisitTypes.UpdatePermission)]
+    [DeletePermission(PatientManagementPermissionKeys.VisitTypes.DeletePermission)]
     [LookupScript("PatientManagement.VisitTypes",
         LookupType = typeof(MultiTenantRowLookupScript<>))]
     public sealed class VisitTypesRow : Row, IIdRow, INameRow, IInsertLogRow, IMultiTenantRow, IIsActiveDeletedRow

@@ -7,6 +7,7 @@ using PatientManagement.PatientManagement.Entities;
 using Serenity.Data;
 using System.Collections.Generic;
 using System.Linq;
+using PatientManagement.PatientManagement;
 using PatientManagement.PatientManagement.Visits;
 
 namespace PatientManagement.Administration.Pages
@@ -15,7 +16,7 @@ namespace PatientManagement.Administration.Pages
     using Serenity.Web;
     using Microsoft.AspNetCore.Mvc;
 
-    [PageAuthorize(typeof(Entities.ExternalAccessRow))]
+    [PageAuthorize(PatientManagementPermissionKeys.ExternalAccess.PagePermission)]
     public class ExternalAccessController : Controller
     {
         [Route("Administration/ExternalAccess")]

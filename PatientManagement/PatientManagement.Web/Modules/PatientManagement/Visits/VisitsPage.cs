@@ -4,13 +4,13 @@
     using Serenity.Web;
     using Microsoft.AspNetCore.Mvc;
 
-    [PageAuthorize(typeof(Entities.VisitsRow))]
+    [PageAuthorize(PatientManagementPermissionKeys.Visits.PagePermission)]
     public class VisitsController : Controller
     {
         [Route("PatientManagement/Visits")]
         public ActionResult Index()
         {
-            return View("~/Modules/PatientManagement/Visits/VisitsIndex.cshtml");
+            return View(MVC.Views.PatientManagement.Visits.VisitsIndex);
         }
     }
 }

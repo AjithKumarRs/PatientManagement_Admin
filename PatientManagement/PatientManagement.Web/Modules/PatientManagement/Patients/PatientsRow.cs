@@ -15,8 +15,9 @@ namespace PatientManagement.PatientManagement.Entities
     using System.IO;
 
     [ConnectionKey("PatientManagement"), TableName("[dbo].[Patients]"), DisplayName("Patients"), InstanceName("Patient"), TwoLevelCached]
-    [ReadPermission("PatientManagement:Patients:Read")]
-    [ModifyPermission("PatientManagement:Patients:Modify")]
+    [ReadPermission(PatientManagementPermissionKeys.Patients.ReadPermission)]
+    [UpdatePermission(PatientManagementPermissionKeys.Patients.UpdatePermission)]
+    [DeletePermission(PatientManagementPermissionKeys.Patients.DeletePermission)]
     [LookupScript("PatientManagement.Patients",
         LookupType = typeof(MultiTenantRowLookupScript<>))]
     [LeftJoin("cd", "PatientHealth", "cd.[PatientId] = t0.[PatientId]", RowType = typeof(PatientHealthRow), TitlePrefix = "")]

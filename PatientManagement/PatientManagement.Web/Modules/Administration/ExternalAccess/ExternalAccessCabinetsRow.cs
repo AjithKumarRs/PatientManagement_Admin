@@ -12,8 +12,9 @@ namespace PatientManagement.PatientManagement.Entities
     using System.ComponentModel;
 
     [ConnectionKey("PatientManagement"), DisplayName("ExternalAccess"), InstanceName("ExternalAccessCabinet"), TwoLevelCached]
-    [ReadPermission("PatientManagement:ExternalAccess:Read")]
-    [ModifyPermission("PatientManagement:ExternalAccess:Modify")]
+    [ReadPermission(PatientManagementPermissionKeys.ExternalAccess.ReadPermission)]
+    [UpdatePermission(PatientManagementPermissionKeys.ExternalAccess.UpdatePermission)]
+    [DeletePermission(PatientManagementPermissionKeys.ExternalAccess.DeletePermission)]
     [LookupScript("PatientManagement.ExternalAccessCabinets")]
     public class ExternalAccessCabinetsRow : Row, IIdRow
     {

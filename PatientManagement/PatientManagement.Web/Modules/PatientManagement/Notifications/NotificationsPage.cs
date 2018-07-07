@@ -18,15 +18,15 @@ namespace PatientManagement.PatientManagement.Pages
     using Microsoft.AspNetCore.Mvc;
 
     [Route("Notifications/[action]")]
-    [PageAuthorize(typeof(Entities.NotificationsRow))]
+    [PageAuthorize(PatientManagementPermissionKeys.Notifications.PagePermission)]
     public class NotificationsController : Controller
     {
         [Route("~/Notifications")]
         public ActionResult Index()
         {
-            // TODO All notifications should change to seen 
-            
-            return View("~/Modules/PatientManagement/Notifications/NotificationsIndex.cshtml");
+            // TODO All notifications should change to seen issue #223
+           
+            return View(MVC.Views.PatientManagement.Notifications.NotificationsIndex);
         }
     }
 }

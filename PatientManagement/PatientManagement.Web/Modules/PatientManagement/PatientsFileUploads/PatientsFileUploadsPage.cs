@@ -6,13 +6,14 @@ namespace PatientManagement.PatientManagement.Pages
     using Serenity.Web;
     using Microsoft.AspNetCore.Mvc;
 
-    [PageAuthorize(typeof(Entities.PatientsFileUploadsRow))]
+    [PageAuthorize(PatientManagementPermissionKeys.PatientsFileUploads.PagePermission)]
     public class PatientsFileUploadsController : Controller
     {
         [Route("PatientManagement/PatientsFileUploads")]
         public ActionResult Index()
         {
-            return View("~/Modules/PatientManagement/PatientsFileUploads/PatientsFileUploadsIndex.cshtml");
+           
+            return View(MVC.Views.PatientManagement.PatientsFileUploads.PatientsFileUploadsIndex);
         }
     }
 }
