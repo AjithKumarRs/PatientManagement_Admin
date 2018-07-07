@@ -69,13 +69,13 @@ namespace PatientManagement.PatientManagement
         public class MedicalSpecialties
         {
             [Description("Page"), ImplicitPermission(ReadPermission)]
-            public const string PagePermission = "PatientManagement:MedicalSpecialties:Page";
+            public const string PagePermission = "Administration:MedicalSpecialties:Page";
             [Description("View")]
-            public const string ReadPermission = "PatientManagement:MedicalSpecialties:Read";
+            public const string ReadPermission = "AdministrationTenants:MedicalSpecialties:Read";
             [Description("Update"), ImplicitPermission(ReadPermission)]
-            public const string UpdatePermission = "PatientManagement:MedicalSpecialties:Update";
+            public const string UpdatePermission = "Administration:MedicalSpecialties:Update";
             [Description("Delete"), ImplicitPermission(ReadPermission), ImplicitPermission(UpdatePermission)]
-            public const string DeletePermission = "PatientManagement:MedicalSpecialties:Delete";
+            public const string DeletePermission = "Administration:MedicalSpecialties:Delete";
         }
 
         [DisplayName("Notes")]

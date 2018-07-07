@@ -13,7 +13,7 @@ namespace PatientManagement.PatientManagement.Pages
     using Serenity.Web;
     using Microsoft.AspNetCore.Mvc;
 
-    [PageAuthorize(PermissionKeys.Tenants)]
+    [PageAuthorize(PermissionKeys.Tenant)]
     public class UserNotificationsController : Controller
     {
         [Route("PatientManagement/UserNotifications")]

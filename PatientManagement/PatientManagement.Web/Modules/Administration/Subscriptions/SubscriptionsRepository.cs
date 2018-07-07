@@ -105,7 +105,7 @@ namespace PatientManagement.Administration.Repositories
 
                 if (IsCreate || IsUpdate)
                 {
-                    if (Authorization.HasPermission(PermissionKeys.Tenants))
+                    if (Authorization.HasPermission(PermissionKeys.Tenant))
                         return;
 
                     var user = (UserDefinition)Authorization.UserDefinition;

@@ -189,7 +189,7 @@ namespace PatientManagement.Administration.Repositories
                 {
                     var user = (UserDefinition)Authorization.UserDefinition;
                     if (Old.TenantId != user.TenantId)
-                        Authorization.ValidatePermission(PermissionKeys.Tenants);
+                        Authorization.ValidatePermission(PermissionKeys.Tenant);
 
                     CheckPublicDemo(Row.UserId);
 
@@ -219,7 +219,7 @@ namespace PatientManagement.Administration.Repositories
                 {
                     Row.Source = "site";
                     Row.IsActive = Row.IsActive ?? 1;
-                    if (!Authorization.HasPermission(Administration.PermissionKeys.Tenants) ||
+                    if (!Authorization.HasPermission(Administration.PermissionKeys.Tenant) ||
                         Row.TenantId == null)
                     {
                         Row.TenantId = ((UserDefinition)Authorization.UserDefinition)
@@ -242,7 +242,7 @@ namespace PatientManagement.Administration.Repositories
                 BatchGenerationUpdater.OnCommit(this.UnitOfWork, fld.GenerationKey);
 
 
-                if (!Authorization.HasPermission(PermissionKeys.Tenants))
+                if (!Authorization.HasPermission(PermissionKeys.Tenant))
                 {
                     var permFlds = UserPermissionRow.Fields;
 
@@ -294,7 +294,7 @@ namespace PatientManagement.Administration.Repositories
 
                 var user = (UserDefinition)Authorization.UserDefinition;
                 if (Row.TenantId != user.TenantId)
-                    Authorization.ValidatePermission(PermissionKeys.Tenants);
+                    Authorization.ValidatePermission(PermissionKeys.Tenant);
             }
         }
 
@@ -306,7 +306,7 @@ namespace PatientManagement.Administration.Repositories
 
                 var user = (UserDefinition)Authorization.UserDefinition;
                 if (Row.TenantId != user.TenantId)
-                    Authorization.ValidatePermission(PermissionKeys.Tenants);
+                    Authorization.ValidatePermission(PermissionKeys.Tenant);
             }
         }
 
@@ -317,7 +317,7 @@ namespace PatientManagement.Administration.Repositories
                 base.PrepareQuery(query);
 
                 var user = (UserDefinition)Authorization.UserDefinition;
-                if (!Authorization.HasPermission(PermissionKeys.Tenants))
+                if (!Authorization.HasPermission(PermissionKeys.Tenant))
                     query.Where(fld.TenantId == user.TenantId);
             }
         }
@@ -329,7 +329,7 @@ namespace PatientManagement.Administration.Repositories
                 base.ApplyFilters(query);
 
                 var user = (UserDefinition)Authorization.UserDefinition;
-                if (!Authorization.HasPermission(PermissionKeys.Tenants))
+                if (!Authorization.HasPermission(PermissionKeys.Tenant))
                     query.Where(fld.TenantId == user.TenantId);
             }
         }

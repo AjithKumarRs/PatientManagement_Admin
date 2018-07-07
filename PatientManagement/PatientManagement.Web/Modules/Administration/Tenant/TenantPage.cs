@@ -5,13 +5,13 @@ namespace PatientManagement.Administration.Pages
     using Serenity.Web;
     using Microsoft.AspNetCore.Mvc;
 
-    [PageAuthorize("Administration:Tenants")]
+    [PageAuthorize(PermissionKeys.Tenant)]
     public class TenantController : Controller
     {
         [Route("Administration/Tenant")]
         public ActionResult Index()
         {
-            return View("~/Modules/Administration/Tenant/TenantIndex.cshtml");
+            return View(MVC.Views.Administration.Tenant.TenantIndex);
         }
     }
 }

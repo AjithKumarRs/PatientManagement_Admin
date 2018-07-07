@@ -26,7 +26,7 @@ namespace PatientManagement.PatientManagement.Scripts
         {
             var r = new TRow();
 
-            if (!Authorization.HasPermission(PermissionKeys.Tenants))
+            if (!Authorization.HasPermission(PermissionKeys.Tenant))
                 query.Where(r.TenantIdField ==
                         ((UserDefinition)Authorization.UserDefinition).TenantId);
         }

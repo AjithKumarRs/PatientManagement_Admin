@@ -3808,7 +3808,7 @@ var PatientManagement;
             UserDialog.prototype.getService = function () { return Administration.UserService.baseUrl; };
             UserDialog.prototype.getPropertyItems = function () {
                 var items = _super.prototype.getPropertyItems.call(this);
-                if (!Q.Authorization.hasPermission("Administration:Tenants"))
+                if (!Q.Authorization.hasPermission("Administration:Tenant"))
                     items = items.filter(function (x) { return x.name != "TenantId" /* TenantId */; });
                 return items;
             };
@@ -8618,7 +8618,7 @@ var PatientManagement;
                     this.form.CurrencyId.value = Q.getRemoteData("UserData").TenantCurrencyId;
                 }
                 if (Q.Authorization.hasPermission("AdministrationTenants:VisitPayments")) {
-                    if (!Q.Authorization.hasPermission("Administration:Tenants"))
+                    if (!Q.Authorization.hasPermission("Administration:Tenant"))
                         Serenity.EditorUtils.setReadOnly(this.form.CurrencyId, true);
                 }
                 Serenity.EditorUtils.setReadOnly(this.form.BorderColor, true);

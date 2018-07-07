@@ -23,7 +23,7 @@ namespace PatientManagement.PatientManagement.Scripts
             var r = new TRow();
 
             query.Where( r.Enabled == 1);
-            if (!Authorization.HasPermission(PermissionKeys.Tenants))
+            if (!Authorization.HasPermission(PermissionKeys.Tenant))
                 query.Where(r.IsPublic == 1);
 
         }

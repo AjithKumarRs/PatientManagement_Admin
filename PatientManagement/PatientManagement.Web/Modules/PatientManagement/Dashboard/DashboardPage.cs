@@ -116,7 +116,7 @@ namespace PatientManagement.PatientManagement.Pages
                 
 
 
-                if (!Authorization.HasPermission(PermissionKeys.Tenants))
+                if (!Authorization.HasPermission(PermissionKeys.Tenant))
                     query.Where(visitFlds.TenantId == user.TenantId);
 
                 var result = connection.Query<VisitsRow>(query);
@@ -152,7 +152,7 @@ namespace PatientManagement.PatientManagement.Pages
             var cabinetFlds = CabinetsRow.Fields;
             var cabinets = new List<CabinetsRow>();
 
-            if (Authorization.HasPermission(PermissionKeys.Tenants))
+            if (Authorization.HasPermission(PermissionKeys.Tenant))
                 cabinets = connection.List<CabinetsRow>(cabinetFlds.IsActive == 1);
             else
                 cabinets = connection.List<CabinetsRow>(cabinetFlds.TenantId == user.TenantId && cabinetFlds.IsActive == 1);
@@ -271,7 +271,7 @@ namespace PatientManagement.PatientManagement.Pages
                     & new Criteria(visitFlds.CabinetId) == cabinetIdActive)
                     );
 
-                if (!Authorization.HasPermission(PermissionKeys.Tenants))
+                if (!Authorization.HasPermission(PermissionKeys.Tenant))
                     query.Where(visitFlds.TenantId == user.TenantId);
 
                 countVisitsForToday = connection.Query(query.Where(visitFlds.EndDate <= endDate)).Count();
@@ -290,7 +290,7 @@ namespace PatientManagement.PatientManagement.Pages
             var user = Authorization.UserDefinition as UserDefinition;
             var days = UserSubscriptionHelper.GetTenantPaidDays(user.TenantId);
 
-            if (days <= DateTime.Now.AddDays(7) || Authorization.HasPermission("AdministrationTenants:Payments"))
+            if (days <= DateTime.Now.AddDays(7) || Authorization.HasPermission(PermissionKeys.Payments.ReadPermission))
                 return Json(days);
             else
                 return Json(DateTime.MinValue);

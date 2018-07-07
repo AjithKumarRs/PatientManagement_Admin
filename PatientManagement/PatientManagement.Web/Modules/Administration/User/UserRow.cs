@@ -12,8 +12,8 @@ namespace PatientManagement.Administration.Entities
     using System.ComponentModel;
 
     [ConnectionKey("Default"), DisplayName("Users"), InstanceName("User"), TwoLevelCached]
-    [ReadPermission("AdministrationTenants:User:Read")]
-    [ModifyPermission("Administration:User:Modify")]
+    [ReadPermission(PermissionKeys.User.ReadPermission)]
+    [ModifyPermission(PermissionKeys.User.ModifyPermission)]
     [LookupScript("Administration.User",
         LookupType = typeof(MultiTenantRowLookupScript<>))]
     public sealed class UserRow : LoggingRow, IIdRow, INameRow, IIsActiveDeletedRow, IMultiTenantRow
@@ -53,7 +53,7 @@ namespace PatientManagement.Administration.Entities
             set { Fields.Specialties[this] = value; }
         }
 
-        [ReadPermission(PermissionKeys.Tenants)]
+        [ReadPermission(PermissionKeys.Tenant)]
         [DisplayName("Source"), Size(4), NotNull, Insertable(false), Updatable(false), DefaultValue("site")]
         public String Source
         {
@@ -157,8 +157,8 @@ namespace PatientManagement.Administration.Entities
         }
 
         [NotNull, Insertable(false), Updatable(true)]
-        [ModifyPermission("Administration:User:IsActiveRead")]
-        [ReadPermission("Administration:User:IsActiveRead")]
+        [ModifyPermission(PermissionKeys.User.IsActivePermission)]
+        [ReadPermission(PermissionKeys.User.IsActivePermission)]
         [BsSwitchEditor]
         [LookupInclude]
         public Int16? IsActive
@@ -193,14 +193,14 @@ namespace PatientManagement.Administration.Entities
 
         [DisplayName("Tenant"), ForeignKey("Tenants", "TenantId"), LeftJoin("tnt"), QuickFilter]
         [LookupEditor(typeof(TenantRow))]
-        [ReadPermission(PermissionKeys.Tenants)]
+        [ReadPermission(PermissionKeys.Tenant)]
         public Int32? TenantId
         {
             get { return Fields.TenantId[this]; }
             set { Fields.TenantId[this] = value; }
         }
 
-        [ReadPermission(PermissionKeys.Tenants)]
+        [ReadPermission(PermissionKeys.Tenant)]
         [DisplayName("Tenant"), Expression("tnt.TenantName")]
         public String TenantName
         {

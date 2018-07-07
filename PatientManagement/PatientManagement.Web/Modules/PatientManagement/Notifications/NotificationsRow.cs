@@ -132,15 +132,15 @@ namespace PatientManagement.PatientManagement.Entities
 
         [DisplayName("Tenant"), ForeignKey("Tenants", "TenantId"), LeftJoin("tnt")]
         [LookupEditor(typeof(TenantRow))]
-        [ReadPermission(PermissionKeys.Tenants)]
-        [ModifyPermission(PermissionKeys.Tenants)]
+        [ReadPermission(PermissionKeys.Tenant)]
+        [ModifyPermission(PermissionKeys.Tenant)]
         public Int32? TenantId
         {
             get { return Fields.TenantId[this]; }
             set { Fields.TenantId[this] = value; }
         }
         [DisplayName("Tenant"), Expression("tnt.TenantName")]
-        [ReadPermission("Administration:Tenants")]
+        [ReadPermission(PermissionKeys.Tenant)]
         public String TenantName
         {
             get { return Fields.TenantName[this]; }

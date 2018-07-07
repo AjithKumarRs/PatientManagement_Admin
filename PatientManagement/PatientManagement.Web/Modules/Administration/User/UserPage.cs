@@ -5,7 +5,7 @@ namespace PatientManagement.Administration.Pages
     using Microsoft.AspNetCore.Mvc;
 
     //[PageAuthorize(typeof(Entities.UserRow))]
-    [PageAuthorize("Administration:User:Page")]
+    [PageAuthorize(PermissionKeys.User.PagePermission)]
     public class UserController : Controller
     {
         [Route("Administration/User")]

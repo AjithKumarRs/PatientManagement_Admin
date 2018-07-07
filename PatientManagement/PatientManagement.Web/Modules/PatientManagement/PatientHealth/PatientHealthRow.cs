@@ -1,4 +1,5 @@
 ﻿
+using PatientManagement.Administration;
 using PatientManagement.PatientManagement.Scripts;
 
 namespace PatientManagement.PatientManagement.Entities
@@ -59,7 +60,7 @@ namespace PatientManagement.PatientManagement.Entities
         #region ILoggingRow
 
         [DisplayName("Insert User Id"), NotNull, ForeignKey("Users", "UserId"), LeftJoin("usrI"), TextualField("InsertUserName")]
-        [ReadPermission("Administration:Tenants")]
+        [ReadPermission(PermissionKeys.Tenant)]
         public Int32? InsertUserId
         {
             get { return Fields.InsertUserId[this]; }
@@ -83,14 +84,14 @@ namespace PatientManagement.PatientManagement.Entities
         }
 
         [DisplayName("Update User Id"), NotNull, ForeignKey("Users", "UserId"), LeftJoin("usrU"), TextualField("UpdateUserName")]
-        [ReadPermission("Administration:Tenants")]
+        [ReadPermission(PermissionKeys.Tenant)]
         public Int32? UpdateUserId
         {
             get { return Fields.UpdateUserId[this]; }
             set { Fields.UpdateUserId[this] = value; }
         }
         [DisplayName("Last updated by"), Expression("usrU.UserName")]
-        [ReadPermission("Administration:Tenants")]
+        [ReadPermission(PermissionKeys.Tenant)]
         public String UpdateUserName
         {
             get { return Fields.UpdateUserName[this]; }
@@ -98,7 +99,7 @@ namespace PatientManagement.PatientManagement.Entities
         }
 
         [DisplayName("Update Date Field"), NotNull]
-        [ReadPermission("Administration:Tenants")]
+        [ReadPermission(PermissionKeys.Tenant)]
         public DateTime? UpdateDateField
         {
             get { return Fields.UpdateDateField[this]; }
@@ -124,7 +125,7 @@ namespace PatientManagement.PatientManagement.Entities
             set { Fields.TenantId[this] = value; }
         }
         [DisplayName("Tenant"), Expression("tnt.TenantName")]
-        [ReadPermission("Administration:Tenants")]
+        [ReadPermission(PermissionKeys.Tenant)]
         public String TenantName
         {
             get { return Fields.TenantName[this]; }
@@ -139,7 +140,7 @@ namespace PatientManagement.PatientManagement.Entities
         #region IIsActive
 
         [DisplayName("Is Active"), NotNull]
-        [ReadPermission("Administration:Tenants")]
+        [ReadPermission(PermissionKeys.Tenant)]
         public Int16? IsActive
         {
             get { return Fields.IsActive[this]; }

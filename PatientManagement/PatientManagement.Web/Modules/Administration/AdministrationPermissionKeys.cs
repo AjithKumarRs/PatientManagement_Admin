@@ -7,15 +7,53 @@ namespace PatientManagement.Administration
     [DisplayName("Administration")]
     public class PermissionKeys
     {
-        public const string Tenants = "Administration:Tenants";
-
+        [Description(" Master admin only - Administration Tenants")]
+        public const string Tenant = "Administration:Tenant";
+        [Description(" Master admin only - Change Payment Status")]
+        public const string PaymentStatus = "Administration:PaymentStatus";
+        [Description(" Master admin only - Sergen")]
+        public const string Sergen = "Administration:Sergen";
         public const string AdministrationTenantsPaymentsRead = "AdministrationTenants:Payments:Read";
         public const string AdministrationTenantsPaymentsModify = "AdministrationTenants:Payments:Modify";
 
         public const string AdministrationTenantsCurrenciesRead = "AdministrationTenants:CurrenciesRead";
-        public const string AdministrationTenantsTenantRead = "AdministrationTenants:TenantRead";
-        public const string AdministrationTenantsTenantEditing = "AdministrationTenants:TenantEditing";
+        [Description("Edit Tenant")]
+        public const string AdministrationTenantsTenantEditing = "AdministrationTenants:Tenant:Edit";
+        [Description("Visit Payments")]
         public const string AdministrationTenantsVisitPayments = "AdministrationTenants:VisitPayments";
+        [DisplayName("Tenant")]
+        public class Tenants
+        {
+            [Description("View")]
+            public const string ReadPermission = "AdministrationTenants:Tenant:Read";
+            [Description("Page"), ImplicitPermission(ReadPermission)]
+            public const string PagePermission = "Administration:Tenants:Page";
+            [Description("Modify"), ImplicitPermission(ReadPermission)]
+            public const string ModifyPermission = "Administration:Tenants:Modify";
+        }
+
+        [DisplayName("User")]
+        public class User
+        {
+            [Description("View")]
+            public const string ReadPermission = "AdministrationTenants:User:Read";
+            [Description("Page"), ImplicitPermission(ReadPermission)]
+            public const string PagePermission = "Administration:User:Page";
+            [Description("Modify"), ImplicitPermission(ReadPermission)]
+            public const string ModifyPermission = "Administration:User:Modify";
+
+            [Description("Change Is Active"), ImplicitPermission(ReadPermission), ImplicitPermission(ModifyPermission)]
+            public const string IsActivePermission = "Administration:User:IsActive";
+        }
+
+        [DisplayName("User Role")]
+        public class UserRole
+        {
+            [Description("View")]
+            public const string ReadPermission = "Administration:UserRole:Read";
+            [Description("Modify"), ImplicitPermission(ReadPermission)]
+            public const string ModifyPermission = "Administration:UserRole:Modify";
+        }
 
         [DisplayName("Roles")]
         public class Roles
@@ -27,7 +65,14 @@ namespace PatientManagement.Administration
             [Description("Modify"), ImplicitPermission(ReadPermission)]
             public const string ModifyPermission = "Administration:Roles:Modify";
         }
-
+        [DisplayName("User Permissions")]
+        public class UserPermission
+        {
+            [Description("View")]
+            public const string ReadPermission = "Administration:UserPermission:Read";
+            [Description("Modify"), ImplicitPermission(ReadPermission)]
+            public const string ModifyPermission = "Administration:UserPermission:Modify";
+        }
         [DisplayName("Role Permissions")]
         public class RolePermissions
         {

@@ -71,7 +71,7 @@ namespace PatientManagement.Web.Modules.Common
             using (var uow = new UnitOfWork(SqlConnections.NewFor<OffersRow>()))
             {
                 var tenant = uow.Connection.ById<TenantRow>(user.TenantId);
-                if (!tenant.SubscriptionRequired.Value || Authorization.HasPermission(PermissionKeys.Tenants))
+                if (!tenant.SubscriptionRequired.Value || Authorization.HasPermission(PermissionKeys.Tenant))
                 {
                     return Int32.MaxValue;
                 }
@@ -89,7 +89,7 @@ namespace PatientManagement.Web.Modules.Common
             using (var uow = new UnitOfWork(SqlConnections.NewFor<OffersRow>()))
             {
                 var tenant = uow.Connection.ById<TenantRow>(user.TenantId);
-                if (!tenant.SubscriptionRequired.Value || Authorization.HasPermission(PermissionKeys.Tenants))
+                if (!tenant.SubscriptionRequired.Value || Authorization.HasPermission(PermissionKeys.Tenant))
                 {
                     return Int32.MaxValue;
                 }
@@ -105,7 +105,7 @@ namespace PatientManagement.Web.Modules.Common
             using (var uow = new UnitOfWork(SqlConnections.NewFor<OffersRow>()))
             {
                 var tenant = uow.Connection.ById<TenantRow>(user.TenantId);
-                if (!tenant.SubscriptionRequired.Value || Authorization.HasPermission(PermissionKeys.Tenants))
+                if (!tenant.SubscriptionRequired.Value || Authorization.HasPermission(PermissionKeys.Tenant))
                 {
                     return Int32.MaxValue;
                 }
@@ -123,7 +123,7 @@ namespace PatientManagement.Web.Modules.Common
             using (var uow = new UnitOfWork(SqlConnections.NewFor<OffersRow>()))
             {
                 var tenant = uow.Connection.ById<TenantRow>(user.TenantId);
-                if (!tenant.SubscriptionRequired.Value || Authorization.HasPermission(PermissionKeys.Tenants))
+                if (!tenant.SubscriptionRequired.Value || Authorization.HasPermission(PermissionKeys.Tenant))
                 {
                     return Int32.MaxValue;
                 }

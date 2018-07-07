@@ -119,7 +119,7 @@ namespace PatientManagement.PatientManagement.Entities
         #region IIsActive
 
         [DisplayName("Is Active"), NotNull]
-        [ReadPermission(PermissionKeys.Tenants)]
+        [ReadPermission(PermissionKeys.Tenant)]
         [LookupInclude]
         [BsSwitchEditor]
         public Int16? IsActive
@@ -177,7 +177,7 @@ namespace PatientManagement.PatientManagement.Entities
 
         public DateTimeField InsertDateField => Fields.InsertDate;
         [DisplayName("Insert User Id"), NotNull, ForeignKey("Users", "UserId"), LeftJoin("usrI"), TextualField("InsertUserName")]
-        [ReadPermission(PermissionKeys.Tenants)]
+        [ReadPermission(PermissionKeys.Tenant)]
         public Int32? InsertUserId
         {
             get { return Fields.InsertUserId[this]; }
@@ -207,15 +207,15 @@ namespace PatientManagement.PatientManagement.Entities
 
         [DisplayName("Tenant"), ForeignKey("Tenants", "TenantId"), LeftJoin("tnt")]
         [LookupEditor(typeof(TenantRow))]
-        [ReadPermission(PermissionKeys.Tenants)]
-        [ModifyPermission(PermissionKeys.Tenants)]
+        [ReadPermission(PermissionKeys.Tenant)]
+        [ModifyPermission(PermissionKeys.Tenant)]
         public Int32? TenantId
         {
             get { return Fields.TenantId[this]; }
             set { Fields.TenantId[this] = value; }
         }
         [DisplayName("Tenant"), Expression("tnt.TenantName")]
-        [ReadPermission("Administration:Tenants")]
+        [ReadPermission(PermissionKeys.Tenant)]
         public String TenantName
         {
             get { return Fields.TenantName[this]; }

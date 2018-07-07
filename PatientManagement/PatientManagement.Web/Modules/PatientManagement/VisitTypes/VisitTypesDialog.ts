@@ -22,7 +22,7 @@ namespace PatientManagement.PatientManagement {
                 this.form.CurrencyId.value = Q.getRemoteData("UserData").TenantCurrencyId;
             }
             if (Q.Authorization.hasPermission("AdministrationTenants:VisitPayments")) {
-                if (!Q.Authorization.hasPermission("Administration:Tenants"))
+                if (!Q.Authorization.hasPermission("Administration:Tenant"))
                     Serenity.EditorUtils.setReadOnly(this.form.CurrencyId, true);
 
             }

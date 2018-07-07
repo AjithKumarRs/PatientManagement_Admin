@@ -15,7 +15,6 @@ namespace PatientManagement
         IListBehavior, IRetrieveBehavior
     {
         private Int32Field fldTenantId;
-        public const string Tenants = "Administration:Tenants";
 
         public bool ActivateFor(Row row)
         {
@@ -31,7 +30,7 @@ namespace PatientManagement
             SqlQuery query)
         {
             var user = (UserDefinition)Authorization.UserDefinition;
-            if (!Authorization.HasPermission(Tenants))
+            if (!Authorization.HasPermission(PermissionKeys.Tenant))
                 query.Where(fldTenantId == user.TenantId);
         }
 
@@ -39,7 +38,7 @@ namespace PatientManagement
             SqlQuery query)
         {
             var user = (UserDefinition)Authorization.UserDefinition;
-            if (!Authorization.HasPermission(Tenants))
+            if (!Authorization.HasPermission(PermissionKeys.Tenant))
                 query.Where(fldTenantId == user.TenantId);
         }
 
@@ -57,7 +56,7 @@ namespace PatientManagement
             {
                 var user = (UserDefinition)Authorization.UserDefinition;
                 if (fldTenantId[handler.Old] != fldTenantId[handler.Row])
-                    Authorization.ValidatePermission(Tenants);
+                    Authorization.ValidatePermission(PermissionKeys.Tenant);
             }
         }
 
@@ -65,7 +64,7 @@ namespace PatientManagement
         {
             var user = (UserDefinition)Authorization.UserDefinition;
             if (fldTenantId[handler.Row] != user.TenantId)
-                Authorization.ValidatePermission(Tenants);
+                Authorization.ValidatePermission(PermissionKeys.Tenant);
         }
 
         public void OnAfterDelete(IDeleteRequestHandler handler) { }
@@ -81,7 +80,7 @@ namespace PatientManagement
 
         public void OnBeforeSave(ISaveRequestHandler handler)
         {
-            if (Authorization.HasPermission(PermissionKeys.Tenants))
+            if (Authorization.HasPermission(PermissionKeys.Tenant))
                 return;
 
             if (handler.Row is PaymentsRow

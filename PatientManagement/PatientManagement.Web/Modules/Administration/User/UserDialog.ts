@@ -27,7 +27,7 @@
 
         protected getPropertyItems() {
             var items = super.getPropertyItems();
-            if (!Q.Authorization.hasPermission("Administration:Tenants"))
+            if (!Q.Authorization.hasPermission("Administration:Tenant"))
                 items = items.filter(x => x.name != UserRow.Fields.TenantId);
             return items;
         }

@@ -73,7 +73,7 @@
           "Tablename": "dbo.Tenants",
           "Identifier": "Tenant",
           "Module": "Administration",
-          "PermissionKey": "Administration:Tenants"
+          "PermissionKey": "Administration:Tenant"
         }
       ]
     },

@@ -161,15 +161,15 @@ namespace PatientManagement.PatientManagement.Entities
 
         [DisplayName("Tenant"), ForeignKey("Tenants", "TenantId"), LeftJoin("tnt")]
         [LookupEditor(typeof(TenantRow))]
-        [ReadPermission(PermissionKeys.Tenants)]
-        [ModifyPermission(PermissionKeys.Tenants)]
+        [ReadPermission(PermissionKeys.Tenant)]
+        [ModifyPermission(PermissionKeys.Tenant)]
         public Int32? TenantId
         {
             get { return Fields.TenantId[this]; }
             set { Fields.TenantId[this] = value; }
         }
         [DisplayName("Tenant"), Expression("tnt.TenantName")]
-        [ReadPermission("Administration:Tenants")]
+        [ReadPermission(PermissionKeys.Tenant)]
         public String TenantName
         {
             get { return Fields.TenantName[this]; }
@@ -184,7 +184,7 @@ namespace PatientManagement.PatientManagement.Entities
         #region IIsActive
 
         [DisplayName("Is Active"), NotNull]
-        [ReadPermission(PermissionKeys.Tenants)]
+        [ReadPermission(PermissionKeys.Tenant)]
         [LookupInclude]
         public Int16? IsActive
         {
@@ -204,7 +204,7 @@ namespace PatientManagement.PatientManagement.Entities
         #region IInsertLog
 
         [DisplayName("Insert User Id"), NotNull, ForeignKey("Users", "UserId"), LeftJoin("usrI"), TextualField("InsertUserName")]
-        [ReadPermission("Administration:Tenants")]
+        [ReadPermission(PermissionKeys.Tenant)]
         public Int32? InsertUserId
         {
             get { return Fields.InsertUserId[this]; }
@@ -213,7 +213,7 @@ namespace PatientManagement.PatientManagement.Entities
 
 
         [DisplayName("Created by"), Expression("usrI.UserName")]
-        [ReadPermission("Administration:Tenants")]
+        [ReadPermission(PermissionKeys.Tenant)]
         public String InsertUserName
         {
             get { return Fields.InsertUserName[this]; }
@@ -222,7 +222,7 @@ namespace PatientManagement.PatientManagement.Entities
 
 
         [DisplayName("Insert Date"), NotNull, QuickFilter()]
-        [ReadPermission("Administration:Tenants")]
+        [ReadPermission(PermissionKeys.Tenant)]
         public DateTime? InsertDate
         {
             get { return Fields.InsertDate[this]; }
