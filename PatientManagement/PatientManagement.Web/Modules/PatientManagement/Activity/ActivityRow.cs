@@ -18,7 +18,7 @@ namespace PatientManagement.PatientManagement.Entities
     [DeletePermission(PatientManagementPermissionKeys.Activity.DeletePermission)]
     [LookupScript("PatientManagement.Activity",
         LookupType = typeof(MultiTenantRowLookupScript<>))]
-    public sealed class ActivityRow : Row, IIdRow, INameRow, ILoggingRow, IMultiTenantRow, IIsActiveRow
+    public sealed class ActivityRow : Row, IIdRow, INameRow, ILoggingRow, IMultiTenantRow, IIsActiveDeletedRow
     {
         [DisplayName("Activity Id"), Identity]
         public Int32?ActivityId

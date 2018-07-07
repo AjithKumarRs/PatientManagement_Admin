@@ -1522,6 +1522,7 @@ var PatientManagement;
                 'Create',
                 'Update',
                 'Delete',
+                'Undelete',
                 'Retrieve',
                 'List'
             ].forEach(function (x) {
@@ -5785,6 +5786,7 @@ var PatientManagement;
             ActivityGrid.prototype.getIdProperty = function () { return PatientManagement.ActivityRow.idProperty; };
             ActivityGrid.prototype.getLocalTextPrefix = function () { return PatientManagement.ActivityRow.localTextPrefix; };
             ActivityGrid.prototype.getService = function () { return PatientManagement.ActivityService.baseUrl; };
+            ActivityGrid.prototype.getIsActiveProperty = function () { return PatientManagement.CabinetsRow.isActiveProperty; };
             ActivityGrid = __decorate([
                 Serenity.Decorators.registerClass()
             ], ActivityGrid);
