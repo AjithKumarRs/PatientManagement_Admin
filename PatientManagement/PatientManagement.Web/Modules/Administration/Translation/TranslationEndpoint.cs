@@ -6,7 +6,7 @@ namespace PatientManagement.Administration.Endpoints
     using MyRepository = Repositories.TranslationRepository;
 
     [Route("Services/Administration/Translation/[action]")]
-    [ServiceAuthorize("Administration:Translation:Read")]
+    [ServiceAuthorize(PermissionKeys.Translation.ReadPermission)]
     public class TranslationController : ServiceEndpoint
     {
         public ListResponse<TranslationItem> List(TranslationListRequest request)

@@ -7,8 +7,8 @@ namespace PatientManagement.Administration.Entities
     using System.ComponentModel;
 
     [ConnectionKey("Default"), DisplayName("Languages"), InstanceName("Language"), TwoLevelCached]
-    [ReadPermission("Administration:Translation:Read")]
-    [ModifyPermission("Administration:Translation:Modify")]
+    [ReadPermission(PermissionKeys.Translation.ReadPermission)]
+    [ModifyPermission(PermissionKeys.Translation.ModifyPermission)]
     public sealed class LanguageRow : Row, IIdRow, INameRow
     {
         [DisplayName("Id"), Identity]

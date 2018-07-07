@@ -4,7 +4,7 @@ namespace PatientManagement.Administration.Pages
     using Serenity.Web;
     using Microsoft.AspNetCore.Mvc;
 
-    [PageAuthorize(typeof(Entities.LanguageRow))]
+    [PageAuthorize(PermissionKeys.Translation.LanguagesPagePermission)]
     public class LanguageController : Controller
     {
         [Route("Administration/Language")]

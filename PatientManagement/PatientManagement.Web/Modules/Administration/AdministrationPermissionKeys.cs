@@ -20,8 +20,8 @@ namespace PatientManagement.Administration
         [DisplayName("Coupons")]
         public class Coupons
         {
-            [Description("View")]
-            public const string ReadPermission = "AdministrationTenants:Coupons:Read";
+            [Description("Coupons View")]
+            public const string ReadPermission = "AdministrationTenants:Coupons";
             [Description("Page"), ImplicitPermission(ReadPermission)]
             public const string PagePermission = "Administration:Coupons:Page";
             [Description("Insert"), ImplicitPermission(ReadPermission)]
@@ -30,6 +30,34 @@ namespace PatientManagement.Administration
             public const string UpdatePermission = "Administration:Coupons:Update";
             [Description("Delete"), ImplicitPermission(ReadPermission), ImplicitPermission(InsertPermission), ImplicitPermission(UpdatePermission)]
             public const string DeletePermission = "Administration:Coupons:Delete";
+        }
+
+        [DisplayName("Currencies")]
+        public class Currencies
+        {
+            [Description("Currencies View")]
+            public const string ReadPermission = "AdministrationTenants:Currencies";
+            [Description("Page"), ImplicitPermission(ReadPermission)]
+            public const string PagePermission = "Administration:Currencies:Page";
+            [Description("Insert"), ImplicitPermission(ReadPermission)]
+            public const string InsertPermission = "Administration:Currencies:Insert";
+            [Description("Update"), ImplicitPermission(ReadPermission), ImplicitPermission(InsertPermission)]
+            public const string UpdatePermission = "Administration:Currencies:Update";
+            [Description("Delete"), ImplicitPermission(ReadPermission), ImplicitPermission(InsertPermission), ImplicitPermission(UpdatePermission)]
+            public const string DeletePermission = "Administration:Currencies:Delete";
+        }
+
+        [DisplayName("Languages and Translations")]
+        public class Translation
+        {
+            [Description("View")]
+            public const string ReadPermission = "Administration:Translation:Read";
+            [Description("Page"), ImplicitPermission(ReadPermission)]
+            public const string LanguagesPagePermission = "Administration:Languages:Page";
+            [Description("Page"), ImplicitPermission(ReadPermission)]
+            public const string TranslationsPagePermission = "Administration:Translation:Page";
+            [Description("Modify"), ImplicitPermission(ReadPermission)]
+            public const string ModifyPermission = "Administration:Translation:Modify";
         }
     }
 }

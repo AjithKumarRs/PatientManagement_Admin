@@ -7,14 +7,14 @@ namespace PatientManagement.Administration.Pages
     using Serenity.Web;
     using Microsoft.AspNetCore.Mvc;
 
-    [PageAuthorize("Administration:Currencies:Page")]
+    [PageAuthorize(PermissionKeys.Currencies.PagePermission)]
 
     public class CurrenciesController : Controller
     {
         [Route("Administration/Currencies")]
         public ActionResult Index()
         {
-            return View("~/Modules/Administration/Currencies/CurrenciesIndex.cshtml");
+            return View(MVC.Views.Administration.Currencies.CurrenciesIndex);
         }
     }
 }
