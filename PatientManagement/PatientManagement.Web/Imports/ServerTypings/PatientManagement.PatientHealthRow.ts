@@ -4,16 +4,17 @@
         PatientId?: number;
         Diseases?: string;
         MedicinesIntake?: string;
+        PatientName?: string;
         InsertUserId?: number;
         InsertDate?: string;
-        PatientName?: string;
-        UpdateUserId?: number;
-        UpdateDateField?: string;
-        TenantId?: number;
-        IsActive?: number;
-        TenantName?: string;
         InsertUserName?: string;
         UpdateUserName?: string;
+        UpdateUserId?: number;
+        UpdateDate?: string;
+        IsActive?: number;
+        TenantId?: number;
+        TenantName?: string;
+        TenantCurrencyId?: number;
     }
 
     export namespace PatientHealthRow {
@@ -32,16 +33,17 @@
             PatientId = "PatientId",
             Diseases = "Diseases",
             MedicinesIntake = "MedicinesIntake",
+            PatientName = "PatientName",
             InsertUserId = "InsertUserId",
             InsertDate = "InsertDate",
-            PatientName = "PatientName",
-            UpdateUserId = "UpdateUserId",
-            UpdateDateField = "UpdateDateField",
-            TenantId = "TenantId",
-            IsActive = "IsActive",
-            TenantName = "TenantName",
             InsertUserName = "InsertUserName",
-            UpdateUserName = "UpdateUserName"
+            UpdateUserName = "UpdateUserName",
+            UpdateUserId = "UpdateUserId",
+            UpdateDate = "UpdateDate",
+            IsActive = "IsActive",
+            TenantId = "TenantId",
+            TenantName = "TenantName",
+            TenantCurrencyId = "TenantCurrencyId"
         }
     }
 }

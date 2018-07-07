@@ -1749,13 +1749,14 @@ declare namespace PatientManagement.PatientManagement {
         Profession?: string;
         InsertUserId?: number;
         InsertDate?: string;
+        InsertUserName?: string;
+        UpdateUserName?: string;
         UpdateUserId?: number;
-        UpdateDateField?: string;
+        UpdateDate?: string;
         IsActive?: number;
         TenantId?: number;
         TenantName?: string;
-        InsertUserName?: string;
-        UpdateUserName?: string;
+        TenantCurrencyId?: number;
     }
     namespace ActivityRow {
         const idProperty = "ActivityId";
@@ -1771,13 +1772,14 @@ declare namespace PatientManagement.PatientManagement {
             Profession = "Profession",
             InsertUserId = "InsertUserId",
             InsertDate = "InsertDate",
+            InsertUserName = "InsertUserName",
+            UpdateUserName = "UpdateUserName",
             UpdateUserId = "UpdateUserId",
-            UpdateDateField = "UpdateDateField",
+            UpdateDate = "UpdateDate",
             IsActive = "IsActive",
             TenantId = "TenantId",
             TenantName = "TenantName",
-            InsertUserName = "InsertUserName",
-            UpdateUserName = "UpdateUserName",
+            TenantCurrencyId = "TenantCurrencyId",
         }
     }
 }
@@ -1994,16 +1996,17 @@ declare namespace PatientManagement.PatientManagement {
         RemarksForFoodTake?: string;
         BadHabits?: string;
         NotEating?: string;
+        PatientName?: string;
         InsertUserId?: number;
         InsertDate?: string;
-        UpdateUserId?: number;
-        UpdateDateField?: string;
-        IsActive?: number;
-        TenantName?: string;
         InsertUserName?: string;
         UpdateUserName?: string;
-        PatientName?: string;
+        UpdateUserId?: number;
+        UpdateDate?: string;
+        IsActive?: number;
         TenantId?: number;
+        TenantName?: string;
+        TenantCurrencyId?: number;
     }
     namespace LifeStylesRow {
         const idProperty = "LifeStyleId";
@@ -2020,16 +2023,17 @@ declare namespace PatientManagement.PatientManagement {
             RemarksForFoodTake = "RemarksForFoodTake",
             BadHabits = "BadHabits",
             NotEating = "NotEating",
+            PatientName = "PatientName",
             InsertUserId = "InsertUserId",
             InsertDate = "InsertDate",
-            UpdateUserId = "UpdateUserId",
-            UpdateDateField = "UpdateDateField",
-            IsActive = "IsActive",
-            TenantName = "TenantName",
             InsertUserName = "InsertUserName",
             UpdateUserName = "UpdateUserName",
-            PatientName = "PatientName",
+            UpdateUserId = "UpdateUserId",
+            UpdateDate = "UpdateDate",
+            IsActive = "IsActive",
             TenantId = "TenantId",
+            TenantName = "TenantName",
+            TenantCurrencyId = "TenantCurrencyId",
         }
     }
 }
@@ -2039,12 +2043,14 @@ declare namespace PatientManagement.PatientManagement {
         function Create(request: Serenity.SaveRequest<LifeStylesRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Update(request: Serenity.SaveRequest<LifeStylesRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Undelete(request: Serenity.UndeleteRequest, onSuccess?: (response: Serenity.UndeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<LifeStylesRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<LifeStylesRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         const enum Methods {
             Create = "PatientManagement/LifeStyles/Create",
             Update = "PatientManagement/LifeStyles/Update",
             Delete = "PatientManagement/LifeStyles/Delete",
+            Undelete = "PatientManagement/LifeStyles/Undelete",
             Retrieve = "PatientManagement/LifeStyles/Retrieve",
             List = "PatientManagement/LifeStyles/List",
         }
@@ -2260,16 +2266,17 @@ declare namespace PatientManagement.PatientManagement {
         PatientId?: number;
         Diseases?: string;
         MedicinesIntake?: string;
+        PatientName?: string;
         InsertUserId?: number;
         InsertDate?: string;
-        PatientName?: string;
-        UpdateUserId?: number;
-        UpdateDateField?: string;
-        TenantId?: number;
-        IsActive?: number;
-        TenantName?: string;
         InsertUserName?: string;
         UpdateUserName?: string;
+        UpdateUserId?: number;
+        UpdateDate?: string;
+        IsActive?: number;
+        TenantId?: number;
+        TenantName?: string;
+        TenantCurrencyId?: number;
     }
     namespace PatientHealthRow {
         const idProperty = "PatientHealthId";
@@ -2283,16 +2290,17 @@ declare namespace PatientManagement.PatientManagement {
             PatientId = "PatientId",
             Diseases = "Diseases",
             MedicinesIntake = "MedicinesIntake",
+            PatientName = "PatientName",
             InsertUserId = "InsertUserId",
             InsertDate = "InsertDate",
-            PatientName = "PatientName",
-            UpdateUserId = "UpdateUserId",
-            UpdateDateField = "UpdateDateField",
-            TenantId = "TenantId",
-            IsActive = "IsActive",
-            TenantName = "TenantName",
             InsertUserName = "InsertUserName",
             UpdateUserName = "UpdateUserName",
+            UpdateUserId = "UpdateUserId",
+            UpdateDate = "UpdateDate",
+            IsActive = "IsActive",
+            TenantId = "TenantId",
+            TenantName = "TenantName",
+            TenantCurrencyId = "TenantCurrencyId",
         }
     }
 }
@@ -2302,12 +2310,14 @@ declare namespace PatientManagement.PatientManagement {
         function Create(request: Serenity.SaveRequest<PatientHealthRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Update(request: Serenity.SaveRequest<PatientHealthRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Undelete(request: Serenity.UndeleteRequest, onSuccess?: (response: Serenity.UndeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<PatientHealthRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<PatientHealthRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         const enum Methods {
             Create = "PatientManagement/PatientHealth/Create",
             Update = "PatientManagement/PatientHealth/Update",
             Delete = "PatientManagement/PatientHealth/Delete",
+            Undelete = "PatientManagement/PatientHealth/Undelete",
             Retrieve = "PatientManagement/PatientHealth/Retrieve",
             List = "PatientManagement/PatientHealth/List",
         }
@@ -3800,6 +3810,7 @@ declare namespace PatientManagement.PatientManagement {
         protected getIdProperty(): string;
         protected getLocalTextPrefix(): string;
         protected getService(): string;
+        protected getIsActiveProperty(): string;
         constructor(container: JQuery);
     }
 }
@@ -3928,6 +3939,7 @@ declare namespace PatientManagement.PatientManagement {
         protected getIdProperty(): string;
         protected getLocalTextPrefix(): string;
         protected getService(): string;
+        protected getIsActiveProperty(): string;
         constructor(container: JQuery);
     }
 }

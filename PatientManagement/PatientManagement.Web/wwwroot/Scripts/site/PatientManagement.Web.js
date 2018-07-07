@@ -1724,6 +1724,7 @@ var PatientManagement;
                 'Create',
                 'Update',
                 'Delete',
+                'Undelete',
                 'Retrieve',
                 'List'
             ].forEach(function (x) {
@@ -1973,6 +1974,7 @@ var PatientManagement;
                 'Create',
                 'Update',
                 'Delete',
+                'Undelete',
                 'Retrieve',
                 'List'
             ].forEach(function (x) {
@@ -5786,7 +5788,7 @@ var PatientManagement;
             ActivityGrid.prototype.getIdProperty = function () { return PatientManagement.ActivityRow.idProperty; };
             ActivityGrid.prototype.getLocalTextPrefix = function () { return PatientManagement.ActivityRow.localTextPrefix; };
             ActivityGrid.prototype.getService = function () { return PatientManagement.ActivityService.baseUrl; };
-            ActivityGrid.prototype.getIsActiveProperty = function () { return PatientManagement.CabinetsRow.isActiveProperty; };
+            ActivityGrid.prototype.getIsActiveProperty = function () { return PatientManagement.ActivityRow.isActiveProperty; };
             ActivityGrid = __decorate([
                 Serenity.Decorators.registerClass()
             ], ActivityGrid);
@@ -6843,6 +6845,7 @@ var PatientManagement;
             LifeStylesGrid.prototype.getIdProperty = function () { return PatientManagement.LifeStylesRow.idProperty; };
             LifeStylesGrid.prototype.getLocalTextPrefix = function () { return PatientManagement.LifeStylesRow.localTextPrefix; };
             LifeStylesGrid.prototype.getService = function () { return PatientManagement.LifeStylesService.baseUrl; };
+            LifeStylesGrid.prototype.getIsActiveProperty = function () { return PatientManagement.LifeStylesRow.isActiveProperty; };
             LifeStylesGrid = __decorate([
                 Serenity.Decorators.registerClass()
             ], LifeStylesGrid);
@@ -7431,6 +7434,7 @@ var PatientManagement;
             PatientHealthGrid.prototype.getIdProperty = function () { return PatientManagement.PatientHealthRow.idProperty; };
             PatientHealthGrid.prototype.getLocalTextPrefix = function () { return PatientManagement.PatientHealthRow.localTextPrefix; };
             PatientHealthGrid.prototype.getService = function () { return PatientManagement.PatientHealthService.baseUrl; };
+            PatientHealthGrid.prototype.getIsActiveProperty = function () { return PatientManagement.PatientHealthRow.isActiveProperty; };
             PatientHealthGrid = __decorate([
                 Serenity.Decorators.registerClass()
             ], PatientHealthGrid);

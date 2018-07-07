@@ -7,16 +7,17 @@
         RemarksForFoodTake?: string;
         BadHabits?: string;
         NotEating?: string;
+        PatientName?: string;
         InsertUserId?: number;
         InsertDate?: string;
-        UpdateUserId?: number;
-        UpdateDateField?: string;
-        IsActive?: number;
-        TenantName?: string;
         InsertUserName?: string;
         UpdateUserName?: string;
-        PatientName?: string;
+        UpdateUserId?: number;
+        UpdateDate?: string;
+        IsActive?: number;
         TenantId?: number;
+        TenantName?: string;
+        TenantCurrencyId?: number;
     }
 
     export namespace LifeStylesRow {
@@ -38,16 +39,17 @@
             RemarksForFoodTake = "RemarksForFoodTake",
             BadHabits = "BadHabits",
             NotEating = "NotEating",
+            PatientName = "PatientName",
             InsertUserId = "InsertUserId",
             InsertDate = "InsertDate",
-            UpdateUserId = "UpdateUserId",
-            UpdateDateField = "UpdateDateField",
-            IsActive = "IsActive",
-            TenantName = "TenantName",
             InsertUserName = "InsertUserName",
             UpdateUserName = "UpdateUserName",
-            PatientName = "PatientName",
-            TenantId = "TenantId"
+            UpdateUserId = "UpdateUserId",
+            UpdateDate = "UpdateDate",
+            IsActive = "IsActive",
+            TenantId = "TenantId",
+            TenantName = "TenantName",
+            TenantCurrencyId = "TenantCurrencyId"
         }
     }
 }

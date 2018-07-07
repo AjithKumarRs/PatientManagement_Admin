@@ -22,20 +22,21 @@ namespace PatientManagement.Migrations.PatientManagementDB
             Alter.Table("Activity")
                 .AddColumn("TenantId").AsInt32().NotNullable().WithDefaultValue(1)
                 .AddColumn("UpdateUserId").AsInt32().Nullable()
-                .AddColumn("UpdateDateField").AsDateTime().Nullable()
+                .AddColumn("UpdateDate").AsDateTime().Nullable()
                 .AddColumn("IsActive").AsInt16().NotNullable().WithDefaultValue(1);
 
+            
             // TODO: Move to initial migration - issue #208
             Alter.Table("LifeStyles")
                 .AddColumn("UpdateUserId").AsInt32().Nullable()
-                .AddColumn("UpdateDateField").AsDateTime().Nullable()
+                .AddColumn("UpdateDate").AsDateTime().Nullable()
                 .AddColumn("IsActive").AsInt16().NotNullable().WithDefaultValue(1);
 
             // TODO: Move to initial migration - issue #208
             Alter.Table("PatientHealth")
                 .AddColumn("PatientHealthId").AsInt32().Identity().PrimaryKey().NotNullable()
                 .AddColumn("UpdateUserId").AsInt32().Nullable()
-                .AddColumn("UpdateDateField").AsDateTime().Nullable()
+                .AddColumn("UpdateDate").AsDateTime().Nullable()
                 .AddColumn("IsActive").AsInt16().NotNullable().WithDefaultValue(1);
 
 

@@ -27,6 +27,11 @@ namespace PatientManagement.PatientManagement.Repositories
         {
             return new MyDeleteHandler().Process(uow, request);
         }
+        public UndeleteResponse Undelete(IUnitOfWork uow, UndeleteRequest request)
+        {
+            return new MyUndeleteHandler().Process(uow, request);
+        }
+        private class MyUndeleteHandler : UndeleteRequestHandler<MyRow> { }
 
         public RetrieveResponse<MyRow> Retrieve(IDbConnection connection, RetrieveRequest request)
         {

@@ -6,13 +6,14 @@
         Profession?: string;
         InsertUserId?: number;
         InsertDate?: string;
+        InsertUserName?: string;
+        UpdateUserName?: string;
         UpdateUserId?: number;
-        UpdateDateField?: string;
+        UpdateDate?: string;
         IsActive?: number;
         TenantId?: number;
         TenantName?: string;
-        InsertUserName?: string;
-        UpdateUserName?: string;
+        TenantCurrencyId?: number;
     }
 
     export namespace ActivityRow {
@@ -33,13 +34,14 @@
             Profession = "Profession",
             InsertUserId = "InsertUserId",
             InsertDate = "InsertDate",
+            InsertUserName = "InsertUserName",
+            UpdateUserName = "UpdateUserName",
             UpdateUserId = "UpdateUserId",
-            UpdateDateField = "UpdateDateField",
+            UpdateDate = "UpdateDate",
             IsActive = "IsActive",
             TenantId = "TenantId",
             TenantName = "TenantName",
-            InsertUserName = "InsertUserName",
-            UpdateUserName = "UpdateUserName"
+            TenantCurrencyId = "TenantCurrencyId"
         }
     }
 }
