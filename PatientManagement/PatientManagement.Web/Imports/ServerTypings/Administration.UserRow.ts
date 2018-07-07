@@ -12,7 +12,6 @@
         Info?: string;
         UserImage?: string;
         LastDirectoryUpdate?: string;
-        IsActive?: number;
         WebSite?: string;
         PhoneNumber?: string;
         EmailSignature?: string;
@@ -21,13 +20,16 @@
         Specialties?: number[];
         Password?: string;
         PasswordConfirm?: string;
+        InsertUserId?: number;
+        InsertDate?: string;
+        InsertUserName?: string;
+        UpdateUserName?: string;
+        UpdateUserId?: number;
+        UpdateDate?: string;
+        IsActive?: number;
         TenantId?: number;
         TenantName?: string;
         TenantCurrencyId?: number;
-        InsertUserId?: number;
-        InsertDate?: string;
-        UpdateUserId?: number;
-        UpdateDate?: string;
     }
 
     export namespace UserRow {
@@ -54,7 +56,6 @@
             Info = "Info",
             UserImage = "UserImage",
             LastDirectoryUpdate = "LastDirectoryUpdate",
-            IsActive = "IsActive",
             WebSite = "WebSite",
             PhoneNumber = "PhoneNumber",
             EmailSignature = "EmailSignature",
@@ -63,13 +64,16 @@
             Specialties = "Specialties",
             Password = "Password",
             PasswordConfirm = "PasswordConfirm",
-            TenantId = "TenantId",
-            TenantName = "TenantName",
-            TenantCurrencyId = "TenantCurrencyId",
             InsertUserId = "InsertUserId",
             InsertDate = "InsertDate",
+            InsertUserName = "InsertUserName",
+            UpdateUserName = "UpdateUserName",
             UpdateUserId = "UpdateUserId",
-            UpdateDate = "UpdateDate"
+            UpdateDate = "UpdateDate",
+            IsActive = "IsActive",
+            TenantId = "TenantId",
+            TenantName = "TenantName",
+            TenantCurrencyId = "TenantCurrencyId"
         }
     }
 }

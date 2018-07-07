@@ -15,8 +15,8 @@
         Info: Serenity.TextAreaEditor;
         EmailSignature: Serenity.HtmlContentEditor;
         Source: Serenity.StringEditor;
-        IsActive: BsSwitchEditor;
-        TenantId: Serenity.LookupEditor;
+        IsActive: Serenity.IntegerEditor;
+        TenantId: Serenity.IntegerEditor;
     }
 
     export class UserForm extends Serenity.PrefixedContext {
@@ -38,6 +38,7 @@
                 var w5 = s.ImageUploadEditor;
                 var w6 = s.TextAreaEditor;
                 var w7 = s.HtmlContentEditor;
+                var w8 = s.IntegerEditor;
 
                 Q.initFormType(UserForm, [
                     'Username', w0,
@@ -55,8 +56,8 @@
                     'Info', w6,
                     'EmailSignature', w7,
                     'Source', w0,
-                    'IsActive', w4,
-                    'TenantId', w2
+                    'IsActive', w8,
+                    'TenantId', w8
                 ]);
             }
         }

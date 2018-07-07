@@ -16,7 +16,7 @@ namespace PatientManagement.Administration.Entities
     [ModifyPermission(PermissionKeys.User.ModifyPermission)]
     [LookupScript("Administration.User",
         LookupType = typeof(MultiTenantRowLookupScript<>))]
-    public sealed class UserRow : LoggingRow, IIdRow, INameRow, IIsActiveDeletedRow, IMultiTenantRow
+    public sealed class UserRow : LoggingRow, IIdRow, INameRow
     {
         [DisplayName("User Id"), Identity]
         public Int32? UserId
@@ -156,16 +156,6 @@ namespace PatientManagement.Administration.Entities
             set { Fields.Password[this] = value; }
         }
 
-        [NotNull, Insertable(false), Updatable(true)]
-        [ModifyPermission(PermissionKeys.User.IsActivePermission)]
-        [ReadPermission(PermissionKeys.User.IsActivePermission)]
-        [BsSwitchEditor]
-        [LookupInclude]
-        public Int16? IsActive
-        {
-            get { return Fields.IsActive[this]; }
-            set { Fields.IsActive[this] = value; }
-        }
 
         [BsSwitchEditor]
         [DisplayName("Can Be Assigned To Visit")]
@@ -189,37 +179,7 @@ namespace PatientManagement.Administration.Entities
             get { return Fields.LastDirectoryUpdate[this]; }
             set { Fields.LastDirectoryUpdate[this] = value; }
         }
-        #region Tenant
-
-        [DisplayName("Tenant"), ForeignKey("Tenants", "TenantId"), LeftJoin("tnt"), QuickFilter]
-        [LookupEditor(typeof(TenantRow))]
-        [ReadPermission(PermissionKeys.Tenant)]
-        public Int32? TenantId
-        {
-            get { return Fields.TenantId[this]; }
-            set { Fields.TenantId[this] = value; }
-        }
-
-        [ReadPermission(PermissionKeys.Tenant)]
-        [DisplayName("Tenant"), Expression("tnt.TenantName")]
-        public String TenantName
-        {
-            get { return Fields.TenantName[this]; }
-            set { Fields.TenantName[this] = value; }
-        }
-
-        [DisplayName("CurrencyId"), Expression("tnt.CurrencyId")]
-        public Int32? TenantCurrencyId
-        {
-            get { return Fields.TenantCurrencyId[this]; }
-            set { Fields.TenantCurrencyId[this] = value; }
-        }
-        public Int32Field TenantIdField
-        {
-            get { return Fields.TenantId; }
-        }
-
-#endregion
+        
 
         IIdField IIdRow.IdField
         {
@@ -229,11 +189,6 @@ namespace PatientManagement.Administration.Entities
         StringField INameRow.NameField
         {
             get { return Fields.DisplayName; }
-        }
-
-        Int16Field IIsActiveRow.IsActiveField
-        {
-            get { return Fields.IsActive; }
         }
 
         public static readonly RowFields Fields = new RowFields().Init();
@@ -257,7 +212,6 @@ namespace PatientManagement.Administration.Entities
             public StringField Info;
             public StringField UserImage;
             public DateTimeField LastDirectoryUpdate;
-            public Int16Field IsActive;
             public StringField WebSite;
             public StringField PhoneNumber;
             public StringField EmailSignature;
@@ -269,10 +223,6 @@ namespace PatientManagement.Administration.Entities
 
             public StringField Password;
             public StringField PasswordConfirm;
-
-            public readonly Int32Field TenantId;
-            public readonly StringField TenantName;
-            public readonly Int32Field TenantCurrencyId;
             
             public RowFields()
                 : base("Users")
