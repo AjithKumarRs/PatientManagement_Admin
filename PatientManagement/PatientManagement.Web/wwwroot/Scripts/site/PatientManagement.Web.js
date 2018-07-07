@@ -3138,8 +3138,9 @@ var PatientManagement;
                     Module: null,
                     Submodule: null
                 }, function (response) {
-                    _this.permissions.set_value(response.Entities.map(function (x) { return ({ PermissionKey: x }); }));
+                    _this.permissions.value = response.Entities.map(function (x) { return ({ PermissionKey: x }); });
                 });
+                _this.permissions.implicitPermissions = Q.getRemoteData('Administration.ImplicitPermissions');
                 return _this;
             }
             RolePermissionDialog.prototype.getDialogOptions = function () {
@@ -3151,7 +3152,7 @@ var PatientManagement;
                         click: function (e) {
                             Administration.RolePermissionService.Update({
                                 RoleID: _this.options.roleID,
-                                Permissions: _this.permissions.get_value().map(function (x) { return x.PermissionKey; }),
+                                Permissions: _this.permissions.value.map(function (x) { return x.PermissionKey; }),
                                 Module: null,
                                 Submodule: null
                             }, function (response) {
@@ -3909,7 +3910,8 @@ var PatientManagement;
             __extends(PermissionCheckEditor, _super);
             function PermissionCheckEditor(container, opt) {
                 var _this = _super.call(this, container, opt) || this;
-                _this.rolePermissions = {};
+                _this._rolePermissions = {};
+                _this._implicitPermissions = {};
                 var titleByKey = {};
                 var permissionKeys = _this.getSortedGroupAndPermissionKeys(titleByKey);
                 var items = permissionKeys.map(function (key) { return ({
@@ -3938,12 +3940,31 @@ var PatientManagement;
                 }
                 return 'checked partial';
             };
+            PermissionCheckEditor.prototype.roleOrImplicit = function (key) {
+                if (this._rolePermissions[key])
+                    return true;
+                for (var _i = 0, _a = Object.keys(this._rolePermissions); _i < _a.length; _i++) {
+                    var k = _a[_i];
+                    var d = this._implicitPermissions[k];
+                    if (d && d[key])
+                        return true;
+                }
+                for (var _b = 0, _c = Object.keys(this._implicitPermissions); _b < _c.length; _b++) {
+                    var i = _c[_b];
+                    var item = this.view.getItemById(i);
+                    if (item && item.GrantRevoke == true) {
+                        var d = this._implicitPermissions[i];
+                        if (d && d[key])
+                            return true;
+                    }
+                }
+            };
             PermissionCheckEditor.prototype.getItemEffectiveClass = function (item) {
                 var _this = this;
                 if (item.IsGroup) {
                     var desc = this.getDescendants(item, true);
                     var grantCount = Q.count(desc, function (x) { return x.GrantRevoke === true ||
-                        (x.GrantRevoke == null && _this.rolePermissions[x.Key]); });
+                        (x.GrantRevoke == null && _this.roleOrImplicit(x.Key)); });
                     if (grantCount === desc.length || desc.length === 0) {
                         return 'allow';
                     }
@@ -3953,7 +3974,7 @@ var PatientManagement;
                     return 'partial';
                 }
                 var granted = item.GrantRevoke === true ||
-                    (item.GrantRevoke == null && this.rolePermissions[item.Key]);
+                    (item.GrantRevoke == null && this.roleOrImplicit(item.Key));
                 return (granted ? ' allow' : ' deny');
             };
             PermissionCheckEditor.prototype.getColumns = function () {
@@ -4126,45 +4147,73 @@ var PatientManagement;
                 keys = keys.sort(function (x, y) { return Q.turkishLocaleCompare(titleWithGroup[x], titleWithGroup[y]); });
                 return keys;
             };
-            PermissionCheckEditor.prototype.get_value = function () {
-                var result = [];
-                for (var _i = 0, _a = this.view.getItems(); _i < _a.length; _i++) {
-                    var item = _a[_i];
-                    if (item.GrantRevoke != null && item.Key.charAt(item.Key.length - 1) != ':') {
-                        result.push({ PermissionKey: item.Key, Granted: item.GrantRevoke });
-                    }
-                }
-                return result;
-            };
-            PermissionCheckEditor.prototype.set_value = function (value) {
-                for (var _i = 0, _a = this.view.getItems(); _i < _a.length; _i++) {
-                    var item = _a[_i];
-                    item.GrantRevoke = null;
-                }
-                if (value != null) {
-                    for (var _b = 0, value_1 = value; _b < value_1.length; _b++) {
-                        var row = value_1[_b];
-                        var r = this.view.getItemById(row.PermissionKey);
-                        if (r) {
-                            r.GrantRevoke = Q.coalesce(row.Granted, true);
+            Object.defineProperty(PermissionCheckEditor.prototype, "value", {
+                get: function () {
+                    var result = [];
+                    for (var _i = 0, _a = this.view.getItems(); _i < _a.length; _i++) {
+                        var item = _a[_i];
+                        if (item.GrantRevoke != null && item.Key.charAt(item.Key.length - 1) != ':') {
+                            result.push({ PermissionKey: item.Key, Granted: item.GrantRevoke });
                         }
                     }
-                }
-                this.setItems(this.getItems());
-            };
-            PermissionCheckEditor.prototype.get_rolePermissions = function () {
-                return Object.keys(this.rolePermissions);
-            };
-            PermissionCheckEditor.prototype.set_rolePermissions = function (value) {
-                this.rolePermissions = {};
-                if (value) {
-                    for (var _i = 0, value_2 = value; _i < value_2.length; _i++) {
-                        var k = value_2[_i];
-                        this.rolePermissions[k] = true;
+                    return result;
+                },
+                set: function (value) {
+                    for (var _i = 0, _a = this.view.getItems(); _i < _a.length; _i++) {
+                        var item = _a[_i];
+                        item.GrantRevoke = null;
                     }
-                }
-                this.setItems(this.getItems());
-            };
+                    if (value != null) {
+                        for (var _b = 0, value_1 = value; _b < value_1.length; _b++) {
+                            var row = value_1[_b];
+                            var r = this.view.getItemById(row.PermissionKey);
+                            if (r) {
+                                r.GrantRevoke = Q.coalesce(row.Granted, true);
+                            }
+                        }
+                    }
+                    this.setItems(this.getItems());
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(PermissionCheckEditor.prototype, "rolePermissions", {
+                get: function () {
+                    return Object.keys(this._rolePermissions);
+                },
+                set: function (value) {
+                    this._rolePermissions = {};
+                    if (value) {
+                        for (var _i = 0, value_2 = value; _i < value_2.length; _i++) {
+                            var k = value_2[_i];
+                            this._rolePermissions[k] = true;
+                        }
+                    }
+                    this.setItems(this.getItems());
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(PermissionCheckEditor.prototype, "implicitPermissions", {
+                set: function (value) {
+                    this._implicitPermissions = {};
+                    if (value) {
+                        for (var _i = 0, _a = Object.keys(value); _i < _a.length; _i++) {
+                            var k = _a[_i];
+                            this._implicitPermissions[k] = this._implicitPermissions[k] || {};
+                            var l = value[k];
+                            if (l) {
+                                for (var _b = 0, l_1 = l; _b < l_1.length; _b++) {
+                                    var s = l_1[_b];
+                                    this._implicitPermissions[k][s] = true;
+                                }
+                            }
+                        }
+                    }
+                },
+                enumerable: true,
+                configurable: true
+            });
             PermissionCheckEditor = __decorate([
                 Serenity.Decorators.registerEditor([Serenity.IGetEditValue, Serenity.ISetEditValue])
             ], PermissionCheckEditor);
@@ -4189,15 +4238,16 @@ var PatientManagement;
                     Module: null,
                     Submodule: null
                 }, function (response) {
-                    _this.permissions.set_value(response.Entities);
+                    _this.permissions.value = response.Entities;
                 });
                 Administration.UserPermissionService.ListRolePermissions({
                     UserID: _this.options.userID,
                     Module: null,
                     Submodule: null,
                 }, function (response) {
-                    _this.permissions.set_rolePermissions(response.Entities);
+                    _this.permissions.rolePermissions = response.Entities;
                 });
+                _this.permissions.implicitPermissions = Q.getRemoteData('Administration.ImplicitPermissions');
                 return _this;
             }
             UserPermissionDialog.prototype.getDialogOptions = function () {
@@ -4209,7 +4259,7 @@ var PatientManagement;
                         click: function (e) {
                             Administration.UserPermissionService.Update({
                                 UserID: _this.options.userID,
-                                Permissions: _this.permissions.get_value(),
+                                Permissions: _this.permissions.value,
                                 Module: null,
                                 Submodule: null
                             }, function (response) {

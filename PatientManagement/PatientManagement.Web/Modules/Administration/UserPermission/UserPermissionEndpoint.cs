@@ -1,6 +1,7 @@
 ﻿
 namespace PatientManagement.Administration.Endpoints
 {
+    using System.Collections.Generic;
     using Serenity.ComponentModel;
     using Serenity.Data;
     using Serenity.Services;
@@ -33,6 +34,12 @@ namespace PatientManagement.Administration.Endpoints
         public ListResponse<string> ListPermissionKeys()
         {
             return new MyRepository().ListPermissionKeys();
+        }
+
+        [DataScript("Administration.ImplicitPermissions"), NonAction]
+        public Dictionary<string, HashSet<string>> ListImplicitPermissions()
+        {
+            return new MyRepository().ImplicitPermissions;
         }
     }
 }

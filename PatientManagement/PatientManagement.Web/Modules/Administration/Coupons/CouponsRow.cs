@@ -10,8 +10,10 @@ namespace PatientManagement.Administration.Entities
     using System.IO;
 
     [ConnectionKey("Default"), TableName("[dbo].[Coupons]"), DisplayName("Coupons"), InstanceName("Coupons"), TwoLevelCached]
-    [ReadPermission("AdministrationTenants:Coupons:Read")]
-    [ModifyPermission("Administration:Coupons:Modify")]
+    [ReadPermission(PermissionKeys.Coupons.ReadPermission)]
+    [InsertPermission(PermissionKeys.Coupons.InsertPermission)]
+    [UpdatePermission(PermissionKeys.Coupons.UpdatePermission)]
+    [DeletePermission(PermissionKeys.Coupons.DeletePermission)]
     [LookupScript("Administration.Coupons")]
     public sealed class CouponsRow : Row, IIdRow, INameRow, ILoggingRow, IIsActiveDeletedRow
     {

@@ -11,7 +11,6 @@ namespace PatientManagement.Administration
     using Serenity.Data;
     using System;
     using System.Collections.Generic;
-
     public class PermissionService : IPermissionService
     {
         public bool HasPermission(string permission)
@@ -22,12 +21,12 @@ namespace PatientManagement.Administration
             var user = (UserDefinition)Authorization.UserDefinition;
             if (user == null)
                 return false;
-            
+
             bool grant;
             if (GetUserPermissions(user.UserId).TryGetValue(permission, out grant))
                 return grant;
 
-            foreach (var roleId in GetUserRoles(user.UserId, user.TenantId))
+            foreach (var roleId in GetUserRoles(user.UserId))
             {
                 if (GetRolePermissions(roleId).Contains(permission))
                     return true;
@@ -35,7 +34,7 @@ namespace PatientManagement.Administration
 
             return false;
         }
-        
+
         private Dictionary<string, bool> GetUserPermissions(int userId)
         {
             var fld = UserPermissionRow.Fields;
@@ -51,6 +50,15 @@ namespace PatientManagement.Administration
                             .Select(fld.Granted)
                             .Where(new Criteria(fld.UserId) == userId))
                         .ForEach(x => result[x.PermissionKey] = x.Granted ?? true);
+
+                    var implicitPermissions = new Repositories.UserPermissionRepository().ImplicitPermissions;
+                    foreach (var pair in result.ToArray())
+                    {
+                        HashSet<string> list;
+                        if (pair.Value && implicitPermissions.TryGetValue(pair.Key, out list))
+                            foreach (var x in list)
+                                result[x] = true;
+                    }
 
                     return result;
                 }
@@ -72,12 +80,21 @@ namespace PatientManagement.Administration
                             .Where(new Criteria(fld.RoleId) == userId))
                         .ForEach(x => result.Add(x.PermissionKey));
 
+                    var implicitPermissions = new Repositories.UserPermissionRepository().ImplicitPermissions;
+                    foreach (var key in result.ToArray())
+                    {
+                        HashSet<string> list;
+                        if (implicitPermissions.TryGetValue(key, out list))
+                            foreach (var x in list)
+                                result.Add(x);
+                    }
+
                     return result;
                 }
             });
         }
 
-        private HashSet<int> GetUserRoles(int userId, int tenantId)
+        private HashSet<int> GetUserRoles(int userId)
         {
             var fld = UserRoleRow.Fields;
 
@@ -94,7 +111,6 @@ namespace PatientManagement.Administration
 
                     return result;
                 }
-
             });
         }
     }

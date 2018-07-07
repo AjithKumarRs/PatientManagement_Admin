@@ -28,7 +28,7 @@ namespace PatientManagement.PatientManagement
         [DisplayName("Activity")]
         public class Activity
         {
-            [Description("Page")]
+            [Description("Page"), ImplicitPermission(ReadPermission)]
             public const string PagePermission = "PatientManagement:Activity:Page";
             [Description("View")]
             public const string ReadPermission = "PatientManagement:Activity:Read";
@@ -41,7 +41,7 @@ namespace PatientManagement.PatientManagement
         [DisplayName("Cabinets")]
         public class Cabinets
         {
-            [Description("Page")]
+            [Description("Page"), ImplicitPermission(ReadPermission)]
             public const string PagePermission = "PatientManagement:Cabinets:Page";
             [Description("View")]
             public const string ReadPermission = "PatientManagement:Cabinets:Read";
@@ -55,7 +55,7 @@ namespace PatientManagement.PatientManagement
         [DisplayName("Life Styles")]
         public class LifeStyles
         {
-            [Description("Page")]
+            [Description("Page"), ImplicitPermission(ReadPermission)]
             public const string PagePermission = "PatientManagement:LifeStyles:Page";
             [Description("View")]
             public const string ReadPermission = "PatientManagement:LifeStyles:Read";
@@ -68,7 +68,7 @@ namespace PatientManagement.PatientManagement
         [DisplayName("Medical Specialties")]
         public class MedicalSpecialties
         {
-            [Description("Page")]
+            [Description("Page"), ImplicitPermission(ReadPermission)]
             public const string PagePermission = "PatientManagement:MedicalSpecialties:Page";
             [Description("View")]
             public const string ReadPermission = "PatientManagement:MedicalSpecialties:Read";
@@ -92,7 +92,7 @@ namespace PatientManagement.PatientManagement
         [DisplayName("Notifications")]
         public class Notifications
         {
-            [Description("Page")]
+            [Description("Page"), ImplicitPermission(ReadPermission)]
             public const string PagePermission = "PatientManagement:Notifications:Page";
             [Description("View")]
             public const string ReadPermission = "PatientManagement:Notifications:Read";
@@ -108,7 +108,7 @@ namespace PatientManagement.PatientManagement
         [DisplayName("Patient Health")]
         public class PatientHealth
         {
-            [Description("Page")]
+            [Description("Page"), ImplicitPermission(ReadPermission)]
             public const string PagePermission = "PatientManagement:PatientHealth:Page";
             [Description("View")]
             public const string ReadPermission = "PatientManagement:PatientHealth:Read";
@@ -121,7 +121,7 @@ namespace PatientManagement.PatientManagement
         [DisplayName("Patients")]
         public class Patients
         {
-            [Description("Page")]
+            [Description("Page"), ImplicitPermission(ReadPermission)]
             public const string PagePermission = "PatientManagement:Patients:Page";
             [Description("View")]
             public const string ReadPermission = "PatientManagement:Patients:Read";
@@ -134,7 +134,7 @@ namespace PatientManagement.PatientManagement
         [DisplayName("Patients File Uploads")]
         public class PatientsFileUploads
         {
-            [Description("Page")]
+            [Description("Page"), ImplicitPermission(ReadPermission)]
             public const string PagePermission = "PatientManagement:PatientsFileUploads:Page";
             [Description("View")]
             public const string ReadPermission = "PatientManagement:PatientsFileUploads:Read";
@@ -147,7 +147,7 @@ namespace PatientManagement.PatientManagement
         [DisplayName("Visits")]
         public class Visits
         {
-            [Description("Page")]
+            [Description("Page"), ImplicitPermission(ReadPermission)]
             public const string PagePermission = "PatientManagement:Visits:Page";
             [Description("View")]
             public const string ReadPermission = "PatientManagement:Visits:Read";
@@ -160,7 +160,7 @@ namespace PatientManagement.PatientManagement
         [DisplayName("External Access")]
         public class ExternalAccess
         {
-            [Description("Page")]
+            [Description("Page"), ImplicitPermission(ReadPermission)]
             public const string PagePermission = "PatientManagement:ExternalAccess:Page";
             [Description("View")]
             public const string ReadPermission = "PatientManagement:ExternalAccess:Read";
@@ -173,7 +173,7 @@ namespace PatientManagement.PatientManagement
         [DisplayName("Visit Types")]
         public class VisitTypes
         {
-            [Description("Page")]
+            [Description("Page"), ImplicitPermission(ReadPermission)]
             public const string PagePermission = "PatientManagement:VisitTypes:Page";
             [Description("View")]
             public const string ReadPermission = "PatientManagement:VisitTypes:Read";

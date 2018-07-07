@@ -6,7 +6,7 @@ namespace PatientManagement.Administration.Pages
     using Serenity.Web;
     using Microsoft.AspNetCore.Mvc;
 
-    [PageAuthorize("Administration:Coupons:Page")]
+    [PageAuthorize(PermissionKeys.Coupons.PagePermission)]
     public class CouponsController : Controller
     {
         [Route("Administration/Coupons")]
