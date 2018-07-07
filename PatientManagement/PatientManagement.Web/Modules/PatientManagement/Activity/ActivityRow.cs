@@ -12,8 +12,9 @@ namespace PatientManagement.PatientManagement.Entities
     using System.IO;
 
     [ConnectionKey("PatientManagement"), TableName("[dbo].[Activity]"), DisplayName("Activity"), InstanceName("Activity"), TwoLevelCached]
-    [ReadPermission("PatientManagement:Activity:Read")]
-    [ModifyPermission("PatientManagement:Activity:Modify")]
+    [ReadPermission(PatientManagementPermissionKeys.Activity.ReadPermission)]
+    [UpdatePermission(PatientManagementPermissionKeys.Activity.UpdatePermission)]
+    [DeletePermission(PatientManagementPermissionKeys.Activity.DeletePermission)]
     [LookupScript("PatientManagement.Activity",
         LookupType = typeof(MultiTenantRowLookupScript<>))]
     public sealed class ActivityRow : Row, IIdRow, INameRow, ILoggingRow, IMultiTenantRow, IIsActiveRow
