@@ -51,6 +51,6 @@ namespace PatientManagement.Administration.Columns
         public String UpdateUserName { get; set; }
         [DisplayFormat("dd/MM/yyyy HH:mm")]
         [Width(120)]
-        public DateTime UpdateDateField { get; set; }
+        public DateTime UpdateDate { get; set; }
     }
 }

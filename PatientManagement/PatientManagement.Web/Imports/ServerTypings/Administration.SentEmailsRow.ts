@@ -7,16 +7,17 @@
         Body?: string;
         ToEmail?: string;
         ToName?: string;
-        TenantId?: number;
+        EmailSignature?: string;
         InsertUserId?: number;
         InsertDate?: string;
-        UpdateUserId?: number;
-        UpdateDateField?: string;
-        IsActive?: number;
-        EmailSignature?: string;
-        TenantName?: string;
         InsertUserName?: string;
         UpdateUserName?: string;
+        UpdateUserId?: number;
+        UpdateDate?: string;
+        IsActive?: number;
+        TenantId?: number;
+        TenantName?: string;
+        TenantCurrencyId?: number;
     }
 
     export namespace SentEmailsRow {
@@ -38,16 +39,17 @@
             Body = "Body",
             ToEmail = "ToEmail",
             ToName = "ToName",
-            TenantId = "TenantId",
+            EmailSignature = "EmailSignature",
             InsertUserId = "InsertUserId",
             InsertDate = "InsertDate",
-            UpdateUserId = "UpdateUserId",
-            UpdateDateField = "UpdateDateField",
-            IsActive = "IsActive",
-            EmailSignature = "EmailSignature",
-            TenantName = "TenantName",
             InsertUserName = "InsertUserName",
-            UpdateUserName = "UpdateUserName"
+            UpdateUserName = "UpdateUserName",
+            UpdateUserId = "UpdateUserId",
+            UpdateDate = "UpdateDate",
+            IsActive = "IsActive",
+            TenantId = "TenantId",
+            TenantName = "TenantName",
+            TenantCurrencyId = "TenantCurrencyId"
         }
     }
 }

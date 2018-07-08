@@ -18,7 +18,7 @@ namespace PatientManagement.Administration.Entities
     [ModifyPermission(PermissionKeys.Payments.ModifyPermission)]
     [LookupScript("AdministrationTenants.Payment",
         LookupType = typeof(MultiTenantRowLookupScript<>))]
-    public sealed class PaymentsRow : Row, IIdRow, INameRow, ILoggingRow, IMultiTenantRow
+    public sealed class PaymentsRow : LoggingRow, IIdRow, INameRow
     {
         [DisplayName("Payment Id"), Identity]
         public Int64? PaymentId
@@ -311,89 +311,7 @@ namespace PatientManagement.Administration.Entities
 
 
         #endregion
-
-        #region ILoggingRow
-
-        [DisplayName("Insert User Id"), NotNull, ForeignKey("Users", "UserId"), LeftJoin("usrI"), TextualField("InsertUserName")]
-        [ReadPermission(PermissionKeys.Tenant)]
-        public Int32? InsertUserId
-        {
-            get { return Fields.InsertUserId[this]; }
-            set { Fields.InsertUserId[this] = value; }
-        }
-
-
-        [DisplayName("Created by"), Expression("usrI.UserName")]
-        [ReadPermission(PermissionKeys.Tenant)]
-        public String InsertUserName
-        {
-            get { return Fields.InsertUserName[this]; }
-            set { Fields.InsertUserName[this] = value; }
-        }
-
-
-        [DisplayName("Insert Date"), NotNull, SortOrder(1, true)]
-        [ReadPermission(PermissionKeys.Tenant)]
-        public DateTime? InsertDate
-        {
-            get { return Fields.InsertDate[this]; }
-            set { Fields.InsertDate[this] = value; }
-        }
-
-        [DisplayName("Update User Id"), NotNull, ForeignKey("Users", "UserId"), LeftJoin("usrU"), TextualField("UpdateUserName")]
-        [ReadPermission(PermissionKeys.Tenant)]
-        public Int32? UpdateUserId
-        {
-            get { return Fields.UpdateUserId[this]; }
-            set { Fields.UpdateUserId[this] = value; }
-        }
-        [DisplayName("Last updated by"), Expression("usrU.UserName")]
-        [ReadPermission(PermissionKeys.Tenant)]
-        public String UpdateUserName
-        {
-            get { return Fields.UpdateUserName[this]; }
-            set { Fields.UpdateUserName[this] = value; }
-        }
-
-        [DisplayName("Update Date Field"), NotNull]
-        [ReadPermission(PermissionKeys.Tenant)]
-        public DateTime? UpdateDateField
-        {
-            get { return Fields.UpdateDateField[this]; }
-            set { Fields.UpdateDateField[this] = value; }
-        }
-        public IIdField InsertUserIdField => Fields.InsertUserId;
-
-        public DateTimeField InsertDateField => Fields.InsertDate;
-
-
-        public IIdField UpdateUserIdField { get; } = Fields.UpdateUserId;
-
-        DateTimeField IUpdateLogRow.UpdateDateField { get; } = Fields.UpdateDateField;
-
-        #endregion
-
-        #region Tenant
-
-        [Insertable(false), Updatable(false), ForeignKey("Tenants", "TenantId"), LeftJoin("tnt")]
-        public Int32? TenantId
-        {
-            get { return Fields.TenantId[this]; }
-            set { Fields.TenantId[this] = value; }
-        }
-        [DisplayName("Tenant"), Expression("tnt.TenantName")]
-        [ReadPermission(PermissionKeys.Tenant)]
-        public String TenantName
-        {
-            get { return Fields.TenantName[this]; }
-            set { Fields.TenantName[this] = value; }
-        }
-        public Int32Field TenantIdField
-        {
-            get { return Fields.TenantId; }
-        }
-        #endregion
-
+        
         IIdField IIdRow.IdField
         {
             get { return Fields.PaymentId; }
@@ -411,11 +329,10 @@ namespace PatientManagement.Administration.Entities
         {
         }
 
-        public class RowFields : RowFieldsBase
+        public class RowFields : LoggingRowFields
         {
             public Int64Field PaymentId;
             public Int64Field SubscriptionId;
-            public Int32Field TenantId;
             public Int64Field PaymentDetailsId;
             public Int32Field PaymentOptionId;
             public Int32Field CurrencyId;
@@ -456,16 +373,6 @@ namespace PatientManagement.Administration.Entities
             public StringField CurrencyName;
             public DecimalField CurrencyRate;
 
-
-            public Int32Field InsertUserId;
-            public DateTimeField InsertDate;
-            public Int32Field UpdateUserId;
-            public DateTimeField UpdateDateField;
-
-
-            public StringField TenantName;
-            public StringField InsertUserName;
-            public StringField UpdateUserName;
             public RowFields()
                 : base()
             {

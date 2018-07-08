@@ -26,7 +26,7 @@ namespace PatientManagement.Migrations.DefaultDB
                 .WithColumn("RoleId").AsInt32().NotNullable()
                 .ForeignKey("FK_Roles_RoleId", "Roles", "RoleId")
                 .WithColumn("UpdateUserId").AsInt32().NotNullable()
-                .WithColumn("UpdateDateField").AsDateTime().NotNullable()
+                .WithColumn("UpdateDate").AsDateTime().NotNullable()
             );
 
             Insert.IntoTable("Offers")
@@ -39,7 +39,7 @@ namespace PatientManagement.Migrations.DefaultDB
                     CurrencyId = 1,
                     RoleId = 2,
                     UpdateUserId = 1,
-                    UpdateDateField = DateTime.Now
+                    UpdateDate = DateTime.Now
                 });
         }
     }

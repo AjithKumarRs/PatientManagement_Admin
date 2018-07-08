@@ -362,7 +362,7 @@ declare namespace PatientManagement.Administration {
         InsertUserId?: number;
         InsertDate?: string;
         UpdateUserId?: number;
-        UpdateDateField?: string;
+        UpdateDate?: string;
         IsActive?: number;
         InsertUserName?: string;
         UpdateUserName?: string;
@@ -396,7 +396,7 @@ declare namespace PatientManagement.Administration {
             InsertUserId = "InsertUserId",
             InsertDate = "InsertDate",
             UpdateUserId = "UpdateUserId",
-            UpdateDateField = "UpdateDateField",
+            UpdateDate = "UpdateDate",
             IsActive = "IsActive",
             InsertUserName = "InsertUserName",
             UpdateUserName = "UpdateUserName",
@@ -525,17 +525,20 @@ declare namespace PatientManagement.Administration {
         Name?: string;
         PaymentType?: PatientManagement.PaymentTypes;
         IbanBeneficient?: string;
-        TenantId?: number;
         InsertUserId?: number;
         InsertDate?: string;
-        UpdateUserId?: number;
-        UpdateDateField?: string;
-        TenantName?: string;
         InsertUserName?: string;
         UpdateUserName?: string;
+        UpdateUserId?: number;
+        UpdateDate?: string;
+        IsActive?: number;
+        TenantId?: number;
+        TenantName?: string;
+        TenantCurrencyId?: number;
     }
     namespace PaymentsDetailsRow {
         const idProperty = "PaymentDetailsId";
+        const isActiveProperty = "IsActive";
         const nameProperty = "Name";
         const localTextPrefix = "Administration.PaymentsDetails";
         const lookupKey = "Administration.PaymentsDetails";
@@ -547,14 +550,16 @@ declare namespace PatientManagement.Administration {
             Name = "Name",
             PaymentType = "PaymentType",
             IbanBeneficient = "IbanBeneficient",
-            TenantId = "TenantId",
             InsertUserId = "InsertUserId",
             InsertDate = "InsertDate",
-            UpdateUserId = "UpdateUserId",
-            UpdateDateField = "UpdateDateField",
-            TenantName = "TenantName",
             InsertUserName = "InsertUserName",
             UpdateUserName = "UpdateUserName",
+            UpdateUserId = "UpdateUserId",
+            UpdateDate = "UpdateDate",
+            IsActive = "IsActive",
+            TenantId = "TenantId",
+            TenantName = "TenantName",
+            TenantCurrencyId = "TenantCurrencyId",
         }
     }
 }
@@ -564,12 +569,14 @@ declare namespace PatientManagement.Administration {
         function Create(request: Serenity.SaveRequest<PaymentsDetailsRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Update(request: Serenity.SaveRequest<PaymentsDetailsRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Undelete(request: Serenity.UndeleteRequest, onSuccess?: (response: Serenity.UndeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<PaymentsDetailsRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<PaymentsDetailsRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         const enum Methods {
             Create = "Administration/PaymentsDetails/Create",
             Update = "Administration/PaymentsDetails/Update",
             Delete = "Administration/PaymentsDetails/Delete",
+            Undelete = "Administration/PaymentsDetails/Undelete",
             Retrieve = "Administration/PaymentsDetails/Retrieve",
             List = "Administration/PaymentsDetails/List",
         }
@@ -604,7 +611,6 @@ declare namespace PatientManagement.Administration {
     interface PaymentsRow {
         PaymentId?: number;
         SubscriptionId?: number;
-        TenantId?: number;
         PaymentDetailsId?: number;
         PaymentOptionId?: number;
         CurrencyId?: number;
@@ -639,14 +645,18 @@ declare namespace PatientManagement.Administration {
         CurrencyRate?: number;
         InsertUserId?: number;
         InsertDate?: string;
-        UpdateUserId?: number;
-        UpdateDateField?: string;
-        TenantName?: string;
         InsertUserName?: string;
         UpdateUserName?: string;
+        UpdateUserId?: number;
+        UpdateDate?: string;
+        IsActive?: number;
+        TenantId?: number;
+        TenantName?: string;
+        TenantCurrencyId?: number;
     }
     namespace PaymentsRow {
         const idProperty = "PaymentId";
+        const isActiveProperty = "IsActive";
         const nameProperty = "SubscriptionName";
         const localTextPrefix = "Administration.Payments";
         const lookupKey = "AdministrationTenants.Payment";
@@ -654,7 +664,6 @@ declare namespace PatientManagement.Administration {
         const enum Fields {
             PaymentId = "PaymentId",
             SubscriptionId = "SubscriptionId",
-            TenantId = "TenantId",
             PaymentDetailsId = "PaymentDetailsId",
             PaymentOptionId = "PaymentOptionId",
             CurrencyId = "CurrencyId",
@@ -689,11 +698,14 @@ declare namespace PatientManagement.Administration {
             CurrencyRate = "CurrencyRate",
             InsertUserId = "InsertUserId",
             InsertDate = "InsertDate",
-            UpdateUserId = "UpdateUserId",
-            UpdateDateField = "UpdateDateField",
-            TenantName = "TenantName",
             InsertUserName = "InsertUserName",
             UpdateUserName = "UpdateUserName",
+            UpdateUserId = "UpdateUserId",
+            UpdateDate = "UpdateDate",
+            IsActive = "IsActive",
+            TenantId = "TenantId",
+            TenantName = "TenantName",
+            TenantCurrencyId = "TenantCurrencyId",
         }
     }
 }
@@ -703,12 +715,14 @@ declare namespace PatientManagement.Administration {
         function Create(request: Serenity.SaveRequest<PaymentsRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Update(request: Serenity.SaveRequest<PaymentsRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function Undelete(request: Serenity.UndeleteRequest, onSuccess?: (response: Serenity.UndeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<PaymentsRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<PaymentsRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         const enum Methods {
             Create = "Administration/Payments/Create",
             Update = "Administration/Payments/Update",
             Delete = "Administration/Payments/Delete",
+            Undelete = "Administration/Payments/Undelete",
             Retrieve = "Administration/Payments/Retrieve",
             List = "Administration/Payments/List",
         }
@@ -858,16 +872,17 @@ declare namespace PatientManagement.Administration {
         Body?: string;
         ToEmail?: string;
         ToName?: string;
-        TenantId?: number;
+        EmailSignature?: string;
         InsertUserId?: number;
         InsertDate?: string;
-        UpdateUserId?: number;
-        UpdateDateField?: string;
-        IsActive?: number;
-        EmailSignature?: string;
-        TenantName?: string;
         InsertUserName?: string;
         UpdateUserName?: string;
+        UpdateUserId?: number;
+        UpdateDate?: string;
+        IsActive?: number;
+        TenantId?: number;
+        TenantName?: string;
+        TenantCurrencyId?: number;
     }
     namespace SentEmailsRow {
         const idProperty = "SentEmailId";
@@ -884,16 +899,17 @@ declare namespace PatientManagement.Administration {
             Body = "Body",
             ToEmail = "ToEmail",
             ToName = "ToName",
-            TenantId = "TenantId",
+            EmailSignature = "EmailSignature",
             InsertUserId = "InsertUserId",
             InsertDate = "InsertDate",
-            UpdateUserId = "UpdateUserId",
-            UpdateDateField = "UpdateDateField",
-            IsActive = "IsActive",
-            EmailSignature = "EmailSignature",
-            TenantName = "TenantName",
             InsertUserName = "InsertUserName",
             UpdateUserName = "UpdateUserName",
+            UpdateUserId = "UpdateUserId",
+            UpdateDate = "UpdateDate",
+            IsActive = "IsActive",
+            TenantId = "TenantId",
+            TenantName = "TenantName",
+            TenantCurrencyId = "TenantCurrencyId",
         }
     }
 }
@@ -3052,6 +3068,7 @@ declare namespace PatientManagement.Administration {
         protected getIdProperty(): string;
         protected getLocalTextPrefix(): string;
         protected getService(): string;
+        protected getIsActiveProperty(): string;
         constructor(container: JQuery);
         protected getItemCssClass(item: PaymentsRow, index: number): string;
         protected getColumns(): Slick.Column[];
@@ -3077,6 +3094,7 @@ declare namespace PatientManagement.Administration {
         protected getIdProperty(): string;
         protected getLocalTextPrefix(): string;
         protected getService(): string;
+        protected getIsActiveProperty(): string;
         constructor(container: JQuery);
     }
 }

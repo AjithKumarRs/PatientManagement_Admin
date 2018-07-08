@@ -499,6 +499,7 @@ var PatientManagement;
         var PaymentsDetailsRow;
         (function (PaymentsDetailsRow) {
             PaymentsDetailsRow.idProperty = 'PaymentDetailsId';
+            PaymentsDetailsRow.isActiveProperty = 'IsActive';
             PaymentsDetailsRow.nameProperty = 'Name';
             PaymentsDetailsRow.localTextPrefix = 'Administration.PaymentsDetails';
             PaymentsDetailsRow.lookupKey = 'Administration.PaymentsDetails';
@@ -520,6 +521,7 @@ var PatientManagement;
                 'Create',
                 'Update',
                 'Delete',
+                'Undelete',
                 'Retrieve',
                 'List'
             ].forEach(function (x) {
@@ -579,6 +581,7 @@ var PatientManagement;
         var PaymentsRow;
         (function (PaymentsRow) {
             PaymentsRow.idProperty = 'PaymentId';
+            PaymentsRow.isActiveProperty = 'IsActive';
             PaymentsRow.nameProperty = 'SubscriptionName';
             PaymentsRow.localTextPrefix = 'Administration.Payments';
             PaymentsRow.lookupKey = 'AdministrationTenants.Payment';
@@ -600,6 +603,7 @@ var PatientManagement;
                 'Create',
                 'Update',
                 'Delete',
+                'Undelete',
                 'Retrieve',
                 'List'
             ].forEach(function (x) {
@@ -2944,6 +2948,7 @@ var PatientManagement;
             PaymentsGrid.prototype.getIdProperty = function () { return Administration.PaymentsRow.idProperty; };
             PaymentsGrid.prototype.getLocalTextPrefix = function () { return Administration.PaymentsRow.localTextPrefix; };
             PaymentsGrid.prototype.getService = function () { return Administration.PaymentsService.baseUrl; };
+            PaymentsGrid.prototype.getIsActiveProperty = function () { return Administration.PaymentsRow.isActiveProperty; };
             PaymentsGrid.prototype.getItemCssClass = function (item, index) {
                 var klass = "";
                 if (item.PaymentStatus != PatientManagement.PatientManagement.PaymentStatus.Success) {
@@ -3058,6 +3063,7 @@ var PatientManagement;
             PaymentsDetailsGrid.prototype.getIdProperty = function () { return Administration.PaymentsDetailsRow.idProperty; };
             PaymentsDetailsGrid.prototype.getLocalTextPrefix = function () { return Administration.PaymentsDetailsRow.localTextPrefix; };
             PaymentsDetailsGrid.prototype.getService = function () { return Administration.PaymentsDetailsService.baseUrl; };
+            PaymentsDetailsGrid.prototype.getIsActiveProperty = function () { return Administration.PaymentsRow.isActiveProperty; };
             PaymentsDetailsGrid = __decorate([
                 Serenity.Decorators.registerClass()
             ], PaymentsDetailsGrid);

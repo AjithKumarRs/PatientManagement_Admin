@@ -42,6 +42,31 @@ IF EXISTS(SELECT 1 FROM sys.columns WHERE [name] = N'UpdateDateField'
 BEGIN
     EXEC sp_RENAME 'MedicalSpecialties.UpdateDateField', 'UpdateDate' , 'COLUMN'
 END;
+
+IF EXISTS(SELECT 1 FROM sys.columns WHERE [name] = N'UpdateDateField'
+           AND [object_id] = OBJECT_ID(N'PaymentsDetails'))
+BEGIN
+    EXEC sp_RENAME 'PaymentsDetails.UpdateDateField', 'UpdateDate' , 'COLUMN'
+END;
+
+IF EXISTS(SELECT 1 FROM sys.columns WHERE [name] = N'UpdateDateField'
+           AND [object_id] = OBJECT_ID(N'Payments'))
+BEGIN
+    EXEC sp_RENAME 'Payments.UpdateDateField', 'UpdateDate' , 'COLUMN'
+END;
+
+IF EXISTS(SELECT 1 FROM sys.columns WHERE [name] = N'UpdateDateField'
+           AND [object_id] = OBJECT_ID(N'SentEmails'))
+BEGIN
+    EXEC sp_RENAME 'SentEmails.UpdateDateField', 'UpdateDate' , 'COLUMN'
+END;
+
+
+IF EXISTS(SELECT 1 FROM sys.columns WHERE [name] = N'UpdateDateField'
+           AND [object_id] = OBJECT_ID(N'Offers'))
+BEGIN
+    EXEC sp_RENAME 'Offers.UpdateDateField', 'UpdateDate' , 'COLUMN'
+END;
 ");
 
             Alter.Table("Patients")
@@ -61,6 +86,14 @@ END;
             Alter.Table("Visits")
                 .AddColumn("UpdateUserId").AsInt32().Nullable()
                 .AddColumn("UpdateDate").AsDateTime().Nullable()
+                .AddColumn("IsActive").AsInt16().NotNullable().WithDefaultValue(1)
+                ;
+
+            Alter.Table("PaymentsDetails")
+                .AddColumn("IsActive").AsInt16().NotNullable().WithDefaultValue(1)
+                ;
+
+            Alter.Table("Payments")
                 .AddColumn("IsActive").AsInt16().NotNullable().WithDefaultValue(1)
                 ;
         }

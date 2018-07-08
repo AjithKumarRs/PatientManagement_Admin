@@ -55,7 +55,7 @@ namespace PatientManagement.Migrations.DefaultDB
                 Days = 1,
                 Name = "Monthly Payment",
                 UpdateUserId = 1,
-                UpdateDateField = DateTime.Now,
+                UpdateDate = DateTime.Now,
                 InsertUserId = 1,
                 InsertDate = DateTime.Now,
             }).Row(new
@@ -63,7 +63,7 @@ namespace PatientManagement.Migrations.DefaultDB
                 Days = 12,
                 Name = "Year Payment",
                 UpdateUserId = 1,
-                UpdateDateField = DateTime.Now,
+                UpdateDate = DateTime.Now,
                 InsertUserId = 1,
                 InsertDate = DateTime.Now,
             });

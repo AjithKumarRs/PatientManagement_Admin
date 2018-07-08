@@ -21,7 +21,7 @@
         InsertUserId?: number;
         InsertDate?: string;
         UpdateUserId?: number;
-        UpdateDateField?: string;
+        UpdateDate?: string;
         IsActive?: number;
         InsertUserName?: string;
         UpdateUserName?: string;
@@ -60,7 +60,7 @@
             InsertUserId = "InsertUserId",
             InsertDate = "InsertDate",
             UpdateUserId = "UpdateUserId",
-            UpdateDateField = "UpdateDateField",
+            UpdateDate = "UpdateDate",
             IsActive = "IsActive",
             InsertUserName = "InsertUserName",
             UpdateUserName = "UpdateUserName"

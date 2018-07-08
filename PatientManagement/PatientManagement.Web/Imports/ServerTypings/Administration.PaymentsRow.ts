@@ -2,7 +2,6 @@
     export interface PaymentsRow {
         PaymentId?: number;
         SubscriptionId?: number;
-        TenantId?: number;
         PaymentDetailsId?: number;
         PaymentOptionId?: number;
         CurrencyId?: number;
@@ -37,15 +36,19 @@
         CurrencyRate?: number;
         InsertUserId?: number;
         InsertDate?: string;
-        UpdateUserId?: number;
-        UpdateDateField?: string;
-        TenantName?: string;
         InsertUserName?: string;
         UpdateUserName?: string;
+        UpdateUserId?: number;
+        UpdateDate?: string;
+        IsActive?: number;
+        TenantId?: number;
+        TenantName?: string;
+        TenantCurrencyId?: number;
     }
 
     export namespace PaymentsRow {
         export const idProperty = 'PaymentId';
+        export const isActiveProperty = 'IsActive';
         export const nameProperty = 'SubscriptionName';
         export const localTextPrefix = 'Administration.Payments';
         export const lookupKey = 'AdministrationTenants.Payment';
@@ -57,7 +60,6 @@
         export declare const enum Fields {
             PaymentId = "PaymentId",
             SubscriptionId = "SubscriptionId",
-            TenantId = "TenantId",
             PaymentDetailsId = "PaymentDetailsId",
             PaymentOptionId = "PaymentOptionId",
             CurrencyId = "CurrencyId",
@@ -92,11 +94,14 @@
             CurrencyRate = "CurrencyRate",
             InsertUserId = "InsertUserId",
             InsertDate = "InsertDate",
-            UpdateUserId = "UpdateUserId",
-            UpdateDateField = "UpdateDateField",
-            TenantName = "TenantName",
             InsertUserName = "InsertUserName",
-            UpdateUserName = "UpdateUserName"
+            UpdateUserName = "UpdateUserName",
+            UpdateUserId = "UpdateUserId",
+            UpdateDate = "UpdateDate",
+            IsActive = "IsActive",
+            TenantId = "TenantId",
+            TenantName = "TenantName",
+            TenantCurrencyId = "TenantCurrencyId"
         }
     }
 }
