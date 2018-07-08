@@ -14,6 +14,19 @@ namespace PatientManagement.Membership {
         }
 
 
+        protected onViewSubmit() {
+            if (!super.onViewSubmit()) {
+                return false;
+            }
+            
+            var request = this.view.params as Serenity.ListRequest;
+            
+            request.Criteria = Serenity.Criteria.and(request.Criteria,
+                [['InsertUserId'], '=', Authorization.userDefinition.UserId]);
+                
+            return true;
+        }
+
         protected getColumns(): Slick.Column[] {
             return super.getColumns();
         }
