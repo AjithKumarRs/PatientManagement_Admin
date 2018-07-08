@@ -96,6 +96,10 @@ END;
             Alter.Table("Payments")
                 .AddColumn("IsActive").AsInt16().NotNullable().WithDefaultValue(1)
                 ;
+
+
+            Alter.Table("Visits")
+                .AddColumn("Price").AsDecimal(8, 4).Nullable();
         }
     }
 }

@@ -2764,6 +2764,8 @@ declare namespace PatientManagement.PatientManagement {
         FreeForReservation: BsSwitchEditor;
         StartDate: Serenity.DateTimeEditor;
         EndDate: Serenity.DateTimeEditor;
+        Price: Serenity.DecimalEditor;
+        VisitTypeCurrencyName: Serenity.StringEditor;
         Description: Serenity.TextAreaEditor;
         TenantId: Serenity.IntegerEditor;
     }
@@ -3682,7 +3684,9 @@ declare namespace PatientManagement.PatientManagement {
         protected getService(): string;
         protected getIsActiveProperty(): string;
         constructor(container: JQuery);
+        protected createSlickGrid(): Slick.Grid;
         protected getButtons(): Serenity.ToolButton[];
+        protected getSlickOptions(): Slick.GridOptions;
         protected getQuickFilters(): Serenity.QuickFilter<Serenity.Widget<any>, any>[];
     }
 }
@@ -3854,6 +3858,7 @@ declare namespace PatientManagement.PatientManagement {
         protected form: VisitsForm;
         protected updateInterface(): void;
         constructor();
+        afterLoadEntity(): void;
         protected getCloningEntity(): VisitsRow;
     }
 }

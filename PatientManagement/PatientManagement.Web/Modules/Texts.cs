@@ -135,6 +135,9 @@ namespace PatientManagement
         }
         public static class Site
         {
+            public static LocalText GroupByButton = "Group By ";
+            public static LocalText NoGroupingButton = "No Grouping";
+
             public static class Reports
             {
                 public static LocalText ReportNewPatientsThisMonthBox = "New patients this month";

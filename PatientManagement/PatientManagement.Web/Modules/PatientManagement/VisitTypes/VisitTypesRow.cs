@@ -61,6 +61,7 @@ namespace PatientManagement.PatientManagement.Entities
         [ReadPermission(AdministrationTenantsPermissionKeys.VisitPayments.ReadPermissions)]
         [ModifyPermission(AdministrationTenantsPermissionKeys.VisitPayments.ModifyPermissions)]
         [DecimalEditor(Decimals = 2, MaxValue = "10000")]
+        [LookupInclude]
         public Decimal? Price
         {
             get { return Fields.Price[this]; }
@@ -71,6 +72,7 @@ namespace PatientManagement.PatientManagement.Entities
 
         [DisplayName("Currency"), NotNull, ForeignKey("[dbo].[Currencies]", "Id"), LeftJoin("jCurrency"), TextualField("CurrencyCurrencyId")]
         [ReadPermission(AdministrationTenantsPermissionKeys.VisitPayments.ReadPermissions)]
+        [LookupInclude]
         [Updatable(false)]
         [LookupEditor(typeof(CurrenciesRow), FilterField = "Enabled", FilterValue = true)]
         public Int32? CurrencyId
@@ -89,6 +91,7 @@ namespace PatientManagement.PatientManagement.Entities
 
         [DisplayName("Currency Name"), Expression("jCurrency.[Name]")]
         [ReadPermission(AdministrationTenantsPermissionKeys.VisitPayments.ReadPermissions)]
+        [LookupInclude]
         public String CurrencyName
         {
             get { return Fields.CurrencyName[this]; }

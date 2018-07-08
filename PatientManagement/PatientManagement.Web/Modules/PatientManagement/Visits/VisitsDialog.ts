@@ -22,7 +22,7 @@ namespace PatientManagement.PatientManagement {
 
         constructor() {
             super();
-
+            
             this.form.FreeForReservation.element.bootstrapSwitch('onSwitchChange', e => {
                 if (this.form.FreeForReservation.getState()) {
                     Serenity.EditorUtils.setReadOnly(this.form.PatientId, true);
@@ -33,6 +33,17 @@ namespace PatientManagement.PatientManagement {
                     Serenity.EditorUtils.setRequired(this.form.PatientId, true);
                 }
             });
+
+            this.form.VisitTypeId.changeSelect2(e => {
+                var visitTypeId = Q.toId(this.form.VisitTypeId.value);
+                if (visitTypeId != null) {
+                    var visitType =
+                        PatientManagement.VisitTypesRow.getLookup().itemById[visitTypeId];
+                    this.form.VisitTypeCurrencyName.value = visitType.CurrencyName;
+                    this.form.Price.value = visitType.Price;
+                }
+            });
+
             this.form.PatientId.changeSelect2(e => {
                 var patientId = this.form.PatientId.value;
                 if (!patientId)
@@ -70,10 +81,20 @@ namespace PatientManagement.PatientManagement {
                 var dateStart = this.form.StartDate.value;
                 this.form.EndDate.value = dateStart;
             });
-
-
+            if (!Q.Authorization.hasPermission("AdministrationTenants:VisitPayments:Modify")) {
+                Serenity.EditorUtils.setReadOnly(this.form.Price, true);
+                this.updateInterface();
+            }
         }
-        
+
+        afterLoadEntity(): void {
+
+            if (!Q.Authorization.hasPermission("AdministrationTenants:VisitPayments:Modify")) {
+                Serenity.EditorUtils.setReadOnly(this.form.Price, true);
+                this.updateInterface();
+            }
+        }
+
         protected getCloningEntity() {
             var clone = super.getCloningEntity();
 

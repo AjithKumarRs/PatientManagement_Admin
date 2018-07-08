@@ -2369,8 +2369,10 @@ var PatientManagement;
                     var w0 = s.LookupEditor;
                     var w1 = PatientManagement_44.BsSwitchEditor;
                     var w2 = s.DateTimeEditor;
-                    var w3 = s.TextAreaEditor;
-                    var w4 = s.IntegerEditor;
+                    var w3 = s.DecimalEditor;
+                    var w4 = s.StringEditor;
+                    var w5 = s.TextAreaEditor;
+                    var w6 = s.IntegerEditor;
                     Q.initFormType(VisitsForm, [
                         'PatientId', w0,
                         'VisitTypeId', w0,
@@ -2379,8 +2381,10 @@ var PatientManagement;
                         'FreeForReservation', w1,
                         'StartDate', w2,
                         'EndDate', w2,
-                        'Description', w3,
-                        'TenantId', w4
+                        'Price', w3,
+                        'VisitTypeCurrencyName', w4,
+                        'Description', w5,
+                        'TenantId', w6
                     ]);
                 }
                 return _this;
@@ -5861,9 +5865,23 @@ var PatientManagement;
             VisitsGrid.prototype.getLocalTextPrefix = function () { return PatientManagement.VisitsRow.localTextPrefix; };
             VisitsGrid.prototype.getService = function () { return PatientManagement.VisitsService.baseUrl; };
             VisitsGrid.prototype.getIsActiveProperty = function () { return PatientManagement.VisitTypesRow.isActiveProperty; };
+            VisitsGrid.prototype.createSlickGrid = function () {
+                var grid = _super.prototype.createSlickGrid.call(this);
+                grid.registerPlugin(new Slick.Data.GroupItemMetadataProvider());
+                if (Q.Authorization.hasPermission("AdministrationTenants:VisitPayments:Read")) {
+                    // need to register this plugin for grouping or you'll have errors
+                    this.view.setSummaryOptions({
+                        aggregators: [
+                            new Slick.Aggregators.Sum('Price')
+                        ]
+                    });
+                }
+                return grid;
+            };
             VisitsGrid.prototype.getButtons = function () {
                 var _this = this;
                 var buttons = _super.prototype.getButtons.call(this);
+                var text = Q.text("Site.GroupByButton");
                 buttons.push(PatientManagement_53.Common.ExcelExportHelper.createToolButton({
                     grid: this,
                     hint: 'Export to Excel',
@@ -5880,7 +5898,37 @@ var PatientManagement;
                     onViewSubmit: function () { return _this.onViewSubmit(); },
                     separator: true,
                 }));
+                buttons.push({
+                    title: text + Q.text("Db.PatientManagement.VisitTypes.EntitySingular"),
+                    cssClass: 'expand-all-button',
+                    separator: true,
+                    onClick: function () { return _this.view.setGrouping([
+                        {
+                            getter: 'VisitTypeName'
+                        }
+                    ]); }
+                });
+                buttons.push({
+                    title: text + Q.text("Db.PatientManagement.Patients.EntitySingular"),
+                    cssClass: 'expand-all-button',
+                    separator: true,
+                    onClick: function () { return _this.view.setGrouping([
+                        {
+                            getter: 'PatientName'
+                        }
+                    ]); }
+                });
+                buttons.push({
+                    title: Q.text("Site.NoGroupingButton"),
+                    cssClass: 'collapse-all-button',
+                    onClick: function () { return _this.view.setGrouping([]); }
+                });
                 return buttons;
+            };
+            VisitsGrid.prototype.getSlickOptions = function () {
+                var opt = _super.prototype.getSlickOptions.call(this);
+                opt.showFooterRow = true;
+                return opt;
             };
             VisitsGrid.prototype.getQuickFilters = function () {
                 // get quick filter list from base class
@@ -6676,6 +6724,14 @@ var PatientManagement;
                         Serenity.EditorUtils.setRequired(_this.form.PatientId, true);
                     }
                 });
+                _this.form.VisitTypeId.changeSelect2(function (e) {
+                    var visitTypeId = Q.toId(_this.form.VisitTypeId.value);
+                    if (visitTypeId != null) {
+                        var visitType = PatientManagement.VisitTypesRow.getLookup().itemById[visitTypeId];
+                        _this.form.VisitTypeCurrencyName.value = visitType.CurrencyName;
+                        _this.form.Price.value = visitType.Price;
+                    }
+                });
                 _this.form.PatientId.changeSelect2(function (e) {
                     var patientId = _this.form.PatientId.value;
                     if (!patientId)
@@ -6707,6 +6763,10 @@ var PatientManagement;
                     var dateStart = this.form.StartDate.value;
                     this.form.EndDate.value = dateStart;
                 });
+                if (!Q.Authorization.hasPermission("AdministrationTenants:VisitPayments:Modify")) {
+                    Serenity.EditorUtils.setReadOnly(_this.form.Price, true);
+                    _this.updateInterface();
+                }
                 return _this;
             }
             VisitsDialog.prototype.getFormKey = function () { return PatientManagement.VisitsForm.formKey; };
@@ -6718,6 +6778,12 @@ var PatientManagement;
                 _super.prototype.updateInterface.call(this);
                 // here we show it if it is edit mode (not new)
                 this.cloneButton.toggle(this.isEditMode());
+            };
+            VisitsDialog.prototype.afterLoadEntity = function () {
+                if (!Q.Authorization.hasPermission("AdministrationTenants:VisitPayments:Modify")) {
+                    Serenity.EditorUtils.setReadOnly(this.form.Price, true);
+                    this.updateInterface();
+                }
             };
             VisitsDialog.prototype.getCloningEntity = function () {
                 var clone = _super.prototype.getCloningEntity.call(this);

@@ -15,8 +15,24 @@ namespace PatientManagement.PatientManagement {
             super(container);
         }
 
+        protected createSlickGrid() {
+            var grid = super.createSlickGrid();
+            grid.registerPlugin(new Slick.Data.GroupItemMetadataProvider());
+
+            if (Q.Authorization.hasPermission("AdministrationTenants:VisitPayments:Read")) {
+                // need to register this plugin for grouping or you'll have errors
+
+                this.view.setSummaryOptions({
+                    aggregators: [
+                        new Slick.Aggregators.Sum('Price')
+                    ]
+                });
+            }
+            return grid;
+        }
         protected getButtons() {
             var buttons = super.getButtons();
+            var text = Q.text("Site.GroupByButton");
 
             buttons.push(Common.ExcelExportHelper.createToolButton({
                 grid: this,
@@ -35,10 +51,42 @@ namespace PatientManagement.PatientManagement {
                 onViewSubmit: () => this.onViewSubmit(),
                 separator: true,
             }));
+            buttons.push({
+                title: text +  Q.text("Db.PatientManagement.VisitTypes.EntitySingular"),
+                cssClass: 'expand-all-button',
+                separator: true,
+                onClick: () => this.view.setGrouping(
+                    [
+                        {
+                            getter: 'VisitTypeName'
+                        }
+                    ])
+            });
 
+            buttons.push({
+                title: text +  Q.text("Db.PatientManagement.Patients.EntitySingular"),
+                cssClass: 'expand-all-button',
+                separator: true,
+                onClick: () => this.view.setGrouping(
+                    [
+                        {
+                            getter: 'PatientName'
+                        }
+                    ])
+            });
+
+            buttons.push({
+                title: Q.text("Site.NoGroupingButton"),
+                cssClass: 'collapse-all-button',
+                onClick: () => this.view.setGrouping([])
+            });
             return buttons;
         }
-
+        protected getSlickOptions() {
+            var opt = super.getSlickOptions();
+            opt.showFooterRow = true;
+            return opt;
+        }
         protected getQuickFilters(): Serenity.QuickFilter<Serenity.Widget<any>, any>[] {
 
             // get quick filter list from base class

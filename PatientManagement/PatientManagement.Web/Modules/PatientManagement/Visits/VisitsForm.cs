@@ -30,6 +30,11 @@ namespace PatientManagement.PatientManagement.Forms
 
         [Category("Additional Information")]
 
+        [HalfWidth]
+        public Decimal Price { get; set; }
+
+        [HalfWidth]
+        public string VisitTypeCurrencyName { get; set; }
         public String Description { get; set; }
         public Int32? TenantId { get; set; }
 

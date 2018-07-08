@@ -104,6 +104,7 @@ namespace PatientManagement.PatientManagement.Pages
                     .Where(~(
                     new Criteria(visitFlds.StartDate) >= startDate
                     & new Criteria(visitFlds.EndDate) <= endDate
+                    & new Criteria(visitFlds.IsActive) == 1
                     & new Criteria(visitFlds.CabinetId) == int.Parse(cabinetIdActive)
                         ))
                         .LeftJoin(users, visitFlds.AssignedUserId == users.UserId)
@@ -269,6 +270,7 @@ namespace PatientManagement.PatientManagement.Pages
                     .Where(~(
                     new Criteria(visitFlds.StartDate) >= startDate
                     & new Criteria(visitFlds.CabinetId) == cabinetIdActive)
+                    & new Criteria(visitFlds.IsActive) == 1
                     );
 
                 if (!Authorization.HasPermission(PermissionKeys.Tenant))

@@ -5,6 +5,7 @@
         VisitTypeId?: number;
         CabinetId?: number;
         CabinetName?: string;
+        VisitTypeCurrencyName?: string;
         CabinetIsActive?: number;
         AssignedUserId?: number;
         AssignedUserName?: string;
@@ -12,6 +13,7 @@
         Description?: string;
         StartDate?: string;
         EndDate?: string;
+        Price?: number;
         PatientGender?: Gender;
         PatientEmail?: string;
         PatientNotifyOnChange?: boolean;
@@ -51,6 +53,7 @@
             VisitTypeId = "VisitTypeId",
             CabinetId = "CabinetId",
             CabinetName = "CabinetName",
+            VisitTypeCurrencyName = "VisitTypeCurrencyName",
             CabinetIsActive = "CabinetIsActive",
             AssignedUserId = "AssignedUserId",
             AssignedUserName = "AssignedUserName",
@@ -58,6 +61,7 @@
             Description = "Description",
             StartDate = "StartDate",
             EndDate = "EndDate",
+            Price = "Price",
             PatientGender = "PatientGender",
             PatientEmail = "PatientEmail",
             PatientNotifyOnChange = "PatientNotifyOnChange",

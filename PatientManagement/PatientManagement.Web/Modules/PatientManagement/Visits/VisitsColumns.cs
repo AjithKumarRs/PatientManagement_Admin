@@ -32,11 +32,14 @@ namespace PatientManagement.PatientManagement.Columns
 
         public bool FreeForReservation { get; set; }
         
-        [Width(120)]
-        [VisitsPriceFormatter(VisitTypePriceProperty = "VisitTypePrice", VisitTypeCurrencyIdProperty = "VisitTypeCurrencyId")]
-        public String VisitTypePriceFormatted { get; set; }
-        
+        //[Width(120)]
+        //[VisitsPriceFormatter(VisitTypePriceProperty = "VisitTypePrice", VisitTypeCurrencyIdProperty = "VisitTypeCurrencyId")]
+        //public String VisitTypePriceFormatted { get; set; }
 
+        [Width(50)]
+        public String Price { get; set; }
+        [Width(80)]
+        public String VisitTypeCurrencyName { get; set; }
         [Width(150)]
         public string AssignedUserName { get; set; }
 

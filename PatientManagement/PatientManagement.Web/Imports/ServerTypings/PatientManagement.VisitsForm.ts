@@ -7,6 +7,8 @@
         FreeForReservation: BsSwitchEditor;
         StartDate: Serenity.DateTimeEditor;
         EndDate: Serenity.DateTimeEditor;
+        Price: Serenity.DecimalEditor;
+        VisitTypeCurrencyName: Serenity.StringEditor;
         Description: Serenity.TextAreaEditor;
         TenantId: Serenity.IntegerEditor;
     }
@@ -25,8 +27,10 @@
                 var w0 = s.LookupEditor;
                 var w1 = BsSwitchEditor;
                 var w2 = s.DateTimeEditor;
-                var w3 = s.TextAreaEditor;
-                var w4 = s.IntegerEditor;
+                var w3 = s.DecimalEditor;
+                var w4 = s.StringEditor;
+                var w5 = s.TextAreaEditor;
+                var w6 = s.IntegerEditor;
 
                 Q.initFormType(VisitsForm, [
                     'PatientId', w0,
@@ -36,8 +40,10 @@
                     'FreeForReservation', w1,
                     'StartDate', w2,
                     'EndDate', w2,
-                    'Description', w3,
-                    'TenantId', w4
+                    'Price', w3,
+                    'VisitTypeCurrencyName', w4,
+                    'Description', w5,
+                    'TenantId', w6
                 ]);
             }
         }

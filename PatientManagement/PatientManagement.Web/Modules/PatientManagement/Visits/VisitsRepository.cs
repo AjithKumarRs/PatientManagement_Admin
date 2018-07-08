@@ -62,7 +62,7 @@ namespace PatientManagement.PatientManagement.Repositories
                 base.AfterSave();
 
                 //Added to not try to send notification
-                if (this.Row.FreeForReservation??true)
+                if (this.Row.FreeForReservation ?? true)
                     return;
 
                 var cabinetName = Connection.ById<CabinetsRow>(Row.CabinetId).Name;
@@ -127,7 +127,27 @@ namespace PatientManagement.PatientManagement.Repositories
 
             }
         }
-        private class MyRetrieveHandler : RetrieveRequestHandler<MyRow> { }
+
+        private class MyRetrieveHandler : RetrieveRequestHandler<MyRow>
+        {
+            protected override void OnReturn()
+            {
+                base.OnReturn();
+
+                if (!Authorization.HasPermission(AdministrationTenantsPermissionKeys.VisitPayments.ReadPermissions))
+                    return;
+
+                using (var connection = SqlConnections.NewFor<CurrenciesRow>())
+                {
+                    if (!Response.Entity.VisitTypeCurrencyId.HasValue)
+                        return;
+                    var currencyFlds = CurrenciesRow.Fields;
+
+                    var currency = connection.First<CurrenciesRow>(~(new Criteria(currencyFlds.Id) == Response.Entity.VisitTypeCurrencyId.Value));
+                    Response.Entity.VisitTypeCurrencyName = currency.Name;
+                }
+            }
+        }
 
         private class MyListHandler : ListRequestHandler<MyRow>
         {
@@ -148,8 +168,8 @@ namespace PatientManagement.PatientManagement.Repositories
                     using (var connection = SqlConnections.NewFor<CurrenciesRow>())
                     {
                         var currencyFlds = CurrenciesRow.Fields;
-                        
-                        IDictionary<int, List<string>>  currencies = connection.Query(new SqlQuery()
+
+                        IDictionary<int, List<string>> currencies = connection.Query(new SqlQuery()
                                 .From(currencyFlds)
                                 .Select(currencyFlds.Id)
                                 .Select(currencyFlds.CurrencyId)
@@ -165,8 +185,10 @@ namespace PatientManagement.PatientManagement.Repositories
                                 currencies.TryGetValue(x.VisitTypeCurrencyId.Value, out s))
                             {
                                 var currencyName = string.IsNullOrEmpty(s[1]) ? s[0] : s[1];
-                                var price = x.VisitTypePrice?.ToString("#.## "+ currencyName);
+                                var price = x.Price?.ToString("#.## " + currencyName);
                                 x.VisitTypePriceFormatted = $"{price}";
+                                if (!string.IsNullOrEmpty(price))
+                                    x.VisitTypeCurrencyName = currencyName;
                             }
                         }
                     }

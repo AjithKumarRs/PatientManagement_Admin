@@ -60,6 +60,16 @@ namespace PatientManagement.PatientManagement.Entities
         {
             get { return Fields.CabinetName[this]; }
             set { Fields.CabinetName[this] = value; }
+        } 
+
+        [DisplayName("Price")]
+        [ReadPermission(AdministrationTenantsPermissionKeys.VisitPayments.ReadPermissions)]
+       // [ModifyPermission(AdministrationTenantsPermissionKeys.VisitPayments.ModifyPermissions)]
+        [DecimalEditor(Decimals = 2, MaxValue = "10000")]
+        public Decimal? Price
+        {
+            get { return Fields.Price[this]; }
+            set { Fields.Price[this] = value; }
         }
 
         [DisplayName("Cabinet IsActive"), Expression("jCabinets.[IsActive]")]
@@ -198,12 +208,21 @@ namespace PatientManagement.PatientManagement.Entities
         [ReadPermission(AdministrationTenantsPermissionKeys.VisitPayments.ReadPermissions)]
         [Expression("jVisitType.[CurrencyId]")]
         [DisplayName("Visit Type Currency Id")]
+        [MinSelectLevel(SelectLevel.List)]
         public Int32? VisitTypeCurrencyId
         {
             get => Fields.VisitTypeCurrencyId[this]; 
             set => Fields.VisitTypeCurrencyId[this] = value; 
         }
-        
+
+        [ReadPermission(AdministrationTenantsPermissionKeys.VisitPayments.ReadPermissions)]
+        [NotMapped, Insertable(false), Updatable(false)]
+        [DisplayName("Visit Type Currency Name")]
+        public String VisitTypeCurrencyName
+        {
+            get { return Fields.VisitTypeCurrencyName[this]; }
+            set { Fields.VisitTypeCurrencyName[this] = value; }
+        }
         IIdField IIdRow.IdField => Fields.VisitId;
 
         public static readonly RowFields Fields = new RowFields().Init();
@@ -221,6 +240,7 @@ namespace PatientManagement.PatientManagement.Entities
 
             public Int32Field CabinetId;
             public StringField CabinetName;
+            public StringField VisitTypeCurrencyName;
             public Int16Field CabinetIsActive;
             public Int32Field AssignedUserId;
             public StringField AssignedUserName;
@@ -228,6 +248,7 @@ namespace PatientManagement.PatientManagement.Entities
             public StringField Description;
             public DateTimeField StartDate;
             public DateTimeField EndDate;
+            public DecimalField Price;
 
             public Int32Field PatientGender;
             public StringField PatientEmail;
