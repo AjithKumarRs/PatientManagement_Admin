@@ -152,7 +152,7 @@
                 </a>
             </li>
 
-            @if (Authorization.HasPermission(PermissionKeys.AdministrationTenantsTenantEditing))
+            @if (Authorization.HasPermission(AdministrationTenantsPermissionKeys.Tenant.ModifyPermission))
             {
                 <li>
                     <a href="#tenant-editing" data-toggle="tab">
@@ -197,7 +197,7 @@
             </div>
 
 
-            @if (Authorization.HasPermission(PermissionKeys.AdministrationTenantsTenantEditing))
+            @if (Authorization.HasPermission(AdministrationTenantsPermissionKeys.Tenant.ModifyPermission))
             {
                 <div class=" tab-pane" id="tenant-editing">
 
@@ -267,7 +267,7 @@
     });
 </script>
 
-@if (Authorization.HasPermission(PermissionKeys.AdministrationTenantsTenantEditing))
+@if (Authorization.HasPermission(AdministrationTenantsPermissionKeys.Tenant.ModifyPermission))
 {
     <script type="text/javascript">
         $(function () {

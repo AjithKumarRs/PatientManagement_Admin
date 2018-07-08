@@ -1,5 +1,6 @@
 ﻿
 using PatientManagement.Common;
+using PatientManagement.PatientManagement;
 using PatientManagement.PatientManagement.Entities;
 using PatientManagement.PatientManagement.Scripts;
 
@@ -14,8 +15,8 @@ namespace PatientManagement.Administration.Entities
     using System.IO;
 
     [ConnectionKey("Default"), TableName("[dbo].[SentEmails]"), DisplayName("Sent Emails"), InstanceName("Sent Emails"), TwoLevelCached]
-    [ReadPermission(PermissionKeys.SentEmails.ReadPermission)]
-    [InsertPermission(PermissionKeys.SentEmails.InsertPermission)]
+    [ReadPermission(PatientManagementPermissionKeys.SentEmails.ReadPermission)]
+    [InsertPermission(PatientManagementPermissionKeys.SentEmails.InsertPermission)]
     [UpdatePermission(PermissionKeys.SentEmails.UpdatePermission)]
     [DeletePermission(PermissionKeys.SentEmails.DeletePermission)]
     [LookupScript("AdministrationTenants.SentEmails",

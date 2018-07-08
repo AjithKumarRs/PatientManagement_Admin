@@ -58,7 +58,8 @@ namespace PatientManagement.PatientManagement.Entities
         }
 
         [DisplayName("Price")]
-        [ReadPermission(PermissionKeys.AdministrationTenantsVisitPayments)]
+        [ReadPermission(AdministrationTenantsPermissionKeys.VisitPayments.ReadPermissions)]
+        [ModifyPermission(AdministrationTenantsPermissionKeys.VisitPayments.ModifyPermissions)]
         [DecimalEditor(Decimals = 2, MaxValue = "10000")]
         public Decimal? Price
         {
@@ -69,7 +70,7 @@ namespace PatientManagement.PatientManagement.Entities
         #region Currency
 
         [DisplayName("Currency"), NotNull, ForeignKey("[dbo].[Currencies]", "Id"), LeftJoin("jCurrency"), TextualField("CurrencyCurrencyId")]
-        [ReadPermission(PermissionKeys.AdministrationTenantsVisitPayments)]
+        [ReadPermission(AdministrationTenantsPermissionKeys.VisitPayments.ReadPermissions)]
         [Updatable(false)]
         [LookupEditor(typeof(CurrenciesRow), FilterField = "Enabled", FilterValue = true)]
         public Int32? CurrencyId
@@ -79,7 +80,7 @@ namespace PatientManagement.PatientManagement.Entities
         }
 
         [DisplayName("Currency Code"), Expression("jCurrency.[CurrencyId]")]
-        [ReadPermission(PermissionKeys.AdministrationTenantsVisitPayments)]
+        [ReadPermission(AdministrationTenantsPermissionKeys.VisitPayments.ReadPermissions)]
         public String CurrencyCurrencyId
         {
             get { return Fields.CurrencyCurrencyId[this]; }
@@ -87,7 +88,7 @@ namespace PatientManagement.PatientManagement.Entities
         }
 
         [DisplayName("Currency Name"), Expression("jCurrency.[Name]")]
-        [ReadPermission(PermissionKeys.AdministrationTenantsVisitPayments)]
+        [ReadPermission(AdministrationTenantsPermissionKeys.VisitPayments.ReadPermissions)]
         public String CurrencyName
         {
             get { return Fields.CurrencyName[this]; }
@@ -95,7 +96,7 @@ namespace PatientManagement.PatientManagement.Entities
         }
 
         [DisplayName("Currency Rate"), Expression("jCurrency.[Rate]")]
-        [ReadPermission(PermissionKeys.AdministrationTenantsVisitPayments)]
+        [ReadPermission(AdministrationTenantsPermissionKeys.VisitPayments.ReadPermissions)]
         public Decimal? CurrencyRate
         {
             get { return Fields.CurrencyRate[this]; }

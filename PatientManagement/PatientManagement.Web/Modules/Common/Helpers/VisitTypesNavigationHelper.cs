@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using PatientManagement;
+using PatientManagement.PatientManagement;
 using PatientManagement.PatientManagement.Entities;
 using Serenity;
 using Serenity.Data;
@@ -57,14 +58,14 @@ public class VisitTypesNavigationHelper : NavigationHelper
             path: LocalText.Get("Db.PatientManagement.VisitTypes.EntityPlural") + "/" + LocalText.Get("LeftNavigation.AddNewVisitType"),
             url: "#",
             icon: "fa-plus-square open-new-visit-dialog",
-            permission: "PatientManagement:VisitTypes:Modify"));
+            permission: PatientManagementPermissionKeys.VisitTypes.UpdatePermission));
         foreach (var visitType in visitTypes)
         {
             list.Add(new NavigationLinkAttribute(506,
                 path: LocalText.Get("Db.PatientManagement.VisitTypes.EntityPlural") + "/" + visitType.Name.Replace("/", "//"),
                 url: "/PatientManagement/Visits?visittype=" + visitType.VisitTypeId,
                 icon: "fa-circle-o fc-event-droppable " + visitType.BackgroundColor,
-                permission: "PatientManagement:VisitTypes:Read"
+                permission: PatientManagementPermissionKeys.VisitTypes.ReadPermission
             ));
 
         }
@@ -72,7 +73,7 @@ public class VisitTypesNavigationHelper : NavigationHelper
             path: LocalText.Get("Db.PatientManagement.VisitTypes.EntityPlural") + "/" + LocalText.Get("LeftNavigation.VisitTypesPage"),
             url: "/PatientManagement/VisitTypes",
             icon: "fa-bars",
-            permission: "PatientManagement:VisitTypes:Page"
+            permission: PatientManagementPermissionKeys.VisitTypes.PagePermission
         ));
         return NavigationHelper.ByCategory(list);
     }

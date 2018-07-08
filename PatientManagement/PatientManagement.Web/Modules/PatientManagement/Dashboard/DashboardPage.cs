@@ -290,7 +290,7 @@ namespace PatientManagement.PatientManagement.Pages
             var user = Authorization.UserDefinition as UserDefinition;
             var days = UserSubscriptionHelper.GetTenantPaidDays(user.TenantId);
 
-            if (days <= DateTime.Now.AddDays(7) || Authorization.HasPermission(PermissionKeys.Payments.ReadPermission))
+            if (days <= DateTime.Now.AddDays(7) || Authorization.HasPermission(AdministrationTenantsPermissionKeys.Payments.ReadPermission))
                 return Json(days);
             else
                 return Json(DateTime.MinValue);

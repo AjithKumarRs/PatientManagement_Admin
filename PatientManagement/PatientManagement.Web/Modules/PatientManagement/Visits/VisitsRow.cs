@@ -178,7 +178,7 @@ namespace PatientManagement.PatientManagement.Entities
         }
 
 
-        [ReadPermission(PermissionKeys.AdministrationTenantsVisitPayments)]
+        [ReadPermission(AdministrationTenantsPermissionKeys.VisitPayments.ReadPermissions)]
         [NotMapped]
         [DisplayName("Price Per Visit")]
         public String VisitTypePriceFormatted
@@ -187,7 +187,7 @@ namespace PatientManagement.PatientManagement.Entities
             set { Fields.VisitTypePriceFormatted[this] = value; }
         }
 
-        [ReadPermission(PermissionKeys.AdministrationTenantsVisitPayments)]
+        [ReadPermission(AdministrationTenantsPermissionKeys.VisitPayments.ReadPermissions)]
         [Expression("jVisitType.[Price]")]
         public Decimal? VisitTypePrice
         {
@@ -195,7 +195,7 @@ namespace PatientManagement.PatientManagement.Entities
             set { Fields.VisitTypePrice[this] = value; }
         }
 
-        [ReadPermission(PermissionKeys.AdministrationTenantsVisitPayments)]
+        [ReadPermission(AdministrationTenantsPermissionKeys.VisitPayments.ReadPermissions)]
         [Expression("jVisitType.[CurrencyId]")]
         [DisplayName("Visit Type Currency Id")]
         public Int32? VisitTypeCurrencyId

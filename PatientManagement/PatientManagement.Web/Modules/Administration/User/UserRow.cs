@@ -12,7 +12,7 @@ namespace PatientManagement.Administration.Entities
     using System.ComponentModel;
 
     [ConnectionKey("Default"), DisplayName("Users"), InstanceName("User"), TwoLevelCached]
-    [ReadPermission(PermissionKeys.User.ReadPermission)]
+    [ReadPermission(AdministrationTenantsPermissionKeys.User.ReadPermission)]
     [ModifyPermission(PermissionKeys.User.ModifyPermission)]
     [LookupScript("Administration.User",
         LookupType = typeof(MultiTenantRowLookupScript<>))]

@@ -135,7 +135,7 @@ namespace PatientManagement.PatientManagement.Repositories
             {
                 base.OnReturn();
 
-                if (!Authorization.HasPermission(PermissionKeys.AdministrationTenantsVisitPayments))
+                if (!Authorization.HasPermission(AdministrationTenantsPermissionKeys.VisitPayments.ReadPermissions))
                     return;
 
                 var currencyIdList = Response.Entities.Where(x => x.VisitTypeCurrencyId != null)

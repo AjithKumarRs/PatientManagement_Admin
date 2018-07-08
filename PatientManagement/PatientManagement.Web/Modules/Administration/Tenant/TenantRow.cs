@@ -10,7 +10,7 @@ namespace PatientManagement.Administration.Entities
     using System.IO;
 
     [ConnectionKey("Default"), TableName("[dbo].[Tenants]"), DisplayName("Tenant"), InstanceName("Tenant"), TwoLevelCached]
-    [ReadPermission(PermissionKeys.Tenants.ReadPermission)]
+    [ReadPermission(AdministrationTenantsPermissionKeys.Tenant.ReadPermission)]
     [ModifyPermission(PermissionKeys.Tenants.ModifyPermission)]
     [LookupScript("Administration.Tenant")]
     public sealed class TenantRow : Row, IIdRow, INameRow, ILoggingRow , IIsActiveDeletedRow

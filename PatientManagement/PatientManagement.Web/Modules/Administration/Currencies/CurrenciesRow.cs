@@ -10,7 +10,7 @@ namespace PatientManagement.Administration.Entities
     using System.IO;
 
     [ConnectionKey("Default"), TableName("[dbo].[Currencies]"), DisplayName("Currencies"), InstanceName("Currencies"), TwoLevelCached]
-    [ReadPermission(PermissionKeys.Currencies.ReadPermission)]
+    [ReadPermission(AdministrationTenantsPermissionKeys.Currencies.ReadPermission)]
     [InsertPermission(PermissionKeys.Currencies.InsertPermission)]
     [UpdatePermission(PermissionKeys.Currencies.UpdatePermission)]
     [DeletePermission(PermissionKeys.Currencies.DeletePermission)]

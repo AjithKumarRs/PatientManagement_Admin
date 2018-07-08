@@ -10,7 +10,7 @@ namespace PatientManagement.Administration.Entities
     using System.IO;
 
     [ConnectionKey("Default"), TableName("[dbo].[OfferLang]"), DisplayName("Offer Lang"), InstanceName("Offer Lang"), TwoLevelCached]
-    [ReadPermission(PermissionKeys.Offers.ReadPermission)]
+    [ReadPermission(AdministrationTenantsPermissionKeys.Offers.ReadPermission)]
     [ModifyPermission(PermissionKeys.Offers.ModifyPermission)]
     public sealed class OfferLangRow : Row, IIdRow, INameRow, ILocalizationRow
     {

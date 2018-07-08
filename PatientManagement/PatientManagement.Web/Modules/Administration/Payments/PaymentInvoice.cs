@@ -11,7 +11,7 @@ namespace PatientManagement.Payments
 {
     [Report("Administration.PaymentInvoice")]
     [ReportDesign(MVC.Views.Administration.Payments.PaymentInvoicePage)]
-    [ReadPermission(PermissionKeys.Payments.InvoicePermission)]
+    [ReadPermission(AdministrationTenantsPermissionKeys.Payments.InvoicePermission)]
     public class PaymentInvoice : IReport, ICustomizeHtmlToPdf
     {
         public Int32 PaymentId { get; set; }

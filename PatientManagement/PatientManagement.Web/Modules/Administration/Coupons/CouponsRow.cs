@@ -10,7 +10,7 @@ namespace PatientManagement.Administration.Entities
     using System.IO;
 
     [ConnectionKey("Default"), TableName("[dbo].[Coupons]"), DisplayName("Coupons"), InstanceName("Coupons"), TwoLevelCached]
-    [ReadPermission(PermissionKeys.Coupons.ReadPermission)]
+    [ReadPermission(AdministrationTenantsPermissionKeys.Coupons.ReadPermission)]
     [InsertPermission(PermissionKeys.Coupons.InsertPermission)]
     [UpdatePermission(PermissionKeys.Coupons.UpdatePermission)]
     [DeletePermission(PermissionKeys.Coupons.DeletePermission)]

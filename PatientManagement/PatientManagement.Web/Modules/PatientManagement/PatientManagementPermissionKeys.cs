@@ -3,27 +3,19 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using PatientManagement.Administration;
 using Serenity.Extensibility;
 namespace PatientManagement.PatientManagement
 {
+   
     [NestedPermissionKeys]
-    [DisplayName("Patient Management")]
+    [DisplayName("Clinic Management")]
     public class PatientManagementPermissionKeys
     {
-        [DisplayName("Reports")]
-        public class Reports
-        {
-            [Description("Page")]
-            public const string ReportsPage = "Reports:Visits:Page";
-            [Description("Visit Types Per Gender Chart")]
-            public const string ReportsVisitTypesPerGenderChart = "Reports:Visits:VisitTypesPerGenderChart";
-            [Description("New Patients This Month Box")]
-            public const string ReportsNewPatientsThisMonth = "Reports:Visits:NewPatientsThisMonthBox";
-            [Description("New Visits This Month Box")]
-            public const string ReportsNewVisitsThisMonth = "Reports:Visits:NewVisitsThisMonthBox";
-            [Description("Visits Per Month Line Chart")]
-            public const string ReportsVisitsPerMonthLinearChart = "Reports:Visits:VisitsPerMonthLineChart";
-        }
+        [Description("General")]
+        public const string General = "PatientManagement:General"; 
+
+    
 
         [DisplayName("Activity")]
         public class Activity
@@ -68,14 +60,25 @@ namespace PatientManagement.PatientManagement
         [DisplayName("Medical Specialties")]
         public class MedicalSpecialties
         {
-            [Description("Page"), ImplicitPermission(ReadPermission)]
+            [Description("Page"), ImplicitPermission(AdministrationTenantsPermissionKeys.MedicalSpecialties.ReadPermission)]
             public const string PagePermission = "Administration:MedicalSpecialties:Page";
-            [Description("View")]
-            public const string ReadPermission = "AdministrationTenants:MedicalSpecialties:Read";
-            [Description("Update"), ImplicitPermission(ReadPermission)]
+            [Description("Update"), ImplicitPermission(AdministrationTenantsPermissionKeys.MedicalSpecialties.ReadPermission)]
             public const string UpdatePermission = "Administration:MedicalSpecialties:Update";
-            [Description("Delete"), ImplicitPermission(ReadPermission), ImplicitPermission(UpdatePermission)]
+            [Description("Delete"), ImplicitPermission(AdministrationTenantsPermissionKeys.MedicalSpecialties.ReadPermission), ImplicitPermission(UpdatePermission)]
             public const string DeletePermission = "Administration:MedicalSpecialties:Delete";
+        }
+
+        [DisplayName("Sent Emails")]
+        public class SentEmails
+        {
+            [Description("View")]
+            public const string ReadPermission = "PatientManagement:SentEmails:Read";
+
+            [Description("Page"), ImplicitPermission(ReadPermission)]
+            public const string PagePermission = "PatientManagement:SentEmails:Page";
+
+            [Description("Insert"), ImplicitPermission(ReadPermission)]
+            public const string InsertPermission = "PatientManagement:SentEmails:Insert";
         }
 
         [DisplayName("Notes")]

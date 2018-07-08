@@ -12,8 +12,8 @@ namespace PatientManagement.Administration.Entities
     using System.IO;
 
     [ConnectionKey("Default"), TableName("[dbo].[Subscriptions]"), DisplayName("Subscriptions"), InstanceName("Subscriptions"), TwoLevelCached]
-    [ReadPermission(PermissionKeys.Subscriptions.ReadPermission)]
-    [ModifyPermission(PermissionKeys.Subscriptions.ModifyPermission)]
+    [ReadPermission(AdministrationTenantsPermissionKeys.Subscriptions.ReadPermission)]
+    [ModifyPermission(AdministrationTenantsPermissionKeys.Subscriptions.ModifyPermission)]
     [LookupScript("Administration.Subscriptions",
         LookupType = typeof(MultiTenantRowLookupScript<>))]
     public sealed class SubscriptionsRow : Row, IIdRow, ILoggingRow, INameRow,  IMultiTenantRow, IIsActiveDeletedRow

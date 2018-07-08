@@ -13,7 +13,7 @@ namespace PatientManagement.Administration.Entities
     using System.IO;
 
     [ConnectionKey("Default"), TableName("[dbo].[Offers]"), DisplayName("Offers"), InstanceName("Offers"), TwoLevelCached]
-    [ReadPermission(PermissionKeys.Offers.ReadPermission)]
+    [ReadPermission(AdministrationTenantsPermissionKeys.Offers.ReadPermission)]
     [ModifyPermission(PermissionKeys.Offers.ModifyPermission)]
     [LookupScript("Administration.Offers", LookupType = typeof(OfferRowLookupScript<>))]
     [LocalizationRow(typeof(OfferLangRow))]

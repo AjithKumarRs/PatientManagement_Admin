@@ -5,7 +5,7 @@ namespace PatientManagement.Administration.Pages
     using Serenity.Web;
     using Microsoft.AspNetCore.Mvc;
     
-    [PageAuthorize(PermissionKeys.PaymentsDetails.PagePermission)]
+    [PageAuthorize(AdministrationTenantsPermissionKeys.PaymentsDetails.PagePermission)]
     public class PaymentsDetailsController : Controller
     {
         [Route("Administration/PaymentsDetails")]

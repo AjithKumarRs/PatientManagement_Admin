@@ -14,7 +14,7 @@ namespace PatientManagement.Administration.Pages
     using Serenity.Web;
     using Microsoft.AspNetCore.Mvc;
 
-    [PageAuthorize(PermissionKeys.Subscriptions.PagePermission)]
+    [PageAuthorize(AdministrationTenantsPermissionKeys.Subscriptions.PagePermission)]
     public class SubscriptionsController : Controller
     {
         [Route("Administration/Subscriptions")]

@@ -1,6 +1,8 @@
 ﻿
 using Serenity.Extensibility;
 using System.ComponentModel;
+using PatientManagement.PatientManagement;
+
 namespace PatientManagement.Administration
 {
     [NestedPermissionKeys]
@@ -13,36 +15,25 @@ namespace PatientManagement.Administration
         public const string PaymentStatus = "Administration:PaymentStatus";
         [Description(" Master admin only - Sergen")]
         public const string Sergen = "Administration:Sergen";
-        public const string AdministrationTenantsPaymentsRead = "AdministrationTenants:Payments:Read";
-        public const string AdministrationTenantsPaymentsModify = "AdministrationTenants:Payments:Modify";
 
-        public const string AdministrationTenantsCurrenciesRead = "AdministrationTenants:CurrenciesRead";
-        [Description("Edit Tenant")]
-        public const string AdministrationTenantsTenantEditing = "AdministrationTenants:Tenant:Edit";
-        [Description("Visit Payments")]
-        public const string AdministrationTenantsVisitPayments = "AdministrationTenants:VisitPayments";
         [DisplayName("Tenant")]
         public class Tenants
         {
-            [Description("View")]
-            public const string ReadPermission = "AdministrationTenants:Tenant:Read";
-            [Description("Page"), ImplicitPermission(ReadPermission)]
+            [Description("Page"), ImplicitPermission(AdministrationTenantsPermissionKeys.Tenant.ReadPermission)]
             public const string PagePermission = "Administration:Tenants:Page";
-            [Description("Modify"), ImplicitPermission(ReadPermission)]
+            [Description("Modify"), ImplicitPermission(AdministrationTenantsPermissionKeys.Tenant.ReadPermission)]
             public const string ModifyPermission = "Administration:Tenants:Modify";
         }
 
         [DisplayName("User")]
         public class User
         {
-            [Description("View")]
-            public const string ReadPermission = "AdministrationTenants:User:Read";
-            [Description("Page"), ImplicitPermission(ReadPermission)]
+            [Description("Page"), ImplicitPermission(AdministrationTenantsPermissionKeys.User.ReadPermission)]
             public const string PagePermission = "Administration:User:Page";
-            [Description("Modify"), ImplicitPermission(ReadPermission)]
+            [Description("Modify"), ImplicitPermission(AdministrationTenantsPermissionKeys.User.ReadPermission)]
             public const string ModifyPermission = "Administration:User:Modify";
 
-            [Description("Change Is Active"), ImplicitPermission(ReadPermission), ImplicitPermission(ModifyPermission)]
+            [Description("Change Is Active"), ImplicitPermission(AdministrationTenantsPermissionKeys.User.ReadPermission), ImplicitPermission(ModifyPermission)]
             public const string IsActivePermission = "Administration:User:IsActive";
         }
 
@@ -84,8 +75,8 @@ namespace PatientManagement.Administration
         [DisplayName("Coupons")]
         public class Coupons
         {
-            [Description("Coupons View")]
-            public const string ReadPermission = "AdministrationTenants:Coupons:Read";
+            const string ReadPermission = AdministrationTenantsPermissionKeys.Coupons.ReadPermission;
+
             [Description("Page"), ImplicitPermission(ReadPermission)]
             public const string PagePermission = "Administration:Coupons:Page";
             [Description("Insert"), ImplicitPermission(ReadPermission)]
@@ -99,8 +90,8 @@ namespace PatientManagement.Administration
         [DisplayName("Currencies")]
         public class Currencies
         {
-            [Description("Currencies View")]
-            public const string ReadPermission = "AdministrationTenants:Currencies:Read";
+            const string ReadPermission = AdministrationTenantsPermissionKeys.Currencies.ReadPermission;
+            
             [Description("Page"), ImplicitPermission(ReadPermission)]
             public const string PagePermission = "Administration:Currencies:Page";
             [Description("Insert"), ImplicitPermission(ReadPermission)]
@@ -127,74 +118,34 @@ namespace PatientManagement.Administration
         [DisplayName("Offers")]
         public class Offers
         {
-            [Description("Offers View")]
-            public const string ReadPermission = "AdministrationTenants:Offers:Read";
+            const string ReadPermission = AdministrationTenantsPermissionKeys.Offers.ReadPermission;
+
             [Description("Page"), ImplicitPermission(ReadPermission)]
             public const string PagePermission = "Administration:Offers:Page";
             [Description("Modify"), ImplicitPermission(ReadPermission)]
             public const string ModifyPermission = "Administration:Offers:Modify";
         }
 
+
+        [DisplayName("Sent Emails")]
+        public class SentEmails
+        {
+            [Description("Update"), ImplicitPermission(PatientManagementPermissionKeys.SentEmails.ReadPermission), ImplicitPermission(PatientManagementPermissionKeys.SentEmails.InsertPermission)]
+            public const string UpdatePermission = "Administration:SentEmails:Update";
+            [Description("Delete"), ImplicitPermission(PatientManagementPermissionKeys.SentEmails.ReadPermission), ImplicitPermission(PatientManagementPermissionKeys.SentEmails.InsertPermission), ImplicitPermission(UpdatePermission)]
+            public const string DeletePermission = "Administration:SentEmails:Delete";
+        }
+
         [DisplayName("Payment Options")]
         public class PaymentOptions
         {
-            [Description("Payment Options View")]
-            public const string ReadPermission = "AdministrationTenants:PaymentOptions:Read";
+            const string ReadPermission = AdministrationTenantsPermissionKeys.PaymentOptions.ReadPermission;
             [Description("Page"), ImplicitPermission(ReadPermission)]
             public const string PagePermission = "Administration:PaymentOptions:Page";
             [Description("Modify"), ImplicitPermission(ReadPermission)]
             public const string ModifyPermission = "Administration:PaymentOptions:Modify";
         }
 
-        [DisplayName("Payments")]
-        public class Payments
-        {
-            [Description("View")]
-            public const string ReadPermission = "AdministrationTenants:Payments:Read";
-            [Description("Page"), ImplicitPermission(ReadPermission)]
-            public const string PagePermission = "AdministrationTenants:Payments:Page";
-            [Description("Invoice View"), ImplicitPermission(ReadPermission)]
-            public const string InvoicePermission = "AdministrationTenants:Payments:Invoice";
-            [Description("Modify"), ImplicitPermission(ReadPermission)]
-            public const string ModifyPermission = "AdministrationTenants:Payments:Modify";
-        }
-
-        [DisplayName("Payments Details")]
-        public class PaymentsDetails
-        {
-            [Description("View")]
-            public const string ReadPermission = "AdministrationTenants:PaymentsDetails:Read";
-            [Description("Page"), ImplicitPermission(ReadPermission)]
-            public const string PagePermission = "AdministrationTenants:PaymentsDetails:Page";
-            [Description("Modify"), ImplicitPermission(ReadPermission)]
-            public const string ModifyPermission = "AdministrationTenants:PaymentsDetails:Modify";
-        }
-
-
-        [DisplayName("Sent Emails")]
-        public class SentEmails
-        {
-            [Description("View")]
-            public const string ReadPermission = "PatientManagement:SentEmails:Read";
-            [Description("Page"), ImplicitPermission(ReadPermission)]
-            public const string PagePermission = "PatientManagement:SentEmails:Page";
-            [Description("Insert"), ImplicitPermission(ReadPermission)]
-            public const string InsertPermission = "PatientManagement:SentEmails:Insert";
-            [Description("Update"), ImplicitPermission(ReadPermission), ImplicitPermission(InsertPermission)]
-            public const string UpdatePermission = "Administration:SentEmails:Update";
-            [Description("Delete"), ImplicitPermission(ReadPermission), ImplicitPermission(InsertPermission), ImplicitPermission(UpdatePermission)]
-            public const string DeletePermission = "Administration:SentEmails:Delete";
-        }
-        [DisplayName("Subscriptions")]
-        public class Subscriptions
-        {
-            [Description("View")]
-            public const string ReadPermission = "AdministrationTenants:Subscriptions:Read";
-            [Description("Page"), ImplicitPermission(ReadPermission)]
-            public const string PagePermission = "AdministrationTenants:Subscriptions:Page";
-            [Description("Modify"), ImplicitPermission(ReadPermission)]
-            public const string ModifyPermission = "AdministrationTenants:Subscriptions:Modify";
-        }
 
     }
 

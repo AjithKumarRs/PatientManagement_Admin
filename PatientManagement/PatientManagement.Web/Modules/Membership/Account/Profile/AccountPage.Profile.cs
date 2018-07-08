@@ -45,7 +45,7 @@ namespace PatientManagement.Membership.Pages
         }
 
 #pragma warning disable SG0016 // Controller method is vulnerable to CSRF
-        [HttpPost, JsonFilter, ServiceAuthorize(PermissionKeys.AdministrationTenantsTenantEditing)]
+        [HttpPost, JsonFilter, ServiceAuthorize(AdministrationTenantsPermissionKeys.Tenant.ModifyPermission)]
         [Route("Account/EditTenant")]
         public Result<ServiceResponse> EditTenant(EditTenantRequest request)
         {

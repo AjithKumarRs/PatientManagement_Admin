@@ -13,7 +13,7 @@ namespace PatientManagement.PatientManagement.Entities
 
     [ConnectionKey("PatientManagement"), TableName("[dbo].[MedicalSpecialties]")]
     [DisplayName("Medical Specialty"), InstanceName("Medical Specialty"), TwoLevelCached]
-    [ReadPermission(PatientManagementPermissionKeys.MedicalSpecialties.ReadPermission)]
+    [ReadPermission(AdministrationTenantsPermissionKeys.MedicalSpecialties.ReadPermission)]
     [UpdatePermission(PatientManagementPermissionKeys.MedicalSpecialties.UpdatePermission)]
     [DeletePermission(PatientManagementPermissionKeys.MedicalSpecialties.DeletePermission)]
     [LookupScript("PatientManagement.MedicalSpecialties")]
