@@ -138,6 +138,13 @@ namespace PatientManagement
             public static LocalText GroupByButton = "Group By ";
             public static LocalText NoGroupingButton = "No Grouping";
 
+            public static class Visits
+            {
+
+                public static LocalText VisitRepeatCounterInCalendarDescription = "Repeated number - ";
+                public static LocalText VisitWillRepeatUntilInCalendarDescription = "Will repeat until - ";
+            }
+
             public static class Reports
             {
                 public static LocalText ReportNewPatientsThisMonthBox = "New patients this month";

@@ -2554,6 +2554,14 @@ declare namespace PatientManagement.PatientManagement {
     }
 }
 declare namespace PatientManagement.PatientManagement {
+    enum RepeatPeriod {
+        Day = 1,
+        Week = 2,
+        Month = 3,
+        Year = 4,
+    }
+}
+declare namespace PatientManagement.PatientManagement {
     namespace ReportsVisitsEndpointService {
         const baseUrl = "PatientManagement/ReportsVisits";
         function NewPatientsThisMonth(request: Serenity.ServiceRequest, onSuccess?: (response: Serenity.RetrieveResponse<NewPatientsThisMonthResponse>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
@@ -2764,6 +2772,9 @@ declare namespace PatientManagement.PatientManagement {
         FreeForReservation: BsSwitchEditor;
         StartDate: Serenity.DateTimeEditor;
         EndDate: Serenity.DateTimeEditor;
+        RepeatTimes: Serenity.IntegerEditor;
+        RepeatPeriod: Serenity.EnumEditor;
+        RepeatUntilEndDate: Serenity.StringEditor;
         Price: Serenity.DecimalEditor;
         VisitTypeCurrencyName: Serenity.StringEditor;
         Description: Serenity.TextAreaEditor;
@@ -2786,8 +2797,13 @@ declare namespace PatientManagement.PatientManagement {
         VisitId?: number;
         PatientId?: number;
         VisitTypeId?: number;
+        RepeatPeriod?: RepeatPeriod;
+        RepeatTimes?: number;
+        RepeatUntilStartDate?: string;
+        RepeatUntilEndDate?: string;
         CabinetId?: number;
         CabinetName?: string;
+        VisitTypeCurrencyName?: string;
         CabinetIsActive?: number;
         AssignedUserId?: number;
         AssignedUserName?: string;
@@ -2795,6 +2811,7 @@ declare namespace PatientManagement.PatientManagement {
         Description?: string;
         StartDate?: string;
         EndDate?: string;
+        Price?: number;
         PatientGender?: Gender;
         PatientEmail?: string;
         PatientNotifyOnChange?: boolean;
@@ -2827,8 +2844,13 @@ declare namespace PatientManagement.PatientManagement {
             VisitId = "VisitId",
             PatientId = "PatientId",
             VisitTypeId = "VisitTypeId",
+            RepeatPeriod = "RepeatPeriod",
+            RepeatTimes = "RepeatTimes",
+            RepeatUntilStartDate = "RepeatUntilStartDate",
+            RepeatUntilEndDate = "RepeatUntilEndDate",
             CabinetId = "CabinetId",
             CabinetName = "CabinetName",
+            VisitTypeCurrencyName = "VisitTypeCurrencyName",
             CabinetIsActive = "CabinetIsActive",
             AssignedUserId = "AssignedUserId",
             AssignedUserName = "AssignedUserName",
@@ -2836,6 +2858,7 @@ declare namespace PatientManagement.PatientManagement {
             Description = "Description",
             StartDate = "StartDate",
             EndDate = "EndDate",
+            Price = "Price",
             PatientGender = "PatientGender",
             PatientEmail = "PatientEmail",
             PatientNotifyOnChange = "PatientNotifyOnChange",
@@ -3859,6 +3882,7 @@ declare namespace PatientManagement.PatientManagement {
         protected updateInterface(): void;
         constructor();
         afterLoadEntity(): void;
+        showRepeatUntilBox(): void;
         protected getCloningEntity(): VisitsRow;
     }
 }
