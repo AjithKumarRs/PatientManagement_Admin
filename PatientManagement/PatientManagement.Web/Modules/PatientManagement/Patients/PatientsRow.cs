@@ -141,7 +141,7 @@ namespace PatientManagement.PatientManagement.Entities
         }
 
         [DisplayName("Visits Count"), Insertable(false), Updatable(false)]
-        [Expression("(SELECT COUNT(*) FROM Visits vsts WHERE PatientId = T0.[PatientId])")]
+        [Expression("(SELECT COUNT(*) + SUM(COALESCE(vsts.RepeatTimes, 0)) FROM Visits vsts WHERE PatientId = T0.[PatientId])")]
         public Int32? VisitsCount
         {
             get { return Fields.VisitsCount[this]; }

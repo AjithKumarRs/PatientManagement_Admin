@@ -127,8 +127,6 @@ THEN
 ELSE
 T0.[StartDate]
 END
-
-
 ")]
         public DateTime? RepeatUntilStartDate
         {
@@ -137,6 +135,7 @@ END
         }
 
 
+        [DisplayFormat("dd/MM/yyyy HH:mm")]
         [DisplayName("Repeat Until End Date"),Insertable(false),Updatable(false), ReadOnly(true), Expression(@"
 CASE WHEN (T0.[RepeatTimes] > 0 AND T0.[RepeatPeriod] > 0) 
 THEN 
@@ -156,14 +155,40 @@ THEN
 ELSE
 T0.[EndDate]
 END
-
-
 ")]
         public DateTime? RepeatUntilEndDate
         {
             get { return Fields.RepeatUntilEndDate[this]; }
             set { Fields.RepeatUntilEndDate[this] = value; }
         }
+
+        [DisplayFormat("dd/MM/yyyy HH:mm")]
+        [DisplayName("Next Repea Time"), Insertable(false), Updatable(false), ReadOnly(true), Expression(@"
+CASE WHEN (T0.[RepeatTimes] > 0 AND T0.[RepeatPeriod] > 0) 
+THEN 
+    CASE 
+        WHEN (T0.[RepeatPeriod] = 1) THEN
+             DATEADD(day,1,T0.[StartDate])  
+        WHEN (T0.[RepeatPeriod] = 2) THEN
+            DATEADD(week,1,T0.[StartDate])  
+        WHEN (T0.[RepeatPeriod] = 3) THEN
+            DATEADD(month,1,T0.[StartDate])  
+        WHEN (T0.[RepeatPeriod] = 4) THEN
+            DATEADD(year,1,T0.[StartDate])  
+    ELSE
+    T0.[StartDate]
+    END
+
+ELSE
+T0.[StartDate]
+END
+")]
+        public DateTime? NextRepeaTime
+        {
+            get { return Fields.NextRepeaTime[this]; }
+            set { Fields.NextRepeaTime[this] = value; }
+        }
+
 
         [DisplayFormat("dd/MM/yyyy HH:mm")]
         [DisplayName("Start Date"), NotNull, QuickSearch, QuickFilter, SortOrder(1, true), Width(150)]
@@ -312,6 +337,7 @@ END
             public Int16Field RepeatTimes;
             public DateTimeField RepeatUntilStartDate;
             public DateTimeField RepeatUntilEndDate;
+            public DateTimeField NextRepeaTime;
 
             public Int32Field CabinetId;
             public StringField CabinetName;

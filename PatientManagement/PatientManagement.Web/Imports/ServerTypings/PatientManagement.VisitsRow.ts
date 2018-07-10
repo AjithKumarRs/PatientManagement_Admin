@@ -7,6 +7,7 @@
         RepeatTimes?: number;
         RepeatUntilStartDate?: string;
         RepeatUntilEndDate?: string;
+        NextRepeaTime?: string;
         CabinetId?: number;
         CabinetName?: string;
         VisitTypeCurrencyName?: string;
@@ -59,6 +60,7 @@
             RepeatTimes = "RepeatTimes",
             RepeatUntilStartDate = "RepeatUntilStartDate",
             RepeatUntilEndDate = "RepeatUntilEndDate",
+            NextRepeaTime = "NextRepeaTime",
             CabinetId = "CabinetId",
             CabinetName = "CabinetName",
             VisitTypeCurrencyName = "VisitTypeCurrencyName",
