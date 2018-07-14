@@ -89,13 +89,13 @@ namespace PatientManagement.PatientManagement {
                 VisitsService.Update({
                         Entity: p,
                         EntityId: visitId
-                    },
+                    }, 
                     response => {
                         Q.reloadLookup(PatientManagement.VisitsRow.lookupKey);
 
                         $('#VisitsGridDiv .refresh-button').click();
-
-                        if (new Date(start).getDay() === new Date().getDay() ||
+                        if (p.IsRepeated ||
+                            new Date(start).getDay() === new Date().getDay() ||
                             new Date(end).getDay() === new Date().getDay() ||
                             new Date(beforeDateStart).getDay() === new Date().getDay() ||
                             new Date(beforeDateEnd).getDay() === new Date().getDay()) {

@@ -56,6 +56,38 @@ namespace PatientManagement.PatientManagement.Repositories
             return new MyListHandler().Process(connection, request);
         }
 
+        public ListResponse<MyRow> ListCriteriaStartDateEndDate(IDbConnection connection, ListCriteriaStartDateEndDateRequest request)
+        {
+            request.ColumnSelection = ColumnSelection.Details;
+            request.Criteria =
+                (new Criteria(fld.IsActive.Name) == 1 & new Criteria(fld.CabinetId.Name) == request.CabinetId
+                    & (new Criteria(fld.StartDate.Name) <= request.EndDate
+                       & new Criteria(fld.EndDate.Name) >= request.StartDate
+                       &
+                       //Visits with start before start date and end before end date
+                       ((new Criteria(fld.StartDate.Name) <= request.StartDate
+                         & new Criteria(fld.EndDate.Name) <= request.EndDate)
+                        //Visits with start after start date and end before end date
+                        | (new Criteria(fld.StartDate.Name) >= request.StartDate
+                           & new Criteria(fld.EndDate.Name) <= request.EndDate)
+                        //Visits with start after start date and end after end date
+                        | (new Criteria(fld.StartDate.Name) >= request.StartDate
+                           & new Criteria(fld.EndDate.Name) >= request.EndDate)
+                        //Visits with start before start date and end after end date
+                        | (new Criteria(fld.StartDate.Name) <= request.StartDate
+                           & new Criteria(fld.EndDate.Name) >= request.EndDate
+                        )
+                       )
+                       //Recurring visits
+                       | (new Criteria(fld.RepeatUntilEndDate.Name) >= request.StartDate
+                          & new Criteria(fld.StartDate.Name) < request.EndDate
+                          & new Criteria(fld.RepeatPeriod.Name) > 0
+                       )
+                    ));
+            
+            return new MyListHandler().Process(connection, request);
+        }
+
         private class MySaveHandler : SaveRequestHandler<MyRow>
         {
             protected override void AfterSave()

@@ -91,38 +91,15 @@ namespace PatientManagement.PatientManagement.Pages
             using (var connection = SqlConnections.NewFor<VisitsRow>())
             {
                 var visitFlds = VisitsRow.Fields.As("vis");
-                var listRequest = new ListRequest();
-                listRequest.ColumnSelection = ColumnSelection.Details;
-                listRequest.Criteria =
-                    (new Criteria(visitFlds.IsActive.Name) == 1 & new Criteria(visitFlds.CabinetId.Name) == int.Parse(cabinetIdActive)
-                        & (new Criteria(visitFlds.StartDate.Name) <= endDate
-                           & new Criteria(visitFlds.EndDate.Name) >= startDate
-                           &
-                            //Visits with start before start date and end before end date
-                            ((new Criteria(visitFlds.StartDate.Name) <= startDate 
-                             & new Criteria(visitFlds.EndDate.Name) <= endDate)
-                            //Visits with start after start date and end before end date
-                            | (new Criteria(visitFlds.StartDate.Name) >= startDate
-                               & new Criteria(visitFlds.EndDate.Name) <= endDate)
-                            //Visits with start after start date and end after end date
-                            | (new Criteria(visitFlds.StartDate.Name) >= startDate
-                               & new Criteria(visitFlds.EndDate.Name) >= endDate)
-                            //Visits with start before start date and end after end date
-                            | (new Criteria(visitFlds.StartDate.Name) <= startDate
-                               & new Criteria(visitFlds.EndDate.Name) >= endDate
-                            )
-                         )
-                        //Recurring visits
-                        | (new Criteria(visitFlds.RepeatUntilEndDate.Name) >= startDate
-                           & new Criteria(visitFlds.StartDate.Name) < endDate
-                           & new Criteria(visitFlds.RepeatPeriod.Name) > 0
-                        )
-                        ));
-
-                var result = new VisitsRepository().List(connection, listRequest).Entities;
+                var listRequest = new ListCriteriaStartDateEndDateRequest();
+                listRequest.StartDate = startDate;
+                listRequest.EndDate = endDate;
+                listRequest.CabinetId = int.Parse(cabinetIdActive);
+                var result = new VisitsRepository().ListCriteriaStartDateEndDate(connection, listRequest).Entities;
 
                 foreach (VisitsRow visit in result)
                 {
+
                     var eventOriginal = new Event
                     {
                         id = visit.VisitId ?? 0,
@@ -149,7 +126,9 @@ namespace PatientManagement.PatientManagement.Pages
                                 LocalText.Get(Texts.Site.Visits.VisitWillRepeatUntilInCalendarDescription) +
                                 visit.RepeatUntilEndDate.Value.ToString(DateHelper.CurrentDateFormat);
 
-                        model.EventsList.Add(eventOriginal);
+
+                        if (visit.StartDate < endDate && visit.EndDate > startDate)
+                           model.EventsList.Add(eventOriginal);
                         
                         for (int counter = 1; counter <= visit.RepeatTimes.Value; counter++)
                         {
@@ -174,6 +153,10 @@ namespace PatientManagement.PatientManagement.Pages
                                     endDateRepeat = endDateRepeat.AddYears(counter);
                                     break;
                             }
+
+                            if(startDateRepeat > endDate || endDateRepeat < startDate )
+                                continue;
+                            
 
                             var eventRepeated = new Event
                             {
@@ -315,39 +298,30 @@ namespace PatientManagement.PatientManagement.Pages
 
         public JsonResult GetTodayVisits()
         {
-            var user = (UserDefinition)Authorization.UserDefinition;
-
             var startDate = DateTime.UtcNow.Date;
-            var endDate = DateTime.UtcNow.Date.AddDays(1).AddTicks(-1);
-
-            var connection = SqlConnections.NewFor<VisitsRow>();
-            var cabinetIdActive = Request.Cookies["CabinetPreference"];
-
+            var endDate = DateTime.UtcNow.Date.AddDays(2).AddTicks(-1);
+            
             var countVisitsForToday = 0;
             var alreadyExpired = 0;
 
             var endDateToday = DateTime.Now;
 
-            var visitFlds = VisitsRow.Fields.As("vs");
-
-            using (var conection = SqlConnections.NewFor<VisitsRow>())
+            var visitsForToday = (List<Event>)GetVisitsTasks(startDate.ToString("yyyy-MM-dd"), endDate.ToString("yyyy-MM-dd")).Value;
+            
+            countVisitsForToday = visitsForToday.Where(v =>
             {
-                SqlQuery query = new SqlQuery()
-                    .From(visitFlds)
-                    .Select(visitFlds.VisitId)
-                    .Where(~(
-                    new Criteria(visitFlds.StartDate) >= startDate
-                    & new Criteria(visitFlds.CabinetId) == cabinetIdActive)
-                    & new Criteria(visitFlds.IsActive) == 1
-                    );
+                DateTime temp = DateTime.MinValue;
+                DateTime.TryParseExact(v.end, "yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz", CultureInfo.InvariantCulture, DateTimeStyles.None, out temp);
+                return temp <= endDate;
+            }).Count();
 
-                if (!Authorization.HasPermission(PermissionKeys.Tenant))
-                    query.Where(visitFlds.TenantId == user.TenantId);
-
-                countVisitsForToday = connection.Query(query.Where(visitFlds.EndDate <= endDate)).Count();
-                alreadyExpired = connection.Query(query.Where(visitFlds.EndDate <= endDateToday)).Count();
-            }
-
+            alreadyExpired = visitsForToday.Where(v =>
+            {
+                DateTime temp = DateTime.MinValue;
+                DateTime.TryParseExact(v.end, "yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz", CultureInfo.InvariantCulture, DateTimeStyles.None, out temp);
+                return temp <= endDateToday;
+            }).Count();
+            
             return Json(new { countVisitsForToday, alreadyExpired });
         }
 
