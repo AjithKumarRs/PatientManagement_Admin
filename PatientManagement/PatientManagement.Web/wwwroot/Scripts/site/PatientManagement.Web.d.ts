@@ -31,7 +31,7 @@ declare namespace PatientManagement.Administration {
         InsertUserId?: number;
         InsertDate?: string;
         UpdateUserId?: number;
-        UpdateDateField?: string;
+        UpdateDate?: string;
         IsActive?: number;
         MaxTimeUsing?: number;
         InsertUserName?: string;
@@ -55,7 +55,7 @@ declare namespace PatientManagement.Administration {
             InsertUserId = "InsertUserId",
             InsertDate = "InsertDate",
             UpdateUserId = "UpdateUserId",
-            UpdateDateField = "UpdateDateField",
+            UpdateDate = "UpdateDate",
             IsActive = "IsActive",
             MaxTimeUsing = "MaxTimeUsing",
             InsertUserName = "InsertUserName",
@@ -109,7 +109,7 @@ declare namespace PatientManagement.Administration {
         BaseCurrencyName?: string;
         UpdateUserId?: number;
         UserName?: string;
-        UpdateDateField?: string;
+        UpdateDate?: string;
     }
     namespace CurrenciesRow {
         const idProperty = "Id";
@@ -127,7 +127,7 @@ declare namespace PatientManagement.Administration {
             BaseCurrencyName = "BaseCurrencyName",
             UpdateUserId = "UpdateUserId",
             UserName = "UserName",
-            UpdateDateField = "UpdateDateField",
+            UpdateDate = "UpdateDate",
         }
     }
 }
@@ -174,15 +174,16 @@ declare namespace PatientManagement.Administration {
         VisitedCount?: number;
         AccessType?: PatientManagement.AccessType;
         OutputFormat?: PatientManagement.OutputFormat;
-        TenantId?: number;
         InsertUserId?: number;
         InsertDate?: string;
-        UpdateUserId?: number;
-        UpdateDateField?: string;
-        IsActive?: number;
-        TenantName?: string;
         InsertUserName?: string;
         UpdateUserName?: string;
+        UpdateUserId?: number;
+        UpdateDate?: string;
+        IsActive?: number;
+        TenantId?: number;
+        TenantName?: string;
+        TenantCurrencyId?: number;
     }
     namespace ExternalAccessRow {
         const idProperty = "ExternalAccessId";
@@ -199,15 +200,16 @@ declare namespace PatientManagement.Administration {
             VisitedCount = "VisitedCount",
             AccessType = "AccessType",
             OutputFormat = "OutputFormat",
-            TenantId = "TenantId",
             InsertUserId = "InsertUserId",
             InsertDate = "InsertDate",
-            UpdateUserId = "UpdateUserId",
-            UpdateDateField = "UpdateDateField",
-            IsActive = "IsActive",
-            TenantName = "TenantName",
             InsertUserName = "InsertUserName",
             UpdateUserName = "UpdateUserName",
+            UpdateUserId = "UpdateUserId",
+            UpdateDate = "UpdateDate",
+            IsActive = "IsActive",
+            TenantId = "TenantId",
+            TenantName = "TenantName",
+            TenantCurrencyId = "TenantCurrencyId",
         }
     }
 }
@@ -459,7 +461,7 @@ declare namespace PatientManagement.Administration {
         InsertUserId?: number;
         InsertDate?: string;
         UpdateUserId?: number;
-        UpdateDateField?: string;
+        UpdateDate?: string;
         InsertUserName?: string;
         UpdateUserName?: string;
     }
@@ -476,7 +478,7 @@ declare namespace PatientManagement.Administration {
             InsertUserId = "InsertUserId",
             InsertDate = "InsertDate",
             UpdateUserId = "UpdateUserId",
-            UpdateDateField = "UpdateDateField",
+            UpdateDate = "UpdateDate",
             InsertUserName = "InsertUserName",
             UpdateUserName = "UpdateUserName",
         }
@@ -734,7 +736,7 @@ declare namespace PatientManagement.Administration {
     interface RoleForm {
         RoleName: Serenity.StringEditor;
         UsersInRole: Serenity.LookupEditor;
-        TenantId: Serenity.LookupEditor;
+        TenantId: Serenity.IntegerEditor;
     }
     class RoleForm extends Serenity.PrefixedContext {
         static formKey: string;
@@ -795,16 +797,17 @@ declare namespace PatientManagement.Administration {
     interface RoleRow {
         RoleId?: number;
         RoleName?: string;
-        TenantId?: number;
+        UsersInRole?: number[];
         InsertUserId?: number;
         InsertDate?: string;
-        UpdateUserId?: number;
-        UpdateDateField?: string;
-        IsActive?: number;
-        UsersInRole?: number[];
-        TenantName?: string;
         InsertUserName?: string;
         UpdateUserName?: string;
+        UpdateUserId?: number;
+        UpdateDate?: string;
+        IsActive?: number;
+        TenantId?: number;
+        TenantName?: string;
+        TenantCurrencyId?: number;
     }
     namespace RoleRow {
         const idProperty = "RoleId";
@@ -816,16 +819,17 @@ declare namespace PatientManagement.Administration {
         const enum Fields {
             RoleId = "RoleId",
             RoleName = "RoleName",
-            TenantId = "TenantId",
+            UsersInRole = "UsersInRole",
             InsertUserId = "InsertUserId",
             InsertDate = "InsertDate",
-            UpdateUserId = "UpdateUserId",
-            UpdateDateField = "UpdateDateField",
-            IsActive = "IsActive",
-            UsersInRole = "UsersInRole",
-            TenantName = "TenantName",
             InsertUserName = "InsertUserName",
             UpdateUserName = "UpdateUserName",
+            UpdateUserId = "UpdateUserId",
+            UpdateDate = "UpdateDate",
+            IsActive = "IsActive",
+            TenantId = "TenantId",
+            TenantName = "TenantName",
+            TenantCurrencyId = "TenantCurrencyId",
         }
     }
 }
@@ -986,7 +990,7 @@ declare namespace PatientManagement.Administration {
         SubscriptionEndDate: Serenity.DateEditor;
         Enabled: BsSwitchEditor;
         FreeDaysFromOffer: Serenity.IntegerEditor;
-        TenantId: Serenity.LookupEditor;
+        TenantId: Serenity.IntegerEditor;
     }
     class SubscriptionsForm extends Serenity.PrefixedContext {
         static formKey: string;
@@ -999,24 +1003,25 @@ declare namespace PatientManagement.Administration {
         SubscriptionId?: number;
         Name?: string;
         OfferId?: number;
-        TenantId?: number;
         SubscriptionEndDate?: string;
         Enabled?: number;
         FreeDaysFromOffer?: number;
-        IsActive?: number;
         DeactivatedOn?: string;
         ActivatedOn?: string;
-        InsertUserId?: number;
-        InsertDate?: string;
-        UpdateUserId?: number;
-        UpdateDateField?: string;
         OfferName?: string;
         OfferDescription?: string;
         OfferPrice?: number;
         OfferRoleId?: number;
-        TenantName?: string;
+        InsertUserId?: number;
+        InsertDate?: string;
         InsertUserName?: string;
         UpdateUserName?: string;
+        UpdateUserId?: number;
+        UpdateDate?: string;
+        IsActive?: number;
+        TenantId?: number;
+        TenantName?: string;
+        TenantCurrencyId?: number;
     }
     namespace SubscriptionsRow {
         const idProperty = "SubscriptionId";
@@ -1029,24 +1034,25 @@ declare namespace PatientManagement.Administration {
             SubscriptionId = "SubscriptionId",
             Name = "Name",
             OfferId = "OfferId",
-            TenantId = "TenantId",
             SubscriptionEndDate = "SubscriptionEndDate",
             Enabled = "Enabled",
             FreeDaysFromOffer = "FreeDaysFromOffer",
-            IsActive = "IsActive",
             DeactivatedOn = "DeactivatedOn",
             ActivatedOn = "ActivatedOn",
-            InsertUserId = "InsertUserId",
-            InsertDate = "InsertDate",
-            UpdateUserId = "UpdateUserId",
-            UpdateDateField = "UpdateDateField",
             OfferName = "OfferName",
             OfferDescription = "OfferDescription",
             OfferPrice = "OfferPrice",
             OfferRoleId = "OfferRoleId",
-            TenantName = "TenantName",
+            InsertUserId = "InsertUserId",
+            InsertDate = "InsertDate",
             InsertUserName = "InsertUserName",
             UpdateUserName = "UpdateUserName",
+            UpdateUserId = "UpdateUserId",
+            UpdateDate = "UpdateDate",
+            IsActive = "IsActive",
+            TenantId = "TenantId",
+            TenantName = "TenantName",
+            TenantCurrencyId = "TenantCurrencyId",
         }
     }
 }
@@ -1106,12 +1112,12 @@ declare namespace PatientManagement.Administration {
         SubscriptionInsertUserId?: number;
         SubscriptionInsertDate?: string;
         SubscriptionUpdateUserId?: number;
-        SubscriptionUpdateDateField?: string;
+        SubscriptionUpdateDate?: string;
         SubscriptionName?: string;
         InsertUserId?: number;
         InsertDate?: string;
         UpdateUserId?: number;
-        UpdateDateField?: string;
+        UpdateDate?: string;
         InsertUserName?: string;
         UpdateUserName?: string;
         IsActive?: number;
@@ -1140,12 +1146,12 @@ declare namespace PatientManagement.Administration {
             SubscriptionInsertUserId = "SubscriptionInsertUserId",
             SubscriptionInsertDate = "SubscriptionInsertDate",
             SubscriptionUpdateUserId = "SubscriptionUpdateUserId",
-            SubscriptionUpdateDateField = "SubscriptionUpdateDateField",
+            SubscriptionUpdateDate = "SubscriptionUpdateDate",
             SubscriptionName = "SubscriptionName",
             InsertUserId = "InsertUserId",
             InsertDate = "InsertDate",
             UpdateUserId = "UpdateUserId",
-            UpdateDateField = "UpdateDateField",
+            UpdateDate = "UpdateDate",
             InsertUserName = "InsertUserName",
             UpdateUserName = "UpdateUserName",
             IsActive = "IsActive",
@@ -2554,6 +2560,14 @@ declare namespace PatientManagement.PatientManagement {
     }
 }
 declare namespace PatientManagement.PatientManagement {
+    enum RepeatPeriod {
+        Day = 1,
+        Week = 2,
+        Month = 3,
+        Year = 4,
+    }
+}
+declare namespace PatientManagement.PatientManagement {
     namespace ReportsVisitsEndpointService {
         const baseUrl = "PatientManagement/ReportsVisits";
         function NewPatientsThisMonth(request: Serenity.ServiceRequest, onSuccess?: (response: Serenity.RetrieveResponse<NewPatientsThisMonthResponse>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
@@ -2764,6 +2778,9 @@ declare namespace PatientManagement.PatientManagement {
         FreeForReservation: BsSwitchEditor;
         StartDate: Serenity.DateTimeEditor;
         EndDate: Serenity.DateTimeEditor;
+        RepeatTimes: Serenity.IntegerEditor;
+        RepeatPeriod: Serenity.EnumEditor;
+        RepeatUntilEndDate: Serenity.StringEditor;
         Price: Serenity.DecimalEditor;
         VisitTypeCurrencyName: Serenity.StringEditor;
         Description: Serenity.TextAreaEditor;
@@ -2786,8 +2803,16 @@ declare namespace PatientManagement.PatientManagement {
         VisitId?: number;
         PatientId?: number;
         VisitTypeId?: number;
+        RepeatPeriod?: RepeatPeriod;
+        RepeatTimes?: number;
+        RepeatUntilStartDate?: string;
+        RepeatUntilEndDate?: string;
+        NextRepeaTime?: string;
+        IsRepeated?: boolean;
+        RepeatCounter?: number;
         CabinetId?: number;
         CabinetName?: string;
+        VisitTypeCurrencyName?: string;
         CabinetIsActive?: number;
         AssignedUserId?: number;
         AssignedUserName?: string;
@@ -2795,6 +2820,7 @@ declare namespace PatientManagement.PatientManagement {
         Description?: string;
         StartDate?: string;
         EndDate?: string;
+        Price?: number;
         PatientGender?: Gender;
         PatientEmail?: string;
         PatientNotifyOnChange?: boolean;
@@ -2827,8 +2853,16 @@ declare namespace PatientManagement.PatientManagement {
             VisitId = "VisitId",
             PatientId = "PatientId",
             VisitTypeId = "VisitTypeId",
+            RepeatPeriod = "RepeatPeriod",
+            RepeatTimes = "RepeatTimes",
+            RepeatUntilStartDate = "RepeatUntilStartDate",
+            RepeatUntilEndDate = "RepeatUntilEndDate",
+            NextRepeaTime = "NextRepeaTime",
+            IsRepeated = "IsRepeated",
+            RepeatCounter = "RepeatCounter",
             CabinetId = "CabinetId",
             CabinetName = "CabinetName",
+            VisitTypeCurrencyName = "VisitTypeCurrencyName",
             CabinetIsActive = "CabinetIsActive",
             AssignedUserId = "AssignedUserId",
             AssignedUserName = "AssignedUserName",
@@ -2836,6 +2870,7 @@ declare namespace PatientManagement.PatientManagement {
             Description = "Description",
             StartDate = "StartDate",
             EndDate = "EndDate",
+            Price = "Price",
             PatientGender = "PatientGender",
             PatientEmail = "PatientEmail",
             PatientNotifyOnChange = "PatientNotifyOnChange",
@@ -3859,6 +3894,7 @@ declare namespace PatientManagement.PatientManagement {
         protected updateInterface(): void;
         constructor();
         afterLoadEntity(): void;
+        showRepeatUntilBox(): void;
         protected getCloningEntity(): VisitsRow;
     }
 }
@@ -3867,7 +3903,7 @@ declare namespace PatientManagement.PatientManagement {
     class CalendarVisitsDialog extends VisitsDialog {
         protected updateTitle(): void;
         newPredifinedVisit: (start: any, end: any) => void;
-        updateVisit: (visitId: any, start: any, end: any) => void;
+        updateVisit: (visitId: any, start: any, end: any, isRepeated: any, repeatCounter: any) => void;
         deleteVisit: (visitId: any) => void;
         protected onSaveSuccess(response: Serenity.SaveResponse): void;
         refreshVisitForTodayBox(): void;

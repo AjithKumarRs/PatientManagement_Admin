@@ -3,6 +3,13 @@
         VisitId?: number;
         PatientId?: number;
         VisitTypeId?: number;
+        RepeatPeriod?: RepeatPeriod;
+        RepeatTimes?: number;
+        RepeatUntilStartDate?: string;
+        RepeatUntilEndDate?: string;
+        NextRepeaTime?: string;
+        IsRepeated?: boolean;
+        RepeatCounter?: number;
         CabinetId?: number;
         CabinetName?: string;
         VisitTypeCurrencyName?: string;
@@ -51,6 +58,13 @@
             VisitId = "VisitId",
             PatientId = "PatientId",
             VisitTypeId = "VisitTypeId",
+            RepeatPeriod = "RepeatPeriod",
+            RepeatTimes = "RepeatTimes",
+            RepeatUntilStartDate = "RepeatUntilStartDate",
+            RepeatUntilEndDate = "RepeatUntilEndDate",
+            NextRepeaTime = "NextRepeaTime",
+            IsRepeated = "IsRepeated",
+            RepeatCounter = "RepeatCounter",
             CabinetId = "CabinetId",
             CabinetName = "CabinetName",
             VisitTypeCurrencyName = "VisitTypeCurrencyName",

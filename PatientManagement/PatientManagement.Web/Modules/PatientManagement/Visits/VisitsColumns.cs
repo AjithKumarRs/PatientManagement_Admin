@@ -1,4 +1,6 @@
 ﻿
+using PatientManagement.PatientManagement.Entities;
+
 namespace PatientManagement.PatientManagement.Columns
 {
     using Serenity;
@@ -45,6 +47,16 @@ namespace PatientManagement.PatientManagement.Columns
 
         [EditLink, Width(200), CabinetsFormatter]
         public string CabinetName { get; set; }
+
+        public Int32 RepeatTimes { get; set; }
+
+        public RepeatPeriod? RepeatPeriod { get; set; }
+
+        public DateTime NextRepeaTime { get; set; }
+
+        public DateTime RepeatUntilEndDate { get; set; }
+
+
         [EditLink, Width(300)]
         public String Description { get; set; }
         public DateTime StartDate { get; set; }

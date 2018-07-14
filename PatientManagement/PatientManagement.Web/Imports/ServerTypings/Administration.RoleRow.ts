@@ -2,16 +2,17 @@
     export interface RoleRow {
         RoleId?: number;
         RoleName?: string;
-        TenantId?: number;
+        UsersInRole?: number[];
         InsertUserId?: number;
         InsertDate?: string;
-        UpdateUserId?: number;
-        UpdateDateField?: string;
-        IsActive?: number;
-        UsersInRole?: number[];
-        TenantName?: string;
         InsertUserName?: string;
         UpdateUserName?: string;
+        UpdateUserId?: number;
+        UpdateDate?: string;
+        IsActive?: number;
+        TenantId?: number;
+        TenantName?: string;
+        TenantCurrencyId?: number;
     }
 
     export namespace RoleRow {
@@ -28,16 +29,17 @@
         export declare const enum Fields {
             RoleId = "RoleId",
             RoleName = "RoleName",
-            TenantId = "TenantId",
+            UsersInRole = "UsersInRole",
             InsertUserId = "InsertUserId",
             InsertDate = "InsertDate",
-            UpdateUserId = "UpdateUserId",
-            UpdateDateField = "UpdateDateField",
-            IsActive = "IsActive",
-            UsersInRole = "UsersInRole",
-            TenantName = "TenantName",
             InsertUserName = "InsertUserName",
-            UpdateUserName = "UpdateUserName"
+            UpdateUserName = "UpdateUserName",
+            UpdateUserId = "UpdateUserId",
+            UpdateDate = "UpdateDate",
+            IsActive = "IsActive",
+            TenantId = "TenantId",
+            TenantName = "TenantName",
+            TenantCurrencyId = "TenantCurrencyId"
         }
     }
 }

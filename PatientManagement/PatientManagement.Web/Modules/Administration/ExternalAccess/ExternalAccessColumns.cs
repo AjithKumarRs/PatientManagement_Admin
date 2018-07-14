@@ -32,7 +32,7 @@ namespace PatientManagement.Administration.Columns
         public Int32 AccessType { get; set; }
         public Int32 OutputFormat { get; set; }
 
-        [Width(120)]
+        [Width(80)]
         public String TenantName { get; set; }
 
         [Width(80)]
@@ -44,6 +44,6 @@ namespace PatientManagement.Administration.Columns
         public String UpdateUserName { get; set; }
         [DisplayFormat("dd/MM/yyyy HH:mm")]
         [Width(120)]
-        public DateTime UpdateDateField { get; set; }
+        public DateTime UpdateDate { get; set; }
     }
 }

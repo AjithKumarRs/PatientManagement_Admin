@@ -146,11 +146,11 @@ namespace PatientManagement.Administration.Entities
             set { Fields.SubscriptionUpdateUserId[this] = value; }
         }
 
-        [DisplayName("Subscription Update Date Field"), Expression("jSubscription.[UpdateDateField]")]
-        public DateTime? SubscriptionUpdateDateField
+        [DisplayName("Subscription Update Date"), Expression("jSubscription.[UpdateDate]")]
+        public DateTime? SubscriptionUpdateDate
         {
-            get { return Fields.SubscriptionUpdateDateField[this]; }
-            set { Fields.SubscriptionUpdateDateField[this] = value; }
+            get { return Fields.SubscriptionUpdateDate[this]; }
+            set { Fields.SubscriptionUpdateDate[this] = value; }
         }
 
         #endregion
@@ -198,12 +198,12 @@ namespace PatientManagement.Administration.Entities
             set { Fields.UpdateUserName[this] = value; }
         }
 
-        [DisplayName("Update Date Field"), NotNull]
+        [DisplayName("Update Date"), NotNull]
         [ReadPermission(PermissionKeys.Tenant)]
-        public DateTime? UpdateDateField
+        public DateTime? UpdateDate
         {
-            get { return Fields.UpdateDateField[this]; }
-            set { Fields.UpdateDateField[this] = value; }
+            get { return Fields.UpdateDate[this]; }
+            set { Fields.UpdateDate[this] = value; }
         }
         public IIdField InsertUserIdField => Fields.InsertUserId;
 
@@ -212,7 +212,7 @@ namespace PatientManagement.Administration.Entities
 
         public IIdField UpdateUserIdField { get; } = Fields.UpdateUserId;
 
-        DateTimeField IUpdateLogRow.UpdateDateField { get; } = Fields.UpdateDateField;
+        DateTimeField IUpdateLogRow.UpdateDateField { get; } = Fields.UpdateDate;
 
         #endregion
 
@@ -274,13 +274,13 @@ namespace PatientManagement.Administration.Entities
             public Int32Field SubscriptionInsertUserId;
             public DateTimeField SubscriptionInsertDate;
             public Int32Field SubscriptionUpdateUserId;
-            public DateTimeField SubscriptionUpdateDateField;
+            public DateTimeField SubscriptionUpdateDate;
             public StringField SubscriptionName;
 
             public Int32Field InsertUserId;
             public DateTimeField InsertDate;
             public Int32Field UpdateUserId;
-            public DateTimeField UpdateDateField;
+            public DateTimeField UpdateDate;
             public StringField InsertUserName;
             public StringField UpdateUserName;
             public Int16Field IsActive;

@@ -3,24 +3,25 @@
         SubscriptionId?: number;
         Name?: string;
         OfferId?: number;
-        TenantId?: number;
         SubscriptionEndDate?: string;
         Enabled?: number;
         FreeDaysFromOffer?: number;
-        IsActive?: number;
         DeactivatedOn?: string;
         ActivatedOn?: string;
-        InsertUserId?: number;
-        InsertDate?: string;
-        UpdateUserId?: number;
-        UpdateDateField?: string;
         OfferName?: string;
         OfferDescription?: string;
         OfferPrice?: number;
         OfferRoleId?: number;
-        TenantName?: string;
+        InsertUserId?: number;
+        InsertDate?: string;
         InsertUserName?: string;
         UpdateUserName?: string;
+        UpdateUserId?: number;
+        UpdateDate?: string;
+        IsActive?: number;
+        TenantId?: number;
+        TenantName?: string;
+        TenantCurrencyId?: number;
     }
 
     export namespace SubscriptionsRow {
@@ -38,24 +39,25 @@
             SubscriptionId = "SubscriptionId",
             Name = "Name",
             OfferId = "OfferId",
-            TenantId = "TenantId",
             SubscriptionEndDate = "SubscriptionEndDate",
             Enabled = "Enabled",
             FreeDaysFromOffer = "FreeDaysFromOffer",
-            IsActive = "IsActive",
             DeactivatedOn = "DeactivatedOn",
             ActivatedOn = "ActivatedOn",
-            InsertUserId = "InsertUserId",
-            InsertDate = "InsertDate",
-            UpdateUserId = "UpdateUserId",
-            UpdateDateField = "UpdateDateField",
             OfferName = "OfferName",
             OfferDescription = "OfferDescription",
             OfferPrice = "OfferPrice",
             OfferRoleId = "OfferRoleId",
-            TenantName = "TenantName",
+            InsertUserId = "InsertUserId",
+            InsertDate = "InsertDate",
             InsertUserName = "InsertUserName",
-            UpdateUserName = "UpdateUserName"
+            UpdateUserName = "UpdateUserName",
+            UpdateUserId = "UpdateUserId",
+            UpdateDate = "UpdateDate",
+            IsActive = "IsActive",
+            TenantId = "TenantId",
+            TenantName = "TenantName",
+            TenantCurrencyId = "TenantCurrencyId"
         }
     }
 }

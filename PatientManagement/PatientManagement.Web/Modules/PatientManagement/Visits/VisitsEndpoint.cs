@@ -55,13 +55,43 @@ namespace PatientManagement.PatientManagement.Endpoints
         {
             var visit = uow.Connection.ById<VisitsRow>(request.EntityId);
 
-            if(request.Entity.FreeForReservation.HasValue && !request.Entity.FreeForReservation.Value)
+            if (request.Entity.FreeForReservation.HasValue && !request.Entity.FreeForReservation.Value)
                 if (request.Entity.StartDate != visit.StartDate || request.Entity.EndDate != visit.EndDate)
                 {
                     var patient = uow.Connection.ById<PatientsRow>(visit.PatientId);
                     SendAutomaticEmailToPatient(uow, patient, request.Entity.StartDate ?? DateTime.MinValue, false);
                 }
 
+            #region Repeated visit
+            if (request.Entity.IsRepeated.HasValue && request.Entity.IsRepeated.Value
+                && request.Entity.RepeatCounter.HasValue && request.Entity.RepeatCounter.Value > 0
+                && visit.RepeatPeriod.HasValue)
+            {
+                var timeDiff = request.Entity.EndDate.Value - request.Entity.StartDate.Value;
+
+                switch (visit.RepeatPeriod.Value)
+                {
+                    case RepeatPeriod.Day:
+                        request.Entity.StartDate = request.Entity.StartDate.Value.AddDays(- request.Entity.RepeatCounter.Value);
+                        request.Entity.EndDate = request.Entity.EndDate.Value.AddDays(- request.Entity.RepeatCounter.Value);
+                        break;
+                    case RepeatPeriod.Week:
+                        visit.StartDate = request.Entity.StartDate.Value.AddDays(- (request.Entity.RepeatCounter.Value) * 7);
+                        request.Entity.EndDate = request.Entity.EndDate.Value.AddDays(- (request.Entity.RepeatCounter.Value) * 7);
+                        break;
+                    case RepeatPeriod.Month:
+                        request.Entity.StartDate = request.Entity.StartDate.Value.AddMonths(- request.Entity.RepeatCounter.Value);
+                        request.Entity.EndDate = request.Entity.EndDate.Value.AddMonths(- request.Entity.RepeatCounter.Value);
+                        break;
+                    case RepeatPeriod.Year:
+                        request.Entity.StartDate = request.Entity.StartDate.Value.AddYears(- request.Entity.RepeatCounter.Value);
+                        request.Entity.EndDate = request.Entity.EndDate.Value.AddYears(- request.Entity.RepeatCounter.Value);
+                        break;
+                }
+
+
+            }
+            #endregion
             return new MyRepository().Update(uow, request);
         }
 

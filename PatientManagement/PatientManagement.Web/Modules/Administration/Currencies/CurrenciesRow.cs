@@ -86,14 +86,14 @@ namespace PatientManagement.Administration.Entities
 
         DateTimeField IUpdateLogRow.UpdateDateField
         {
-            get { return Fields.UpdateDateField; }
+            get { return Fields.UpdateDate; }
         }
 
-        [DisplayName("Update Date Field"), NotNull]
-        public DateTime? UpdateDateField
+        [DisplayName("Update Date"), NotNull]
+        public DateTime? UpdateDate
         {
-            get { return Fields.UpdateDateField[this]; }
-            set { Fields.UpdateDateField[this] = value; }
+            get { return Fields.UpdateDate[this]; }
+            set { Fields.UpdateDate[this] = value; }
         }
 
         IIdField IIdRow.IdField
@@ -124,7 +124,7 @@ namespace PatientManagement.Administration.Entities
             public StringField BaseCurrencyName;
             public Int32Field UpdateUserId;
             public StringField UserName;
-            public DateTimeField UpdateDateField;
+            public DateTimeField UpdateDate;
 
             public RowFields()
                 : base()

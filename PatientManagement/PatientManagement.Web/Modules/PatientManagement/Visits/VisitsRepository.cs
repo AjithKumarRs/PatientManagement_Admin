@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using NodaTime.Extensions;
 using PatientManagement.Administration;
 using PatientManagement.Administration.Entities;
 using PatientManagement.PatientManagement.Entities;
@@ -127,7 +128,7 @@ namespace PatientManagement.PatientManagement.Repositories
 
             }
         }
-
+        
         private class MyRetrieveHandler : RetrieveRequestHandler<MyRow>
         {
             protected override void OnReturn()

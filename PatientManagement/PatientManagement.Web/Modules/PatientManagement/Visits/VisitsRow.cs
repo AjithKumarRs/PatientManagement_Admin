@@ -72,6 +72,21 @@ namespace PatientManagement.PatientManagement.Entities
             set { Fields.Price[this] = value; }
         }
 
+        [DisplayName("Repeat Times"), DefaultValue(0), NotNull]
+        [IntegerEditor(MaxValue = 1000)]
+        public Int16? RepeatTimes
+        {
+            get { return Fields.RepeatTimes[this]; }
+            set { Fields.RepeatTimes[this] = value; }
+        }
+
+        [DisplayName("Repeat Every"), DefaultValue(1), NotNull]
+        public RepeatPeriod? RepeatPeriod
+        {
+            get { return (RepeatPeriod?)Fields.RepeatPeriod[this]; }
+            set { Fields.RepeatPeriod[this] = (Int16?)value; }
+        }
+
         [DisplayName("Cabinet IsActive"), Expression("jCabinets.[IsActive]")]
         public Int16? CabinetIsActive
         {
@@ -91,6 +106,87 @@ namespace PatientManagement.PatientManagement.Entities
         {
             get { return Fields.VisitTypeBorderColor[this]; }
             set { Fields.VisitTypeBorderColor[this] = value; }
+        }
+
+        [DisplayName("Repeat Until Start Date"), Expression(@"
+CASE WHEN (T0.[RepeatTimes] > 0 AND T0.[RepeatPeriod] > 0) 
+THEN 
+    CASE 
+        WHEN (T0.[RepeatPeriod] = 1) THEN
+            DATEADD(day,T0.[RepeatTimes],T0.[StartDate])
+        WHEN (T0.[RepeatPeriod] = 2) THEN
+            DATEADD(week,T0.[RepeatTimes],T0.[StartDate])
+        WHEN (T0.[RepeatPeriod] = 3) THEN
+            DATEADD(month,T0.[RepeatTimes],T0.[StartDate])
+        WHEN (T0.[RepeatPeriod] = 4) THEN
+            DATEADD(year,T0.[RepeatTimes],T0.[StartDate])
+    ELSE
+    T0.[StartDate]
+    END
+
+ELSE
+T0.[StartDate]
+END
+")]
+        public DateTime? RepeatUntilStartDate
+        {
+            get { return Fields.RepeatUntilStartDate[this]; }
+            set { Fields.RepeatUntilStartDate[this] = value; }
+        }
+
+
+        [DisplayFormat("dd/MM/yyyy HH:mm")]
+        [DisplayName("Repeat Until End Date"),Insertable(false),Updatable(false), ReadOnly(true), Expression(@"
+CASE WHEN (T0.[RepeatTimes] > 0 AND T0.[RepeatPeriod] > 0) 
+THEN 
+    CASE 
+        WHEN (T0.[RepeatPeriod] = 1) THEN
+             DATEADD(day,T0.[RepeatTimes],T0.[EndDate])  
+        WHEN (T0.[RepeatPeriod] = 2) THEN
+            DATEADD(week,T0.[RepeatTimes],T0.[EndDate])  
+        WHEN (T0.[RepeatPeriod] = 3) THEN
+            DATEADD(month,T0.[RepeatTimes],T0.[EndDate])  
+        WHEN (T0.[RepeatPeriod] = 4) THEN
+            DATEADD(year,T0.[RepeatTimes],T0.[EndDate])  
+    ELSE
+    T0.[EndDate]
+    END
+
+ELSE
+T0.[EndDate]
+END
+")]
+        public DateTime? RepeatUntilEndDate
+        {
+            get { return Fields.RepeatUntilEndDate[this]; }
+            set { Fields.RepeatUntilEndDate[this] = value; }
+        }
+
+        [DisplayFormat("dd/MM/yyyy HH:mm")]
+        [DisplayName("Next Repea Time"), Insertable(false), Updatable(false), ReadOnly(true), Expression(@"
+CASE WHEN (T0.[RepeatTimes] > 0 AND T0.[RepeatPeriod] > 0) 
+THEN 
+    CASE 
+        WHEN (T0.[RepeatPeriod] = 1) THEN
+             DATEADD(day,1,T0.[StartDate])  
+        WHEN (T0.[RepeatPeriod] = 2) THEN
+            DATEADD(week,1,T0.[StartDate])  
+        WHEN (T0.[RepeatPeriod] = 3) THEN
+            DATEADD(month,1,T0.[StartDate])  
+        WHEN (T0.[RepeatPeriod] = 4) THEN
+            DATEADD(year,1,T0.[StartDate])  
+    ELSE
+    T0.[StartDate]
+    END
+
+ELSE
+T0.[StartDate]
+END
+")]
+        public DateTime? NextRepeaTime
+        {
+            get { return Fields.NextRepeaTime[this]; }
+            set { Fields.NextRepeaTime[this] = value; }
         }
 
 
@@ -141,6 +237,20 @@ namespace PatientManagement.PatientManagement.Entities
         {
             get => Fields.FreeForReservation[this];
             set => Fields.FreeForReservation[this] = value;
+        }
+
+
+        [NotMapped]
+        public int? RepeatCounter
+        {
+            get => Fields.RepeatCounter[this];
+            set => Fields.RepeatCounter[this] = value;
+        }
+        [NotMapped]
+        public Boolean? IsRepeated
+        {
+            get => Fields.IsRepeated[this];
+            set => Fields.IsRepeated[this] = value;
         }
 
         #region PatientFields
@@ -237,6 +347,13 @@ namespace PatientManagement.PatientManagement.Entities
             public Int32Field VisitId;
             public Int32Field PatientId;
             public Int32Field VisitTypeId;
+            public Int16Field RepeatPeriod;
+            public Int16Field RepeatTimes;
+            public DateTimeField RepeatUntilStartDate;
+            public DateTimeField RepeatUntilEndDate;
+            public DateTimeField NextRepeaTime;
+            public BooleanField IsRepeated;
+            public Int32Field RepeatCounter;
 
             public Int32Field CabinetId;
             public StringField CabinetName;

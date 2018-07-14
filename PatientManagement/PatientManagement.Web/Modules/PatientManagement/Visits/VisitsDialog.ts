@@ -22,7 +22,7 @@ namespace PatientManagement.PatientManagement {
 
         constructor() {
             super();
-            
+
             this.form.FreeForReservation.element.bootstrapSwitch('onSwitchChange', e => {
                 if (this.form.FreeForReservation.getState()) {
                     Serenity.EditorUtils.setReadOnly(this.form.PatientId, true);
@@ -49,16 +49,17 @@ namespace PatientManagement.PatientManagement {
                 if (!patientId)
                     return;
                 PatientsService.Retrieve({
-                        EntityId: patientId
-                    },
+                    EntityId: patientId
+                },
                     response => {
                         if (response.Entity.NotifyOnChange) {
                             var parentCat = this.form.PatientId.element.parents(".categories ");
-                           
+
                             var text = Q.text("Site.Dashboard.AlertMessagePatientWithNotificationActiveVisitDialog");
-                            parentCat.append(
-                                "<div class='alert alert-info' style='display: none' id='automatic-notification-email'>" + text + "</div>");
-                                $("#automatic-notification-email").show(200);
+                            if ($("#automatic-notification-email").length < 1)
+                                parentCat.append(
+                                    "<div class='alert alert-info' style='display: none' id='automatic-notification-email'>" + text + "</div>");
+                            $("#automatic-notification-email").show(200);
 
                         } else {
                             $("#automatic-notification-email").hide(200);
@@ -73,7 +74,7 @@ namespace PatientManagement.PatientManagement {
                     this.form.StartDate == this.form.EndDate) {
                     return Q.text("Site.Dashboard.ErrorEndDateBiggerThanStartDate");
                 }
-                
+
                 return null;
             });
 
@@ -85,6 +86,12 @@ namespace PatientManagement.PatientManagement {
                 Serenity.EditorUtils.setReadOnly(this.form.Price, true);
                 this.updateInterface();
             }
+            this.form.RepeatPeriod.changeSelect2(e => {
+                this.showRepeatUntilBox();
+            });
+            this.form.RepeatTimes.change(e => {
+              this.showRepeatUntilBox();
+            });
         }
 
         afterLoadEntity(): void {
@@ -92,6 +99,37 @@ namespace PatientManagement.PatientManagement {
             if (!Q.Authorization.hasPermission("AdministrationTenants:VisitPayments:Modify")) {
                 Serenity.EditorUtils.setReadOnly(this.form.Price, true);
                 this.updateInterface();
+            }
+
+            this.showRepeatUntilBox();
+        }
+
+        showRepeatUntilBox(): void {
+            var repeatTimes = this.form.RepeatTimes.value;
+            var repeatEvery = this.form.RepeatPeriod.value;
+
+            if (repeatTimes > 0 && repeatEvery != null && repeatEvery !== "") {
+
+                var repeatUntilDate = new Date(this.form.EndDate.value);
+
+                if (repeatEvery === "1")
+                    repeatUntilDate.setDate(repeatUntilDate.getDate() + repeatTimes);
+                else if (repeatEvery === "2") {
+                    var days = repeatTimes * 7;
+                    repeatUntilDate.setDate(repeatUntilDate.getDate() + days);
+                }
+                else if (repeatEvery === "3")
+                    repeatUntilDate.setMonth(repeatUntilDate.getMonth() + repeatTimes);
+                else if (repeatEvery === "4")
+                    repeatUntilDate.setFullYear(repeatUntilDate.getFullYear() + repeatTimes);
+
+                this.form.RepeatUntilEndDate.value = Serenity.DateFormatter.format(repeatUntilDate);
+
+                this.form.RepeatUntilEndDate.element.parent(".RepeatUntilEndDate").show(200);
+              //  $(".repeat-until-last-date").show(200);
+
+            } else {
+                this.form.RepeatUntilEndDate.element.parent(".RepeatUntilEndDate").hide(200);
             }
         }
 

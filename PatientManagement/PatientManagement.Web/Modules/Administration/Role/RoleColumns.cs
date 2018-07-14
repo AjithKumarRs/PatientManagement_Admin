@@ -22,6 +22,7 @@ namespace PatientManagement.Administration.Forms
 
         [Width(80)]
         public String TenantName { get; set; }
+
         [Width(80)]
         public String InsertUserName { get; set; }
         [DisplayFormat("dd/MM/yyyy HH:mm")]
@@ -31,6 +32,6 @@ namespace PatientManagement.Administration.Forms
         public String UpdateUserName { get; set; }
         [DisplayFormat("dd/MM/yyyy HH:mm")]
         [Width(120)]
-        public DateTime UpdateDateField { get; set; }
+        public DateTime UpdateDate { get; set; }
     }
 }

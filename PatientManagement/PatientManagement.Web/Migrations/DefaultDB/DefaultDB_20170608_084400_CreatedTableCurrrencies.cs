@@ -19,7 +19,7 @@ namespace PatientManagement.Migrations.DefaultDB
                 .WithColumn("BaseCurrencyId").AsInt32().Nullable()
                     .ForeignKey("FK_Currencies_CurrencyId", "Currencies", "Id")
                     .WithColumn("UpdateUserId").AsInt32().NotNullable()
-                .WithColumn("UpdateDateField").AsDateTime().NotNullable());
+                .WithColumn("UpdateDate").AsDateTime().NotNullable());
 
             Insert.IntoTable("Currencies").Row(new
             {
@@ -28,7 +28,7 @@ namespace PatientManagement.Migrations.DefaultDB
                 Rate = 1,
                 Enabled = true,
                 UpdateUserId = 1,
-                UpdateDateField = DateTime.Now,
+                UpdateDate = DateTime.Now,
 
             });
             Alter.Table("Tenants")

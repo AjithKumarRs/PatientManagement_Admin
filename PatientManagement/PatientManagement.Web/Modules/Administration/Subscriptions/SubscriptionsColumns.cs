@@ -32,14 +32,18 @@ namespace PatientManagement.Administration.Columns
 
         [DisplayFormat("dd/MM/yyyy")]
         public DateTime SubscriptionEndDate { get; set; }
+        [Width(80)]
+        public String TenantName { get; set; }
 
-        public string TenantName { get; set; }
-
+        [Width(80)]
         public String InsertUserName { get; set; }
         [DisplayFormat("dd/MM/yyyy HH:mm")]
+        [Width(120)]
         public DateTime InsertDate { get; set; }
+        [Width(80)]
         public String UpdateUserName { get; set; }
         [DisplayFormat("dd/MM/yyyy HH:mm")]
-        public DateTime UpdateDateField { get; set; }
+        [Width(120)]
+        public DateTime UpdateDate { get; set; }
     }
 }

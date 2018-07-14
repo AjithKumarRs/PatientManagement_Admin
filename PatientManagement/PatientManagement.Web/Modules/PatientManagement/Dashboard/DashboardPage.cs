@@ -76,12 +76,10 @@ namespace PatientManagement.PatientManagement.Pages
 
         [Route("~/Exceptions")]
         public async Task Exceptions() => await ExceptionalMiddleware.HandleRequestAsync(HttpContext).ConfigureAwait(false);
-        
+
         [PageAuthorize]
         public JsonResult GetVisitsTasks(string start, string end)
         {
-            var user = (UserDefinition)Authorization.UserDefinition;
-
             var startDate = DateTime.ParseExact(start, "yyyy-MM-dd", new CultureInfo("en-US"),
                 DateTimeStyles.None);
 
@@ -90,58 +88,128 @@ namespace PatientManagement.PatientManagement.Pages
             var cabinetIdActive = Request.Cookies["CabinetPreference"];
 
             var model = new DashboardPageModel();
-            
             using (var connection = SqlConnections.NewFor<VisitsRow>())
             {
                 var visitFlds = VisitsRow.Fields.As("vis");
-                var patient = PatientsRow.Fields.As("ptn");
-                var visitType = VisitTypesRow.Fields.As("vstt");
-                var users = UserRow.Fields.As("assUsr");
+                var listRequest = new ListRequest();
+                listRequest.ColumnSelection = ColumnSelection.Details;
+                listRequest.Criteria =
+                    (new Criteria(visitFlds.IsActive.Name) == 1 & new Criteria(visitFlds.CabinetId.Name) == int.Parse(cabinetIdActive)
+                        & (new Criteria(visitFlds.StartDate.Name) <= endDate
+                           & new Criteria(visitFlds.EndDate.Name) >= startDate
+                           &
+                            //Visits with start before start date and end before end date
+                            ((new Criteria(visitFlds.StartDate.Name) <= startDate 
+                             & new Criteria(visitFlds.EndDate.Name) <= endDate)
+                            //Visits with start after start date and end before end date
+                            | (new Criteria(visitFlds.StartDate.Name) >= startDate
+                               & new Criteria(visitFlds.EndDate.Name) <= endDate)
+                            //Visits with start after start date and end after end date
+                            | (new Criteria(visitFlds.StartDate.Name) >= startDate
+                               & new Criteria(visitFlds.EndDate.Name) >= endDate)
+                            //Visits with start before start date and end after end date
+                            | (new Criteria(visitFlds.StartDate.Name) <= startDate
+                               & new Criteria(visitFlds.EndDate.Name) >= endDate
+                            )
+                         )
+                        //Recurring visits
+                        | (new Criteria(visitFlds.RepeatUntilEndDate.Name) >= startDate
+                           & new Criteria(visitFlds.StartDate.Name) < endDate
+                           & new Criteria(visitFlds.RepeatPeriod.Name) > 0
+                        )
+                        ));
 
-                var query = new SqlQuery()
-                    .From(visitFlds)
-                    .Select("*")
-                    .Where(~(
-                    new Criteria(visitFlds.StartDate) >= startDate
-                    & new Criteria(visitFlds.EndDate) <= endDate
-                    & new Criteria(visitFlds.IsActive) == 1
-                    & new Criteria(visitFlds.CabinetId) == int.Parse(cabinetIdActive)
-                        ))
-                        .LeftJoin(users, visitFlds.AssignedUserId == users.UserId)
-                            .Select(users.DisplayName = visitFlds.AssignedUserName)
-                        .LeftJoin(patient, visitFlds.PatientId == patient.PatientId)
-                            .Select(patient.Name = visitFlds.PatientName, patient.NotifyOnChange = visitFlds.PatientNotifyOnChange)
-                        .LeftJoin(visitType, visitFlds.VisitTypeId == visitType.VisitTypeId)
-                            .Select(visitType.BackgroundColor = visitFlds.VisitTypeBackgroundColor, visitType.BorderColor = visitFlds.VisitTypeBorderColor)
-                        ;
-                
-
-
-                if (!Authorization.HasPermission(PermissionKeys.Tenant))
-                    query.Where(visitFlds.TenantId == user.TenantId);
-
-                var result = connection.Query<VisitsRow>(query);
+                var result = new VisitsRepository().List(connection, listRequest).Entities;
 
                 foreach (VisitsRow visit in result)
                 {
-                    model.EventsList.Add(new Event
+                    var eventOriginal = new Event
                     {
                         id = visit.VisitId ?? 0,
                         patientId = visit.PatientId ?? 0,
                         assignedToUser = visit.AssignedUserName,
                         patientAutoEmailActive = visit.PatientNotifyOnChange ?? false,
                         title = string.Join("\n",
-                            string.IsNullOrEmpty(visit.PatientName)?"* " +LocalText.Get("Db.PatientManagement.Visits.FreeForReservation") + " *": visit.PatientName
+                            string.IsNullOrEmpty(visit.PatientName)
+                                ? "* " + LocalText.Get("Db.PatientManagement.Visits.FreeForReservation") + " *"
+                                : visit.PatientName
                             , visit.Description),
                         start = (visit.StartDate ?? DateTime.Now).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
                         end = (visit.EndDate ?? DateTime.Now).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
                         allDay = false,
                         backgroundColor = visit.VisitTypeBackgroundColor,
                         borderColor = visit.VisitTypeBorderColor
-                    });
+                    };
+
+
+                    if (visit.RepeatTimes.HasValue && visit.RepeatTimes.Value > 0 && visit.RepeatPeriod.HasValue)
+                    {
+                        if (visit.RepeatUntilEndDate != null)
+                            eventOriginal.title +=
+                                LocalText.Get(Texts.Site.Visits.VisitWillRepeatUntilInCalendarDescription) +
+                                visit.RepeatUntilEndDate.Value.ToString(DateHelper.CurrentDateFormat);
+
+                        model.EventsList.Add(eventOriginal);
+                        
+                        for (int counter = 1; counter <= visit.RepeatTimes.Value; counter++)
+                        {
+                            var startDateRepeat = visit.StartDate.Value;
+                            var endDateRepeat = visit.EndDate.Value;
+                            switch (visit.RepeatPeriod.Value)
+                            {
+                                case RepeatPeriod.Day:
+                                    startDateRepeat = startDateRepeat.AddDays(counter);
+                                    endDateRepeat = endDateRepeat.AddDays(counter);
+                                    break;
+                                case RepeatPeriod.Week:
+                                    startDateRepeat = startDateRepeat.AddDays((counter) * 7);
+                                    endDateRepeat = endDateRepeat.AddDays((counter) * 7);
+                                    break;
+                                case RepeatPeriod.Month:
+                                    startDateRepeat = startDateRepeat.AddMonths(counter);
+                                    endDateRepeat = endDateRepeat.AddMonths(counter);
+                                    break;
+                                case RepeatPeriod.Year:
+                                    startDateRepeat = startDateRepeat.AddYears(counter);
+                                    endDateRepeat = endDateRepeat.AddYears(counter);
+                                    break;
+                            }
+
+                            var eventRepeated = new Event
+                            {
+                                id = visit.VisitId ?? 0,
+                                patientId = visit.PatientId ?? 0,
+                                assignedToUser = visit.AssignedUserName,
+                                patientAutoEmailActive = visit.PatientNotifyOnChange ?? false,
+                                title = string.Join("\n",
+                                    string.IsNullOrEmpty(visit.PatientName)
+                                        ? "* " + LocalText.Get("Db.PatientManagement.Visits.FreeForReservation") + " *"
+                                        : visit.PatientName
+                                    , visit.Description
+                                    ),
+                                start = (startDateRepeat).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
+                                end = (endDateRepeat).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
+                                allDay = false,
+                                backgroundColor = visit.VisitTypeBackgroundColor,
+                                borderColor = visit.VisitTypeBorderColor,
+                                isRepeated = true,
+                                repeatCounter =  counter
+                            };
+                            eventRepeated.title +=
+                                LocalText.Get(Texts.Site.Visits.VisitRepeatCounterInCalendarDescription.Key) + " " +counter;
+                            model.EventsList.Add(eventRepeated);
+
+                        }
+                    }
+                    else
+                    {
+                        model.EventsList.Add(eventOriginal);
+
+                    }
                 }
+                
             }
-            
+
             return Json(model.EventsList);
         }
 
@@ -257,7 +325,7 @@ namespace PatientManagement.PatientManagement.Pages
 
             var countVisitsForToday = 0;
             var alreadyExpired = 0;
-            
+
             var endDateToday = DateTime.Now;
 
             var visitFlds = VisitsRow.Fields.As("vs");

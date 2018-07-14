@@ -9,7 +9,7 @@
         BaseCurrencyName?: string;
         UpdateUserId?: number;
         UserName?: string;
-        UpdateDateField?: string;
+        UpdateDate?: string;
     }
 
     export namespace CurrenciesRow {
@@ -32,7 +32,7 @@
             BaseCurrencyName = "BaseCurrencyName",
             UpdateUserId = "UpdateUserId",
             UserName = "UserName",
-            UpdateDateField = "UpdateDateField"
+            UpdateDate = "UpdateDate"
         }
     }
 }

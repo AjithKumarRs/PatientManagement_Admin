@@ -17,7 +17,7 @@ namespace PatientManagement.Migrations.DefaultDB
                 .AddColumn("InsertUserId").AsInt32().NotNullable().WithDefaultValue(1)
                 .AddColumn("InsertDate").AsDateTime().NotNullable().WithDefaultValue(DateTime.Now)
                 .AddColumn("UpdateUserId").AsInt32().Nullable()
-                .AddColumn("UpdateDateField").AsDateTime().Nullable();
+                .AddColumn("UpdateDate").AsDateTime().Nullable();
 
             Alter.Table("Users")
                 .AddColumn("WebSite").AsString(200).Nullable()

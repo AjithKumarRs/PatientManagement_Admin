@@ -296,7 +296,7 @@
                 Q.confirm(FormatAlertMessage(event.title, event.start, event.end, event.patientAutoEmailActive), () => {
                         var dialog = new PatientManagement.PatientManagement.CalendarVisitsDialog();
 
-                        dialog.updateVisit(event.id, event.start.format("YYYY-MM-DD HH:mm:ss"), event.end.format("YYYY-MM-DD HH:mm:ss"));
+                    dialog.updateVisit(event.id, event.start.format("YYYY-MM-DD HH:mm:ss"), event.end.format("YYYY-MM-DD HH:mm:ss"), event.isRepeated, event.repeatCounter);
 
                     },
                     {
@@ -310,7 +310,7 @@
             eventResize: function(event,dayDelta,minuteDelta, revertFunc) {
                 Q.confirm(FormatAlertMessage(event.title, event.start, event.end, event.patientAutoEmailActive), () => {
                         var dialog = new PatientManagement.PatientManagement.CalendarVisitsDialog();
-                        dialog.updateVisit(event.id, event.start.format("YYYY-MM-DD HH:mm:ss"), event.end.format("YYYY-MM-DD HH:mm:ss"));
+                    dialog.updateVisit(event.id, event.start.format("YYYY-MM-DD HH:mm:ss"), event.end.format("YYYY-MM-DD HH:mm:ss"), event.isRepeated, event.repeatCounter);
                 },
                     {
                         onCancel: () => {

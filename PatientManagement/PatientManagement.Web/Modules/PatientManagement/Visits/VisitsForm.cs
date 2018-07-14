@@ -28,6 +28,14 @@ namespace PatientManagement.PatientManagement.Forms
         [DefaultValue("now")]
         public DateTime EndDate { get; set; }
 
+        [HalfWidth]
+        public Int16 RepeatTimes { get; set; }
+
+        [HalfWidth]
+        public Int16 RepeatPeriod { get; set; }
+
+        [HalfWidth, Hidden]
+        public string RepeatUntilEndDate { get; set; }
         [Category("Additional Information")]
 
         [HalfWidth]
@@ -35,6 +43,8 @@ namespace PatientManagement.PatientManagement.Forms
 
         [HalfWidth]
         public string VisitTypeCurrencyName { get; set; }
+
+
         public String Description { get; set; }
         public Int32? TenantId { get; set; }
 
