@@ -5,7 +5,7 @@
         SubscriptionEndDate: Serenity.DateEditor;
         Enabled: BsSwitchEditor;
         FreeDaysFromOffer: Serenity.IntegerEditor;
-        TenantId: Serenity.LookupEditor;
+        TenantId: Serenity.IntegerEditor;
     }
 
     export class SubscriptionsForm extends Serenity.PrefixedContext {
@@ -31,7 +31,7 @@
                     'SubscriptionEndDate', w2,
                     'Enabled', w3,
                     'FreeDaysFromOffer', w4,
-                    'TenantId', w1
+                    'TenantId', w4
                 ]);
             }
         }

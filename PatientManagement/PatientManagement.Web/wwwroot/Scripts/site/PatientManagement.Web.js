@@ -627,10 +627,11 @@ var PatientManagement;
                     var s = Serenity;
                     var w0 = s.StringEditor;
                     var w1 = s.LookupEditor;
+                    var w2 = s.IntegerEditor;
                     Q.initFormType(RoleForm, [
                         'RoleName', w0,
                         'UsersInRole', w1,
-                        'TenantId', w1
+                        'TenantId', w2
                     ]);
                 }
                 return _this;
@@ -821,7 +822,7 @@ var PatientManagement;
                         'SubscriptionEndDate', w2,
                         'Enabled', w3,
                         'FreeDaysFromOffer', w4,
-                        'TenantId', w1
+                        'TenantId', w4
                     ]);
                 }
                 return _this;

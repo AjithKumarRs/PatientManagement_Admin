@@ -21,7 +21,7 @@ namespace PatientManagement.Migrations.DefaultDB
                 .WithColumn("InsertUserId").AsInt32().NotNullable()
                 .WithColumn("InsertDate").AsDateTime().NotNullable()
                 .WithColumn("UpdateUserId").AsInt32().Nullable()
-                .WithColumn("UpdateDateField").AsDateTime().Nullable()
+                .WithColumn("UpdateDate").AsDateTime().Nullable()
                 .Nullable().WithColumn("IsActive").AsInt16().NotNullable().WithDefaultValue(1);
 
             Alter.Table("Payments")

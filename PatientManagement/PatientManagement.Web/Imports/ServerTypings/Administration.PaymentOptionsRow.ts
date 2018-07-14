@@ -6,7 +6,7 @@
         InsertUserId?: number;
         InsertDate?: string;
         UpdateUserId?: number;
-        UpdateDateField?: string;
+        UpdateDate?: string;
         InsertUserName?: string;
         UpdateUserName?: string;
     }
@@ -28,7 +28,7 @@
             InsertUserId = "InsertUserId",
             InsertDate = "InsertDate",
             UpdateUserId = "UpdateUserId",
-            UpdateDateField = "UpdateDateField",
+            UpdateDate = "UpdateDate",
             InsertUserName = "InsertUserName",
             UpdateUserName = "UpdateUserName"
         }

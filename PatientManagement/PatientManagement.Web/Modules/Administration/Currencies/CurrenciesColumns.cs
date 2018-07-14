@@ -26,6 +26,6 @@ namespace PatientManagement.Administration.Columns
 
         [Width(150)]
         public String UserName { get; set; }
-        public DateTime UpdateDateField { get; set; }
+        public DateTime UpdateDate { get; set; }
     }
 }

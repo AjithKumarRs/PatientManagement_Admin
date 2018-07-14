@@ -2,7 +2,7 @@
     export interface RoleForm {
         RoleName: Serenity.StringEditor;
         UsersInRole: Serenity.LookupEditor;
-        TenantId: Serenity.LookupEditor;
+        TenantId: Serenity.IntegerEditor;
     }
 
     export class RoleForm extends Serenity.PrefixedContext {
@@ -18,11 +18,12 @@
                 var s = Serenity;
                 var w0 = s.StringEditor;
                 var w1 = s.LookupEditor;
+                var w2 = s.IntegerEditor;
 
                 Q.initFormType(RoleForm, [
                     'RoleName', w0,
                     'UsersInRole', w1,
-                    'TenantId', w1
+                    'TenantId', w2
                 ]);
             }
         }

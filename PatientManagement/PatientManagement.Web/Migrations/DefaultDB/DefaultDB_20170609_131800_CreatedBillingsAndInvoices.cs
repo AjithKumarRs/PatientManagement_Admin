@@ -24,7 +24,7 @@ namespace PatientManagement.Migrations.DefaultDB
                     .WithColumn("InsertUserId").AsInt32().NotNullable()
                     .WithColumn("InsertDate").AsDateTime().NotNullable()
                     .WithColumn("UpdateUserId").AsInt32().Nullable()
-                    .WithColumn("UpdateDateField").AsDateTime().Nullable()
+                    .WithColumn("UpdateDate").AsDateTime().Nullable()
             );
 
             this.CreateTableWithId64("Subscriptions", "SubscriptionId", x => x
@@ -38,7 +38,7 @@ namespace PatientManagement.Migrations.DefaultDB
                     .WithColumn("InsertUserId").AsInt32().NotNullable()
                     .WithColumn("InsertDate").AsDateTime().NotNullable()
                     .WithColumn("UpdateUserId").AsInt32().Nullable()
-                    .WithColumn("UpdateDateField").AsDateTime().Nullable()
+                    .WithColumn("UpdateDate").AsDateTime().Nullable()
             );
 
             this.CreateTableWithId32("PaymentOptions", "PaymentOptionId", x => x
@@ -48,7 +48,7 @@ namespace PatientManagement.Migrations.DefaultDB
                 .WithColumn("InsertUserId").AsInt32().NotNullable()
                 .WithColumn("InsertDate").AsDateTime().NotNullable()
                 .WithColumn("UpdateUserId").AsInt32().Nullable()
-                .WithColumn("UpdateDateField").AsDateTime().Nullable());
+                .WithColumn("UpdateDate").AsDateTime().Nullable());
 
             Insert.IntoTable("PaymentOptions").Row(new
             {
@@ -90,7 +90,7 @@ namespace PatientManagement.Migrations.DefaultDB
                 .WithColumn("InsertUserId").AsInt32().NotNullable()
                 .WithColumn("InsertDate").AsDateTime().NotNullable()
                 .WithColumn("UpdateUserId").AsInt32().Nullable()
-                .WithColumn("UpdateDateField").AsDateTime().Nullable());
+                .WithColumn("UpdateDate").AsDateTime().Nullable());
 
             Alter.Table("Tenants")
                 .AddColumn("SubscriptionRequired").AsBoolean().NotNullable().WithDefaultValue(false)

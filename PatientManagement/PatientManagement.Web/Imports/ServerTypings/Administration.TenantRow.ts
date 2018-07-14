@@ -16,12 +16,12 @@
         SubscriptionInsertUserId?: number;
         SubscriptionInsertDate?: string;
         SubscriptionUpdateUserId?: number;
-        SubscriptionUpdateDateField?: string;
+        SubscriptionUpdateDate?: string;
         SubscriptionName?: string;
         InsertUserId?: number;
         InsertDate?: string;
         UpdateUserId?: number;
-        UpdateDateField?: string;
+        UpdateDate?: string;
         InsertUserName?: string;
         UpdateUserName?: string;
         IsActive?: number;
@@ -55,12 +55,12 @@
             SubscriptionInsertUserId = "SubscriptionInsertUserId",
             SubscriptionInsertDate = "SubscriptionInsertDate",
             SubscriptionUpdateUserId = "SubscriptionUpdateUserId",
-            SubscriptionUpdateDateField = "SubscriptionUpdateDateField",
+            SubscriptionUpdateDate = "SubscriptionUpdateDate",
             SubscriptionName = "SubscriptionName",
             InsertUserId = "InsertUserId",
             InsertDate = "InsertDate",
             UpdateUserId = "UpdateUserId",
-            UpdateDateField = "UpdateDateField",
+            UpdateDate = "UpdateDate",
             InsertUserName = "InsertUserName",
             UpdateUserName = "UpdateUserName",
             IsActive = "IsActive"

@@ -10,7 +10,7 @@
         InsertUserId?: number;
         InsertDate?: string;
         UpdateUserId?: number;
-        UpdateDateField?: string;
+        UpdateDate?: string;
         IsActive?: number;
         MaxTimeUsing?: number;
         InsertUserName?: string;
@@ -39,7 +39,7 @@
             InsertUserId = "InsertUserId",
             InsertDate = "InsertDate",
             UpdateUserId = "UpdateUserId",
-            UpdateDateField = "UpdateDateField",
+            UpdateDate = "UpdateDate",
             IsActive = "IsActive",
             MaxTimeUsing = "MaxTimeUsing",
             InsertUserName = "InsertUserName",
