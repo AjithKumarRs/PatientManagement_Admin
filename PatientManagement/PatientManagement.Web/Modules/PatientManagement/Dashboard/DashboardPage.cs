@@ -191,7 +191,9 @@ namespace PatientManagement.PatientManagement.Pages
                                 end = (endDateRepeat).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
                                 allDay = false,
                                 backgroundColor = visit.VisitTypeBackgroundColor,
-                                borderColor = visit.VisitTypeBorderColor
+                                borderColor = visit.VisitTypeBorderColor,
+                                isRepeated = true,
+                                repeatCounter =  counter
                             };
                             eventRepeated.title +=
                                 LocalText.Get(Texts.Site.Visits.VisitRepeatCounterInCalendarDescription.Key) + " " +counter;

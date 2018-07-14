@@ -239,6 +239,20 @@ END
             set => Fields.FreeForReservation[this] = value;
         }
 
+
+        [NotMapped]
+        public int? RepeatCounter
+        {
+            get => Fields.RepeatCounter[this];
+            set => Fields.RepeatCounter[this] = value;
+        }
+        [NotMapped]
+        public Boolean? IsRepeated
+        {
+            get => Fields.IsRepeated[this];
+            set => Fields.IsRepeated[this] = value;
+        }
+
         #region PatientFields
         [DisplayName("Patient Name"), Expression("jPatient.[Name]"), Width(150), EditLink, QuickSearch ]
         public String PatientName
@@ -338,6 +352,8 @@ END
             public DateTimeField RepeatUntilStartDate;
             public DateTimeField RepeatUntilEndDate;
             public DateTimeField NextRepeaTime;
+            public BooleanField IsRepeated;
+            public Int32Field RepeatCounter;
 
             public Int32Field CabinetId;
             public StringField CabinetName;

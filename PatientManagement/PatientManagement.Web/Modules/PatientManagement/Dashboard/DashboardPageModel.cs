@@ -35,6 +35,10 @@ namespace PatientManagement.Dashboard
         public string start { get; set; }
 
         public string end { get; set; }
+        
+        public bool isRepeated { get; set; }
+
+        public int repeatCounter { get; set; }
 
     }
 }

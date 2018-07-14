@@ -59,7 +59,7 @@ namespace PatientManagement.PatientManagement {
             
 
         }
-        public updateVisit = (visitId, start, end): void => {
+        public updateVisit = (visitId, start, end, isRepeated, repeatCounter): void => {
         
             VisitsService.Retrieve(<any>{
                 EntityId: visitId
@@ -76,8 +76,13 @@ namespace PatientManagement.PatientManagement {
 
                 var beforeDateStart = resp.Entity.StartDate;
                 var beforeDateEnd = resp.Entity.EndDate;
-
+                console.log(p.RepeatCounter);
                 var p = <PatientManagement.VisitsRow>{};
+
+                if (isRepeated) {
+                    p.IsRepeated = isRepeated;
+                    p.RepeatCounter = repeatCounter;
+                }
 
                 p.StartDate = start;
                 p.EndDate = end;
