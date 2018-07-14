@@ -76,7 +76,7 @@ namespace PatientManagement.PatientManagement {
 
                 var beforeDateStart = resp.Entity.StartDate;
                 var beforeDateEnd = resp.Entity.EndDate;
-                console.log(p.RepeatCounter);
+
                 var p = <PatientManagement.VisitsRow>{};
 
                 if (isRepeated) {
