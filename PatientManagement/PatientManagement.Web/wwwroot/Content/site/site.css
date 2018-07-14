@@ -8749,6 +8749,9 @@ section.content > .s-DataGrid {
 .s-NoteDialog .ui-dialog-content {
   padding-bottom: 10px;
 }
+.tooltip {
+  position: fixed;
+}
 .s-PatientManagement-PatientsDialog > .size {
   width: 700px;
   min-height: 550px;
