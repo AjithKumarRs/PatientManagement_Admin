@@ -112,14 +112,14 @@ namespace PatientManagement.PatientManagement.Endpoints
 
                 if (patients.Any())
                 {
-                    dataset.PatientsTotal = patients.Count;
+                    dataset.patientsTotal = patients.Count;
 
                     var visitsFields = VisitsRow.Fields;
                     var visits = connection.List<VisitsRow>(s => s
                         .Select(visitsFields.VisitId).Select(visitsFields.VisitTypeId).Select(visitsFields.PatientId)
                         .Where(visitsFields.PatientId.In(patients.Select(p => p.PatientId))));
 
-                    dataset.VisitsTotal = visits.Count;
+                    dataset.visitsTotal = visits.Count;
                     var tempCounter = 0;
                     foreach (var visitTypesRow in visitTypes)
                     {
@@ -128,7 +128,7 @@ namespace PatientManagement.PatientManagement.Endpoints
                             && visitsFields.PatientId.In(patients.Select(p => p.PatientId)));
 
                         if (visitsCounter > tempCounter)
-                            dataset.MostReservedVisitType = visitTypesRow.Name;
+                            dataset.mostReservedVisitType = visitTypesRow.Name;
 
                         dataset.data.Add(visitsCounter);
                     }

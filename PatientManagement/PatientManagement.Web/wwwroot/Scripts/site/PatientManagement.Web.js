@@ -1853,7 +1853,7 @@ var PatientManagement;
                     NotificationsForm.init = true;
                     var s = Serenity;
                     var w0 = s.StringEditor;
-                    var w1 = s.IntegerEditor;
+                    var w1 = s.LookupEditor;
                     var w2 = s.DateEditor;
                     Q.initFormType(NotificationsForm, [
                         'EntityType', w0,
@@ -1878,6 +1878,7 @@ var PatientManagement;
         var NotificationsRow;
         (function (NotificationsRow) {
             NotificationsRow.idProperty = 'NotificationId';
+            NotificationsRow.isActiveProperty = 'IsActive';
             NotificationsRow.nameProperty = 'EntityType';
             NotificationsRow.localTextPrefix = 'PatientManagement.Notifications';
             NotificationsRow.lookupKey = 'PatientManagement.Notifications';
@@ -1898,6 +1899,7 @@ var PatientManagement;
             [
                 'Create',
                 'Update',
+                'MarkAsSeen',
                 'Delete',
                 'Retrieve',
                 'List',
@@ -3010,6 +3012,7 @@ var PatientManagement;
             PaymentsGrid.prototype.getIsActiveProperty = function () { return Administration.PaymentsRow.isActiveProperty; };
             PaymentsGrid.prototype.getItemCssClass = function (item, index) {
                 var klass = "";
+                klass = _super.prototype.getItemCssClass.call(this, item, index);
                 if (item.PaymentStatus != PatientManagement.PatientManagement.PaymentStatus.Success) {
                     klass += " not-success-payment";
                 }
@@ -5908,7 +5911,10 @@ var PatientManagement;
             function CabinetsFormatter() {
             }
             CabinetsFormatter.prototype.format = function (ctx) {
-                return "<span class='home-symbol'>" + Q.htmlEncode(ctx.value) + '</span>';
+                if (ctx.value != "")
+                    return "<span class='home-symbol'>" + Q.htmlEncode(ctx.value) + '</span>';
+                else
+                    return "";
             };
             CabinetsFormatter = __decorate([
                 Serenity.Decorators.registerFormatter()
@@ -6395,7 +6401,6 @@ var PatientManagement;
                         }, function (response) {
                             Q.reloadLookup(PatientManagement.VisitsRow.lookupKey);
                             $('#VisitsGridDiv .refresh-button').click();
-                            console.log(p);
                             if (p.IsRepeated ||
                                 new Date(start).getDay() === new Date().getDay() ||
                                 new Date(end).getDay() === new Date().getDay() ||
@@ -7385,6 +7390,8 @@ var PatientManagement;
             function NotificationDropdownMenu(elem, opt) {
                 var _this = _super.call(this, elem, opt) || this;
                 _this.updateNotifications = function () {
+                    //if (this.byId('NotificationCounterLabel').text() === "0")
+                    //    return;
                     PatientManagement.NotificationsService.ListForDropdown({ Take: 50 }, function (resp) {
                         _this.byId('NotificationCounterLabel').text(resp.Entities.length);
                         var notifactionList = _this.byId('NotificationDropdownMenuMessages');
@@ -7403,6 +7410,7 @@ var PatientManagement;
                                 var userH4 = "<h4><div>" + item.InsertUserDisplayName + "</div><small> <i class='fa fa-clock-o'> </i> " + dateInserted + "</small></h4>";
                                 a.append(userH4);
                                 var p = $('<p/>').text(item.Text);
+                                p.css("white-space", "normal");
                                 a.append(p);
                                 notifactionList.append(a);
                             }
@@ -7414,11 +7422,12 @@ var PatientManagement;
                             a.append(h4);
                             notifactionList.append(a);
                         }
-                        _this.markAsSeen();
+                        //   this.markAsSeen();
                     });
                 };
                 _this.byId('NotificationDropdownMenuHeader').text(Q.text("Site.Layout.NotificationMenuHeader"));
                 _this.byId('NotificationDropdownMenuFooter').text(Q.text("Site.Layout.NotificationMenuFooter"));
+                _this.byId('MarkAllAsSeen').text(Q.text("Site.Layout.NotificationMenuMarkAsSeen"));
                 var toggleMenuButton = _this.byId('NotificationDropdownMenuToggle');
                 toggleMenuButton.click(function (e) { return _this.openClick(e); });
                 PatientManagement.NotificationsService.CountNotifications({ Take: 50 }, function (resp) {
@@ -7427,6 +7436,7 @@ var PatientManagement;
                         text = text + "+";
                     _this.byId('NotificationCounterLabel').text(text);
                 });
+                _this.byId('MarkAllAsSeen').click(function (e) { return _this.markAsSeen(); });
                 return _this;
             }
             NotificationDropdownMenu.prototype.getService = function () { return PatientManagement.NotificationsService.baseUrl; };
@@ -7439,19 +7449,25 @@ var PatientManagement;
             };
             NotificationDropdownMenu.prototype.markAsSeen = function () {
                 var _this = this;
-                var entities = new Array();
-                for (var id in this.notificationIds) {
-                    var entity = {};
-                    entity.NotificationId = this.notificationIds[Number(id)];
-                    //if (entities.indexOf(this.notificationIds[Number(id)]) > -1)
-                    //    return;
-                    entities.push(entity);
+                for (var idNotification in this.notificationIds) {
+                    PatientManagement.NotificationsService.MarkAsSeen({ EntityId: this.notificationIds[Number(idNotification)] }, function (resp) {
+                        var counter = Number(_this.byId('NotificationCounterLabel').text());
+                        _this.byId('NotificationCounterLabel').text(counter - 1);
+                    });
                 }
-                PatientManagement.UserNotificationsService.CreateList({
-                    Entity: entities
-                }, function (resp) {
-                    _this.byId('NotificationCounterLabel').text(0);
-                });
+                //var entities = new Array<PatientManagement.UserNotificationsRow>();
+                //for (var id in this.notificationIds) {
+                //    var entity = <PatientManagement.UserNotificationsRow>{};
+                //    entity.NotificationId = this.notificationIds[Number(id)];
+                //    //if (entities.indexOf(this.notificationIds[Number(id)]) > -1)
+                //    //    return;
+                //    entities.push(entity);
+                //}
+                //PatientManagement.UserNotificationsService.CreateList({
+                //    Entity: entities
+                //}, resp => {
+                //    this.byId('NotificationCounterLabel').text(0);
+                //});
             };
             return NotificationDropdownMenu;
         }(Serenity.TemplatedWidget));
@@ -7497,6 +7513,31 @@ var PatientManagement;
             NotificationsGrid.prototype.getIdProperty = function () { return PatientManagement.NotificationsRow.idProperty; };
             NotificationsGrid.prototype.getLocalTextPrefix = function () { return PatientManagement.NotificationsRow.localTextPrefix; };
             NotificationsGrid.prototype.getService = function () { return PatientManagement.NotificationsService.baseUrl; };
+            NotificationsGrid.prototype.getColumns = function () {
+                var columns = _super.prototype.getColumns.call(this);
+                columns.splice(0, 0, {
+                    field: Q.text("Site.Notifications.NotificationsPageGridMarkAsSeen"),
+                    name: '',
+                    format: function (ctx) { return '<a class="inline-action mark-as-seen-row" style="font-size: 20px;" title="' + Q.text("Site.Notifications.NotificationsPageGridMarkAsSeen") + '">' +
+                        '<i class="fa fa-check-square-o text-green"></i></a>'; },
+                    width: 24,
+                    minWidth: 24,
+                    maxWidth: 24
+                });
+                return columns;
+            };
+            NotificationsGrid.prototype.getItemCssClass = function (item, index) {
+                var klass = "";
+                klass = _super.prototype.getItemCssClass.call(this, item, index);
+                var seen = PatientManagement.NotificationsRow.getLookup().itemById[item.NotificationId];
+                if (seen.SeenByUser) {
+                    klass += " notification-seen-by-user";
+                }
+                else {
+                    klass += " notification-not-seen-by-user";
+                }
+                return Q.trimToNull(klass);
+            };
             NotificationsGrid.prototype.getButtons = function () {
                 var _this = this;
                 var buttons = _super.prototype.getButtons.call(this);
@@ -7515,6 +7556,26 @@ var PatientManagement;
                 var opt = _super.prototype.getSlickOptions.call(this);
                 opt.rowHeight = 55;
                 return opt;
+            };
+            NotificationsGrid.prototype.onClick = function (e, row, cell) {
+                var _this = this;
+                _super.prototype.onClick.call(this, e, row, cell);
+                if (e.isDefaultPrevented())
+                    return;
+                var item = this.itemAt(row);
+                var target = $(e.target);
+                // if user clicks "i" element, e.g. icon
+                if (target.parent().hasClass('inline-action'))
+                    target = target.parent();
+                if (target.hasClass('inline-action')) {
+                    e.preventDefault();
+                    if (target.hasClass('mark-as-seen-row')) {
+                        PatientManagement.NotificationsService.MarkAsSeen({ EntityId: item.NotificationId }, function (resp) {
+                            _this.refresh();
+                            Q.reloadLookup(PatientManagement.NotificationsRow.lookupKey);
+                        });
+                    }
+                }
             };
             NotificationsGrid = __decorate([
                 Serenity.Decorators.registerClass()

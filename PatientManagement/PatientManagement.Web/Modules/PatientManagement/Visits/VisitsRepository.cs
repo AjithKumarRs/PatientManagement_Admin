@@ -104,6 +104,7 @@ namespace PatientManagement.PatientManagement.Repositories
 
                     NotificationHelpers.SendVisitNotification(
                     Row.VisitId ?? 0,
+                        Row.CabinetId,
                     cabinetName,
                     Row.StartDate ?? DateTime.Now,
                     Row.EndDate ?? DateTime.Now.AddMonths(1),
@@ -114,6 +115,7 @@ namespace PatientManagement.PatientManagement.Repositories
                 {
                     NotificationHelpers.SendVisitNotification(
                         Row.VisitId ?? 0,
+                        Row.CabinetId,
                         cabinetName,
                         Row.StartDate ?? DateTime.Now,
                         Row.EndDate ?? DateTime.Now.AddMonths(1),
@@ -152,7 +154,9 @@ namespace PatientManagement.PatientManagement.Repositories
                 var cabinetName = Connection.ById<CabinetsRow>(Row.CabinetId).Name;
 
                 NotificationHelpers.SendVisitNotification(
-                    Row.VisitId ?? 0, cabinetName,
+                    Row.VisitId ?? 0,
+                    Row.CabinetId,
+                    cabinetName,
                     Row.StartDate ?? DateTime.Now,
                     Row.EndDate ?? DateTime.Now.AddMonths(1),
                     Row.PatientId ?? 0,

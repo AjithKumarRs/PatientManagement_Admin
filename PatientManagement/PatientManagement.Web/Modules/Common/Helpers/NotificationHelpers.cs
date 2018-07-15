@@ -6,6 +6,7 @@ using Hubs;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.AspNetCore.SignalR.Infrastructure;
 using Microsoft.CodeAnalysis;
+using Newtonsoft.Json;
 using PatientManagement.Administration.Entities;
 using PatientManagement.PatientManagement.Entities;
 using PatientManagement.PatientManagement.Repositories;
@@ -62,9 +63,11 @@ namespace PatientManagement.Web.Modules.Common.Helpers
             return message;
         }
 
-        private static void InsertNotificationForCurrentTable(string tableName, int visitId, string message)
+        private static void InsertNotificationForCurrentTable(string tableName, int visitId, string message, int? cabinetId = null)
         {
             UserDefinition user = (UserDefinition) Authorization.UserDefinition;
+            var seenBy = new List<string>();
+            seenBy.Add(user.Id);
             var notificationRow = new NotificationsRow
             {
                 EntityType = tableName,
@@ -72,7 +75,8 @@ namespace PatientManagement.Web.Modules.Common.Helpers
                 Text = message,
                 TenantId = user.TenantId,
                 InsertUserId = user.UserId,
-                InsertDate = DateTime.Now
+                InsertDate = DateTime.Now,
+                SeenByUserIds = JsonConvert.SerializeObject(seenBy)
             };
 
             using (var connectionNotification = SqlConnections.NewFor<NotificationsRow>())
@@ -92,7 +96,7 @@ namespace PatientManagement.Web.Modules.Common.Helpers
         #endregion
 
         #region Visits Notification
-        public static void SendVisitNotification(int VisitId, string cabinetName, DateTime start, DateTime end, int patientId, EEntityNotificationStatus status)
+        public static void SendVisitNotification(int VisitId, int? CabinetId, string cabinetName, DateTime start, DateTime end, int patientId, EEntityNotificationStatus status)
         {
             UserDefinition user = (UserDefinition) Authorization.UserDefinition;
             var patientName = string.Empty;
@@ -121,7 +125,7 @@ namespace PatientManagement.Web.Modules.Common.Helpers
             List<string> users = GetOtherUsersIdForTenant(user.TenantId, Int32.Parse(user.Id));
             notificationHub.Clients.Users(users.ToList()).visitChangedNotification(user.DisplayName, user.UserImage, message, start, end);
 
-            InsertNotificationForCurrentTable(VisitsRow.Fields.TableName, VisitId, message);
+            InsertNotificationForCurrentTable(VisitsRow.Fields.TableName, VisitId, message, CabinetId);
         }
 
         #endregion

@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using PatientManagement.Administration;
 using PatientManagement.Administration.Entities;
 using PatientManagement.PatientManagement.Scripts;
@@ -18,7 +19,7 @@ namespace PatientManagement.PatientManagement.Entities
     [ReadPermission(PatientManagementPermissionKeys.Notifications.ReadPermission)]
     [DeletePermission(PatientManagementPermissionKeys.Notifications.DeletePermission)]
     [LookupScript("PatientManagement.Notifications", LookupType = typeof(MultiTenantRowLookupScript<>))]
-    public sealed class NotificationsRow : Row, IIdRow, INameRow, IInsertLogRow, IMultiTenantRow
+    public sealed class NotificationsRow : LoggingRow, IIdRow, INameRow
     {
         [DisplayName("Notification Id"), SortOrder(1, true), Identity, Column("NotificationId"), Updatable(false)]
         public Int32? NotificationId
@@ -50,8 +51,58 @@ namespace PatientManagement.PatientManagement.Entities
             set { Fields.Text[this] = value; }
         }
 
-        [DisplayName("Insert User Id"), NotNull, Insertable(false), Updatable(false)]
-        public Int32? InsertUserId
+        [DisplayName("Seen By User Ids")]
+        [MinSelectLevel(SelectLevel.Always)]
+        public String SeenByUserIds
+        {
+            get { return Fields.SeenByUserIds[this]; }
+            set { Fields.SeenByUserIds[this] = value; }
+        }
+        [DisplayName("Seen By User Names"), NotMapped]
+        public String SeenByUserNames
+        {
+            get { return Fields.SeenByUserNames[this]; }
+            set { Fields.SeenByUserNames[this] = value; }
+        }
+        [DisplayName("Is seen by user")]
+        [Expression(@"
+        CASE WHEN (T0.[SeenByUserIds] IS NOT NULL AND T0.[SeenByUserIds] LIKE Concat('%""', @LogedUser, '""%') ) 
+            THEN
+                1
+            ELSE
+                0
+        END
+        ")]
+        [BooleanEditor, QuickFilter(), Insertable(false), Updatable(false)]
+        [LookupInclude]
+        [MinSelectLevel(SelectLevel.Always)]
+        public bool? SeenByUser
+        {
+            get { return Fields.SeenByUser[this]; }
+            set { Fields.SeenByUser[this] = value; }
+        }
+
+        [DisplayName("Cabinet"), NotNull, ForeignKey("[dbo].[Cabinets]", "CabinetId"), LeftJoin("jCabinets"), TextualField("CabinetName")]
+        [LookupEditor(typeof(CabinetsRow), InplaceAdd = true, FilterField = "IsActive", FilterValue = 1)]
+        [QuickFilter()]
+        public Int32? CabinetId
+        {
+            get => Fields.CabinetId[this];
+            set => Fields.CabinetId[this] = value;
+        }
+
+        [DisplayName("Cabinet Name"), Expression("jCabinets.[Name]"), QuickSearch]
+        [QuickFilter()]
+        public String CabinetName
+        {
+            get { return Fields.CabinetName[this]; }
+            set { Fields.CabinetName[this] = value; }
+        }
+
+        [DisplayName("Insert User Id"), ForeignKey("Users", "UserId"), LeftJoin("usrI"), TextualField("InsertUserName")]
+        [NotNull, Insertable(false), Updatable(false), QuickFilter()]
+        [LookupEditor(typeof(UserRow), FilterField = "IsActive", FilterValue = 1)]
+        public new Int32? InsertUserId
         {
             get { return Fields.InsertUserId[this]; }
             set { Fields.InsertUserId[this] = value; }
@@ -71,19 +122,15 @@ namespace PatientManagement.PatientManagement.Entities
             set { Fields.InsertUserPicture[this] = value; }
         }
 
-        [DisplayFormat("dd/MM/yyyy HH:mm")]
-        [DisplayName("Insert Date"), NotNull, Insertable(false), Updatable(false), QuickFilter()]
-        public DateTime? InsertDate
+        [NotNull, Insertable(false), Updatable(false)]
+        [DisplayName("Insert Date"), QuickFilter()]
+        [SortOrder(1, true)]
+        public new DateTime? InsertDate
         {
             get { return Fields.InsertDate[this]; }
             set { Fields.InsertDate[this] = value; }
         }
         
-        [DisplayName("Insert Date Formated"),NotMapped]
-        public string InsertDateFormated
-        {
-            get { return Fields.InsertDate[this]?.ToString("hh:mm:ss MMM-yy"); }
-        }
 
         IIdField IIdRow.IdField
         {
@@ -94,9 +141,6 @@ namespace PatientManagement.PatientManagement.Entities
         {
             get { return Fields.EntityType; }
         }
-        public IIdField InsertUserIdField => Fields.InsertUserId;
-
-        public DateTimeField InsertDateField => Fields.InsertDate;
 
         public static readonly RowFields Fields = new RowFields().Init();
 
@@ -105,51 +149,25 @@ namespace PatientManagement.PatientManagement.Entities
         {
         }
 
-        public class RowFields : RowFieldsBase
+        public class RowFields : LoggingRowFields
         {
             public Int32Field NotificationId;
             public StringField EntityType;
             public Int64Field EntityId;
+            public BooleanField SeenByUser;
             public StringField Text;
-            public Int32Field InsertUserId;
-            public DateTimeField InsertDate;
-
-
+            public StringField SeenByUserIds;
+            public StringField SeenByUserNames;
+            public Int32Field CabinetId;
+            public StringField CabinetName;
             public StringField InsertUserDisplayName;
             public StringField InsertUserPicture;
-            public readonly Int32Field TenantId;
-
-            public StringField TenantName;
             public RowFields()
                 : base()
             {
                 LocalTextPrefix = "PatientManagement.Notifications";
             }
         }
-
-
-        #region Tenant
-
-        [DisplayName("Tenant"), ForeignKey("Tenants", "TenantId"), LeftJoin("tnt")]
-        [LookupEditor(typeof(TenantRow))]
-        [ReadPermission(PermissionKeys.Tenant)]
-        [ModifyPermission(PermissionKeys.Tenant)]
-        public Int32? TenantId
-        {
-            get { return Fields.TenantId[this]; }
-            set { Fields.TenantId[this] = value; }
-        }
-        [DisplayName("Tenant"), Expression("tnt.TenantName")]
-        [ReadPermission(PermissionKeys.Tenant)]
-        public String TenantName
-        {
-            get { return Fields.TenantName[this]; }
-            set { Fields.TenantName[this] = value; }
-        }
-        public Int32Field TenantIdField
-        {
-            get { return Fields.TenantId; }
-        }
-        #endregion
+        
     }
 }

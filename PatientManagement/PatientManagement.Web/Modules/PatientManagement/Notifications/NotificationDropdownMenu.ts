@@ -11,6 +11,7 @@ namespace PatientManagement.PatientManagement {
 
             this.byId('NotificationDropdownMenuHeader').text(Q.text("Site.Layout.NotificationMenuHeader"));
             this.byId('NotificationDropdownMenuFooter').text(Q.text("Site.Layout.NotificationMenuFooter"));
+            this.byId('MarkAllAsSeen').text(Q.text("Site.Layout.NotificationMenuMarkAsSeen"));
 
             var toggleMenuButton = this.byId('NotificationDropdownMenuToggle');
             toggleMenuButton.click((e) => this.openClick(e));
@@ -24,10 +25,12 @@ namespace PatientManagement.PatientManagement {
 
                 });
 
+            this.byId('MarkAllAsSeen').click((e) => this.markAsSeen());
         }
 
         public updateNotifications = (): void => {
-
+            //if (this.byId('NotificationCounterLabel').text() === "0")
+            //    return;
             PatientManagement.NotificationsService.ListForDropdown({ Take: 50 },
                 resp => {
 
@@ -45,7 +48,7 @@ namespace PatientManagement.PatientManagement {
 
                         for (var t1 = 0; t1 < resp.Entities.length; t1++) {
                             var item = resp.Entities[t1];
-
+                             
                             this.notificationIds.push(item.NotificationId);
                             var a = $('<a/>');
 
@@ -58,6 +61,7 @@ namespace PatientManagement.PatientManagement {
                             a.append(userH4);
 
                             var p = $('<p/>').text(item.Text);
+                            p.css("white-space", "normal");
                             a.append(p);
 
                             notifactionList.append(a);
@@ -73,7 +77,7 @@ namespace PatientManagement.PatientManagement {
                     }
 
 
-                    this.markAsSeen();
+                 //   this.markAsSeen();
 
                 });
         };
@@ -92,25 +96,33 @@ namespace PatientManagement.PatientManagement {
         }
         
         protected markAsSeen() {
-
-            var entities = new Array<PatientManagement.UserNotificationsRow>();
-            for (var id in this.notificationIds) {
-                var entity = <PatientManagement.UserNotificationsRow>{};
-
-                entity.NotificationId = this.notificationIds[Number(id)];
-
-                //if (entities.indexOf(this.notificationIds[Number(id)]) > -1)
-                //    return;
-
-                entities.push(entity);
+            for (var idNotification in this.notificationIds) {
+                PatientManagement.NotificationsService.MarkAsSeen({ EntityId: this.notificationIds[Number(idNotification)]},
+                    resp => {
+                        var counter = Number(this.byId('NotificationCounterLabel').text());
+                        this.byId('NotificationCounterLabel').text(counter - 1);
+                    });
             }
 
-            PatientManagement.UserNotificationsService.CreateList({
-                Entity: entities
-            }, resp => {
-                this.byId('NotificationCounterLabel').text(0);
 
-            });
+            //var entities = new Array<PatientManagement.UserNotificationsRow>();
+            //for (var id in this.notificationIds) {
+            //    var entity = <PatientManagement.UserNotificationsRow>{};
+
+            //    entity.NotificationId = this.notificationIds[Number(id)];
+
+            //    //if (entities.indexOf(this.notificationIds[Number(id)]) > -1)
+            //    //    return;
+
+            //    entities.push(entity);
+            //}
+
+            //PatientManagement.UserNotificationsService.CreateList({
+            //    Entity: entities
+            //}, resp => {
+            //    this.byId('NotificationCounterLabel').text(0);
+
+            //});
         }
     }
 

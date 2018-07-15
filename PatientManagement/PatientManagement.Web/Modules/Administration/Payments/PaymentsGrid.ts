@@ -17,7 +17,7 @@ namespace PatientManagement.Administration {
         }
         protected getItemCssClass(item: PaymentsRow, index: number): string {
             let klass: string = "";
-
+            klass = super.getItemCssClass(item, index);
             if (item.PaymentStatus != PatientManagement.PaymentStatus.Success) {
                 klass += " not-success-payment";
             }

@@ -67,7 +67,6 @@ namespace PatientManagement.PatientManagement.Endpoints
                 && request.Entity.RepeatCounter.HasValue && request.Entity.RepeatCounter.Value > 0
                 && visit.RepeatPeriod.HasValue)
             {
-                var timeDiff = request.Entity.EndDate.Value - request.Entity.StartDate.Value;
 
                 switch (visit.RepeatPeriod.Value)
                 {

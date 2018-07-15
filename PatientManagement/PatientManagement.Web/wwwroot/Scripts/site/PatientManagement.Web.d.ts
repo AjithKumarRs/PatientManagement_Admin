@@ -2208,7 +2208,7 @@ declare namespace PatientManagement.PatientManagement {
         EntityType: Serenity.StringEditor;
         EntityId: Serenity.StringEditor;
         Text: Serenity.StringEditor;
-        InsertUserId: Serenity.IntegerEditor;
+        InsertUserId: Serenity.LookupEditor;
         InsertDate: Serenity.DateEditor;
     }
     class NotificationsForm extends Serenity.PrefixedContext {
@@ -2222,16 +2222,28 @@ declare namespace PatientManagement.PatientManagement {
         NotificationId?: number;
         EntityType?: string;
         EntityId?: number;
+        SeenByUser?: boolean;
         Text?: string;
-        InsertUserId?: number;
-        InsertDate?: string;
+        SeenByUserIds?: string;
+        SeenByUserNames?: string;
+        CabinetId?: number;
+        CabinetName?: string;
         InsertUserDisplayName?: string;
         InsertUserPicture?: string;
+        InsertUserId?: number;
+        InsertDate?: string;
+        InsertUserName?: string;
+        UpdateUserName?: string;
+        UpdateUserId?: number;
+        UpdateDate?: string;
+        IsActive?: number;
         TenantId?: number;
         TenantName?: string;
+        TenantCurrencyId?: number;
     }
     namespace NotificationsRow {
         const idProperty = "NotificationId";
+        const isActiveProperty = "IsActive";
         const nameProperty = "EntityType";
         const localTextPrefix = "PatientManagement.Notifications";
         const lookupKey = "PatientManagement.Notifications";
@@ -2240,13 +2252,24 @@ declare namespace PatientManagement.PatientManagement {
             NotificationId = "NotificationId",
             EntityType = "EntityType",
             EntityId = "EntityId",
+            SeenByUser = "SeenByUser",
             Text = "Text",
-            InsertUserId = "InsertUserId",
-            InsertDate = "InsertDate",
+            SeenByUserIds = "SeenByUserIds",
+            SeenByUserNames = "SeenByUserNames",
+            CabinetId = "CabinetId",
+            CabinetName = "CabinetName",
             InsertUserDisplayName = "InsertUserDisplayName",
             InsertUserPicture = "InsertUserPicture",
+            InsertUserId = "InsertUserId",
+            InsertDate = "InsertDate",
+            InsertUserName = "InsertUserName",
+            UpdateUserName = "UpdateUserName",
+            UpdateUserId = "UpdateUserId",
+            UpdateDate = "UpdateDate",
+            IsActive = "IsActive",
             TenantId = "TenantId",
             TenantName = "TenantName",
+            TenantCurrencyId = "TenantCurrencyId",
         }
     }
 }
@@ -2255,6 +2278,7 @@ declare namespace PatientManagement.PatientManagement {
         const baseUrl = "PatientManagement/Notifications";
         function Create(request: Serenity.SaveRequest<NotificationsRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Update(request: Serenity.SaveRequest<NotificationsRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        function MarkAsSeen(request: Serenity.SaveRequest<NotificationsRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<NotificationsRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<NotificationsRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
@@ -2263,6 +2287,7 @@ declare namespace PatientManagement.PatientManagement {
         const enum Methods {
             Create = "PatientManagement/Notifications/Create",
             Update = "PatientManagement/Notifications/Update",
+            MarkAsSeen = "PatientManagement/Notifications/MarkAsSeen",
             Delete = "PatientManagement/Notifications/Delete",
             Retrieve = "PatientManagement/Notifications/Retrieve",
             List = "PatientManagement/Notifications/List",
@@ -4029,8 +4054,11 @@ declare namespace PatientManagement.PatientManagement {
         protected getLocalTextPrefix(): string;
         protected getService(): string;
         constructor(container: JQuery);
+        protected getColumns(): Slick.Column[];
+        protected getItemCssClass(item: NotificationsRow, index: number): string;
         protected getButtons(): Serenity.ToolButton[];
         protected getSlickOptions(): Slick.GridOptions;
+        protected onClick(e: JQueryEventObject, row: number, cell: number): void;
     }
 }
 declare namespace PatientManagement.PatientManagement {

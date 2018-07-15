@@ -1,6 +1,9 @@
 ﻿
 using System;
+using System.Collections.Generic;
 using PatientManagement.Administration;
+using PatientManagement.Web.Modules.PatientManagement.Notifications;
+using Serenity.Abstractions;
 using Serenity.Reporting;
 using Serenity.Web;
 
@@ -29,7 +32,14 @@ namespace PatientManagement.PatientManagement.Endpoints
         {
             return new MyRepository().Update(uow, request);
         }
- 
+
+
+        [HttpPost]
+        public SaveResponse MarkAsSeen(IUnitOfWork uow, SaveRequest<MyRow> request)
+        {
+            return new MyRepository().MarkAsSeen(uow, request);
+        }
+
         [HttpPost, AuthorizeDelete(typeof(MyRow))]
         public DeleteResponse Delete(IUnitOfWork uow, DeleteRequest request)
         {
@@ -48,15 +58,16 @@ namespace PatientManagement.PatientManagement.Endpoints
         public ListResponse<MyRow> ListForDropdown(IDbConnection connection, ListRequest request)
         {
             return new MyRepository().ListForDropdown(connection, request);
+
         }
         public CountNotificationsResponse CountNotifications(IDbConnection connection, ListRequest request)
         {
             var some = new MyRepository().ListForDropdown(connection, request);
             return new CountNotificationsResponse
-           {
+            {
 
-               Count = some.Entities.Count
-           };
+                Count = some.Entities.Count
+            };
         }
 
         public FileContentResult ListExcel(IDbConnection connection, ListRequest request)

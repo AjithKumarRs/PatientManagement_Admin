@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using PatientManagement.Administration.Entities;
 using PatientManagement.PatientManagement.Entities;
 using PatientManagement.PatientManagement.Repositories;
@@ -24,8 +25,6 @@ namespace PatientManagement.PatientManagement.Pages
         [Route("~/Notifications")]
         public ActionResult Index()
         {
-            // TODO All notifications should change to seen issue #223
-           
             return View(MVC.Views.PatientManagement.Notifications.NotificationsIndex);
         }
     }

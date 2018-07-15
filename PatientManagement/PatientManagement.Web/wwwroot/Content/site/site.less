@@ -4,9 +4,6 @@
 @import "site.membership.less";
 @import "site.northwind.less";
 
-.tooltip {
-    position: fixed;
-}
 .s-PatientManagement-PatientsDialog {
     > .size { width: 700px; min-height: 550px; }
     .caption { width: 150px; }
@@ -288,4 +285,18 @@
 // puts the google places autocomplete dropdown results above the bootstrap modal 1100 zindex.
 .pac-container {
     z-index: 2051 !important;
-} 
+}
+
+
+.tooltip {
+    position: fixed;
+}
+
+.notification-seen-by-user {
+    .mark-as-seen-row{
+        display: none;
+    }
+}
+
+.notification-not-seen-by-user {
+}

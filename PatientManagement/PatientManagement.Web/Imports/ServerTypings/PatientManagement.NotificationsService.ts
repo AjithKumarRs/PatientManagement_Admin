@@ -4,6 +4,7 @@
 
         export declare function Create(request: Serenity.SaveRequest<NotificationsRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         export declare function Update(request: Serenity.SaveRequest<NotificationsRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
+        export declare function MarkAsSeen(request: Serenity.SaveRequest<NotificationsRow>, onSuccess?: (response: Serenity.SaveResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         export declare function Delete(request: Serenity.DeleteRequest, onSuccess?: (response: Serenity.DeleteResponse) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         export declare function Retrieve(request: Serenity.RetrieveRequest, onSuccess?: (response: Serenity.RetrieveResponse<NotificationsRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
         export declare function List(request: Serenity.ListRequest, onSuccess?: (response: Serenity.ListResponse<NotificationsRow>) => void, opt?: Q.ServiceOptions<any>): JQueryXHR;
@@ -13,6 +14,7 @@
         export declare const enum Methods {
             Create = "PatientManagement/Notifications/Create",
             Update = "PatientManagement/Notifications/Update",
+            MarkAsSeen = "PatientManagement/Notifications/MarkAsSeen",
             Delete = "PatientManagement/Notifications/Delete",
             Retrieve = "PatientManagement/Notifications/Retrieve",
             List = "PatientManagement/Notifications/List",
@@ -23,6 +25,7 @@
         [
             'Create', 
             'Update', 
+            'MarkAsSeen', 
             'Delete', 
             'Retrieve', 
             'List', 

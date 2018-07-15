@@ -20,6 +20,9 @@ namespace PatientManagement.PatientManagement.Scripts
         {
             base.PrepareQuery(query);
             AddTenantFilter(query);
+
+            var user = (UserDefinition)Authorization.UserDefinition;
+            query.SetParam("@LogedUser", user.Id);
         }
 
         protected void AddTenantFilter(SqlQuery query)

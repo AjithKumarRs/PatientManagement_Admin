@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Core: General Layout Style
  * -------------------------
  */
@@ -7523,7 +7523,7 @@ section.content > .s-DataGrid {
   width: 50px;
   height: 50px;
   float: left;
-  background: url(../../Content/images/app-icon.png) no-repeat center center;
+  background: url(../images/app-icon.png) no-repeat center center;
 }
 .main-header .logo b {
   float: left;
@@ -7531,7 +7531,7 @@ section.content > .s-DataGrid {
 }
 .skin-black .main-header .logo i,
 .skin-black-light .main-header .logo i {
-  background: url(../../Content/images/app-icon.png) no-repeat center center;
+  background: url(../images/app-icon.png) no-repeat center center;
 }
 .s-BasicProgressDialogContent .status-text {
   height: 1em;
@@ -7949,7 +7949,7 @@ section.content > .s-DataGrid {
   margin: 0 auto 20px auto;
   width: 330px;
   height: 128px;
-  background: transparent url(../../Content/images/logo-frond-page.png) no-repeat center center;
+  background: transparent url(../images/logo-frond-page.png) no-repeat center center;
   background-size: contain;
 }
 .page-content .s-LoginPanel h3 {
@@ -8749,9 +8749,6 @@ section.content > .s-DataGrid {
 .s-NoteDialog .ui-dialog-content {
   padding-bottom: 10px;
 }
-.tooltip {
-  position: fixed;
-}
 .s-PatientManagement-PatientsDialog > .size {
   width: 700px;
   min-height: 550px;
@@ -9029,4 +9026,10 @@ section.content > .s-DataGrid {
 }
 .pac-container {
   z-index: 2051 !important;
+}
+.tooltip {
+  position: fixed;
+}
+.notification-seen-by-user .mark-as-seen-row {
+  display: none;
 }

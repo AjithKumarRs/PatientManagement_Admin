@@ -28,10 +28,10 @@ namespace PatientManagement.PatientManagement.Entities
             }
             public string label { get; set; }
 
-            public int PatientsTotal { get; set; }
-            public int VisitsTotal { get; set; }
+            public int patientsTotal { get; set; }
+            public int visitsTotal { get; set; }
 
-            public string MostReservedVisitType { get; set; }
+            public string mostReservedVisitType { get; set; }
 
             public List<int> data { get; set; }
 
