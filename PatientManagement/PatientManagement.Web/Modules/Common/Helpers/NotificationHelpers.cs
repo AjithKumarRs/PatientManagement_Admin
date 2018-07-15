@@ -128,7 +128,7 @@ namespace PatientManagement.Web.Modules.Common.Helpers
             );
 
             List<string> users = GetOtherUsersIdForTenant(user.TenantId, Int32.Parse(user.Id));
-            notificationHub.Clients.Users(users.ToList()).visitChangedNotification(user.DisplayName, user.UserImage, message, start, end);
+            notificationHub.Clients.Users(users.ToList()).visitChangedNotification(user.DisplayName,CabinetId, user.UserImage, message, start, end);
 
             InsertNotificationForCurrentTable(VisitsRow.Fields.TableName, VisitId, message, CabinetId);
         }

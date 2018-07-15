@@ -554,16 +554,18 @@
                 //  $.connection.hub.start().done(function () {
                 //    if ($.connection.hub && $.connection.hub.state === $.signalR.connectionState.connected) {
 
-                hub.client.visitChangedNotification = function (userDisplayName, userPicture, notification, start, end) {
+                hub.client.visitChangedNotification = function (userDisplayName, cabinetId,userPicture, notification, start, end) {
                     var to = {};
                     to.timeOut = 6000;
                     to.closeButton = true;
-
-
-                    if ($('#NotificationCheck').bootstrapSwitch('state')) {
-                        Q.notifyInfo(notification, '', to);
+                    if (!!$.cookie('CabinetPreference')) {
+                        if ($('#NotificationCheck').bootstrapSwitch('state') && $.cookie("CabinetPreference") + "" === cabinetId + "") {
+                            Q.notifyInfo(notification, '', to);
+                        }
                     }
-                    RefreshFullCalendar(start, end);
+
+                    
+                    RefreshFullCalendar(start, end, cabinetId);
 
                     if ($('#VisitsGridDiv').length) {
                         $('#VisitsGridDiv .refresh-button').click();
