@@ -20,7 +20,7 @@ namespace PatientManagement.Web.Modules.Common.Helpers
     {
         private static readonly IHubContext notificationHub = Dependency.Resolver.Resolve<IConnectionManager>().GetHubContext<NotificationHub>();
 
-        
+
 
         #region Private Methods
 
@@ -65,7 +65,7 @@ namespace PatientManagement.Web.Modules.Common.Helpers
 
         private static void InsertNotificationForCurrentTable(string tableName, int visitId, string message, int? cabinetId = null)
         {
-            UserDefinition user = (UserDefinition) Authorization.UserDefinition;
+            UserDefinition user = (UserDefinition)Authorization.UserDefinition;
             var seenBy = new List<string>();
             seenBy.Add(user.Id);
             var notificationRow = new NotificationsRow
@@ -76,7 +76,8 @@ namespace PatientManagement.Web.Modules.Common.Helpers
                 TenantId = user.TenantId,
                 InsertUserId = user.UserId,
                 InsertDate = DateTime.Now,
-                SeenByUserIds = JsonConvert.SerializeObject(seenBy)
+                SeenByUserIds = JsonConvert.SerializeObject(seenBy),
+                CabinetId = cabinetId
             };
 
             using (var connectionNotification = SqlConnections.NewFor<NotificationsRow>())
@@ -98,12 +99,16 @@ namespace PatientManagement.Web.Modules.Common.Helpers
         #region Visits Notification
         public static void SendVisitNotification(int VisitId, int? CabinetId, string cabinetName, DateTime start, DateTime end, int patientId, EEntityNotificationStatus status)
         {
-            UserDefinition user = (UserDefinition) Authorization.UserDefinition;
+            UserDefinition user = (UserDefinition)Authorization.UserDefinition;
             var patientName = string.Empty;
-            using (var connectionPatients = SqlConnections.NewFor<PatientsRow>())
-            {
-                patientName = connectionPatients.First<PatientsRow>(new Criteria(PatientsRow.Fields.PatientId) == patientId.ToString()).Name;
-            }
+            if (patientId > 0)
+                using (var connectionPatients = SqlConnections.NewFor<PatientsRow>())
+                {
+                    patientName = connectionPatients
+                        .First<PatientsRow>(new Criteria(PatientsRow.Fields.PatientId) == patientId.ToString()).Name;
+                }
+            else
+                patientName = LocalText.Get("Db.PatientManagement.Visits.FreeForReservation");
 
             var message = FormatedMessageForStatus(
                 status, new string[]{
@@ -157,7 +162,7 @@ namespace PatientManagement.Web.Modules.Common.Helpers
         }
 
         #endregion
-        
+
     }
 
 

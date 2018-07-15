@@ -7530,7 +7530,7 @@ var PatientManagement;
                 var klass = "";
                 klass = _super.prototype.getItemCssClass.call(this, item, index);
                 var seen = PatientManagement.NotificationsRow.getLookup().itemById[item.NotificationId];
-                if (seen.SeenByUser) {
+                if (seen != null && seen.SeenByUser) {
                     klass += " notification-seen-by-user";
                 }
                 else {
