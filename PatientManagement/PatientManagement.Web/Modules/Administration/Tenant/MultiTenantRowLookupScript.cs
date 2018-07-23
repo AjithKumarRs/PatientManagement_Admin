@@ -1,4 +1,9 @@
 ﻿
+using System.Linq;
+using PatientManagement.PatientManagement.Entities;
+using PatientManagement.PatientManagement.Repositories;
+using Serenity.Services;
+
 namespace PatientManagement.PatientManagement.Scripts
 {
     using Administration;
@@ -32,6 +37,25 @@ namespace PatientManagement.PatientManagement.Scripts
             if (!Authorization.HasPermission(PermissionKeys.Tenant))
                 query.Where(r.TenantIdField ==
                         ((UserDefinition)Authorization.UserDefinition).TenantId);
+
+            var user = (UserDefinition)Authorization.UserDefinition;
+
+            if (user.RestrictedToCabinets == 1 && (this.ScriptName.Contains("PatientManagement.Visits")) || this.ScriptName.Contains("PatientManagement.Cabinets"))
+            {
+                using (var connection = SqlConnections.NewFor<CabinetRepresentativesRow>())
+                {
+                    var listRequest = new ListRequest();
+                    listRequest.Criteria = new Criteria(CabinetRepresentativesRow.Fields.UserId.Name) == user.Id;
+                    listRequest.ColumnSelection = ColumnSelection.Details;
+
+                    var cabinets = new CabinetRepresentativesRepository().List(connection, listRequest).Entities;
+                    if (!cabinets.Any())
+                        return;
+
+                    query.Where(CabinetsRow.Fields.CabinetId.In(cabinets.Select(c => c.CabinetId.Value)));
+
+                }
+            }
         }
 
         public override string GetScript()

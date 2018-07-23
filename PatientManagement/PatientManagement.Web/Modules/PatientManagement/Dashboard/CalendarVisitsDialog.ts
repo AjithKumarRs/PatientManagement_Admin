@@ -8,50 +8,14 @@ namespace PatientManagement.PatientManagement {
 
     @Serenity.Decorators.registerClass()
     export class CalendarVisitsDialog extends VisitsDialog {
-        protected updateTitle(): void {
-            super.updateTitle();
-            if (this.isEditMode()) {
 
-                Serenity.EditorUtils.setReadOnly(this.form.CabinetId, true);
-                if (!this.form.FreeForReservation.getState()) {
-                    Serenity.EditorUtils.setReadOnly(this.form.PatientId, true);
-                } else {
-                    return;
-                }
-
-                var patientId = this.form.PatientId.value;
-                if(patientId)
-                PatientsService.Retrieve({
-                        EntityId: patientId
-                    },
-                    response => {
-                        if (response.Entity.NotifyOnChange) {
-                            var parentCat = this.form.PatientId.element.parents(".categories ");
-                            console.log(parentCat);
-                            var text = Q.text("Site.Dashboard.AlertMessagePatientWithNotificationActiveVisitDialog");
-                            parentCat.append(
-                                "<div class='alert alert-info' style='display: none' id='automatic-notification-email'>" +
-                                text +
-                                "</div>");
-                            $("#automatic-notification-email").show(200);
-
-                        } else {
-                            $("#automatic-notification-email").hide(200);
-                        }
-                    });
-            } else {
-                this.form.CabinetId.value = $.cookie("CabinetPreference");
-            }
-        }
         public newPredifinedVisit = (start, end): void => {
 
             var p = <PatientManagement.VisitsRow>{};
-            var dlg = new PatientManagement.CalendarVisitsDialog();
-
             p.StartDate = start;
             p.EndDate = end;
 
-            dlg.loadEntityAndOpenDialog(<PatientManagement.VisitsRow>{
+            this.loadEntityAndOpenDialog(<PatientManagement.VisitsRow>{
                 StartDate: start,
                 EndDate: end,
                 CabinetId: $.cookie("CabinetPreference")
@@ -100,7 +64,7 @@ namespace PatientManagement.PatientManagement {
                             new Date(beforeDateStart).getDay() === new Date().getDay() ||
                             new Date(beforeDateEnd).getDay() === new Date().getDay()) {
 
-                            this.refreshVisitForTodayBox();
+                            CalendarVisitsDialog.refreshVisitForTodayBox();
                         }
                     });
 
@@ -112,7 +76,7 @@ namespace PatientManagement.PatientManagement {
         public deleteVisit = (visitId): void => {
             var p = <PatientManagement.VisitsRow>{};
 
-            VisitsService.Retrieve(<any>{
+            VisitsService.Retrieve({
                 EntityId: visitId
             }, resp => {
               
@@ -137,12 +101,12 @@ namespace PatientManagement.PatientManagement {
         }
 
         protected onSaveSuccess(response: Serenity.SaveResponse): void {
-            this.refreshVisitForTodayBox();
+            CalendarVisitsDialog.refreshVisitForTodayBox();
 
             $("#calendar").fullCalendar('refetchEvents');
         }
 
-        public refreshVisitForTodayBox() {
+        public static refreshVisitForTodayBox() {
             $.get('/Dashboard/GetTodayVisits/', data => {
                 $('#today-visit-counter').text(data.countVisitsForToday);
                 var width = (data.alreadyExpired / data.countVisitsForToday) * 100;
@@ -151,9 +115,9 @@ namespace PatientManagement.PatientManagement {
 
             });
         }
-
+         
         protected onDeleteSuccess(response: Serenity.DeleteResponse): void {
-            this.refreshVisitForTodayBox();
+            CalendarVisitsDialog.refreshVisitForTodayBox();
             $("#calendar").fullCalendar('refetchEvents');
         }
 

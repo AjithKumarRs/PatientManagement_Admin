@@ -12,7 +12,7 @@ namespace PatientManagement.PatientManagement {
             CabinetsService.List({},
                 response => {
                     if (response.TotalCount === 0) {
-                        this.readOnly = true;
+                        //this.readOnly = true;
                     }
                     else if (response.TotalCount === 1) {
                         this.addItem({
@@ -21,7 +21,7 @@ namespace PatientManagement.PatientManagement {
 
                         });
                         this.value = response.Entities[0].CabinetId + "";
-                        this.readOnly = true;
+                        //this.readOnly = true;
                     } else {
 
                         for (var i = 0; i < response.TotalCount; i++) {
@@ -81,7 +81,7 @@ namespace PatientManagement.PatientManagement {
                     $("#calendar").fullCalendar('refetchEvents');
 
 
-                    new CalendarVisitsDialog().refreshVisitForTodayBox();
+                    CalendarVisitsDialog.refreshVisitForTodayBox();
 
                 });
         }

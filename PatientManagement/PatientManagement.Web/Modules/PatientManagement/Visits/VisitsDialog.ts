@@ -15,7 +15,6 @@ namespace PatientManagement.PatientManagement {
 
             // by default cloneButton is hidden in base UpdateInterface method
             super.updateInterface();
-
             // here we show it if it is edit mode (not new)
             this.cloneButton.toggle(this.isEditMode());
         }
@@ -48,23 +47,7 @@ namespace PatientManagement.PatientManagement {
                 var patientId = this.form.PatientId.value;
                 if (!patientId)
                     return;
-                PatientsService.Retrieve({
-                    EntityId: patientId
-                },
-                    response => {
-                        if (response.Entity.NotifyOnChange) {
-                            var parentCat = this.form.PatientId.element.parents(".categories ");
-
-                            var text = Q.text("Site.Dashboard.AlertMessagePatientWithNotificationActiveVisitDialog");
-                            if ($("#automatic-notification-email").length < 1)
-                                parentCat.append(
-                                    "<div class='alert alert-info' style='display: none' id='automatic-notification-email'>" + text + "</div>");
-                            $("#automatic-notification-email").show(200);
-
-                        } else {
-                            $("#automatic-notification-email").hide(200);
-                        }
-                    });
+                this.checkAutomaticEmailAlert(patientId);
             });
 
             this.form.EndDate.addValidationRule(this.uniqueName, e => {
@@ -84,7 +67,6 @@ namespace PatientManagement.PatientManagement {
             });
             if (!Q.Authorization.hasPermission("AdministrationTenants:VisitPayments:Modify")) {
                 Serenity.EditorUtils.setReadOnly(this.form.Price, true);
-                this.updateInterface();
             }
             this.form.RepeatPeriod.changeSelect2(e => {
                 this.showRepeatUntilBox();
@@ -94,15 +76,37 @@ namespace PatientManagement.PatientManagement {
             });
         }
 
-        afterLoadEntity(): void {
+        checkAutomaticEmailAlert(patientId): void {
+            PatientsService.Retrieve({
+                    EntityId: patientId
+                },
+                response => {
+                    if (response.Entity.NotifyOnChange) {
+                        var parentCat = this.form.PatientId.element.parents(".categories ");
+
+                        var text = Q.text("Site.Dashboard.AlertMessagePatientWithNotificationActiveVisitDialog");
+                        if ($("#automatic-notification-email").length < 1)
+                            parentCat.append(
+                                "<div class='alert alert-info' style='display: none' id='automatic-notification-email'>" + text + "</div>");
+                        $("#automatic-notification-email").show(200);
+
+                    } else {
+                        $("#automatic-notification-email").hide(200);
+                    }
+                });
+        }
+
+        loadEntity(entity: PatientManagement.VisitsRow): void {
+            super.loadEntity(entity);
+            if (entity.PatientId != null)
+                this.checkAutomaticEmailAlert(entity.PatientId);
 
             if (!Q.Authorization.hasPermission("AdministrationTenants:VisitPayments:Modify")) {
                 Serenity.EditorUtils.setReadOnly(this.form.Price, true);
-                this.updateInterface();
             }
-
             this.showRepeatUntilBox();
         }
+        
 
         showRepeatUntilBox(): void {
             var repeatTimes = this.form.RepeatTimes.value;

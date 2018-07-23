@@ -86,6 +86,7 @@ namespace PatientManagement.PatientManagement.Pages
             var endDate = DateTime.ParseExact(end, "yyyy-MM-dd", new CultureInfo("en-US"),
                 DateTimeStyles.None);
             var cabinetIdActive = Request.Cookies["CabinetPreference"];
+   
 
             var model = new DashboardPageModel();
             using (var connection = SqlConnections.NewFor<VisitsRow>())
@@ -94,7 +95,15 @@ namespace PatientManagement.PatientManagement.Pages
                 var listRequest = new ListCriteriaStartDateEndDateRequest();
                 listRequest.StartDate = startDate;
                 listRequest.EndDate = endDate;
-                listRequest.CabinetId = int.Parse(cabinetIdActive);
+
+                if (cabinetIdActive == null)
+                {
+                    int temp;
+                    GetAndSetActiveCabinetIdIfAny(connection, out temp);
+                    listRequest.CabinetId = temp;
+                }
+                else
+                    listRequest.CabinetId = int.Parse(cabinetIdActive);
                 var result = new VisitsRepository().ListCriteriaStartDateEndDate(connection, listRequest).Entities;
 
                 foreach (VisitsRow visit in result)

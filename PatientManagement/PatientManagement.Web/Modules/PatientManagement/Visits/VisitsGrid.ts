@@ -1,6 +1,7 @@
 ﻿
 namespace PatientManagement.PatientManagement {
     import fields = VisitsRow.Fields;
+    import fieldsCabinetsRepresent = CabinetRepresentativesRow.Fields;
 
     @Serenity.Decorators.registerClass()
     export class VisitsGrid extends Serenity.EntityGrid<VisitsRow, any> {
@@ -52,7 +53,7 @@ namespace PatientManagement.PatientManagement {
                 separator: true,
             }));
             buttons.push({
-                title: text +  Q.text("Db.PatientManagement.VisitTypes.EntitySingular"),
+                title: text + Q.text("Db.PatientManagement.VisitTypes.EntitySingular"),
                 cssClass: 'expand-all-button',
                 separator: true,
                 onClick: () => this.view.setGrouping(
@@ -64,7 +65,7 @@ namespace PatientManagement.PatientManagement {
             });
 
             buttons.push({
-                title: text +  Q.text("Db.PatientManagement.Patients.EntitySingular"),
+                title: text + Q.text("Db.PatientManagement.Patients.EntitySingular"),
                 cssClass: 'expand-all-button',
                 separator: true,
                 onClick: () => this.view.setGrouping(
@@ -91,17 +92,7 @@ namespace PatientManagement.PatientManagement {
 
             // get quick filter list from base class
             let filters = super.getQuickFilters();
-            var cookie = $.cookie("CabinetPreference");
-            if (cookie) {
-
-                Q.first(filters, x => x.field == fields.CabinetId).init = w => {
-                    (w as Serenity.IntegerEditor).value = cookie;
-
-                    if(Authorization.userDefinition.RestrictedToCabinets == 1)
-                        (w as Serenity.IntegerEditor).element.prop('readonly', true);
-                };
-            }
-
+            
             var q = Q.parseQueryString();
             if (q["visittype"]) {
                 var category = Q.tryFirst(filters, x => x.field == fields.VisitTypeId);

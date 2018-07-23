@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.Rest;
 using PatientManagement.Administration;
 using PatientManagement.Administration.Entities;
 using PatientManagement.PatientManagement.Entities;
+using PatientManagement.PatientManagement.Repositories;
 using PatientManagement.Web.Modules.Common;
 using Serenity;
 using Serenity.Data;
@@ -40,6 +42,23 @@ namespace PatientManagement
             var user = (UserDefinition)Authorization.UserDefinition;
             if (!Authorization.HasPermission(PermissionKeys.Tenant))
                 query.Where(fldTenantId == user.TenantId);
+
+            if (user.RestrictedToCabinets == 1 && (handler.Row is CabinetsRow) || handler.Row is VisitsRow)
+            {
+                using (var connection = SqlConnections.NewFor<CabinetRepresentativesRow>())
+                {
+                    var listRequest = new ListRequest();
+                    listRequest.Criteria = new Criteria(CabinetRepresentativesRow.Fields.UserId.Name) == user.Id;
+                    listRequest.ColumnSelection = ColumnSelection.Details;
+                    
+                    var cabinets = new CabinetRepresentativesRepository().List(connection, listRequest).Entities;
+                    if (!cabinets.Any())
+                        return;
+
+                    query.Where(CabinetsRow.Fields.CabinetId.In(cabinets.Select(c => c.CabinetId.Value)));
+
+                }
+            }
         }
 
         public void OnSetInternalFields(ISaveRequestHandler handler)
