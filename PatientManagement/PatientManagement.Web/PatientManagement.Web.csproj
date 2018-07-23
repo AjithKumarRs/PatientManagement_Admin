@@ -38,7 +38,7 @@
     <PackageReference Include="Serenity.FluentMigrator.Runner" Version="1.6.904" />
     <PackageReference Include="NodaMoney" Version="1.0.0" />
     <PackageReference Include="Sendgrid" Version="9.4.1" />
-    <PackageReference Include="Serenity.Web" Version="3.7.4" />
+    <PackageReference Include="Serenity.Web" Version="3.7.6" />
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.0' ">
     <PackageReference Include="EPPlus.Core" Version="1.5.2" />
@@ -100,7 +100,7 @@
     <Exec Command="&quot;$(TscToolPath.Replace('build\\..\tools\', 'tools\'))\tsc&quot; -p ./tsconfig.json" ContinueOnError="true" />
   </Target>
   <ItemGroup>
-    <DotNetCliToolReference Include="Serenity.CodeGenerator" Version="3.7.4" />
+    <DotNetCliToolReference Include="Serenity.CodeGenerator" Version="3.7.6" />
   </ItemGroup>
   <ItemGroup>
     <None Update="App_Data\Reporting\wkhtmltopdf.exe">

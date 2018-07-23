@@ -87,6 +87,12 @@
           "PermissionKey": "PatientManagement:Activity"
         },
         {
+          "Tablename": "dbo.CabinetRepresentatives",
+          "Identifier": "CabinetRepresentatives",
+          "Module": "PatientManagement",
+          "PermissionKey": "PatientManagement:General"
+        },
+        {
           "Tablename": "dbo.Cabinets",
           "Identifier": "Cabinets",
           "Module": "PatientManagement",
